@@ -5,34 +5,31 @@ import java.util.TreeMap;
 
 public class Comunitat {
 	
-	private int Identificador, Numero_categories; //crec que Numero_categories no fa falta
+	private Integer Identificador;
 	private Map<String, Categoria> CategoriesComunitat;
 	
-	public Comunitat(int id) {
+	public Comunitat(Integer id) {
 		Identificador = id;
-		Numero_categories = 0;
 		CategoriesComunitat = new TreeMap<String, Categoria>();
 	}
 	
 	public Comunitat() {
-		Identificador = -1; //Pau: mmm.. aixo podria donar problemes, podrien haver-hi dues comunitats amb el mateix 
-							//     id, ho hauriem de parlar a classe. he vist que has posat que podria ser un string,
-							//	   a mi tambe em sembla bé
-		Numero_categories = 0;
+		Identificador = Integer.valueOf(-1); 	//Pau: mmm.. aixo podria donar problemes, podrien haver-hi dues comunitats amb el mateix 
+												//     id, ho hauriem de parlar a classe. he vist que has posat que podria ser un string,
+												//	   a mi tambe em sembla bé
 		CategoriesComunitat = new TreeMap<String, Categoria>();
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return Identificador;
 	}
 	
-	public int getNumeroDeCategories() {
-		return Numero_categories;
-		//return CategoriesComunitat.size();	
+	public Integer getNumeroDeCategories() {
+		return Integer.valueOf(CategoriesComunitat.size());	
 	}
 	
-	public Categoria getCat(String key) {
-		return CategoriesComunitat.get(key);
+	public Categoria getCat(String nom) {
+		return CategoriesComunitat.get(nom);
 	}
 	
 	public void addCat(Categoria c) {

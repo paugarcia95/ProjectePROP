@@ -10,13 +10,13 @@ public class CercaComunitats {
 	private String Nom, Comentari, Usuari;
 	private Date DataCreacio, Data_Modificacio;
 	private Criteris Criteris_seleccio;
-	private int Algorisme, nComunitats;
+	private Integer Algorisme, nComunitats;
 	private ArrayList<Comunitat> Comunitats;
 	private Queue<Integer> eliminats;
 	
 	//Pre: dataCreacio < data_modif, usuari existeix, ¿¿no existeix cap CercaComunitats amb el mateix nom??
 	//Post: retorna una CercaComunitats amb...
-	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date data_modif, int algorisme, String comentari, ArrayList<Comunitat> Comunitats) {
+	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date data_modif, Integer algorisme, String comentari, ArrayList<Comunitat> Comunitats) {
 		Nom = nom;
 		DataCreacio = dataCreacio;
 		Criteris_seleccio = criteris;
@@ -24,7 +24,7 @@ public class CercaComunitats {
 		Data_Modificacio = data_modif; //hauriem de decidir si posem una data nul·la o com s'implementa
 		Algorisme = algorisme;
 		Comentari = comentari;
-		nComunitats = 0;
+		nComunitats = Integer.valueOf(0);
 		this.Comunitats = Comunitats;
 		eliminats = new LinkedList<Integer>();
 	}
@@ -81,51 +81,51 @@ public class CercaComunitats {
 		Data_Modificacio = d;
 	}
 	
-	public int getAlgorisme() {
+	public Integer getAlgorisme() {
 		return Algorisme;
 	}
 	
-	public void setAlgorisme(int i) {
+	public void setAlgorisme(Integer i) {
 		Algorisme = i;
 	}
 	
 	//Pre: i es l'index d'una comunitat existent a Comunitats && i < Comunitas.size()
 	//Post: es retorna la comunitat amb index i
-	public Comunitat getComunitat(int i) {
-		return Comunitats.get(i);		
+	public Comunitat getComunitat(Integer i) {
+		return Comunitats.get(i.intValue());		
 	}
 	
 	//Pre: Cert
 	//Post: Retorna el nombre de comunitats que componen la cerca
-	public int getNumComunitats() {
+	public Integer getNumComunitats() {
 		return nComunitats;
 	}	
 	
 	//Pre: comunitat no pertany a Comunitats
 	//Post: comunitat pertanty a Comunitats amb index retornat && nComunitats s'incrementa
-	public int addComunitat(Comunitat comunitat) {
-		int i;
+	public Integer addComunitat(Comunitat comunitat) {
+		Integer i;
 		if(eliminats.isEmpty()) {
-			if (nComunitats == Comunitats.size()) {
-				Comunitats.ensureCapacity(nComunitats+5);
+			if (nComunitats.intValue() == Comunitats.size()) {
+				Comunitats.ensureCapacity(nComunitats.intValue()+5);
 			}
 			i = nComunitats;
 		}
 		else {
-			i = eliminats.poll().intValue(); //primer index buit
+			i = eliminats.poll(); //primer index buit
 		}
-		Comunitats.set(i, comunitat);
-		++nComunitats;
+		Comunitats.set(i.intValue(), comunitat);
+		nComunitats = Integer.valueOf(nComunitats.intValue()+1);
 		return i;
 	}
 	
 	//Pre: i es l'index d'una comunitat existent a Comunitats && i < Comunitas.size()
 	//Post: la comunitat amb index i ja no pertany a aquesta cerca && nComunitats es decrementada
-	public boolean removeComunitat(int i) {
-		Comunitats.set(i,null);
-		eliminats.add(new Integer(i));
-		--nComunitats;
-		return true;
+	public Boolean removeComunitat(Integer i) {
+		Comunitats.set(i.intValue(),null);
+		eliminats.add(i);
+		nComunitats = Integer.valueOf(nComunitats.intValue()-1);
+		return Boolean.valueOf(true);
 	}
 	
 }

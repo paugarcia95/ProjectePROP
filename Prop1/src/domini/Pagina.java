@@ -36,10 +36,10 @@ public class Pagina {
 	
 	//Pre: cert
 	//Post: retorna 0 si no existeix ni CP ni PC, 1 si és PC i 2 si es CP
-	public int existsPC(String categoria) {
-		if(PC.containsKey(categoria)) return 1;
-		if(CP.containsKey(categoria)) return 2;
-		return 0;
+	public Integer existsPC(String categoria) {
+		if(PC.containsKey(categoria)) return Integer.valueOf(1);
+		if(CP.containsKey(categoria)) return Integer.valueOf(2);
+		return Integer.valueOf(0);
 	}
 	
 	/*
@@ -61,9 +61,9 @@ public class Pagina {
 	
 	//Pre: categoria no pertany a PC
 	//Post: categoria pertany a PC
-	public boolean addPC(Categoria categoria) {
+	public Boolean addPC(Categoria categoria) {
 		PC.put(categoria.getNom(), categoria);
-		return true;
+		return Boolean.TRUE;
 	}	
 	
 	
@@ -75,24 +75,24 @@ public class Pagina {
 	
 	//Pre: categoria es una key de PC amb un valor assignat
 	//Post: categoria ja no es key de PC
-	public boolean removePC(String categoria) {
+	public Boolean removePC(String categoria) {
 		PC.remove(categoria);
-		return true;
+		return Boolean.TRUE;
 	}
 	
 	//Pre: categoria es una key de CP amb un valor assignat
 	//Post: categoria ja no es key de CP
-	public boolean removeCP(String categoria) {
+	public Boolean removeCP(String categoria) {
 		CP.remove(categoria);
-		return true;
+		return Boolean.TRUE;
 	}
 	
-	public int getNumPC() {
-		return PC.size();
+	public Integer getNumPC() {
+		return Integer.valueOf(PC.size());
 	}
 	
-	public int getNumCP() {
-		return CP.size();
+	public Integer getNumCP() {
+		return Integer.valueOf(CP.size());
 	}
 	
 }

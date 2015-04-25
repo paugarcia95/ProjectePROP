@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Criteris {
 	
 	private ParaulaValor paraula_clau;
-	private int relacions_cat, sembla_nom, algorisme, tipu_cerca;
+	private Integer relacions_cat, sembla_nom, algorisme, tipu_cerca;
 	private ArrayList<Categoria> subconj_cat, evita_cat;
 	private String pare;
 	
 	
 	
-	public Criteris(ParaulaValor paraula_clau, int relacions_cat, int sembla_nom, int algorisme, int tipu_cerca, ArrayList<Categoria> subconj_cat, ArrayList<Categoria> evita_cat, String pare) {
+	public Criteris(ParaulaValor paraula_clau, Integer relacions_cat, Integer sembla_nom, Integer algorisme, Integer tipu_cerca, ArrayList<Categoria> subconj_cat, ArrayList<Categoria> evita_cat, String pare) {
 		this.paraula_clau = paraula_clau;
 		this.relacions_cat = relacions_cat;
 		this.sembla_nom = sembla_nom;
@@ -34,7 +34,7 @@ public class Criteris {
 		return relacions_cat;
 	}
 	
-	public void setRelacions_cat(int relacions_cat) {
+	public void setRelacions_cat(Integer relacions_cat) {
 		this.relacions_cat = relacions_cat;
 	}
 	
@@ -42,7 +42,7 @@ public class Criteris {
 		return sembla_nom;
 	}
 	
-	public void setSembla_nom(int sembla_nom) {
+	public void setSembla_nom(Integer sembla_nom) {
 		this.sembla_nom = sembla_nom;
 	}
 	
@@ -50,7 +50,7 @@ public class Criteris {
 		return algorisme;
 	}
 	
-	public void setAlgorisme(int algorisme) {
+	public void setAlgorisme(Integer algorisme) {
 		this.algorisme = algorisme;
 	}
 	
@@ -58,7 +58,7 @@ public class Criteris {
 		return tipu_cerca;
 	}
 	
-	public void setTipu_cerca(int tipu_cerca) {
+	public void setTipu_cerca(Integer tipu_cerca) {
 		this.tipu_cerca = tipu_cerca;
 	}
 	
