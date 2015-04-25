@@ -3,13 +3,13 @@ package domini;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Graf {
+public class GrafDades {
 	
 	private Map<String, Categoria> Categories;
 	private Map<String, Pagina> Pagines;
 	
 	
-	public Graf() {
+	public GrafDades() {
 		Categories = new TreeMap<String, Categoria>();
 		Pagines = new TreeMap<String, Pagina>();
 	}
