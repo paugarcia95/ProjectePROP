@@ -20,26 +20,24 @@ public class InputOutput {
 			// System.out.println(s);
 			StringTokenizer st = new StringTokenizer(s);
 
-			while (st.hasMoreTokens()) {/*
-										 * String word1 = st.nextToken();
-										 * st.nextToken(); String link =
-										 * st.nextToken(); String word2 =
-										 * st.nextToken(); st.nextToken();
-										 * 
-										 * if (link == "CsubC") G.addCC(new
-										 * Categoria(word2), new
-										 * Categoria(word1)); else if (link ==
-										 * "CsupC") G.addCC(new
-										 * Categoria(word1), new
-										 * Categoria(word2)); else if (link ==
-										 * "CP") G.addCP(new Categoria(word1),
-										 * new Pagina(word2)); else if (link ==
-										 * "PC") G.addPC(new Categoria(word1),
-										 * new Pagina(word2)); else
-										 * System.out.println(
-										 * "Error al crear el graf: Comprova la sintaxi de l'entrada"
-										 * );
-										 */
+			while (st.hasMoreTokens()) {
+				String word1 = st.nextToken();
+				st.nextToken();
+				String link = st.nextToken();
+				String word2 = st.nextToken();
+				st.nextToken();
+
+				if (link == "CsubC")
+					G.addCC(new Categoria(word2), new Categoria(word1));
+				else if (link == "CsupC")
+					G.addCC(new Categoria(word1), new Categoria(word2));
+				else if (link == "CP")
+					G.addCP(new Categoria(word1), new Pagina(word2));
+				else if (link == "PC")
+					G.addPC(new Categoria(word1), new Pagina(word2));
+				else
+					System.out.println("Error al crear el graf: Comprova la sintaxi de l'entrada");
+
 			}
 		}
 
