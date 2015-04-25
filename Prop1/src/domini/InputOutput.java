@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 public class InputOutput {
 
 	public void loadGraph(String rute) throws FileNotFoundException, IOException {
-		// Graf G = new Graf();
+		Graf G = new Graf();
 		String s;
 		BufferedReader b = new BufferedReader(new FileReader(rute));
 
@@ -34,7 +34,7 @@ public class InputOutput {
 				else if (link == "CP")
 					G.addCP(new Categoria(word1), new Pagina(word2));
 				else if (link == "PC")
-					G.addPC(new Categoria(word1), new Pagina(word2));
+					G.addPC(new Pagina(word2), new Categoria(word1));
 				else
 					System.out.println("Error al crear el graf: Comprova la sintaxi de l'entrada");
 
