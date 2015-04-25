@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class InputOutput {
+public class EntradaSortidaDadesGraf {
 
 	public void loadGraph(String rute) throws FileNotFoundException, IOException {
 		Graf G = new Graf();
