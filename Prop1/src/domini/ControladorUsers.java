@@ -1,4 +1,3 @@
-/////HOLAAAAAAA HO VEIEU¿?? sii (pau)
 /**
  * 
  */
