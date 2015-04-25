@@ -7,8 +7,6 @@ import java.util.Queue;
 
 public class CercaComunitats {
 	
-	//COMENTARI
-	
 	private String Nom, Comentari, Usuari;
 	private Date DataCreacio, Data_Modificacio;
 	private Criteris Criteris_seleccio;
@@ -129,7 +127,5 @@ public class CercaComunitats {
 		--nComunitats;
 		return true;
 	}
-	
-	
 	
 }
