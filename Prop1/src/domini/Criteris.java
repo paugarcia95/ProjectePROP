@@ -3,6 +3,7 @@ package domini;
 import java.util.ArrayList;
 
 public class Criteris {
+	
 	private ParaulaValor paraula_clau;
 	private int relacions_cat, sembla_nom, algorisme, tipu_cerca;
 	private ArrayList<Categoria> subconj_cat, evita_cat;
@@ -85,5 +86,5 @@ public class Criteris {
 		this.pare = pare;
 	}
 	
-	
 }
+

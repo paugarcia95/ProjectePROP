@@ -51,5 +51,4 @@ public class Comunitat {
 		CategoriesComunitat = mapa;
 	}
 	
-
 }
