@@ -13,9 +13,10 @@ import java.util.Scanner;
  */
 public class MainProvisional {
 //Declaro els controladors aqui per a poder-los fer servir des de les funcions privades, ja veurem si funciona, en java nse
-	 ControladorUsers cu;
-	 String useractual;
-	 Scanner s = new Scanner(System.in);
+	 static ControladorUsers cu;
+	 static ControladorAdminUsers ca;
+	 static String useractual;
+	 static Scanner s = new Scanner(System.in);
 	//+ Cotnroladors
 	 
 	 
@@ -26,7 +27,7 @@ public class MainProvisional {
 		System.out.print("Numero d'opció:");
 		int n = 0;
 		n = s.nextInt();
-		while(1<=n && n <= ) {
+		while(true) {
 			switch(n) {
 			case 1:
 				
@@ -39,17 +40,19 @@ public class MainProvisional {
 		}
  */
 	 
-	private void EsborraDades(){}
-	private void IntroduirDesDeFitxer() {}
-	private void IntroduirDadesManual() {}
-	private void BuscaEntreCategories(Boolean admin) {}
-	private void BuscarEntreCategoriesPagines(Boolean admin) {}
-	private void BuscarEntrePagines(Boolean admin) {}
-	private void CrearConjuntComunitats() {}
-	private void VisualitzarConjuntsComunitats() {}
+	private static void EsborraDades(){}
+	private static void IntroduirDesDeFitxer() {}
+	private static void IntroduirDadesManual() {}
+	private static void BuscaEntreCategories(Boolean admin) {}
+	private static void BuscarEntreCategoriesPagines(Boolean admin) {}
+	private static void BuscarEntrePagines(Boolean admin) {}
+	private static void CrearConjuntComunitats() {}
+	private static void VisualitzarConjuntsComunitats() {
+		
+	}
 	//private void {}
 	
-	private void CreaAdmin(){
+	private static void CreaAdmin(){
 		System.out.println("PANTALLA CREACIO ADMIN:");
 		System.out.println("Tria com vols crear el nou administrador: ");
 		System.out.println("1. Fer admin a un usuari ja existent ");
@@ -66,18 +69,23 @@ public class MainProvisional {
 				Iterator<String> it = usuaris.iterator();
 				while(it.hasNext()) System.out.println(it.next());
 				System.out.print("Escriu el nom del client que vols fer admin: ");
-				String nom = s.nextLine();
+				String nom = s.next();
 				if(cu.existsUser(nom)) {
 					cu.addAdmin(nom);				
-					System.out.print("Feliciats, aquest usuari ja es administrador ");
+					System.out.println("Feliciats, aquest usuari ja es administrador, clica enter per a continuar ");
 				}
+				else System.out.println("Aquest usuari ja era admin, clica enter per a continuar");
+				s.next();
 				OpcionsAdmin();
 			break;
 			case 2:
 				CrearClient(true);
 			break;
+			case 3:
+				OpcionsAdmin();
+			break;
 			default:
-			System.out.println("Opcio erronia, has d'introduir el numero de l'operacio que desitjes:");
+			System.out.println("Opcio erronia, torna a introduir el numero de l'operacio que desitjes:");
 			n = s.nextInt();
 			break;
 			}
@@ -85,7 +93,7 @@ public class MainProvisional {
 		
 	}
 	
-	private void EsborraClients() {
+	private static void EsborraClients() {
 		ArrayList<String> usuaris =	cu.getUsers();
 		System.out.println("Aquests son els usuaris registrats: ");
 		Iterator<String> it = usuaris.iterator();
@@ -96,14 +104,15 @@ public class MainProvisional {
 		int num = s.nextInt();
 		String nom;
 		for(int i = 0; i < num; ++i) {
-			System.out.print("nom del "+ i + " usuari a eliminar: ");
-			nom = s.nextLine();
-			if(! cu.removeUser(nom)) System.out.println("error, aquest usuari no s'ha pogut eliminar.");	
+			System.out.print("nom del "+ (i+1) + " usuari a eliminar: ");
+			nom = s.next();
+			if(! cu.removeUser(nom)) System.out.println("error, aquest usuari no s'ha pogut eliminar.");
+			else System.out.println("Usuari eliminat");
 		}
 		OpcionsAdmin();
 	}
 	
-	private void OpcionsAdmin(){
+	private static void OpcionsAdmin(){
 		System.out.println("PANTALLA D'OPCIONS D'ADMIN:");
 		System.out.println("Tria entre les seguents opcions:");
 		System.out.println("1. Crear altres administradors");
@@ -120,7 +129,7 @@ public class MainProvisional {
 		System.out.print("Numero d'opció:");
 		int n = 0;
 		n = s.nextInt();
-		while(1<=n && n <=8) {
+		while(true) {
 			switch(n) {
 			case 1:
 				CreaAdmin();
@@ -163,8 +172,8 @@ public class MainProvisional {
 		}
 	} 
 	 	 
-	private void OpcionsClient(){
-		System.out.println("PANTALLA D'OPCIONS D'ADMIN:");
+	private static void OpcionsClient(){
+		System.out.println("PANTALLA D'OPCIONS DE CLIENT:");
 		System.out.println("Tria entre les seguents opcions:");
 		System.out.println("1. Buscar entre les categories ");
 		System.out.println("2. Buscar entre les categories i pagines ");
@@ -175,7 +184,7 @@ public class MainProvisional {
 		System.out.print("Numero d'opció:");
 		int n = 0;
 		n = s.nextInt();
-		while(1<=n && n <=6) {
+		while(true) {
 			switch(n) {
 			case 1:
 				BuscaEntreCategories(false);
@@ -203,27 +212,30 @@ public class MainProvisional {
 		}
 	}
 	
-	private void Login() {
+	private static void Login() {
 		System.out.println("PANTALLA DE LOGIN:");
 		System.out.println("Introdueix les dades requerides: ");
 		int error=1;		//es una marranada, ja ho se, pero com q es provisional, no ens importa i ho faig aixi
 		while(error==1) {
 			System.out.print("Username: ");
 			String user;
-			user = s.nextLine();
-			System.out.print("Password: ");
-			String pass;
-			pass = s.nextLine();
-			if( cu.login(user,pass) ){
-				error=0;
-				useractual = user;
-				if(cu.esAdmin(user) ) OpcionsAdmin();
-				else OpcionsClient();
-			}
+			user = s.next();
+			if(!cu.existsUser(user)) System.out.println("Aquest usuari no existeix");
 			else {
-				System.out.println("Error, o l'usuari no existeix o la password es erronia; tria 1 si vols tornar a introduir les dades o 2 si vols sortir");
-				int op = s.nextInt();
-				if(op==2) PantallaInici();
+				System.out.print("Password: ");
+				String pass;
+				pass = s.next();
+				if(cu.login(user,pass) ){
+					error=0;
+					useractual = user;
+					if(cu.esAdmin(user) ) OpcionsAdmin();
+					else OpcionsClient();
+				}
+				else {
+					System.out.println("Error, la password es erronia; tria 1 si vols tornar a introduir les dades o 2 si vols sortir");
+					int op = s.nextInt();
+					if(op==2) PantallaInici();
+				}
 			}
 		}
 		
@@ -231,29 +243,33 @@ public class MainProvisional {
 	}
 	
 	//admin es true quan el nou client sera admin, fals si es un client normal
-	private void CrearClient(Boolean admin) {
+	private static void CrearClient(Boolean admin) {
 		System.out.println("PANTALLA DE CREACIO DE NOUS CLIENTS:");
 		int error=1;
 		while (error==1) {
 			System.out.print("Introdueix el nom d'usuari que desitgis: ");
-			String nom = s.nextLine();
+			String nom = s.next();
 			if(cu.existsUser(nom)) System.out.println("Aquest usuari ja existeix.");
 			else {
 				System.out.print("Introdueix la contrassenya: ");
-				String pass;
-				pass= s.nextLine();
+				String pass = s.next();
 				cu.addUser(nom, pass);
-				if(admin) { 
+				/*System.out.print("User: "+ nom+ " pass: " + pass);
+				if(admin)System.out.println("Creo un admin");
+				else if(nom==pass) System.out.println("Es un admin apanyat");
+				else System.out.println("No sera admin");
+				*/
+				if(admin) {
 					cu.addAdmin(nom);
 					OpcionsAdmin();
 				}
-				else OpcionsClient();
+				else OpcionsAdmin(); //OpcionsClient();
 			}
 			
 		}
 	}
 	
-	private void PantallaInici() {
+	private static void PantallaInici() {
 		System.out.println("PANTALLA D'INICI:");
 		System.out.println("Tria entre les seguents opcions:");
 		System.out.println("1. Login");
@@ -262,7 +278,8 @@ public class MainProvisional {
 		System.out.print("Numero d'opció:");
 		int n=0;
 		n = s.nextInt();
-		while(n>=1 && n<=3) {
+		boolean sortida = false;
+		while(sortida==false) {
 			switch(n) {
 				case 1:
 					Login();
@@ -271,7 +288,7 @@ public class MainProvisional {
 					CrearClient(false);
 				break;
 				case 3:
-					n=40;		//la intenció és retornar al main i acabar el programa, segur q hi ha maners mes maques de fer-ho.
+					sortida=true;
 				break;
 				default:
 				System.out.print("Opcio erronia, has d'introduir el numero de l'operacio que desitjes: ");
@@ -284,11 +301,16 @@ public class MainProvisional {
 	/**
 	 * 
 	 */
-	public  void main(String[] args) {
+	public static void main(String[] args) {
 		cu = new ControladorUsers();
+		ca = new ControladorAdminUsers();
+		ca.inici_carregarDades();
 		//+ Cotnroladors
+		cu.addUser("admin", "admin");
+		cu.addUser("client", "client");
+		cu.addAdmin("admin");
 		System.out.println("Acabes d'entrar al main provisional del projecte de la Wikipedia, es mostraran les mateixes funcionalitats que en el projecte final però en mode consola.");
-		System.out.println("Prem enter per continuar");
+		System.out.println("Escriu alguna cosa per continuar");
 		s.next();
 		PantallaInici();
 		
