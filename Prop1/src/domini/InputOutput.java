@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
-//Hola
+
 public class InputOutput {
 
 	public void loadGraph(String rute) throws FileNotFoundException, IOException {
