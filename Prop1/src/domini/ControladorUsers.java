@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
-import sun.security.util.Password;
-
 /**
  * @author cristina.fontanet
  *
@@ -49,7 +47,7 @@ public class ControladorUsers {
 	 * 
 	 * @return
 	 */
-	public boolean addUser(String username, Password pass) {
+	public boolean addUser(String username, String pass) {
 		if (!conj.exists(username)) {
 			Usuari u = new Usuari(username, pass, false);
 			return conj.addUser(u);
@@ -62,7 +60,7 @@ public class ControladorUsers {
 	 * 
 	 * @return
 	 */
-	public boolean setPassword(String username, Password pass) {
+	public boolean setPassword(String username, String pass) {
 		return true; // /////////////////////////////////////
 	}
 
@@ -95,7 +93,7 @@ public class ControladorUsers {
 	 * @return cert si les dades son correctes i corresponen a un usuari
 	 *         existent o fals en cas contrari
 	 */
-	public boolean login(String username, Password pass) {
+	public boolean login(String username, String pass) {
 		if (conj.exists(username)) {
 			Usuari u = conj.getUser(username);
 			return u.getPassword() == pass;

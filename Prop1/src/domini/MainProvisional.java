@@ -3,12 +3,9 @@
  */
 package domini;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
-
-import sun.security.util.Password;
 
 /**
  * @author cristina.fontanet
@@ -215,8 +212,8 @@ public class MainProvisional {
 			String user;
 			user = s.nextLine();
 			System.out.print("Password: ");
-			Password pass;
-			//he de trobar la manera de llegir la password pass.readPassword(am);
+			String pass;
+			pass = s.nextLine();
 			if( cu.login(user,pass) ){
 				error=0;
 				useractual = user;
@@ -243,8 +240,8 @@ public class MainProvisional {
 			if(cu.existsUser(nom)) System.out.println("Aquest usuari ja existeix.");
 			else {
 				System.out.print("Introdueix la contrassenya: ");
-				Password pass;
-				//cin password
+				String pass;
+				pass= s.nextLine();
 				cu.addUser(nom, pass);
 				if(admin) { 
 					cu.addAdmin(nom);
@@ -284,7 +281,6 @@ public class MainProvisional {
 		}
 	}
 	
-	
 	/**
 	 * 
 	 */
@@ -297,23 +293,5 @@ public class MainProvisional {
 		PantallaInici();
 		
 	}
-	
-	
-	/*public class Main {
-
-		  public static void main(String[] args) {
-		    GA ga = new GA();
-		    ga.algoritmoGenetico();
-		  }
--------------		 
-char c;
-int n;
-cin >> c >> n;
-----------------
-Scanner s = new Scanner(System.in);
-char c = s.findInLine(".").charAt(0);
-int n = s.nextInt();
---------------------
-		}*/
 
 }
