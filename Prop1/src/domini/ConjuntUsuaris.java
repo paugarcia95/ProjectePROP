@@ -16,20 +16,20 @@ public class ConjuntUsuaris {
 	//Post: u pertany a Users
 	public Boolean addUser(Usuari u) {
 		Users.put(u.getUsername(), u);
-		return Boolean.valueOf(true);
+		return true;
 	}
 	
 	//Pre: Cert
 	//Post: Retorna si existeix l'Usuari u a Users
 	public Boolean exists(Usuari u) {
-		return Boolean.valueOf(Users.containsKey(u.getUsername())); 	// log(n)
-		//return Users.containsValue(u); 								// (n)
+		return Users.containsKey(u.getUsername()); 	// log(n)
+		//return Users.containsValue(u); 			// (n)
 	}
 	
 	//Pre: Cert
 	//Post: Retorna si existeix l'Usuari amb Username=Username a Users
 	public Boolean exists(String Username) {
-		return Boolean.valueOf(Users.containsKey(Username));
+		return Users.containsKey(Username);
 	}
 	
 	//Pre: Username pertany a un Usuari de Users
@@ -42,11 +42,11 @@ public class ConjuntUsuaris {
 	//Post: l'usuari amb key username ja no existeix a Users
 	public Boolean removeUser(String username) {
 		Users.remove(username);
-		return Boolean.TRUE;
+		return true;
 	}
 	
 	public Integer getNombreUsers() {
-		return Integer.valueOf(Users.size());
+		return Users.size();
 	}
 	
 	public Set<String> getUsers() {
@@ -60,9 +60,9 @@ public class ConjuntUsuaris {
 			Usuari u = Users.remove(antic);
 			u.setUsername(nou);
 			Users.put(nou, u);
-			return Boolean.TRUE;
+			return true;
 		}
-		return Boolean.FALSE;
+		return false;
 	}
 
 }

@@ -15,7 +15,7 @@ public class ParaulaValor {
 
 	public boolean setParaula(String nom) {
 		Paraula = nom;
-		return Boolean.TRUE;
+		return true;
 	}
 
 	public Integer getNum() {

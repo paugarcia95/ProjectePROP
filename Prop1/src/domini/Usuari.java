@@ -19,13 +19,13 @@ public class Usuari {
         this.Password = Password;
         this.Admin = Admin;
         Cerques_fetes = new ArrayList<CercaComunitats>();
-        nCerques = Integer.valueOf(0);
+        nCerques = 0;
 	}
 	
 	//Pre: cert
 	//Post: Admin = true
 	public void ferAdmin() {
-		Admin = Boolean.TRUE;				
+		Admin = true;				
 	}
 
 	//Pre: Cert
@@ -61,44 +61,46 @@ public class Usuari {
 	//Pre: i < Cerques_fetes.size() && es l'index d'una CercaComunitats a Cerques_fetes
 	//Post: Retorna el CercaComunitats amb índex i
 	public CercaComunitats getCerca(Integer i) {
-		return Cerques_fetes.get(i.intValue());
+		return Cerques_fetes.get(i);
 	}
 	
 	//Pre: Cert
 	//Post: ++nCerques i c pertany a Cerques_fetes
 	public Integer addCerca(CercaComunitats c) {
-		Integer i;
+		int i;
 		if(eliminats.isEmpty()) {
-			if (nCerques == Cerques_fetes.size()) {
-				Cerques_fetes.ensureCapacity(nCerques+5);
-			}
 			i = nCerques;
+			if (i == Cerques_fetes.size()) { //sempre que eliminats.isEmpty s'ha de complir això
+				Cerques_fetes.add(i, c);
+				++nCerques;
+				return i;
+			}
 		}
 		else {
 			i = eliminats.poll(); //primer index buit
 		}
-		Cerques_fetes.set(i.intValue(), c);
-		nCerques = Integer.valueOf(nCerques.intValue()+1);
+		Cerques_fetes.set(i, c);
+		++nCerques;
 		return i;		
 	}
 	
 	//Pre: c es a Cerques_fetes
 	//Post: c no es a Cerques_fetes i --Cerques_fetes.size() (o --nCerques)
 	public Boolean removeCerca(CercaComunitats c) {
-		Integer i = Integer.valueOf(Cerques_fetes.indexOf(c));
-		Cerques_fetes.set(i.intValue(), null);
-		nCerques = Integer.valueOf(nCerques.intValue()-1);
-		eliminats.add(Integer.valueOf(i));
-		return Boolean.TRUE;
+		int i = Cerques_fetes.indexOf(c);
+		Cerques_fetes.set(i, null);
+		--nCerques;
+		eliminats.add(i);
+		return true;
 	}
 	
 	//Pre: i < Cerques_fetes.size() && es l'index d'una CercaComunitats a Cerques_fetes
 	//Post: Cerques_fetes ja no conté la CercaComunitats amb index i
 	public Boolean removeCerca(Integer i) {
-		Cerques_fetes.set(i.intValue(), null);
-		nCerques = Integer.valueOf(nCerques.intValue()-1);
-		eliminats.add(Integer.valueOf(i));
-		return Boolean.TRUE;
+		Cerques_fetes.set(i, null);
+		--nCerques;
+		eliminats.add(i);
+		return true;
 	}
 	
 	//Pre: Cert

@@ -30,7 +30,7 @@ public class Criteris {
 		this.paraula_clau = paraula_clau;
 	}
 	
-	public int getRelacions_cat() {
+	public Integer getRelacions_cat() {
 		return relacions_cat;
 	}
 	
@@ -38,7 +38,7 @@ public class Criteris {
 		this.relacions_cat = relacions_cat;
 	}
 	
-	public int getSembla_nom() {
+	public Integer getSembla_nom() {
 		return sembla_nom;
 	}
 	
@@ -46,7 +46,7 @@ public class Criteris {
 		this.sembla_nom = sembla_nom;
 	}
 	
-	public int getAlgorisme() {
+	public Integer getAlgorisme() {
 		return algorisme;
 	}
 	
@@ -54,7 +54,7 @@ public class Criteris {
 		this.algorisme = algorisme;
 	}
 	
-	public int getTipu_cerca() {
+	public Integer getTipu_cerca() {
 		return tipu_cerca;
 	}
 	
