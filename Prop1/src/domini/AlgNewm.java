@@ -6,10 +6,15 @@ package domini;
 import java.util.HashSet;
 
 /**
- * @author Alr
+ * @author Rafa
  *
  */
 public class AlgNewm {
+	private void inicialitzar () {
+		
+		
+		
+	}
 	
 	public HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
 		return null;

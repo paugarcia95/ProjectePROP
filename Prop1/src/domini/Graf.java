@@ -70,7 +70,7 @@ public class Graf {
 	public Boolean addNode(String id) {
 		if (existeixNode(id)) return false;
 		Integer Posicio = Matriu.size();
-		Matriu.add(new Vector<Double>(Posicio-1));
+		Matriu.add(new Vector<Double>(Posicio+1));
 		
 		//Nova fila al final inicialitzada a 0.0
 		for(Integer i = 0; i < Matriu.size()-1; ++i){
@@ -96,14 +96,14 @@ public class Graf {
 		Integer Posicio = Diccionari.get(id);
 		Integer Size = Matriu.size();
 		for (Integer i = 0; i < Size; ++i){
-			Matriu.get(i).remove(Posicio);
+			Matriu.get(i).remove((int) Posicio);
 		}
-		Matriu.remove(Posicio);
+		Matriu.remove((int) Posicio);
 		Diccionari.remove(id);
-		for (Integer i = Posicio+1; i < Size; ++i) {
-			String iString = DiccionariInvers.get(i);
-			Diccionari.put(iString,i-1);
-			DiccionariInvers.put(i-1, iString);
+		for (Integer i = Posicio; i < Size-1; ++i) {//TODO Corregir errores
+			String iString = DiccionariInvers.get(i+1);
+			Diccionari.put(iString,i);
+			DiccionariInvers.put(i, iString);
 		}
 		
 		DiccionariInvers.remove(Size-1);
@@ -194,7 +194,7 @@ public class Graf {
 		Integer Posicio = Diccionari.get(id);
 		Integer N = Matriu.size();
 		for(Integer j = 0; j < N; ++j) {
-			if (Matriu.get(Posicio).get(j) >= 0.0) Cjt.add(DiccionariInvers.get(j));
+			if (Matriu.get(Posicio).get(j) > 0.0) Cjt.add(DiccionariInvers.get(j));
 		}
 		return Cjt;
 	}
