@@ -12,53 +12,37 @@ public class EntradaSortidaDadesGraf {
 
 	public void loadGraph(String rute) throws FileNotFoundException, IOException {
 		GrafDades G = new GrafDades();
-		String s;
 		BufferedReader b = new BufferedReader(new FileReader(rute));
+		String s;
 
 		while ((s = b.readLine()) != null) {
-
-			// System.out.println(s);
 			StringTokenizer st = new StringTokenizer(s);
 
-			while (st.hasMoreTokens()) {
+			while (st.hasMoreTokens() && st.countTokens() >= 4) {
 				String word1 = st.nextToken();
 				st.nextToken();
 				String link = st.nextToken();
 				String word2 = st.nextToken();
 				st.nextToken();
 
-				if (link == "CsubC")
+				if (link.equals("CsubC"))
 					G.addCC(new Categoria(word2), new Categoria(word1));
-				else if (link == "CsupC")
+				else if (link.equals("CsupC"))
 					G.addCC(new Categoria(word1), new Categoria(word2));
-				else if (link == "CP")
+				else if (link.equals("CP"))
 					G.addCP(new Categoria(word1), new Pagina(word2));
-				else if (link == "PC")
+				else if (link.equals("PC"))
 					G.addPC(new Pagina(word2), new Categoria(word1));
 				else
 					System.out.println("Error al crear el graf: Comprova la sintaxi de l'entrada");
-
 			}
 		}
-
 		b.close();
 	}
 
 	public void printGrafAsPicture(GrafDades G, String ruta) {
-		/*
-		 * FileWriter fichero = null; PrintWriter pw = null; try { fichero = new
-		 * FileWriter("C:/Users/Pau/Downloads/cats2.txt"); pw = new
-		 * PrintWriter(fichero);
-		 * 
-		 * for (int i = 0; i < 10; i++) pw.println("Linea " + i);
-		 * 
-		 * } catch (Exception e) { e.printStackTrace(); } finally { try { // Nos
-		 * aseguramos que se cierra el fichero. if (null != fichero)
-		 * fichero.close(); } catch (Exception e2) { e2.printStackTrace(); } }
-		 */
 	}
 	public void printGrafAsText(GrafDades G, String ruta, String nomDoc) {
-
 	}
 
 	public void translateTextToPicture(String textRute, String pictureRute) {
@@ -92,17 +76,11 @@ public class EntradaSortidaDadesGraf {
 					String word2 = st.nextToken();
 					String type2 = st.nextToken();
 
-					word1 = word1.replaceAll("[^a-zA-Z]", "_"); // Aixo fa que
-																// elimini tots
-																// els caracters
-																// que no siguin
-																// lletres
-					word2 = word2.replaceAll("[^a-zA-Z]", "_"); // Perque sino
-																// el
-																// programa de
-																// dibuixar
-																// grafs no
-																// funciona
+					word1 = word1.replaceAll("[^a-zA-Z]", "_");
+					// Aixo fa que elimini tots els caracters que no siguin
+					// lletres
+					word2 = word2.replaceAll("[^a-zA-Z]", "_");
+					// Perque sino el programa de dibuixargrafs no funciona
 
 					if (link.equals("CsubC") || link.equals("CP") || link.equals("PC"))
 						docE.println(word1 + " -> " + word2);
@@ -140,6 +118,5 @@ public class EntradaSortidaDadesGraf {
 				e2.printStackTrace();
 			}
 		}
-
 	}
 }
