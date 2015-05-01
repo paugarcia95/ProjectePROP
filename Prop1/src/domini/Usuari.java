@@ -109,7 +109,7 @@ public class Usuari {
 	        	break;
 	        }
 	    }
-		if (i == 8) return false;
+		if (i == CerquesFetes.size()) return false;
 		CerquesFetes.set(i, null);
 		--nCerques;
 		eliminats.add(i);
