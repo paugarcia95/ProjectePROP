@@ -1,4 +1,3 @@
-/////HOLAAAAAAA HO VEIEU¿?? sii (pau)
 /**
  * 
  */
@@ -19,7 +18,8 @@ public class ControladorUsers {
 	// CREADORA
 
 	/**
-	 * Pre: no existeix cap conjunt d'usuaris en el sistema Post: hi ha un
+	 * Pre: no existeix cap conjunt d'usuaris en el sistema 
+	 * Post: hi ha un
 	 * conjunt d'usuaris que conté els usuaris existents en el registre
 	 */
 	public ControladorUsers() {
@@ -32,7 +32,8 @@ public class ControladorUsers {
 	// MODIFICADORES
 
 	/**
-	 * Pre: L'usuari username ja existeix Post: l'usuari username es admin
+	 * Pre: L'usuari username ja existeix 
+	 * Post: l'usuari username es admin
 	 * 
 	 * @return
 	 */
@@ -41,7 +42,8 @@ public class ControladorUsers {
 	}
 
 	/**
-	 * Pre: cert Post: Es retorna cert si l'usuari s'ha pogut crear
+	 * Pre: cert 
+	 * Post: Es retorna cert si l'usuari s'ha pogut crear
 	 * satisfactoriament i s'afegeix un usari amb les dades corresponents o es
 	 * retorna fals si no s'ha pogut crear
 	 * 
@@ -56,7 +58,8 @@ public class ControladorUsers {
 	}
 
 	/**
-	 * Pre: Post:
+	 * Pre:
+	 * Post:
 	 * 
 	 * @return
 	 */
@@ -65,7 +68,8 @@ public class ControladorUsers {
 	}
 
 	/**
-	 * Pre: cert Post: si l'usuari existia, s'elimina
+	 * Pre: cert 
+	 * Post: si l'usuari existia, s'elimina
 	 * 
 	 * @return cert si s'ha pogut eliminar, fals en cas contrari
 	 */
@@ -79,7 +83,8 @@ public class ControladorUsers {
 	// CONSULTORES
 
 	/**
-	 * Pre: Cert Post: no modifica les dades
+	 * Pre: Cert 
+	 * Post: no modifica les dades
 	 * 
 	 * @return Retorna cert si existeix l'usuari username al registre de dades
 	 */
@@ -88,21 +93,19 @@ public class ControladorUsers {
 	}
 
 	/**
-	 * Pre: existeix un conjunt d'usuaris Post: no modifica les dades
-	 * 
+	 * Pre: existeix un conjunt d'usuaris i username existeix
+	 * Post: no modifica les dades
 	 * @return cert si les dades son correctes i corresponen a un usuari
 	 *         existent o fals en cas contrari
 	 */
 	public boolean login(String username, String pass) {
-		if (conj.exists(username)) {
-			Usuari u = conj.getUser(username);
-			return u.getPassword() == pass;
-		} else
-			return false;
+		Usuari u = conj.getUser(username);
+		return u.getPassword().equals(pass);
 	}
 
 	/**
-	 * Pre:existeix un conjunt d'usuaris Post: no modifica les dades
+	 * Pre:existeix un conjunt d'usuaris 
+	 * Post: no modifica les dades
 	 * 
 	 * @return una llista amb els noms dels usuaris existents
 	 */
@@ -116,8 +119,8 @@ public class ControladorUsers {
 	}
 
 	/**
-	 * Pre: l'usuari username existeix Post: no modifica les dades
-	 * 
+	 * Pre: l'usuari username existeix 
+	 * Post: no modifica les dades
 	 * @return cert si l'usuari és admin o fals en cas contrari
 	 */
 	public boolean esAdmin(String username) {

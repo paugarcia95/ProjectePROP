@@ -2,80 +2,85 @@ package domini;
 
 import java.util.ArrayList;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class Criteris {
 	
-	private ParaulaValor paraula_clau;
-	private int relacions_cat, sembla_nom, algorisme, tipu_cerca;
-	private ArrayList<Categoria> subconj_cat, evita_cat;
+	private ParaulaValor paraulaClau;
+	private Integer relacionsCat, semblaNom, algorisme, tipuCerca;
+	private ArrayList<Categoria> subconjCat, evitaCat;
 	private String pare;
 	
 	
 	
-	public Criteris(ParaulaValor paraula_clau, int relacions_cat, int sembla_nom, int algorisme, int tipu_cerca, ArrayList<Categoria> subconj_cat, ArrayList<Categoria> evita_cat, String pare) {
-		this.paraula_clau = paraula_clau;
-		this.relacions_cat = relacions_cat;
-		this.sembla_nom = sembla_nom;
-		this.algorisme = algorisme;
-		this.tipu_cerca = tipu_cerca;
-		this.subconj_cat = subconj_cat;
-		this.evita_cat = evita_cat;
+	public Criteris(ParaulaValor paraula, Integer relacions, Integer sembla, Integer alg, Integer tipus, ArrayList<Categoria> subconj, ArrayList<Categoria> evita, String pare) {
+		paraulaClau = paraula;
+		relacionsCat = relacions;
+		semblaNom = sembla;
+		algorisme = alg;
+		tipuCerca = tipus;
+		subconjCat = subconj;
+		evitaCat = evita;
 		this.pare = pare;
 	}
 
-	public ParaulaValor getParaula_clau() {
-		return paraula_clau;
+	public ParaulaValor getParaulaClau() {
+		return paraulaClau;
 	}
 	
-	public void setParaula_clau(ParaulaValor paraula_clau) {
-		this.paraula_clau = paraula_clau;
+	public void setParaulaClau(ParaulaValor paraula) {
+		paraulaClau = paraula;
 	}
 	
-	public int getRelacions_cat() {
-		return relacions_cat;
+	public Integer getRelacionsCat() {
+		return relacionsCat;
 	}
 	
-	public void setRelacions_cat(int relacions_cat) {
-		this.relacions_cat = relacions_cat;
+	public void setRelacionsCat(Integer relacions) {
+		relacionsCat = relacions;
 	}
 	
-	public int getSembla_nom() {
-		return sembla_nom;
+	public Integer getSemblNom() {
+		return semblaNom;
 	}
 	
-	public void setSembla_nom(int sembla_nom) {
-		this.sembla_nom = sembla_nom;
+	public void setSemblaNom(Integer sembla) {
+		semblaNom = sembla;
 	}
 	
-	public int getAlgorisme() {
+	public Integer getAlgorisme() {
 		return algorisme;
 	}
 	
-	public void setAlgorisme(int algorisme) {
-		this.algorisme = algorisme;
+	public void setAlgorisme(Integer alg) {
+		algorisme = alg;
 	}
 	
-	public int getTipu_cerca() {
-		return tipu_cerca;
+	public Integer getTipuCerca() {
+		return tipuCerca;
 	}
 	
-	public void setTipu_cerca(int tipu_cerca) {
-		this.tipu_cerca = tipu_cerca;
+	public void setTipuCerca(Integer tipus) {
+		tipuCerca = tipus;
 	}
 	
-	public ArrayList<Categoria> getSubconj_cat() {
-		return subconj_cat;
+	public ArrayList<Categoria> getSubconjCat() {
+		return subconjCat;
 	}
 	
-	public void setSubconj_cat(ArrayList<Categoria> subconj_cat) {
-		this.subconj_cat = subconj_cat;
+	public void setSubconjCat(ArrayList<Categoria> subconj) {
+		subconjCat = subconj;
 	}
 	
-	public ArrayList<Categoria> getEvita_cat() {
-		return evita_cat;
+	public ArrayList<Categoria> getEvitaCat() {
+		return evitaCat;
 	}
 	
-	public void setEvita_cat(ArrayList<Categoria> evita_cat) {
-		this.evita_cat = evita_cat;
+	public void setEvitaCat(ArrayList<Categoria> evita) {
+		evitaCat = evita;
 	}
 	
 	public String getPare() {

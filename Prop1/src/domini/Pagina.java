@@ -3,6 +3,11 @@ package domini;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class Pagina {
 	
 	private String Nom;
@@ -36,7 +41,7 @@ public class Pagina {
 	
 	//Pre: cert
 	//Post: retorna 0 si no existeix ni CP ni PC, 1 si és PC i 2 si es CP
-	public int existsPC(String categoria) {
+	public Integer existsPC(String categoria) {
 		if(PC.containsKey(categoria)) return 1;
 		if(CP.containsKey(categoria)) return 2;
 		return 0;
@@ -61,7 +66,7 @@ public class Pagina {
 	
 	//Pre: categoria no pertany a PC
 	//Post: categoria pertany a PC
-	public boolean addPC(Categoria categoria) {
+	public Boolean addPC(Categoria categoria) {
 		PC.put(categoria.getNom(), categoria);
 		return true;
 	}	
@@ -75,23 +80,23 @@ public class Pagina {
 	
 	//Pre: categoria es una key de PC amb un valor assignat
 	//Post: categoria ja no es key de PC
-	public boolean removePC(String categoria) {
+	public Boolean removePC(String categoria) {
 		PC.remove(categoria);
 		return true;
 	}
 	
 	//Pre: categoria es una key de CP amb un valor assignat
 	//Post: categoria ja no es key de CP
-	public boolean removeCP(String categoria) {
+	public Boolean removeCP(String categoria) {
 		CP.remove(categoria);
 		return true;
 	}
 	
-	public int getNumPC() {
+	public Integer getNumPC() {
 		return PC.size();
 	}
 	
-	public int getNumCP() {
+	public Integer getNumCP() {
 		return CP.size();
 	}
 	

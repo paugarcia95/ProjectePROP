@@ -3,13 +3,18 @@ package domini;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Graf {
+/**
+ * @author Dani
+ *
+ */
+
+public class GrafDades {
 	
 	private Map<String, Categoria> Categories;
 	private Map<String, Pagina> Pagines;
 	
 	
-	public Graf() {
+	public GrafDades() {
 		Categories = new TreeMap<String, Categoria>();
 		Pagines = new TreeMap<String, Pagina>();
 	}
@@ -28,33 +33,34 @@ public class Graf {
 	
 	//Pre: Cert
 	//Post: Retorna el nombre de Categories que hi ha al graf
-	public int getNombreCategories() {
+	public Integer getNombreCategories() {
 		return Categories.size();
 	}
 	
 	//Pre: Cert
 	//Post: Retorna el nombre de Pàgines que hi ha al graf
-	public int getNombrePagines() {
+	public Integer getNombrePagines() {
 		return Pagines.size();
 	}
 	
-	//Pre: cat no és l'assignació de cap key a Categories
+	//Pre: Cert
 	//Post: cat és l'assignació de la key cat.Nom
-	public boolean addCategoria(Categoria cat) {
+	public Boolean addCategoria(Categoria cat) {
 		if (Categories.containsKey(cat.getNom())) return false;
 		Categories.put(cat.getNom(), cat);
 		return true;
 	}
 	
-	//Pre: pag no és l'assignació de cap key a Pagines
+	//Pre: Cert
 	//Post: pag és l'assignació de la key pag.Nom
-	public boolean addPagina(Pagina pag) {
+	public Boolean addPagina(Pagina pag) {
+		if (Pagines.containsKey(pag.getNom())) return false;
 		Pagines.put(pag.getNom(), pag);
 		return true;
 	}
 	
 	
-	public boolean addCC(Categoria cat1, Categoria cat2) {
+	public Boolean addCC(Categoria cat1, Categoria cat2) {
 		if (Categories.containsKey(cat1.getNom()) && Categories.containsKey(cat2.getNom())) {
 			if (cat1.existsCC(cat2.getNom()) == 2 && cat2.existsCC(cat1.getNom()) == 1) { //ja existeix
 				return false;
@@ -81,7 +87,7 @@ public class Graf {
 	}
 	
 	
-	public boolean addPC(Pagina pag, Categoria cat) {
+	public Boolean addPC(Pagina pag, Categoria cat) {
 		if (Pagines.containsKey(pag.getNom()) && Categories.containsKey(cat.getNom())) {
 			if (pag.existsPC(cat.getNom()) == 1 && cat.existsCP(pag.getNom()) == 1) { //ja existeix
 				return false;
@@ -108,7 +114,7 @@ public class Graf {
 	}
 	
 	
-	public boolean addCP(Categoria cat, Pagina pag) {
+	public Boolean addCP(Categoria cat, Pagina pag) {
 		if (Categories.containsKey(cat.getNom()) && Pagines.containsKey(pag.getNom())) {
 			if (cat.existsCP(pag.getNom()) == 2 && pag.existsPC(cat.getNom()) == 2) { //ja existeix
 				return false;
@@ -136,7 +142,7 @@ public class Graf {
 	
 	//Pre: Cert
 	//Post: retorna true si cat1 era super de cat2 i ja no, false altrament
-	public boolean removeCC(Categoria cat1, Categoria cat2) {
+	public Boolean removeCC(Categoria cat1, Categoria cat2) {
 		if (Categories.containsKey(cat1.getNom()) && Categories.containsKey(cat2.getNom())) {
 			if (cat1.existsCC(cat2.getNom()) == 2 && cat2.existsCC(cat1.getNom()) == 1) {
 				cat1.removeCsubC(cat2.getNom());
@@ -149,7 +155,7 @@ public class Graf {
 	
 	//Pre: Cert
 	//Post: retorna true si pag apuntava a cat i ja no, false altrament
-	public boolean removePC(Pagina pag, Categoria cat) {
+	public Boolean removePC(Pagina pag, Categoria cat) {
 		if (Pagines.containsKey(pag.getNom()) && Categories.containsKey(cat.getNom())) {
 			if (pag.existsPC(cat.getNom()) == 1 && cat.existsCP(pag.getNom()) == 1) {
 				pag.removePC(cat.getNom());
@@ -162,7 +168,7 @@ public class Graf {
 	
 	//Pre: Cert
 	//Post: retorna true si cat apuntava a pag i ja no, false altrament
-	public boolean removeCP(Categoria cat, Pagina pag) {
+	public Boolean removeCP(Categoria cat, Pagina pag) {
 		if (Categories.containsKey(cat.getNom()) && Pagines.containsKey(pag.getNom())) {
 			if (pag.existsPC(cat.getNom()) == 2 && cat.existsCP(pag.getNom()) == 2) {
 				cat.removeCP(pag.getNom());
@@ -176,7 +182,7 @@ public class Graf {
 	
 	//Pre: Cert
 	//Post: si nom era una key de Categories amb una assignació nom ja no és key de Categories, altrament retorna false
-	public boolean removeCategoria(String nom) {
+	public Boolean removeCategoria(String nom) {
 		if (Categories.containsKey(nom)) {
 			Categories.remove(nom);
 			return true;
@@ -186,7 +192,7 @@ public class Graf {
 	
 	//Pre: Cert
 	//Post: si nom era una key de Pagines amb una assignació ja no és key de Pagines, altrament retorna false
-	public boolean removePagina(String nom) {
+	public Boolean removePagina(String nom) {
 		if (Pagines.containsKey(nom)) {
 			Pagines.remove(nom);
 			return true;
@@ -196,13 +202,13 @@ public class Graf {
 	
 	//Pre: Cert
 	//Post: retorna si existeix una Categoria assignada a nom
-	public boolean existsCategoria(String nom) {
+	public Boolean existsCategoria(String nom) {
 		return Categories.containsKey(nom);
 	}
 
 	//Pre: Cert
 	//Post: retorna si existeix una Pagina assignada a nom
-	public boolean existsPagina(String nom) {
+	public Boolean existsPagina(String nom) {
 		return Pagines.containsKey(nom);
 	}
 		

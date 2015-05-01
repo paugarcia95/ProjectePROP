@@ -4,6 +4,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class ConjuntUsuaris {
 	
 	private Map<String, Usuari> Users;
@@ -14,21 +19,21 @@ public class ConjuntUsuaris {
 	
 	//Pre: u no existeix a Users
 	//Post: u pertany a Users
-	public boolean addUser(Usuari u) {
+	public Boolean addUser(Usuari u) {
 		Users.put(u.getUsername(), u);
 		return true;
 	}
 	
 	//Pre: Cert
 	//Post: Retorna si existeix l'Usuari u a Users
-	public boolean exists(Usuari u) {
+	public Boolean exists(Usuari u) {
 		return Users.containsKey(u.getUsername()); 	// log(n)
 		//return Users.containsValue(u); 			// (n)
 	}
 	
 	//Pre: Cert
 	//Post: Retorna si existeix l'Usuari amb Username=Username a Users
-	public boolean exists(String Username) {
+	public Boolean exists(String Username) {
 		return Users.containsKey(Username);
 	}
 	
@@ -40,12 +45,12 @@ public class ConjuntUsuaris {
 	
 	//Pre: username es la key d'un usuari existent a Users
 	//Post: l'usuari amb key username ja no existeix a Users
-	public boolean removeUser(String username) {
+	public Boolean removeUser(String username) {
 		Users.remove(username);
 		return true;
 	}
 	
-	public int getNombreUsers() {
+	public Integer getNombreUsers() {
 		return Users.size();
 	}
 	
@@ -55,7 +60,7 @@ public class ConjuntUsuaris {
 	
 	//Pre: Cert
 	//Post: si existeix Usuari amb Username = antic, ara Username = nou
-	public boolean setUsername(String antic, String nou) {
+	public Boolean setUsername(String antic, String nou) {
 		if (Users.containsKey(antic) && !Users.containsKey(nou)) {
 			Usuari u = Users.remove(antic);
 			u.setUsername(nou);

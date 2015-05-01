@@ -1,10 +1,15 @@
 package domini;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class ParaulaValor {
 	private String Paraula;
-	private int Num;
+	private Integer Num;
 	
-	public ParaulaValor(String paraula, int num) {
+	public ParaulaValor(String paraula, Integer num) {
 		Paraula = paraula;
 		Num = num;
 	}
@@ -18,11 +23,11 @@ public class ParaulaValor {
 		return true;
 	}
 
-	public int getNum() {
+	public Integer getNum() {
 		return Num;
 	}
 
-	public void setNum(int num) {
+	public void setNum(Integer num) {
 		Num = num;
 	}
 

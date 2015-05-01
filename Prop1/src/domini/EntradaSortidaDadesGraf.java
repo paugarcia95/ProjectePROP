@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 public class EntradaSortidaDadesGraf {
 
 	public void loadGraph(String rute) throws FileNotFoundException, IOException {
-		Graf G = new Graf();
+		GrafDades G = new GrafDades();
 		String s;
 		BufferedReader b = new BufferedReader(new FileReader(rute));
 
@@ -44,7 +44,7 @@ public class EntradaSortidaDadesGraf {
 		b.close();
 	}
 
-	public void printGrafAsPicture(Graf G, String ruta) {
+	public void printGrafAsPicture(GrafDades G, String ruta) {
 		/*
 		 * FileWriter fichero = null; PrintWriter pw = null; try { fichero = new
 		 * FileWriter("C:/Users/Pau/Downloads/cats2.txt"); pw = new
@@ -57,7 +57,7 @@ public class EntradaSortidaDadesGraf {
 		 * fichero.close(); } catch (Exception e2) { e2.printStackTrace(); } }
 		 */
 	}
-	public void printGrafAsText(Graf G, String ruta, String nomDoc) {
+	public void printGrafAsText(GrafDades G, String ruta, String nomDoc) {
 
 	}
 
