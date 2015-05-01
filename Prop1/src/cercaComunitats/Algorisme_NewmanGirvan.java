@@ -6,8 +6,6 @@ package cercaComunitats;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import domini.CercaComunitats;
-
 /**
  * @author Rafa
  *
