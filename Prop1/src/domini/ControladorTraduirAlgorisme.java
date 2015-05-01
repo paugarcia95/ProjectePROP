@@ -4,7 +4,7 @@
 package domini;
 
 /**
- * @author Alr
+ * @author Rafa
  *
  */
 public class ControladorTraduirAlgorisme {
