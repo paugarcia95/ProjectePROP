@@ -40,7 +40,7 @@ public class Algorisme_NewmanGirvan {
 	public HashSet<HashSet<String>> executa_bet(Graf G, Integer maxbetweness) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
-		Integer maxactual = 0; //Futura variable amb el max valor de betweness
+		int maxactual = 0; //Futura variable amb el max valor de betweness
 		while(maxactual > maxbetweness) {
 			util.Calculate_edge_between();
 			if(!util.esborrar_maxim()) return null; // Futur control d'errors;
