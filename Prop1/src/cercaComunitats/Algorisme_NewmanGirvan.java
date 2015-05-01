@@ -28,9 +28,10 @@ public class Algorisme_NewmanGirvan {
 	public HashSet<HashSet<String>> executa_num(Graf G, Integer numComunidades) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
+		util.Calculate_edge_between();
 		while(util.Num_comunitats() < numComunidades) {
+			if(!util.esborrar_maxim()) return null; // Futur control d'errors
 			util.Calculate_edge_between();
-			if(!util.esborrar_maxim()) return null; // Futur control d'errors;
 		}
 		return util.comunitats();
 		
@@ -40,13 +41,13 @@ public class Algorisme_NewmanGirvan {
 	public HashSet<HashSet<String>> executa_bet(Graf G, Integer maxbetweness) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
-		int maxactual = 0; //Futura variable amb el max valor de betweness
+		util.Calculate_edge_between();
+		int maxactual = util.getMaxBet(); //Variable amb el valor de maxbtw
 		while(maxactual > maxbetweness) {
+			if(!util.esborrar_maxim()) return null; // Futur control d'errors
 			util.Calculate_edge_between();
-			if(!util.esborrar_maxim()) return null; // Futur control d'errors;
+			maxactual = util.getMaxBet();
 		}
 		return util.comunitats();
-		
-		
 	}
 }
