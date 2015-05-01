@@ -3,6 +3,11 @@ package domini;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class GrafDades {
 	
 	private Map<String, Categoria> Categories;
@@ -38,7 +43,7 @@ public class GrafDades {
 		return Pagines.size();
 	}
 	
-	//Pre: cat no és l'assignació de cap key a Categories
+	//Pre: Cert
 	//Post: cat és l'assignació de la key cat.Nom
 	public Boolean addCategoria(Categoria cat) {
 		if (Categories.containsKey(cat.getNom())) return false;
@@ -46,9 +51,10 @@ public class GrafDades {
 		return true;
 	}
 	
-	//Pre: pag no és l'assignació de cap key a Pagines
+	//Pre: Cert
 	//Post: pag és l'assignació de la key pag.Nom
 	public Boolean addPagina(Pagina pag) {
+		if (Pagines.containsKey(pag.getNom())) return false;
 		Pagines.put(pag.getNom(), pag);
 		return true;
 	}

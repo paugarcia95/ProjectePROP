@@ -3,6 +3,11 @@ package domini;
 import java.util.ArrayList;
 import java.util.Queue;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class Usuari {
 	
 	private String Username, Password;

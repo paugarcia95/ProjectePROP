@@ -5,6 +5,11 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class CercaComunitats {
 	
 	private String Nom, Comentari, Usuari;

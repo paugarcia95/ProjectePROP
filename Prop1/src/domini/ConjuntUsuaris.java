@@ -4,6 +4,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class ConjuntUsuaris {
 	
 	private Map<String, Usuari> Users;

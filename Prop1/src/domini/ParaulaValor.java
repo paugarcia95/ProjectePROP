@@ -1,5 +1,10 @@
 package domini;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class ParaulaValor {
 	private String Paraula;
 	private Integer Num;

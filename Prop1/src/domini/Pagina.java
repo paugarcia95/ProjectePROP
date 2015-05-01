@@ -3,6 +3,11 @@ package domini;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class Pagina {
 	
 	private String Nom;

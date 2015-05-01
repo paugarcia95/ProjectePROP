@@ -3,6 +3,11 @@ package domini;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * @author Dani
+ *
+ */
+
 public class Categoria {
 	
 	private String nom;
@@ -103,17 +108,36 @@ public class Categoria {
 		CsupC.remove(nom_categoria);
 	}
 	
-	/*
 	public Map<String, Pagina> getMapCP() {
 		return CP;
 	}
+
+	public Map<String, Pagina> getMapPC() {
+		return PC;
+	}
 	
-	No he implementat la resta:
-	+ getMapCC(): &map<string, *Categoria>
-	+ setMapCP(mapa: &map<string, *Pagina>): void
-	+ setMapCC(mapa: &map<string, *Categoria>): void
+	public Map<String, Categoria> getMapCsubC() {
+		return CsubC;
+	}
 	
-	perque no se quin es el MapCC, si es l'agregació del CsupC amb el CsubC o com
-	*/
+	public Map<String, Categoria> getMapCsupC() {
+		return CsupC;
+	}
+
+	public void setMapCP(Map<String, Pagina> mapa) {
+		CP = mapa;
+	}
+	
+	public void setMapPC(Map<String, Pagina> mapa) {
+		PC = mapa;
+	}
+
+	public void setMapCsubC(Map<String, Categoria> mapa) {
+		CsubC = mapa;
+	}
+
+	public void setMapCsupC(Map<String, Categoria> mapa) {
+		CsupC = mapa;
+	}	
 
 }
