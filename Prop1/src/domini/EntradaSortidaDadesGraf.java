@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
-//he canviat el nom
+
 public class EntradaSortidaDadesGraf {
 
 	public void loadGraph(String rute) throws FileNotFoundException, IOException {
