@@ -12,7 +12,7 @@ public class Usuari {
 	
 	private String Username, Password;
 	private Boolean Admin;
-	private ArrayList<CercaComunitats> Cerques_fetes;
+	private ArrayList<CercaComunitats> CerquesFetes;
 	private Integer nCerques;
 	private Queue<Integer> eliminats;
 	
@@ -23,7 +23,7 @@ public class Usuari {
         this.Username = Username;
         this.Password = Password;
         this.Admin = Admin;
-        Cerques_fetes = new ArrayList<CercaComunitats>();
+        CerquesFetes = new ArrayList<CercaComunitats>();
         nCerques = 0;
 	}
 	
@@ -66,7 +66,7 @@ public class Usuari {
 	//Pre: i < Cerques_fetes.size() && es l'index d'una CercaComunitats a Cerques_fetes
 	//Post: Retorna el CercaComunitats amb índex i
 	public CercaComunitats getCerca(Integer i) {
-		return Cerques_fetes.get(i);
+		return CerquesFetes.get(i);
 	}
 	
 	//Pre: Cert
@@ -75,8 +75,8 @@ public class Usuari {
 		int i;
 		if(eliminats.isEmpty()) {
 			i = nCerques;
-			if (i == Cerques_fetes.size()) { //sempre que eliminats.isEmpty s'ha de complir això
-				Cerques_fetes.add(i, c);
+			if (i == CerquesFetes.size()) { //sempre que eliminats.isEmpty s'ha de complir això
+				CerquesFetes.add(i, c);
 				++nCerques;
 				return i;
 			}
@@ -84,16 +84,33 @@ public class Usuari {
 		else {
 			i = eliminats.poll(); //primer index buit
 		}
-		Cerques_fetes.set(i, c);
+		CerquesFetes.set(i, c);
 		++nCerques;
 		return i;		
 	}
 	
-	//Pre: c es a Cerques_fetes
-	//Post: c no es a Cerques_fetes i --Cerques_fetes.size() (o --nCerques)
+	//Pre: c és a Cerques_fetes
+	//Post: c no és a Cerques_fetes i --Cerques_fetes.size() (o --nCerques)
 	public Boolean removeCerca(CercaComunitats c) {
-		int i = Cerques_fetes.indexOf(c);
-		Cerques_fetes.set(i, null);
+		int i = CerquesFetes.indexOf(c);
+		CerquesFetes.set(i, null);
+		--nCerques;
+		eliminats.add(i);
+		return true;
+	}
+	
+	//Pre: cert
+	//Post: c no és a Cerques_fetes i --Cerques_fetes.size() (o --nCerques)
+	public Boolean removeCerca(String s) {
+		int i;
+		for (i = 0; i < CerquesFetes.size(); i++) {
+	        CercaComunitats cerca = CerquesFetes.get(i);
+	        if (cerca != null && s.equals(cerca.getNom())) {
+	        	break;
+	        }
+	    }
+		if (i == 8) return false;
+		CerquesFetes.set(i, null);
 		--nCerques;
 		eliminats.add(i);
 		return true;
@@ -102,7 +119,7 @@ public class Usuari {
 	//Pre: i < Cerques_fetes.size() && es l'index d'una CercaComunitats a Cerques_fetes
 	//Post: Cerques_fetes ja no conté la CercaComunitats amb index i
 	public Boolean removeCerca(Integer i) {
-		Cerques_fetes.set(i, null);
+		CerquesFetes.set(i, null);
 		--nCerques;
 		eliminats.add(i);
 		return true;
