@@ -3,8 +3,11 @@
  */
 package cercaComunitats;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Vector;
 
@@ -13,104 +16,248 @@ import java.util.Vector;
  *
  */
 public class GrafNewman extends Graf {
-	
-	
-	private Vector< Vector<Integer> > NCM;
+
+	private Vector<Vector<Integer>> NCM;
 	@SuppressWarnings("unused")
 	private Integer maxi;
 	@SuppressWarnings("unused")
 	private Integer maxj;
 	private Integer maxNumCM;
-	
-	private class Aresta {			//NSE SI ES POT FER D'UNA ALTRA MANERA! (CRIS)
-	    public Integer posi; 
-	    public Integer posj;   
-	 };
-	
-	//Calcula el camí minim des del node posiA-posjA a el node posiB-posjB, retorna una cua de les arestes per on passa
-	private Queue<Aresta> camiMin(int nodeA, int nodeB ){
-		return null;	//PAU
+
+	private class Aresta { // NSE SI ES POT FER D'UNA ALTRA MANERA! (CRIS)
+							// Sisi esta bé! (Pau) l'únic és que he afegit el
+							// contructor per treballar millor
+		public Integer posi;
+		public Integer posj;
+
+		public Aresta(int posi, int posj) {
+			this.posi = posi;
+			this.posj = posj;
+		}
+	};
+
+	private static final class ArestaPes {
+		public Integer aresta;
+		public Double pes;
+
+		public ArestaPes(int aresta, double pes) {
+			this.aresta = aresta;
+			this.pes = pes;
+		}
 	}
-	
-	
+
+	private static final class ComparaValors implements Comparator<ArestaPes> {
+		@Override
+		public int compare(ArestaPes o1, ArestaPes o2) {
+			// Es multiplica el valor per 100 per no perdre precisió a la
+			// comparació de doubles (ja que despres es fa un cast a integer i
+			// es perden els decimals)
+			return (int) (o1.pes * 100 - o2.pes * 100);
+		}
+	}
+
+	private static final class QueueVector {
+		private static Vector<Queue<Aresta>> Q;
+
+		public QueueVector(int size) {
+			Q = new Vector<Queue<Aresta>>();
+			Q.setSize(size);
+
+			for (int i = 0; i < size; ++i) {
+				Q.set(i, new LinkedList<Aresta>());
+			}
+		}
+
+		public void push(int i, Aresta a) {
+			// El que fa aquest push és posar les arestes necessaries per
+			// arribar al primer node de l'aresta més la nova aresta per arribar
+			// al següent node
+
+			Queue<Aresta> aux = new LinkedList<Aresta>();
+			aux = Q.get(a.posi);
+
+			while (!aux.isEmpty()) {
+				Q.get(i).add(aux.poll());
+				System.out.println(Q.get(i).peek().posi);
+			}
+
+			Q.get(i).add(a);
+		}
+		public void pop(int i) {
+			Q.get(i).poll();
+		}
+
+		public Aresta poll(int i) {
+			return Q.get(i).poll();
+		}
+
+		public Aresta front(int i) {
+			return Q.get(i).peek();
+		}
+
+		public Boolean isEmpty(int i) {
+			return Q.get(i).isEmpty();
+		}
+	}
+
+	/**
+	 * Calcula el camí minim des del nodeA al nodeB. (Pau)
+	 * 
+	 * @param nodeA
+	 *            El node d'un dels extrems del camí.
+	 * @param nodeB
+	 *            El node de l'altre extrem.
+	 * @return Una cua de les arestes per on passa.
+	 */
+	public Queue<Aresta> camiMin(int nodeA, int nodeB) {
+		// Implementat amb Dijkstra
+
+		QueueVector camiMinim = new QueueVector(this.size());
+
+		// Vector que marca la distància del nodeA a la resta de nodes
+		Vector<Double> distancia = new Vector<Double>();
+		distancia.setSize(this.size());
+		/** TENIR EN COMPTE QUE POTSER QE ELS NODES NO SIGUIN CONSECUTIUS!!! */
+
+		// Es com una cua de prioritat que ordena els nodes en una posicio mes
+		// curta al principi
+		PriorityQueue<ArestaPes> cola = new PriorityQueue<ArestaPes>(new ComparaValors());
+
+		// En un principi no se sap, i es marquen les distàncies com a infinites
+		for (int i = 0; i < distancia.size(); ++i) {
+			distancia.set(i, Double.POSITIVE_INFINITY);
+		}
+
+		// La distància del nodeA a ell mateix és 0
+		distancia.set(nodeA, 0.0);
+
+		cola.add(new ArestaPes(nodeA, distancia.get(nodeA)));
+
+		while (!cola.isEmpty()) {
+			ArestaPes a = cola.poll();
+			Integer u = a.aresta;
+
+			// Conté els nodes adjacents a "u"
+			HashSet<String> adjacents = this.getAdjacents(DiccionariInvers.get(u));
+			Iterator<String> it2 = adjacents.iterator();
+
+			while (it2.hasNext()) {
+				Integer v = this.Diccionari.get(it2.next());
+				Double pesUV = this.getPes(DiccionariInvers.get(u), DiccionariInvers.get(v));
+
+				if (distancia.get(v) > distancia.get(u) + pesUV) {
+					distancia.set(v, distancia.get(u) + pesUV);
+					cola.add(new ArestaPes(v, distancia.get(v)));
+
+					camiMinim.push(v, new Aresta(v, u));
+				}
+			}
+		}
+
+		while (!camiMinim.isEmpty(Diccionari.get("G"))) {
+			Aresta a = camiMinim.poll(Diccionari.get("G"));
+			if (a != null)
+				System.out.println(DiccionariInvers.get(a.posi) + " " + DiccionariInvers.get(a.posj));
+		}
+
+		return null;
+	}
+
 	/**
 	 * Creadora per defecte.
 	 */
-	public GrafNewman() { //Cris
+	public GrafNewman() { // Cris
 		super();
-		NCM = new Vector< Vector<Integer> > (super.Matriu.size() );	//crea NCM de la mateixa mida que Matriu
+		// crea NCM de la mateixa mida que Matriu
+		NCM = new Vector<Vector<Integer>>(super.Matriu.size());
 		maxNumCM = maxi = maxj = 0;
 	}
-	
+
 	/**
-	 *  Calcula el nombre de camins minims que passen per cada vertex.
-	 * @return true si s'ha pogut calcular tot correctament, false si hi ha hagut algun error.
+	 * Calcula el nombre de camins minims que passen per cada vertex.
+	 * 
+	 * @return true si s'ha pogut calcular tot correctament, false si hi ha
+	 *         hagut algun error.
 	 */
 	public Integer getMaxBet() {
 		return maxNumCM;
 	}
 	/**
-	 *  Calcula el nombre de camins minims que passen per cada vertex.
-	 * @return true si s'ha pogut calcular tot correctament, false si hi ha hagut algun error.
+	 * Calcula el nombre de camins minims que passen per cada vertex.
+	 * 
+	 * @return true si s'ha pogut calcular tot correctament, false si hi ha
+	 *         hagut algun error.
 	 */
-	public Boolean Calculate_edge_between(){	//CRIS
-		if(NCM.size() < 2) return false;
-		//Posem a 0 tots els camins minims per "començar" la nova ronda
-		for(int i = 0; i < NCM.size(); ++i) {
-			for(int j = 0; i < NCM.size();++j) NCM.get(i).set(j,0);
+	public Boolean Calculate_edge_between() { // CRIS
+		if (NCM.size() < 2)
+			return false;
+		// Posem a 0 tots els camins minims per "començar" la nova ronda
+		for (int i = 0; i < NCM.size(); ++i) {
+			for (int j = 0; i < NCM.size(); ++j)
+				NCM.get(i).set(j, 0);
 		}
-		//Calcula el cami minim de cada node cap a tots els nodes
-		for(int i = 0; i < NCM.size(); ++i) {
-			for(int j = 0; i < NCM.size(); ++j) {
-				if(i !=j) {
-					Queue<Aresta> cami = camiMin(i,j); 
-					//un cop trobat cada cami minim, sumar 1 a la pos de NCM
-					if(cami.size()>0) {
+		// Calcula el cami minim de cada node cap a tots els nodes
+		for (int i = 0; i < NCM.size(); ++i) {
+			for (int j = 0; i < NCM.size(); ++j) {
+				if (i != j) {
+					Queue<Aresta> cami = camiMin(i, j);
+					// un cop trobat cada cami minim, sumar 1 a la pos de NCM
+					if (cami.size() > 0) {
 						Iterator<Aresta> itc = cami.iterator();
 						while (itc.hasNext()) {
 							Aresta aux = itc.next();
 							Integer act = NCM.get(aux.posi).get(aux.posj);
-							NCM.get(aux.posi).set(aux.posj,act+1);
-							//mantenir el vertex per on passen mes camins minims (variables maxi, maxj i maxNumCM)
-							if(maxNumCM <= act) { maxi = aux.posi; maxj = aux.posj; }
+							NCM.get(aux.posi).set(aux.posj, act + 1);
+							// mantenir el vertex per on passen mes camins
+							// minims (variables maxi, maxj i maxNumCM)
+							if (maxNumCM <= act) {
+								maxi = aux.posi;
+								maxj = aux.posj;
+							}
 						}
 					}
 				}
-		}}
+			}
+		}
 		return null;
 	}
 
-	//Fa la inversa dels pesos de les arestes del graf, retorna false si hi ha hagut algun error.	
-	public Boolean Invertir_pesos(){ //Cris
+	// Fa la inversa dels pesos de les arestes del graf, retorna false si hi ha
+	// hagut algun error.
+	public Boolean Invertir_pesos() { // Cris
 		int mida = Matriu.size();
-		if(mida < 2) return false;
+		if (mida < 2)
+			return false;
 		else {
-			for(int i = 0;i < mida; ++i) {
-				for(int j = 0; j < mida; ++j) {
+			for (int i = 0; i < mida; ++i) {
+				for (int j = 0; j < mida; ++j) {
 					double act = Matriu.get(i).get(j);
-					Matriu.get(i).set(j,1/act);
+					Matriu.get(i).set(j, 1 / act);
 				}
 			}
 			return true;
-		} 
+		}
 	}
 
-	//Esborra l’aresta per la que passen més camins mínims de tot el graf, retorna false si hi ha hagut algun error.
-	public Boolean esborrar_maxim(){ //Cris
-		//del Graf "original", eliminem (posar a null, infinit o lu q sigui) del graf de pesos la posicio que indiqui la variable maxNumCM i la posem a 0 
-		
-		return null; 
+	// Esborra l’aresta per la que passen més camins mínims de tot el graf,
+	// retorna false si hi ha hagut algun error.
+	public Boolean esborrar_maxim() { // Cris
+		// del Graf "original", eliminem (posar a null, infinit o lu q sigui)
+		// del graf de pesos la posicio que indiqui la variable maxNumCM i la
+		// posem a 0
+
+		return null;
 	}
 
-	//Retorna el nombre de comunitats en les quals està dividit el graf o 1 en cas d’error.
-	public Integer Num_comunitats(){ //Pau
-		return null; 
-	} 
-
-	//Retorna el conjunt de comunitats existents.
-	public HashSet<HashSet<String>> comunitats(){ //Pau
-		return null; 
+	// Retorna el nombre de comunitats en les quals està dividit el graf o 1 en
+	// cas d’error.
+	public Integer Num_comunitats() { // Pau
+		return null;
 	}
 
-	
+	// Retorna el conjunt de comunitats existents.
+	public HashSet<HashSet<String>> comunitats() { // Pau
+		return null;
+	}
+
 }
