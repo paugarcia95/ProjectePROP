@@ -69,6 +69,8 @@ public class Usuari {
 		return CerquesFetes.get(i);
 	}
 	
+	//Pre: Cert
+	//Post: si s es el nom d'una cerca de l'usuari retorna aquesta cerca, altrament retorna null
 	public CercaComunitats getCerca(String s) {
 		for (int i = 0; i < CerquesFetes.size(); i++) {
 	        CercaComunitats cerca = CerquesFetes.get(i);
