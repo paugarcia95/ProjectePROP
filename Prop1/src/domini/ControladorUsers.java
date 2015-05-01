@@ -4,7 +4,9 @@
 package domini;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -15,7 +17,7 @@ public class ControladorUsers {
 
 	private ConjuntUsuaris conj;
 
-	// CREADORA
+// CREADORA///////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Pre: no existeix cap conjunt d'usuaris en el sistema 
@@ -29,7 +31,7 @@ public class ControladorUsers {
 		 * DadesUser du = new DadesUser(); du.carregarUsers();
 		 */
 	}
-	// MODIFICADORES
+// MODIFICADORES///////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Pre: L'usuari username ja existeix 
@@ -53,18 +55,28 @@ public class ControladorUsers {
 		if (!conj.exists(username)) {
 			Usuari u = new Usuari(username, pass, false);
 			return conj.addUser(u);
-		} else
-			return false;
+		}
+		else return false;
 	}
 
 	/**
-	 * Pre:
+	 * Pre: username existeix
 	 * Post:
 	 * 
 	 * @return
 	 */
-	public boolean setPassword(String username, String pass) {
-		return true; // /////////////////////////////////////
+	public void setPassword(String username, String pass) {
+		conj.getUser(username).setPassword(pass);
+	}
+	
+	/**
+	 * Pre:
+	 * Post:
+	 * 
+	 * @return false si hi ha hagut algun problema, cert altrament
+	 */
+	public boolean setUsername(String antic, String nou) {
+		return conj.setUsername(antic, nou);
 	}
 
 	/**
@@ -74,13 +86,15 @@ public class ControladorUsers {
 	 * @return cert si s'ha pogut eliminar, fals en cas contrari
 	 */
 	public boolean removeUser(String username) {
-		if (conj.exists(username))
-			return conj.removeUser(username);
-		else
-			return false;
+		if (conj.exists(username)) return conj.removeUser(username);
+		else return false;
 
 	}
-	// CONSULTORES
+	
+	public boolean removeCerca(String username, String nom) {
+		return conj.getUser(username).removeCerca(nom);
+	}
+// CONSULTORES///////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Pre: Cert 
@@ -124,8 +138,128 @@ public class ControladorUsers {
 	 * @return cert si l'usuari és admin o fals en cas contrari
 	 */
 	public boolean esAdmin(String username) {
+		return conj.getUser(username).esAdmin();
+	}
+	
+	/**
+	 * Pre: l'usuari username existeix 
+	 * Post: no modifica les dades
+	 * @return noms de les cerques de comunitats fetes per l'usuari
+	 */
+	public ArrayList<String> getCerquesComunitats(String username) {
 		Usuari aux = conj.getUser(username);
-		return aux.esAdmin();
+		int num = aux.getNumCerques();
+		ArrayList<String> comunitats = new ArrayList<String>();
+		for(int i = 0; i < num; ++i)comunitats.add(aux.getCerca(i).getNom());
+		return comunitats;
+	}
+	
+	/**
+	 * Pre: l'usuari username existeix 
+	 * Post: 
+	 * @return identificador de la nova cerca creada
+	 */
+	public Integer novaCerca(String username) {
+		conj.getUser(username).addCerca(new CercaComunitats());
+		Integer aux = conj.getUser(username).getNumCerques();		//l'identificador comença amb 0 o 1? que obtinc amb el getNumCerques? la ultima o la seguent?
+		conj.getUser(username).getCerca(aux).setUsuari(username);
+		Date act = new Date();		//Com s'obté la data actual?
+		conj.getUser(username).getCerca(aux).setDataCreacio(act);
+		return aux;
+	}
+	
+	public boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<Categoria> subconj, ArrayList<Categoria> evita, String pare ) {
+		ParaulaValor par = new ParaulaValor(paraulast, paraulain);
+		Criteris aux = new Criteris(par, relacions, sembla, alg, tipus, dada, subconj, evita, pare);
+		conj.getUser(username).getCerca(i).setCriteris_seleccio(aux);
+		conj.getUser(username).getCerca(i).setAlgorisme(alg);
+		if(modifica) conj.getUser(username).getCerca(i).setData_modificacio(new Date());
+		return true;
+	}
+	
+	public void addNomCerca(String username, Integer i, String nom) {
+		conj.getUser(username).getCerca(i).setNom(nom);
+	}
+	
+	public void addComentariCerca(String username, Integer i, String comentari) {
+		conj.getUser(username).getCerca(i).setComentari(comentari);
+	}
+	
+	public Integer getNumCerca(String quina) {			//////////////////////////////////////////////////
+		return 1;
+	}
+	
+	public String getNomCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getNom();
+	}
+	
+	public String getComentariCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getComentari();
+	}
+	
+	public Date getDataCreacioCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getDataCreacio();
 	}
 
+	public Date getDataModificacioCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getData_modificacio();
+	}
+	
+	public Integer getAlgCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getAlgorisme();
+	}
+	
+	public Integer getAlgDadaCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getDada();
+	}
+	
+	public Integer getAlgTipuCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getTipuCerca();
+	}
+	
+	public Integer getRelacioCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getRelacionsCat();
+	}
+	
+	public Integer getSembCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getSemblNom();
+	}
+	
+	public Integer getParaulaImpCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getParaulaClau().getNum();
+	}
+	
+	public String getParaulaClauCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getParaulaClau().getParaula();
+	}
+	
+	public String getPareCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getPare();
+	}
+	
+	public ArrayList<String> getSubCerca(String username, Integer quina) {
+		ArrayList<String> aux = new ArrayList<String>();
+		ArrayList<Categoria> aux2 = conj.getUser(username).getCerca(quina).getCriteris_seleccio().getSubconjCat();
+		for(Categoria cat: aux2) aux.add(cat.getNom());
+		return aux;
+	}
+	
+	public ArrayList<String> getEvitaCerca(String username, Integer quina) {
+		ArrayList<String> aux = new ArrayList<String>();
+		ArrayList<Categoria> aux2 = conj.getUser(username).getCerca(quina).getCriteris_seleccio().getEvitaCat();
+		for(Categoria cat: aux2) aux.add(cat.getNom());
+		return aux;
+	}
+	public Integer getNumComunitatsCerca(String username, Integer quina) {
+		return conj.getUser(username).getCerca(quina).getNumComunitats();
+	}
+	
+	public Integer getNumCatCerca(String username, Integer quina, Integer num) {
+		return conj.getUser(username).getCerca(quina).getComunitat(num).getNumeroDeCategories();
+	}
+	
+	public Set<String> getCatCerca(String username, Integer quina, Integer com) {
+		Map<String,Categoria> aux = conj.getUser(username).getCerca(quina).getComunitat(com).getMapCat();
+		return aux.keySet();
+	}
 }
