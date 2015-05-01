@@ -12,16 +12,29 @@ import java.util.HashSet;
  */
 public class Algorisme_NewmanGirvan {
 	
+	/**
+	 * 
+	 * Creadora per defecte
+	 */
 	public Algorisme_NewmanGirvan() {
 		// TODO Auto-generated constructor stub
 	}
-	
+	/**
+	 * @param iterador Integer que indica les iteracions que s'han fet
+	 * @param percentatge Integer de dispersió requerida
+	 * @return Retorna la iteració en la qual hi havia el param de dispersió requerit
+	 */
 	private Integer calculadora (Integer iterador, Integer percentatge) {
 		Integer solu = new Integer(((iterador-1)*percentatge)/100);
 		return solu;
 	}
 	
-	//Retorna el conjunt de comunitats corresponent a l’execució de l’algorisme NewmannGirvan a partir del percentatge de dispersió desitjat.
+	/**
+	 * Retorna el conjunt de comunitats corresponent a l’execució de l’algorisme NewmanGirvan a partir del percentatge de dispersió desitjat.
+	 * @param G Graf que es tractarà
+	 * @param percentatge Integer que indica el percentatge de dispersió desitjat
+	 * @return Comunitats creades a partir de l'execució amb el parametre de dispersió requerit
+	 */
 	public HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
 		ArrayList<HashSet<HashSet<String>>> storage = new ArrayList<HashSet<HashSet<String>>>();
 		Integer iterador = new Integer(1);
@@ -40,7 +53,13 @@ public class Algorisme_NewmanGirvan {
 		
 	}
 	
-	//Retorna el conjunt de comunitats corresponent a l’execució de l’algorisme NewmannGirvan a partir del nombre de Comunitats desitjat.
+	//
+	/**
+	 * Retorna el conjunt de comunitats corresponent a l’execució de l’algorisme NewmanGirvan a partir del nombre de Comunitats desitjat.
+	 * @param G Graf que es tractarà
+	 * @param numComunidades Integer que indica el max nº de comunitats que es poden crear
+	 * @return Comunitats creades a partir de l'execució ( com a max = numcomunidades comunitats)
+	 */
 	public HashSet<HashSet<String>> executa_num(Graf G, Integer numComunidades) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
@@ -53,7 +72,12 @@ public class Algorisme_NewmanGirvan {
 		
 	}
 	
-	//Retorna el conjunt de comunitats corresponent a l’execució de l’algorisme NewmannGirvan a partir del màxim de camins mínims que passen per a qualsevol aresta.
+	/**
+	 * Retorna el conjunt de comunitats corresponent a l’execució de l’algorisme NewmanGirvan a partir del màxim de camins mínims que passen per a qualsevol aresta.
+	 * @param G Graf que es tractarà
+	 * @param maxbetweness Integer que indica la max btw que hi pot haver al graf
+	 * @return Comunitats en les qual cap node tindrá btw > maxbetweness.
+	 */
 	public HashSet<HashSet<String>> executa_bet(Graf G, Integer maxbetweness) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
