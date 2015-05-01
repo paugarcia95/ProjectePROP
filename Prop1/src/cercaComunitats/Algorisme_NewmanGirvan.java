@@ -15,6 +15,7 @@ public class Algorisme_NewmanGirvan {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
 	//Retorna el conjunt de comunitats corresponent a l’execució de l’algorisme NewmannGirvan a partir del percentatge de dispersió desitjat.
 	public HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
 		GrafNewman util = new GrafNewman();

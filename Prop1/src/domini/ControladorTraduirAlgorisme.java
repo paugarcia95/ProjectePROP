@@ -23,4 +23,10 @@ public class ControladorTraduirAlgorisme {
 		
 		return null;
 	}
+	
+	public CercaComunitats Traduir_i_buscar (GrafDades graf, Criteris cri) {
+		
+		return null;
+		
+	}
 }
