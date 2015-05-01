@@ -14,12 +14,15 @@ import java.util.Vector;
  */
 public class GrafNewman extends Graf {
 	
-	protected Vector< Vector<Integer> > NCM;
-	int maxi;
-	int maxj;
-	int maxNumCM;
 	
-	class Aresta {			//NSE SI ES POT FER D'UNA ALTRA MANERA! (CRIS)
+	private Vector< Vector<Integer> > NCM;
+	@SuppressWarnings("unused")
+	private Integer maxi;
+	@SuppressWarnings("unused")
+	private Integer maxj;
+	private Integer maxNumCM;
+	
+	private class Aresta {			//NSE SI ES POT FER D'UNA ALTRA MANERA! (CRIS)
 	    public Integer posi; 
 	    public Integer posj;   
 	 };
@@ -31,36 +34,49 @@ public class GrafNewman extends Graf {
 	
 	
 	/**
-	 * 
+	 * Creadora per defecte.
 	 */
 	public GrafNewman() { //Cris
-		// TODO Auto-generated constructor stub 
+		super();
+		NCM = new Vector< Vector<Integer> > (super.Matriu.size() );	//crea NCM de la mateixa mida que Matriu
+		maxNumCM = maxi = maxj = 0;
 	}
 	
-	//Recalcula el nombre de camins mínims que passen per cada vèrtex, retorna false si hi ha hagut algun error.	
+	/**
+	 *  Calcula el nombre de camins minims que passen per cada vertex.
+	 * @return true si s'ha pogut calcular tot correctament, false si hi ha hagut algun error.
+	 */
+	public Integer getMaxBet() {
+		return maxNumCM;
+	}
+	/**
+	 *  Calcula el nombre de camins minims que passen per cada vertex.
+	 * @return true si s'ha pogut calcular tot correctament, false si hi ha hagut algun error.
+	 */
 	public Boolean Calculate_edge_between(){	//CRIS
+		if(NCM.size() < 2) return false;
 		//Posem a 0 tots els camins minims per "començar" la nova ronda
 		for(int i = 0; i < NCM.size(); ++i) {
-			for(int j = 0; i < NCM.size();++j) {
-				NCM.get(i).set(j,0);
-			}
+			for(int j = 0; i < NCM.size();++j) NCM.get(i).set(j,0);
 		}
 		//Calcula el cami minim de cada node cap a tots els nodes
 		for(int i = 0; i < NCM.size(); ++i) {
-			for(int j = 0; i < NCM.size();++j) {
-				if(i !=j ) {
+			for(int j = 0; i < NCM.size(); ++j) {
+				if(i !=j) {
 					Queue<Aresta> cami = camiMin(i,j); 
-					Iterator<Aresta> itc = cami.iterator();
-					while (itc.hasNext()) {
-						//Aresta aux = 
-						//NCM.get(itc.)
+					//un cop trobat cada cami minim, sumar 1 a la pos de NCM
+					if(cami.size()>0) {
+						Iterator<Aresta> itc = cami.iterator();
+						while (itc.hasNext()) {
+							Aresta aux = itc.next();
+							Integer act = NCM.get(aux.posi).get(aux.posj);
+							NCM.get(aux.posi).set(aux.posj,act+1);
+							//mantenir el vertex per on passen mes camins minims (variables maxi, maxj i maxNumCM)
+							if(maxNumCM <= act) { maxi = aux.posi; maxj = aux.posj; }
+						}
 					}
 				}
-			}
-		}
-		
-		//un cop trobat cada cami minim, sumar 1 a la pos de NCM
-		//mantenir el vertex per on passen mes camins minims (variables maxi, maxj i maxNumCM)
+		}}
 		return null;
 	}
 
