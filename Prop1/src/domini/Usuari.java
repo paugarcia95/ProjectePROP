@@ -69,6 +69,16 @@ public class Usuari {
 		return CerquesFetes.get(i);
 	}
 	
+	public CercaComunitats getCerca(String s) {
+		for (int i = 0; i < CerquesFetes.size(); i++) {
+	        CercaComunitats cerca = CerquesFetes.get(i);
+	        if (cerca != null && s.equals(cerca.getNom())) {
+	        	return cerca;
+	        }
+	    }
+		return null;
+	}
+	
 	//Pre: Cert
 	//Post: ++nCerques i c pertany a Cerques_fetes
 	public Integer addCerca(CercaComunitats c) {
