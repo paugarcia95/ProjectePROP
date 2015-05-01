@@ -53,7 +53,7 @@ public class Algorisme_NewmanGirvan {
 		
 	}
 	
-	//
+	
 	/**
 	 * Retorna el conjunt de comunitats corresponent a l’execució de l’algorisme NewmanGirvan a partir del nombre de Comunitats desitjat.
 	 * @param G Graf que es tractarà
