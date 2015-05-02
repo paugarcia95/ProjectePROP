@@ -5,6 +5,8 @@ package domini;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
 
 import cercaComunitats.Graf;
 
@@ -64,8 +66,8 @@ public class ControladorTraduirAlgorisme {
 	 * @param 
 	 * @return 
 	 */
-	private Integer CalcularPesEntreCategories(Categoria c1, Categoria c2, Criteris cri){
-		Integer solucio = new Integer(0);	
+	private Double CalcularPesEntreCategories(Categoria c1, Categoria c2, Criteris cri){
+		Double solucio = new Double(0);	
 		
 		////////////**************Criteri de cat-cat i cat-pg********/////////////
 		Integer temp = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg
@@ -80,7 +82,7 @@ public class ControladorTraduirAlgorisme {
 		/////////////////////////////////////////////////
 		
 		
-		if(solucio < 0) solucio = 0; // Evitem que suigi negatiu
+		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
 		return solucio;
 	}
 	
@@ -91,8 +93,8 @@ public class ControladorTraduirAlgorisme {
 	 * @param 
 	 * @return 
 	 */
-	private Integer CalcularPesEntreCatPag(Categoria c, Pagina p, Criteris cri) {
-		Integer solucio = new Integer(0);
+	private Double CalcularPesEntreCatPag(Categoria c, Pagina p, Criteris cri) {
+		Double solucio = new Double(0);
 		if(cri.getEvitaCat().contains(c) || cri.getEvitaCat().contains(p)) return solucio; // Criteri d'ignorar aquestes cat o pg !!! ESta mal lo de p!!!!
 		else {
 			
@@ -117,10 +119,10 @@ public class ControladorTraduirAlgorisme {
 	 * @return 
 	 */
 	private Graf GrafDadestoGraf (GrafDades graf, Criteris cri) {
-		Graf solucio;
+		Graf solucio = new Graf();
 		Collection<Categoria> llistat = graf.getCategories();
 		
-		/////////////////ANEM A AFEGIR ELS NODES AL GRAF //////////////////
+		///////////////////////ANEM A AFEGIR ELS NODES AL GRAF //////////////////////////
 		
 		if(cri.getSubconjCat().size() != 0) {// Si aquest criteri està actiu...(subconjunt)
 			for(Categoria cataux : llistat) {
@@ -129,7 +131,7 @@ public class ControladorTraduirAlgorisme {
 				}
 			}
 		}
-		else {
+		else { // Si no està actiu el criteri de subconjunt, fem servir la resta
 			if(cri.getParaulaClau().getNum() != 0) { // Si està activat el criteri de paraula clau
 				if(cri.getParaulaClau().getNum() == 5) {
 					String ayuda = cri.getParaulaClau().getParaula().substring(0, (cri.getParaulaClau().getParaula().length())/2); // Partim la paraula /2
@@ -145,12 +147,42 @@ public class ControladorTraduirAlgorisme {
 						if(cataux.getNom().indexOf(ayuda) != -1) { // mirem q continguin exactament aquella paraula
 							solucio.addNode(cataux.getNom());
 						}
-						
 					}
-					
+				}
+			}
+			else { // Si no hi ha cap criteri, ho afegim tot
+				for(Categoria cataux : llistat) {
+					solucio.addNode(cataux.getNom());
+				}
+			}
+			if(cri.getEvitaCat().size() != 0) { // Si el criteri d'ignorar està actiu
+				HashSet<String> llistatactual = solucio.getNodes(); // Agafo tots els nodes afegits fins llavors
+				for(String it : llistatactual) {
+					if(cri.getEvitaCat().contains(it)) { // Miro si estan a la llista d'ignorats
+						solucio.removeNode(it); // I l'elimino si escau
+					}
 				}
 			}
 		}
+		////////////////////////FI AFEGIR NODES////////////////////////////
+		
+		
+		///////////////ANEM A CREAR LES ARESTES AMB PESOS////////////////////////
+		for(Categoria cataux : llistat) { // agafar de graf
+			Map<String, Categoria> mapcatsupcat = cataux.getMapCSubC(); // posem pes entre un node i els seus subnodes
+			for(Categoria e : mapcatsupcat.values()) {
+				if(solucio.existeixNode(e.getNom())) {
+					solucio.addAresta(cataux.getNom(), e.getNom(), CalcularPesEntreCategories(cataux,e,cri));
+				}
+				
+			}
+			
+		}
+		
+		
+		
+		
+		
 		return solucio;
 	}
 	
