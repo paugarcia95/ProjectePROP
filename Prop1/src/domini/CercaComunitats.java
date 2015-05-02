@@ -12,92 +12,92 @@ import java.util.Queue;
 
 public class CercaComunitats {
 	
-	private String Nom, Comentari, Usuari;
-	private Date DataCreacio, DataModificacio;
-	private Criteris CriterisSeleccio;
-	private Integer Algorisme, nComunitats;
-	private ArrayList<Comunitat> Comunitats;
+	private String nom, comentari, usuari;
+	private Date dataCreacio, dataModificacio;
+	private Criteris criterisSeleccio;
+	private Integer algorisme, nComunitats;
+	private ArrayList<Comunitat> comunitats;
 	private Queue<Integer> eliminats;
 	
-	//Pre: dataCreacio < data_modif, usuari existeix, ¿¿no existeix cap CercaComunitats amb el mateix nom??
-	//Post: retorna una CercaComunitats amb...
+	//Pre: dataCreacio < dataModif, usuari existeix, no existeix cap CercaComunitats amb el mateix nom per a usuari
+	//Post: Retorna una CercaComunitats
 	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date dataModif, Integer algorisme, String comentari, ArrayList<Comunitat> Comunitats) {
-		Nom = nom;
-		DataCreacio = dataCreacio;
-		CriterisSeleccio = criteris;
-		Usuari = usuari;
-		DataModificacio = dataModif; //hauriem de decidir si posem una data nul·la o com s'implementa
-		Algorisme = algorisme;
-		Comentari = comentari;
-		nComunitats = 0;
-		this.Comunitats = Comunitats;
+		this.nom = nom;
+		this.dataCreacio = dataCreacio;
+		this.criterisSeleccio = criteris;
+		this.usuari = usuari;
+		dataModificacio = dataModif;
+		this.algorisme = algorisme;
+		this.comentari = comentari;
+		nComunitats = Comunitats.size();
+		this.comunitats = Comunitats;
 		eliminats = new LinkedList<Integer>();
 	}
 	
 	public CercaComunitats() {
-		DataCreacio = new Date();
+		dataCreacio = new Date();
 	}
 	
 	public String getNom() {
-		return Nom;
+		return nom;
 	}
 	
 	public void setNom(String s) {
-		Nom = s;
+		nom = s;
 	}
 	
 	public Date getDataCreacio() {
-		return DataCreacio;
+		return dataCreacio;
 	}
 	
 	public void setDataCreacio(Date d) {
-		DataCreacio = d;
+		dataCreacio = d;
 	}
 	
 	public Criteris getCriterisSeleccio() {
-		return CriterisSeleccio;
+		return criterisSeleccio;
 	}
 	
 	public void setCriterisSeleccio(Criteris c) {
-		CriterisSeleccio = c;
+		criterisSeleccio = c;
 	}
 	
 	public String getComentari() {
-		return Comentari;
+		return comentari;
 	}
 	
 	public void setComentari(String s) {
-		Comentari = s;
+		comentari = s;
 	}
 	
 	public String getUsuari() {
-		return Usuari;
+		return usuari;
 	}	
 	
 	public void setUsuari(String s) {
-		Usuari = s;
+		usuari = s;
 	}
 	
 	public Date getDataModificacio() {
-		return DataModificacio;
+		return dataModificacio;
 	}
 	
 	public void setDataModificacio(Date d) {
-		DataModificacio = d;
+		dataModificacio = d;
 	}
 	
 	public Integer getAlgorisme() {
-		return Algorisme;
+		return algorisme;
 	}
 	
 	public void setAlgorisme(Integer i) {
-		Algorisme = i;
+		algorisme = i;
 	}
 	
-	//Pre: i es l'index d'una comunitat existent a Comunitats && i < Comunitas.size()
-	//Post: es retorna la comunitat amb index i
+	//Pre: i es l'índex d'una Comunitat existent a comunitats && i < comunitas.size()
+	//Post: Retorna la Comunitat amb índex i
 	public Comunitat getComunitat(Integer i) {
-		return Comunitats.get(i);		
+		return comunitats.get(i);		
 	}
 	
 	//Pre: Cert
@@ -106,14 +106,14 @@ public class CercaComunitats {
 		return nComunitats;
 	}	
 	
-	//Pre: comunitat no pertany a Comunitats
-	//Post: comunitat pertanty a Comunitats amb index retornat && nComunitats s'incrementa
+	//Pre: comunitat no pertany a comunitats
+	//Post: comunitat pertanty a comunitats amb índex retornat && nComunitats s'incrementa
 	public Integer addComunitat(Comunitat comunitat) {
 		int i;
 		if(eliminats.isEmpty()) {
 			i = nComunitats;
-			if (i == Comunitats.size()) { //sempre que eliminats.isEmpty s'ha de complir això
-				Comunitats.add(i, comunitat);
+			if (i == comunitats.size()) { //sempre que eliminats.isEmpty s'ha de complir això
+				comunitats.add(i, comunitat);
 				++nComunitats;
 				return i;
 			}
@@ -121,15 +121,15 @@ public class CercaComunitats {
 		else {
 			i = eliminats.poll(); //primer index buit
 		}
-		Comunitats.set(i, comunitat);
+		comunitats.set(i, comunitat);
 		++nComunitats;
 		return i;
 	}
 	
-	//Pre: i es l'index d'una comunitat existent a Comunitats && i < Comunitas.size()
-	//Post: la comunitat amb index i ja no pertany a aquesta cerca && nComunitats es decrementada
+	//Pre: i es l'índex d'una Comunitat existent a comunitats && i < comunitas.size()
+	//Post: La Comunitat amb índex i ja no pertany a comunitats && nComunitats es decrementada
 	public Boolean removeComunitat(Integer i) {
-		Comunitats.set(i,null);
+		comunitats.set(i,null);
 		eliminats.add(i);
 		--nComunitats;
 		return true;
