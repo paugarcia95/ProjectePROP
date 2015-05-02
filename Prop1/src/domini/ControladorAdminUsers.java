@@ -6,7 +6,7 @@ package domini;
 import java.util.ArrayList;
 
 /**
- * @author Cristina
+ * @author cristina.fontanet
  *
  */
 public class ControladorAdminUsers {
@@ -16,7 +16,9 @@ public class ControladorAdminUsers {
 	private GrafDades gd;
 	@SuppressWarnings("unused")
 	private ConjuntUsuaris conj;
+	//PUBLIC
 //CONSTRUCTORA
+	/**
 	 * 
 	 */
 	public ControladorAdminUsers(GrafDades noug, ConjuntUsuaris nouu) {

@@ -20,6 +20,8 @@ public class MainProvisional {
 	 
 	 
 /*
+ * mc.getContUser().isAdmin(mc.getUserActual())
+ * 
  		System.out.println("PANTALLA :");
 		System.out.println("Tria entre les seguents opcions:");
 		System.out.println(" ");
@@ -43,7 +45,7 @@ public class MainProvisional {
 	private static void visualitzarCategoria(String quina){}
 	private static void visualitzarPagina(String quina) {}
 	
-	private static void modificaCriterisConjuntComunitats(Boolean admin, Integer cercaactual) {
+	private static void modificaCriterisConjuntComunitats(Integer cercaactual) {
 		System.out.println("PANTALLA DE MODIFICACIO DELS CRITERIS D'UNA CERCA DE COMUNITATS:");
 		
 		System.out.println("Indica amb un numero del 0 al 10 la importancia que li vols donar als seguents criteris: ");
@@ -170,9 +172,9 @@ public class MainProvisional {
 		}
 		System.out.println("Comença la Cerca de Comunitats, aquest procés pot tardar uns minuts, si us plau, tingues paciencia");
 		mc.getContUser().ferCerca(mc.getUserActual(), cercaactual);
-		visualitzarNovaCercaComunitats(cercaactual, admin);
+		visualitzarNovaCercaComunitats(cercaactual);
 	}
-	private static void modificarCerca(Integer cercaactual, Boolean admin, Boolean guardada) {
+	private static void modificarCerca(Integer cercaactual, Boolean guardada) {
 		if(guardada) {
 			System.out.println("Tria entre les seguents opcions de modificacio:");
 			System.out.println("1. Modificar el nom de la Cerca ");
@@ -196,11 +198,11 @@ public class MainProvisional {
 					mc.getContUser().addComentariCerca(mc.getUserActual(), cercaactual, comentari);
 					break;
 				case 3:
-					modificaCriterisConjuntComunitats(admin,cercaactual);
+					modificaCriterisConjuntComunitats(cercaactual);
 					break;
 				case 4:
 					String quina = mc.getContUser().getNomCerca(mc.getUserActual(), cercaactual);
-					visualitzarExistentCercaComunitats(quina, admin);
+					visualitzarExistentCercaComunitats(quina);
 					break;
 				default:
 				System.out.println("Opcio erronia, has d'introduir el numero de l'operacio que desitjes:");
@@ -220,10 +222,10 @@ public class MainProvisional {
 			while(modifica) {
 				switch(n1) {
 				case 1:
-					modificaCriterisConjuntComunitats(admin,cercaactual);
+					modificaCriterisConjuntComunitats(cercaactual);
 					break;
 				case 2:
-					visualitzarNovaCercaComunitats(cercaactual, admin);
+					visualitzarNovaCercaComunitats(cercaactual);
 					break;
 				default:
 				System.out.println("Opcio erronia, has d'introduir el numero de l'operacio que desitjes:");
@@ -233,7 +235,7 @@ public class MainProvisional {
 			}
 		}	
 	}
-	private static void guardaCerca(Integer cercaactual,Boolean admin){
+	private static void guardaCerca(Integer cercaactual){
 		System.out.print("Indica el nom que li vols posar a la nova cerca: ");
 		String nomC = s.next();
 		mc.getContUser().addNomCerca(mc.getUserActual(), cercaactual, nomC);
@@ -243,10 +245,10 @@ public class MainProvisional {
 	}
 	
 	
-	private static void visualitzarNovaCercaComunitats(Integer cercaactual, Boolean admin) {
-		visualitzarCriterisCerca(cercaactual, admin, false);
+	private static void visualitzarNovaCercaComunitats(Integer cercaactual) {
+		visualitzarCriterisCerca(cercaactual, false);
 	}
-	private static void visualitzarCriterisCerca(Integer cercaactual, Boolean admin, Boolean guardada) {
+	private static void visualitzarCriterisCerca(Integer cercaactual, Boolean guardada) {
 		System.out.println("Criteris de cerca: ");
 		Integer alg = mc.getContUser().getAlgCerca(mc.getUserActual(), cercaactual);
 		Integer dada = mc.getContUser().getAlgDadaCerca(mc.getUserActual(), cercaactual);
@@ -310,7 +312,7 @@ public class MainProvisional {
 		while(true) {
 			switch(n) {
 			case 1:
-				modificarCerca(cercaactual, admin, guardada);
+				modificarCerca(cercaactual, guardada);
 				break;
 			case 2:
 				if(!mc.getContUser().removeCerca(mc.getUserActual(), cercaactual)) System.out.println("No s'ha pogut eliminar");
@@ -321,7 +323,7 @@ public class MainProvisional {
 				visualitzarCategoria(categor);
 				break;
 			case 4:
-				if(!guardada)guardaCerca(cercaactual, admin);
+				if(!guardada)guardaCerca(cercaactual);
 				//si ja esta guardada, no passa res
 				System.out.println("Felicitats, Cerca guardada amb exit");
 				guardada = true;
@@ -335,7 +337,7 @@ public class MainProvisional {
 				n = s.nextInt();
 				break;
 			case 5:
-				if(admin) opcionsAdmin();
+				if(mc.getContUser().isAdmin(mc.getUserActual())) opcionsAdmin();
 				else opcionsClient();
 				break;
 			default:
@@ -347,15 +349,15 @@ public class MainProvisional {
 	}
 	//private void {}
 	
-	private static void visualitzarExistentCercaComunitats(String quina, Boolean admin) {
-		Integer cercaactual = mc.getContUser().getNumCerca(quina);
+	private static void visualitzarExistentCercaComunitats(String quina) {
+		Integer cercaactual = mc.getContUser().getNumCerca(mc.getUserActual(), quina);
 		System.out.println(" ");
 		System.out.println("PANTALLA DE VISUALITZACIO D'UNA CERCA DE COMUNITATS JA GUARDADA");
 		System.out.println("Nom de la cerca: "+ mc.getContUser().getNomCerca(mc.getUserActual(), cercaactual));
 		System.out.println("Comentari: "+mc.getContUser().getComentariCerca(mc.getUserActual(), cercaactual));
 		System.out.println("Data Creacio: "+ mc.getContUser().getDataCreacioCerca(mc.getUserActual(), cercaactual));
 		System.out.println("Data Modificacio: "+mc.getContUser().getDataModificacioCerca(mc.getUserActual(), cercaactual));
-		visualitzarCriterisCerca(cercaactual, admin, true);
+		visualitzarCriterisCerca(cercaactual, true);
 		
 	}
 	
@@ -380,7 +382,7 @@ public class MainProvisional {
 				String nom = s.next();
 				if(mc.getContUser().existsUser(nom)) {
 					mc.getContUser().addAdmin(nom);				
-					System.out.println("Feliciats, aquest usuari ja es administrador, clica enter per a continuar ");
+					System.out.println("Feliciats, aquest usuari ja es administrador, escriu alguna cosa per a continuar ");
 				}
 				else System.out.println("Aquest usuari ja era admin, clica enter per a continuar");
 				s.next();
@@ -499,7 +501,7 @@ public class MainProvisional {
 			}
 		}
 	}
-	private static void crearConjuntComunitats(Boolean admin) {
+	private static void crearConjuntComunitats() {
 		System.out.println("PANTALLA DE CREACIO D'UNA CERCA DE COMUNITATS:");
 		Integer cercaactual= mc.getContUser().addNovaCerca(mc.getUserActual());
 		
@@ -620,8 +622,11 @@ public class MainProvisional {
 			mc.getContUser().addCriterisCerca(false, mc.getUserActual(), cercaactual, paraulast, paraulain, relacions, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare);
 		}
 		System.out.println("Comença la Cerca de Comunitats, aquest procés pot tardar uns minuts, si us plau, tingues paciencia");
-		mc.getContUser().ferCerca(mc.getUserActual(), cercaactual);
-		visualitzarNovaCercaComunitats(cercaactual, admin);
+		if(!mc.getContUser().ferCerca(mc.getUserActual(), cercaactual)) {
+			System.out.println("Error, no s'ha pogut executar la Cerca");
+			
+		}
+		else visualitzarNovaCercaComunitats(cercaactual);
 	}
 	private static void visualitzarConjuntsComunitats(Boolean admin) {
 		System.out.println("PANTALLA DE VISUALITZACIO DE CERQUES ANTIGUES:");
@@ -650,10 +655,10 @@ public class MainProvisional {
 			case 2:
 				System.out.print("Digues quina vols visualitzar: ");
 				String visualitza = s.next();
-				visualitzarExistentCercaComunitats(visualitza, admin);
+				visualitzarExistentCercaComunitats(visualitza);
 				break;
 			case 3:
-				crearConjuntComunitats(admin);
+				crearConjuntComunitats();
 				break;
 			case 4:
 				if(admin) opcionsAdmin();
@@ -753,7 +758,7 @@ public class MainProvisional {
 				buscarEntrePaginesAdmin();
 				break;
 			case 9:
-				crearConjuntComunitats(true);
+				crearConjuntComunitats();
 				break;
 			case 10:
 				visualitzarConjuntsComunitats(true);
@@ -796,7 +801,7 @@ public class MainProvisional {
 				buscarEntrePaginesClient();
 				break;
 			case 4:
-				crearConjuntComunitats(false);
+				crearConjuntComunitats();
 				break;
 			case 5:
 				visualitzarConjuntsComunitats(false);
@@ -914,7 +919,5 @@ public class MainProvisional {
 		s.next();
 		pantallaInici();
 		
-		
 	}
-
 }
