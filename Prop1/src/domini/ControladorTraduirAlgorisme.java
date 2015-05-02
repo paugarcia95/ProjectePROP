@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import cercaComunitats.Graf;
+import cercaComunitats.Louvain;
 
 
 /**
@@ -220,8 +221,17 @@ public class ControladorTraduirAlgorisme {
 	 * @return 
 	 */
 	public ArrayList<Comunitat> Traduir_i_buscar (GrafDades graf, Criteris cri) {
-		
-		return null;
-		
+		Graf utilitzable = new Graf();
+		utilitzable = GrafDadestoGraf(graf,cri);
+		HashSet<HashSet<String>> solucio = new HashSet<HashSet<String>>();
+		if(cri.getTipuCerca() == 1) {
+			solucio = Louvain.executa(utilitzable, 0); ///////// Aqui demana un percenatge pero no se d'on surt
+		}
+		else if (cri.getTipuCerca() == 2) {
+			
+			
+		}
+		HashSet<Comunitat> retorna = new HashSet<Comunitat>();
+		return retorna;
 	}
 }
