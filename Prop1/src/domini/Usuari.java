@@ -1,6 +1,7 @@
 package domini;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
@@ -25,6 +26,7 @@ public class Usuari {
         this.Admin = Admin;
         CerquesFetes = new ArrayList<CercaComunitats>();
         nCerques = 0;
+        eliminats = new LinkedList<Integer>();
 	}
 	
 	//Pre: cert
@@ -82,7 +84,26 @@ public class Usuari {
 	}
 	
 	//Pre: Cert
-	//Post: ++nCerques i c pertany a Cerques_fetes
+	//Post: si s es el nom d'una cerca de l'usuari retorna la posiciço d'aquesta cerca, altrament retorna -1
+	public Integer getPosCerca(String s) {
+		for (int i = 0; i < CerquesFetes.size(); i++) {
+	        CercaComunitats cerca = CerquesFetes.get(i);
+	        if (cerca != null && s.equals(cerca.getNom())) {
+	        	return i;
+	        }
+	    }
+		return -1;
+	}
+	
+	//Pre: cert
+	//Post: retorna si existeix una cerca amb nom s
+	public Boolean existsCerca(String s) {
+		if (this.getPosCerca(s) != -1) return true;
+		return false;
+	}
+	
+	//Pre: Cert
+	//Post: Si c no pertanyia a CerquesFetes ++nCerques i c pertany a Cerques_fetes, 
 	public Integer addCerca(CercaComunitats c) {
 		int i;
 		if(eliminats.isEmpty()) {

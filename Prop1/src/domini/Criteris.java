@@ -10,18 +10,19 @@ import java.util.ArrayList;
 public class Criteris {
 	
 	private ParaulaValor paraulaClau;
-	private Integer relacionsCat, semblaNom, algorisme, tipuCerca;
+	private Integer relacionsCat, semblaNom, algorisme, tipuCerca, dada;
 	private ArrayList<Categoria> subconjCat, evitaCat;
 	private String pare;
 	
 	
 	
-	public Criteris(ParaulaValor paraula, Integer relacions, Integer sembla, Integer alg, Integer tipus, ArrayList<Categoria> subconj, ArrayList<Categoria> evita, String pare) {
+	public Criteris(ParaulaValor paraula, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<Categoria> subconj, ArrayList<Categoria> evita, String pare) {
 		paraulaClau = paraula;
 		relacionsCat = relacions;
 		semblaNom = sembla;
 		algorisme = alg;
 		tipuCerca = tipus;
+		this.dada = dada;
 		subconjCat = subconj;
 		evitaCat = evita;
 		this.pare = pare;
@@ -65,6 +66,14 @@ public class Criteris {
 	
 	public void setTipuCerca(Integer tipus) {
 		tipuCerca = tipus;
+	}
+	
+	public Integer getDada() {
+		return dada;
+	}
+	
+	public void setDada(Integer dada) {
+		this.dada = dada;
 	}
 	
 	public ArrayList<Categoria> getSubconjCat() {

@@ -13,20 +13,20 @@ import java.util.Queue;
 public class CercaComunitats {
 	
 	private String Nom, Comentari, Usuari;
-	private Date DataCreacio, Data_Modificacio;
-	private Criteris Criteris_seleccio;
+	private Date DataCreacio, DataModificacio;
+	private Criteris CriterisSeleccio;
 	private Integer Algorisme, nComunitats;
 	private ArrayList<Comunitat> Comunitats;
 	private Queue<Integer> eliminats;
 	
 	//Pre: dataCreacio < data_modif, usuari existeix, ¿¿no existeix cap CercaComunitats amb el mateix nom??
 	//Post: retorna una CercaComunitats amb...
-	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date data_modif, Integer algorisme, String comentari, ArrayList<Comunitat> Comunitats) {
+	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date dataModif, Integer algorisme, String comentari, ArrayList<Comunitat> Comunitats) {
 		Nom = nom;
 		DataCreacio = dataCreacio;
-		Criteris_seleccio = criteris;
+		CriterisSeleccio = criteris;
 		Usuari = usuari;
-		Data_Modificacio = data_modif; //hauriem de decidir si posem una data nul·la o com s'implementa
+		DataModificacio = dataModif; //hauriem de decidir si posem una data nul·la o com s'implementa
 		Algorisme = algorisme;
 		Comentari = comentari;
 		nComunitats = 0;
@@ -54,12 +54,12 @@ public class CercaComunitats {
 		DataCreacio = d;
 	}
 	
-	public Criteris getCriteris_seleccio() {
-		return Criteris_seleccio;
+	public Criteris getCriterisSeleccio() {
+		return CriterisSeleccio;
 	}
 	
-	public void setCriteris_seleccio(Criteris c) {
-		Criteris_seleccio = c;
+	public void setCriterisSeleccio(Criteris c) {
+		CriterisSeleccio = c;
 	}
 	
 	public String getComentari() {
@@ -78,12 +78,12 @@ public class CercaComunitats {
 		Usuari = s;
 	}
 	
-	public Date getData_modificacio() {
-		return Data_Modificacio;
+	public Date getDataModificacio() {
+		return DataModificacio;
 	}
 	
-	public void setData_modificacio(Date d) {
-		Data_Modificacio = d;
+	public void setDataModificacio(Date d) {
+		DataModificacio = d;
 	}
 	
 	public Integer getAlgorisme() {
