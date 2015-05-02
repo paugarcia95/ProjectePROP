@@ -15,7 +15,7 @@ import java.util.Set;
  */
 public class ControladorUsers {
 	private ConjuntUsuaris conj;
-	
+	private GrafDades gd;
 
 // CREADORA///////////////////////////////////////////////////////////////////////////////
 
@@ -24,8 +24,9 @@ public class ControladorUsers {
 	 * Post: hi ha un
 	 * conjunt d'usuaris que conté els usuaris existents en el registre
 	 */
-	public ControladorUsers(ConjuntUsuaris nou) {
-		conj = nou;
+	public ControladorUsers(ConjuntUsuaris nouu, GrafDades noug) {
+		conj = nouu;
+		gd = noug;
 	}
 // MODIFICADORES///////////////////////////////////////////////////////////////////////////////
 
@@ -77,9 +78,17 @@ public class ControladorUsers {
 	public boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare ) {
 		ParaulaValor par = new ParaulaValor(paraulast, paraulain);
 		ArrayList<Categoria> sub = new ArrayList<Categoria>();
-		
+		for(String catsub: subconj) {
+			sub.add(gd.getCategoria(catsub));
+		}
 		ArrayList<Categoria> evitCat = new ArrayList<Categoria>();
+		for(String evcat: evitaCat) {
+			evitCat.add(gd.getCategoria(evcat));
+		}
 		ArrayList<Pagina> evitPag = new ArrayList<Pagina>();
+		for(String evpag: evitaPag) {
+			evitPag.add(gd.getPagina(evpag));
+		}
 		Criteris aux = new Criteris(par, relacions, sembla, alg, tipus, dada, sub, evitCat, evitPag, pare);
 		conj.getUser(username).getCerca(i).setCriterisSeleccio(aux);
 		conj.getUser(username).getCerca(i).setAlgorisme(alg);
@@ -129,6 +138,18 @@ public class ControladorUsers {
 	
 	public boolean removeCerca(String username, String nom) {
 		return conj.getUser(username).removeCerca(nom);
+	}
+	
+	public boolean removeCerca(String username, Integer quina) {
+		return conj.getUser(username).removeCerca(quina);
+	}
+	
+	public boolean ferCerca(String username, Integer quina){
+		ControladorTraduirAlgorisme ta = new ControladorTraduirAlgorisme();
+		ArrayList<Comunitat> list;
+		list = ta.Traduir_i_buscar(gd, conj.getUser(username).getCerca(quina).getCriterisSeleccio());
+		conj.getUser(username).getCerca(quina).setComunitats(list);
+		return true;
 	}
 // CONSULTORES///////////////////////////////////////////////////////////////////////////////
 
@@ -252,10 +273,17 @@ public class ControladorUsers {
 		return aux;
 	}
 	
-	public ArrayList<String> getEvitaCerca(String username, Integer quina) {
+	public ArrayList<String> getEvitaCatCerca(String username, Integer quina) {
 		ArrayList<String> aux = new ArrayList<String>();
 		ArrayList<Categoria> aux2 = conj.getUser(username).getCerca(quina).getCriterisSeleccio().getEvitaCat();
 		for(Categoria cat: aux2) aux.add(cat.getNom());
+		return aux;
+	}
+	
+	public ArrayList<String> getEvitaPagCerca(String username, Integer quina) {
+		ArrayList<String> aux = new ArrayList<String>();
+		ArrayList<Pagina> aux2 = conj.getUser(username).getCerca(quina).getCriterisSeleccio().getEvitaPag();
+		for(Pagina cat: aux2) aux.add(cat.getNom());
 		return aux;
 	}
 	public Integer getNumComunitatsCerca(String username, Integer quina) {

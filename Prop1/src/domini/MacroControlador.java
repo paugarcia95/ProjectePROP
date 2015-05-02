@@ -9,10 +9,11 @@ package domini;
  */
 public class MacroControlador {
 	static ControladorUsers cu;
+	static ControladorAdminUsers cau;
+	static ControladorTraduirAlgorisme ta;
+	private GrafDades gd;
 	private ConjuntUsuaris conj;
 	static String useractual;
-	static ControladorAdminUsers cau;
-	private GrafDades gd;
 
 // CREADORA///////////////////////////////////////////////////////////////////////////////
 
@@ -21,9 +22,10 @@ public class MacroControlador {
 	 */
 	public MacroControlador() {
 		conj = new ConjuntUsuaris();
-		cu = new ControladorUsers(conj);
 		gd = new GrafDades();
-		cau = new ControladorAdminUsers(gd);
+		cu = new ControladorUsers(conj, gd);
+		cau = new ControladorAdminUsers(gd, conj);
+		ta = new ControladorTraduirAlgorisme();
 	}
 	
 // MODIFICADORES///////////////////////////////////////////////////////////////////////////////
@@ -39,6 +41,8 @@ public class MacroControlador {
 	public boolean carregaUsers() {
 		return cu.iniciCarregarUsers();
 	}
+	
+	
 
 // CONSULTORES///////////////////////////////////////////////////////////////////////////////
 

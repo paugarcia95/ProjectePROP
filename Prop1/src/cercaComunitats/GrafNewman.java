@@ -29,7 +29,8 @@ public class GrafNewman extends Graf {
 		public Integer node2;
 
 		/**
-		 * Constructora per defecte. (Cris)
+		 * Constructora per defecte. 
+		 * (Cris)
 		 * 
 		 * @param node1
 		 *            El node d'un dels extrems de l'aresta.
@@ -138,6 +139,15 @@ public class GrafNewman extends Graf {
 		}
 	}
 
+	/**
+	 * Agrupa els nodes adjacents al donat.
+	 * (Cristina)
+	 * 
+	 * @param posicio
+	 *            Node del qual es vol saber els adjacents
+	 * 
+	 * @return El conjunt de nodes adjacents a posicio
+	 */
 	private HashSet<Integer> getAdjacents(Integer posicio) {
 		HashSet<Integer> Cjt = new HashSet<Integer>();
 		Integer N = Matriu.size();
@@ -149,9 +159,84 @@ public class GrafNewman extends Graf {
 		}
 		return Cjt;
 	}
+	
+	/**
+	 * Recorre una comunitat i va marcant com a true al vector visitats pels
+	 * nodes que passa. Retorna les comunitats que pertanyen al nodeOrigen
+	 *  (Pau)
+	 *  
+	 * @param nodeOrigen
+	 *            Node del qual se'n vol saber la comunitat
+	 * @param visitats
+	 *            Vector que conté tots els nodes del graf i té com a true els
+	 *            nodes que ja ha visitat i amb false els que no
+	 * @return El conjunt de comunitats a la que pertany el nodeOrigen
+	 */
+	private HashSet<String> nodesDeLaComunitat(Integer nodeOrigen, Vector<Boolean> visitats) {
+		HashSet<Integer> adjacents = getAdjacents(nodeOrigen);
+		Iterator<Integer> it = adjacents.iterator();
+
+		HashSet<String> comunitat = new HashSet<String>();
+		comunitat.add(DiccionariInvers.get(nodeOrigen));
+
+		while (it.hasNext()) {
+			Integer n = it.next();
+			if (!visitats.get(n)) {
+				visitats.set(n, true);
+
+				comunitat.add(DiccionariInvers.get(n));
+				comunitat.addAll(nodesDeLaComunitat(n, visitats));
+			}
+		}
+		return comunitat;
+	}
+	
+	/**
+	 * Indica si el nodeA i el nodeB pertanyen a la mateixa comunitat 
+	 * (Pau)
+	 * 
+	 * @param nodeA
+	 *            L'identificador d'un dels nodes
+	 * @param nodeB
+	 *            L'identificador de l'altre node
+	 * @return true si pertanyen a la mateixa comunitat i false en cas contrari
+	 */
+	private Boolean pertanyenMateixaComunitat(int nodeA, int nodeB) {
+		Vector<Boolean> visitats = new Vector<Boolean>();
+		visitats.setSize(this.size());
+		for (int i = 0; i < visitats.size(); ++i)
+			visitats.set(i, false);
+
+		recorrerComunitat(nodeA, visitats);
+
+		return visitats.get(nodeB);
+	}
 
 	/**
-	 * Calcula el camí minim des del nodeA al nodeB. (Pau)
+	 * Recorre una comunitat i va marcant com a true al vector visitats pels
+	 * nodes que passa 
+	 * (Pau)
+	 * 
+	 * @param nodeOrigen
+	 *            Node del qual se'n vol saber la comunitat
+	 * @param visitats
+	 *            Vector que conté tots els nodes del graf i té com a true els
+	 *            nodes que ja ha visitat i amb false els que no
+	 */
+	private void recorrerComunitat(Integer nodeOrigen, Vector<Boolean> visitats) {
+		HashSet<Integer> adjacents = getAdjacents(nodeOrigen);
+		Iterator<Integer> it = adjacents.iterator();
+		while (it.hasNext()) {
+			Integer n = it.next();
+			if (!visitats.get(n)) {
+				visitats.set(n, true);
+				recorrerComunitat(n, visitats);
+			}
+		}
+	}
+	/**
+	 * Calcula el camí minim des del nodeA al nodeB. 
+	 * (Pau)
 	 * 
 	 * @param nodeA
 	 *            El node d'un dels extrems del camí.
@@ -205,42 +290,43 @@ public class GrafNewman extends Graf {
 		}
 		return camiMinim.getQueue(nodeB);
 	}
+	
 	/**
 	 * Creadora per defecte.
+	 * (Cristina)
 	 */
-	public GrafNewman() { // Cris
+	public GrafNewman() { 
 		super();
 		// crea NCM de la mateixa mida que Matriu
 		NCM = new Vector<Vector<Integer>>(super.Matriu.size());
 		maxNumCM = maxi = maxj = numCom= 0;
-
 	}
 
 	/**
-	 * Calcula el nombre de camins minims que passen per cada vertex.
+	 * Indica el maxim nombre de camins minims que passen entre dos nodes del graf.
 	 * 
-	 * @return true si s'ha pogut calcular tot correctament, false si hi ha
-	 *         hagut algun error.
+	 * @return el maxim nombre de camins minims que pasen entre dos nodes del graf.
 	 */
 	public Integer getMaxBet() {
 		return maxNumCM;
 	}
+	
 	/**
 	 * Calcula el nombre de camins minims que passen per cada vertex.
+	 * (Cristina)
 	 * 
 	 * @return true si s'ha pogut calcular tot correctament, false si hi ha
 	 *         hagut algun error.
 	 */
-	public Boolean Calculate_edge_between() { // CRIS
-		if (NCM.size() < 2)
-			return false;
+	public Boolean Calculate_edge_between() {
+		if (NCM.size() < 2) return false;
 		// Posem a 0 tots els camins minims per "començar" la nova ronda
 		for (int i = 0; i < NCM.size(); ++i) {
 			for (int j = 0; i < NCM.size(); ++j)
 				NCM.get(i).set(j, 0);
 		}
 		// Calcula el cami minim de cada node cap a tots els nodes
-		for (int i = 0; i < NCM.size(); ++i) {
+		for (int i = 0; i < NCM.size(); ++i) 
 			for (int j = 0; i < NCM.size(); ++j) {
 				if (i != j) {
 					if(numCom <4 ||pertanyenMateixaComunitat(i,j)) {
@@ -254,23 +340,25 @@ public class GrafNewman extends Graf {
 								NCM.get(aux.node1).set(aux.node2, act + 1);
 								// mantenir el vertex per on passen mes camins
 								// minims (variables maxi, maxj i maxNumCM)
-								if (maxNumCM <= act) {
-									maxi = aux.node1;
-									maxj = aux.node2;
+								if (maxNumCM <= act) { 
+									maxi = aux.node1; 
+									maxj = aux.node2;	
 								}
 							}
 						}
 					}
 				}
-			}
 		}
 		return null;
 	}
 
-
-	// Fa la inversa dels pesos de les arestes del graf, retorna false si hi ha
-	// hagut algun error.
-	public Boolean Invertir_pesos() { // Cris
+	/**
+	 * Fa la inversa dels pesos de les arestes del graf, de manera que un numero mes gran indica menys relacio
+	 * (Cristina)
+	 * 
+	 * @return false si hi ha hagut algun problema, true en cas contrari
+	 */
+	public Boolean Invertir_pesos() {
 		int mida = Matriu.size();
 		if (mida < 2)
 			return false;
@@ -286,64 +374,30 @@ public class GrafNewman extends Graf {
 		}
 	}
 
-	// Esborra l'aresta per la que passen més camins mínims de tot el graf,
-	// retorna false si hi ha hagut algun error.
-	public Boolean esborrar_maxim() { // Cris
-		// del Graf "original", eliminem (posar a null, infinit o lu q sigui)
-		// del graf de pesos la posicio que indiqui la variable maxNumCM i la
-		// posem a 0
-		if(maxNumCM!=0)Matriu.get(maxi).set(maxj, 0.0);
-
-		return null;
-
-	}
-
 	/**
-	 * Recorre una comunitat i va marcant com a true al vector visitats pels
-	 * nodes que passa (Pau)
+	 * Esborra l'aresta per la que passen mes camins minims de tot el graf
+	 * (Cristina)
 	 * 
-	 * @param nodeOrigen
-	 *            Node del qual se'n vol saber la comunitat
-	 * @param visitats
-	 *            Vector que conté tots els nodes del graf i té com a true els
-	 *            nodes que ja ha visitat i amb false els que no
+	 * @return false si hi ha hagut algun problema i no s'ha pogut eliminar, true en cas contrari
 	 */
-	private void recorrerComunitat(Integer nodeOrigen, Vector<Boolean> visitats) {
-		HashSet<Integer> adjacents = getAdjacents(nodeOrigen);
-		Iterator<Integer> it = adjacents.iterator();
-
-		while (it.hasNext()) {
-			Integer n = it.next();
-			if (!visitats.get(n)) {
-				visitats.set(n, true);
-				recorrerComunitat(n, visitats);
+	public Boolean esborrar_maxim() {
+		if(maxNumCM!=0) {
+			Matriu.get(maxi).set(maxj, 0.0);
+			if(!pertanyenMateixaComunitat(maxi, maxj)) {
+				numCom=0;
+				numComunitats();
 			}
+			return true;
 		}
+		else return false;
+
 	}
 
-	/**
-	 * Indica si el nodeA i el nodeB pertanyen a la mateixa comunitat (Pau)
-	 * 
-	 * @param nodeA
-	 *            L'identificador d'un dels nodes
-	 * @param nodeB
-	 *            L'identificador de l'altre node
-	 * @return true si pertanyen a la mateixa comunitat i false en cas contrari
-	 */
-	private Boolean pertanyenMateixaComunitat(int nodeA, int nodeB) {
-		Vector<Boolean> visitats = new Vector<Boolean>();
-		visitats.setSize(this.size());
-		for (int i = 0; i < visitats.size(); ++i)
-			visitats.set(i, false);
-
-		recorrerComunitat(nodeA, visitats);
-
-		return visitats.get(nodeB);
-	}
 
 	/**
 	 * Retorna el nombre de comunitats en les que està dividit el graf o -1 en
-	 * cas d'error (Pau)
+	 * cas d'error 
+	 * (Pau)
 	 * 
 	 * @return Nombre de comunitats del graf
 	 */
@@ -366,43 +420,16 @@ public class GrafNewman extends Graf {
 					++numComunitats;
 				}
 			}
+			numCom = numComunitats;
 			return numComunitats;
 		}
 		else return numCom;
 	}
 
-	/**
-	 * Recorre una comunitat i va marcant com a true al vector visitats pels
-	 * nodes que passa. Retorna les comunitats que pertanyen al nodeOrigen (Pau)
-	 * 
-	 * @param nodeOrigen
-	 *            Node del qual se'n vol saber la comunitat
-	 * @param visitats
-	 *            Vector que conté tots els nodes del graf i té com a true els
-	 *            nodes que ja ha visitat i amb false els que no
-	 * @return El conjunt de comunitats a la que pertany el nodeOrigen
-	 */
-	private HashSet<String> nodesDeLaComunitat(Integer nodeOrigen, Vector<Boolean> visitats) {
-		HashSet<Integer> adjacents = getAdjacents(nodeOrigen);
-		Iterator<Integer> it = adjacents.iterator();
-
-		HashSet<String> comunitat = new HashSet<String>();
-		comunitat.add(DiccionariInvers.get(nodeOrigen));
-
-		while (it.hasNext()) {
-			Integer n = it.next();
-			if (!visitats.get(n)) {
-				visitats.set(n, true);
-
-				comunitat.add(DiccionariInvers.get(n));
-				comunitat.addAll(nodesDeLaComunitat(n, visitats));
-			}
-		}
-		return comunitat;
-	}
 
 	/**
-	 * Retorna un conjunt que conté les comunitats que conté el graf (Pau)
+	 * Retorna un conjunt que conté les comunitats que conté el graf 
+	 * (Pau)
 	 * 
 	 * @return Un conjunt que conté tants subconjunts com comunitats té el graf
 	 *         i cada subconjunt conté els nodes de la comunitat

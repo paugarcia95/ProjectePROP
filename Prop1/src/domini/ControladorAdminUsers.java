@@ -14,13 +14,14 @@ public class ControladorAdminUsers {
 	//	Atribut: una constant amb inici
 	@SuppressWarnings("unused")
 	private GrafDades gd;
-	//PUBLIC
+	@SuppressWarnings("unused")
+	private ConjuntUsuaris conj;
 //CONSTRUCTORA
-	/**
 	 * 
 	 */
-	public ControladorAdminUsers(GrafDades nou) {
-		gd= nou;
+	public ControladorAdminUsers(GrafDades noug, ConjuntUsuaris nouu) {
+		gd= noug;
+		conj = nouu;
 	}
 
 //CONSULTORES///////////////////////////////////////////////////////////////////////////////
