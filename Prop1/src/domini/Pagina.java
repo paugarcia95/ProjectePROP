@@ -31,16 +31,20 @@ public class Pagina {
 		pC = new TreeMap<String, Categoria>();
 	}
 	
+	//Pre: Cert
+	//Post: Retorna nom
 	public String getNom() {
 		return nom;
 	}
 	
+	//Pre: Cert
+	//Post: this.nom = nom
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	
-	//Pre: cert
-	//Post: retorna 0 si no existeix ni cP ni pC, 1 si és pC i 2 si es cP
+	//Pre: Cert
+	//Post: Retorna 0 si no existeix ni cP ni pC, 1 si és pC i 2 si es cP
 	public Integer existsPC(String categoria) {
 		if(pC.containsKey(categoria)) return 1;
 		if(cP.containsKey(categoria)) return 2;
@@ -76,18 +80,26 @@ public class Pagina {
 		return true;
 	}
 	
+	//Pre: Cert
+	//Post: Retorna pC
 	public Map<String, Categoria> getPC() {
 		return pC;
 	}
 	
+	//Pre: Cert
+	//Post: Retorna cP
 	public Map<String, Categoria> getCP() {
 		return cP;
 	}
 	
+	//Pre: Cert
+	//Post: Retorna el nombre de categories a les que apunta la Pagina
 	public Integer getNumPC() {
 		return pC.size();
 	}
 	
+	//Pre: Cert
+	//Post: Retorna el nombre de categories que apunten a la Pagina
 	public Integer getNumCP() {
 		return cP.size();
 	}

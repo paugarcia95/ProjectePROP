@@ -6,29 +6,29 @@ package domini;
  */
 
 public class ParaulaValor {
-	private String Paraula;
-	private Integer Num;
+	private String paraula;
+	private Integer num;
 	
 	public ParaulaValor(String paraula, Integer num) {
-		Paraula = paraula;
-		Num = num;
+		this.paraula = paraula;
+		this.num = num;
 	}
 
 	public String getParaula() {
-		return Paraula;
+		return paraula;
 	}
 
 	public boolean setParaula(String nom) {
-		Paraula = nom;
+		paraula = nom;
 		return true;
 	}
 
 	public Integer getNum() {
-		return Num;
+		return num;
 	}
 
 	public void setNum(Integer num) {
-		Num = num;
+		this.num = num;
 	}
 
 }
