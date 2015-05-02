@@ -41,7 +41,7 @@ public class Algorisme_NewmanGirvan {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
 		util.Calculate_edge_between();
-		while(util.Num_comunitats() != G.size()) {
+		while(util.numComunitats() != G.size()) {
 			storage.add(iterador, util.comunitats());
 			util.esborrar_maxim();
 			util.Calculate_edge_between();
@@ -64,7 +64,7 @@ public class Algorisme_NewmanGirvan {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
 		util.Calculate_edge_between();
-		while(util.Num_comunitats() < numComunidades) {
+		while(util.numComunitats() < numComunidades) {
 			if(!util.esborrar_maxim()) return null; // Futur control d'errors
 			util.Calculate_edge_between();
 		}

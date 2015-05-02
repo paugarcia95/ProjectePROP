@@ -116,7 +116,7 @@ public class ControladorTraduirAlgorisme {
 	 */
 	private Graf GrafDadestoGraf (GrafDades graf, Criteris cri) {
 		Graf solucio;
-		
+
 		
 		return solucio;
 	}
