@@ -14,9 +14,7 @@ import java.util.Set;
  */
 public class MainProvisional {
 //Declaro els controladors aqui per a poder-los fer servir des de les funcions privades, ja veurem si funciona, en java nse
-	 static ControladorUsers cu;
-	 static ControladorAdminUsers cau;
-	 static String useractual;
+	 static MacroControlador mc;
 	 static Scanner s = new Scanner(System.in);
 	//+ Cotnroladors
 	 
@@ -50,23 +48,23 @@ public class MainProvisional {
 	private static void visualitzarCategoria(String quina){}
 
 	private static void visualitzarCercaComunitats(String quina, Boolean admin) {
-		Integer cercaactual = cu.getNumCerca(quina);
+		Integer cercaactual = mc.getContUser().getNumCerca(quina);
 		System.out.println(" ");
 		System.out.println("PANTALLA DE VISUALITZACIO D'UNA CERCA DE COMUNITATS");
-		System.out.println("Nom de la cerca: "+ cu.getNomCerca(useractual, cercaactual));
-		System.out.println("Comentari: "+cu.getComentariCerca(useractual, cercaactual));
-		System.out.println("Data Creacio: "+ cu.getDataCreacioCerca(useractual, cercaactual));
-		System.out.println("Data Modificacio: "+cu.getDataModificacioCerca(useractual, cercaactual));
+		System.out.println("Nom de la cerca: "+ mc.getContUser().getNomCerca(mc.getUserActual(), cercaactual));
+		System.out.println("Comentari: "+mc.getContUser().getComentariCerca(mc.getUserActual(), cercaactual));
+		System.out.println("Data Creacio: "+ mc.getContUser().getDataCreacioCerca(mc.getUserActual(), cercaactual));
+		System.out.println("Data Modificacio: "+mc.getContUser().getDataModificacioCerca(mc.getUserActual(), cercaactual));
 		System.out.println("Criteris de cerca: ");
-		Integer alg = cu.getAlgCerca(useractual, cercaactual);
-		Integer dada = cu.getAlgDadaCerca(useractual, cercaactual);
+		Integer alg = mc.getContUser().getAlgCerca(mc.getUserActual(), cercaactual);
+		Integer dada = mc.getContUser().getAlgDadaCerca(mc.getUserActual(), cercaactual);
 			if(alg==1) {
 				System.out.println("	1. Algorisme: Louvain ");
 				System.out.println("	2. Amb el percentatge de dispersio: "+dada);
 			}
 			else if(alg==2) {
 				System.out.println("	1. Algorisme: Newmann-Girvan ");
-				Integer tipu = cu.getAlgTipuCerca(useractual, cercaactual);
+				Integer tipu = mc.getContUser().getAlgTipuCerca(mc.getUserActual(), cercaactual);
 				if(tipu==0) System.out.println("	2. Amb el percentatge de dispersio: "+dada);
 				else if(tipu==1) System.out.println("2. Amb el numero de comunitats: "+dada);
 				else System.out.println("	2. Amb el maxim Between: "+dada);
@@ -75,27 +73,27 @@ public class MainProvisional {
 				System.out.println("	1. Algorisme: Clique percolation ");
 				System.out.println("	2. Amb el percentatge de dispersio: "+dada);
 			}
-		System.out.println("	3. Amb la importancia a les relacions entre categories: "+cu.getRelacioCerca(useractual, cercaactual));
-		System.out.println(" 	4. Amb la importancia entre la semblansa dels noms: "+cu.getSembCerca(useractual, cercaactual));
-		System.out.println("	5. Amb " +cu.getParaulaImpCerca(useractual, cercaactual)+ " importancia a la paraula clau "+cu.getParaulaClauCerca(useractual, cercaactual));
-		System.out.println(" 	6. Categoria a partir de la qual s'ha fet la cerca: "+cu.getPareCerca(useractual, cercaactual));
+		System.out.println("	3. Amb la importancia a les relacions entre categories: "+mc.getContUser().getRelacioCerca(mc.getUserActual(), cercaactual));
+		System.out.println(" 	4. Amb la importancia entre la semblansa dels noms: "+mc.getContUser().getSembCerca(mc.getUserActual(), cercaactual));
+		System.out.println("	5. Amb " +mc.getContUser().getParaulaImpCerca(mc.getUserActual(), cercaactual)+ " importancia a la paraula clau "+mc.getContUser().getParaulaClauCerca(mc.getUserActual(), cercaactual));
+		System.out.println(" 	6. Categoria a partir de la qual s'ha fet la cerca: "+mc.getContUser().getPareCerca(mc.getUserActual(), cercaactual));
 		System.out.println(" 	7. Restringida a les comunitats:");
-		ArrayList<String> aux = cu.getSubCerca(useractual, cercaactual);
+		ArrayList<String> aux = mc.getContUser().getSubCerca(mc.getUserActual(), cercaactual);
 		Iterator<String> it = aux.iterator();
 		while(it.hasNext()) System.out.println(it.next());
 		
 		System.out.println(" 	8. Evitant les comunitats: ");
-		aux = cu.getEvitaCerca(useractual, cercaactual);
+		aux = mc.getContUser().getEvitaCerca(mc.getUserActual(), cercaactual);
 		Iterator<String> it2 = aux.iterator();
 		while(it2.hasNext())System.out.println(it.next());
 		
-		Integer numcom =  cu.getNumComunitatsCerca(useractual, cercaactual);
+		Integer numcom =  mc.getContUser().getNumComunitatsCerca(mc.getUserActual(), cercaactual);
 		System.out.println("Hi ha "+numcom+ " comunitats: ");
 		for(Integer i = 1; i <= numcom; ++i) {
 			System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
-			Integer comunitat = cu.getNumCatCerca(useractual, cercaactual, i-1);
+			Integer comunitat = mc.getContUser().getNumCatCerca(mc.getUserActual(), cercaactual, i-1);
 			for (Integer j = 0; j < comunitat; ++j) {
-				Set<String> aux1 = cu.getCatCerca(useractual, cercaactual, i-1);
+				Set<String> aux1 = mc.getContUser().getCatCerca(mc.getUserActual(), cercaactual, i-1);
 				Iterator<String> it3 = aux1.iterator();
 				while(it3.hasNext())System.out.println(it.next());
 			}
@@ -128,7 +126,7 @@ public class MainProvisional {
 					case 1:
 						System.out.print("Indica el nom que li vols posar: ");
 						String nom = s.next();
-						cu.addNomCerca(useractual, cercaactual, nom);
+						mc.getContUser().addNomCerca(mc.getUserActual(), cercaactual, nom);
 						break;
 					case 2:
 						
@@ -147,7 +145,7 @@ public class MainProvisional {
 				}
 				break;
 			case 2:
-				if(!cu.removeCerca(useractual, quina)) System.out.println("No s'ha pogut eliminar");
+				if(!mc.getContUser().removeCerca(mc.getUserActual(), quina)) System.out.println("No s'ha pogut eliminar");
 				break;
 			case 3:
 				System.out.print("Escriu el nom de la categoria que vols visualitzar: ");
@@ -169,14 +167,14 @@ public class MainProvisional {
 	
 	private static void crearConjuntComunitats(Boolean admin) {
 		System.out.println("PANTALLA DE CREACIO D'UNA CERCA DE COMUNITATS:");
-		Integer cercaactual= cu.novaCerca(useractual);
+		Integer cercaactual= mc.getContUser().addNovaCerca(mc.getUserActual());
 		System.out.print("Indica el nom que li vols posar a la nova cerca: ");
 		String nom = s.next();
-		cu.addNomCerca(useractual, cercaactual, nom);
+		mc.getContUser().addNomCerca(mc.getUserActual(), cercaactual, nom);
 		
 		System.out.println("Indica amb un numero del 0 al 10 la importancia que li vols donar als seguents criteris: ");
 		Integer relacions, sembla, alg, tipus, paraulain, dada;
-		ArrayList<Categoria> subconj, evita;
+		ArrayList<String> subconj, evitaCat, evitaPag;
 		String pare, paraulast;
 		
 		System.out.print("Importancia a les relacions entre categories: ");
@@ -196,18 +194,29 @@ public class MainProvisional {
 		
 		System.out.print("Numero de categories a partir de les quals es vol fer la cerca, ignorant la resta. Si no vols restringir, marca 0:");
 		int num = s.nextInt();
+		subconj = new ArrayList<String>();
 		for(int i = 1; i <= num; ++i) {
 			System.out.print("Nom de la "+ i + " categoria a tenir en compte: ");
 			String nom2 = s.next();
-		//	subconj.add(nom);
+			subconj.add(nom2);
 		}
 		
 		System.out.print("Numero de categories que vols evitar: ");
 		int num2 = s.nextInt();
-		for(int i = 1; i <= num; ++i) {
+		evitaCat = new ArrayList<String>();
+		for(int i = 1; i <= num2; ++i) {
 			System.out.print("Nom de la "+ i + " categoria a evitar: ");
 			String nom3 = s.next();
-		//	evita.add();
+			evitaCat.add(nom3);
+		}
+		
+		System.out.print("Numero de Pagines que vols evitar: ");
+		int num3 = s.nextInt();
+		evitaPag = new ArrayList<String>();
+		for(int i = 1; i <= num3; ++i) {
+			System.out.print("Nom de la "+ i + " Pagina a evitar: ");
+			String nom4 = s.next();
+			evitaCat.add(nom4);
 		}
 		
 		System.out.println("Tria amb quin dels tres algorismes vols fer la Cerca: ");
@@ -216,12 +225,15 @@ public class MainProvisional {
 		System.out.println("2. Algorisme Clique percolation");
 		System.out.print("Numero d'opció:");
 		alg = s.nextInt();
-		while(true) {
+		tipus = dada= 0;
+		boolean omplint = true;
+		while(omplint) {
 			switch(alg) {
 			case 1:
 				tipus = 0;
 				System.out.println("Digues amb un numero del 0 al 100, la dispersió desitjada");
 				dada = s.nextInt();
+				omplint = false;
 				break;
 			case 2:
 				System.out.println("has seleccionat fer la cerca amb l'algorisme de Newmann-Girvan :");
@@ -239,16 +251,19 @@ public class MainProvisional {
 						tipus = 0;
 						System.out.print("Digues amb un numero del 0 al 100, la dispersió desitjada: ");
 						dada = s.nextInt();
+						fet = true;
 						break;
 					case 2:
 						tipus = 1;
 						System.out.print("Digues el nombre de comunitats desitjades: ");
 						dada = s.nextInt();
+						fet = true;
 						break;
 					case 3:
 						tipus = 2;
 						System.out.print("Digues la maxima Betweenes desitjada: ");
 						dada = s.nextInt();
+						fet = true;
 						break;
 					default:
 					System.out.println("Opcio erronia, has d'introduir el numero de l'operacio que desitjes:");
@@ -256,27 +271,29 @@ public class MainProvisional {
 					break;
 					}
 				}
+				omplint = false;
 				break;
 			case 3:
 				tipus = 0;
 				System.out.print("Digues amb un numero del 0 al 100, la dispersió desitjada: ");
 				dada = s.nextInt();
+				omplint = false;
 				break;
 			default:
 			System.out.println("Opcio erronia, has d'introduir el numero de l'operacio que desitjes:");
 			n = s.nextInt();
 			break;
 			}
-			cu.addCriterisCerca(false, useractual, cercaactual, paraulast, paraulain, relacions, sembla, alg, tipus, dada, subconj, evita, pare);
+			mc.getContUser().addCriterisCerca(false, mc.getUserActual(), cercaactual, paraulast, paraulain, relacions, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare);
 		}
 		System.out.println("Escriu sense espais el comentari que vulguis guardar: ");
 		String com = s.next();
-		cu.addComentariCerca(useractual, cercaactual, com);
+		mc.getContUser().addComentariCerca(mc.getUserActual(), cercaactual, com);
 	}
 	
 	private static void visualitzarConjuntsComunitats(Boolean admin) {
 		System.out.println("PANTALLA DE VISUALITZACIO DE CERQUES ANTIGUES:");
-		ArrayList<String> cats= cu.getCerquesComunitats(useractual);
+		ArrayList<String> cats= mc.getContUser().getCerquesComunitats(mc.getUserActual());
 		System.out.println("Els Conjunts de Comunitats antics creats per l'usuari actual son:");
 		Iterator<String> it = cats.iterator();
 		while(it.hasNext()){
@@ -296,7 +313,7 @@ public class MainProvisional {
 			case 1:
 				System.out.print("Digues quina vols eliminar:");
 				String elimina = s.next();
-				if(!cu.removeCerca(useractual, elimina)) System.out.println("No s'ha pogut eliminar");
+				if(!mc.getContUser().removeCerca(mc.getUserActual(), elimina)) System.out.println("No s'ha pogut eliminar");
 			break;
 			case 2:
 				System.out.print("Digues quina vols visualitzar: ");
@@ -335,11 +352,11 @@ public class MainProvisional {
 				while (canviu) {
 					System.out.print("Introdueix el nou nom d'usuari que desitges: ");
 					String nom = s.next();
-					if(cu.existsUser(nom)) System.out.println("Aquest nom d'usuari ja existeix.");
+					if(mc.getContUser().existsUser(nom)) System.out.println("Aquest nom d'usuari ja existeix.");
 					else {
-						Boolean error = cu.setUsername(useractual, nom);
+						Boolean error = mc.getContUser().setUsername(mc.getUserActual(), nom);
 						if(!error) System.out.println("Hi ha hagut algun error en intentar canviar el nom, torna a provar mes tard");
-						else useractual = nom;
+						else mc.setUserActual(nom);
 						canviu = false;
 					}
 				}
@@ -347,7 +364,7 @@ public class MainProvisional {
 			case 2:
 				System.out.print("Introdueix la nova contrassenya que desitges: ");
 				String pass = s.next();
-				cu.setPassword(useractual, pass);
+				mc.getContUser().setPassword(mc.getUserActual(), pass);
 				break;
 			case 3:
 				if(admin) opcionsAdmin();
@@ -373,14 +390,14 @@ public class MainProvisional {
 		while(true) {
 			switch(n) {
 			case 1:
-				ArrayList<String> usuaris =	cu.getUsers();
+				ArrayList<String> usuaris =	mc.getContUser().getUsers();
 				System.out.println("Aquests son els usuaris registrats: ");
 				Iterator<String> it = usuaris.iterator();
 				while(it.hasNext()) System.out.println(it.next());
 				System.out.print("Escriu el nom del client que vols fer admin: ");
 				String nom = s.next();
-				if(cu.existsUser(nom)) {
-					cu.addAdmin(nom);				
+				if(mc.getContUser().existsUser(nom)) {
+					mc.getContUser().addAdmin(nom);				
 					System.out.println("Feliciats, aquest usuari ja es administrador, clica enter per a continuar ");
 				}
 				else System.out.println("Aquest usuari ja era admin, clica enter per a continuar");
@@ -403,7 +420,7 @@ public class MainProvisional {
 	}
 	
 	private static void esborraClients() {
-		ArrayList<String> usuaris =	cu.getUsers();
+		ArrayList<String> usuaris =	mc.getContUser().getUsers();
 		System.out.println("Aquests son els usuaris registrats: ");
 		Iterator<String> it = usuaris.iterator();
 		while(it.hasNext()){
@@ -415,7 +432,7 @@ public class MainProvisional {
 		for(int i = 0; i < num; ++i) {
 			System.out.print("nom del "+ (i+1) + " usuari a eliminar: ");
 			nom = s.next();
-			if(! cu.removeUser(nom)) System.out.println("error, aquest usuari no s'ha pogut eliminar.");
+			if(!mc.getContUser().removeUser(nom)) System.out.println("error, aquest usuari no s'ha pogut eliminar.");
 			else System.out.println("Usuari eliminat");
 		}
 		opcionsAdmin();
@@ -537,15 +554,15 @@ public class MainProvisional {
 			System.out.print("Username: ");
 			String user;
 			user = s.next();
-			if(!cu.existsUser(user)) System.out.println("Aquest usuari no existeix");
+			if(!mc.getContUser().existsUser(user)) System.out.println("Aquest usuari no existeix");
 			else {
 				System.out.print("Password: ");
 				String pass;
 				pass = s.next();
-				if(cu.login(user,pass) ){
+				if(mc.getContUser().login(user,pass) ){
 					error=0;
-					useractual = user;
-					if(cu.esAdmin(user) ) opcionsAdmin();
+					mc.setUserActual(user);
+					if(mc.getContUser().isAdmin(user) ) opcionsAdmin();
 					else opcionsClient();
 				}
 				else {
@@ -566,13 +583,13 @@ public class MainProvisional {
 		while (error==1) {
 			System.out.print("Introdueix el nom d'usuari que desitgis: ");
 			String nom = s.next();
-			if(cu.existsUser(nom)) System.out.println("Aquest usuari ja existeix.");
+			if(mc.getContUser().existsUser(nom)) System.out.println("Aquest usuari ja existeix.");
 			else {
 				System.out.print("Introdueix la contrassenya: ");
 				String pass = s.next();
-				cu.addUser(nom, pass);
+				mc.getContUser().addUser(nom, pass);
 				if(admin) {
-					cu.addAdmin(nom);
+					mc.getContUser().addAdmin(nom);
 					opcionsAdmin();
 				}
 				else opcionsClient();
@@ -614,17 +631,18 @@ public class MainProvisional {
 	 * 
 	 */
 	public static void main(String[] args) {
-		cu = new ControladorUsers();
-		cau = new ControladorAdminUsers();
-		cau.inici_carregarDades();
-		//+ Cotnroladors
-		cu.addUser("admin", "admin");
-		cu.addUser("client", "client");
-		cu.addAdmin("admin");
+		mc = new MacroControlador();
+		if(!mc.carregaDades()) System.out.println("Hi ha hagut algun problema al carregar les dades de la wiki");
+		if(!mc.carregaUsers()) System.out.println("Hi ha hagut algun problema al carregar les dades dels usuaris");
+		
+		mc.getContUser().addUser("admin", "admin");
+		mc.getContUser().addUser("client", "client");
+		mc.getContUser().addAdmin("admin");
 		System.out.println("Acabes d'entrar al main provisional del projecte de la Wikipedia, es mostraran les mateixes funcionalitats que en el projecte final però en mode consola.");
 		System.out.println("Escriu alguna cosa per continuar");
 		s.next();
 		pantallaInici();
+		
 		
 	}
 

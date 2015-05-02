@@ -14,8 +14,8 @@ import java.util.Set;
  *
  */
 public class ControladorUsers {
-
 	private ConjuntUsuaris conj;
+	
 
 // CREADORA///////////////////////////////////////////////////////////////////////////////
 
@@ -24,15 +24,17 @@ public class ControladorUsers {
 	 * Post: hi ha un
 	 * conjunt d'usuaris que conté els usuaris existents en el registre
 	 */
-	public ControladorUsers() {
-		// TODO Auto-generated constructor stub
-		conj = new ConjuntUsuaris();
-		/*
-		 * DadesUser du = new DadesUser(); du.carregarUsers();
-		 */
+	public ControladorUsers(ConjuntUsuaris nou) {
+		conj = nou;
 	}
 // MODIFICADORES///////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Pre:
+	 * Post: Carrega en els usuaris a partir del fitxer per defecte
+	 * @return true si s'ha carregat tot correctament, false si hi ha hagut algun error.
+	 */
+	public boolean iniciCarregarUsers() {return true; }
 	/**
 	 * Pre: L'usuari username ja existeix 
 	 * Post: l'usuari username es admin
@@ -72,12 +74,16 @@ public class ControladorUsers {
 		return aux;
 	}
 	
-	public boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<Categoria> subconj, ArrayList<Categoria> evita, String pare ) {
+	public boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare ) {
 		ParaulaValor par = new ParaulaValor(paraulast, paraulain);
-		Criteris aux = new Criteris(par, relacions, sembla, alg, tipus, dada, subconj, evita, pare);
-		conj.getUser(username).getCerca(i).setCriteris_seleccio(aux);
+		ArrayList<Categoria> sub = new ArrayList<Categoria>();
+		
+		ArrayList<Categoria> evitCat = new ArrayList<Categoria>();
+		ArrayList<Pagina> evitPag = new ArrayList<Pagina>();
+		Criteris aux = new Criteris(par, relacions, sembla, alg, tipus, dada, sub, evitCat, evitPag, pare);
+		conj.getUser(username).getCerca(i).setCriterisSeleccio(aux);
 		conj.getUser(username).getCerca(i).setAlgorisme(alg);
-		if(modifica) conj.getUser(username).getCerca(i).setData_modificacio(new Date());
+		if(modifica) conj.getUser(username).getCerca(i).setDataModificacio(new Date());
 		return true;
 	}
 	
@@ -204,51 +210,51 @@ public class ControladorUsers {
 	}
 
 	public Date getDataModificacioCerca(String username, Integer quina) {
-		return conj.getUser(username).getCerca(quina).getData_modificacio();
+		return conj.getUser(username).getCerca(quina).getDataModificacio();
 	}
 	
 	public Integer getAlgCerca(String username, Integer quina) {
-		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getAlgorisme();
+		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getAlgorisme();
 	}
 	
 	public Integer getAlgDadaCerca(String username, Integer quina) {
-		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getDada();
+		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getDada();
 	}
 	
 	public Integer getAlgTipuCerca(String username, Integer quina) {
-		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getTipuCerca();
+		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getTipuCerca();
 	}
 	
 	public Integer getRelacioCerca(String username, Integer quina) {
-		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getRelacionsCat();
+		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getRelacionsCat();
 	}
 	
 	public Integer getSembCerca(String username, Integer quina) {
-		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getSemblNom();
+		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getSemblNom();
 	}
 	
 	public Integer getParaulaImpCerca(String username, Integer quina) {
-		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getParaulaClau().getNum();
+		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getParaulaClau().getNum();
 	}
 	
 	public String getParaulaClauCerca(String username, Integer quina) {
-		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getParaulaClau().getParaula();
+		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getParaulaClau().getParaula();
 	}
 	
 	public String getPareCerca(String username, Integer quina) {
-		return conj.getUser(username).getCerca(quina).getCriteris_seleccio().getPare();
+		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getPare();
 	}
 	
 	public ArrayList<String> getSubCerca(String username, Integer quina) {
 		ArrayList<String> aux = new ArrayList<String>();
-		ArrayList<Categoria> aux2 = conj.getUser(username).getCerca(quina).getCriteris_seleccio().getSubconjCat();
+		ArrayList<Categoria> aux2 = conj.getUser(username).getCerca(quina).getCriterisSeleccio().getSubconjCat();
 		for(Categoria cat: aux2) aux.add(cat.getNom());
 		return aux;
 	}
 	
 	public ArrayList<String> getEvitaCerca(String username, Integer quina) {
 		ArrayList<String> aux = new ArrayList<String>();
-		ArrayList<Categoria> aux2 = conj.getUser(username).getCerca(quina).getCriteris_seleccio().getEvitaCat();
+		ArrayList<Categoria> aux2 = conj.getUser(username).getCerca(quina).getCriterisSeleccio().getEvitaCat();
 		for(Categoria cat: aux2) aux.add(cat.getNom());
 		return aux;
 	}

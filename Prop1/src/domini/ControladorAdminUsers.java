@@ -12,14 +12,15 @@ import java.util.ArrayList;
 public class ControladorAdminUsers {
 	//PRIVAT
 	//	Atribut: una constant amb inici
+	@SuppressWarnings("unused")
 	private GrafDades gd;
 	//PUBLIC
 //CONSTRUCTORA
 	/**
 	 * 
 	 */
-	public ControladorAdminUsers() {
-		// TODO Auto-generated constructor stub
+	public ControladorAdminUsers(GrafDades nou) {
+		gd= nou;
 	}
 
 //CONSULTORES///////////////////////////////////////////////////////////////////////////////
@@ -98,31 +99,31 @@ public class ControladorAdminUsers {
 	
 	/**
 	 * Pre:
-	 * Post:
-	 * @return
+	 * Post: Carrega en el graf les dades del fitxer per defecte
+	 * @return true si s'ha carregat tot correctament, false si hi ha hagut algun error.
 	 */
-	public boolean inici_carregarDades() {return true;}
+	public boolean iniciCarregarDades() {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean carregar_fitxer_enllacos_inserir(String ruta) {return true;}
+	public boolean carregarFitxerEnllacosInserir(String ruta) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public void fer_cerca() {}
+	public void ferCerca() {}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean Eliminar_dades(){return true;}
+	public boolean eliminarDades(){return true;}
 	
 	/**
 	 * Pre:
@@ -130,7 +131,7 @@ public class ControladorAdminUsers {
 	 * @return
 	 */
 	//el boolean indica quin dels dos tipus de format d'entrada és, el boolean retorna 0 si no hi ha errors, 1 si no es reconeix l'URL o 2 si és algun altre tipus d'error
-	public Integer Intro_fitx(String URL, boolean enllaços) {return 1;}
+	public Integer introFitx(String URL, boolean enllaços) {return 1;}
 	
 	/**
 	 * Pre:
