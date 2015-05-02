@@ -11,133 +11,133 @@ import java.util.TreeMap;
 public class Categoria {
 	
 	private String nom;
-	private Map<String, Pagina> CP, PC; //CP conté les pàgines a les que apunta i PC les pàgines que li apunten
-	private Map<String, Categoria> CsubC, CsupC; //CsubC conté les seves subcategories, CsupC conté les seves supercategories
+	private Map<String, Pagina> cP, pC; //cP conté les pàgines a les que apunta i pC les pàgines que li apunten
+	private Map<String, Categoria> cSubC, cSupC; //cSubC conté les seves subcategories, cSupC conté les seves supercategories
 	
 	
 	public Categoria(String nom) {
 		this.nom = nom;
-		CP = new TreeMap<String, Pagina>();
-		PC = new TreeMap<String, Pagina>();
-		CsubC = new TreeMap<String, Categoria>();
-		CsupC = new TreeMap<String, Categoria>();
+		cP = new TreeMap<String, Pagina>();
+		pC = new TreeMap<String, Pagina>();
+		cSubC = new TreeMap<String, Categoria>();
+		cSupC = new TreeMap<String, Categoria>();
 	}
 	
 	public Categoria() {
 		nom = "NoIndicat";
-		CP = new TreeMap<String, Pagina>();
-		PC = new TreeMap<String, Pagina>();
-		CsubC = new TreeMap<String, Categoria>();
-		CsupC = new TreeMap<String, Categoria>();
+		cP = new TreeMap<String, Pagina>();
+		pC = new TreeMap<String, Pagina>();
+		cSubC = new TreeMap<String, Categoria>();
+		cSupC = new TreeMap<String, Categoria>();
 	}
 	
 	//Pre: Cert
-	//Post: Retorna el Nom
+	//Post: Retorna el nom
 	public String getNom() {
 		return nom;
 	}
 	
 	//Pre: Cert
-	//Post: Nom = nom
+	//Post: this.nom = nom
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	
 	//Pre: Cert
-	//Post: Retorna 0 si no existeix ni CP ni PC, 1 si és PC i 2 si es CP
+	//Post: Retorna 0 si no existeix ni cP ni pC, 1 si és pC i 2 si es cP
 	public Integer existsCP(String nom_pagina) {
-		if(PC.containsKey(nom_pagina)) return 1;
-		if(CP.containsKey(nom_pagina)) return 2;
+		if(pC.containsKey(nom_pagina)) return 1;
+		if(cP.containsKey(nom_pagina)) return 2;
 		return 0;
 	}
 	
 	//Pre: Cert
-	//Post: Retorna 0 si no hi ha ni CsupC ni CsubC, 1 si és CsupC i 2 si és CsubC
+	//Post: Retorna 0 si no hi ha ni cSupC ni cSubC, 1 si és cSupC i 2 si és cSubC
 	public Integer existsCC(String nom_categoria) {
-		if(CsupC.containsKey(nom_categoria)) return 1;
-		if(CsubC.containsKey(nom_categoria)) return 2;
+		if(cSupC.containsKey(nom_categoria)) return 1;
+		if(cSubC.containsKey(nom_categoria)) return 2;
 		return 0;
 	}
 	
-	//Pre: pagina no pertany a CP
-	//Post: pagina pertany a CP
+	//Pre: pagina no pertany a cP
+	//Post: pagina pertany a cP
 	public void addCP(Pagina pagina) {
-		CP.put(pagina.getNom(), pagina);
+		cP.put(pagina.getNom(), pagina);
 	}
 	
-	//Pre: pagina no pertany a PC
-	//Post: pagina pertany a PC
+	//Pre: pagina no pertany a pC
+	//Post: pagina pertany a pC
 	public void addPC(Pagina pagina) {
-		PC.put(pagina.getNom(), pagina);
+		pC.put(pagina.getNom(), pagina);
 	}
 	
-	//Pre: categoria no pertany a CsupC
-	//Post: categoria pertany a CsupC
+	//Pre: categoria no pertany a cSupC
+	//Post: categoria pertany a cSupC
 	public void addCsupC(Categoria categoria) {
-		CsupC.put(categoria.nom, categoria);
+		cSupC.put(categoria.nom, categoria);
 	}
 	
-	//Pre: categoria no pertany a CsubC
-	//Post: categoria pertany a CsubC
+	//Pre: categoria no pertany a cSubC
+	//Post: categoria pertany a cSubC
 	public void addCsubC(Categoria categoria) {
-		CsubC.put(categoria.nom, categoria);
+		cSubC.put(categoria.nom, categoria);
 	}
 	
 	
-	//Pre: nom_pagina es una key de CP amb un valor assignat
-	//Post: nom_pagina ja no es key de CP
-	public void removeCP(String nom_pagina) {
-		CP.remove(nom_pagina);
+	//Pre: nomPagina es una key de cP amb un valor assignat
+	//Post: nomPagina ja no es key de cP
+	public void removeCP(String nomPagina) {
+		cP.remove(nomPagina);
 	}
 	
-	//Pre: nom_pagina es una key de PC amb un valor assignat
-	//Post: nom_pagina ja no es key de PC
-	public void removePC(String nom_pagina) {
-		PC.remove(nom_pagina);
+	//Pre: nomPagina es una key de pC amb un valor assignat
+	//Post: nomPagina ja no es key de pC
+	public void removePC(String nomPagina) {
+		pC.remove(nomPagina);
 	}
 	
-	//Pre: nom_categoria es una key de CsubC amb un valor assignat
-	//Post: nom_categoria ja no es key de CsubC
-	public void removeCsubC(String nom_categoria) {
-		CsubC.remove(nom_categoria);
+	//Pre: nomCategoria es una key de cSubC amb un valor assignat
+	//Post: nomCategoria ja no es key de cSubC
+	public void removeCsubC(String nomCategoria) {
+		cSubC.remove(nomCategoria);
 	}
 	
-	//Pre: nom_categoria es una key de CsupC amb un valor assignat
-	//Post: nom_categoria ja no es key de CsupC
-	public void removeCsupC(String nom_categoria) {
-		CsupC.remove(nom_categoria);
+	//Pre: nomCategoria es una key de cSupC amb un valor assignat
+	//Post: nomCategoria ja no es key de cSupC
+	public void removeCsupC(String nomCategoria) {
+		cSupC.remove(nomCategoria);
 	}
 	
 	public Map<String, Pagina> getMapCP() {
-		return CP;
+		return cP;
 	}
 
 	public Map<String, Pagina> getMapPC() {
-		return PC;
+		return pC;
 	}
 	
-	public Map<String, Categoria> getMapCsubC() {
-		return CsubC;
+	public Map<String, Categoria> getMapCSubC() {
+		return cSubC;
 	}
 	
-	public Map<String, Categoria> getMapCsupC() {
-		return CsupC;
+	public Map<String, Categoria> getMapCSupC() {
+		return cSupC;
 	}
 
 	public void setMapCP(Map<String, Pagina> mapa) {
-		CP = mapa;
+		cP = mapa;
 	}
 	
 	public void setMapPC(Map<String, Pagina> mapa) {
-		PC = mapa;
+		pC = mapa;
 	}
 
-	public void setMapCsubC(Map<String, Categoria> mapa) {
-		CsubC = mapa;
+	public void setMapCSubC(Map<String, Categoria> mapa) {
+		cSubC = mapa;
 	}
 
-	public void setMapCsupC(Map<String, Categoria> mapa) {
-		CsupC = mapa;
+	public void setMapCSupC(Map<String, Categoria> mapa) {
+		cSupC = mapa;
 	}	
 
 }
