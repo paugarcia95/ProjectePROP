@@ -4,6 +4,7 @@
 package domini;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import cercaComunitats.Graf;
 
@@ -108,6 +109,7 @@ public class ControladorTraduirAlgorisme {
 	}
 	
 	
+	
 	/**
 	 * Explicacio
 	 * @param 
@@ -116,8 +118,39 @@ public class ControladorTraduirAlgorisme {
 	 */
 	private Graf GrafDadestoGraf (GrafDades graf, Criteris cri) {
 		Graf solucio;
-
+		Collection<Categoria> llistat = graf.getCategories();
 		
+		/////////////////ANEM A AFEGIR ELS NODES AL GRAF //////////////////
+		
+		if(cri.getSubconjCat().size() != 0) {// Si aquest criteri està actiu...(subconjunt)
+			for(Categoria cataux : llistat) {
+				if(cri.getSubconjCat().contains(cataux)) {// I està a la llista d'acceptats
+					solucio.addNode(cataux.getNom()); // L'afegim
+				}
+			}
+		}
+		else {
+			if(cri.getParaulaClau().getNum() != 0) { // Si està activat el criteri de paraula clau
+				if(cri.getParaulaClau().getNum() == 5) {
+					String ayuda = cri.getParaulaClau().getParaula().substring(0, (cri.getParaulaClau().getParaula().length())/2); // Partim la paraula /2
+					for(Categoria cataux : llistat) { // Recorrem els nodes
+						if(cataux.getNom().indexOf(ayuda) != -1) { // Si la paraula/2 està inclosa al nom de la categoria
+							solucio.addNode(cataux.getNom()); //L'afegim al graf
+						}
+					}
+				}
+				else { // Si el criteri val 10 és molt estricte
+					String ayuda = cri.getParaulaClau().getParaula();
+					for(Categoria cataux : llistat) {
+						if(cataux.getNom().indexOf(ayuda) != -1) { // mirem q continguin exactament aquella paraula
+							solucio.addNode(cataux.getNom());
+						}
+						
+					}
+					
+				}
+			}
+		}
 		return solucio;
 	}
 	
