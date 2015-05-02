@@ -23,9 +23,9 @@ public class GrafNewman extends Graf {
 	@SuppressWarnings("unused")
 	private Integer maxj;
 	private Integer maxNumCM;
-	private HashSet<HashSet<Integer> > comunitats;
-	
-	private class Aresta { 
+	private HashSet<HashSet<Integer>> comunitats;
+
+	public class Aresta {
 		public Integer posi;
 		public Integer posj;
 
@@ -73,72 +73,56 @@ public class GrafNewman extends Graf {
 			// al següent node
 
 			Queue<Aresta> aux = new LinkedList<Aresta>();
-			aux = Q.get(a.posi);
+			aux = new LinkedList<Aresta>(Q.get(a.posi));
 
 			while (!aux.isEmpty()) {
 				Q.get(i).add(aux.poll());
-				System.out.println(Q.get(i).peek().posi);
 			}
 
 			Q.get(i).add(a);
 		}
-		public void pop(int i) {
-			Q.get(i).poll();
-		}
 
-		public Aresta poll(int i) {
-			return Q.get(i).poll();
-		}
-
-		public Aresta front(int i) {
-			return Q.get(i).peek();
-		}
-
-		public Boolean isEmpty(int i) {
-			return Q.get(i).isEmpty();
+		public Queue<Aresta> getQueue(int i) {
+			return Q.get(i);
 		}
 	}
-	
+
 	private HashSet<Integer> getAdjacents(Integer posicio) {
 		HashSet<Integer> Cjt = new HashSet<Integer>();
 		Integer N = Matriu.size();
-		if(posicio >= N) return Cjt;
-		for(Integer j = 0; j < N; ++j) {
-			if (Matriu.get(posicio).get(j) > 0.0) Cjt.add(j);
+		if (posicio >= N)
+			return Cjt;
+		for (Integer j = 0; j < N; ++j) {
+			if (Matriu.get(posicio).get(j) > 0.0)
+				Cjt.add(j);
 		}
 		return Cjt;
 	}
-	
-	private void connectedComponents() {
-		/*	ArrayList<Set<Integer> > connectedComponents = new ArrayList<Set<Integer>>();
-			HashSet<Integer> visitedNodes= new HashSet<Integer>();
-			int nodes = Matriu.size();
-			for(int i = 0; i < nodes; ++i) {
-				if(visitedNodes.contains(i)) continue;
-				
-				LinkedList<Integer> nextNodes = new LinkedList<Integer>();
-				int currentNode = i;
-				nextNodes.push(i);
-				
-				HashSet<Integer> cc = new HashSet<Integer>();
-				connectedComponents.add(cc);
-				cc.add(i);
-				while(nextNodes.size()>0) {
-					currentNode = nextNodes.get(0);
-					nextNodes.remove(0);
-					Set<Integer> adjNodes = (Set<Integer>)
-				}
-			}*/
-			
-			 comunitats = new HashSet<HashSet<Integer> >();
-			 int mida = Matriu.size();
-			 for(int i = 0; i < mida; ++i) {
-				 
-			 }
-			//Iterator<HashSet<Integer>> com = comunitats.iterator();
-			
-		}
 
+	private void connectedComponents() {
+		/*
+		 * ArrayList<Set<Integer> > connectedComponents = new
+		 * ArrayList<Set<Integer>>(); HashSet<Integer> visitedNodes= new
+		 * HashSet<Integer>(); int nodes = Matriu.size(); for(int i = 0; i <
+		 * nodes; ++i) { if(visitedNodes.contains(i)) continue;
+		 * 
+		 * LinkedList<Integer> nextNodes = new LinkedList<Integer>(); int
+		 * currentNode = i; nextNodes.push(i);
+		 * 
+		 * HashSet<Integer> cc = new HashSet<Integer>();
+		 * connectedComponents.add(cc); cc.add(i); while(nextNodes.size()>0) {
+		 * currentNode = nextNodes.get(0); nextNodes.remove(0); Set<Integer>
+		 * adjNodes = (Set<Integer>) } }
+		 */
+
+		comunitats = new HashSet<HashSet<Integer>>();
+		int mida = Matriu.size();
+		for (int i = 0; i < mida; ++i) {
+
+		}
+		// Iterator<HashSet<Integer>> com = comunitats.iterator();
+
+	}
 
 	/**
 	 * Calcula el camí minim des del nodeA al nodeB. (Pau)
@@ -178,31 +162,23 @@ public class GrafNewman extends Graf {
 			Integer u = a.aresta;
 
 			// Conté els nodes adjacents a "u"
-			HashSet<String> adjacents = this.getAdjacents(DiccionariInvers.get(u));
-			Iterator<String> it2 = adjacents.iterator();
+			HashSet<Integer> adjacents = this.getAdjacents(u);
+			Iterator<Integer> it2 = adjacents.iterator();
 
 			while (it2.hasNext()) {
-				Integer v = this.Diccionari.get(it2.next());
+				Integer v = it2.next();
 				Double pesUV = this.getPes(DiccionariInvers.get(u), DiccionariInvers.get(v));
 
 				if (distancia.get(v) > distancia.get(u) + pesUV) {
 					distancia.set(v, distancia.get(u) + pesUV);
 					cola.add(new ArestaPes(v, distancia.get(v)));
 
-					camiMinim.push(v, new Aresta(v, u));
+					camiMinim.push(v, new Aresta(u, v));
 				}
 			}
 		}
-
-		while (!camiMinim.isEmpty(Diccionari.get("G"))) {
-			Aresta a = camiMinim.poll(Diccionari.get("G"));
-			if (a != null)
-				System.out.println(DiccionariInvers.get(a.posi) + " " + DiccionariInvers.get(a.posj));
-		}
-
-		return null;
+		return camiMinim.getQueue(nodeB);
 	}
-
 	/**
 	 * Creadora per defecte.
 	 */
@@ -211,7 +187,7 @@ public class GrafNewman extends Graf {
 		// crea NCM de la mateixa mida que Matriu
 		NCM = new Vector<Vector<Integer>>(super.Matriu.size());
 		maxNumCM = maxi = maxj = 0;
-		comunitats = new HashSet<HashSet<Integer> >();
+		comunitats = new HashSet<HashSet<Integer>>();
 
 	}
 
@@ -268,12 +244,14 @@ public class GrafNewman extends Graf {
 	// hagut algun error.
 	public Boolean Invertir_pesos() { // Cris
 		int mida = Matriu.size();
-		if (mida < 2) return false;
+		if (mida < 2)
+			return false;
 		else {
 			for (int i = 0; i < mida; ++i) {
 				for (int j = 0; j < mida; ++j) {
 					double act = Matriu.get(i).get(j);
-					if(act!= 0.0)Matriu.get(i).set(j, 1 / act);
+					if (act != 0.0)
+						Matriu.get(i).set(j, 1 / act);
 				}
 			}
 			return true;
