@@ -273,8 +273,16 @@ public class GrafDades {
 		return false;
 	}
 	
+	//Pre: Cert
+	//Post: Retorna el conjunt de categories
 	public Collection<Categoria> getCategories() {
 		return categories.values();
+	}
+
+	//Pre: Cert
+	//Post: Retorna el conjunt de pàgines
+	public Collection<Pagina> getPagines() {
+		return pagines.values();
 	}
 
 }
