@@ -181,7 +181,7 @@ public class GrafDades {
 	
 	
 	//Pre: Cert
-	//Post: si nom era una key de Categories amb una assignació nom ja no és key de Categories, altrament retorna false
+	//Post: Si nom era una key de Categories amb una assignació nom ja no és key de Categories, altrament retorna false
 	public Boolean removeCategoria(String nom) {
 		if (Categories.containsKey(nom)) {
 			Categories.remove(nom);
@@ -191,7 +191,7 @@ public class GrafDades {
 	}
 	
 	//Pre: Cert
-	//Post: si nom era una key de Pagines amb una assignació ja no és key de Pagines, altrament retorna false
+	//Post: Si nom era una key de Pagines amb una assignació ja no és key de Pagines, altrament retorna false
 	public Boolean removePagina(String nom) {
 		if (Pagines.containsKey(nom)) {
 			Pagines.remove(nom);
@@ -201,15 +201,75 @@ public class GrafDades {
 	}
 	
 	//Pre: Cert
-	//Post: retorna si existeix una Categoria assignada a nom
+	//Post: Retorna si existeix una Categoria assignada a nom
 	public Boolean existsCategoria(String nom) {
 		return Categories.containsKey(nom);
 	}
 
 	//Pre: Cert
-	//Post: retorna si existeix una Pagina assignada a nom
+	//Post: Retorna si existeix una Pagina assignada a nom
 	public Boolean existsPagina(String nom) {
 		return Pagines.containsKey(nom);
+	}
+	
+	//Pre: Cert
+	//Post: Si existia una Categoria amb nom == nomAntic ara nom = nomNou i retorna true, altrament retorna false
+	public Boolean setNomCategoria(String nomAntic, String nomNou) {
+		if (Categories.containsKey(nomAntic) && !Categories.containsKey(nomNou)) {
+			Categoria c = Categories.remove(nomAntic);
+			c.setNom(nomNou);
+			Categories.put(nomNou, c);
+			Map<String, Pagina> CpPc = c.getMapCP();
+			for (Pagina pag : CpPc.values())
+			{
+				pag.removeCP(nomAntic);
+				pag.addCP(c);
+			}
+			CpPc = c.getMapPC();
+			for (Pagina pag : CpPc.values())
+			{
+				pag.removePC(nomAntic);
+				pag.addPC(c);
+			}
+			Map<String, Categoria> CSubcCsupc = c.getMapCSubC();
+			for (Categoria cat : CSubcCsupc.values())
+			{
+				cat.removeCsupC(nomAntic);
+				cat.addCsupC(c);
+			}
+			CSubcCsupc = c.getMapCSupC();
+			for (Categoria cat : CSubcCsupc.values())
+			{
+				cat.removeCsubC(nomAntic);
+				cat.addCsubC(c);
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	//Pre: Cert
+	//Post: Si existia una Pagina amb nom == nomAntic ara nom = nomNou i retorna true, altrament retorna false
+	public Boolean setNomPagina(String nomAntic, String nomNou) {
+		if (Pagines.containsKey(nomAntic) && !Pagines.containsKey(nomNou)) {
+			Pagina p = Pagines.remove(nomAntic);
+			p.setNom(nomNou);
+			Pagines.put(nomNou, p);
+			Map<String, Categoria> PcCp = p.getPC();
+			for (Categoria cat : PcCp.values())
+			{
+				cat.removePC(nomAntic);
+				cat.addPC(p);
+			}
+			PcCp = p.getCP();
+			for (Categoria cat : PcCp.values())
+			{
+				cat.removeCP(nomAntic);
+				cat.addCP(p);
+			}
+			return true;
+		}
+		return false;
 	}
 		
 
