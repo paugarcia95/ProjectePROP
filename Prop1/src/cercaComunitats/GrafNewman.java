@@ -15,6 +15,7 @@ import java.util.Vector;
  * @author Cristina & Pau
  *
  */
+// Poso aixo pq sino no em deixa fer commit
 public class GrafNewman extends Graf {
 
 	private Vector<Vector<Integer>> NCM;
