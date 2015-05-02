@@ -60,6 +60,36 @@ public class ControladorUsers {
 	}
 
 	/**
+	 * Pre: l'usuari username existeix 
+	 * Post: 
+	 * @return identificador de la nova cerca creada
+	 */
+	public Integer addNovaCerca(String username) {
+		Integer aux = conj.getUser(username).addCerca(new CercaComunitats());
+		conj.getUser(username).getCerca(aux).setUsuari(username);
+		Date act = new Date();		//Com s'obté la data actual?
+		conj.getUser(username).getCerca(aux).setDataCreacio(act);
+		return aux;
+	}
+	
+	public boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<Categoria> subconj, ArrayList<Categoria> evita, String pare ) {
+		ParaulaValor par = new ParaulaValor(paraulast, paraulain);
+		Criteris aux = new Criteris(par, relacions, sembla, alg, tipus, dada, subconj, evita, pare);
+		conj.getUser(username).getCerca(i).setCriteris_seleccio(aux);
+		conj.getUser(username).getCerca(i).setAlgorisme(alg);
+		if(modifica) conj.getUser(username).getCerca(i).setData_modificacio(new Date());
+		return true;
+	}
+	
+	public void addNomCerca(String username, Integer i, String nom) {
+		conj.getUser(username).getCerca(i).setNom(nom);
+	}
+	
+	public void addComentariCerca(String username, Integer i, String comentari) {
+		conj.getUser(username).getCerca(i).setComentari(comentari);
+	}
+	
+	/**
 	 * Pre: username existeix
 	 * Post:
 	 * 
@@ -116,6 +146,15 @@ public class ControladorUsers {
 		Usuari u = conj.getUser(username);
 		return u.getPassword().equals(pass);
 	}
+	
+	/**
+	 * Pre: l'usuari username existeix 
+	 * Post: no modifica les dades
+	 * @return cert si l'usuari és admin o fals en cas contrari
+	 */
+	public boolean isAdmin(String username) {
+		return conj.getUser(username).esAdmin();
+	}
 
 	/**
 	 * Pre:existeix un conjunt d'usuaris 
@@ -132,14 +171,7 @@ public class ControladorUsers {
 		return llista;
 	}
 
-	/**
-	 * Pre: l'usuari username existeix 
-	 * Post: no modifica les dades
-	 * @return cert si l'usuari és admin o fals en cas contrari
-	 */
-	public boolean esAdmin(String username) {
-		return conj.getUser(username).esAdmin();
-	}
+	
 	
 	/**
 	 * Pre: l'usuari username existeix 
@@ -154,36 +186,6 @@ public class ControladorUsers {
 		return comunitats;
 	}
 	
-	/**
-	 * Pre: l'usuari username existeix 
-	 * Post: 
-	 * @return identificador de la nova cerca creada
-	 */
-	public Integer novaCerca(String username) {
-		conj.getUser(username).addCerca(new CercaComunitats());
-		Integer aux = conj.getUser(username).getNumCerques();		//l'identificador comença amb 0 o 1? que obtinc amb el getNumCerques? la ultima o la seguent?
-		conj.getUser(username).getCerca(aux).setUsuari(username);
-		Date act = new Date();		//Com s'obté la data actual?
-		conj.getUser(username).getCerca(aux).setDataCreacio(act);
-		return aux;
-	}
-	
-	public boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<Categoria> subconj, ArrayList<Categoria> evita, String pare ) {
-		ParaulaValor par = new ParaulaValor(paraulast, paraulain);
-		Criteris aux = new Criteris(par, relacions, sembla, alg, tipus, dada, subconj, evita, pare);
-		conj.getUser(username).getCerca(i).setCriteris_seleccio(aux);
-		conj.getUser(username).getCerca(i).setAlgorisme(alg);
-		if(modifica) conj.getUser(username).getCerca(i).setData_modificacio(new Date());
-		return true;
-	}
-	
-	public void addNomCerca(String username, Integer i, String nom) {
-		conj.getUser(username).getCerca(i).setNom(nom);
-	}
-	
-	public void addComentariCerca(String username, Integer i, String comentari) {
-		conj.getUser(username).getCerca(i).setComentari(comentari);
-	}
 	
 	public Integer getNumCerca(String quina) {			//////////////////////////////////////////////////
 		return 1;

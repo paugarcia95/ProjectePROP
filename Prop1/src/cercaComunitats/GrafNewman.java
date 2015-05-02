@@ -23,10 +23,9 @@ public class GrafNewman extends Graf {
 	@SuppressWarnings("unused")
 	private Integer maxj;
 	private Integer maxNumCM;
-
-	private class Aresta { // NSE SI ES POT FER D'UNA ALTRA MANERA! (CRIS)
-							// Sisi esta bé! (Pau) l'únic és que he afegit el
-							// contructor per treballar millor
+	private HashSet<HashSet<Integer> > comunitats;
+	
+	private class Aresta { 
 		public Integer posi;
 		public Integer posj;
 
@@ -99,6 +98,47 @@ public class GrafNewman extends Graf {
 			return Q.get(i).isEmpty();
 		}
 	}
+	
+	private HashSet<Integer> getAdjacents(Integer posicio) {
+		HashSet<Integer> Cjt = new HashSet<Integer>();
+		Integer N = Matriu.size();
+		if(posicio >= N) return Cjt;
+		for(Integer j = 0; j < N; ++j) {
+			if (Matriu.get(posicio).get(j) > 0.0) Cjt.add(j);
+		}
+		return Cjt;
+	}
+	
+	private void connectedComponents() {
+		/*	ArrayList<Set<Integer> > connectedComponents = new ArrayList<Set<Integer>>();
+			HashSet<Integer> visitedNodes= new HashSet<Integer>();
+			int nodes = Matriu.size();
+			for(int i = 0; i < nodes; ++i) {
+				if(visitedNodes.contains(i)) continue;
+				
+				LinkedList<Integer> nextNodes = new LinkedList<Integer>();
+				int currentNode = i;
+				nextNodes.push(i);
+				
+				HashSet<Integer> cc = new HashSet<Integer>();
+				connectedComponents.add(cc);
+				cc.add(i);
+				while(nextNodes.size()>0) {
+					currentNode = nextNodes.get(0);
+					nextNodes.remove(0);
+					Set<Integer> adjNodes = (Set<Integer>)
+				}
+			}*/
+			
+			 comunitats = new HashSet<HashSet<Integer> >();
+			 int mida = Matriu.size();
+			 for(int i = 0; i < mida; ++i) {
+				 
+			 }
+			//Iterator<HashSet<Integer>> com = comunitats.iterator();
+			
+		}
+
 
 	/**
 	 * Calcula el camí minim des del nodeA al nodeB. (Pau)
@@ -171,6 +211,8 @@ public class GrafNewman extends Graf {
 		// crea NCM de la mateixa mida que Matriu
 		NCM = new Vector<Vector<Integer>>(super.Matriu.size());
 		maxNumCM = maxi = maxj = 0;
+		comunitats = new HashSet<HashSet<Integer> >();
+
 	}
 
 	/**
@@ -226,13 +268,12 @@ public class GrafNewman extends Graf {
 	// hagut algun error.
 	public Boolean Invertir_pesos() { // Cris
 		int mida = Matriu.size();
-		if (mida < 2)
-			return false;
+		if (mida < 2) return false;
 		else {
 			for (int i = 0; i < mida; ++i) {
 				for (int j = 0; j < mida; ++j) {
 					double act = Matriu.get(i).get(j);
-					Matriu.get(i).set(j, 1 / act);
+					if(act!= 0.0)Matriu.get(i).set(j, 1 / act);
 				}
 			}
 			return true;
