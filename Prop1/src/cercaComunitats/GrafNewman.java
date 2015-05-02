@@ -18,9 +18,7 @@ import java.util.Vector;
 public class GrafNewman extends Graf {
 
 	private Vector<Vector<Integer>> NCM;
-	@SuppressWarnings("unused")
 	private Integer maxi;
-	@SuppressWarnings("unused")
 	private Integer maxj;
 	private Integer maxNumCM;
 	private HashSet<HashSet<Integer>> comunitats;
