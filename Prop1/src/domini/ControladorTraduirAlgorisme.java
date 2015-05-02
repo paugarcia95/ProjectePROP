@@ -168,18 +168,26 @@ public class ControladorTraduirAlgorisme {
 		
 		
 		///////////////ANEM A CREAR LES ARESTES AMB PESOS////////////////////////
-		for(Categoria cataux : llistat) { // agafar de graf
-			Map<String, Categoria> mapcatsupcat = cataux.getMapCSubC(); // posem pes entre un node i els seus subnodes
-			for(Categoria e : mapcatsupcat.values()) {
-				if(solucio.existeixNode(e.getNom())) {
-					solucio.addAresta(cataux.getNom(), e.getNom(), CalcularPesEntreCategories(cataux,e,cri));
+		
+		//////////////////ENTRE CATEGORIES////////////////////////
+		HashSet<String> llistatactual = solucio.getNodes(); // Llista dels nodes a Solució (Graf)
+		for(String it : llistatactual) { // Per a cada node del graf( a seques)
+			Map<String, Categoria> mapcatsupcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
+			for(Categoria e : mapcatsupcat.values()) { // Per a cadascuna de les seves categories
+				if(solucio.existeixNode(e.getNom())) { // Miro si està al graf Solució
+					solucio.addAresta(it, e.getNom(), CalcularPesEntreCategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
 				}
-				
 			}
+		}
+		//////////////////////////////////////////////////////////////
+		
+		/////////////ENTRE PAGINES//////////////////
+		Collection<Pagina> paginat = graf.getPagines();
+		
+		for(Pagina pa : paginat) {
+			
 			
 		}
-		
-		
 		
 		
 		
