@@ -38,6 +38,7 @@ public class driverGrafNewman {
 		 * Queue<Aresta> a = G.camiMin(0, 6); while (!a.isEmpty()) { Aresta b =
 		 * a.poll(); System.out.println(b.posi + " " + b.posj); }
 		 */
-		System.out.println(G.Num_comunitats());
+		System.out.println(G.comunitats());
+		System.out.println(G.numComunitats());
 	}
 }
