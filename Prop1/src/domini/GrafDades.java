@@ -10,58 +10,58 @@ import java.util.TreeMap;
 
 public class GrafDades {
 	
-	private Map<String, Categoria> Categories;
-	private Map<String, Pagina> Pagines;
+	private Map<String, Categoria> categories;
+	private Map<String, Pagina> pagines;
 	
 	
 	public GrafDades() {
-		Categories = new TreeMap<String, Categoria>();
-		Pagines = new TreeMap<String, Pagina>();
+		categories = new TreeMap<String, Categoria>();
+		pagines = new TreeMap<String, Pagina>();
 	}
 	
-	//Pre: nom és una key de Categories amb una assignació
-	//Post: retorna la assignació de nom a Categories
+	//Pre: nom és una key de categories amb una assignació
+	//Post: Retorna la assignació de nom a categories
 	public Categoria getCategoria(String nom) {
-		return Categories.get(nom);
+		return categories.get(nom);
 	}
 	
-	//Pre: nom és una key de Pagines amb una assignació
-	//Post: retorna la assignació de nom a Pagines
+	//Pre: nom és una key de pagines amb una assignació
+	//Post: Retorna la assignació de nom a pagines
 	public Pagina getPagina(String nom) {
-		return Pagines.get(nom);
+		return pagines.get(nom);
 	}
 	
 	//Pre: Cert
-	//Post: Retorna el nombre de Categories que hi ha al graf
+	//Post: Retorna el nombre de categories que hi ha al graf
 	public Integer getNombreCategories() {
-		return Categories.size();
+		return categories.size();
 	}
 	
 	//Pre: Cert
-	//Post: Retorna el nombre de Pàgines que hi ha al graf
+	//Post: Retorna el nombre de pàgines que hi ha al graf
 	public Integer getNombrePagines() {
-		return Pagines.size();
+		return pagines.size();
 	}
 	
 	//Pre: Cert
-	//Post: cat és l'assignació de la key cat.Nom
+	//Post: Si cat no existia a categories ara és l'assignació de la key cat.Nom i retorna true, altrament retorna false
 	public Boolean addCategoria(Categoria cat) {
-		if (Categories.containsKey(cat.getNom())) return false;
-		Categories.put(cat.getNom(), cat);
+		if (categories.containsKey(cat.getNom())) return false;
+		categories.put(cat.getNom(), cat);
 		return true;
 	}
 	
 	//Pre: Cert
-	//Post: pag és l'assignació de la key pag.Nom
+	//Post: Si pag no existia a pagines ara és l'assignació de la key pag.Nom i retorna true, altrament retorna false
 	public Boolean addPagina(Pagina pag) {
-		if (Pagines.containsKey(pag.getNom())) return false;
-		Pagines.put(pag.getNom(), pag);
+		if (pagines.containsKey(pag.getNom())) return false;
+		pagines.put(pag.getNom(), pag);
 		return true;
 	}
 	
 	
 	public Boolean addCC(Categoria cat1, Categoria cat2) {
-		if (Categories.containsKey(cat1.getNom()) && Categories.containsKey(cat2.getNom())) {
+		if (categories.containsKey(cat1.getNom()) && categories.containsKey(cat2.getNom())) {
 			if (cat1.existsCC(cat2.getNom()) == 2 && cat2.existsCC(cat1.getNom()) == 1) { //ja existeix
 				return false;
 			}
@@ -71,15 +71,15 @@ public class GrafDades {
 			//com que el graf es consistent no existeixen els casos  {(0,1),(0,2),(1,0),(1,1),(2,0),(2,2)}
 			//el cas (0,0) es tracta al final del metode
 		}
-		else if (!Categories.containsKey(cat1.getNom()) && Categories.containsKey(cat2.getNom())) {
-			Categories.put(cat1.getNom(), cat1);
+		else if (!categories.containsKey(cat1.getNom()) && categories.containsKey(cat2.getNom())) {
+			categories.put(cat1.getNom(), cat1);
 		}
-		else if (Categories.containsKey(cat1.getNom()) && !Categories.containsKey(cat2.getNom())) {
-			Categories.put(cat2.getNom(), cat2);
+		else if (categories.containsKey(cat1.getNom()) && !categories.containsKey(cat2.getNom())) {
+			categories.put(cat2.getNom(), cat2);
 		}
 		else {
-			Categories.put(cat1.getNom(), cat1);
-			Categories.put(cat2.getNom(), cat2);
+			categories.put(cat1.getNom(), cat1);
+			categories.put(cat2.getNom(), cat2);
 		}
 		cat1.addCsubC(cat2);
 		cat2.addCsupC(cat1);
@@ -88,7 +88,7 @@ public class GrafDades {
 	
 	
 	public Boolean addPC(Pagina pag, Categoria cat) {
-		if (Pagines.containsKey(pag.getNom()) && Categories.containsKey(cat.getNom())) {
+		if (pagines.containsKey(pag.getNom()) && categories.containsKey(cat.getNom())) {
 			if (pag.existsPC(cat.getNom()) == 1 && cat.existsCP(pag.getNom()) == 1) { //ja existeix
 				return false;
 			}
@@ -98,15 +98,15 @@ public class GrafDades {
 			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
 			//el cas (0,0) es tracta al final del metode
 		}
-		else if (!Pagines.containsKey(pag.getNom()) && Categories.containsKey(cat.getNom())) {
-			Pagines.put(pag.getNom(), pag);
+		else if (!pagines.containsKey(pag.getNom()) && categories.containsKey(cat.getNom())) {
+			pagines.put(pag.getNom(), pag);
 		}
-		else if (Pagines.containsKey(pag.getNom()) && !Categories.containsKey(cat.getNom())) {
-			Categories.put(cat.getNom(), cat);
+		else if (pagines.containsKey(pag.getNom()) && !categories.containsKey(cat.getNom())) {
+			categories.put(cat.getNom(), cat);
 		}
 		else {
-			Pagines.put(pag.getNom(), pag);
-			Categories.put(cat.getNom(), cat);
+			pagines.put(pag.getNom(), pag);
+			categories.put(cat.getNom(), cat);
 		}
 		pag.addPC(cat);
 		cat.addPC(pag);
@@ -115,7 +115,7 @@ public class GrafDades {
 	
 	
 	public Boolean addCP(Categoria cat, Pagina pag) {
-		if (Categories.containsKey(cat.getNom()) && Pagines.containsKey(pag.getNom())) {
+		if (categories.containsKey(cat.getNom()) && pagines.containsKey(pag.getNom())) {
 			if (cat.existsCP(pag.getNom()) == 2 && pag.existsPC(cat.getNom()) == 2) { //ja existeix
 				return false;
 			}
@@ -125,15 +125,15 @@ public class GrafDades {
 			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
 			//el cas (0,0) es tracta al final del metode
 		}
-		else if (!Categories.containsKey(cat.getNom()) && Pagines.containsKey(pag.getNom())) {
-			Categories.put(cat.getNom(), cat);
+		else if (!categories.containsKey(cat.getNom()) && pagines.containsKey(pag.getNom())) {
+			categories.put(cat.getNom(), cat);
 		}
-		else if (Categories.containsKey(cat.getNom()) && !Pagines.containsKey(pag.getNom())) {
-			Pagines.put(pag.getNom(), pag);
+		else if (categories.containsKey(cat.getNom()) && !pagines.containsKey(pag.getNom())) {
+			pagines.put(pag.getNom(), pag);
 		}
 		else {
-			Categories.put(cat.getNom(), cat);
-			Pagines.put(pag.getNom(), pag);
+			categories.put(cat.getNom(), cat);
+			pagines.put(pag.getNom(), pag);
 		}
 		cat.addCP(pag);
 		pag.addCP(cat);
@@ -141,9 +141,9 @@ public class GrafDades {
 	}
 	
 	//Pre: Cert
-	//Post: retorna true si cat1 era super de cat2 i ja no, false altrament
+	//Post: Retorna true si cat1 era super de cat2 i ja no, false altrament
 	public Boolean removeCC(Categoria cat1, Categoria cat2) {
-		if (Categories.containsKey(cat1.getNom()) && Categories.containsKey(cat2.getNom())) {
+		if (categories.containsKey(cat1.getNom()) && categories.containsKey(cat2.getNom())) {
 			if (cat1.existsCC(cat2.getNom()) == 2 && cat2.existsCC(cat1.getNom()) == 1) {
 				cat1.removeCsubC(cat2.getNom());
 				cat2.removeCsupC(cat1.getNom());
@@ -154,9 +154,9 @@ public class GrafDades {
 	}
 	
 	//Pre: Cert
-	//Post: retorna true si pag apuntava a cat i ja no, false altrament
+	//Post: Retorna true si pag apuntava a cat i ja no, false altrament
 	public Boolean removePC(Pagina pag, Categoria cat) {
-		if (Pagines.containsKey(pag.getNom()) && Categories.containsKey(cat.getNom())) {
+		if (pagines.containsKey(pag.getNom()) && categories.containsKey(cat.getNom())) {
 			if (pag.existsPC(cat.getNom()) == 1 && cat.existsCP(pag.getNom()) == 1) {
 				pag.removePC(cat.getNom());
 				cat.removePC(pag.getNom());
@@ -167,9 +167,9 @@ public class GrafDades {
 	}
 	
 	//Pre: Cert
-	//Post: retorna true si cat apuntava a pag i ja no, false altrament
+	//Post: Retorna true si cat apuntava a pag i ja no, false altrament
 	public Boolean removeCP(Categoria cat, Pagina pag) {
-		if (Categories.containsKey(cat.getNom()) && Pagines.containsKey(pag.getNom())) {
+		if (categories.containsKey(cat.getNom()) && pagines.containsKey(pag.getNom())) {
 			if (pag.existsPC(cat.getNom()) == 2 && cat.existsCP(pag.getNom()) == 2) {
 				cat.removeCP(pag.getNom());
 				pag.removeCP(cat.getNom());
@@ -181,20 +181,20 @@ public class GrafDades {
 	
 	
 	//Pre: Cert
-	//Post: Si nom era una key de Categories amb una assignació nom ja no és key de Categories, altrament retorna false
+	//Post: Si nom era una key de categories amb una assignació nom ja no és key de categories i retorna true, altrament retorna false
 	public Boolean removeCategoria(String nom) {
-		if (Categories.containsKey(nom)) {
-			Categories.remove(nom);
+		if (categories.containsKey(nom)) {
+			categories.remove(nom);
 			return true;
 		}
 		return false;
 	}
 	
 	//Pre: Cert
-	//Post: Si nom era una key de Pagines amb una assignació ja no és key de Pagines, altrament retorna false
+	//Post: Si nom era una key de pagines amb una assignació ja no és key de pagines i retorna true, altrament retorna false
 	public Boolean removePagina(String nom) {
-		if (Pagines.containsKey(nom)) {
-			Pagines.remove(nom);
+		if (pagines.containsKey(nom)) {
+			pagines.remove(nom);
 			return true;
 		}
 		return false;
@@ -203,22 +203,22 @@ public class GrafDades {
 	//Pre: Cert
 	//Post: Retorna si existeix una Categoria assignada a nom
 	public Boolean existsCategoria(String nom) {
-		return Categories.containsKey(nom);
+		return categories.containsKey(nom);
 	}
 
 	//Pre: Cert
 	//Post: Retorna si existeix una Pagina assignada a nom
 	public Boolean existsPagina(String nom) {
-		return Pagines.containsKey(nom);
+		return pagines.containsKey(nom);
 	}
 	
 	//Pre: Cert
 	//Post: Si existia una Categoria amb nom == nomAntic ara nom = nomNou i retorna true, altrament retorna false
 	public Boolean setNomCategoria(String nomAntic, String nomNou) {
-		if (Categories.containsKey(nomAntic) && !Categories.containsKey(nomNou)) {
-			Categoria c = Categories.remove(nomAntic);
+		if (categories.containsKey(nomAntic) && !categories.containsKey(nomNou)) {
+			Categoria c = categories.remove(nomAntic);
 			c.setNom(nomNou);
-			Categories.put(nomNou, c);
+			categories.put(nomNou, c);
 			Map<String, Pagina> CpPc = c.getMapCP();
 			for (Pagina pag : CpPc.values())
 			{
@@ -251,10 +251,10 @@ public class GrafDades {
 	//Pre: Cert
 	//Post: Si existia una Pagina amb nom == nomAntic ara nom = nomNou i retorna true, altrament retorna false
 	public Boolean setNomPagina(String nomAntic, String nomNou) {
-		if (Pagines.containsKey(nomAntic) && !Pagines.containsKey(nomNou)) {
-			Pagina p = Pagines.remove(nomAntic);
+		if (pagines.containsKey(nomAntic) && !pagines.containsKey(nomNou)) {
+			Pagina p = pagines.remove(nomAntic);
 			p.setNom(nomNou);
-			Pagines.put(nomNou, p);
+			pagines.put(nomNou, p);
 			Map<String, Categoria> PcCp = p.getPC();
 			for (Categoria cat : PcCp.values())
 			{
