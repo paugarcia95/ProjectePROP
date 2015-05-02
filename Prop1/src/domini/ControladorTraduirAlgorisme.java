@@ -5,8 +5,12 @@ package domini;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import cercaComunitats.Graf;
 
@@ -17,7 +21,6 @@ import cercaComunitats.Graf;
  */
 public class ControladorTraduirAlgorisme {
 
-	private Integer maxvalor = new Integer(80);
 	
 	private static int similarity(String s1, String s2) {
         String longer = s1, shorter = s2;
@@ -93,19 +96,18 @@ public class ControladorTraduirAlgorisme {
 	 * @param 
 	 * @return 
 	 */
-	private Double CalcularPesEntreCatPag(Categoria c, Pagina p, Criteris cri) {
-		Double solucio = new Double(0);
-		if(cri.getEvitaCat().contains(c) || cri.getEvitaCat().contains(p)) return solucio; // Criteri d'ignorar aquestes cat o pg !!! ESta mal lo de p!!!!
-		else {
-			
-			Integer temp = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg
-			if(temp == 5) solucio += 5;
-			else if(temp < 5) solucio += (5+(5-temp));
-			else solucio += 5-(temp-5);
-			
-			
-		}
+	private Double CalcularPesEntreCatPag(Criteris cri) {
+		Double solucio = new Double(0);	
 		
+		////////////**************Criteri de cat-cat i cat-pg********/////////////
+		Integer temp = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg
+		if(temp == 5) solucio += 5;
+		else if(temp > 5) solucio += 5-(5-temp);
+		else solucio += (5+(temp-5));
+		/////////////*********************************************///////////
+		
+		
+		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
 		return solucio;
 		
 	}
@@ -172,8 +174,8 @@ public class ControladorTraduirAlgorisme {
 		//////////////////ENTRE CATEGORIES////////////////////////
 		HashSet<String> llistatactual = solucio.getNodes(); // Llista dels nodes a Solució (Graf)
 		for(String it : llistatactual) { // Per a cada node del graf( a seques)
-			Map<String, Categoria> mapcatsupcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
-			for(Categoria e : mapcatsupcat.values()) { // Per a cadascuna de les seves categories
+			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
+			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
 				if(solucio.existeixNode(e.getNom())) { // Miro si està al graf Solució
 					solucio.addAresta(it, e.getNom(), CalcularPesEntreCategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
 				}
@@ -184,9 +186,26 @@ public class ControladorTraduirAlgorisme {
 		/////////////ENTRE PAGINES//////////////////
 		Collection<Pagina> paginat = graf.getPagines();
 		
-		for(Pagina pa : paginat) {
-			
-			
+		for(Pagina p : paginat) {
+			Map<String, Categoria> pagacat = p.getPC(); // Cosneguim les categories a les q apunta la pag
+			Collection<Categoria> cates = pagacat.values(); // Agafo les categories i les paso a una Collection
+			ArrayList<Categoria> seguiment = new ArrayList<Categoria>(); // Creo una arraylist
+			seguiment.addAll(cates); // I passo els valors d la collection a la arraylist
+			for(int q = 0; q < seguiment.size(); ++q){
+				for(int u = q+1; u < seguiment.size(); ++u) {
+					if(solucio.existeixNode(seguiment.get(q).getNom()) && solucio.existeixNode(seguiment.get(u).getNom())) { // Si les categories existeixen al graf Solució
+						if(solucio.existeixAresta(seguiment.get(q).getNom(), seguiment.get(u).getNom())) {
+							Double pesactual = solucio.getPes(seguiment.get(q).getNom(), seguiment.get(u).getNom());
+							pesactual += CalcularPesEntreCatPag(cri);
+							solucio.setPes(seguiment.get(q).getNom(), seguiment.get(u).getNom(), pesactual);
+						}
+						else {
+							solucio.addAresta(seguiment.get(q).getNom(), seguiment.get(u).getNom(), CalcularPesEntreCatPag(cri));
+							
+						}
+					}
+				}
+			}
 		}
 		
 		
