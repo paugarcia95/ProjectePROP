@@ -29,6 +29,11 @@ public class Usuari {
         eliminats = new LinkedList<Integer>();
 	}
 	
+	public Usuari() {
+		cerquesFetes = new ArrayList<CercaComunitats>();
+		eliminats = new LinkedList<Integer>();
+	}
+	
 	//Pre: Cert
 	//Post: admin = true
 	public void ferAdmin() {
