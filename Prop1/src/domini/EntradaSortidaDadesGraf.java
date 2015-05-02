@@ -6,11 +6,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.StringTokenizer;
 
 public class EntradaSortidaDadesGraf {
 
-	public void loadGraph(String ruta) throws FileNotFoundException, IOException {
+	public GrafDades loadGraph(String ruta) throws FileNotFoundException, IOException {
 		GrafDades G = new GrafDades();
 		BufferedReader b = new BufferedReader(new FileReader(ruta));
 		String s;
@@ -38,41 +39,64 @@ public class EntradaSortidaDadesGraf {
 			}
 		}
 		b.close();
-	}
-
-	public void printGrafAsPicture(GrafDades G, String ruta) {
+		return G;
 	}
 
 	public void printGrafAsText(GrafDades G, String ruta) throws FileNotFoundException, IOException {
-		BufferedReader b = new BufferedReader(new FileReader(ruta));
-		String s;
+		FileWriter fichEscr = null;
+		PrintWriter docE = null;
 
-		while ((s = b.readLine()) != null) {
-			StringTokenizer st = new StringTokenizer(s);
+		try {
+			// Arxiu d'escriptura
+			fichEscr = new FileWriter(ruta);
+			docE = new PrintWriter(fichEscr);
 
-			while (st.hasMoreTokens() && st.countTokens() >= 4) {
-				String word1 = st.nextToken();
-				st.nextToken();
-				String link = st.nextToken();
-				String word2 = st.nextToken();
-				st.nextToken();
+			Iterator<Categoria> it = G.getCategories().iterator();
 
-				if (link.equals("CsubC"))
-					G.addCC(new Categoria(word2), new Categoria(word1));
-				else if (link.equals("CsupC"))
-					G.addCC(new Categoria(word1), new Categoria(word2));
-				else if (link.equals("CP"))
-					G.addCP(new Categoria(word1), new Pagina(word2));
-				else if (link.equals("PC"))
-					G.addPC(new Pagina(word2), new Categoria(word1));
-				else
-					System.out.println("Error al crear el graf: Comprova la sintaxi de l'entrada");
+			while (it.hasNext()) {
+				Categoria c = it.next();
+				String c1 = c.getNom();
+
+				Iterator<Pagina> CP = c.getMapCP().values().iterator();
+				Iterator<Pagina> PC = c.getMapPC().values().iterator();
+				Iterator<Categoria> CsubC = c.getMapCSubC().values().iterator();
+				Iterator<Categoria> CsupC = c.getMapCSupC().values().iterator();
+
+				while (CP.hasNext()) {
+					Pagina p = CP.next();
+					docE.println(c1 + " cat CP " + p.getNom() + " pag");
+				}
+
+				while (PC.hasNext()) {
+					Pagina p = PC.next();
+					docE.println(c1 + " pag PC " + p.getNom() + " cat");
+				}
+
+				while (CsubC.hasNext()) {
+					Categoria c2 = CsubC.next();
+					docE.println(c2.getNom() + " cat CsubC " + c1 + " cat");
+				}
+
+				while (CsupC.hasNext()) {
+					Categoria c2 = CsupC.next();
+					docE.println(c2.getNom() + " cat CsupC " + c1 + " cat");
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// Nos aseguramos que se cierra el fichero.
+				if (null != docE)
+					docE.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
-		b.close();
 	}
 
-	public void translateTextToPicture(String textRute, String pictureRute) {
+	public void translateTextToPicture(String textRoute, String pictureRoute) {
 		String s;
 
 		FileWriter fichEscr = null;
@@ -83,11 +107,11 @@ public class EntradaSortidaDadesGraf {
 
 		try {
 			// Arxiu de lectura
-			fichLect = new FileReader(textRute);
+			fichLect = new FileReader(textRoute);
 			docL = new BufferedReader(fichLect);
 
 			// Arxiu d'escriptura
-			fichEscr = new FileWriter(pictureRute);
+			fichEscr = new FileWriter(pictureRoute);
 			docE = new PrintWriter(fichEscr);
 
 			docE.println("digraph Graf {");
