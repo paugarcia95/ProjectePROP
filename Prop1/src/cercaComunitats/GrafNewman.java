@@ -25,7 +25,8 @@ public class GrafNewman extends Graf {
 	private Integer maxNumCM;
 	private HashSet<HashSet<Integer>> comunitats;
 
-	public class Aresta {
+	public class Aresta { // Ha de ser privada!!! pero pel driver la deixo aixi
+							// de moment
 		public Integer posi;
 		public Integer posj;
 
@@ -268,14 +269,69 @@ public class GrafNewman extends Graf {
 		return null;
 	}
 
-	// Retorna el nombre de comunitats en les quals està dividit el graf o 1 en
-	// cas d’error.
-	public Integer Num_comunitats() { // Pau
-		return null;
+	/**
+	 * Recorre una comunitat i va marcant com a true al vector visitats pels
+	 * nodes que passa
+	 * 
+	 */
+	private void RecorreComunitat(Integer nodeOrigen, Vector<Boolean> visitats) {
+		HashSet<Integer> adjacents = getAdjacents(nodeOrigen);
+		Iterator<Integer> it = adjacents.iterator();
+
+		while (it.hasNext()) {
+			Integer n = it.next();
+			if (!visitats.get(n)) {
+				visitats.set(n, true);
+				RecorreComunitat(n, visitats);
+			}
+		}
+	}
+
+	/**
+	 * Retorna el nombre de comunitats en les que està dividit el graf o -1 en
+	 * cas d'error (Pau)
+	 * 
+	 * @return Nombre de comunitats del graf
+	 */
+	public Integer Num_comunitats() {
+		HashSet<String> nodes = this.getNodes();
+		Iterator<String> it = nodes.iterator();
+		Integer numComunitats = 0;
+
+		Vector<Boolean> visitats = new Vector<Boolean>();
+		visitats.setSize(this.size());
+		for (int i = 0; i < visitats.size(); ++i)
+			visitats.set(i, false);
+
+		while (it.hasNext()) {
+			Integer n = Diccionari.get(it.next());
+			if (!visitats.get(n)) {
+				RecorreComunitat(n, visitats);
+				++numComunitats;
+			}
+		}
+
+		return numComunitats;
 	}
 
 	// Retorna el conjunt de comunitats existents.
 	public HashSet<HashSet<String>> comunitats() { // Pau
+		HashSet<String> nodes = this.getNodes();
+		Iterator<String> it = nodes.iterator();
+		HashSet<HashSet<String>> comunitats = 0;
+
+		Vector<Boolean> visitats = new Vector<Boolean>();
+		visitats.setSize(this.size());
+		for (int i = 0; i < visitats.size(); ++i)
+			visitats.set(i, false);
+
+		while (it.hasNext()) {
+			Integer n = Diccionari.get(it.next());
+			if (!visitats.get(n)) {
+				RecorreComunitat(n, visitats);
+			}
+		}
+
 		return null;
 	}
 
