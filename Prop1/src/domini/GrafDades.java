@@ -284,5 +284,19 @@ public class GrafDades {
 	public Collection<Pagina> getPagines() {
 		return pagines.values();
 	}
-
+	
+	public void Prueba() {
+		int j = 1;
+		Collection<Categoria>cats = this.getCategories();
+		Categoria[] array = (Categoria[]) cats.toArray();
+		for (Categoria cat : cats)
+		{
+			for(int i=j; i < array.length; i++) {
+				Categoria c = array[i];
+				cat.addCsubC(c); //relacionas cat con cada c
+			}
+			++j;
+		}
+	}
+	
 }
