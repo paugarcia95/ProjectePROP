@@ -10,102 +10,86 @@ import java.util.TreeMap;
 
 public class Pagina {
 	
-	private String Nom;
-	private Map<String, Categoria> CP, PC; //CP conté les categories que li apunten i el PC les categories a les que apunta
+	private String nom;
+	private Map<String, Categoria> cP, pC; //cP conté les categories que li apunten i el pC les categories a les que apunta
 	
 	
-	public Pagina(String nom, Map<String, Categoria> PC, Map<String, Categoria> CP) {
-		Nom = nom;
-		this.PC = PC;
-		this.CP = CP;
+	public Pagina(String nom, Map<String, Categoria> pC, Map<String, Categoria> cP) {
+		this.nom = nom;
+		this.pC = pC;
+		this.cP = cP;
 	}
 	
 	public Pagina() {
-		CP = new TreeMap<String, Categoria>();
-		PC = new TreeMap<String, Categoria>();
+		cP = new TreeMap<String, Categoria>();
+		pC = new TreeMap<String, Categoria>();
 	}
 	
 	public Pagina(String nom) {
-		Nom = nom;
-		CP = new TreeMap<String, Categoria>();
-		PC = new TreeMap<String, Categoria>();
+		this.nom = nom;
+		cP = new TreeMap<String, Categoria>();
+		pC = new TreeMap<String, Categoria>();
 	}
 	
 	public String getNom() {
-		return Nom;
+		return nom;
 	}
 	
 	public void setNom(String nom) {
-		Nom = nom;
+		this.nom = nom;
 	}
 	
 	//Pre: cert
-	//Post: retorna 0 si no existeix ni CP ni PC, 1 si és PC i 2 si es CP
+	//Post: retorna 0 si no existeix ni cP ni pC, 1 si és pC i 2 si es cP
 	public Integer existsPC(String categoria) {
-		if(PC.containsKey(categoria)) return 1;
-		if(CP.containsKey(categoria)) return 2;
+		if(pC.containsKey(categoria)) return 1;
+		if(cP.containsKey(categoria)) return 2;
 		return 0;
 	}
 	
-	/*
-	//Pre: i < PC.size()
-	//Post: retorna la pàgina que hi ha a la posició i
-	public Pagina consultarPC(int i) {
-		List keys = new ArrayList(PC.keySet()); 
-	//MOOOLT INEFICIENT i hauriem d'implementar tots aquests maps com LinkedHashMap 
-	//per que els elements conservin els índexs
-		return keys.get(i);
-	}
 	
-	No he implementat la resta:
-	+ consultar CP(i:int): &Categoria
-	
-	perque no crec que per índex estiguin bé
-	*/
-	
-	
-	//Pre: categoria no pertany a PC
-	//Post: categoria pertany a PC
+	//Pre: categoria no pertany a pC
+	//Post: categoria pertany a pC
 	public Boolean addPC(Categoria categoria) {
-		PC.put(categoria.getNom(), categoria);
+		pC.put(categoria.getNom(), categoria);
 		return true;
 	}	
 	
 	
-	//Pre: categoria no pertany a CP
-	//Post: categoria pertany a CP
+	//Pre: categoria no pertany a cP
+	//Post: categoria pertany a cP
 	public void addCP(Categoria categoria) {
-		CP.put(categoria.getNom(), categoria);
+		cP.put(categoria.getNom(), categoria);
 	}
 	
-	//Pre: categoria es una key de PC amb un valor assignat
-	//Post: categoria ja no es key de PC
+	//Pre: categoria es una key de pC amb un valor assignat
+	//Post: categoria ja no es key de pC
 	public Boolean removePC(String categoria) {
-		PC.remove(categoria);
+		pC.remove(categoria);
 		return true;
 	}
 	
-	//Pre: categoria es una key de CP amb un valor assignat
-	//Post: categoria ja no es key de CP
+	//Pre: categoria es una key de cP amb un valor assignat
+	//Post: categoria ja no es key de cP
 	public Boolean removeCP(String categoria) {
-		CP.remove(categoria);
+		cP.remove(categoria);
 		return true;
 	}
 	
 	public Map<String, Categoria> getPC() {
-		return PC;
+		return pC;
 	}
 	
 	public Map<String, Categoria> getCP() {
-		return CP;
+		return cP;
 	}
 	
 	public Integer getNumPC() {
-		return PC.size();
+		return pC.size();
 	}
 	
 	public Integer getNumCP() {
-		return CP.size();
+		return cP.size();
 	}
 	
 }
