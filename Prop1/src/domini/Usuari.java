@@ -19,7 +19,7 @@ public class Usuari {
 	
 	
 	//Pre: No hi existeix cap usuari amb el mateix username
-	//Post: Crea un Usuari amb username=username, password=password i admin=admin
+	//Post: Crea un Usuari amb this.username=username, this.password=password i this.admin=admin
 	public Usuari (String username, String password, Boolean admin) {
         this.username = username;
         this.password = password;
@@ -29,7 +29,7 @@ public class Usuari {
         eliminats = new LinkedList<Integer>();
 	}
 	
-	//Pre: cert
+	//Pre: Cert
 	//Post: admin = true
 	public void ferAdmin() {
 		admin = true;				
@@ -42,37 +42,37 @@ public class Usuari {
 	}
 
 	//Pre: Cert
-	//Post: password = password
+	//Post: this.password = password
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
 	//Pre: Cert
-	//Post: retorna l'username
+	//Post: Retorna l'username
 	public String getUsername() {
 		return username;
 	}
 	
 	//Pre: Cert
-	//Post: retorna el password
+	//Post: Retorna el password
 	public String getPassword() {
 		return password;
 	}
 	
 	//Pre: Cert
-	//Post: Retorna el numero de cerques fetes
+	//Post: Retorna el nombre de cerques que té l'usuari
 	public Integer getNumCerques() {
 		return nCerques;
 	}
 	
-	//Pre: i < cerquesFetes.size() && es l'index d'una CercaComunitats a cerquesFetes
+	//Pre: i < cerquesFetes.size() && és l'índex d'una CercaComunitats a cerquesFetes
 	//Post: Retorna la CercaComunitats amb índex i
 	public CercaComunitats getCerca(Integer i) {
 		return cerquesFetes.get(i);
 	}
 	
 	//Pre: Cert
-	//Post: si s es el nom d'una cerca de l'usuari retorna aquesta cerca, altrament retorna null
+	//Post: Si s és el nom d'una cerca de l'usuari retorna aquesta cerca, altrament retorna null
 	public CercaComunitats getCerca(String s) {
 		for (int i = 0; i < cerquesFetes.size(); i++) {
 	        CercaComunitats cerca = cerquesFetes.get(i);
@@ -84,7 +84,7 @@ public class Usuari {
 	}
 	
 	//Pre: Cert
-	//Post: si s es el nom d'una cerca de l'usuari retorna la posiciço d'aquesta cerca, altrament retorna -1
+	//Post: Si s és el nom d'una cerca de l'usuari retorna la posiciço d'aquesta cerca, altrament retorna -1
 	public Integer getPosCerca(String s) {
 		for (int i = 0; i < cerquesFetes.size(); i++) {
 	        CercaComunitats cerca = cerquesFetes.get(i);
@@ -95,15 +95,15 @@ public class Usuari {
 		return -1;
 	}
 	
-	//Pre: cert
-	//Post: retorna si existeix una cerca amb nom s
+	//Pre: Cert
+	//Post: Retorna si existeix una cerca amb nom s
 	public Boolean existsCerca(String s) {
 		if (this.getPosCerca(s) != -1) return true;
 		return false;
 	}
 	
-	//Pre: c.Nom és únic a cerquesFetes
-	//Post: Si c no pertanyia a cerquesFetes ++nCerques i c pertany a cerquesFetes, 
+	//Pre: c.nom és únic a cerquesFetes
+	//Post: Si c no pertanyia a cerquesFetes ++nCerques i c pertany a cerquesFetes
 	public Integer addCerca(CercaComunitats c) {
 		int i;
 		if(eliminats.isEmpty()) {
@@ -115,7 +115,7 @@ public class Usuari {
 			}
 		}
 		else {
-			i = eliminats.poll(); //primer index buit
+			i = eliminats.poll(); //primer índex buit
 		}
 		cerquesFetes.set(i, c);
 		++nCerques;
@@ -132,25 +132,19 @@ public class Usuari {
 		return true;
 	}
 	
-	//Pre: cert
-	//Post: c no és a cerquesFetes i --nCerques
+	//Pre: Cert
+	//Post: Si s era el nom d'una cerca a cerquesFetes, aquesta cerca no és a cerquesFetes, --nCerques i retorna cert, altrament retorna false
 	public Boolean removeCerca(String s) {
-		int i;
-		for (i = 0; i < cerquesFetes.size(); i++) {
-	        CercaComunitats cerca = cerquesFetes.get(i);
-	        if (cerca != null && s.equals(cerca.getNom())) {
-	        	break;
-	        }
-	    }
-		if (i == cerquesFetes.size()) return false;
+		int i = this.getPosCerca(s);
+		if (i == -1) return false;
 		cerquesFetes.set(i, null);
 		--nCerques;
 		eliminats.add(i);
 		return true;
 	}
 	
-	//Pre: i < cerquesFetes.size() && és l'index d'una CercaComunitats a cerquesFetes
-	//Post: cerquesFetes ja no conté la CercaComunitats amb index i
+	//Pre: i < cerquesFetes.size() && és l'índex d'una CercaComunitats a cerquesFetes
+	//Post: cerquesFetes ja no conté la CercaComunitats amb índex i
 	public Boolean removeCerca(Integer i) {
 		cerquesFetes.set(i, null);
 		--nCerques;
@@ -159,7 +153,7 @@ public class Usuari {
 	}
 	
 	//Pre: Cert
-	//Post: retorna cert si l'usuari es Admin
+	//Post: Retorna cert si l'usuari es admin
 	public Boolean esAdmin() {
 		return admin;
 	}
