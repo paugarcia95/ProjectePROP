@@ -331,7 +331,7 @@ public class GrafNewman extends Graf {
 	 *            Vector que conté tots els nodes del graf i té com a true els
 	 *            nodes que ja ha visitat i amb false els que no
 	 */
-	private void RecorreComunitat(Integer nodeOrigen, Vector<Boolean> visitats) {
+	private void recorrerComunitat(Integer nodeOrigen, Vector<Boolean> visitats) {
 		HashSet<Integer> adjacents = getAdjacents(nodeOrigen);
 		Iterator<Integer> it = adjacents.iterator();
 
@@ -339,9 +339,29 @@ public class GrafNewman extends Graf {
 			Integer n = it.next();
 			if (!visitats.get(n)) {
 				visitats.set(n, true);
-				RecorreComunitat(n, visitats);
+				recorrerComunitat(n, visitats);
 			}
 		}
+	}
+
+	/**
+	 * Indica si el nodeA i el nodeB pertanyen a la mateixa comunitat (Pau)
+	 * 
+	 * @param nodeA
+	 *            L'identificador d'un dels nodes
+	 * @param nodeB
+	 *            L'identificador de l'altre node
+	 * @return true si pertanyen a la mateixa comunitat i false en cas contrari
+	 */
+	private Boolean pertanyenMateixaComunitat(int nodeA, int nodeB) {
+		Vector<Boolean> visitats = new Vector<Boolean>();
+		visitats.setSize(this.size());
+		for (int i = 0; i < visitats.size(); ++i)
+			visitats.set(i, false);
+
+		recorrerComunitat(nodeA, visitats);
+
+		return visitats.get(nodeB);
 	}
 
 	/**
@@ -364,7 +384,7 @@ public class GrafNewman extends Graf {
 			Integer n = Diccionari.get(it.next());
 			if (!visitats.get(n)) {
 				visitats.set(n, true);
-				RecorreComunitat(n, visitats);
+				recorrerComunitat(n, visitats);
 				++numComunitats;
 			}
 		}
