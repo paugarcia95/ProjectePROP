@@ -5,13 +5,12 @@ package domini;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
+import cercaComunitats.Algorisme_NewmanGirvan;
+import cercaComunitats.Clique;
 import cercaComunitats.Graf;
 import cercaComunitats.Louvain;
 
@@ -65,10 +64,11 @@ public class ControladorTraduirAlgorisme {
 	
 	
 	/**
-	 * Explicacio
-	 * @param 
-	 * @param 
-	 * @return 
+	 * Calcula el pes entre dues categories donades
+	 * @param c1 Categoria primera
+	 * @param c2 Categoria segona
+	 * @param cri Criteris passats
+	 * @return Retorna el pes de la relacio entre les dues categories C1 i C2
 	 */
 	private Double CalcularPesEntreCategories(Categoria c1, Categoria c2, Criteris cri){
 		Double solucio = new Double(0);	
@@ -92,10 +92,9 @@ public class ControladorTraduirAlgorisme {
 	
 	
 	/**
-	 * Explicacio
-	 * @param 
-	 * @param 
-	 * @return 
+	 * Calcula el pes entre dues categories que apunten a una mateixa pagina
+	 * @param cri Criteri passat
+	 * @return Retorna el pes que ha de tenir la relacio
 	 */
 	private Double CalcularPesEntreCatPag(Criteris cri) {
 		Double solucio = new Double(0);	
@@ -116,10 +115,10 @@ public class ControladorTraduirAlgorisme {
 	
 	
 	/**
-	 * Explicacio
-	 * @param 
-	 * @param 
-	 * @return 
+	 * Transforma un graf de dades a un graf
+	 * @param graf GrafDades que hem de transformar
+	 * @param cri Criteris passats
+	 * @return Retorna un graf transformat a partir de l'original
 	 */
 	private Graf GrafDadestoGraf (GrafDades graf, Criteris cri) {
 		Graf solucio = new Graf();
@@ -208,28 +207,29 @@ public class ControladorTraduirAlgorisme {
 				}
 			}
 		}
-		
-		
-		
 		return solucio;
 	}
 	
 	/**
-	 * Explicacio
-	 * @param 
-	 * @param 
-	 * @return 
+	 * Tradueix un graf i invoca al algorisme requerit
+	 * @param graf GrafDades que volem tractar
+	 * @param cri Criteris passats
+	 * @return Retorna un conjunt de comunitats resultant d'aplicar els algorismes al graf transformat
 	 */
 	public ArrayList<Comunitat> Traduir_i_buscar (GrafDades graf, Criteris cri) {
 		Graf utilitzable = new Graf();
 		utilitzable = GrafDadestoGraf(graf,cri);
 		HashSet<HashSet<String>> solucio = new HashSet<HashSet<String>>();
-		if(cri.getTipuCerca() == 1) {
-			solucio = Louvain.executa(utilitzable, 0); ///////// Aqui demana un percenatge pero no se d'on surt
+		if(cri.getAlgorisme() == 1) {
+			solucio = Louvain.executa(utilitzable, cri.getDada());
 		}
-		else if (cri.getTipuCerca() == 2) {
-			
-			
+		else if (cri.getAlgorisme() == 2) {
+			if(cri.getTipuCerca() == 1) solucio = Algorisme_NewmanGirvan.executa(utilitzable,cri.getDada());
+			else if(cri.getTipuCerca() == 2) solucio = Algorisme_NewmanGirvan.executa_num(utilitzable,cri.getDada());
+			else solucio = Algorisme_NewmanGirvan.executa_bet(utilitzable,cri.getDada());
+		}
+		else {
+			solucio = Clique.executa(utilitzable, cri.getDada());
 		}
 		ArrayList<Comunitat> retorna = new ArrayList<Comunitat>();
 		//it es un iterador que va recorrent el primer HashSet de HashSet<HashSet<String>> (el conjunt de comunitats

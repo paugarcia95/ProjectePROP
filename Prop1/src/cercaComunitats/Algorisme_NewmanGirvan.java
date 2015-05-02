@@ -24,7 +24,7 @@ public class Algorisme_NewmanGirvan {
 	 * @param percentatge Integer de dispersió requerida
 	 * @return Retorna la iteració en la qual hi havia el param de dispersió requerit
 	 */
-	private Integer calculadora (Integer iterador, Integer percentatge) {
+	private static Integer calculadora (Integer iterador, Integer percentatge) {
 		Integer solu = new Integer(((iterador-1)*percentatge)/100);
 		return solu;
 	}
@@ -35,7 +35,7 @@ public class Algorisme_NewmanGirvan {
 	 * @param percentatge Integer que indica el percentatge de dispersió desitjat
 	 * @return Comunitats creades a partir de l'execució amb el parametre de dispersió requerit
 	 */
-	public HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
+	public static HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
 		ArrayList<HashSet<HashSet<String>>> storage = new ArrayList<HashSet<HashSet<String>>>();
 		Integer iterador = new Integer(1);
 		GrafNewman util = new GrafNewman();
@@ -60,7 +60,7 @@ public class Algorisme_NewmanGirvan {
 	 * @param numComunidades Integer que indica el max nº de comunitats que es poden crear
 	 * @return Comunitats creades a partir de l'execució ( com a max = numcomunidades comunitats)
 	 */
-	public HashSet<HashSet<String>> executa_num(Graf G, Integer numComunidades) {
+	public static HashSet<HashSet<String>> executa_num(Graf G, Integer numComunidades) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
 		util.Calculate_edge_between();
@@ -78,7 +78,7 @@ public class Algorisme_NewmanGirvan {
 	 * @param maxbetweness Integer que indica la max btw que hi pot haver al graf
 	 * @return Comunitats en les qual cap node tindrá btw > maxbetweness.
 	 */
-	public HashSet<HashSet<String>> executa_bet(Graf G, Integer maxbetweness) {
+	public static HashSet<HashSet<String>> executa_bet(Graf G, Integer maxbetweness) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
 		util.Calculate_edge_between();
