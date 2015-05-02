@@ -120,7 +120,7 @@ public class ControladorTraduirAlgorisme {
 	 * @param cri Criteris passats
 	 * @return Retorna un graf transformat a partir de l'original
 	 */
-	private Graf GrafDadestoGraf (GrafDades graf, Criteris cri) {
+	public Graf GrafDadestoGraf (GrafDades graf, Criteris cri) {
 		Graf solucio = new Graf();
 		Collection<Categoria> llistat = graf.getCategories();
 		
