@@ -29,6 +29,8 @@ public class Criteris {
 		this.evitaPag = evitaPag;
 		this.pare = pare;
 	}
+	
+	public Criteris() {	}
 
 	public ParaulaValor getParaulaClau() {
 		return paraulaClau;

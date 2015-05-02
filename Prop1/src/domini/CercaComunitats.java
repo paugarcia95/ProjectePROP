@@ -21,7 +21,7 @@ public class CercaComunitats {
 	
 	//Pre: dataCreacio < dataModif, usuari existeix, no existeix cap CercaComunitats amb el mateix nom per a usuari
 	//Post: Retorna una CercaComunitats
-	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date dataModif, Integer algorisme, String comentari, ArrayList<Comunitat> Comunitats) {
+	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date dataModif, Integer algorisme, String comentari, ArrayList<Comunitat> comunitats) {
 		this.nom = nom;
 		this.dataCreacio = dataCreacio;
 		this.criterisSeleccio = criteris;
@@ -29,13 +29,16 @@ public class CercaComunitats {
 		dataModificacio = dataModif;
 		this.algorisme = algorisme;
 		this.comentari = comentari;
-		nComunitats = Comunitats.size();
-		this.comunitats = Comunitats;
+		nComunitats = comunitats.size();
+		this.comunitats = comunitats;
 		eliminats = new LinkedList<Integer>();
 	}
 	
 	public CercaComunitats() {
 		dataCreacio = new Date();
+		nComunitats = 0;
+		comunitats = new ArrayList<Comunitat>();
+		eliminats = new LinkedList<Integer>();
 	}
 	
 	public String getNom() {
@@ -133,6 +136,13 @@ public class CercaComunitats {
 		eliminats.add(i);
 		--nComunitats;
 		return true;
+	}
+	
+	//Pre: Cert
+	//Post: comunitats = array i nComunitats = array.size()
+	public void setComunitats(ArrayList<Comunitat> array) {
+		nComunitats = array.size();
+		this.comunitats = array;
 	}
 	
 }
