@@ -1,5 +1,6 @@
 package domini;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -271,6 +272,9 @@ public class GrafDades {
 		}
 		return false;
 	}
-		
+	
+	public Collection<Categoria> getCategories() {
+		return categories.values();
+	}
 
 }
