@@ -92,6 +92,14 @@ public class Pagina {
 		return true;
 	}
 	
+	public Map<String, Categoria> getPC() {
+		return PC;
+	}
+	
+	public Map<String, Categoria> getCP() {
+		return CP;
+	}
+	
 	public Integer getNumPC() {
 		return PC.size();
 	}

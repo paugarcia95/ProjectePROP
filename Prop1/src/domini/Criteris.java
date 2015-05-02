@@ -12,11 +12,12 @@ public class Criteris {
 	private ParaulaValor paraulaClau;
 	private Integer relacionsCat, semblaNom, algorisme, tipuCerca, dada;
 	private ArrayList<Categoria> subconjCat, evitaCat;
+	private ArrayList<Pagina> evitaPag;
 	private String pare;
 	
 	
 	
-	public Criteris(ParaulaValor paraula, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<Categoria> subconj, ArrayList<Categoria> evita, String pare) {
+	public Criteris(ParaulaValor paraula, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<Categoria> subconj, ArrayList<Categoria> evitaCat, ArrayList<Pagina> evitaPag, String pare) {
 		paraulaClau = paraula;
 		relacionsCat = relacions;
 		semblaNom = sembla;
@@ -24,7 +25,8 @@ public class Criteris {
 		tipuCerca = tipus;
 		this.dada = dada;
 		subconjCat = subconj;
-		evitaCat = evita;
+		this.evitaCat = evitaCat;
+		this.evitaPag = evitaPag;
 		this.pare = pare;
 	}
 
@@ -90,6 +92,14 @@ public class Criteris {
 	
 	public void setEvitaCat(ArrayList<Categoria> evita) {
 		evitaCat = evita;
+	}
+	
+	public ArrayList<Pagina> getEvitaPag() {
+		return evitaPag;
+	}
+	
+	public void setEvitaPag(ArrayList<Pagina> evita) {
+		evitaPag = evita;
 	}
 	
 	public String getPare() {
