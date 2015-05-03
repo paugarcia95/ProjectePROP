@@ -23,18 +23,20 @@ public class ControladorTraduirAlgorisme {
 
 	
 	  private static double similarity(String s1, String s2) {
-	        String longer = s1, shorter = s2;
 	        Double solu = new Double (0);
-	        if (s1.length() < s2.length()) { // longer should always have greater length
-	            longer = s2; shorter = s1;
-	        }
-	        String ayuda = shorter.substring(0,shorter.length()/2);
-	        if(longer.indexOf(ayuda) != -1) {
+	        
+	        String ayuda = s1.substring(0,s1.length()/2);
+	        System.out.print("LA PALABRA CORATDA1 ES: ");
+        	System.out.println(ayuda);
+	        if(s2.indexOf(ayuda) != -1) {
 	        	solu += ayuda.length();
+	        	
 	        }
 	        else {
-	        	ayuda = longer.substring(0,longer.length()/2);
-	        	if(shorter.indexOf(ayuda) != -1){
+	        	ayuda = s2.substring(0,s2.length()/2);
+	        	System.out.print("LA PALABRA CORATDA2 ES: ");
+	        	System.out.println(ayuda);
+	        	if(s1.indexOf(ayuda) != -1){
 	        		solu += ayuda.length();
 	        	}
 	        }

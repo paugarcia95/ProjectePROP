@@ -3,16 +3,12 @@
  */
 package drivers;
 
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import cercaComunitats.Graf;
 import domini.Categoria;
 import domini.ControladorTraduirAlgorisme;
 import domini.Criteris;
-import domini.EntradaSortidaDadesGraf;
 import domini.GrafDades;
 import domini.Pagina;
 import domini.ParaulaValor;
@@ -72,7 +68,7 @@ public class driverTraduirAlgorisme {
 		ArrayList<Categoria> c = new ArrayList<Categoria>();
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
 		cri.setSubconjCat(c2);
-		ParaulaValor caca = new ParaulaValor("t", 0);
+		ParaulaValor caca = new ParaulaValor("tg", 5);
 		cri.setParaulaClau(caca);
 		cri.setEvitaCat(c);
 		cri.setEvitaPag(s);
