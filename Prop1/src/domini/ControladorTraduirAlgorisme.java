@@ -292,9 +292,9 @@ public class ControladorTraduirAlgorisme {
 			//afegim a la comunitat aux totes les categories del HashSet<String>
 			while(it2.hasNext()){
 				aux.addCat(graf.getCategoria(it2.next()));
-				aux.setId(idaux);
-				++idaux;
 			}
+			aux.setId(idaux);
+			++idaux;
 			//la comunitat aux ja conte totes les categories i l'afegim al retorna
 			retorna.add(aux);
 		}
