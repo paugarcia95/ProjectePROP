@@ -88,7 +88,7 @@ public class TraduccioiAlgorisme {
 		
 		
 		/////////// Criteri Semblança //////////////////
-		if(cri.getSemblNom() != 0) { // Si  està actiu
+		if(cri.getSemblaNom() != 0) { // Si  està actiu
 			System.out.print("Relacio entre: ");
 			System.out.print(c1.getNom());
 			System.out.print(" i ");
@@ -96,7 +96,7 @@ public class TraduccioiAlgorisme {
 			Double aux = similarity(c1.getNom(),c2.getNom());
 			System.out.print(" té semblança de ");
 			System.out.println(aux);
-			solucio += cri.getSemblNom()*aux;
+			solucio += cri.getSemblaNom()*aux;
 		}
 		/////////////////////////////////////////////////
 		
@@ -307,12 +307,6 @@ public class TraduccioiAlgorisme {
 			//la comunitat aux ja conte totes les categories i l'afegim al retorna
 			retorna.add(aux);
 		}
-
-		System.out.println("SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-		System.out.println(solucio);
-		System.out.println("SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-		System.out.println(retorna);
-		System.out.println("SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 		return retorna;
 	}
 }

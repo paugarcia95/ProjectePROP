@@ -111,7 +111,7 @@ public class ControladorAdminUsers {
 	public Boolean iniciCarregarDades() {
 		aux = new EntradaSortidaDadesGraf();
 		try {
-			gd= aux.carregarGrafDades(rutaXDefecte);
+			aux.carregarGrafDades(gd,rutaXDefecte);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

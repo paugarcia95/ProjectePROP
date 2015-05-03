@@ -463,7 +463,7 @@ public class ControladorUsers {
 	 * @return valor de la importancia entre la semblansa entre els noms de les categories de la CercaComunitats a resoldre.
 	 */
 	public Integer getSembCerca(String username, Integer quina) {
-		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getSemblNom();
+		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getSemblaNom();
 	}
 	
 	/**

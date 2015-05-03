@@ -336,7 +336,7 @@ public class GrafNewman extends Graf {
 	 *         hagut algun error.
 	 */
 	public Boolean calcularEdgeBetween() {
-		System.out.println("Entro a 6, errors: " +errors);
+		//System.out.println("Entro a 6, errors: " +errors);
 		++errors;
 		//if (NCM.size() < 2) return false;
 		// Posem a 0 tots els camins minims per "comencar" la nova ronda
@@ -350,7 +350,18 @@ public class GrafNewman extends Graf {
 			for (int j = 0; j < NCM.length-1; ++j) {
 				if (i != j) {
 					if (numCom < 4 || pertanyenMateixaComunitat(i, j)) {
+						if(errors < 2) {
+							System.out.println("Intentant anar de "+ DiccionariInvers.get(i)+ " a "+ DiccionariInvers.get(j));
+						}
 						Queue<Aresta> cami = getCamiMinim(i, j);
+						Iterator<Aresta> it = cami.iterator();
+						if(errors < 2) {
+							//System.out.println("Intentant anar de "+ DiccionariInvers.get(i)+ " a "+ DiccionariInvers.get(j));
+							while(it.hasNext()) {
+								Aresta aux = it.next();
+								System.out.println(DiccionariInvers.get(aux.node1)+ " " +DiccionariInvers.get(aux.node2));
+							}
+						}
 						// un cop trobat cada cami minim, sumar 1 a la pos de
 						// NCM
 						if (cami.size() > 0) {
@@ -407,11 +418,28 @@ public class GrafNewman extends Graf {
 	 */
 	public Boolean esborrarMaxim() {
 		if (maxNumCM != 0) {
-			System.out.println("Esborro una aresta entre els nodes "+ maxi+ " i "+maxj);
+			if(errors < 4) System.out.println("Esborro una aresta entre "+ DiccionariInvers.get(maxi)+ " i "+DiccionariInvers.get(maxj));
+			//System.out.println(G.in);
 			Matriu.get(maxi).set(maxj, -1.0);
+			Matriu.get(maxj).set(maxi, -1.0);
 			if (!pertanyenMateixaComunitat(maxi, maxj)) {
 				numCom = 0;
 				numComunitats();
+			}
+			if(errors ==1) {
+				System.out.println("1: " + DiccionariInvers.get(1)+" i 2: "+ DiccionariInvers.get(2));
+				System.out.println("3: " + DiccionariInvers.get(3)+" i 4: "+ DiccionariInvers.get(4));
+				System.out.println("5: " + DiccionariInvers.get(5)+" i 6: "+ DiccionariInvers.get(6));
+				System.out.println("0: " + DiccionariInvers.get(0));
+			}
+			if(errors<3) {
+				System.out.println("Adjacents sexualitat en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("sexualitat")));
+				System.out.println("Adjacents asexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("asexual")));
+				System.out.println("Adjacents Infertil en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("infertil")));
+				System.out.println("Adjacents embaras en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("embaras")));
+				System.out.println("Adjacents heterosexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("heterosexual")));
+				System.out.println("Adjacents homosexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("homosexual")));
+				System.out.println("Adjacents sexe en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("sexe")));
 			}
 			return true;
 		} else {
