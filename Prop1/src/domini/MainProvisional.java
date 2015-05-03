@@ -640,6 +640,7 @@ public class MainProvisional {
 		cri.setSemblaNom(0);
 		String sa = new String();
 		cri.setPare(sa);
+		mc.getConjUsers().getUser(mc.getUserActual()).getCerca(cercaactual).setCriterisSeleccio(cri);
 		System.out.println("Comença la Cerca de Comunitats, aquest procés pot tardar uns minuts, si us plau, tingues paciencia");
 		if(!mc.getContUser().ferCerca(mc.getUserActual(), cercaactual)) {
 			System.out.println("Error, no s'ha pogut executar la Cerca");

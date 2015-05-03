@@ -60,5 +60,8 @@ public class MacroControlador {
 	public GrafDades getGraf(){
 		return gd;
 	}
+	public ConjuntUsuaris getConjUsers() {
+		return conj;
+	}
 
 }

@@ -20,6 +20,7 @@ public class driverGrafNewman extends GrafNewman {
 		System.out.println("");
 		System.out.println("Introdueix els nodes (Per indicar que has acabat escriu el caracter  \"#\"");
 
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		GrafNewman G = new GrafNewman();
 
