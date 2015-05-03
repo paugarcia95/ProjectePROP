@@ -63,6 +63,7 @@ public class GrafDades {
 	//Pre: Cert
 	//Post: Si no existia cap relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna true, altrament retorna false	
 	public Boolean addCC(Categoria cat1, Categoria cat2) {
+		if (cat1 == cat2 || cat1.getNom() == cat2.getNom()) return false;
 		if (categories.containsKey(cat1.getNom()) && categories.containsKey(cat2.getNom())) {
 			if (cat1.existsCC(cat2.getNom()) == 2 && cat2.existsCC(cat1.getNom()) == 1) { //ja existeix
 				return false;
@@ -91,6 +92,7 @@ public class GrafDades {
 	//Pre: Cert
 	//Post: Si no existia cap relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna true, altrament retorna false	
 	public Boolean addCC(String categoria1, String categoria2) {
+		if (categoria1.equals(categoria2)) return false;
 		Categoria cat1, cat2;
 		if (categories.containsKey(categoria1) && categories.containsKey(categoria2)) {
 			cat1 = categories.get(categoria1);
@@ -332,6 +334,7 @@ public class GrafDades {
 	//Pre: Cert
 	//Post: Si existia una Categoria amb nom == nomAntic ara nom = nomNou i retorna true, altrament retorna false
 	public Boolean setNomCategoria(String nomAntic, String nomNou) {
+		if (nomAntic.equals(nomNou)) return false;
 		if (categories.containsKey(nomAntic) && !categories.containsKey(nomNou)) {
 			Categoria c = categories.remove(nomAntic);
 			c.setNom(nomNou);
