@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import cercaComunitats.Graf;
 import domini.Categoria;
-import domini.Traduccioialgorisme;
+import domini.TraduccioiAlgorisme;
 import domini.Criteris;
 import domini.GrafDades;
 import domini.Pagina;
@@ -104,7 +104,7 @@ public class DriverTraduccioialgorisme {
 		cri.setPare(sa);
 		
 		
-		Traduccioialgorisme trd = new Traduccioialgorisme();
+		TraduccioiAlgorisme trd = new TraduccioiAlgorisme();
 		Graf fora = new Graf(trd.grafdadestograf(G, cri));
 		HashSet<String> naa = new HashSet<String>(fora.getNodes());
 		ArrayList<String> n2 = new ArrayList<String>();

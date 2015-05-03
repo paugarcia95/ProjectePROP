@@ -247,7 +247,7 @@ public class ControladorUsers {
 	 * @return false si no s'ha pogut executar, true altrament.
 	 */
 	public boolean ferCerca(String username, Integer quina){
-		Traduccioialgorisme ta = new Traduccioialgorisme();
+		TraduccioiAlgorisme ta = new TraduccioiAlgorisme();
 		ArrayList<Comunitat> list = ta.traduiricercar(gd, conj.getUser(username).getCerca(quina).getCriterisSeleccio());
 		conj.getUser(username).getCerca(quina).setComunitats(list);
 		return true;

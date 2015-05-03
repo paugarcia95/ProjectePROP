@@ -10,7 +10,7 @@ package domini;
 public class MacroControlador {
 	static ControladorUsers cu;
 	static ControladorAdminUsers cau;
-	static Traduccioialgorisme ta;
+	static TraduccioiAlgorisme ta;
 	private GrafDades gd;
 	private ConjuntUsuaris conj;
 	static String useractual;
@@ -25,7 +25,7 @@ public class MacroControlador {
 		gd = new GrafDades();
 		cu = new ControladorUsers(conj, gd);
 		cau = new ControladorAdminUsers(gd, conj);
-		ta = new Traduccioialgorisme();
+		ta = new TraduccioiAlgorisme();
 	}
 	
 // MODIFICADORES///////////////////////////////////////////////////////////////////////////////

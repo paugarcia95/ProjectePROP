@@ -20,7 +20,7 @@ import cercaComunitats.Louvain;
  * @author Rafa
  *
  */
-public class Traduccioialgorisme {
+public class TraduccioiAlgorisme {
 
 	
 	  private static double similarity(String s1, String s2) {
