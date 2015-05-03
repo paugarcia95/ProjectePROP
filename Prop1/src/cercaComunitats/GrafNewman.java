@@ -258,7 +258,7 @@ public class GrafNewman extends Graf {
 	 *            El node de l'altre extrem.
 	 * @return Una cua de les arestes per on passa.
 	 */
-	public Queue<Aresta> getCamiMinim(int nodeA, int nodeB) {
+	private Queue<Aresta> getCamiMinim(int nodeA, int nodeB) {
 		// Implementat amb Dijkstra
 
 		QueueVector camiMinim = new QueueVector(this.size());

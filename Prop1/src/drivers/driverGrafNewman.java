@@ -44,34 +44,30 @@ public class driverGrafNewman extends GrafNewman {
 
 		System.out.println("");
 		System.out.println("Quina funció vol provar?");
-		System.out.println("1. Queue<Aresta> camiMin(int nodeA, int nodeB)");
-		System.out.println("2. Integer getMaxBet()");
-		System.out.println("3. Boolean Calculate_edge_between()");
-		System.out.println("4. Boolean Invertir_pesos()");
-		System.out.println("5. Boolean esborrar_maxim()");
-		System.out.println("6. Integer numComunitats()");
-		System.out.println("7. HashSet<HashSet<String>> comunitats()");
+		System.out.println("1. Integer getMaxBet()");
+		System.out.println("2. Boolean Calculate_edge_between()");
+		System.out.println("3. Boolean Invertir_pesos()");
+		System.out.println("4. Boolean esborrar_maxim()");
+		System.out.println("5. Integer numComunitats()");
+		System.out.println("6. HashSet<HashSet<String>> comunitats()");
 
 		switch (in.nextInt()) {
 			case 1 :
-				System.out.println(G.getCamiMinim(in.nextInt(), in.nextInt()));
-				break;
-			case 2 :
 				System.out.println(G.getMaxBetween());
 				break;
-			case 3 :
+			case 2 :
 				System.out.println(G.calcularEdgeBetween());
+				break;
+			case 3 :
+				System.out.println(G.invertirPesos());
 				break;
 			case 4 :
 				System.out.println(G.invertirPesos());
 				break;
 			case 5 :
-				System.out.println(G.invertirPesos());
-				break;
-			case 6 :
 				System.out.println(G.numComunitats());
 				break;
-			case 7 :
+			case 6 :
 				System.out.println(G.comunitats());
 				break;
 		}
