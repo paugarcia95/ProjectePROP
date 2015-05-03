@@ -21,7 +21,7 @@ import domini.ParaulaValor;
 
 
 
-public class DriverTraduccioialgorisme {
+public class DriverTraduccioiAlgorisme {
 	/**
 	 * @param args
 	 */
