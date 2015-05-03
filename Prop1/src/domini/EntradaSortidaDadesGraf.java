@@ -83,7 +83,7 @@ public class EntradaSortidaDadesGraf {
 		/*
 		 * if (utilitzarRutaPerDefecte) { G = new GrafDades(); if
 		 * (rutaPerDefecte != null) ruta = rutaPerDefecte; else { rutaPerDefecte
-		 * = ruta; } }
+		 * = ruta; } } //no va
 		 */
 
 		BufferedReader b = null;
