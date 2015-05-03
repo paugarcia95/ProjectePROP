@@ -58,32 +58,30 @@ public class EntradaSortidaDadesGraf {
 	/**
 	 * Carrega les dades d'un fitxer de text a un graf.
 	 * 
-	 * Si inici==TRUE:
+	 * Si utilitzarRutaPerDefecte==TRUE:
 	 * 
 	 * S'utilitza la rutaPerDefecte de la classe per carregar les dades del
 	 * graf. Si la rutaPerDefecte no està inicialitzada, s'inicialitza
 	 * utilitzant "ruta". En aquest cas, es crea un nou GrafDades (s'ignora G),
 	 * s'omple amb les dades indicades al fitxer i es retorna aquest graf.
 	 * 
-	 * Si inici==FALSE:
+	 * Si utilitzarRutaPerDefecte==FALSE:
 	 * 
 	 * S'afegeixen a G els nodes i/o arestes indicats pel fitxer de text a
 	 * "ruta"
 	 * 
-	 * @param inici
-	 *            Booleà que indica si és la primera vegada que es carreguen
-	 *            fitxers al graf G
+	 * @param utilitzarRutaPerDefecte
+	 *            Booleà que indica si es vol utilitzar la ruta per defecte
 	 * @param G
-	 *            Només es té en compte si inici==FALSE; si és així, s'afegeixen
-	 *            a aquest graf els nous nodes i arestes
+	 *            Només es té en compte si utilitzarRutaPerDefecte==FALSE; si és
+	 *            així, s'afegeixen a aquest graf els nous nodes i arestes
 	 * @param ruta
 	 *            Adreça on es troba el fitxer de text
 	 * @return Un GrafDades amb les dades de "ruta"
 	 */
-	public GrafDades carregarGrafDades(Boolean inici, GrafDades G, String ruta) throws FileNotFoundException,
-			IOException {
+	public GrafDades carregarGrafDades(Boolean utilitzarRutaPerDefecte, GrafDades G, String ruta) {
 
-		if (inici) {
+		if (utilitzarRutaPerDefecte) {
 			G = new GrafDades();
 			if (rutaPerDefecte != null)
 				ruta = rutaPerDefecte;
@@ -92,44 +90,74 @@ public class EntradaSortidaDadesGraf {
 			}
 		}
 
-		BufferedReader b = new BufferedReader(new FileReader(ruta));
+		BufferedReader b = null;
 		String s;
-
-		while ((s = b.readLine()) != null) {
-			StringTokenizer st = new StringTokenizer(s);
-
-			while (st.hasMoreTokens() && st.countTokens() >= 4) {
-				String word1 = st.nextToken();
-				st.nextToken();
-				String link = st.nextToken();
-				String word2 = st.nextToken();
-
-				if (link.equals("CsubC"))
-					G.addCC(new Categoria(word2), new Categoria(word1));
-				else if (link.equals("CsupC"))
-					G.addCC(new Categoria(word1), new Categoria(word2));
-				else if (link.equals("CP"))
-					G.addCP(new Categoria(word1), new Pagina(word2));
-				else if (link.equals("PC"))
-					G.addPC(new Pagina(word1), new Categoria(word2));
-				else
-					System.out.println("Error al crear el graf: Comprova la sintaxi de l'entrada");
-			}
+		try {
+			b = new BufferedReader(new FileReader(ruta));
+		} catch (FileNotFoundException e) {
+			System.out.println(e);
+			System.out.println("Fitxer no trobat");
 		}
-		b.close();
+
+		try {
+			while ((s = b.readLine()) != null) {
+				StringTokenizer st = new StringTokenizer(s);
+
+				while (st.hasMoreTokens() && st.countTokens() >= 4) {
+					String word1 = st.nextToken();
+					st.nextToken();
+					String link = st.nextToken();
+					String word2 = st.nextToken();
+
+					if (link.equals("CsubC"))
+						G.addCC(word1, word2);
+					else if (link.equals("CsupC"))
+						G.addCC(word2, word1);
+					else if (link.equals("CP"))
+						G.addCP(word1, word2);
+					else if (link.equals("PC"))
+						G.addPC(word1, word2);
+					else
+						System.out.println("Error al crear el graf: Comprova la sintaxi de l'entrada");
+				}
+				b.close();
+			}
+		} catch (IOException e) {
+			System.out.println(e);
+			System.out.println("Error en la sintaxi d'entrada");
+		}
 		return G;
 	}
 
 	/**
-	 * Guarda la configuració del graf G a un fitxer de text a "ruta"
+	 * Guarda la configuració del graf G a un fitxer de text a "ruta".
 	 * 
+	 * Si utilitzarRutaPerDefecte==TRUE:
+	 * 
+	 * El graf es guarda a RutaPerDefecte. En cas que aquesta sigui nul·la,
+	 * s'assigna com a ruta per defecte "ruta".
+	 * 
+	 * Si utilitzarRutaPerDefecte==FALSE:
+	 * 
+	 * El graf es guarda a "ruta".
+	 * 
+	 * @param utilitzarRutaPerDefecte
+	 *            Booleà que indica si es vol utilitzar la ruta per defecte
 	 * @param G
 	 *            Indica el graf de dades que es vol emmagatzemar
 	 * @param ruta
 	 *            Indica la ruta de directoris i el fitxer on es vol guardar el
 	 *            graf
 	 */
-	public void escriureGrafDadesEnFitxer(GrafDades G, String ruta) {
+	public void escriureGrafDadesEnFitxer(Boolean utilitzarRutaPerDefecte, GrafDades G, String ruta) {
+		if (utilitzarRutaPerDefecte) {
+			if (rutaPerDefecte != null)
+				ruta = rutaPerDefecte;
+			else {
+				rutaPerDefecte = ruta;
+			}
+		}
+
 		FileWriter fichEscr = null;
 		PrintWriter docE = null;
 
@@ -148,6 +176,8 @@ public class EntradaSortidaDadesGraf {
 				Iterator<Pagina> PC = c.getMapPC().values().iterator();
 				Iterator<Categoria> CsupC = c.getMapCSupC().values().iterator();
 				// Iterator<Categoria> CsubC = c.getMapCSubC().values().iterator();
+				// Aquest últim no cal ja que només amb els enllaços CsupC ja es
+				// pot representar tot el graf
 
 				while (CP.hasNext()) {
 					Pagina p = CP.next();
@@ -161,32 +191,21 @@ public class EntradaSortidaDadesGraf {
 
 				while (CsupC.hasNext()) {
 					Categoria c2 = CsupC.next();
-					docE.println(c2.getNom() + " cat CsupC " + c1 + " cat");
+					docE.println(c1 + " cat CsupC " + c2.getNom() + " cat");
 				}
-
-				/*
-				 * Aquest no cal perquè sinó es replicarien les dades, igual que
-				 * només imprimeixo les categories
-				 * 
-				 * while (CsubC.hasNext()) {
-				 * 
-				 * Categoria c2 = CsubC.next(); docE.println(c2.getNom() +
-				 * " cat CsubC " + c1 + " cat");
-				 * 
-				 * }
-				 */
-
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e);
+			System.out.println("Error a l'escriure a l'arxiu");
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
 				if (null != docE)
 					docE.close();
 			} catch (Exception e2) {
-				e2.printStackTrace();
+				System.out.println(e2);
+				System.out.println("Error al tancar l'arxiu");
 			}
 		}
 	}
@@ -259,20 +278,23 @@ public class EntradaSortidaDadesGraf {
 			docE.println("}");
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e);
+			System.out.println("Error: no s'ha trobat el fitxer o no s'hi pot escriure");
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
 				if (null != docE)
 					docE.close();
 			} catch (Exception e2) {
-				e2.printStackTrace();
+				System.out.println(e2);
+				System.out.println("Error: no es pot tancar el fitxer d'escriptura");
 			}
 			try {
 				if (null != docL)
 					docL.close();
 			} catch (Exception e2) {
-				e2.printStackTrace();
+				System.out.println(e2);
+				System.out.println("Error: no es pot tancar el fitxer de lectura");
 			}
 		}
 	}
@@ -289,28 +311,35 @@ public class EntradaSortidaDadesGraf {
 	 *         false en cas contrari
 	 */
 	public Boolean entrarUnaDada(GrafDades G, Boolean OK) {
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		OK = true;
 
-		String element1 = in.next();
+		String element1 = "#";
+		if (in.hasNext())
+			element1 = in.next();
 
 		if (element1.equals("#")) {
 			OK = false;
 			return false;
 		}
 
-		String link = in.next();
-		String element2 = in.next();
+		String link = null;
+		if (in.hasNext())
+			link = in.next();
+		String element2 = null;
+		if (in.hasNext())
+			element2 = in.next();
 
-		if (link.equals("CP")) {
-			OK = G.addCP(new Categoria(element1), new Pagina(element2));
-		} else if (link.equals("PC")) {
-			OK = G.addPC(new Pagina(element1), new Categoria(element2));
-		} else if (link.equals("CsubC")) {
-			OK = G.addCC(new Categoria(element1), new Categoria(element2));
-		} else if (link.equals("CsupC")) {
-			OK = G.addCC(new Categoria(element2), new Categoria(element1));
-		} else
+		if (link.equals("CP"))
+			OK = G.addCP(element1, element2);
+		else if (link.equals("PC"))
+			OK = G.addPC(element1, element2);
+		else if (link.equals("CsubC"))
+			OK = G.addCC(element1, element2);
+		else if (link.equals("CsupC"))
+			OK = G.addCC(element2, element1);
+		else
 			OK = false;
 
 		return true;
