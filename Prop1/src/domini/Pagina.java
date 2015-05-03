@@ -21,6 +21,7 @@ public class Pagina {
 	}
 	
 	public Pagina() {
+		nom = "NoIndicat";
 		cP = new TreeMap<String, Categoria>();
 		pC = new TreeMap<String, Categoria>();
 	}
@@ -54,9 +55,8 @@ public class Pagina {
 	
 	//Pre: categoria no pertany a pC
 	//Post: categoria pertany a pC
-	public Boolean addPC(Categoria categoria) {
+	public void addPC(Categoria categoria) {
 		pC.put(categoria.getNom(), categoria);
-		return true;
 	}	
 	
 	
@@ -68,16 +68,14 @@ public class Pagina {
 	
 	//Pre: categoria es una key de pC amb un valor assignat
 	//Post: categoria ja no es key de pC
-	public Boolean removePC(String categoria) {
+	public void removePC(String categoria) {
 		pC.remove(categoria);
-		return true;
 	}
 	
 	//Pre: categoria es una key de cP amb un valor assignat
 	//Post: categoria ja no es key de cP
-	public Boolean removeCP(String categoria) {
+	public void removeCP(String categoria) {
 		cP.remove(categoria);
-		return true;
 	}
 	
 	//Pre: Cert
