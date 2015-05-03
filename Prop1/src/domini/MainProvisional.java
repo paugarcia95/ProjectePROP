@@ -628,7 +628,7 @@ public class MainProvisional {
 		cri.setDada(5);
 		
 		cri.setRelacionsCat(5); // Relacions cat-pg
-		cri.setTipuCerca(2); ///???
+		cri.setTipuCerca(3); ///???
 		ArrayList<Categoria> c2 = new ArrayList<Categoria>(); // Subconjunt
 		ArrayList<Categoria> c = new ArrayList<Categoria>(); // Evitar
 		ArrayList<Pagina> s = new ArrayList<Pagina>();

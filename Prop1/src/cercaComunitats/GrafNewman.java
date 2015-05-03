@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.TreeMap;
 import java.util.Vector;
 
 /**
@@ -145,6 +146,14 @@ public class GrafNewman extends Graf {
 	public GrafNewman() {
 		super();
 		// crea NCM de la mateixa mida que Matriu
+		NCM = new Vector<Vector<Integer>>(super.Matriu.size());
+		maxNumCM = maxi = maxj = numCom = 0;
+	}
+	
+	public GrafNewman(Graf G) {
+		Diccionari = new TreeMap<String,Integer>(G.Diccionari);
+		DiccionariInvers = new TreeMap<Integer,String>(G.DiccionariInvers);
+		Matriu = new Vector< Vector<Double> >(G.Matriu);
 		NCM = new Vector<Vector<Integer>>(super.Matriu.size());
 		maxNumCM = maxi = maxj = numCom = 0;
 	}
@@ -385,8 +394,7 @@ public class GrafNewman extends Graf {
 				numComunitats();
 			}
 			return true;
-		} else
-			return false;
+		} else return false;
 
 	}
 

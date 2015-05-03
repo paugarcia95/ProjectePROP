@@ -274,9 +274,18 @@ public class TraduccioiAlgorisme {
 			solucio = Louvain.executa(utilitzable, cri.getDada());
 		}
 		else if (cri.getAlgorisme() == 2) {
-			if(cri.getTipuCerca() == 1) solucio = AlgorismeNewmanGirvan.executa(utilitzable,cri.getDada());
-			else if(cri.getTipuCerca() == 2) solucio = AlgorismeNewmanGirvan.executa_num(utilitzable,cri.getDada());
-			else solucio = AlgorismeNewmanGirvan.executabet(utilitzable,cri.getDada());
+			if(cri.getTipuCerca() == 1) {
+				System.out.println("1ra");
+				solucio = AlgorismeNewmanGirvan.executa(utilitzable,cri.getDada());
+			}
+			else if(cri.getTipuCerca() == 2) {
+				System.out.println("2na");
+				solucio = AlgorismeNewmanGirvan.executaNum(utilitzable,cri.getDada());
+			}
+			else {
+				System.out.println("3ra");
+				solucio = AlgorismeNewmanGirvan.executabet(utilitzable,cri.getDada());
+			}
 		}
 		else {
 			solucio = Clique.executa(utilitzable, cri.getDada());
@@ -298,6 +307,12 @@ public class TraduccioiAlgorisme {
 			//la comunitat aux ja conte totes les categories i l'afegim al retorna
 			retorna.add(aux);
 		}
+
+		System.out.println("SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+		System.out.println(solucio);
+		System.out.println("SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+		System.out.println(retorna);
+		System.out.println("SOLUCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 		return retorna;
 	}
 }
