@@ -20,7 +20,7 @@ import cercaComunitats.Louvain;
  * @author Rafa
  *
  */
-public class ControladorTraduirAlgorisme {
+public class Traduccioialgorisme {
 
 	
 	  private static double similarity(String s1, String s2) {
@@ -266,7 +266,7 @@ public class ControladorTraduirAlgorisme {
 	 * @param cri Criteris passats
 	 * @return Retorna un conjunt de comunitats resultant d'aplicar els algorismes al graf transformat
 	 */
-	public ArrayList<Comunitat> Traduir_i_buscar (GrafDades graf, Criteris cri) {
+	public ArrayList<Comunitat> traduiricercar (GrafDades graf, Criteris cri) {
 		Graf utilitzable = new Graf();
 		utilitzable = GrafDadestoGraf(graf,cri);
 		HashSet<HashSet<String>> solucio = new HashSet<HashSet<String>>();
