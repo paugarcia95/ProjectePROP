@@ -51,7 +51,7 @@ public class GrafNewman extends Graf {
 		 * Constructora per defecte. (Pau)
 		 * 
 		 * @param aresta
-		 *            És el node d'un dels extrems de l'aresta (A la funció on
+		 *            Es el node d'un dels extrems de l'aresta (A la funcio on
 		 *            s'utilitza representa el node a on es vol anar).
 		 * @param pes
 		 *            Representa el pes de l'aresta formada per el node d'origen
@@ -66,15 +66,14 @@ public class GrafNewman extends Graf {
 
 	private static final class ComparaValors implements Comparator<ArestaPes> {
 		/**
-		 * Compara l'aresta les arestes mitjançant el seu pes. (Pau)
+		 * Compara l'aresta les arestes mitjancant el seu pes. (Pau)
 		 * 
 		 * @param o1
 		 *            Una Aresta.
 		 * @param o2
 		 *            L'altra Aresta.
-		 * @return Un enter positiu si o1 té un pes més gran que o2, 0 si
-		 *         tenen el mateix pes i un enter negatiu si o2 té un pes major
-		 *         a o1.
+		 * @return Un enter positiu si o1 te un pes mes gran que o2, 0 si tenen
+		 *         el mateix pes i un enter negatiu si o2 te un pes major a o1.
 		 */
 		@Override
 		public int compare(ArestaPes o1, ArestaPes o2) {
@@ -93,7 +92,7 @@ public class GrafNewman extends Graf {
 		 * 
 		 * @param size
 		 *            Representa el tamany del vector
-		 * @return Un vector que conté tantes Queue (buides) com size indica
+		 * @return Un vector que conte tantes Queue (buides) com size indica
 		 */
 		public QueueVector(int size) {
 			Q = new Vector<Queue<Aresta>>();
@@ -105,10 +104,10 @@ public class GrafNewman extends Graf {
 		}
 
 		/**
-		 * Insereix l'element "a" a la cua de la posició i (Pau)
+		 * Insereix l'element "a" a la cua de la posicio "i" (Pau)
 		 * 
 		 * @param i
-		 *            Posició on es vol inserir
+		 *            Posicio on es vol inserir
 		 * @param a
 		 *            Aresta que es vol inserir
 		 */
@@ -129,11 +128,11 @@ public class GrafNewman extends Graf {
 		}
 
 		/**
-		 * Retorna la cua de la posició i. (Pau)
+		 * Retorna la cua de la posicio i. (Pau)
 		 * 
 		 * @param i
-		 *            Posició on es troba la cua desitjada
-		 * @return La cua de la posició i
+		 *            Posicio on es troba la cua desitjada
+		 * @return La cua de la posicio i
 		 */
 		public Queue<Aresta> getQueue(int i) {
 			return Q.get(i);
@@ -177,7 +176,7 @@ public class GrafNewman extends Graf {
 	 * @param nodeOrigen
 	 *            Node del qual se'n vol saber la comunitat
 	 * @param visitats
-	 *            Vector que conté tots els nodes del graf i té com a true els
+	 *            Vector que conte tots els nodes del graf i te com a true els
 	 *            nodes que ja ha visitat i amb false els que no
 	 * @return El conjunt de comunitats a la que pertany el nodeOrigen
 	 */
@@ -227,7 +226,7 @@ public class GrafNewman extends Graf {
 	 * @param nodeOrigen
 	 *            Node del qual se'n vol saber la comunitat
 	 * @param visitats
-	 *            Vector que conté tots els nodes del graf i té com a true els
+	 *            Vector que conte tots els nodes del graf i te com a true els
 	 *            nodes que ja ha visitat i amb false els que no
 	 */
 	private void recorrerComunitat(Integer nodeOrigen, Vector<Boolean> visitats) {
@@ -242,10 +241,10 @@ public class GrafNewman extends Graf {
 		}
 	}
 	/**
-	 * Calcula el camí minim des del nodeA al nodeB. (Pau)
+	 * Calcula el cami minim des del nodeA al nodeB. (Pau)
 	 * 
 	 * @param nodeA
-	 *            El node d'un dels extrems del camí.
+	 *            El node d'un dels extrems del cami.
 	 * @param nodeB
 	 *            El node de l'altre extrem.
 	 * @return Una cua de les arestes per on passa.
@@ -255,22 +254,21 @@ public class GrafNewman extends Graf {
 
 		QueueVector camiMinim = new QueueVector(this.size());
 
-		// Vector que marca la distància del nodeA a la resta de nodes
+		// Vector que marca la distancia del nodeA a la resta de nodes
 		Vector<Double> distancia = new Vector<Double>();
 		distancia.setSize(this.size());
-		/** TENIR EN COMPTE QUE POTSER QE ELS NODES NO SIGUIN CONSECUTIUS!!! */
 
 		// Es com una cua de prioritat que ordena els nodes en una posicio mes
 		// curta al principi
 		PriorityQueue<ArestaPes> cola = new PriorityQueue<ArestaPes>(new ComparaValors());
 
-		// En un principi no se sap, i es marquen les distàncies com a
+		// En un principi no se sap, i es marquen les distancies com a
 		// infinites
 		for (int i = 0; i < distancia.size(); ++i) {
 			distancia.set(i, Double.POSITIVE_INFINITY);
 		}
 
-		// La distància del nodeA a ell mateix és 0
+		// La distancia del nodeA a ell mateix es 0
 		distancia.set(nodeA, 0.0);
 
 		cola.add(new ArestaPes(nodeA, distancia.get(nodeA)));
@@ -279,7 +277,7 @@ public class GrafNewman extends Graf {
 			ArestaPes a = cola.poll();
 			Integer u = a.aresta;
 
-			// Conté els nodes adjacents a "u"
+			// Conte els nodes adjacents a "u"
 			HashSet<Integer> adjacents = this.getAdjacents(u);
 			Iterator<Integer> it2 = adjacents.iterator();
 
@@ -318,7 +316,7 @@ public class GrafNewman extends Graf {
 	public Boolean calcularEdgeBetween() {
 		if (NCM.size() < 2)
 			return false;
-		// Posem a 0 tots els camins minims per "començar" la nova ronda
+		// Posem a 0 tots els camins minims per "comencar" la nova ronda
 		for (int i = 0; i < NCM.size(); ++i) {
 			for (int j = 0; i < NCM.size(); ++j)
 				NCM.get(i).set(j, 0);
@@ -374,7 +372,7 @@ public class GrafNewman extends Graf {
 	}
 
 	/**
-	 * Esborra l'aresta per la que passen mes camins minims de tot el graf
+	 * Esborra l'aresta per la que passen mes camins minims de tot el graf
 	 * (Cristina)
 	 * 
 	 * @return false si hi ha hagut algun problema i no s'ha pogut eliminar,
@@ -394,7 +392,7 @@ public class GrafNewman extends Graf {
 	}
 
 	/**
-	 * Retorna el nombre de comunitats en les que està dividit el graf o -1 en
+	 * Retorna el nombre de comunitats en les que esta� dividit el graf o -1 en
 	 * cas d'error (Pau)
 	 * 
 	 * @return Nombre de comunitats del graf
@@ -425,10 +423,10 @@ public class GrafNewman extends Graf {
 	}
 
 	/**
-	 * Retorna un conjunt que conté les comunitats que conté el graf (Pau)
+	 * Retorna un conjunt que conte les comunitats que conte el graf (Pau)
 	 * 
-	 * @return Un conjunt que conté tants subconjunts com comunitats té el
-	 *         graf i cada subconjunt conté els nodes de la comunitat
+	 * @return Un conjunt que conte tants subconjunts com comunitats te el graf
+	 *         i cada subconjunt conte els nodes de la comunitat
 	 */
 	public HashSet<HashSet<String>> comunitats() {
 		HashSet<String> nodes = this.getNodes();
@@ -443,8 +441,8 @@ public class GrafNewman extends Graf {
 			visitats.set(i, false);
 
 		while (it.hasNext()) {
-			// Per cada node miro si ja l'he visitat, si no és així invoco la
-			// funció nodesDeLaComunitat que em retorna els nodes de la
+			// Per cada node miro si ja l'he visitat, si no es aixo invoco la
+			// funcio getNodesDeLaComunitat que em retorna els nodes de la
 			// comunitat a la qual pertany n
 			Integer n = Diccionari.get(it.next());
 			if (!visitats.get(n)) {
