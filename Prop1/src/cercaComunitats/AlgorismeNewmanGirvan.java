@@ -49,7 +49,7 @@ public class AlgorismeNewmanGirvan {
 	 */
 	public static HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
 		ArrayList<HashSet<HashSet<String>>> storage = new ArrayList<HashSet<HashSet<String>>>();
-		Integer iterador = new Integer(1);
+		int iterador = 0;
 		GrafNewman util = new GrafNewman(G);
 		util.calcularEdgeBetween();
 		while (util.numComunitats() != G.size()) {
@@ -58,7 +58,6 @@ public class AlgorismeNewmanGirvan {
 			util.calcularEdgeBetween();
 			++iterador;
 		}
-		System.out.println("Hello, num comunitats:"+ util.getNodes());
 		Integer quitoca = new Integer(calculadora(iterador, percentatge));
 		return storage.get(quitoca);
 
@@ -76,14 +75,12 @@ public class AlgorismeNewmanGirvan {
 	 *         numcomunidades comunitats)
 	 */
 	public static HashSet<HashSet<String>> executaNum(Graf G, Integer numComunidades) {
-		System.out.println("1ra");
 		GrafNewman util = new GrafNewman(G);
 		util.calcularEdgeBetween();
 		while (util.numComunitats() < numComunidades) {
 			if (!util.esborrarMaxim()) return null; // Futur control d'errors
 			util.calcularEdgeBetween();
 		}
-		System.out.println("Hello, num comunitats:"+ util.getNodes());
 		return util.comunitats();
 
 	}
@@ -100,7 +97,6 @@ public class AlgorismeNewmanGirvan {
 	 * @return Comunitats en les qual cap node tindrá btw > maxbetweness.
 	 */
 	public static HashSet<HashSet<String>> executabet(Graf G, Integer maxbetweness) {
-		System.out.println("HOLLAAAAAA");
 		GrafNewman util = new GrafNewman(G);
 		util.calcularEdgeBetween();
 		int maxactual = util.getMaxBetween(); // Variable amb el valor de maxbtw
@@ -109,7 +105,6 @@ public class AlgorismeNewmanGirvan {
 			util.calcularEdgeBetween();
 			maxactual = util.getMaxBetween();
 		}
-		System.out.println("Hello, num comunitats:"+ util.getNodes());
 		return util.comunitats();
 	}
 }
