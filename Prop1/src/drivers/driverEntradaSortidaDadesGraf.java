@@ -36,12 +36,13 @@ public class driverEntradaSortidaDadesGraf {
 		System.out.println("Vols utilitzar la ruta per defecte? (s/n)");
 		String rutaPerDefecte = in.next();
 		String ruta = null;
+		GrafDades G = new GrafDades();
 
 		if (rutaPerDefecte.equals("n")) {
 			System.out.println("Escriu la ruta on vols llegir el graf");
 			ruta = in.next();
 		}
-		return io.carregarGrafDades((rutaPerDefecte.equals("s")), null, ruta);
+		return io.carregarGrafDades((rutaPerDefecte.equals("s")), G, ruta);
 	}
 	// C:/Users/Pau/Desktop/cats.txt
 	public static void escriureGraf(EntradaSortidaDadesGraf io, GrafDades G) {

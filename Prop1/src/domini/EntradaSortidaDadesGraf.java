@@ -80,15 +80,11 @@ public class EntradaSortidaDadesGraf {
 	 * @return Un GrafDades amb les dades de "ruta"
 	 */
 	public GrafDades carregarGrafDades(Boolean utilitzarRutaPerDefecte, GrafDades G, String ruta) {
-
-		if (utilitzarRutaPerDefecte) {
-			G = new GrafDades();
-			if (rutaPerDefecte != null)
-				ruta = rutaPerDefecte;
-			else {
-				rutaPerDefecte = ruta;
-			}
-		}
+		/*
+		 * if (utilitzarRutaPerDefecte) { G = new GrafDades(); if
+		 * (rutaPerDefecte != null) ruta = rutaPerDefecte; else { rutaPerDefecte
+		 * = ruta; } }
+		 */
 
 		BufferedReader b = null;
 		String s;
