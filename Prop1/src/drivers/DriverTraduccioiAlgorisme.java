@@ -95,8 +95,8 @@ public class DriverTraduccioiAlgorisme {
 		c.add(aux4);
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
 		cri.setSubconjCat(c2);
-		ParaulaValor caca = new ParaulaValor("ho", 0);
-		cri.setParaulaClau(caca);
+		ParaulaValor utilitzable = new ParaulaValor("ho", 0);
+		cri.setParaulaClau(utilitzable);
 		cri.setEvitaCat(c);
 		cri.setEvitaPag(s);
 		cri.setSemblaNom(0);
