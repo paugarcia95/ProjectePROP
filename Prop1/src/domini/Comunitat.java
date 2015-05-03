@@ -10,12 +10,27 @@ import java.util.TreeMap;
 
 public class Comunitat {
 	
+	private Integer id;
 	private Map<String, Categoria> categoriesComunitat;
 		
-	public Comunitat() {
+	public Comunitat(Integer id) {
+		this.id = id;
 		categoriesComunitat = new TreeMap<String, Categoria>();
 	}
 	
+	public Comunitat() {
+		id = -1;
+		categoriesComunitat = new TreeMap<String, Categoria>();
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public Integer getNumeroDeCategories() {
 		return categoriesComunitat.size();	
 	}
