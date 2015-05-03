@@ -348,6 +348,7 @@ public class GrafNewman extends Graf {
 								if (maxNumCM <= act) {
 									maxi = aux.node1;
 									maxj = aux.node2;
+									maxNumCM = act;
 								}
 							}
 						}
