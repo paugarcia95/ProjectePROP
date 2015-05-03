@@ -467,7 +467,7 @@ public class GrafNewman extends Graf {
 			visitats.setSize(this.size());
 			for (int i = 0; i < visitats.size(); ++i)
 				visitats.set(i, false);
-
+			
 			while (it.hasNext()) {
 				Integer n = Diccionari.get(it.next());
 				if (!visitats.get(n)) {
