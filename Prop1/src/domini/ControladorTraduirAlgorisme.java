@@ -22,45 +22,24 @@ import cercaComunitats.Louvain;
 public class ControladorTraduirAlgorisme {
 
 	
-	private static int similarity(String s1, String s2) {
-        String longer = s1, shorter = s2;
-        if (s1.length() < s2.length()) { // longer should always have greater length
-            longer = s2; shorter = s1;
-        }
-        int longerLength = longer.length();
-        if (longerLength == 0) { return 10; /* both strings are zero length */ }
-
-        return (longerLength - editDistance(longer, shorter)); // Retorna la distancia
-
-    }
-
-
-    private static int editDistance(String s1, String s2) {
-        s1 = s1.toLowerCase();
-        s2 = s2.toLowerCase();
-
-        int[] costs = new int[s2.length() + 1];
-        for (int i = 0; i <= s1.length(); i++) {
-            int lastValue = i;
-            for (int j = 0; j <= s2.length(); j++) {
-                if (i == 0)
-                    costs[j] = j;
-                else {
-                    if (j > 0) {
-                        int newValue = costs[j - 1];
-                        if (s1.charAt(i - 1) != s2.charAt(j - 1))
-                            newValue = Math.min(Math.min(newValue, lastValue),
-                                    costs[j]) + 1;
-                        costs[j - 1] = lastValue;
-                        lastValue = newValue;
-                    }
-                }
-            }
-            if (i > 0)
-                costs[s2.length()] = lastValue;
-        }
-        return costs[s2.length()];
-    }
+	  private static double similarity(String s1, String s2) {
+	        String longer = s1, shorter = s2;
+	        Double solu = new Double (0);
+	        if (s1.length() < s2.length()) { // longer should always have greater length
+	            longer = s2; shorter = s1;
+	        }
+	        String ayuda = shorter.substring(0,shorter.length()/2);
+	        if(longer.indexOf(ayuda) != -1) {
+	        	solu += ayuda.length();
+	        }
+	        else {
+	        	ayuda = longer.substring(0,longer.length()/2);
+	        	if(shorter.indexOf(ayuda) != -1){
+	        		solu += ayuda.length();
+	        	}
+	        }
+	        return solu;
+	    }
 	
 	
 	/**
@@ -82,7 +61,14 @@ public class ControladorTraduirAlgorisme {
 		
 		
 		/////////// Criteri Semblança //////////////////
-		solucio += cri.getSemblNom()*(similarity(c1.getNom(),c2.getNom()));
+		System.out.print("Relacio entre: ");
+		System.out.print(c1.getNom());
+		System.out.print(" i ");
+		System.out.print(c2.getNom());
+		Double aux = similarity(c1.getNom(),c2.getNom());
+		System.out.print(" té semblança de ");
+		System.out.println(aux);
+		solucio += cri.getSemblNom()*aux;
 		/////////////////////////////////////////////////
 		
 		
@@ -102,8 +88,8 @@ public class ControladorTraduirAlgorisme {
 		////////////**************Criteri de cat-cat i cat-pg********/////////////
 		Integer temp = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg
 		if(temp == 5) solucio += 5;
-		else if(temp > 5) solucio += 5-(5-temp);
-		else solucio += (5+(temp-5));
+		else if(temp > 5) solucio += 5-(temp-5);
+		else solucio += (5+(5-temp));
 		/////////////*********************************************///////////
 		
 		
@@ -160,7 +146,7 @@ public class ControladorTraduirAlgorisme {
 			if(cri.getEvitaCat().size() != 0) { // Si el criteri d'ignorar està actiu
 				HashSet<String> llistatactual = solucio.getNodes(); // Agafo tots els nodes afegits fins llavors
 				for(String it : llistatactual) {
-					if(cri.getEvitaCat().contains(it)) { // Miro si estan a la llista d'ignorats
+					if(cri.getEvitaCat().contains(graf.getCategoria(it))) { // Miro si estan a la llista d'ignorats
 						solucio.removeNode(it); // I l'elimino si escau
 					}
 				}
@@ -176,7 +162,13 @@ public class ControladorTraduirAlgorisme {
 		for(String it : llistatactual) { // Per a cada node del graf( a seques)
 			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
 			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
-				if(solucio.existeixNode(e.getNom())) { // Miro si està al graf Solució
+				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
+					solucio.addAresta(it, e.getNom(), CalcularPesEntreCategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
+				}
+			}
+			Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(it).getMapCSupC(); //Adquireixo totes les seves subcategories
+			for(Categoria e : mapcatsubcat2.values()) { // Per a cadascuna de les seves categories
+				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
 					solucio.addAresta(it, e.getNom(), CalcularPesEntreCategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
 				}
 			}
@@ -187,10 +179,12 @@ public class ControladorTraduirAlgorisme {
 		Collection<Pagina> paginat = graf.getPagines();
 		
 		for(Pagina p : paginat) {
-			Map<String, Categoria> pagacat = p.getPC(); // Cosneguim les categories a les q apunta la pag
+			Map<String, Categoria> pagacat = p.getCP(); // Cosneguim les categories a les q apunta la pag
 			Collection<Categoria> cates = pagacat.values(); // Agafo les categories i les paso a una Collection
 			ArrayList<Categoria> seguiment = new ArrayList<Categoria>(); // Creo una arraylist
-			seguiment.addAll(cates); // I passo els valors d la collection a la arraylist
+			for(Categoria ka : cates){
+				seguiment.add(ka);
+			}
 			for(int q = 0; q < seguiment.size(); ++q){
 				for(int u = q+1; u < seguiment.size(); ++u) {
 					if(solucio.existeixNode(seguiment.get(q).getNom()) && solucio.existeixNode(seguiment.get(u).getNom())) { // Si les categories existeixen al graf Solució
@@ -200,7 +194,8 @@ public class ControladorTraduirAlgorisme {
 							solucio.setPes(seguiment.get(q).getNom(), seguiment.get(u).getNom(), pesactual);
 						}
 						else {
-							solucio.addAresta(seguiment.get(q).getNom(), seguiment.get(u).getNom(), CalcularPesEntreCatPag(cri));
+							Double calc = new Double(CalcularPesEntreCatPag(cri));
+							solucio.addAresta(seguiment.get(q).getNom(), seguiment.get(u).getNom(),calc );
 							
 						}
 					}

@@ -7,15 +7,8 @@ package drivers;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-
-
-
-
-
-
-
+import java.util.HashSet;
+import cercaComunitats.Graf;
 import domini.Categoria;
 import domini.ControladorTraduirAlgorisme;
 import domini.Criteris;
@@ -39,35 +32,72 @@ public class driverTraduirAlgorisme {
 	 
 	 
 	public static void main(String[] args) {
-		EntradaSortidaDadesGraf obj = new EntradaSortidaDadesGraf();
 		GrafDades G = new GrafDades();
+		/*EntradaSortidaDadesGraf obj = new EntradaSortidaDadesGraf();
 		try {
-			G = obj.loadGraph("C:/Users/Alr/Downloads/cats.txt");
+			G = obj.loadGraph("C:/Users/Alr/Desktop/Prova1.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		Categoria c1 = new Categoria("Sanitari");
-		Categoria c2 = new Categoria("Metgessa");
-		G.addCategoria(c1);
-		G.addCategoria(c2);
-		G.addCC(c1, c2);
+		}*/
+		
+		Categoria aux1 = new Categoria("sanitat");
+		Categoria aux2 = new Categoria("metge");
+		G.addCC(aux1, aux2);
+		Categoria aux3 = new Categoria("sanitat");
+		Categoria aux4 = new Categoria("metgessa");
+		G.addCC(aux3, aux4);
+		Categoria aux5 = new Categoria("metge");
+		Categoria aux6 = new Categoria("uroleg");
+		G.addCC(aux5, aux6);
+		Pagina aux7 = new Pagina("agulla");
+		G.addCP(aux5, aux7);
+		G.addCP(aux4, aux7);
+		Categoria aux8 = new Categoria("ginecoleg");
+		G.addCC(aux4, aux8);
+		Categoria aux9 = new Categoria("traumatoleg");
+		G.addCC(aux4, aux9);
+		G.addCC(aux2, aux9);
+		Categoria aux10 = new Categoria("metgos");
+		G.addCC(aux2, aux10);
+		
 		Criteris cri = new Criteris();
 		cri.setAlgorisme(2);
 		cri.setDada(5);
-		cri.setRelacionsCat(5);
-		cri.setTipuCerca(2);
+		
+		cri.setRelacionsCat(5); // Relacions cat-pg
+		cri.setTipuCerca(2); ///???
+		ArrayList<Categoria> c2 = new ArrayList<Categoria>();
 		ArrayList<Categoria> c = new ArrayList<Categoria>();
+		c.add(aux10);
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
-		cri.setSubconjCat(c);
+		cri.setSubconjCat(c2);
 		ParaulaValor caca = new ParaulaValor("caca", 0);
 		cri.setParaulaClau(caca);
 		cri.setEvitaCat(c);
 		cri.setEvitaPag(s);
-		cri.setSemblaNom(5);
+		cri.setSemblaNom(0);
+		
+		
 		ControladorTraduirAlgorisme trd = new ControladorTraduirAlgorisme();
-		trd.GrafDadestoGraf(G, cri);
+		Graf fora = new Graf(trd.GrafDadestoGraf(G, cri));
+		HashSet<String> naa = new HashSet<String>(fora.getNodes());
+		ArrayList<String> n2 = new ArrayList<String>();
+		n2.addAll(naa);
+		for(int q = 0; q < n2.size(); ++q) {
+			for(int g = q+1; g < n2.size(); ++g) {
+				if(fora.existeixAresta(n2.get(q), n2.get(g))) {
+					System.out.print("Cat1: ");
+					System.out.print(n2.get(q));
+					System.out.print(" -Pes de ");
+					System.out.print(fora.getPes(n2.get(q), n2.get(g)));
+					System.out.print("- Cat2: ");
+					System.out.print(n2.get(g));
+					System.out.println();
+				}
+			}
+		}
 		System.out.println("SACABOOOOO");
 	}
 
