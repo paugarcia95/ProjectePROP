@@ -31,6 +31,7 @@ public class Usuari {
 	
 	public Usuari() {
 		cerquesFetes = new ArrayList<CercaComunitats>();
+		nCerques = 0;
 		eliminats = new LinkedList<Integer>();
 	}
 	
@@ -64,16 +65,25 @@ public class Usuari {
 		return password;
 	}
 	
+
+	//Pre: Cert
+	//Post: Retorna cert si l'usuari es admin
+	public Boolean esAdmin() {
+		return admin;
+	}
+
+	
 	//Pre: Cert
 	//Post: Retorna el nombre de cerques que té l'usuari
 	public Integer getNumCerques() {
 		return nCerques;
 	}
 	
-	//Pre: i < cerquesFetes.size() && és l'índex d'una CercaComunitats a cerquesFetes
+	//Pre: Cert
 	//Post: Retorna la CercaComunitats amb índex i
 	public CercaComunitats getCerca(Integer i) {
-		return cerquesFetes.get(i);
+		if (i >= 0 && i < cerquesFetes.size()) return cerquesFetes.get(i); //pot retornar null si i és l'índex d'una cerca eliminada
+		else return null;
 	}
 	
 	//Pre: Cert
@@ -108,7 +118,7 @@ public class Usuari {
 	}
 	
 	//Pre: c.nom és únic a cerquesFetes
-	//Post: Si c no pertanyia a cerquesFetes ++nCerques i c pertany a cerquesFetes
+	//Post: S'incrementa nCerques i c pertany a cerquesFetes
 	public Integer addCerca(CercaComunitats c) {
 		int i;
 		if(eliminats.isEmpty()) {
@@ -127,10 +137,11 @@ public class Usuari {
 		return i;		
 	}
 	
-	//Pre: c és a cerquesFetes
-	//Post: c no és a cerquesFetes i --nCerques
+	//Pre: Cert
+	//Post: Si c pertanyia a cerquesFetes ja no és a cerquesFetes, es decrementa nCerques i retorna true, altrament retorna false
 	public Boolean removeCerca(CercaComunitats c) {
 		int i = cerquesFetes.indexOf(c);
+		if (i == -1) return false;
 		cerquesFetes.set(i, null);
 		--nCerques;
 		eliminats.add(i);
@@ -138,7 +149,7 @@ public class Usuari {
 	}
 	
 	//Pre: Cert
-	//Post: Si s era el nom d'una cerca a cerquesFetes, aquesta cerca no és a cerquesFetes, --nCerques i retorna cert, altrament retorna false
+	//Post: Si s era el nom d'una cerca a cerquesFetes, aquesta cerca no és a cerquesFetes, es decrementa nCerques i retorna cert, altrament retorna false
 	public Boolean removeCerca(String s) {
 		int i = this.getPosCerca(s);
 		if (i == -1) return false;
@@ -148,19 +159,16 @@ public class Usuari {
 		return true;
 	}
 	
-	//Pre: i < cerquesFetes.size() && és l'índex d'una CercaComunitats a cerquesFetes
-	//Post: cerquesFetes ja no conté la CercaComunitats amb índex i
-	public Boolean removeCerca(Integer i) {
-		cerquesFetes.set(i, null);
-		--nCerques;
-		eliminats.add(i);
-		return true;
-	}
-	
 	//Pre: Cert
-	//Post: Retorna cert si l'usuari es admin
-	public Boolean esAdmin() {
-		return admin;
+	//Post: Si i era l'índex d'una cercaFeta cerquesFetes ja no conté la CercaComunitats i retorna true, retorna false altrament
+	public Boolean removeCerca(Integer i) {
+		if (i >= 0 && i < cerquesFetes.size() && cerquesFetes.get(i) != null) {
+			cerquesFetes.set(i, null);
+			--nCerques;
+			eliminats.add(i);
+			return true;
+		}
+		return false;
 	}
 
 }

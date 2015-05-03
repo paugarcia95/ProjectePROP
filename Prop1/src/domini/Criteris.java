@@ -30,7 +30,11 @@ public class Criteris {
 		this.pare = pare;
 	}
 	
-	public Criteris() {	}
+	public Criteris() {
+		subconjCat = new ArrayList<Categoria>();
+		evitaCat = new ArrayList<Categoria>();
+		evitaPag = new ArrayList<Pagina>();
+	}
 
 	public ParaulaValor getParaulaClau() {
 		return paraulaClau;
