@@ -625,7 +625,7 @@ public class MainProvisional {
 		*/
 		Criteris cri = new Criteris();
 		cri.setAlgorisme(2);
-		cri.setDada(2);
+		cri.setDada(3);
 		
 		cri.setRelacionsCat(5); // Relacions cat-pg
 		cri.setTipuCerca(2 ); ///???
