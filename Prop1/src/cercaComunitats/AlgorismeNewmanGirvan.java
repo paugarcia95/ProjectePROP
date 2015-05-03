@@ -32,7 +32,7 @@ public class AlgorismeNewmanGirvan {
 	 *         requerit
 	 */
 	private static Integer calculadora(Integer iterador, Integer percentatge) {
-		Integer solu = new Integer(((iterador - 1) * percentatge) / 100);
+		Integer solu = new Integer(((iterador) * percentatge) / 100);
 		return solu;
 	}
 
@@ -52,13 +52,15 @@ public class AlgorismeNewmanGirvan {
 		int iterador = 0;
 		GrafNewman util = new GrafNewman(G);
 		util.calcularEdgeBetween();
-		while (util.numComunitats() != G.size()) {
+		while (util.numComunitats() < G.size()) {
 			storage.add(iterador, util.comunitats());
 			util.esborrarMaxim();
 			util.calcularEdgeBetween();
 			++iterador;
 		}
+		storage.add(iterador, util.comunitats());
 		Integer quitoca = new Integer(calculadora(iterador, percentatge));
+		System.out.println("Toca: " + quitoca + "num iteracions:"+ iterador);
 		return storage.get(quitoca);
 
 	}

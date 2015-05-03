@@ -625,10 +625,10 @@ public class MainProvisional {
 		*/
 		Criteris cri = new Criteris();
 		cri.setAlgorisme(2);
-		cri.setDada(100);
+		cri.setDada(2);
 		
 		cri.setRelacionsCat(5); // Relacions cat-pg
-		cri.setTipuCerca(1); ///???
+		cri.setTipuCerca(2); ///???
 		ArrayList<Categoria> c2 = new ArrayList<Categoria>(); // Subconjunt
 		ArrayList<Categoria> c = new ArrayList<Categoria>(); // Evitar
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
