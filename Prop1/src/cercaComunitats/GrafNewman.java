@@ -116,7 +116,7 @@ public class GrafNewman extends Graf {
 			// El que fa aquest push és posar les arestes necessaries per
 			// arribar al primer node de l'aresta més la nova aresta per
 			// arribar
-			// al següent node
+			// al seguent node
 
 			Queue<Aresta> aux = new LinkedList<Aresta>();
 			aux = new LinkedList<Aresta>(Q.get(a.node1));

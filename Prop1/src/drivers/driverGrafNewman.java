@@ -18,7 +18,7 @@ public class driverGrafNewman extends GrafNewman {
 		System.out.println("Crea Graf");
 		System.out.println("---------");
 		System.out.println("");
-		System.out.println("Introdueix els nodes (Per indicar que has acabat escriu el caracter \"#\"");
+		System.out.println("Introdueix els nodes (Per indicar que has acabat escriu el caracter  \"#\"");
 
 		Scanner in = new Scanner(System.in);
 		GrafNewman G = new GrafNewman();
