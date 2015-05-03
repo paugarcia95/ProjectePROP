@@ -293,6 +293,7 @@ public class ControladorTraduirAlgorisme {
 			while(it2.hasNext()){
 				aux.addCat(graf.getCategoria(it2.next()));
 				aux.setId(idaux);
+				++idaux;
 			}
 			//la comunitat aux ja conte totes les categories i l'afegim al retorna
 			retorna.add(aux);
