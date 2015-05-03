@@ -90,8 +90,9 @@ public class driverTraduirAlgorisme {
 		
 		cri.setRelacionsCat(5); // Relacions cat-pg
 		cri.setTipuCerca(2); ///???
-		ArrayList<Categoria> c2 = new ArrayList<Categoria>();
-		ArrayList<Categoria> c = new ArrayList<Categoria>();
+		ArrayList<Categoria> c2 = new ArrayList<Categoria>(); // Subconjunt
+		ArrayList<Categoria> c = new ArrayList<Categoria>(); // Evitar
+		c.add(aux4);
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
 		cri.setSubconjCat(c2);
 		ParaulaValor caca = new ParaulaValor("ho", 0);

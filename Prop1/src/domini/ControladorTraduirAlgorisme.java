@@ -284,12 +284,16 @@ public class ControladorTraduirAlgorisme {
 		ArrayList<Comunitat> retorna = new ArrayList<Comunitat>();
 		//it es un iterador que va recorrent el primer HashSet de HashSet<HashSet<String>> (el conjunt de comunitats
 		Iterator<HashSet<String>> it = solucio.iterator();
+		int idaux = 0;
 		while(it.hasNext()) {
 			//it2 es un iterador que va recorrent el segon HashSet de HashSet<HashSet<String>> (les comunitats)
 			Iterator<String> it2 = it.next().iterator();
 			Comunitat aux = new Comunitat();
 			//afegim a la comunitat aux totes les categories del HashSet<String>
-			while(it2.hasNext()) aux.addCat(graf.getCategoria(it2.next()));
+			while(it2.hasNext()){
+				aux.addCat(graf.getCategoria(it2.next()));
+				aux.setId(idaux);
+			}
 			//la comunitat aux ja conte totes les categories i l'afegim al retorna
 			retorna.add(aux);
 		}
