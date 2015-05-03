@@ -1,5 +1,6 @@
 package drivers;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import domini.EntradaSortidaDadesGraf;
@@ -33,16 +34,19 @@ public class driverEntradaSortidaDadesGraf {
 		System.out.println("Llegir Graf");
 		System.out.println("---------");
 		System.out.println("");
-		System.out.println("Vols utilitzar la ruta per defecte? (s/n)");
-		String rutaPerDefecte = in.next();
-		String ruta = null;
+
 		GrafDades G = new GrafDades();
 
-		if (rutaPerDefecte.equals("n")) {
-			System.out.println("Escriu la ruta on vols llegir el graf");
-			ruta = in.next();
+		System.out.println("Escriu la ruta on vols llegir el graf");
+		String ruta = in.next();
+
+		try {
+			io.carregarGrafDades(G, ruta);
+			return G;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
 		}
-		return io.carregarGrafDades((rutaPerDefecte.equals("s")), G, ruta);
 	}
 	// C:/Users/Pau/Desktop/cats.txt
 	public static void escriureGraf(EntradaSortidaDadesGraf io, GrafDades G) {
@@ -50,15 +54,11 @@ public class driverEntradaSortidaDadesGraf {
 		System.out.println("Escriure Graf");
 		System.out.println("---------");
 		System.out.println("");
-		System.out.println("Vols utilitzar la ruta per defecte? (s/n)");
-		String rutaPerDefecte = in.next();
-		String ruta = null;
 
-		if (rutaPerDefecte.equals("n")) {
-			System.out.println("Escriu la ruta on vols escriure el graf");
-			ruta = in.next();
-		}
-		io.escriureGrafDadesEnFitxer((rutaPerDefecte.equals("s")), G, ruta);
+		System.out.println("Escriu la ruta on vols escriure el graf");
+		String ruta = in.next();
+
+		io.escriureGrafDadesEnFitxer(G, ruta);
 	}
 
 	public static void main(String[] args) {
@@ -70,7 +70,6 @@ public class driverEntradaSortidaDadesGraf {
 			System.out.println("2. Llegir les entrades del graf una a una i escriure'l a un fitxer");
 			System.out.println("3. Llegir des d'un fitxer i escriure la representació en imatge del graf (cal haver especificat una ruta per defecte per guardar el graf auxiliar)");
 			System.out.println("4. Llegir les entrades del graf una a una i escriure'n la seva representació gràfica (cal haver especificat una ruta per defecte per guardar el graf auxiliar)");
-			System.out.println("5. Definir ruta per defecte");
 			System.out.println("6. Sortir");
 
 			EntradaSortidaDadesGraf io = new EntradaSortidaDadesGraf();
@@ -81,29 +80,29 @@ public class driverEntradaSortidaDadesGraf {
 					escriureGraf(io, G);
 					break;
 				case 2 :
-					GrafDades G2 = creaGraf(io);
-					escriureGraf(io, G2);
+					G = creaGraf(io);
+					escriureGraf(io, G);
 					break;
 				case 3 :
-					GrafDades G3 = llegirFitxer(io);
-					if (io.getRutaPerDefecte() == null)
-						break;
-					io.escriureGrafDadesEnFitxer(false, G3, io.getRutaPerDefecte());
+					System.out.println("Escriu la ruta on vols llegir el graf");
+					String ruta = in.next();
+
 					System.out.println("Escriu la ruta de destí");
-					io.traduirGrafDadesAImatge(in.next(), in.next());
+					io.traduirGrafDadesAImatge(ruta, in.next());
 					break;
 				case 4 :
-					GrafDades G4 = creaGraf(io);
-					if (io.getRutaPerDefecte() == null)
-						break;
-					io.escriureGrafDadesEnFitxer(false, G4, io.getRutaPerDefecte());
+					G = creaGraf(io);
+
+					System.out.println("Escriu la ruta per guardar un fitxer auxiliar");
+					String aux = in.next();
+					io.escriureGrafDadesEnFitxer(G, aux);
+
 					System.out.println("Escriu la ruta de destí");
-					io.traduirGrafDadesAImatge(in.next(), in.next());
+					io.traduirGrafDadesAImatge(aux, in.next());
 					break;
-				case 5 :
-					io.setRutaPerDefecte(in.next());
-					break;
+
 				default :
+					System.out.println("Sortint...");
 					return;
 			}
 		}

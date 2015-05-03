@@ -40,8 +40,7 @@ public class EntradaSortidaDadesGraf {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public GrafDades carregarGrafDades(String ruta) throws FileNotFoundException, IOException {
-		GrafDades G = new GrafDades();
+	public void carregarGrafDades(GrafDades G, String ruta) throws FileNotFoundException, IOException {
 		BufferedReader b = new BufferedReader(new FileReader(ruta));
 		String s;
 
@@ -68,7 +67,6 @@ public class EntradaSortidaDadesGraf {
 			}
 		}
 		b.close();
-		return G;
 	}
 
 	/**
