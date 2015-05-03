@@ -505,7 +505,7 @@ public class MainProvisional {
 	private static void crearConjuntComunitats() {
 		System.out.println("PANTALLA DE CREACIO D'UNA CERCA DE COMUNITATS:");
 		Integer cercaactual= mc.getContUser().addNovaCerca(mc.getUserActual());
-		
+		/*
 		System.out.println("Indica amb un numero del 0 al 10 la importancia que li vols donar als seguents criteris: ");
 		System.out.println("Atencio! Si es fa servir el criteri de triar un subconjunt de categories, nomes es tindran en compte, a mes a mes, els criteris de relacio i semblança ");
 		Integer relacions, sembla, alg, tipus, paraulain, dada;
@@ -525,7 +525,7 @@ public class MainProvisional {
 		paraulain = s.nextInt();
 		if(paraulain==0) paraulast = null;
 		
-		System.out.println("Categoria a partir de la qual es vol fer la cerca (nomes es tindran en compte les categories i pagines a partir dels seus fills): ");
+		System.out.println("Categoria a partir de la qual es vol fer la cerca (nomes es tindran en compte les categories i pagines a partir dels seus fills), escriu null si no en vols cap: ");
 		pare = s.next();
 		
 		System.out.print("Numero de categories a partir de les quals es vol fer la cerca, ignorant la resta. Si no vols restringir, marca 0:");
@@ -622,6 +622,24 @@ public class MainProvisional {
 			}
 			mc.getContUser().addCriterisCerca(false, mc.getUserActual(), cercaactual, paraulast, paraulain, relacions, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare);
 		}
+		*/
+		Criteris cri = new Criteris();
+		cri.setAlgorisme(2);
+		cri.setDada(5);
+		
+		cri.setRelacionsCat(5); // Relacions cat-pg
+		cri.setTipuCerca(2); ///???
+		ArrayList<Categoria> c2 = new ArrayList<Categoria>(); // Subconjunt
+		ArrayList<Categoria> c = new ArrayList<Categoria>(); // Evitar
+		ArrayList<Pagina> s = new ArrayList<Pagina>();
+		cri.setSubconjCat(c2);
+		ParaulaValor utilitzable = new ParaulaValor("ho", 0);
+		cri.setParaulaClau(utilitzable);
+		cri.setEvitaCat(c);
+		cri.setEvitaPag(s);
+		cri.setSemblaNom(0);
+		String sa = new String();
+		cri.setPare(sa);
 		System.out.println("Comença la Cerca de Comunitats, aquest procés pot tardar uns minuts, si us plau, tingues paciencia");
 		if(!mc.getContUser().ferCerca(mc.getUserActual(), cercaactual)) {
 			System.out.println("Error, no s'ha pogut executar la Cerca");
@@ -909,9 +927,25 @@ public class MainProvisional {
 	 */
 	public static void main(String[] args) {
 		mc = new MacroControlador();
-		if(!mc.carregaDades()) System.out.println("Hi ha hagut algun problema al carregar les dades de la wiki");
+		//if(!mc.carregaDades()) System.out.println("Hi ha hagut algun problema al carregar les dades de la wiki");
 		if(!mc.carregaUsers()) System.out.println("Hi ha hagut algun problema al carregar les dades dels usuaris");
-		
+		Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
+		Categoria aux2 = new Categoria("asexual");
+		GrafDades G = mc.getGraf();
+		G.addCC(aux1,aux2);
+		Categoria aux3 = new Categoria("heterosexual");
+		G.addCC(aux1,aux3);
+		Categoria aux4 = new Categoria("homosexual");
+		G.addCC(aux1, aux4);
+		Categoria aux5 = new Categoria("sexe");
+		G.addCC(aux1,aux5);
+		Categoria aux6 = new Categoria("embaras");
+		G.addCC(aux3,aux6);
+		G.addCC(aux5, aux6);
+		Categoria aux7 = new Categoria("infertil");
+		G.addCC(aux4, aux7);
+		G.addCC(aux2, aux7);
+		G.addCC(aux3,aux4);
 		mc.getContUser().addUser("admin", "admin");
 		mc.getContUser().addUser("client", "client");
 		mc.getContUser().addAdmin("admin");

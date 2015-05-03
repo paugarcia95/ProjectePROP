@@ -3,6 +3,8 @@
  */
 package domini;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +18,7 @@ public class ControladorAdminUsers {
 	@SuppressWarnings("unused")
 	private ConjuntUsuaris conj;
 	EntradaSortidaDadesGraf aux;
+	String rutaXDefecte = "C:/Users/Cristina/Google Drive/UNI/PROP/Projecte/cats.txt";
 	//PUBLIC
 //CONSTRUCTORA
 	/**
@@ -106,8 +109,16 @@ public class ControladorAdminUsers {
 	 * @return true si s'ha carregat tot correctament, false si hi ha hagut algun error.
 	 */
 	public boolean iniciCarregarDades() {
-		aux = new EntradaSortidaDadesGraf("C:/Users/Cristina/Google Drive/UNI/PROP/Projecte/cats.txt");
-		aux.carregarGrafDades(true,gd, null);
+		aux = new EntradaSortidaDadesGraf();
+		try {
+			gd= aux.carregarGrafDades(rutaXDefecte);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return true;
 		
 	}

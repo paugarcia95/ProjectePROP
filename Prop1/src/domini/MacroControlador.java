@@ -57,5 +57,8 @@ public class MacroControlador {
 	public String getUserActual() {
 		return useractual;
 	}
+	public GrafDades getGraf(){
+		return gd;
+	}
 
 }
