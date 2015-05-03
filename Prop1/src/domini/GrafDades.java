@@ -60,7 +60,8 @@ public class GrafDades {
 		return true;
 	}
 	
-	
+	//Pre: Cert
+	//Post: Si no existia cap relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna true, altrament retorna false	
 	public Boolean addCC(Categoria cat1, Categoria cat2) {
 		if (categories.containsKey(cat1.getNom()) && categories.containsKey(cat2.getNom())) {
 			if (cat1.existsCC(cat2.getNom()) == 2 && cat2.existsCC(cat1.getNom()) == 1) { //ja existeix
@@ -87,7 +88,8 @@ public class GrafDades {
 		return true;
 	}
 	
-	
+	//Pre: Cert
+	//Post: Si no existia cap relació entre pag i cat ara pag apunta a cat i retorna true, altrament retorna false
 	public Boolean addPC(Pagina pag, Categoria cat) {
 		if (pagines.containsKey(pag.getNom()) && categories.containsKey(cat.getNom())) {
 			if (pag.existsPC(cat.getNom()) == 1 && cat.existsCP(pag.getNom()) == 1) { //ja existeix
@@ -114,7 +116,8 @@ public class GrafDades {
 		return true;
 	}
 	
-	
+	//Pre: Cert
+	//Post: Si no existia cap relació entre cat i pag ara cat apunta a pag i retorna true, altrament retorna false
 	public Boolean addCP(Categoria cat, Pagina pag) {
 		if (categories.containsKey(cat.getNom()) && pagines.containsKey(pag.getNom())) {
 			if (cat.existsCP(pag.getNom()) == 2 && pag.existsPC(cat.getNom()) == 2) { //ja existeix
