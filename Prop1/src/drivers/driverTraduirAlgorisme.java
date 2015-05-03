@@ -70,10 +70,9 @@ public class driverTraduirAlgorisme {
 		cri.setTipuCerca(2); ///???
 		ArrayList<Categoria> c2 = new ArrayList<Categoria>();
 		ArrayList<Categoria> c = new ArrayList<Categoria>();
-		c.add(aux10);
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
 		cri.setSubconjCat(c2);
-		ParaulaValor caca = new ParaulaValor("caca", 0);
+		ParaulaValor caca = new ParaulaValor("t", 0);
 		cri.setParaulaClau(caca);
 		cri.setEvitaCat(c);
 		cri.setEvitaPag(s);
