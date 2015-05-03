@@ -19,8 +19,10 @@ public class CercaComunitats {
 	private ArrayList<Comunitat> comunitats;
 	private Queue<Integer> eliminats;
 	
-	//Pre: dataCreacio < dataModif, usuari existeix, no existeix cap CercaComunitats amb el mateix nom per a usuari
-	//Post: Retorna una CercaComunitats
+	/**
+	 * Pre: dataCreacio < dataModif, usuari existeix, no existeix cap CercaComunitats amb el mateix nom per a usuari
+	 * Post: Retorna una CercaComunitats
+	 */
 	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date dataModif, Integer algorisme, String comentari, ArrayList<Comunitat> comunitats) {
 		this.nom = nom;
 		this.dataCreacio = dataCreacio;
@@ -105,20 +107,26 @@ public class CercaComunitats {
 		algorisme = i;
 	}
 	
-	//Pre: i es l'índex d'una Comunitat existent a comunitats && i < comunitas.size()
-	//Post: Retorna la Comunitat amb índex i
+	/**
+	 * Pre: i es l'índex d'una Comunitat existent a comunitats && i < comunitas.size()
+	 * Post: Retorna la Comunitat amb índex i
+	 */	 
 	public Comunitat getComunitat(Integer i) {
 		return comunitats.get(i);		
 	}
 	
-	//Pre: Cert
-	//Post: Retorna el nombre de comunitats que componen la cerca
+	/**
+	 * Pre: Cert
+	 * Post: Retorna el nombre de comunitats que componen la cerca
+	 */
 	public Integer getNumComunitats() {
 		return nComunitats;
 	}	
 	
-	//Pre: comunitat no pertany a comunitats
-	//Post: comunitat pertanty a comunitats amb índex retornat && nComunitats s'incrementa
+	/**
+	 * Pre: comunitat no pertany a comunitats
+	 * Post: comunitat pertanty a comunitats amb índex retornat && nComunitats s'incrementa
+	 */
 	public Integer addComunitat(Comunitat comunitat) {
 		int i;
 		if(eliminats.isEmpty()) {
@@ -137,8 +145,10 @@ public class CercaComunitats {
 		return i;
 	}
 	
-	//Pre: i es l'índex d'una Comunitat existent a comunitats && i < comunitas.size()
-	//Post: La Comunitat amb índex i ja no pertany a comunitats && nComunitats es decrementada
+	/** 
+	 * Pre: i es l'índex d'una Comunitat existent a comunitats && i < comunitas.size()
+	 * Post: La Comunitat amb índex i ja no pertany a comunitats && nComunitats es decrementada
+	 */
 	public Boolean removeComunitat(Integer i) {
 		comunitats.set(i,null);
 		eliminats.add(i);
@@ -146,8 +156,10 @@ public class CercaComunitats {
 		return true;
 	}
 	
-	//Pre: Cert
-	//Post: comunitats = array i nComunitats = array.size()
+	/**
+	 * Pre: Cert
+	 * Post: comunitats = array i nComunitats = array.size()
+	 */
 	public void setComunitats(ArrayList<Comunitat> array) {
 		nComunitats = array.size();
 		this.comunitats = array;
