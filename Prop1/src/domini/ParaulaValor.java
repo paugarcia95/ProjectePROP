@@ -13,6 +13,11 @@ public class ParaulaValor {
 		this.paraula = paraula;
 		this.num = num;
 	}
+	
+	public ParaulaValor() {
+		paraula = "NoIndicat";
+		num = 0;
+	}
 
 	public String getParaula() {
 		return paraula;

@@ -31,9 +31,16 @@ public class Criteris {
 	}
 	
 	public Criteris() {
+		paraulaClau = new ParaulaValor();
+		relacionsCat = 5;
+		semblaNom = 0;
+		algorisme = 2;
+		dada = 5;
+		tipuCerca = 1;
 		subconjCat = new ArrayList<Categoria>();
 		evitaCat = new ArrayList<Categoria>();
 		evitaPag = new ArrayList<Pagina>();
+		pare = new String();
 	}
 
 	public ParaulaValor getParaulaClau() {
