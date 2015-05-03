@@ -260,7 +260,7 @@ public class GrafNewman extends Graf {
 
 		// Es com una cua de prioritat que ordena els nodes en una posicio mes
 		// curta al principi
-		PriorityQueue<ArestaPes> cola = new PriorityQueue<ArestaPes>(new ComparaValors());
+		PriorityQueue<ArestaPes> cola = new PriorityQueue<ArestaPes>(0, new ComparaValors());
 
 		// En un principi no se sap, i es marquen les distancies com a
 		// infinites
