@@ -108,7 +108,7 @@ public class ControladorAdminUsers {
 	 * Post: Carrega en el graf les dades del fitxer per defecte
 	 * @return true si s'ha carregat tot correctament, false si hi ha hagut algun error.
 	 */
-	public boolean iniciCarregarDades() {
+	public Boolean iniciCarregarDades() {
 		aux = new EntradaSortidaDadesGraf();
 		try {
 			aux.carregarGrafDades(gd,rutaXDefecte);
@@ -128,7 +128,7 @@ public class ControladorAdminUsers {
 	 * Post:
 	 * @return
 	 */
-	public boolean carregarFitxerEnllacosInserir(String ruta) {return true;}
+	public Boolean carregarFitxerEnllacosInserir(String ruta) {return true;}
 	
 	/**
 	 * Pre:
@@ -142,7 +142,7 @@ public class ControladorAdminUsers {
 	 * Post:
 	 * @return
 	 */
-	public boolean eliminarDades(){return true;}
+	public Boolean eliminarDades(){return true;}
 	
 	/**
 	 * Pre:
@@ -157,42 +157,42 @@ public class ControladorAdminUsers {
 	 * Post:
 	 * @return
 	 */
-	public boolean addEnllac(String inici, String fin, Integer tipus) {return true;}
+	public Boolean addEnllac(String inici, String fin, Integer tipus) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean addCateg(String nom) {return true;}
+	public Boolean addCateg(String nom) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean addCP(String nom_cat, ArrayList<String> CPs ) {return true;}
+	public Boolean addCP(String nom_cat, ArrayList<String> CPs ) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean addPC(String nom_cat, ArrayList<String> PCs) {return true;}
+	public Boolean addPC(String nom_cat, ArrayList<String> PCs) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean addCsupC(String nom_cat, ArrayList<String> Sup) {return true;}
+	public Boolean addCsupC(String nom_cat, ArrayList<String> Sup) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean addCsubC(String nom_cat, ArrayList<String> Sub) {return true;}
+	public Boolean addCsubC(String nom_cat, ArrayList<String> Sub) {return true;}
 	
 	/**
 	 * Pre:
@@ -200,89 +200,89 @@ public class ControladorAdminUsers {
 	 * @return
 	 */
 	//els set abans eren Modifica_
-	public boolean setNomCateg(String nom_antic, String nom) {return true;}
+	public Boolean setNomCateg(String nom_antic, String nom) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean setCP(String nom_cat, ArrayList<String> CPs) {return true;}
+	public Boolean setCP(String nom_cat, ArrayList<String> CPs) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean setPC(String nom_cat, ArrayList<String> PCs) {return true;}
+	public Boolean setPC(String nom_cat, ArrayList<String> PCs) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean setCsupC(String nom_cat, ArrayList<String> Sup) {return true;}
+	public Boolean setCsupC(String nom_cat, ArrayList<String> Sup) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean setCsubC(String nom_cat, ArrayList<String> Sub) {return true;}
+	public Boolean setCsubC(String nom_cat, ArrayList<String> Sub) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean addPagina(String nom) {return true;}
+	public Boolean addPagina(String nom) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean addPCP(String nom_pag, ArrayList<String> CPs) {return true;}
+	public Boolean addPCP(String nom_pag, ArrayList<String> CPs) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean addPPC(String nom_pag, ArrayList<String> PCs) {return true;}
+	public Boolean addPPC(String nom_pag, ArrayList<String> PCs) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean setNomPagina(String nom_antic, String nom_nou) {return true;}
+	public Boolean setNomPagina(String nom_antic, String nom_nou) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean setPCP(String nom_pag, ArrayList<String> CPs) {return true;}
+	public Boolean setPCP(String nom_pag, ArrayList<String> CPs) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean setPPC(String nom_pag, ArrayList<String> PCs) {return true;}
+	public Boolean setPPC(String nom_pag, ArrayList<String> PCs) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean removePag(String nom) {return true;}
+	public Boolean removePag(String nom) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
 	 * @return
 	 */
-	public boolean removeCateg(String nom) {return true;}
+	public Boolean removeCateg(String nom) {return true;}
 }

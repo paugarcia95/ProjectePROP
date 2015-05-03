@@ -18,7 +18,7 @@ public class Usuari {
 	private Queue<Integer> eliminats;
 	
 	
-	//Pre: No hi existeix cap usuari amb el mateix username
+	//Pre: No hi existeix cap Usuari amb el mateix username
 	//Post: Crea un Usuari amb this.username=username, this.password=password i this.admin=admin
 	public Usuari (String username, String password, Boolean admin) {
         this.username = username;
