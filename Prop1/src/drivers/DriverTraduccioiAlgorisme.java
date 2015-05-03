@@ -92,7 +92,6 @@ public class DriverTraduccioiAlgorisme {
 		cri.setTipuCerca(2); ///???
 		ArrayList<Categoria> c2 = new ArrayList<Categoria>(); // Subconjunt
 		ArrayList<Categoria> c = new ArrayList<Categoria>(); // Evitar
-		c.add(aux4);
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
 		cri.setSubconjCat(c2);
 		ParaulaValor utilitzable = new ParaulaValor("ho", 0);
