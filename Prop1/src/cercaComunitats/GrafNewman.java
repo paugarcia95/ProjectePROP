@@ -18,7 +18,8 @@ import java.util.Vector;
  */
 public class GrafNewman extends Graf {
 
-	private Vector<Vector<Integer>> NCM;
+	//private Vector<Vector<Integer>> NCM;
+	private int[][] NCM;
 	private Integer maxi;
 	private Integer maxj;
 	private Integer maxNumCM;
@@ -146,8 +147,11 @@ public class GrafNewman extends Graf {
 	public GrafNewman() {
 		super();
 		// crea NCM de la mateixa mida que Matriu
-		NCM = new Vector<Vector<Integer>>();
+		/*NCM = new Vector<Vector<Integer>>();
 		NCM.setSize(Matriu.size());
+		for(int i = 0; i < Matriu.size();++i) {
+			NCM.get(i).setSize(Matriu.size());
+		}*/
 		maxNumCM = maxi = maxj = numCom = 0;
 	}
 	
@@ -155,8 +159,16 @@ public class GrafNewman extends Graf {
 		Diccionari = new TreeMap<String,Integer>(G.Diccionari);
 		DiccionariInvers = new TreeMap<Integer,String>(G.DiccionariInvers);
 		Matriu = new Vector< Vector<Double> >(G.Matriu);
-		NCM = new Vector<Vector<Integer>>(super.Matriu.size());
 		maxNumCM = maxi = maxj = numCom = 0;
+		NCM = new int[Matriu.size()][Matriu.size()];
+		/*NCM = new Vector<Vector<Integer>>();
+		int mida = Matriu.size();
+		Vector<Integer> aux = new Vector<Integer> (mida);
+		NCM = new Vector<Vector<Integer>>(mida);
+		NCM.setSize(mida);
+		for(int i = 0; i < mida;++i) {
+			NCM.get(i).setSize(mida);
+		}*/
 	}
 
 	/**
@@ -323,18 +335,19 @@ public class GrafNewman extends Graf {
 	 *         hagut algun error.
 	 */
 	public Boolean calcularEdgeBetween() {
-		System.out.println("Entro a 6, Matriu.size= "+ Matriu.size());
+		System.out.println("Entro a 6, Matriu.size= "+ Matriu.size()+" i NCM.size= "+ NCM.length);
 		//if (NCM.size() < 2) return false;
 		// Posem a 0 tots els camins minims per "comencar" la nova ronda
-		for (int i = 0; i < NCM.size(); ++i) {
-			//System.out.println("Entro a 7");
-			for (int j = 0; i < NCM.size(); ++j)
-				NCM.get(i).set(j, 0);
+		for (int i = 0; i < NCM.length; ++i) {
+			System.out.println("Entro a 7");
+			for (int j = 0; j < NCM.length; ++j)
+				NCM[i][j] = 0;
+				//NCM.get(i).set(j, 0);
 		}
-		System.out.println("Entro a 5, NCM.size= "+ NCM.size());
+		System.out.println("Entro a 5");
 		// Calcula el cami minim de cada node cap a tots els nodes
-		for (int i = 0; i < NCM.size(); ++i)
-			for (int j = 0; i < NCM.size(); ++j) {
+		for (int i = 0; i < NCM.length; ++i)
+			for (int j = 0; i < NCM.length; ++j) {
 				if (i != j) {
 					System.out.println("Entro a 4");
 					if (numCom < 4 || pertanyenMateixaComunitat(i, j)) {
@@ -348,8 +361,10 @@ public class GrafNewman extends Graf {
 							while (itc.hasNext()) {
 								System.out.println("Entro a 1");
 								Aresta aux = itc.next();
-								Integer act = NCM.get(aux.node1).get(aux.node2);
-								NCM.get(aux.node1).set(aux.node2, act + 1);
+								Integer act = NCM[aux.node1][aux.node2];
+								NCM[aux.node1][aux.node2]=act + 1;
+								//Integer act = NCM.get(aux.node1).get(aux.node2);
+								//NCM.get(aux.node1).set(aux.node2, act + 1);
 								// mantenir el vertex per on passen mes camins
 								// minims (variables maxi, maxj i maxNumCM)
 								if (maxNumCM <= act) {
