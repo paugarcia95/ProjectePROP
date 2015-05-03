@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Stack;
 
 import cercaComunitats.Algorisme_NewmanGirvan;
 import cercaComunitats.Clique;
@@ -25,21 +26,45 @@ public class ControladorTraduirAlgorisme {
 	  private static double similarity(String s1, String s2) {
 	        Double solu = new Double (0);
 	        
+
+	        if(s2.indexOf(s1) != -1) { //Si l'inclou sencer
+	        	solu += s1.length();
+	        	return solu;
+	        }
+	        if(s1.indexOf(s2) != -1) {//Si l'inclou sencer
+	        	solu += s2.length();
+	        	return solu;
+	        }
+	        
 	        String ayuda = s1.substring(0,s1.length()/2);
-	        System.out.print("LA PALABRA CORATDA1 ES: ");
-        	System.out.println(ayuda);
-	        if(s2.indexOf(ayuda) != -1) {
+	        /*System.out.print("LA PALABRA CORTADA1 ES: ");
+        	System.out.println(ayuda);*/
+	        if(s2.indexOf(ayuda) != -1) {//Si l'inclou partit
 	        	solu += ayuda.length();
-	        	
+	        	return solu;
 	        }
-	        else {
-	        	ayuda = s2.substring(0,s2.length()/2);
-	        	System.out.print("LA PALABRA CORATDA2 ES: ");
-	        	System.out.println(ayuda);
-	        	if(s1.indexOf(ayuda) != -1){
-	        		solu += ayuda.length();
-	        	}
+	        ayuda = s2.substring(0,s2.length()/2);
+        	/*System.out.print("LA PALABRA CORTADA2 ES: ");
+        	System.out.println(ayuda);*/
+	        if(s1.indexOf(ayuda) != -1){//Si l'inclou partit
+	        	solu += ayuda.length();
+	        	return solu;
 	        }
+	        ayuda = s1.substring(s1.length()/2,s1.length());
+	        /*System.out.print("LA PALABRA CORTADA3 ES: ");
+	        System.out.println(ayuda);*/
+	        if(s2.indexOf(ayuda) != -1){//Si l'inclou partit ( altre meitat)
+		        solu += ayuda.length();
+		        return solu;
+		    }
+	        ayuda = s2.substring(s2.length()/2,s2.length());
+        	/*System.out.print("LA PALABRA CORTADA4 ES: ");
+        	System.out.println(ayuda);*/
+		    if(s1.indexOf(ayuda) != -1) {//Si l'inclou partit ( altre meitat)
+		    	solu += ayuda.length();
+		    	return solu;
+	        }
+	        
 	        return solu;
 	    }
 	
@@ -63,14 +88,16 @@ public class ControladorTraduirAlgorisme {
 		
 		
 		/////////// Criteri Semblança //////////////////
-		System.out.print("Relacio entre: ");
-		System.out.print(c1.getNom());
-		System.out.print(" i ");
-		System.out.print(c2.getNom());
-		Double aux = similarity(c1.getNom(),c2.getNom());
-		System.out.print(" té semblança de ");
-		System.out.println(aux);
-		solucio += cri.getSemblNom()*aux;
+		if(cri.getSemblNom() != 0) { // Si  està actiu
+			System.out.print("Relacio entre: ");
+			System.out.print(c1.getNom());
+			System.out.print(" i ");
+			System.out.print(c2.getNom());
+			Double aux = similarity(c1.getNom(),c2.getNom());
+			System.out.print(" té semblança de ");
+			System.out.println(aux);
+			solucio += cri.getSemblNom()*aux;
+		}
 		/////////////////////////////////////////////////
 		
 		
@@ -140,11 +167,31 @@ public class ControladorTraduirAlgorisme {
 					}
 				}
 			}
-			else { // Si no hi ha cap criteri, ho afegim tot
-				for(Categoria cataux : llistat) {
-					solucio.addNode(cataux.getNom());
+			else {
+				if(cri.getPare().length() != 0) {
+					Map<String, Categoria> mapcatsubcat = graf.getCategoria(cri.getPare()).getMapCSubC(); //Adquireixo totes les seves subcategories de pare
+					Stack<String> pila = new Stack<String>(); // Monto una pila
+					for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves subcategories
+						pila.push(e.getNom()); // Les guardo a la pila;
+					}
+					solucio.addNode(cri.getPare()); /// Afageixo el pare
+					while(!pila.isEmpty()){
+						String aux = new String(pila.peek());
+						pila.pop();
+						solucio.addNode(aux);
+						Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(aux).getMapCSubC();
+						for(Categoria e2 : mapcatsubcat2.values()) { // Per a cadascuna de les seves subcategories
+							pila.push(e2.getNom()); // Les guardo a la pila;
+						}
+					}
+				}
+				else { // Si no hi ha cap criteri, ho afegim tot
+					for(Categoria cataux : llistat) {
+						solucio.addNode(cataux.getNom());
+					}
 				}
 			}
+			
 			if(cri.getEvitaCat().size() != 0) { // Si el criteri d'ignorar està actiu
 				HashSet<String> llistatactual = solucio.getNodes(); // Agafo tots els nodes afegits fins llavors
 				for(String it : llistatactual) {
@@ -162,18 +209,24 @@ public class ControladorTraduirAlgorisme {
 		//////////////////ENTRE CATEGORIES////////////////////////
 		HashSet<String> llistatactual = solucio.getNodes(); // Llista dels nodes a Solució (Graf)
 		for(String it : llistatactual) { // Per a cada node del graf( a seques)
+			System.out.println("Desde: ");
+			System.out.println(it);
 			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
 			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
+				System.out.print("Fills:");
+				System.out.println(e.getNom());
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
 					solucio.addAresta(it, e.getNom(), CalcularPesEntreCategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
 				}
 			}
-			Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(it).getMapCSupC(); //Adquireixo totes les seves subcategories
+			/*Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(it).getMapCSupC(); //Adquireixo totes les seves subcategories
 			for(Categoria e : mapcatsubcat2.values()) { // Per a cadascuna de les seves categories
+				System.out.print("Pares:");
+				System.out.println(e.getNom());
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
 					solucio.addAresta(it, e.getNom(), CalcularPesEntreCategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
 				}
-			}
+			}*/
 		}
 		//////////////////////////////////////////////////////////////
 		

@@ -38,17 +38,15 @@ public class driverTraduirAlgorisme {
 			e.printStackTrace();
 		}*/
 		
-		Categoria aux1 = new Categoria("sanitat");
+		/*Categoria aux1 = new Categoria("sanitat"); // PROVA METGES
 		Categoria aux2 = new Categoria("metge");
 		G.addCC(aux1, aux2);
-		Categoria aux3 = new Categoria("sanitat");
 		Categoria aux4 = new Categoria("metgessa");
-		G.addCC(aux3, aux4);
-		Categoria aux5 = new Categoria("metge");
+		G.addCC(aux1, aux4);
 		Categoria aux6 = new Categoria("uroleg");
-		G.addCC(aux5, aux6);
+		G.addCC(aux2, aux6);
 		Pagina aux7 = new Pagina("agulla");
-		G.addCP(aux5, aux7);
+		G.addCP(aux2, aux7);
 		G.addCP(aux4, aux7);
 		Categoria aux8 = new Categoria("ginecoleg");
 		G.addCC(aux4, aux8);
@@ -57,6 +55,34 @@ public class driverTraduirAlgorisme {
 		G.addCC(aux2, aux9);
 		Categoria aux10 = new Categoria("metgos");
 		G.addCC(aux2, aux10);
+		G.addCC(aux2, aux4);*/
+		
+		
+		Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
+		Categoria aux2 = new Categoria("asexual");
+		G.addCC(aux1,aux2);
+		Categoria aux3 = new Categoria("heterosexual");
+		G.addCC(aux1,aux3);
+		Categoria aux4 = new Categoria("homosexual");
+		G.addCC(aux1, aux4);
+		Categoria aux5 = new Categoria("sexe");
+		G.addCC(aux1,aux5);
+		Categoria aux6 = new Categoria("embaras");
+		G.addCC(aux3,aux6);
+		G.addCC(aux5, aux6);
+		Categoria aux7 = new Categoria("infertil");
+		G.addCC(aux4, aux7);
+		G.addCC(aux2, aux7);
+		G.addCC(aux3,aux4);
+		
+		/*Categoria aux1 = new Categoria("familia"); // Prova familia
+		Categoria aux2 = new Categoria("pare");
+		G.addCC(aux1,aux2);
+		Categoria aux3 = new Categoria("mare");
+		G.addCC(aux1,aux3);
+		Categoria aux4 = new Categoria("fill");
+		G.addCC(aux2,aux4);
+		G.addCC(aux3,aux4);*/
 		
 		Criteris cri = new Criteris();
 		cri.setAlgorisme(2);
@@ -68,11 +94,13 @@ public class driverTraduirAlgorisme {
 		ArrayList<Categoria> c = new ArrayList<Categoria>();
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
 		cri.setSubconjCat(c2);
-		ParaulaValor caca = new ParaulaValor("tg", 5);
+		ParaulaValor caca = new ParaulaValor("ho", 0);
 		cri.setParaulaClau(caca);
 		cri.setEvitaCat(c);
 		cri.setEvitaPag(s);
 		cri.setSemblaNom(0);
+		String sa = new String();
+		cri.setPare(sa);
 		
 		
 		ControladorTraduirAlgorisme trd = new ControladorTraduirAlgorisme();
@@ -80,6 +108,12 @@ public class driverTraduirAlgorisme {
 		HashSet<String> naa = new HashSet<String>(fora.getNodes());
 		ArrayList<String> n2 = new ArrayList<String>();
 		n2.addAll(naa);
+		for(String hhh : n2) {
+			System.out.print("Element: ");
+			System.out.print(hhh);
+			System.out.print(" ");
+		}
+		System.out.println("");
 		for(int q = 0; q < n2.size(); ++q) {
 			for(int g = q+1; g < n2.size(); ++g) {
 				if(fora.existeixAresta(n2.get(q), n2.get(g))) {
