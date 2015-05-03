@@ -9,9 +9,14 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
+/**
+ * @author Pau
+ *
+ */
+
 public class EntradaSortidaDadesGraf {
 
-	public GrafDades loadGraph(String ruta) throws FileNotFoundException, IOException {
+	public GrafDades carregarGrafDades(String ruta) throws FileNotFoundException, IOException {
 		GrafDades G = new GrafDades();
 		BufferedReader b = new BufferedReader(new FileReader(ruta));
 		String s;
@@ -42,7 +47,7 @@ public class EntradaSortidaDadesGraf {
 		return G;
 	}
 
-	public void printGrafAsText(GrafDades G, String ruta) throws FileNotFoundException, IOException {
+	public void escriureGrafDadesEnFitxer(GrafDades G, String ruta) throws FileNotFoundException, IOException {
 		FileWriter fichEscr = null;
 		PrintWriter docE = null;
 
@@ -96,7 +101,7 @@ public class EntradaSortidaDadesGraf {
 		}
 	}
 
-	public void translateTextToPicture(String textRoute, String pictureRoute) {
+	public void traduirGrafDadesAImatge(String rutaGraf, String rutaImatgeTXT) {
 		String s;
 
 		FileWriter fichEscr = null;
@@ -107,11 +112,11 @@ public class EntradaSortidaDadesGraf {
 
 		try {
 			// Arxiu de lectura
-			fichLect = new FileReader(textRoute);
+			fichLect = new FileReader(rutaGraf);
 			docL = new BufferedReader(fichLect);
 
 			// Arxiu d'escriptura
-			fichEscr = new FileWriter(pictureRoute);
+			fichEscr = new FileWriter(rutaImatgeTXT);
 			docE = new PrintWriter(fichEscr);
 
 			docE.println("digraph Graf {");

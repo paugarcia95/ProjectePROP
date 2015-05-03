@@ -40,11 +40,11 @@ public class Algorisme_NewmanGirvan {
 		Integer iterador = new Integer(1);
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
-		util.Calculate_edge_between();
+		util.calcularEdgeBetween();
 		while(util.numComunitats() != G.size()) {
 			storage.add(iterador, util.comunitats());
-			util.esborrar_maxim();
-			util.Calculate_edge_between();
+			util.esborrarMaxim();
+			util.calcularEdgeBetween();
 			++iterador;
 		}
 		
@@ -63,10 +63,10 @@ public class Algorisme_NewmanGirvan {
 	public static HashSet<HashSet<String>> executa_num(Graf G, Integer numComunidades) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
-		util.Calculate_edge_between();
+		util.calcularEdgeBetween();
 		while(util.numComunitats() < numComunidades) {
-			if(!util.esborrar_maxim()) return null; // Futur control d'errors
-			util.Calculate_edge_between();
+			if(!util.esborrarMaxim()) return null; // Futur control d'errors
+			util.calcularEdgeBetween();
 		}
 		return util.comunitats();
 		
@@ -81,12 +81,12 @@ public class Algorisme_NewmanGirvan {
 	public static HashSet<HashSet<String>> executa_bet(Graf G, Integer maxbetweness) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
-		util.Calculate_edge_between();
-		int maxactual = util.getMaxBet(); //Variable amb el valor de maxbtw
+		util.calcularEdgeBetween();
+		int maxactual = util.getMaxBetween(); //Variable amb el valor de maxbtw
 		while(maxactual > maxbetweness) {
-			if(!util.esborrar_maxim()) return null; // Futur control d'errors
-			util.Calculate_edge_between();
-			maxactual = util.getMaxBet();
+			if(!util.esborrarMaxim()) return null; // Futur control d'errors
+			util.calcularEdgeBetween();
+			maxactual = util.getMaxBetween();
 		}
 		return util.comunitats();
 	}

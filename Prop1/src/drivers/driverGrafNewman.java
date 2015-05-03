@@ -53,19 +53,19 @@ public class driverGrafNewman extends GrafNewman {
 
 		switch (in.nextInt()) {
 			case 1 :
-				System.out.println(G.camiMin(in.nextInt(), in.nextInt()));
+				System.out.println(G.getCamiMinim(in.nextInt(), in.nextInt()));
 				break;
 			case 2 :
-				System.out.println(G.getMaxBet());
+				System.out.println(G.getMaxBetween());
 				break;
 			case 3 :
-				System.out.println(G.Calculate_edge_between());
+				System.out.println(G.calcularEdgeBetween());
 				break;
 			case 4 :
-				System.out.println(G.Invertir_pesos());
+				System.out.println(G.invertirPesos());
 				break;
 			case 5 :
-				System.out.println(G.Invertir_pesos());
+				System.out.println(G.invertirPesos());
 				break;
 			case 6 :
 				System.out.println(G.numComunitats());
