@@ -59,7 +59,7 @@ public class Criteris {
 		relacionsCat = relacions;
 	}
 	
-	public Integer getSemblNom() {
+	public Integer getSemblaNom() {
 		return semblaNom;
 	}
 	
