@@ -1,5 +1,6 @@
 package drivers;
 
+import domini.CercaComunitats;
 import domini.Usuari;
 import junit.framework.TestCase;
 
@@ -66,44 +67,27 @@ public class UsuariTest extends TestCase{
 		assertTrue("No ha canviat la password", u.getPassword() == "entrega");
 	}
 
-	/*@Test
-	public void testGetUsername() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetPassword() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetNumCerques() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetCerca() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testAddCerca() {
-		fail("Not yet implemented");
+		Usuari u = new Usuari();
+		CercaComunitats a = new CercaComunitats("Primera"); 
+		u.addCerca(a);
+		assertTrue("No ha retornat el mateix objecte que s'ha guardat", u.getCerca("Primera") == a);
+		assertTrue("No ha retornat el mateix objecte que s'ha guardat o no l'ha guardat a la posició corresponent", u.getCerca(0) == a);
 	}
 
-	@Test
-	public void testRemoveCercaCercaComunitats() {
-		fail("Not yet implemented");
+	public void testRemoveCercaTresTipus() {
+		Usuari u = new Usuari();
+		CercaComunitats a = new CercaComunitats("Primera"); 
+		u.addCerca(a);
+		u.removeCerca(a);
+		
+		u.addCerca(a);
+		u.removeCerca(0);
+		assertNull("No ha eliminat la cerca", u.getCerca("Primera"));
+		
+		u.addCerca(a);
+		u.removeCerca("Primera");
+		assertNull("No ha eliminat la cerca", u.getCerca("Primera"));
 	}
-
-	@Test
-	public void testRemoveCercaInteger() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testEsAdmin() {
-		fail("Not yet implemented");
-	}*/
 
 }

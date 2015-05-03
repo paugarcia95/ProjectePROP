@@ -34,6 +34,14 @@ public class CercaComunitats {
 		eliminats = new LinkedList<Integer>();
 	}
 	
+	public CercaComunitats(String nom) {
+		this.nom = nom;
+		dataCreacio = new Date();
+		nComunitats = 0;
+		comunitats = new ArrayList<Comunitat>();
+		eliminats = new LinkedList<Integer>();
+	}
+	
 	public CercaComunitats() {
 		dataCreacio = new Date();
 		nComunitats = 0;
