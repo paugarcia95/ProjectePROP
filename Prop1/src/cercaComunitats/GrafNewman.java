@@ -418,10 +418,13 @@ public class GrafNewman extends Graf {
 	 */
 	public Boolean esborrarMaxim() {
 		if (maxNumCM != 0) {
-			if(errors < 4) System.out.println("Esborro una aresta entre "+ DiccionariInvers.get(maxi)+ " i "+DiccionariInvers.get(maxj));
+			System.out.println("Esborro una aresta entre "+ DiccionariInvers.get(maxi)+ " i "+DiccionariInvers.get(maxj));
 			//System.out.println(G.in);
 			Matriu.get(maxi).set(maxj, -1.0);
 			Matriu.get(maxj).set(maxi, -1.0);
+			maxNumCM=0;
+			maxi=0;
+			maxj=0;
 			if (!pertanyenMateixaComunitat(maxi, maxj)) {
 				numCom = 0;
 				numComunitats();
@@ -456,7 +459,6 @@ public class GrafNewman extends Graf {
 	 * @return Nombre de comunitats del graf
 	 */
 	public Integer numComunitats() {
-		if (numCom == 0) {
 			HashSet<String> nodes = this.getNodes();
 			Iterator<String> it = nodes.iterator();
 			Integer numComunitats = 0;
@@ -475,8 +477,6 @@ public class GrafNewman extends Graf {
 				}
 			}
 			numCom = numComunitats;
-			return numComunitats;
-		} else
 			return numCom;
 	}
 
