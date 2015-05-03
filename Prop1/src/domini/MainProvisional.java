@@ -625,10 +625,10 @@ public class MainProvisional {
 		*/
 		Criteris cri = new Criteris();
 		cri.setAlgorisme(2);
-		cri.setDada(4);
+		cri.setDada(5);
 		
 		cri.setRelacionsCat(5); // Relacions cat-pg
-		cri.setTipuCerca(2 ); ///???
+		cri.setTipuCerca(2); ///???
 		ArrayList<Categoria> c2 = new ArrayList<Categoria>(); // Subconjunt
 		ArrayList<Categoria> c = new ArrayList<Categoria>(); // Evitar
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
@@ -637,7 +637,7 @@ public class MainProvisional {
 		cri.setParaulaClau(utilitzable);
 		cri.setEvitaCat(c);
 		cri.setEvitaPag(s);
-		cri.setSemblaNom(0);
+		cri.setSemblaNom(3);
 		String sa = new String();
 		cri.setPare(sa);
 		mc.getConjUsers().getUser(mc.getUserActual()).getCerca(cercaactual).setCriterisSeleccio(cri);
