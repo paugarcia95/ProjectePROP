@@ -24,6 +24,7 @@ public class GrafNewman extends Graf {
 	private Integer maxj;
 	private Integer maxNumCM;
 	private Integer numCom;
+	private int errors;
 
 	private class Aresta { // Ha de ser privada!!! pero pel driver la deixo aixi
 							// de moment
@@ -161,6 +162,7 @@ public class GrafNewman extends Graf {
 		Matriu = new Vector< Vector<Double> >(G.Matriu);
 		maxNumCM = maxi = maxj = numCom = 0;
 		NCM = new int[Matriu.size()][Matriu.size()];
+		errors = 0;
 		/*NCM = new Vector<Vector<Integer>>();
 		int mida = Matriu.size();
 		Vector<Integer> aux = new Vector<Integer> (mida);
@@ -273,7 +275,6 @@ public class GrafNewman extends Graf {
 	 */
 	private Queue<Aresta> getCamiMinim(int nodeA, int nodeB) {
 		// Implementat amb Dijkstra
-		System.out.println("Busco amb A: "+ nodeA +", B: "+ nodeB);
 		QueueVector camiMinim = new QueueVector(this.size());
 
 		// Vector que marca la distancia del nodeA a la resta de nodes
@@ -335,32 +336,26 @@ public class GrafNewman extends Graf {
 	 *         hagut algun error.
 	 */
 	public Boolean calcularEdgeBetween() {
-		System.out.println("Entro a 6, Matriu.size= "+ Matriu.size()+" i NCM.size= "+ NCM.length);
+		System.out.println("Entro a 6, errors: " +errors);
+		++errors;
 		//if (NCM.size() < 2) return false;
 		// Posem a 0 tots els camins minims per "comencar" la nova ronda
 		for (int i = 0; i < NCM.length; ++i) {
-			System.out.println("Entro a 7");
 			for (int j = 0; j < NCM.length; ++j)
 				NCM[i][j] = 0;
 				//NCM.get(i).set(j, 0);
 		}
-		System.out.println("Entro a 5");
 		// Calcula el cami minim de cada node cap a tots els nodes
 		for (int i = 0; i < NCM.length-1; ++i)
 			for (int j = 0; j < NCM.length-1; ++j) {
-				System.out.println("Entro a 4");
 				if (i != j) {
 					if (numCom < 4 || pertanyenMateixaComunitat(i, j)) {
-						System.out.println("Busco amb i: "+ i +", j: "+ j);
 						Queue<Aresta> cami = getCamiMinim(i, j);
 						// un cop trobat cada cami minim, sumar 1 a la pos de
 						// NCM
-						System.out.println("Entro a 3");
 						if (cami.size() > 0) {
-							System.out.println("Entro a 2");
 							Iterator<Aresta> itc = cami.iterator();
 							while (itc.hasNext()) {
-								System.out.println("Entro a 1");
 								Aresta aux = itc.next();
 								Integer act = NCM[aux.node1][aux.node2];
 								NCM[aux.node1][aux.node2]=act + 1;
@@ -369,7 +364,6 @@ public class GrafNewman extends Graf {
 								// mantenir el vertex per on passen mes camins
 								// minims (variables maxi, maxj i maxNumCM)
 								if (maxNumCM <= act) {
-									System.out.println("Soc bo i m'actualitzo (maxNumCM)");
 									maxi = aux.node1;
 									maxj = aux.node2;
 									maxNumCM = act;
@@ -396,8 +390,8 @@ public class GrafNewman extends Graf {
 			for (int i = 0; i < mida; ++i) {
 				for (int j = 0; j < mida; ++j) {
 					double act = Matriu.get(i).get(j);
-					if (act != 0.0)
-						Matriu.get(i).set(j, 1 / act);
+					if (act != 0.0) Matriu.get(i).set(j, 1 / act);
+					else Matriu.get(i).set(j, -1.0);
 				}
 			}
 			return true;
@@ -413,7 +407,8 @@ public class GrafNewman extends Graf {
 	 */
 	public Boolean esborrarMaxim() {
 		if (maxNumCM != 0) {
-			Matriu.get(maxi).set(maxj, 0.0);
+			System.out.println("Esborro una aresta entre els nodes "+ maxi+ " i "+maxj);
+			Matriu.get(maxi).set(maxj, -1.0);
 			if (!pertanyenMateixaComunitat(maxi, maxj)) {
 				numCom = 0;
 				numComunitats();
