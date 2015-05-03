@@ -43,7 +43,7 @@ public class driverEntradaSortidaDadesGraf {
 		}
 		return io.carregarGrafDades((rutaPerDefecte.equals("s")), null, ruta);
 	}
-// C:/Users/Pau/Desktop/cats.txt
+	// C:/Users/Pau/Desktop/cats.txt
 	public static void escriureGraf(EntradaSortidaDadesGraf io, GrafDades G) {
 		in = new Scanner(System.in);
 		System.out.println("Escriure Graf");

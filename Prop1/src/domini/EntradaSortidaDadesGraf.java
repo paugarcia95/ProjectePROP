@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
  */
 
 public class EntradaSortidaDadesGraf {
-	private String rutaPerDefecte;
+	private String rutaPerDefecte = null;
 
 	/**
 	 * Creadora per defecte. La ruta per defecte d'inicialitza a null.
