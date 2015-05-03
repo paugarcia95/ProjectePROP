@@ -40,7 +40,7 @@ public class ControladorUsers {
 	 * 
 	 * @return true si s'ha pogut carregar tot correctament, false si hi ha hagut algun error.
 	 */
-	public boolean iniciCarregarUsers() { return true; }
+	public Boolean iniciCarregarUsers() { return true; }
 	
 	/**
 	 * Fa Admin a un usuari username ja existent.
@@ -62,7 +62,7 @@ public class ControladorUsers {
 	 *  
 	 * @return true si s'ha afegit correctament, false si ja existia un usuari amb aquest username.
 	 */
-	public boolean addUser(String username, String pass) {
+	public Boolean addUser(String username, String pass) {
 		if (!conj.exists(username)) {
 			Usuari u = new Usuari(username, pass, false);
 			return conj.addUser(u);
@@ -120,7 +120,7 @@ public class ControladorUsers {
 	 * 
 	 * @return false si hi ha hagut algun error, true altrament.
 	 */
-	public boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare ) {
+	public Boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare ) {
 		ParaulaValor par = new ParaulaValor(paraulast, paraulain);
 		ArrayList<Categoria> sub = new ArrayList<Categoria>();
 		for(String catsub: subconj) {
@@ -190,7 +190,7 @@ public class ControladorUsers {
 	 * 
 	 * @return false si no s'ha pogut canviar el nom, true en cas contrari.
 	 */
-	public boolean setUsername(String antic, String nou) {
+	public Boolean setUsername(String antic, String nou) {
 		return conj.setUsername(antic, nou);
 	}
 
@@ -202,7 +202,7 @@ public class ControladorUsers {
 	 * 
 	 * @return false si no s'ha pogut eliminar, true altrament.
 	 */
-	public boolean removeUser(String username) {
+	public Boolean removeUser(String username) {
 		if (conj.exists(username)) return conj.removeUser(username);
 		else return false;
 
@@ -218,7 +218,7 @@ public class ControladorUsers {
 	 * 
 	 * @return false si no s'ha pogut eliminar, true altrament.
 	 */
-	public boolean removeCerca(String username, String nom) {
+	public Boolean removeCerca(String username, String nom) {
 		return conj.getUser(username).removeCerca(nom);
 	}
 	
@@ -232,7 +232,7 @@ public class ControladorUsers {
 	 * 
 	 * @return false si no s'ha pogut eliminar, true altrament.
 	 */
-	public boolean removeCerca(String username, Integer quina) {
+	public Boolean removeCerca(String username, Integer quina) {
 		return conj.getUser(username).removeCerca(quina);
 	}
 	
@@ -246,7 +246,7 @@ public class ControladorUsers {
 	 * 
 	 * @return false si no s'ha pogut executar, true altrament.
 	 */
-	public boolean ferCerca(String username, Integer quina){
+	public Boolean ferCerca(String username, Integer quina){
 		TraduccioiAlgorisme ta = new TraduccioiAlgorisme();
 		ArrayList<Comunitat> list = ta.traduiricercar(gd, conj.getUser(username).getCerca(quina).getCriterisSeleccio());
 		conj.getUser(username).getCerca(quina).setComunitats(list);
@@ -263,7 +263,7 @@ public class ControladorUsers {
 	 * 
 	 * @return true si existeix un usuari username.
 	 */
-	public boolean existsUser(String username) {
+	public Boolean existsUser(String username) {
 		return conj.exists(username);
 	}
 
@@ -277,7 +277,7 @@ public class ControladorUsers {
 	 * 
 	 * @return true si concorden, false en cas contrari.
 	 */
-	public boolean login(String username, String pass) {
+	public Boolean login(String username, String pass) {
 		Usuari u = conj.getUser(username);
 		return u.getPassword().equals(pass);
 	}
@@ -290,7 +290,7 @@ public class ControladorUsers {
 	 * 
 	 * @return true si l'usuari es admin, false en cas contrari.
 	 */
-	public boolean isAdmin(String username) {
+	public Boolean isAdmin(String username) {
 		return conj.getUser(username).esAdmin();
 	}
 
