@@ -70,7 +70,7 @@ public class driverEntradaSortidaDadesGraf {
 			System.out.println("2. Llegir les entrades del graf una a una i escriure'l a un fitxer");
 			System.out.println("3. Llegir des d'un fitxer i escriure la representació en imatge del graf (cal haver especificat una ruta per defecte per guardar el graf auxiliar)");
 			System.out.println("4. Llegir les entrades del graf una a una i escriure'n la seva representació gràfica (cal haver especificat una ruta per defecte per guardar el graf auxiliar)");
-			System.out.println("6. Sortir");
+			System.out.println("5. Sortir");
 
 			EntradaSortidaDadesGraf io = new EntradaSortidaDadesGraf();
 			in = new Scanner(System.in);
