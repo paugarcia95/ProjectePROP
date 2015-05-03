@@ -79,8 +79,8 @@ public class GrafNewman extends Graf {
 		 */
 		@Override
 		public int compare(ArestaPes o1, ArestaPes o2) {
-			// Es multiplica el valor per 100 per no perdre precisió a la
-			// comparació de doubles (ja que despres es fa un cast a integer i
+			// Es multiplica el valor per 100 per no perdre precisio a la
+			// comparacio de doubles (ja que despres es fa un cast a integer i
 			// es perden els decimals)
 			return (int) (o1.pes * 100 - o2.pes * 100);
 		}
