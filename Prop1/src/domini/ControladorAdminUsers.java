@@ -12,10 +12,10 @@ import java.util.ArrayList;
 public class ControladorAdminUsers {
 	//PRIVAT
 	//	Atribut: una constant amb inici
-	@SuppressWarnings("unused")
 	private GrafDades gd;
 	@SuppressWarnings("unused")
 	private ConjuntUsuaris conj;
+	EntradaSortidaDadesGraf aux;
 	//PUBLIC
 //CONSTRUCTORA
 	/**
@@ -105,7 +105,12 @@ public class ControladorAdminUsers {
 	 * Post: Carrega en el graf les dades del fitxer per defecte
 	 * @return true si s'ha carregat tot correctament, false si hi ha hagut algun error.
 	 */
-	public boolean iniciCarregarDades() {return true;}
+	public boolean iniciCarregarDades() {
+		aux = new EntradaSortidaDadesGraf("C:/Users/Cristina/Google Drive/UNI/PROP/Projecte/cats.txt");
+		aux.carregarGrafDades(true,gd, null);
+		return true;
+		
+	}
 	
 	/**
 	 * Pre:

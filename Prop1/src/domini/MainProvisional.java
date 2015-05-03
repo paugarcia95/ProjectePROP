@@ -180,6 +180,7 @@ public class MainProvisional {
 			System.out.println("1. Modificar el nom de la Cerca ");
 			System.out.println("2. Modificar el comentari ");
 			System.out.println("3. Modificar els criteris ");
+			//mes modificar les comunitats obtingudes!!!!!
 			System.out.println("4. Enrere ");
 			System.out.print("Numero d'opció:");
 			int n1 = 0;
@@ -719,8 +720,8 @@ public class MainProvisional {
 		System.out.println("1. Crear altres administradors");
 		System.out.println("2. Esborrar totes les dades");
 		System.out.println("3. Introduir dades a partir de fitxers");
-		System.out.println("4. Esborrar clients ");
-		System.out.println("5. Instroduir dades manualment ");
+		System.out.println("4. Esborrar clients");
+		System.out.println("5. Instroduir dades manualment");
 		System.out.println("6. Buscar entre les categories ");
 		System.out.println("7. Buscar entre les categories i pagines ");
 		System.out.println("8. Buscar entre les pagines ");

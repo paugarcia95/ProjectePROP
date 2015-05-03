@@ -12,7 +12,7 @@ import java.util.Queue;
 import java.util.Vector;
 
 /**
- * @author Cristina & Pau
+ * @author cristina.fontanet & Pau
  *
  */
 public class GrafNewman extends Graf {
@@ -23,7 +23,7 @@ public class GrafNewman extends Graf {
 	private Integer maxNumCM;
 	private Integer numCom;
 
-	public class Aresta { // Ha de ser privada!!! pero pel driver la deixo aixi
+	private class Aresta { // Ha de ser privada!!! pero pel driver la deixo aixi
 							// de moment
 		public Integer node1;
 		public Integer node2;
@@ -288,7 +288,6 @@ public class GrafNewman extends Graf {
 				if (distancia.get(v) > distancia.get(u) + pesUV) {
 					distancia.set(v, distancia.get(u) + pesUV);
 					cola.add(new ArestaPes(v, distancia.get(v)));
-
 					camiMinim.push(v, new Aresta(u, v));
 				}
 			}
@@ -392,7 +391,7 @@ public class GrafNewman extends Graf {
 	}
 
 	/**
-	 * Retorna el nombre de comunitats en les que esta  dividit el graf o -1 en
+	 * Retorna el nombre de comunitats en les que estaï¿½ dividit el graf o -1 en
 	 * cas d'error (Pau)
 	 * 
 	 * @return Nombre de comunitats del graf
