@@ -72,7 +72,7 @@ public class AlgorismeNewmanGirvan {
 	 * @return Comunitats creades a partir de l'execució ( com a max =
 	 *         numcomunidades comunitats)
 	 */
-	public static HashSet<HashSet<String>> executanum(Graf G, Integer numComunidades) {
+	public static HashSet<HashSet<String>> executa_num(Graf G, Integer numComunidades) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
 		util.calcularEdgeBetween();

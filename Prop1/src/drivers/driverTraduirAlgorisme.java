@@ -105,7 +105,7 @@ public class driverTraduirAlgorisme {
 		
 		
 		Traduccioialgorisme trd = new Traduccioialgorisme();
-		Graf fora = new Graf(trd.GrafDadestoGraf(G, cri));
+		Graf fora = new Graf(trd.grafdadestograf(G, cri));
 		HashSet<String> naa = new HashSet<String>(fora.getNodes());
 		ArrayList<String> n2 = new ArrayList<String>();
 		n2.addAll(naa);

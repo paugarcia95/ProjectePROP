@@ -76,7 +76,7 @@ public class Traduccioialgorisme {
 	 * @param cri Criteris passats
 	 * @return Retorna el pes de la relacio entre les dues categories C1 i C2
 	 */
-	private Double CalcularPesEntreCategories(Categoria c1, Categoria c2, Criteris cri){
+	private Double calcularpesentrecategories(Categoria c1, Categoria c2, Criteris cri){
 		Double solucio = new Double(0);	
 		
 		////////////**************Criteri de cat-cat i cat-pg********/////////////
@@ -111,7 +111,7 @@ public class Traduccioialgorisme {
 	 * @param cri Criteri passat
 	 * @return Retorna el pes que ha de tenir la relacio
 	 */
-	private Double CalcularPesEntreCatPag(Criteris cri) {
+	private Double calcularpesentrecatpag(Criteris cri) {
 		Double solucio = new Double(0);	
 		
 		////////////**************Criteri de cat-cat i cat-pg********/////////////
@@ -135,7 +135,7 @@ public class Traduccioialgorisme {
 	 * @param cri Criteris passats
 	 * @return Retorna un graf transformat a partir de l'original
 	 */
-	public Graf GrafDadestoGraf (GrafDades graf, Criteris cri) {
+	public Graf grafdadestograf (GrafDades graf, Criteris cri) {
 		Graf solucio = new Graf();
 		Collection<Categoria> llistat = graf.getCategories();
 		
@@ -216,7 +216,7 @@ public class Traduccioialgorisme {
 				System.out.print("Fills:");
 				System.out.println(e.getNom());
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
-					solucio.addAresta(it, e.getNom(), CalcularPesEntreCategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
+					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
 				}
 			}
 			/*Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(it).getMapCSupC(); //Adquireixo totes les seves subcategories
@@ -245,11 +245,11 @@ public class Traduccioialgorisme {
 					if(solucio.existeixNode(seguiment.get(q).getNom()) && solucio.existeixNode(seguiment.get(u).getNom())) { // Si les categories existeixen al graf Solució
 						if(solucio.existeixAresta(seguiment.get(q).getNom(), seguiment.get(u).getNom())) {
 							Double pesactual = solucio.getPes(seguiment.get(q).getNom(), seguiment.get(u).getNom());
-							pesactual += CalcularPesEntreCatPag(cri);
+							pesactual += calcularpesentrecatpag(cri);
 							solucio.setPes(seguiment.get(q).getNom(), seguiment.get(u).getNom(), pesactual);
 						}
 						else {
-							Double calc = new Double(CalcularPesEntreCatPag(cri));
+							Double calc = new Double(calcularpesentrecatpag(cri));
 							solucio.addAresta(seguiment.get(q).getNom(), seguiment.get(u).getNom(),calc );
 							
 						}
@@ -268,14 +268,14 @@ public class Traduccioialgorisme {
 	 */
 	public ArrayList<Comunitat> traduiricercar (GrafDades graf, Criteris cri) {
 		Graf utilitzable = new Graf();
-		utilitzable = GrafDadestoGraf(graf,cri);
+		utilitzable = grafdadestograf(graf,cri);
 		HashSet<HashSet<String>> solucio = new HashSet<HashSet<String>>();
 		if(cri.getAlgorisme() == 1) {
 			solucio = Louvain.executa(utilitzable, cri.getDada());
 		}
 		else if (cri.getAlgorisme() == 2) {
 			if(cri.getTipuCerca() == 1) solucio = AlgorismeNewmanGirvan.executa(utilitzable,cri.getDada());
-			else if(cri.getTipuCerca() == 2) solucio = AlgorismeNewmanGirvan.executanum(utilitzable,cri.getDada());
+			else if(cri.getTipuCerca() == 2) solucio = AlgorismeNewmanGirvan.executa_num(utilitzable,cri.getDada());
 			else solucio = AlgorismeNewmanGirvan.executabet(utilitzable,cri.getDada());
 		}
 		else {
