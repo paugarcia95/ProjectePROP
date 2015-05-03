@@ -273,7 +273,7 @@ public class GrafNewman extends Graf {
 	 */
 	private Queue<Aresta> getCamiMinim(int nodeA, int nodeB) {
 		// Implementat amb Dijkstra
-
+		System.out.println("Busco amb A: "+ nodeA +", B: "+ nodeB);
 		QueueVector camiMinim = new QueueVector(this.size());
 
 		// Vector que marca la distancia del nodeA a la resta de nodes
@@ -346,11 +346,12 @@ public class GrafNewman extends Graf {
 		}
 		System.out.println("Entro a 5");
 		// Calcula el cami minim de cada node cap a tots els nodes
-		for (int i = 0; i < NCM.length; ++i)
-			for (int j = 0; i < NCM.length; ++j) {
+		for (int i = 0; i < NCM.length-1; ++i)
+			for (int j = 0; j < NCM.length-1; ++j) {
+				System.out.println("Entro a 4");
 				if (i != j) {
-					System.out.println("Entro a 4");
 					if (numCom < 4 || pertanyenMateixaComunitat(i, j)) {
+						System.out.println("Busco amb i: "+ i +", j: "+ j);
 						Queue<Aresta> cami = getCamiMinim(i, j);
 						// un cop trobat cada cami minim, sumar 1 a la pos de
 						// NCM
