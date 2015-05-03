@@ -146,7 +146,8 @@ public class GrafNewman extends Graf {
 	public GrafNewman() {
 		super();
 		// crea NCM de la mateixa mida que Matriu
-		NCM = new Vector<Vector<Integer>>(super.Matriu.size());
+		NCM = new Vector<Vector<Integer>>();
+		NCM.setSize(Matriu.size());
 		maxNumCM = maxi = maxj = numCom = 0;
 	}
 	
@@ -322,30 +323,37 @@ public class GrafNewman extends Graf {
 	 *         hagut algun error.
 	 */
 	public Boolean calcularEdgeBetween() {
-		if (NCM.size() < 2)
-			return false;
+		System.out.println("Entro a 6, Matriu.size= "+ Matriu.size());
+		//if (NCM.size() < 2) return false;
 		// Posem a 0 tots els camins minims per "comencar" la nova ronda
 		for (int i = 0; i < NCM.size(); ++i) {
+			//System.out.println("Entro a 7");
 			for (int j = 0; i < NCM.size(); ++j)
 				NCM.get(i).set(j, 0);
 		}
+		System.out.println("Entro a 5, NCM.size= "+ NCM.size());
 		// Calcula el cami minim de cada node cap a tots els nodes
 		for (int i = 0; i < NCM.size(); ++i)
 			for (int j = 0; i < NCM.size(); ++j) {
 				if (i != j) {
+					System.out.println("Entro a 4");
 					if (numCom < 4 || pertanyenMateixaComunitat(i, j)) {
 						Queue<Aresta> cami = getCamiMinim(i, j);
 						// un cop trobat cada cami minim, sumar 1 a la pos de
 						// NCM
+						System.out.println("Entro a 3");
 						if (cami.size() > 0) {
+							System.out.println("Entro a 2");
 							Iterator<Aresta> itc = cami.iterator();
 							while (itc.hasNext()) {
+								System.out.println("Entro a 1");
 								Aresta aux = itc.next();
 								Integer act = NCM.get(aux.node1).get(aux.node2);
 								NCM.get(aux.node1).set(aux.node2, act + 1);
 								// mantenir el vertex per on passen mes camins
 								// minims (variables maxi, maxj i maxNumCM)
 								if (maxNumCM <= act) {
+									System.out.println("Soc bo i m'actualitzo (maxNumCM)");
 									maxi = aux.node1;
 									maxj = aux.node2;
 									maxNumCM = act;
@@ -395,7 +403,10 @@ public class GrafNewman extends Graf {
 				numComunitats();
 			}
 			return true;
-		} else return false;
+		} else {
+			System.out.println("Error en esborrarMaxim");
+			return false;
+		}
 
 	}
 

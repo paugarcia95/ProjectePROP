@@ -291,17 +291,17 @@ public class MainProvisional {
 		System.out.println("Hi ha "+numcom+ " comunitats: ");
 		for(Integer i = 1; i <= numcom; ++i) {
 			System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
-			Integer comunitat = mc.getContUser().getNumCatCerca(mc.getUserActual(), cercaactual, i-1);
-			for (Integer j = 0; j < comunitat; ++j) {
+			//Integer comunitat = mc.getContUser().getNumCatCerca(mc.getUserActual(), cercaactual, i-1);
+			//for (Integer j = 0; j < comunitat; ++j) {
 				Set<String> aux1 = mc.getContUser().getCatCerca(mc.getUserActual(), cercaactual, i-1);
 				Iterator<String> it4 = aux1.iterator();
 				while(it4.hasNext())System.out.println(it4.next());
-			}
+			//}
 		}
 		
 		
 		
-		System.out.println("Tria entre les seguents opcions:");
+	/*	System.out.println("Tria entre les seguents opcions:");
 		System.out.println("1. Modificar Cerca");		
 		System.out.println("2. Eliminar Cerca ");
 		System.out.println("3. Visualitzar Categoria");
@@ -346,7 +346,7 @@ public class MainProvisional {
 			n = s.nextInt();
 			break;
 			}
-		}
+		}*/
 	}
 	//private void {}
 	
@@ -625,10 +625,10 @@ public class MainProvisional {
 		*/
 		Criteris cri = new Criteris();
 		cri.setAlgorisme(2);
-		cri.setDada(5);
+		cri.setDada(2);
 		
 		cri.setRelacionsCat(5); // Relacions cat-pg
-		cri.setTipuCerca(3); ///???
+		cri.setTipuCerca(2 ); ///???
 		ArrayList<Categoria> c2 = new ArrayList<Categoria>(); // Subconjunt
 		ArrayList<Categoria> c = new ArrayList<Categoria>(); // Evitar
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
@@ -948,12 +948,14 @@ public class MainProvisional {
 		G.addCC(aux2, aux7);
 		G.addCC(aux3,aux4);
 		mc.getContUser().addUser("admin", "admin");
-		mc.getContUser().addUser("client", "client");
+		/*mc.getContUser().addUser("client", "client");
 		mc.getContUser().addAdmin("admin");
 		System.out.println("Acabes d'entrar al main provisional del projecte de la Wikipedia, es mostraran les mateixes funcionalitats que en el projecte final però en mode consola.");
 		System.out.println("Escriu alguna cosa per continuar");
 		s.next();
-		pantallaInici();
+		pantallaInici();*/
+		mc.setUserActual("admin");
+		crearConjuntComunitats();
 		
 	}
 }
