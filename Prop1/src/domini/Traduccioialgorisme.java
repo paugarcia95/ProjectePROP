@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Stack;
 
-import cercaComunitats.Algorisme_NewmanGirvan;
+import cercaComunitats.AlgorismeNewmanGirvan;
 import cercaComunitats.Clique;
 import cercaComunitats.Graf;
 import cercaComunitats.Louvain;
@@ -274,9 +274,9 @@ public class Traduccioialgorisme {
 			solucio = Louvain.executa(utilitzable, cri.getDada());
 		}
 		else if (cri.getAlgorisme() == 2) {
-			if(cri.getTipuCerca() == 1) solucio = Algorisme_NewmanGirvan.executa(utilitzable,cri.getDada());
-			else if(cri.getTipuCerca() == 2) solucio = Algorisme_NewmanGirvan.executa_num(utilitzable,cri.getDada());
-			else solucio = Algorisme_NewmanGirvan.executa_bet(utilitzable,cri.getDada());
+			if(cri.getTipuCerca() == 1) solucio = AlgorismeNewmanGirvan.executa(utilitzable,cri.getDada());
+			else if(cri.getTipuCerca() == 2) solucio = AlgorismeNewmanGirvan.executanum(utilitzable,cri.getDada());
+			else solucio = AlgorismeNewmanGirvan.executabet(utilitzable,cri.getDada());
 		}
 		else {
 			solucio = Clique.executa(utilitzable, cri.getDada());

@@ -10,13 +10,13 @@ import java.util.HashSet;
  * @author Rafa
  *
  */
-public class Algorisme_NewmanGirvan {
+public class AlgorismeNewmanGirvan {
 
 	/**
 	 * 
 	 * Creadora per defecte
 	 */
-	public Algorisme_NewmanGirvan() {
+	public AlgorismeNewmanGirvan() {
 		// TODO Auto-generated constructor stub
 	}
 	/**
@@ -72,7 +72,7 @@ public class Algorisme_NewmanGirvan {
 	 * @return Comunitats creades a partir de l'execució ( com a max =
 	 *         numcomunidades comunitats)
 	 */
-	public static HashSet<HashSet<String>> executa_num(Graf G, Integer numComunidades) {
+	public static HashSet<HashSet<String>> executanum(Graf G, Integer numComunidades) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
 		util.calcularEdgeBetween();
@@ -96,7 +96,7 @@ public class Algorisme_NewmanGirvan {
 	 *            Integer que indica la max btw que hi pot haver al graf
 	 * @return Comunitats en les qual cap node tindrá btw > maxbetweness.
 	 */
-	public static HashSet<HashSet<String>> executa_bet(Graf G, Integer maxbetweness) {
+	public static HashSet<HashSet<String>> executabet(Graf G, Integer maxbetweness) {
 		GrafNewman util = new GrafNewman();
 		util = (GrafNewman) G; // Transformem de Graf a GrafNewman
 		util.calcularEdgeBetween();
