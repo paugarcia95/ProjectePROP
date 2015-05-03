@@ -16,144 +16,71 @@ import java.util.StringTokenizer;
  */
 
 public class EntradaSortidaDadesGraf {
-	private String rutaPerDefecte = null;
 
 	/**
 	 * Creadora per defecte. La ruta per defecte d'inicialitza a null.
 	 * 
 	 */
 	public EntradaSortidaDadesGraf() {
-		this.rutaPerDefecte = null;
+		super();
 	}
 
-	/**
-	 * Es crea una nova instància de la classe on la ruta per defecte és la
-	 * indicada
-	 * 
-	 */
-	public EntradaSortidaDadesGraf(String rutaPerDefecte) {
-		this.rutaPerDefecte = rutaPerDefecte;
-	}
-
-	/**
-	 * Retorna la ruta per defecte
-	 * 
-	 * @return rutaPerDefecte
-	 */
-	public String getRutaPerDefecte() {
-		return rutaPerDefecte;
-	}
-
-	/**
-	 * S'estableix com a rutaPerDefecte la indicada
-	 * 
-	 * @param rutaPerDefecte
-	 *            ruta des d'on es carregaran els fitxers a l'iniciar el
-	 *            programa
-	 */
-	public void setRutaPerDefecte(String rutaPerDefecte) {
-		this.rutaPerDefecte = rutaPerDefecte;
-	}
 
 	/**
 	 * Carrega les dades d'un fitxer de text a un graf.
 	 * 
-	 * Si utilitzarRutaPerDefecte==TRUE:
-	 * 
-	 * S'utilitza la rutaPerDefecte de la classe per carregar les dades del
-	 * graf. Si la rutaPerDefecte no està inicialitzada, s'inicialitza
-	 * utilitzant "ruta". En aquest cas, es crea un nou GrafDades (s'ignora G),
-	 * s'omple amb les dades indicades al fitxer i es retorna aquest graf.
-	 * 
-	 * Si utilitzarRutaPerDefecte==FALSE:
-	 * 
 	 * S'afegeixen a G els nodes i/o arestes indicats pel fitxer de text a
 	 * "ruta"
 	 * 
-	 * @param utilitzarRutaPerDefecte
-	 *            Booleà que indica si es vol utilitzar la ruta per defecte
 	 * @param G
-	 *            Només es té en compte si utilitzarRutaPerDefecte==FALSE; si és
-	 *            així, s'afegeixen a aquest graf els nous nodes i arestes
+	 *            S'afegeixen a aquest graf els nous nodes i arestes
 	 * @param ruta
 	 *            Adreça on es troba el fitxer de text
 	 * @return Un GrafDades amb les dades de "ruta"
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
-	public GrafDades carregarGrafDades(Boolean utilitzarRutaPerDefecte, GrafDades G, String ruta) {
-		/*
-		 * if (utilitzarRutaPerDefecte) { G = new GrafDades(); if
-		 * (rutaPerDefecte != null) ruta = rutaPerDefecte; else { rutaPerDefecte
-		 * = ruta; } } //no va
-		 */
-
-		BufferedReader b = null;
+	public GrafDades carregarGrafDades(String ruta) throws FileNotFoundException, IOException {
+		GrafDades G = new GrafDades();
+		BufferedReader b = new BufferedReader(new FileReader(ruta));
 		String s;
-		try {
-			b = new BufferedReader(new FileReader(ruta));
-		} catch (FileNotFoundException e) {
-			System.out.println(e);
-			System.out.println("Fitxer no trobat");
-		}
 
-		try {
-			while ((s = b.readLine()) != null) {
-				StringTokenizer st = new StringTokenizer(s);
+		while ((s = b.readLine()) != null) {
+			StringTokenizer st = new StringTokenizer(s);
 
-				while (st.hasMoreTokens() && st.countTokens() >= 4) {
-					String word1 = st.nextToken();
-					st.nextToken();
-					String link = st.nextToken();
-					String word2 = st.nextToken();
+			while (st.hasMoreTokens() && st.countTokens() >= 4) {
+				String word1 = st.nextToken();
+				st.nextToken();
+				String link = st.nextToken();
+				String word2 = st.nextToken();
+				st.nextToken();
 
-					if (link.equals("CsubC"))
-						G.addCC(word1, word2);
-					else if (link.equals("CsupC"))
-						G.addCC(word2, word1);
-					else if (link.equals("CP"))
-						G.addCP(word1, word2);
-					else if (link.equals("PC"))
-						G.addPC(word1, word2);
-					else
-						System.out.println("Error al crear el graf: Comprova la sintaxi de l'entrada");
-				}
-				b.close();
+				if (link.equals("CsubC"))
+					G.addCC(word1, word2);
+				else if (link.equals("CsupC"))
+					G.addCC(word2, word1);
+				else if (link.equals("CP"))
+					G.addCP(word1, word2);
+				else if (link.equals("PC"))
+					G.addPC(word1, word2);
+				else
+					System.out.println("Error al crear el graf: Comprova la sintaxi de l'entrada");
 			}
-		} catch (IOException e) {
-			System.out.println(e);
-			System.out.println("Error en la sintaxi d'entrada");
 		}
+		b.close();
 		return G;
 	}
 
 	/**
 	 * Guarda la configuració del graf G a un fitxer de text a "ruta".
 	 * 
-	 * Si utilitzarRutaPerDefecte==TRUE:
-	 * 
-	 * El graf es guarda a RutaPerDefecte. En cas que aquesta sigui nul·la,
-	 * s'assigna com a ruta per defecte "ruta".
-	 * 
-	 * Si utilitzarRutaPerDefecte==FALSE:
-	 * 
-	 * El graf es guarda a "ruta".
-	 * 
-	 * @param utilitzarRutaPerDefecte
-	 *            Booleà que indica si es vol utilitzar la ruta per defecte
 	 * @param G
 	 *            Indica el graf de dades que es vol emmagatzemar
 	 * @param ruta
 	 *            Indica la ruta de directoris i el fitxer on es vol guardar el
 	 *            graf
 	 */
-	public void escriureGrafDadesEnFitxer(Boolean utilitzarRutaPerDefecte, GrafDades G, String ruta) {
-		if (utilitzarRutaPerDefecte) {
-			if (rutaPerDefecte != null)
-				ruta = rutaPerDefecte;
-			else {
-				rutaPerDefecte = ruta;
-			}
-		}
-
+	public void escriureGrafDadesEnFitxer(GrafDades G, String ruta) {
 		FileWriter fichEscr = null;
 		PrintWriter docE = null;
 
