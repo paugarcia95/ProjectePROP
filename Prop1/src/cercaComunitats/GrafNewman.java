@@ -282,7 +282,7 @@ public class GrafNewman extends Graf {
 
 		// Es com una cua de prioritat que ordena els nodes en una posicio mes
 		// curta al principi
-		PriorityQueue<ArestaPes> cola = new PriorityQueue<ArestaPes>(0, new ComparaValors());
+		PriorityQueue<ArestaPes> cola = new PriorityQueue<ArestaPes>(100, new ComparaValors());
 
 		// En un principi no se sap, i es marquen les distancies com a
 		// infinites
@@ -307,7 +307,7 @@ public class GrafNewman extends Graf {
 				Integer v = it2.next();
 				Double pesUV = this.getPes(DiccionariInvers.get(u), DiccionariInvers.get(v));
 
-				if (distancia.get(v) > distancia.get(u) + pesUV) {
+				if (distancia.get(v) != -1.0 && distancia.get(u) != -1.0 && distancia.get(v) > distancia.get(u) + pesUV) {
 					distancia.set(v, distancia.get(u) + pesUV);
 					cola.add(new ArestaPes(v, distancia.get(v)));
 					camiMinim.push(v, new Aresta(u, v));
