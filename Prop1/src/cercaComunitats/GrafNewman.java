@@ -429,7 +429,7 @@ public class GrafNewman extends Graf {
 				numCom = 0;
 				numComunitats();
 			}
-			if(errors ==1) {
+	/*		if(errors ==1) {
 				System.out.println("1: " + DiccionariInvers.get(1)+" i 2: "+ DiccionariInvers.get(2));
 				System.out.println("3: " + DiccionariInvers.get(3)+" i 4: "+ DiccionariInvers.get(4));
 				System.out.println("5: " + DiccionariInvers.get(5)+" i 6: "+ DiccionariInvers.get(6));
@@ -443,7 +443,7 @@ public class GrafNewman extends Graf {
 				System.out.println("Adjacents heterosexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("heterosexual")));
 				System.out.println("Adjacents homosexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("homosexual")));
 				System.out.println("Adjacents sexe en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("sexe")));
-			}
+			}*/
 			return true;
 		} else {
 			System.out.println("Error en esborrarMaxim");
