@@ -729,20 +729,22 @@ public class MainProvisional {
 		
 		System.out.println("Indica amb un numero del 0 al 10 la importancia que li vols donar als seguents criteris: ");
 		System.out.println("Atencio! Si es fa servir el criteri de triar un subconjunt de categories, nomes es tindran en compte, a mes a mes, els criteris de relacio i semblança ");
+		System.out.println("Atencio! Si es fa servir el criteri de triar una paraula clau, nomes es tindran en compte, a mes a mes, els criteris d'ignorar, de relacio i semblança ");
+		System.out.println("Atencio! Si es fa servir el criteri de triar una categoria pare, nomes es tindran en compte, a mes a mes, els criteris d'ignorar, de relacio i semblança ");
 		Integer relacions, sembla, alg, tipus, paraulain, dada;
 		ArrayList<String> subconj, evitaCat, evitaPag;
 		String pare, paraulast;
 		
-		System.out.print("Importancia a les relacions entre categories (sent 0 mirar nomes a la relacio entre pagines, 5 totes amb la mateixa importancia i 10 mirar nomes les relacions entre categories, ignorant les pagines ): ");
+		System.out.print("Importancia a les relacions entre categories (si val 0 nomes es premia les relacions cat-pag, 5 totes es premien amb la mateixa importancia i 10 nomes es premien les relacions entre cat-cat): ");
 		relacions= s.nextInt();
 		
-		System.out.print("Importancia en la semblansa de nom de les categories, sent 0 a no donar-li importancia a que els noms s'assemblint i 10 el maxim de semblanca");
+		System.out.print("Importancia en la semblança de nom de les categories, sent 0 a no donar-li importancia a que els noms s'assemblin i 10 que es premiï molt que s'assemblin");
 		sembla = s.nextInt();
 		
 		System.out.println("Importancia que li vols donar a una paraula clau determinada");
 		System.out.print("Introdueix la paraula clau: ");
 		paraulast = s.next();
-		System.out.print("Com de fort vols que la tingui en compte: 0 si no es vol tenir en compte, 5 si han de tenir com a minim mitja paraula igual o 10 si totes l'han de contenir ");
+		System.out.print("Tres valors possibles pel criteri: 0 si no es vol tenir en compte, 5 si han de tenir com a minim mitja paraula igual o 10 si l'ahn de contenir en la seva totalitat ");
 		paraulain = s.nextInt();
 		if(paraulain==0) paraulast = null;
 		
