@@ -112,8 +112,8 @@ public class GrafNewman extends Graf {
 		 *            Aresta que es vol inserir
 		 */
 		public void push(int i, Aresta a) {
-			// El que fa aquest push és posar les arestes necessaries per
-			// arribar al primer node de l'aresta més la nova aresta per
+			// El que fa aquest push es posar les arestes necessaries per
+			// arribar al primer node de l'aresta mes la nova aresta per
 			// arribar
 			// al seguent node
 
