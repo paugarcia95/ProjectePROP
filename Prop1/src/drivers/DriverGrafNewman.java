@@ -11,7 +11,7 @@ import cercaComunitats.GrafNewman;
  * @author Pau
  *
  */
-public class driverGrafNewman extends GrafNewman {
+public class DriverGrafNewman extends GrafNewman {
 
 	public static void main(String[] args) {
 
