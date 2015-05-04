@@ -5,7 +5,6 @@ import java.util.TreeMap;
 
 import domini.Categoria;
 import domini.Comunitat;
-import domini.ParaulaValor;
 import junit.framework.TestCase;
 
 /**
