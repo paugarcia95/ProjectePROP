@@ -1,7 +1,7 @@
 package drivers;
 
-import junit.framework.TestCase;
 import domini.ParaulaValor;
+import junit.framework.TestCase;
 
 /**
  * @author Dani
