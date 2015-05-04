@@ -5,6 +5,8 @@ package drivers;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
+
 import cercaComunitats.Graf;
 import domini.Categoria;
 import domini.TraduccioiAlgorisme;
@@ -29,60 +31,58 @@ public class DriverTraduccioiAlgorisme {
 	 
 	public static void main(String[] args) {
 		GrafDades G = new GrafDades();
-		/*EntradaSortidaDadesGraf obj = new EntradaSortidaDadesGraf();
-		try {
-			G = obj.loadGraph("C:/Users/Alr/Desktop/Prova1.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
+		System.out.print("Escull un joc de proves (1,2,3)");
+		Scanner hu = new Scanner(System.in);
+		Integer jj = hu.nextInt();
+		if(jj == 1) {
+			Categoria aux1 = new Categoria("sanitat"); // PROVA METGES
+			Categoria aux2 = new Categoria("metge");
+			G.addCC(aux1, aux2);
+			Categoria aux4 = new Categoria("metgessa");
+			G.addCC(aux1, aux4);
+			Categoria aux6 = new Categoria("uroleg");
+			G.addCC(aux2, aux6);
+			Pagina aux7 = new Pagina("agulla");
+			G.addCP(aux2, aux7);
+			G.addCP(aux4, aux7);
+			Categoria aux8 = new Categoria("ginecoleg");
+			G.addCC(aux4, aux8);
+			Categoria aux9 = new Categoria("traumatoleg");
+			G.addCC(aux4, aux9);
+			G.addCC(aux2, aux9);
+			Categoria aux10 = new Categoria("metgos");
+			G.addCC(aux2, aux10);
+			G.addCC(aux2, aux4);
+		}
 		
-		/*Categoria aux1 = new Categoria("sanitat"); // PROVA METGES
-		Categoria aux2 = new Categoria("metge");
-		G.addCC(aux1, aux2);
-		Categoria aux4 = new Categoria("metgessa");
-		G.addCC(aux1, aux4);
-		Categoria aux6 = new Categoria("uroleg");
-		G.addCC(aux2, aux6);
-		Pagina aux7 = new Pagina("agulla");
-		G.addCP(aux2, aux7);
-		G.addCP(aux4, aux7);
-		Categoria aux8 = new Categoria("ginecoleg");
-		G.addCC(aux4, aux8);
-		Categoria aux9 = new Categoria("traumatoleg");
-		G.addCC(aux4, aux9);
-		G.addCC(aux2, aux9);
-		Categoria aux10 = new Categoria("metgos");
-		G.addCC(aux2, aux10);
-		G.addCC(aux2, aux4);*/
-		
-		
-		Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
-		Categoria aux2 = new Categoria("asexual");
-		G.addCC(aux1,aux2);
-		Categoria aux3 = new Categoria("heterosexual");
-		G.addCC(aux1,aux3);
-		Categoria aux4 = new Categoria("homosexual");
-		G.addCC(aux1, aux4);
-		Categoria aux5 = new Categoria("sexe");
-		G.addCC(aux1,aux5);
-		Categoria aux6 = new Categoria("embaras");
-		G.addCC(aux3,aux6);
-		G.addCC(aux5, aux6);
-		Categoria aux7 = new Categoria("infertil");
-		G.addCC(aux4, aux7);
-		G.addCC(aux2, aux7);
-		G.addCC(aux3,aux4);
-		
-		/*Categoria aux1 = new Categoria("familia"); // Prova familia
-		Categoria aux2 = new Categoria("pare");
-		G.addCC(aux1,aux2);
-		Categoria aux3 = new Categoria("mare");
-		G.addCC(aux1,aux3);
-		Categoria aux4 = new Categoria("fill");
-		G.addCC(aux2,aux4);
-		G.addCC(aux3,aux4);*/
+		else if(jj == 2) {
+			Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
+			Categoria aux2 = new Categoria("asexual");
+			G.addCC(aux1,aux2);
+			Categoria aux3 = new Categoria("heterosexual");
+			G.addCC(aux1,aux3);
+			Categoria aux4 = new Categoria("homosexual");
+			G.addCC(aux1, aux4);
+			Categoria aux5 = new Categoria("sexe");
+			G.addCC(aux1,aux5);
+			Categoria aux6 = new Categoria("embaras");
+			G.addCC(aux3,aux6);
+			G.addCC(aux5, aux6);
+			Categoria aux7 = new Categoria("infertil");
+			G.addCC(aux4, aux7);
+			G.addCC(aux2, aux7);
+			G.addCC(aux3,aux4);
+		}
+		else {
+			Categoria aux1 = new Categoria("familia"); // Prova familia
+			Categoria aux2 = new Categoria("pare");
+			G.addCC(aux1,aux2);
+			Categoria aux3 = new Categoria("mare");
+			G.addCC(aux1,aux3);
+			Categoria aux4 = new Categoria("fill");
+			G.addCC(aux2,aux4);
+			G.addCC(aux3,aux4);
+		}
 		
 		Criteris cri = new Criteris();
 		cri.setAlgorisme(2);
@@ -127,7 +127,7 @@ public class DriverTraduccioiAlgorisme {
 				}
 			}
 		}
-		System.out.println("SACABOOOOO");
+		//System.out.println("SACABOOOOO");
 	}
 
 }
