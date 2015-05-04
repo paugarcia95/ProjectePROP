@@ -930,7 +930,7 @@ public class MainProvisional {
 		mc = new MacroControlador();
 		//if(!mc.carregaDades()) System.out.println("Hi ha hagut algun problema al carregar les dades de la wiki");
 		if(!mc.carregaUsers()) System.out.println("Hi ha hagut algun problema al carregar les dades dels usuaris");
-		Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
+		/*Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
 		Categoria aux2 = new Categoria("asexual");
 		GrafDades G = mc.getGraf();
 		G.addCC(aux1,aux2);
@@ -946,14 +946,14 @@ public class MainProvisional {
 		Categoria aux7 = new Categoria("infertil");
 		G.addCC(aux4, aux7);
 		G.addCC(aux2, aux7);
-		G.addCC(aux3,aux4);
+		G.addCC(aux3,aux4);*/
 		mc.getContUser().addUser("admin", "admin");
-		/*mc.getContUser().addUser("client", "client");
+		mc.getContUser().addUser("client", "client");
 		mc.getContUser().addAdmin("admin");
 		System.out.println("Acabes d'entrar al main provisional del projecte de la Wikipedia, es mostraran les mateixes funcionalitats que en el projecte final però en mode consola.");
 		System.out.println("Escriu alguna cosa per continuar");
 		s.next();
-		pantallaInici();*/
+		pantallaInici();
 		mc.setUserActual("admin");
 		crearConjuntComunitats();
 		

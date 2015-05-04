@@ -80,7 +80,7 @@ public class AlgorismeNewmanGirvan {
 		GrafNewman util = new GrafNewman(G);
 		util.calcularEdgeBetween();
 		while (util.numComunitats() < numComunidades) {
-			if (!util.esborrarMaxim()) return null; // Futur control d'errors
+			if (!util.esborrarMaxim()) System.out.println("Error de esborrar"); // Futur control d'errors
 			util.calcularEdgeBetween();
 		}
 		return util.comunitats();
