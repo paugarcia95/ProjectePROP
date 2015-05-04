@@ -11,7 +11,7 @@ import domini.GrafDades;
  *
  */
 
-public class driverEntradaSortidaDadesGraf {
+public class DriverEntradaSortidaDadesGraf {
 
 	private static Scanner in;
 
