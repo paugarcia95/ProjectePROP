@@ -37,29 +37,21 @@ public class TraduccioiAlgorisme {
 	        }
 	        
 	        String ayuda = s1.substring(0,s1.length()/2);
-	        /*System.out.print("LA PALABRA CORTADA1 ES: ");
-        	System.out.println(ayuda);*/
 	        if(s2.indexOf(ayuda) != -1) {//Si l'inclou partit
 	        	solu += ayuda.length();
 	        	return solu;
 	        }
 	        ayuda = s2.substring(0,s2.length()/2);
-        	/*System.out.print("LA PALABRA CORTADA2 ES: ");
-        	System.out.println(ayuda);*/
 	        if(s1.indexOf(ayuda) != -1){//Si l'inclou partit
 	        	solu += ayuda.length();
 	        	return solu;
 	        }
 	        ayuda = s1.substring(s1.length()/2,s1.length());
-	        /*System.out.print("LA PALABRA CORTADA3 ES: ");
-	        System.out.println(ayuda);*/
 	        if(s2.indexOf(ayuda) != -1){//Si l'inclou partit ( altre meitat)
 		        solu += ayuda.length();
 		        return solu;
 		    }
 	        ayuda = s2.substring(s2.length()/2,s2.length());
-        	/*System.out.print("LA PALABRA CORTADA4 ES: ");
-        	System.out.println(ayuda);*/
 		    if(s1.indexOf(ayuda) != -1) {//Si l'inclou partit ( altre meitat)
 		    	solu += ayuda.length();
 		    	return solu;
@@ -89,13 +81,7 @@ public class TraduccioiAlgorisme {
 		
 		/////////// Criteri Semblança //////////////////
 		if(cri.getSemblaNom() != 0) { // Si  està actiu
-			System.out.print("Relacio entre: ");
-			System.out.print(c1.getNom());
-			System.out.print(" i ");
-			System.out.print(c2.getNom());
 			Double aux = similarity(c1.getNom(),c2.getNom());
-			System.out.print(" té semblança de ");
-			System.out.println(aux);
 			solucio += cri.getSemblaNom()*aux;
 		}
 		/////////////////////////////////////////////////
@@ -209,20 +195,14 @@ public class TraduccioiAlgorisme {
 		//////////////////ENTRE CATEGORIES////////////////////////
 		HashSet<String> llistatactual = solucio.getNodes(); // Llista dels nodes a Solució (Graf)
 		for(String it : llistatactual) { // Per a cada node del graf( a seques)
-			System.out.println("Desde: ");
-			System.out.println(it);
 			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
 			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
-				System.out.print("Fills:");
-				System.out.println(e.getNom());
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
 					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
 				}
 			}
 			/*Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(it).getMapCSupC(); //Adquireixo totes les seves subcategories
 			for(Categoria e : mapcatsubcat2.values()) { // Per a cadascuna de les seves categories
-				System.out.print("Pares:");
-				System.out.println(e.getNom());
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
 					solucio.addAresta(it, e.getNom(), CalcularPesEntreCategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
 				}
@@ -274,22 +254,11 @@ public class TraduccioiAlgorisme {
 			solucio = Louvain.executa(utilitzable, cri.getDada());
 		}
 		else if (cri.getAlgorisme() == 2) {
-			if(cri.getTipuCerca() == 1) {
-				System.out.println("1ra");
-				solucio = AlgorismeNewmanGirvan.executa(utilitzable,cri.getDada());
-			}
-			else if(cri.getTipuCerca() == 2) {
-				System.out.println("2na");
-				solucio = AlgorismeNewmanGirvan.executaNum(utilitzable,cri.getDada());
-			}
-			else {
-				System.out.println("3ra");
-				solucio = AlgorismeNewmanGirvan.executabet(utilitzable,cri.getDada());
-			}
+			if(cri.getTipuCerca() == 1) solucio = AlgorismeNewmanGirvan.executa(utilitzable,cri.getDada());
+			else if(cri.getTipuCerca() == 2) solucio = AlgorismeNewmanGirvan.executaNum(utilitzable,cri.getDada());
+			else solucio = AlgorismeNewmanGirvan.executabet(utilitzable,cri.getDada());
 		}
-		else {
-			solucio = Clique.executa(utilitzable, cri.getDada());
-		}
+		else solucio = Clique.executa(utilitzable, cri.getDada()); 
 		ArrayList<Comunitat> retorna = new ArrayList<Comunitat>();
 		//it es un iterador que va recorrent el primer HashSet de HashSet<HashSet<String>> (el conjunt de comunitats
 		Iterator<HashSet<String>> it = solucio.iterator();
