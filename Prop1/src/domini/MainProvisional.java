@@ -625,7 +625,7 @@ public class MainProvisional {
 		*/
 		Criteris cri = new Criteris();
 		cri.setAlgorisme(2);
-		cri.setDada(2);
+		cri.setDada(7);
 		
 		cri.setRelacionsCat(5); // Relacions cat-pg
 		cri.setTipuCerca(2); ///???
@@ -633,7 +633,7 @@ public class MainProvisional {
 		ArrayList<Categoria> c = new ArrayList<Categoria>(); // Evitar
 		ArrayList<Pagina> s = new ArrayList<Pagina>();
 		cri.setSubconjCat(c2);
-		ParaulaValor utilitzable = new ParaulaValor("ho", 0);
+		ParaulaValor utilitzable = new ParaulaValor("se", 0);
 		cri.setParaulaClau(utilitzable);
 		cri.setEvitaCat(c);
 		cri.setEvitaPag(s);
@@ -928,7 +928,7 @@ public class MainProvisional {
 	 */
 	public static void main(String[] args) {
 		mc = new MacroControlador();
-		//if(!mc.carregaDades()) System.out.println("Hi ha hagut algun problema al carregar les dades de la wiki");
+	//	if(!mc.carregaDades()) System.out.println("Hi ha hagut algun problema al carregar les dades de la wiki");
 		if(!mc.carregaUsers()) System.out.println("Hi ha hagut algun problema al carregar les dades dels usuaris");
 		Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
 		Categoria aux2 = new Categoria("asexual");

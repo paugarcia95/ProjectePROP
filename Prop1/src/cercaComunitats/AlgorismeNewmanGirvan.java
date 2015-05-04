@@ -60,7 +60,6 @@ public class AlgorismeNewmanGirvan {
 		}
 		storage.add(iterador, util.comunitats());
 		Integer quitoca = new Integer(calculadora(iterador, percentatge));
-		System.out.println("Toca: " + quitoca + "num iteracions:"+ iterador);
 		return storage.get(quitoca);
 
 	}

@@ -18,16 +18,13 @@ import java.util.Vector;
  */
 public class GrafNewman extends Graf {
 
-	//private Vector<Vector<Integer>> NCM;
 	private int[][] NCM;
 	private Integer maxi;
 	private Integer maxj;
 	private Integer maxNumCM;
 	private Integer numCom;
-	private int errors;
 
-	private class Aresta { // Ha de ser privada!!! pero pel driver la deixo aixi
-							// de moment
+	private class Aresta { 
 		public Integer node1;
 		public Integer node2;
 
@@ -147,13 +144,8 @@ public class GrafNewman extends Graf {
 	 */
 	public GrafNewman() {
 		super();
-		// crea NCM de la mateixa mida que Matriu
-		/*NCM = new Vector<Vector<Integer>>();
-		NCM.setSize(Matriu.size());
-		for(int i = 0; i < Matriu.size();++i) {
-			NCM.get(i).setSize(Matriu.size());
-		}*/
 		maxNumCM = maxi = maxj = numCom = 0;
+		NCM = new int[Matriu.size()][Matriu.size()];
 	}
 	
 	public GrafNewman(Graf G) {
@@ -162,15 +154,6 @@ public class GrafNewman extends Graf {
 		Matriu = new Vector< Vector<Double> >(G.Matriu);
 		maxNumCM = maxi = maxj = numCom = 0;
 		NCM = new int[Matriu.size()][Matriu.size()];
-		errors = 0;
-		/*NCM = new Vector<Vector<Integer>>();
-		int mida = Matriu.size();
-		Vector<Integer> aux = new Vector<Integer> (mida);
-		NCM = new Vector<Vector<Integer>>(mida);
-		NCM.setSize(mida);
-		for(int i = 0; i < mida;++i) {
-			NCM.get(i).setSize(mida);
-		}*/
 	}
 
 	/**
@@ -336,30 +319,17 @@ public class GrafNewman extends Graf {
 	 *         hagut algun error.
 	 */
 	public Boolean calcularEdgeBetween() {
-		//System.out.println("Entro a 6, errors: " +errors);
-		//if (NCM.size() < 2) return false;
 		// Posem a 0 tots els camins minims per "comencar" la nova ronda
 		for (int i = 0; i < NCM.length; ++i) {
 			for (int j = 0; j < NCM.length; ++j)
 				NCM[i][j] = 0;
-				//NCM.get(i).set(j, 0);
 		}
 		// Calcula el cami minim de cada node cap a tots els nodes
 		for (int i = 0; i < NCM.length; ++i)
 			for (int j = 0; j < NCM.length; ++j) {
 				if (i != j) {
-				//	if(pertanyenMateixaComunitat(i,j))System.out.println("22Intentant anar de "+ DiccionariInvers.get(i)+ " a "+ DiccionariInvers.get(j));
-				//	System.out.println("Intentant anar de "+ DiccionariInvers.get(i)+ " a "+ DiccionariInvers.get(j));
 				if (numCom < 4 || pertanyenMateixaComunitat(i, j)) {
-						System.out.println("2Intentant anar de "+ DiccionariInvers.get(i)+ " a "+ DiccionariInvers.get(j));
-						Queue<Aresta> cami = getCamiMinim(i, j);
-						Iterator<Aresta> it = cami.iterator();
-						//	System.out.println("Intentant anar de "+ DiccionariInvers.get(i)+ " a "+ DiccionariInvers.get(j));
-							while(it.hasNext()) {
-								Aresta aux = it.next();
-						//		System.out.println(DiccionariInvers.get(aux.node1)+ " " +DiccionariInvers.get(aux.node2));
-							}
-					
+						Queue<Aresta> cami = getCamiMinim(i, j);		
 						// un cop trobat cada cami minim, sumar 1 a la pos de
 						// NCM
 						if (cami.size() > 0) {
@@ -369,8 +339,6 @@ public class GrafNewman extends Graf {
 								Integer act = NCM[aux.node1][aux.node2];
 								NCM[aux.node1][aux.node2]=act + 1;
 								++act;
-								//Integer act = NCM.get(aux.node1).get(aux.node2);
-								//NCM.get(aux.node1).set(aux.node2, act + 1);
 								// mantenir el vertex per on passen mes camins
 								// minims (variables maxi, maxj i maxNumCM)
 								if (maxNumCM <= act) {
@@ -416,14 +384,7 @@ public class GrafNewman extends Graf {
 	 *         true en cas contrari
 	 */
 	public Boolean esborrarMaxim() {
-		if(errors < 10) {
-			System.out.println("Esborro una aresta entre "+ DiccionariInvers.get(maxi)+ " i "+DiccionariInvers.get(maxj) + " maxNCM: "+ maxNumCM);
-			++errors;
-		}
-		
 		if (maxNumCM != 0) {
-			//System.out.println("Esborro una aresta entre "+ DiccionariInvers.get(maxi)+ " i "+DiccionariInvers.get(maxj));
-			//System.out.println(G.in);
 			Matriu.get(maxi).set(maxj, -1.0);
 			Matriu.get(maxj).set(maxi, -1.0);
 			if (!pertanyenMateixaComunitat(maxi, maxj)) {
@@ -433,39 +394,12 @@ public class GrafNewman extends Graf {
 			maxNumCM=0;
 			//maxi=0;
 			//maxj=0;
-			/*	if(errors ==1) {
-				System.out.println("1: " + DiccionariInvers.get(1)+" i 2: "+ DiccionariInvers.get(2));
-				System.out.println("3: " + DiccionariInvers.get(3)+" i 4: "+ DiccionariInvers.get(4));
-				System.out.println("5: " + DiccionariInvers.get(5)+" i 6: "+ DiccionariInvers.get(6));
-				System.out.println("0: " + DiccionariInvers.get(0));
-			}
-				if(errors<10) {
-				System.out.println("Adjacents sexualitat en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("sexualitat")));
-				System.out.println("Adjacents asexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("asexual")));
-				System.out.println("Adjacents Infertil en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("infertil")));
-				System.out.println("Adjacents embaras en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("embaras")));
-				System.out.println("Adjacents heterosexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("heterosexual")));
-				System.out.println("Adjacents homosexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("homosexual")));
-				System.out.println("Adjacents sexe en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("sexe")));
-			}*/
 			return true;
 		} 
 		else if(maxi==0 &&maxj==0) {
 			numComunitats();
-		/*	System.out.println("NUM DE COMUNITATS: "+ numCom);
-			System.out.println("Adjacents sexualitat en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("sexualitat")));
-			System.out.println("Adjacents asexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("asexual")));
-			System.out.println("Adjacents Infertil en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("infertil")));
-			System.out.println("Adjacents embaras en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("embaras")));
-			System.out.println("Adjacents heterosexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("heterosexual")));
-			System.out.println("Adjacents homosexual en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("homosexual")));
-			System.out.println("Adjacents sexe en la ronda "+errors +": "+ this.getAdjacents(Diccionari.get("sexe")));*/
 			return true;
-		}else {
-			System.out.println("Error en esborrarMaxim");
-			return false;
-		}
-
+		}else return false;
 	}
 
 	/**
