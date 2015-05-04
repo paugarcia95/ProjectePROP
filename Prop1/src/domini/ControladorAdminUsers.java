@@ -28,6 +28,11 @@ public class ControladorAdminUsers {
 		gd= noug;
 		conj = nouu;
 	}
+	
+	public void actualitzaRefs(ConjuntUsuaris nouu, GrafDades noug) {
+		conj = nouu;
+		gd = noug;
+	}
 
 //CONSULTORES///////////////////////////////////////////////////////////////////////////////
 	/**
@@ -130,12 +135,6 @@ public class ControladorAdminUsers {
 	 */
 	public Boolean carregarFitxerEnllacosInserir(String ruta) {return true;}
 	
-	/**
-	 * Pre:
-	 * Post:
-	 * @return
-	 */
-	public void ferCerca() {}
 	
 	/**
 	 * Pre:
@@ -149,8 +148,8 @@ public class ControladorAdminUsers {
 	 * Post:
 	 * @return
 	 */
-	//el boolean indica quin dels dos tipus de format d'entrada és, el boolean retorna 0 si no hi ha errors, 1 si no es reconeix l'URL o 2 si és algun altre tipus d'error
-	public Integer introFitx(String URL, boolean enllaços) {return 1;}
+	//el Boolean indica quin dels dos tipus de format d'entrada és, el Boolean retorna 0 si no hi ha errors, 1 si no es reconeix l'URL o 2 si és algun altre tipus d'error
+	public Integer introFitx(String URL, Boolean enllaços) {return 1;}
 	
 	/**
 	 * Pre:

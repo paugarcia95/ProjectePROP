@@ -23,7 +23,7 @@ public class ParaulaValor {
 		return paraula;
 	}
 
-	public boolean setParaula(String nom) {
+	public Boolean setParaula(String nom) {
 		paraula = nom;
 		return true;
 	}

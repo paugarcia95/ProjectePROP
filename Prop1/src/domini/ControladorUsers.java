@@ -31,6 +31,11 @@ public class ControladorUsers {
 		conj = nouu;
 		gd = noug;
 	}
+	
+	public void actualitzaRefs(ConjuntUsuaris nouu, GrafDades noug) {
+		conj = nouu;
+		gd = noug;
+	}
 // MODIFICADORES///////////////////////////////////////////////////////////////////////////////
 
 	/**
@@ -248,6 +253,7 @@ public class ControladorUsers {
 	 * @return false si no s'ha pogut executar, true altrament.
 	 */
 	public Boolean ferCerca(String username, Integer quina){
+		if(gd.getCategories().size()<=0) return false;
 		TraduccioiAlgorisme ta = new TraduccioiAlgorisme();
 		ArrayList<Comunitat> list = ta.traduiricercar(gd, conj.getUser(username).getCerca(quina).getCriterisSeleccio());
 		conj.getUser(username).getCerca(quina).setComunitats(list);

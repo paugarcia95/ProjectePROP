@@ -81,7 +81,11 @@ public class MainProvisional {
 	
 	private static void modificaCriterisConjuntComunitats(Integer cercaactual) {
 		System.out.println("PANTALLA DE MODIFICACIO DELS CRITERIS D'UNA CERCA DE COMUNITATS:");
-
+		if(mc.getGraf().getCategories().size() <= 0) {
+			System.out.println("La Cerca no es pot realitzar ja que no hi ha categories");
+			if(mc.getContUser().isAdmin(mc.getUserActual())) opcionsAdmin();
+			else opcionsClient();
+		}
 		Integer cerca2= mc.getContUser().addNovaCerca(mc.getUserActual());
 		System.out.println("Indica amb un numero del 0 al 10 la importancia que li vols donar als seguents criteris: ");
 		System.out.println("Atencio! Si es fa servir el criteri de triar un subconjunt de categories, nomes es tindran en compte, a mes a mes, els criteris de relacio i semblança ");
@@ -146,7 +150,7 @@ public class MainProvisional {
 		System.out.print("Numero d'opció:");
 		alg = s.nextInt();
 		tipus = dada= 0;
-		boolean omplint = true;
+		Boolean omplint = true;
 		while(omplint) {
 			switch(alg) {
 			case 1:
@@ -164,7 +168,7 @@ public class MainProvisional {
 				System.out.print("Numero d'opció:");
 				int n = 0;
 				n = s.nextInt();
-				boolean fet = false;
+				Boolean fet = false;
 				while(!fet) {
 					switch(n) {
 					case 1:
@@ -207,7 +211,11 @@ public class MainProvisional {
 			mc.getContUser().addCriterisCerca(true, mc.getUserActual(), cerca2, paraulast, paraulain, relacions, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare);
 		}
 		System.out.println("Comença la Cerca de Comunitats, aquest procés pot tardar uns minuts, si us plau, tingues paciencia");
-		mc.getContUser().ferCerca(mc.getUserActual(), cerca2);
+		if(!mc.getContUser().ferCerca(mc.getUserActual(), cerca2)) {
+			System.out.println("La Cerca no s'ha pogut realitzar.");
+			if(mc.getContUser().isAdmin(mc.getUserActual())) opcionsAdmin();
+			else opcionsClient();
+		}
 		visualitzarNovaCercaComunitats(cerca2);
 	}
 	private static void modificarCerca(Integer cercaactual, Boolean guardada) {
@@ -438,7 +446,30 @@ public class MainProvisional {
 			}
 		}
 	}
-	private static void esborraDades(){System.out.println("Funció no implementada encara ");}
+	private static void esborraDades(){
+		System.out.println("PANTALLA D'ELIMINACIO DE TOTES LES DADES DEL GRAF SISTEMA:");
+		System.out.println("Segur que vols eliminar????? Aquesta acció és irreversible i deixa el sisteme sense categories ni pàgines");
+		System.out.println("1. Si ");
+		System.out.println("2. No! Torna enrere ");
+		System.out.print("Numero d'opció:");
+		int n = 0;
+		n = s.nextInt();
+		while(true) {
+			switch(n) {
+			case 1:
+				mc.eliminarDadesGraf();
+				opcionsAdmin();
+				break;
+			case 2:
+				opcionsAdmin();
+				break;
+			default:
+			System.out.println("Opcio erronia, has d'introduir el numero de l'operacio que desitjes:");
+			n = s.nextInt();
+			break;
+			}
+		}
+	}
 	private static void introduirDesDeFitxer() {System.out.println("Funció no implementada encara ");}
 	
 	private static void esborraClients() {
@@ -460,7 +491,45 @@ public class MainProvisional {
 		opcionsAdmin();
 	}
 	
-	private static void introduirDadesManual() {System.out.println("Funció no implementada encara ");}
+	private static void introduirDades() {
+		System.out.println("PANTALLA D'INTRODUCCIO DE DADES:");
+		System.out.println("Tria entre les seguents opcions:");
+		System.out.println("1. Introduir dades a partir de fitxer d'enllaços ");
+		System.out.println("2. Introduir categories manualment (NO IMPLEMENTAT)");
+		System.out.println("3. Introduir pagines manualment (NO IMPLEMENTAT) ");
+		System.out.println("4. Introduir enllaç manualment (NO IMPLEMENTAT)");
+		System.out.println("5. Enrere ");
+		System.out.print("Numero d'opció:");
+		int n = 0;
+		n = s.nextInt();
+		Boolean segueix = true;
+		while(segueix) {
+			switch(n) {
+			case 1:
+				System.out.println("Introdueix la ruta del fitxer de dades que vols introduir (exemple: C:/Users/.../fitxer.txt)");
+				String ruta = s.next();
+				if(!mc.carregaDadesFitxer(ruta)) System.out.println("Hi ha hagut algun problema al carregar les dades del graf la wiki");
+				introduirDades();
+				break;
+			case 2:
+				introduirDades();
+				break;
+			case 3:
+				introduirDades();
+				break;
+			case 4:
+				introduirDades();
+				break;
+			case 5:
+				opcionsAdmin();
+				break;
+			default:
+			System.out.println("Opcio erronia, has d'introduir el numero de l'operacio que desitjes:");
+			n = s.nextInt();
+			break;
+			}
+		}
+		}
 //OPCIONS CLIENT + ADMIN	
 	private static void buscaEntreCategoriesAdmin() {
 		System.out.println("Funció no acabada d'implementar encara, ara per ara només mostra les categories existents i en pots visualitzar ");
@@ -652,6 +721,11 @@ public class MainProvisional {
 	private static void crearConjuntComunitats() {
 		System.out.println("PANTALLA DE CREACIO D'UNA CERCA DE COMUNITATS:");
 		Integer cercaactual= mc.getContUser().addNovaCerca(mc.getUserActual());
+		if(mc.getGraf().getCategories().size() <= 0) {
+			System.out.println("La Cerca no es pot realitzar ja que no hi ha categories");
+			if(mc.getContUser().isAdmin(mc.getUserActual())) opcionsAdmin();
+			else opcionsClient();
+		}
 		
 		System.out.println("Indica amb un numero del 0 al 10 la importancia que li vols donar als seguents criteris: ");
 		System.out.println("Atencio! Si es fa servir el criteri de triar un subconjunt de categories, nomes es tindran en compte, a mes a mes, els criteris de relacio i semblança ");
@@ -710,7 +784,7 @@ public class MainProvisional {
 		System.out.print("Numero d'opció:");
 		alg = s.nextInt();
 		tipus = dada= 0;
-		boolean omplint = true;
+		Boolean omplint = true;
 		while(omplint) {
 			switch(alg) {
 			case 1:
@@ -728,7 +802,7 @@ public class MainProvisional {
 				System.out.print("Numero d'opció:");
 				int n = 0;
 				n = s.nextInt();
-				boolean fet = false;
+				Boolean fet = false;
 				while(!fet) {
 					switch(n) {
 					case 1:
@@ -790,7 +864,11 @@ public class MainProvisional {
 		cri.setPare(sa);
 		mc.getConjUsers().getUser(mc.getUserActual()).getCerca(cercaactual).setCriterisSeleccio(cri);*/
 		System.out.println("Comença la Cerca de Comunitats, aquest procés pot tardar uns minuts, si us plau, tingues paciencia");
-		if(!mc.getContUser().ferCerca(mc.getUserActual(), cercaactual)) System.out.println("Error, no s'ha pogut executar la Cerca");
+		if(!mc.getContUser().ferCerca(mc.getUserActual(), cercaactual)) {
+			System.out.println("La Cerca no s'ha pogut realitzar.");
+			if(mc.getContUser().isAdmin(mc.getUserActual())) opcionsAdmin();
+			else opcionsClient();
+		}
 		else visualitzarNovaCercaComunitats(cercaactual);
 	}
 	private static void visualitzarConjuntsComunitats(Boolean admin) {
@@ -884,16 +962,15 @@ public class MainProvisional {
 		System.out.println("Tria entre les seguents opcions:");
 		System.out.println("1. Crear altres administradors");
 		System.out.println("2. Esborrar totes les dades");
-		System.out.println("3. Introduir dades a partir de fitxers");
+		System.out.println("3. Introduir dades");
 		System.out.println("4. Esborrar clients");
-		System.out.println("5. Instroduir dades manualment");
-		System.out.println("6. Buscar entre les categories ");
-		System.out.println("7. Buscar entre les categories i pagines (INCOMPLET)");
-		System.out.println("8. Buscar entre les pagines ");
-		System.out.println("9. Crear un nou conjunt de comunitats ");
-		System.out.println("10. Visualitzar Conjunts de comunitats realitzats anteriorment ");
-		System.out.println("11. Modificar les propies dades d'usuari");
-		System.out.println("12. Sortir");
+		System.out.println("5. Buscar entre les categories ");
+		System.out.println("6. Buscar entre les categories i pagines (INCOMPLET)");
+		System.out.println("7. Buscar entre les pagines ");
+		System.out.println("8. Crear un nou conjunt de comunitats ");
+		System.out.println("9. Visualitzar Conjunts de comunitats realitzats anteriorment ");
+		System.out.println("10. Modificar les propies dades d'usuari");
+		System.out.println("11. Sortir");
 		System.out.print("Numero d'opció:");
 		int n = 0;
 		n = s.nextInt();
@@ -906,33 +983,30 @@ public class MainProvisional {
 				esborraDades();
 			break;
 			case 3:
-				introduirDesDeFitxer();
+				introduirDades();
 				break;
 			case 4:
 				esborraClients();
 				break;
 			case 5:
-				introduirDadesManual();
-				break;
-			case 6:
 				buscaEntreCategoriesAdmin();
 				break;
-			case 7:
+			case 6:
 				buscarEntreCategoriesPaginesAdmin();
 				break;
-			case 8:
+			case 7:
 				buscarEntrePaginesAdmin();
 				break;
-			case 9:
+			case 8:
 				crearConjuntComunitats();
 				break;
-			case 10:
+			case 9:
 				visualitzarConjuntsComunitats(true);
 				break;
-			case 11:
+			case 10:
 				modificarDadesUser(true);
 				break;
-			case 12:
+			case 11:
 				pantallaInici();
 				break;
 			default:
@@ -1100,6 +1174,7 @@ public class MainProvisional {
 		System.out.println("Acabes d'entrar al main provisional del projecte de la Wikipedia, es mostraran les mateixes funcionalitats que en el projecte final però en mode consola.");
 		System.out.println("Com a caracteristica provisional, hi ha definits dos usuaris per defecte: (admin,admin) amb drets d'administrador i (client, client) com a usuari normal");
 		System.out.println("Per Poder visualitzar alguna categoria o pàgina, provisionalment, has d'entrar com a admin");
+		System.out.println("Com que falta el controladorAdminsUsers, la implementacio de les funcionalitats que han d'anar a traves seu es fan directament des del main o el macrocontrolador, això es provisional");
 		System.out.println("Escriu alguna cosa per continuar");
 		s.next();
 		pantallaInici();
