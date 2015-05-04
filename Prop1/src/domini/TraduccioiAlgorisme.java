@@ -240,7 +240,7 @@ public class TraduccioiAlgorisme {
 	 * @param cri Criteris passats
 	 * @return Retorna un conjunt de comunitats resultant d'aplicar els algorismes al graf transformat
 	 */
-	public ArrayList<Comunitat> traduiricercar (GrafDades graf, Criteris cri) {
+	public ArrayList<Comunitat> traduiricercar (GrafDades graf, Criteris cri) { // ÉS PRIVADA, ESTÀ EN PUBLICA PEL DRIVER
 		Graf utilitzable = new Graf();
 		utilitzable = grafdadestograf(graf,cri);
 		HashSet<HashSet<String>> solucio = new HashSet<HashSet<String>>();
