@@ -42,8 +42,8 @@ public class MainProvisional {
  */
 	 
 	
-	private static void visualitzarCategoria(String quina){}
-	private static void visualitzarPagina(String quina) {}
+	private static void visualitzarCategoria(String quina){System.out.print("Funció no implementada encara ");}
+	private static void visualitzarPagina(String quina) {System.out.print("Funció no implementada encara ");}
 	
 	private static void modificaCriterisConjuntComunitats(Integer cercaactual) {
 		System.out.println("PANTALLA DE MODIFICACIO DELS CRITERIS D'UNA CERCA DE COMUNITATS:");
@@ -291,17 +291,12 @@ public class MainProvisional {
 		System.out.println("Hi ha "+numcom+ " comunitats: ");
 		for(Integer i = 1; i <= numcom; ++i) {
 			System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
-			//Integer comunitat = mc.getContUser().getNumCatCerca(mc.getUserActual(), cercaactual, i-1);
-			//for (Integer j = 0; j < comunitat; ++j) {
 				Set<String> aux1 = mc.getContUser().getCatCerca(mc.getUserActual(), cercaactual, i-1);
 				Iterator<String> it4 = aux1.iterator();
 				while(it4.hasNext())System.out.println(it4.next());
-			//}
 		}
 		
-		
-		
-	/*	System.out.println("Tria entre les seguents opcions:");
+		System.out.println("Tria entre les seguents opcions:");
 		System.out.println("1. Modificar Cerca");		
 		System.out.println("2. Eliminar Cerca ");
 		System.out.println("3. Visualitzar Categoria");
@@ -346,9 +341,8 @@ public class MainProvisional {
 			n = s.nextInt();
 			break;
 			}
-		}*/
+		}
 	}
-	//private void {}
 	
 	private static void visualitzarExistentCercaComunitats(String quina) {
 		Integer cercaactual = mc.getContUser().getNumCerca(mc.getUserActual(), quina);
@@ -402,8 +396,8 @@ public class MainProvisional {
 			}
 		}
 	}
-	private static void esborraDades(){}
-	private static void introduirDesDeFitxer() {}
+	private static void esborraDades(){System.out.print("Funció no implementada encara ");}
+	private static void introduirDesDeFitxer() {System.out.print("Funció no implementada encara ");}
 	
 	private static void esborraClients() {
 		ArrayList<String> usuaris =	mc.getContUser().getUsers();
@@ -424,12 +418,12 @@ public class MainProvisional {
 		opcionsAdmin();
 	}
 	
-	private static void introduirDadesManual() {}
+	private static void introduirDadesManual() {System.out.print("Funció no implementada encara ");}
 //OPCIONS CLIENT + ADMIN	
-	private static void buscaEntreCategoriesAdmin() {}	
-	private static void buscaEntreCategoriesClient() {}
-	private static void buscarEntreCategoriesPaginesAdmin() {}
-	private static void buscarEntreCategoriesPaginesClient() {}
+	private static void buscaEntreCategoriesAdmin() {System.out.print("Funció no implementada encara ");}	
+	private static void buscaEntreCategoriesClient() {System.out.print("Funció no implementada encara ");}
+	private static void buscarEntreCategoriesPaginesAdmin() {System.out.print("Funció no implementada encara ");}
+	private static void buscarEntreCategoriesPaginesClient() {System.out.print("Funció no implementada encara ");}
 	private static void buscarEntrePaginesAdmin() {
 		System.out.println("PANTALLA DE VISUALITZACIO D'UN ADMIN DE LES PAGINES EXISTENTS:");
 		ArrayList<String> pags = mc.getContAdUs().getPagines();
@@ -688,6 +682,7 @@ public class MainProvisional {
 			}
 		}
 	}
+	
 	private static void modificarDadesUser(Boolean admin){
 		System.out.println("PANTALLA DE MODIFICACIO DE DADES D'USUARI:");
 		System.out.println("Tria entre les seguents opcions:");
