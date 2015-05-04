@@ -136,7 +136,6 @@ public class ControladorUsers {
 		}
 		Criteris aux = new Criteris(par, relacions, sembla, alg, tipus, dada, sub, evitCat, evitPag, pare);
 		conj.getUser(username).getCerca(i).setCriterisSeleccio(aux);
-		conj.getUser(username).getCerca(i).setAlgorisme(alg);
 		if(modifica) conj.getUser(username).getCerca(i).setDataModificacio(new Date());
 		return true;
 	}

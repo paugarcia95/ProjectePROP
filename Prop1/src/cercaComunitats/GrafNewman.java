@@ -392,8 +392,7 @@ public class GrafNewman extends Graf {
 				numComunitats();
 			}
 			maxNumCM=0;
-			//maxi=0;
-			//maxj=0;
+			maxi=0;maxj=0;
 			return true;
 		} 
 		else if(maxi==0 &&maxj==0) {
