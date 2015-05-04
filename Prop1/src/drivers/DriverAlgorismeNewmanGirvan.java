@@ -10,11 +10,11 @@ import java.util.Scanner;
 import cercaComunitats.AlgorismeNewmanGirvan;
 import cercaComunitats.Graf;
 import domini.Categoria;
-import domini.TraduccioiAlgorisme;
 import domini.Criteris;
 import domini.GrafDades;
 import domini.Pagina;
 import domini.ParaulaValor;
+import domini.TraduccioiAlgorisme;
 
 
 
@@ -66,6 +66,7 @@ public class DriverAlgorismeNewmanGirvan {
 		System.out.print("Escull un dels metodes d'execucio (1,2,3)");
 		TraduccioiAlgorisme trd = new TraduccioiAlgorisme();
 		Graf fora = new Graf(trd.grafdadestograf(G, cri));
+		@SuppressWarnings("resource")
 		Scanner hu = new Scanner(System.in);
 		Integer jj = hu.nextInt();
 		HashSet<HashSet<String>> solucio = new HashSet<HashSet<String>>();

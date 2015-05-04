@@ -9,11 +9,11 @@ import java.util.Scanner;
 
 import cercaComunitats.Graf;
 import domini.Categoria;
-import domini.TraduccioiAlgorisme;
 import domini.Criteris;
 import domini.GrafDades;
 import domini.Pagina;
 import domini.ParaulaValor;
+import domini.TraduccioiAlgorisme;
 
 
 /**
@@ -32,6 +32,7 @@ public class DriverTraduccioiAlgorisme {
 	public static void main(String[] args) {
 		GrafDades G = new GrafDades();
 		System.out.print("Escull un joc de proves (1,2,3)");
+		@SuppressWarnings("resource")
 		Scanner hu = new Scanner(System.in);
 		Integer jj = hu.nextInt();
 		if(jj == 1) {
