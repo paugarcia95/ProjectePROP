@@ -61,6 +61,8 @@ public class DriverAlgorismeNewmanGirvan {
 		G.addCC(aux2, aux7);
 		G.addCC(aux3,aux4);
 		
+		System.out.println("Categories: "+ aux1.getNom() + " " + aux2.getNom() + " " + aux3.getNom() + " " + aux4.getNom() +" " + aux5.getNom() +" " + aux6.getNom() + " " + aux7.getNom());
+		System.out.println("Relaciones: sexualitat CC asexual  sexualitat CC heterosexual  sexualitat CC asexual  sexualitat CC sexe  heterosexual CC embaras  sexe CC embaras  asexual CC infertil  homosexual CC infertil");
 		System.out.print("Escull un dels metodes d'execucio (1,2,3)");
 		TraduccioiAlgorisme trd = new TraduccioiAlgorisme();
 		Graf fora = new Graf(trd.grafdadestograf(G, cri));
