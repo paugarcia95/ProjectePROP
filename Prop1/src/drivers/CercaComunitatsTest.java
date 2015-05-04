@@ -42,25 +42,31 @@ public class CercaComunitatsTest extends TestCase{
 		assertTrue("Ha posat malament comentari", ce.getComentari().equals("coment"));
 		assertTrue("Ha posat malament usuari", ce.getUsuari().equals("username"));
 		assertTrue("Ha posat malament dataModificacio", ce.getDataModificacio() == ara);
-		assertNull("Ha posat malament dataModificacio", ce.getComunitat(0));
-		assertTrue("Ha posat malament dataModificacio", ce.getNumComunitats() == 0);
+		assertNull("Ha posat malament comunitats", ce.getComunitat(0));
+		assertTrue("Ha posat malament nComunitats", ce.getNumComunitats() == 0);
 	}
 	
 	public void testConstructorString() {
 		CercaComunitats ce = new CercaComunitats("Nom");
 		assertNotNull("No ha creat un objecte", ce);
 		assertTrue("Ha posat malament nom", ce.getNom().equals("Nom"));
-		assertNotNull("Ha posat malament dataCreacio", ce.getDataCreacio());
-		/*assertTrue("Ha posat malament criterisSeleccio", ce.getCriterisSeleccio() == c);
-		assertTrue("Ha posat malament comentari", ce.getComentari().equals("coment"));
-		assertTrue("Ha posat malament usuari", ce.getUsuari().equals("username"));
-		assertTrue("Ha posat malament dataModificacio", ce.getDataModificacio() == ara);
-		assertNull("Ha posat malament dataModificacio", ce.getComunitat(0));
-		assertTrue("Ha posat malament dataModificacio", ce.getNumComunitats() == 0);*/
+		assertNotNull("No ha inicialitzat dataCreacio", ce.getDataCreacio());
+		assertNull("Ha inicialitzat criteris", ce.getCriterisSeleccio());
+		assertNull("Ha inicialitzat comentari", ce.getComentari());
+		assertNull("Ha inicialitzat usuari", ce.getUsuari());
+		assertNull("Ha inicialitzat dataModificacio", ce.getDataModificacio());
+		assertTrue("Ha posat malament dataModificacio", ce.getNumComunitats() == 0);
 	}
 	
 	public void testConstructorBuit() {
-		CercaComunitats c = new CercaComunitats();
-		assertNotNull("No ha creat un objecte", c);
+		CercaComunitats ce = new CercaComunitats();
+		assertNotNull("No ha creat un objecte", ce);
+		assertNull("Ha inicialitzat nom", ce.getNom());
+		assertNotNull("No ha inicialitzat dataCreacio", ce.getDataCreacio());
+		assertNull("Ha inicialitzat criteris", ce.getCriterisSeleccio());
+		assertNull("Ha inicialitzat comentari", ce.getComentari());
+		assertNull("Ha inicialitzat usuari", ce.getUsuari());
+		assertNull("Ha inicialitzat dataModificacio", ce.getDataModificacio());
+		assertTrue("Ha posat malament dataModificacio", ce.getNumComunitats() == 0);
 	}
 }
