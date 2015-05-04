@@ -505,7 +505,7 @@ public class MainProvisional {
 	private static void crearConjuntComunitats() {
 		System.out.println("PANTALLA DE CREACIO D'UNA CERCA DE COMUNITATS:");
 		Integer cercaactual= mc.getContUser().addNovaCerca(mc.getUserActual());
-		/*
+		
 		System.out.println("Indica amb un numero del 0 al 10 la importancia que li vols donar als seguents criteris: ");
 		System.out.println("Atencio! Si es fa servir el criteri de triar un subconjunt de categories, nomes es tindran en compte, a mes a mes, els criteris de relacio i semblança ");
 		Integer relacions, sembla, alg, tipus, paraulain, dada;
@@ -622,7 +622,7 @@ public class MainProvisional {
 			}
 			mc.getContUser().addCriterisCerca(false, mc.getUserActual(), cercaactual, paraulast, paraulain, relacions, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare);
 		}
-		*/
+		/*
 		Criteris cri = new Criteris();
 		cri.setAlgorisme(2);
 		cri.setDada(7);
@@ -640,12 +640,9 @@ public class MainProvisional {
 		cri.setSemblaNom(0);
 		String sa = new String();
 		cri.setPare(sa);
-		mc.getConjUsers().getUser(mc.getUserActual()).getCerca(cercaactual).setCriterisSeleccio(cri);
+		mc.getConjUsers().getUser(mc.getUserActual()).getCerca(cercaactual).setCriterisSeleccio(cri);*/
 		System.out.println("Comença la Cerca de Comunitats, aquest procés pot tardar uns minuts, si us plau, tingues paciencia");
-		if(!mc.getContUser().ferCerca(mc.getUserActual(), cercaactual)) {
-			System.out.println("Error, no s'ha pogut executar la Cerca");
-			
-		}
+		if(!mc.getContUser().ferCerca(mc.getUserActual(), cercaactual)) System.out.println("Error, no s'ha pogut executar la Cerca");
 		else visualitzarNovaCercaComunitats(cercaactual);
 	}
 	private static void visualitzarConjuntsComunitats(Boolean admin) {
@@ -928,7 +925,7 @@ public class MainProvisional {
 	 */
 	public static void main(String[] args) {
 		mc = new MacroControlador();
-	//	if(!mc.carregaDades()) System.out.println("Hi ha hagut algun problema al carregar les dades de la wiki");
+		if(!mc.carregaDades()) System.out.println("Hi ha hagut algun problema al carregar les dades de la wiki");
 		if(!mc.carregaUsers()) System.out.println("Hi ha hagut algun problema al carregar les dades dels usuaris");
 		/*Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
 		Categoria aux2 = new Categoria("asexual");
@@ -954,8 +951,5 @@ public class MainProvisional {
 		System.out.println("Escriu alguna cosa per continuar");
 		s.next();
 		pantallaInici();
-		mc.setUserActual("admin");
-		crearConjuntComunitats();
-		
 	}
 }
