@@ -6,6 +6,7 @@ package domini;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -44,11 +45,39 @@ public class MainProvisional {
 	 
 	
 	private static void visualitzarCategoria(String quina){
-		System.out.println("Funció no implementada encara ");
+		System.out.println("Funció no acabada d'implementar, encara no es pot navegar per la resta de Categories o Pagines ");
 		System.out.println("PANTALLA DE VISUALITZACIO D'UNA CATEGORIA");
-		
+		System.out.println("Nom:"+ mc.getGraf().getCategoria(quina).getNom());
+		System.out.println("Categories a les que apunta:");
+		Map<String,Categoria> aux = mc.getGraf().getCategoria(quina).getMapCSubC();
+		System.out.println(aux.keySet());
+		System.out.println("Categories que l'apunten:");
+		Map<String,Categoria> aux2 = mc.getGraf().getCategoria(quina).getMapCSupC();
+		System.out.println(aux2.keySet());
+		System.out.println("Pagines a les que apunta:");
+		Map<String,Pagina> aux3 = mc.getGraf().getCategoria(quina).getMapCP();
+		System.out.println(aux3.keySet());
+		System.out.println("Pagines que l'apunten:");
+		Map<String,Pagina> aux4 = mc.getGraf().getCategoria(quina).getMapPC();
+		System.out.println(aux4.keySet());
+		System.out.println("escriu qualsevol cosa per a continuar");
+		@SuppressWarnings("unused")
+		String auxp = s.next();
 		return;}
-	private static void visualitzarPagina(String quina) {System.out.println("Funció no implementada encara ");return;}
+	private static void visualitzarPagina(String quina) {
+		System.out.println("Funció no acabada d'implementar, encara no es pot navegar per la resta de Categories ");
+		System.out.println("PANTALLA DE VISUALITZACIO D'UNA PAGINA");
+		System.out.println("Nom:"+ mc.getGraf().getPagina(quina).getNom());
+		System.out.println("Categories a les que apunta:");
+		Map<String,Categoria> aux3 = mc.getGraf().getPagina(quina).getPC();
+		System.out.println(aux3.keySet());
+		System.out.println("Categories que l'apunten:");
+		Map<String,Categoria> aux4 = mc.getGraf().getPagina(quina).getCP();
+		System.out.println(aux4.keySet());
+		System.out.println("Entra qualsevol cosa per a continuar");
+		s.next();
+		return;
+	}
 	
 	private static void modificaCriterisConjuntComunitats(Integer cercaactual) {
 		System.out.println("PANTALLA DE MODIFICACIO DELS CRITERIS D'UNA CERCA DE COMUNITATS:");
@@ -310,7 +339,7 @@ public class MainProvisional {
 		System.out.println("Tria entre les seguents opcions:");
 		System.out.println("1. Modificar Cerca");		
 		System.out.println("2. Eliminar Cerca ");
-		System.out.println("3. Visualitzar Categoria (NO IMPLEMENTAT ENCARA)");
+		System.out.println("3. Visualitzar Categoria");
 		System.out.println("4. Guardar la Cerca");
 		System.out.println("5. Enrere ");
 		System.out.print("Numero d'opció:");
@@ -434,13 +463,37 @@ public class MainProvisional {
 	private static void introduirDadesManual() {System.out.println("Funció no implementada encara ");}
 //OPCIONS CLIENT + ADMIN	
 	private static void buscaEntreCategoriesAdmin() {
-		System.out.println("Funció no acabada d'implementar encara, ara per ara només mostra les categories existents ");
+		System.out.println("Funció no acabada d'implementar encara, ara per ara només mostra les categories existents i en pots visualitzar ");
 		//Quan estigui fet el ControladorAdminsUsers, ho farà des d'allà
 		Collection<Categoria> aux = mc.getGraf().getCategories();
 		Iterator<Categoria> it = aux.iterator();
 		while(it.hasNext()) System.out.println(it.next().getNom());
-		System.out.println("Entra qualsevol cosa per a continuar");
-		s.next();
+		System.out.println("Tria entre les seguents opcions:");
+		System.out.println("1. Visualitzar alguna Categoria ");
+		System.out.println("2. Enrere ");
+		System.out.print("Numero d'opció:");
+		int n = 0;
+		n = s.nextInt();
+		Boolean entra = true;
+		while(entra) {
+			switch(n) {
+			case 1:
+				System.out.print("Escriu el nom de la categoria que vols visualitzar:");
+				String nom = s.next();
+				visualitzarCategoria(nom);
+				entra=false;
+				buscaEntreCategoriesAdmin();
+				break;
+			case 2:
+				entra = false;
+				opcionsAdmin();
+				break;
+			default:
+			System.out.println("Opcio erronia, has d'introduir el numero de l'operacio que desitjes:");
+			n = s.nextInt();
+			break;
+			}
+		}
 		opcionsAdmin();
 		}	
 	private static void buscaEntreCategoriesClient() {
@@ -489,8 +542,32 @@ public class MainProvisional {
 		Collection<Pagina> aux = mc.getGraf().getPagines();
 		Iterator<Pagina> it = aux.iterator();
 		while(it.hasNext()) System.out.println(it.next().getNom());
-		System.out.println("Entra qualsevol cosa per a continuar");
-		s.next();
+		System.out.println("Tria entre les seguents opcions:");
+		System.out.println("1. Visualitzar alguna Pagina ");
+		System.out.println("2. Enrere ");
+		System.out.print("Numero d'opció:");
+		int n = 0;
+		n = s.nextInt();
+		Boolean entra = true;
+		while(entra) {
+			switch(n) {
+			case 1:
+				System.out.print("Escriu el nom de la Pagina que vols visualitzar:");
+				String nom = s.next();
+				visualitzarPagina(nom);
+				entra=false;
+				buscarEntrePaginesAdmin();
+				break;
+			case 2:
+				entra = false;
+				opcionsAdmin();
+				break;
+			default:
+			System.out.println("Opcio erronia, has d'introduir el numero de l'operacio que desitjes:");
+			n = s.nextInt();
+			break;
+			}
+		}
 		 opcionsAdmin();
 		/* 
 		System.out.println("PANTALLA DE VISUALITZACIO D'UN ADMIN DE LES PAGINES EXISTENTS:");
@@ -810,9 +887,9 @@ public class MainProvisional {
 		System.out.println("3. Introduir dades a partir de fitxers");
 		System.out.println("4. Esborrar clients");
 		System.out.println("5. Instroduir dades manualment");
-		System.out.println("6. Buscar entre les categories (INCOMPLET) ");
+		System.out.println("6. Buscar entre les categories ");
 		System.out.println("7. Buscar entre les categories i pagines (INCOMPLET)");
-		System.out.println("8. Buscar entre les pagines (INCOMPLET) ");
+		System.out.println("8. Buscar entre les pagines ");
 		System.out.println("9. Crear un nou conjunt de comunitats ");
 		System.out.println("10. Visualitzar Conjunts de comunitats realitzats anteriorment ");
 		System.out.println("11. Modificar les propies dades d'usuari");
@@ -1022,6 +1099,7 @@ public class MainProvisional {
 		mc.getContUser().addAdmin("admin");
 		System.out.println("Acabes d'entrar al main provisional del projecte de la Wikipedia, es mostraran les mateixes funcionalitats que en el projecte final però en mode consola.");
 		System.out.println("Com a caracteristica provisional, hi ha definits dos usuaris per defecte: (admin,admin) amb drets d'administrador i (client, client) com a usuari normal");
+		System.out.println("Per Poder visualitzar alguna categoria o pàgina, provisionalment, has d'entrar com a admin");
 		System.out.println("Escriu alguna cosa per continuar");
 		s.next();
 		pantallaInici();
