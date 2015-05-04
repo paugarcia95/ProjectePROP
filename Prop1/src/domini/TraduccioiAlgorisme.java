@@ -201,12 +201,6 @@ public class TraduccioiAlgorisme {
 					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
 				}
 			}
-			/*Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(it).getMapCSupC(); //Adquireixo totes les seves subcategories
-			for(Categoria e : mapcatsubcat2.values()) { // Per a cadascuna de les seves categories
-				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
-					solucio.addAresta(it, e.getNom(), CalcularPesEntreCategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
-				}
-			}*/
 		}
 		//////////////////////////////////////////////////////////////
 		

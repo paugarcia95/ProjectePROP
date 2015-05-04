@@ -79,7 +79,7 @@ public class AlgorismeNewmanGirvan {
 		GrafNewman util = new GrafNewman(G);
 		util.calcularEdgeBetween();
 		while (util.numComunitats() < numComunidades) {
-			if (!util.esborrarMaxim()) System.out.println("Error de esborrar"); // Futur control d'errors
+			if (!util.esborrarMaxim()) System.out.println("Error de esborrar"); //control d'errors
 			util.calcularEdgeBetween();
 		}
 		return util.comunitats();
@@ -102,7 +102,7 @@ public class AlgorismeNewmanGirvan {
 		util.calcularEdgeBetween();
 		int maxactual = util.getMaxBetween(); // Variable amb el valor de maxbtw
 		while (maxactual > maxbetweness) {
-			if (!util.esborrarMaxim()) return null; // Futur control d'errors
+			if (!util.esborrarMaxim()) System.out.println("Error de esborrar");// control d'errors
 			util.calcularEdgeBetween();
 			maxactual = util.getMaxBetween();
 		}
