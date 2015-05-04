@@ -19,7 +19,7 @@ import junit.framework.TestCase;
 
 public class CercaComunitatsTest extends TestCase{
 	
-	CercaComunitatsTest() {
+	public CercaComunitatsTest() {
 		super("CercaComunitatsTest");
 	}
 	
@@ -47,8 +47,16 @@ public class CercaComunitatsTest extends TestCase{
 	}
 	
 	public void testConstructorString() {
-		CercaComunitats c = new CercaComunitats("Nom");
-		assertNotNull("No ha creat un objecte", c);
+		CercaComunitats ce = new CercaComunitats("Nom");
+		assertNotNull("No ha creat un objecte", ce);
+		assertTrue("Ha posat malament nom", ce.getNom().equals("Nom"));
+		assertNotNull("Ha posat malament dataCreacio", ce.getDataCreacio());
+		/*assertTrue("Ha posat malament criterisSeleccio", ce.getCriterisSeleccio() == c);
+		assertTrue("Ha posat malament comentari", ce.getComentari().equals("coment"));
+		assertTrue("Ha posat malament usuari", ce.getUsuari().equals("username"));
+		assertTrue("Ha posat malament dataModificacio", ce.getDataModificacio() == ara);
+		assertNull("Ha posat malament dataModificacio", ce.getComunitat(0));
+		assertTrue("Ha posat malament dataModificacio", ce.getNumComunitats() == 0);*/
 	}
 	
 	public void testConstructorBuit() {
