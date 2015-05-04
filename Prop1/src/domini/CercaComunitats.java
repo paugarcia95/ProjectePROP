@@ -15,7 +15,7 @@ public class CercaComunitats {
 	private String nom, comentari, usuari;
 	private Date dataCreacio, dataModificacio;
 	private Criteris criterisSeleccio;
-	private Integer algorisme, nComunitats;
+	private Integer nComunitats;
 	private ArrayList<Comunitat> comunitats;
 	private Queue<Integer> eliminats;
 	
@@ -23,13 +23,12 @@ public class CercaComunitats {
 	 * Pre: dataCreacio < dataModif, usuari existeix, no existeix cap CercaComunitats amb el mateix nom per a usuari
 	 * Post: Retorna una CercaComunitats
 	 */
-	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date dataModif, Integer algorisme, String comentari, ArrayList<Comunitat> comunitats) {
+	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date dataModif, String comentari, ArrayList<Comunitat> comunitats) {
 		this.nom = nom;
 		this.dataCreacio = dataCreacio;
 		this.criterisSeleccio = criteris;
 		this.usuari = usuari;
 		dataModificacio = dataModif;
-		this.algorisme = algorisme;
 		this.comentari = comentari;
 		nComunitats = comunitats.size();
 		this.comunitats = comunitats;
@@ -99,20 +98,13 @@ public class CercaComunitats {
 		dataModificacio = d;
 	}
 	
-	public Integer getAlgorisme() {
-		return algorisme;
-	}
-	
-	public void setAlgorisme(Integer i) {
-		algorisme = i;
-	}
-	
 	/**
-	 * Pre: i es l'índex d'una Comunitat existent a comunitats && i < comunitas.size()
+	 * Pre: Cert
 	 * Post: Retorna la Comunitat amb índex i
 	 */	 
 	public Comunitat getComunitat(Integer i) {
-		return comunitats.get(i);		
+		if (i < comunitats.size()) return comunitats.get(i);
+		return null;
 	}
 	
 	/**
