@@ -151,6 +151,7 @@ public class ControladorUsers {
 	 * 			Nom que es vol posar a la CercaComunitats.
 	 */
 	public void addNomCerca(String username, Integer i, String nom) {
+		if(conj.getUser(username).getCerca(i).getNom()!=null) conj.getUser(username).getCerca(i).setDataModificacio(new Date());
 		conj.getUser(username).getCerca(i).setNom(nom);
 	}
 	/**
@@ -164,6 +165,7 @@ public class ControladorUsers {
 	 * 			Comentari que es vol posar a la CercaComunitats.
 	 */
 	public void addComentariCerca(String username, Integer i, String comentari) {
+		if(conj.getUser(username).getCerca(i).getComentari()!=null) conj.getUser(username).getCerca(i).setDataModificacio(new Date());
 		conj.getUser(username).getCerca(i).setComentari(comentari);
 	}
 	
