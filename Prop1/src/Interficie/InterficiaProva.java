@@ -46,7 +46,10 @@ public class InterficiaProva extends javax.swing.JFrame {
 	G.addCC(aux3,aux4);
 	Pagina aux0 = new Pagina("esteril");
 	G.addPagina(aux0);
+        G.addCP(aux7, aux0);
+        G.addPC(aux0, aux6);
         A_BuscaCat.setVisible(false);
+        A_BuscaPag.setVisible(false);
         A_OpcionsClient.setVisible(false);
         A_OpcionsAdmin.setVisible(false);
         Wikipedia.setVisible(true);
@@ -87,6 +90,11 @@ public class InterficiaProva extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         LlistaCateg = new javax.swing.JList();
         BVisCat = new javax.swing.JButton();
+        A_BuscaPag = new javax.swing.JPanel();
+        BOpC1 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        LlistaPag = new javax.swing.JList();
+        BVisPag = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Prova1");
@@ -194,7 +202,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                                         .addGap(140, 140, 140)
                                         .addComponent(Exit))
                                     .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(370, Short.MAX_VALUE))
+                .addContainerGap(769, Short.MAX_VALUE))
         );
         A_PantallaPrincipalLayout.setVerticalGroup(
             A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,6 +251,11 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
 
         BuscaPagines.setText("Busca entre les Pàgines");
+        BuscaPagines.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscaPaginesActionPerformed(evt);
+            }
+        });
 
         BuscaCatPag.setText("Busca entre les Categories i Pàgines");
         BuscaCatPag.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +281,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                     .addComponent(BuscaCerques, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
                 .addGap(150, 150, 150)
                 .addComponent(EnrereC)
-                .addGap(0, 171, Short.MAX_VALUE))
+                .addGap(0, 570, Short.MAX_VALUE))
         );
         A_OpcionsClientLayout.setVerticalGroup(
             A_OpcionsClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,6 +330,7 @@ public class InterficiaProva extends javax.swing.JFrame {
             }
         });
 
+        LlistaCateg.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(51, 51, 51)));
         LlistaCateg.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -347,8 +361,8 @@ public class InterficiaProva extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(A_BuscaCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(A_BuscaCatLayout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(96, 96, 96)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(183, 183, 183)
                         .addComponent(BOpC)
                         .addGap(0, 179, Short.MAX_VALUE))
                     .addComponent(LlistaCateg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -372,6 +386,72 @@ public class InterficiaProva extends javax.swing.JFrame {
         );
 
         LlistaCateg.getAccessibleContext().setAccessibleName("LlistaCateg");
+
+        BOpC1.setText("Enrere");
+        BOpC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BOpC1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.setBackground(new java.awt.Color(240, 240, 240));
+        jTextField2.setText("Aquestes són les pàgines existents:");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        LlistaPag.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(51, 51, 51)));
+        LlistaPag.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        LlistaPag.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        BVisPag.setText("Visualitza");
+        BVisPag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BVisPagActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout A_BuscaPagLayout = new javax.swing.GroupLayout(A_BuscaPag);
+        A_BuscaPag.setLayout(A_BuscaPagLayout);
+        A_BuscaPagLayout.setHorizontalGroup(
+            A_BuscaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(A_BuscaPagLayout.createSequentialGroup()
+                .addGap(214, 214, 214)
+                .addComponent(BVisPag)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(A_BuscaPagLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(A_BuscaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(A_BuscaPagLayout.createSequentialGroup()
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(183, 183, 183)
+                        .addComponent(BOpC1)
+                        .addGap(0, 192, Short.MAX_VALUE))
+                    .addComponent(LlistaPag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        A_BuscaPagLayout.setVerticalGroup(
+            A_BuscaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(A_BuscaPagLayout.createSequentialGroup()
+                .addGroup(A_BuscaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(A_BuscaPagLayout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(BOpC1))
+                    .addGroup(A_BuscaPagLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(LlistaPag, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
+                .addComponent(BVisPag)
+                .addGap(326, 326, 326))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -397,6 +477,11 @@ public class InterficiaProva extends javax.swing.JFrame {
                     .addGap(333, 333, 333)
                     .addComponent(Wikipedia)
                     .addContainerGap(333, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(307, 307, 307)
+                    .addComponent(A_BuscaPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(307, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,7 +502,12 @@ public class InterficiaProva extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(314, 314, 314)
                     .addComponent(Wikipedia, 0, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(315, Short.MAX_VALUE)))
+                    .addContainerGap(345, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(30, 30, 30)
+                    .addComponent(A_BuscaPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(31, Short.MAX_VALUE)))
         );
 
         Wikipedia.getAccessibleContext().setAccessibleName("Wikipedia");
@@ -513,10 +603,54 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void BVisCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVisCatActionPerformed
-        VCategoria aux = new VCategoria(this,true);
-        aux.setVisible(true);
+        if(LlistaCateg.getSelectedIndices().length>0) {
+            String hy = LlistaCateg.getSelectedValue().toString();
+            VCategoria aux = new VCategoria(this,true);
+            Categoria auxi = macro.getGraf().getCategoria(hy);
+            aux.NomCat(auxi);
+        }
+        else {
+            SeleccionaAlgo despistat = new SeleccionaAlgo(this,true);
+            despistat.setVisible(true);
+        }
 // TODO add your handling code here:
     }//GEN-LAST:event_BVisCatActionPerformed
+
+    private void BuscaPaginesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaPaginesActionPerformed
+       A_OpcionsClient.setVisible(false);
+       A_BuscaPag.setVisible(true);
+        Collection<Pagina> auxc = macro.getGraf().getPagines();
+        Object[] aux2 = new Object[auxc.size()];
+        int cont = 0;
+        Iterator<Pagina> it = auxc.iterator();
+        while(it.hasNext()) {
+            aux2[cont] = it.next().getNom();
+            ++cont;
+        }
+        LlistaPag.setListData(aux2);
+    }//GEN-LAST:event_BuscaPaginesActionPerformed
+
+    private void BOpC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BOpC1ActionPerformed
+       A_OpcionsClient.setVisible(true);// TODO add your handling code here:
+       A_BuscaPag.setVisible(false);
+    }//GEN-LAST:event_BOpC1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void BVisPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVisPagActionPerformed
+        if(LlistaPag.getSelectedIndices().length>0) {
+            String hy = LlistaPag.getSelectedValue().toString();
+            VPagina aux = new VPagina(this,true);
+            Pagina auxi = macro.getGraf().getPagina(hy);
+            aux.NomPag(auxi);
+        }
+        else {
+            SeleccionaAlgo despistat = new SeleccionaAlgo(this,true);
+            despistat.setVisible(true);
+        }
+    }//GEN-LAST:event_BVisPagActionPerformed
 
     /**
      * @param args the command line arguments
@@ -556,11 +690,14 @@ public class InterficiaProva extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel A_BuscaCat;
+    private javax.swing.JPanel A_BuscaPag;
     private javax.swing.JPanel A_OpcionsAdmin;
     private javax.swing.JPanel A_OpcionsClient;
     private javax.swing.JPanel A_PantallaPrincipal;
     private javax.swing.JButton BOpC;
+    private javax.swing.JButton BOpC1;
     private javax.swing.JButton BVisCat;
+    private javax.swing.JButton BVisPag;
     private javax.swing.JButton BuscaCatPag;
     private javax.swing.JButton BuscaCategories;
     private javax.swing.JButton BuscaCerques;
@@ -569,6 +706,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JButton EnrereC;
     private javax.swing.JButton Exit;
     private javax.swing.JList LlistaCateg;
+    private javax.swing.JList LlistaPag;
     private javax.swing.JButton Login;
     private javax.swing.JTextField Password;
     private javax.swing.JTextField Username;
@@ -579,6 +717,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

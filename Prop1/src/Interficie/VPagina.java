@@ -6,7 +6,7 @@
 package Interficie;
 
 import static Interficie.InterficiaProva.macro;
-import domini.Categoria;
+import domini.Pagina;
 import java.awt.Frame;
 import java.util.Collection;
 import java.util.Iterator;
@@ -15,16 +15,22 @@ import java.util.Iterator;
  *
  * @author Cristina
  */
-public class VCategoria extends javax.swing.JDialog {
-    String cat;
+public class VPagina extends javax.swing.JDialog {
+    String pag;
     Frame pare;
     String noSelect="  No n'hi ha cap";
-    
-    public void NomCat(Categoria nomCateg) {
-        cat = nomCateg.getNom();
+    /**
+     * Creates new form VPagina
+     */
+    public VPagina(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+    }
+
+    public void NomPag(Pagina nomPag) {
+        pag = nomPag.getNom();
         initComponents();
         //Categories a les que apunta
-        Collection<String> auxc = macro.getGraf().getCategoria(cat).getMapCSubC().keySet();
+        Collection<String> auxc = macro.getGraf().getPagina(pag).getPC().keySet();
         Object[] aux2;
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
@@ -42,7 +48,7 @@ public class VCategoria extends javax.swing.JDialog {
         CApunta.setListData(aux2);    
         
         //Categories que l'apunten
-        auxc = macro.getGraf().getCategoria(cat).getMapCSupC().keySet();
+        auxc = macro.getGraf().getPagina(pag).getCP().keySet();
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
             int cont = 0;
@@ -57,50 +63,8 @@ public class VCategoria extends javax.swing.JDialog {
             aux2[0] = noSelect;
         }
         CApuntada.setListData(aux2);
-        
-        //Pagines a les que apunta
-        auxc = macro.getGraf().getCategoria(cat).getMapCP().keySet();
-        if(auxc.size()>0) {
-            aux2 = new Object[auxc.size()];
-            int cont = 0;
-            Iterator<String> it = auxc.iterator();
-            while(it.hasNext()) {
-               aux2[cont] = it.next();
-               ++cont;
-            }
-        }
-        else {
-            aux2 = new Object[1];
-            aux2[0] = noSelect;
-        }
-        PApunta.setListData(aux2);
-        
-        //Pagines que l'apunten
-        auxc = macro.getGraf().getCategoria(cat).getMapPC().keySet();
-        if(auxc.size()>0) {
-            aux2 = new Object[auxc.size()];
-            int cont = 0;
-            Iterator<String> it = auxc.iterator();
-            while(it.hasNext()) {
-               aux2[cont] = it.next();
-               ++cont;
-            }
-        }
-        else {
-            aux2 = new Object[1];
-            aux2[0] = noSelect;
-        }
-        PApuntada.setListData(aux2);
         this.setVisible(true);
     }
-    /**
-     * Creates new form VCategoria
-     */
-    public VCategoria(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        pare = parent;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,28 +74,22 @@ public class VCategoria extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         NomC = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         CApunta = new javax.swing.JList();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        PApunta = new javax.swing.JList();
         CApuntada = new javax.swing.JList();
-        PApuntada = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         NomC.setBackground(new java.awt.Color(255, 255, 255));
-        NomC.setText(cat);
+        NomC.setText(pag);
         NomC.setAutoscrolls(true);
 
-        jLabel1.setText("Nom Categoria:");
+        jLabel1.setText("Nom Pàgina:");
 
         jLabel2.setBackground(new java.awt.Color(250, 250, 250));
         jLabel2.setText("Comunitats a les que apunta:");
@@ -145,26 +103,8 @@ public class VCategoria extends javax.swing.JDialog {
             public Object getElementAt(int i) { return strings[i]; }
         });
 
-        jLabel4.setText("Pàgines a les que apunta:");
-
-        jLabel5.setText("Pàgines que l'apunten:");
-
-        PApunta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        PApunta.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-
         CApuntada.setBorder(new javax.swing.border.MatteBorder(null));
         CApuntada.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-
-        PApuntada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        PApuntada.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -174,13 +114,6 @@ public class VCategoria extends javax.swing.JDialog {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Visualitza Pàgina");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -195,25 +128,16 @@ public class VCategoria extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(NomC, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(PApunta, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(jButton2))
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(CApunta, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
+                        .addComponent(CApunta, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CApuntada, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PApuntada, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(jButton1)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CApuntada, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,31 +152,19 @@ public class VCategoria extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CApunta, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(PApunta, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CApunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(89, 89, 89)
-                                .addComponent(jButton1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CApuntada, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(CApuntada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(PApuntada, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(61, 61, 61)))))
-                .addContainerGap(76, Short.MAX_VALUE))
+                                .addGap(116, 116, 116)
+                                .addComponent(jButton1)
+                                .addGap(0, 243, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -273,7 +185,7 @@ public class VCategoria extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         VCategoria nova;
-        
+        //nova.setVisible(true);
         if(CApunta.getSelectedIndices().length>0 && !CApunta.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApunta.getSelectedValue().toString();
             nova = new VCategoria(pare, true);
@@ -292,27 +204,6 @@ public class VCategoria extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        VPagina nova;
-       
-        if(PApunta.getSelectedIndices().length>0 && !PApunta.getSelectedValue().toString().equals(noSelect)) {
-            String hy = PApunta.getSelectedValue().toString();
-            nova = new VPagina(pare, true);
-            nova.NomPag(macro.getGraf().getPagina(hy));
-            nova.setVisible(true);
-        }
-        else if(PApuntada.getSelectedIndices().length>0 && !PApuntada.getSelectedValue().toString().equals(noSelect)) {
-            String hy = PApuntada.getSelectedValue().toString();
-            nova = new VPagina(pare, true);
-            nova.NomPag(macro.getGraf().getPagina(hy));
-            nova.setVisible(true);
-        }
-        else {
-            SeleccionaAlgo despistat = new SeleccionaAlgo(pare,true);
-            despistat.setVisible(true);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -330,20 +221,20 @@ public class VCategoria extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPagina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPagina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPagina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPagina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VCategoria dialog = new VCategoria(new javax.swing.JFrame(), true);
+                VPagina dialog = new VPagina(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -359,16 +250,10 @@ public class VCategoria extends javax.swing.JDialog {
     private javax.swing.JList CApunta;
     private javax.swing.JList CApuntada;
     private javax.swing.JLabel NomC;
-    private javax.swing.JList PApunta;
-    private javax.swing.JList PApuntada;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
