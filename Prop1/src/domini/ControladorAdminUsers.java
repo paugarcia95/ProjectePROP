@@ -22,7 +22,8 @@ public class ControladorAdminUsers {
 	//PUBLIC
 //CONSTRUCTORA
 	/**
-	 * 
+	 * @param noug
+         * @param nouu
 	 */
 	public ControladorAdminUsers(GrafDades noug, ConjuntUsuaris nouu) {
 		gd= noug;
@@ -54,7 +55,7 @@ public class ControladorAdminUsers {
 	 * Post:
 	 * @return
 	 */
-	//nse si aquestes d'aqui abaix (idem x pag) es poden posar totes dins d'una funció, però el fet de donar-li a la vista tots els atributs a partir d'strings es la unica manera q se m'ha acudit
+	//nse si aquestes d'aqui abaix (idem x pag) es poden posar totes dins d'una funciï¿½, perï¿½ el fet de donar-li a la vista tots els atributs a partir d'strings es la unica manera q se m'ha acudit
 	public ArrayList<String> getCatCP(String Categoria) {return null;} 
 	
 	/**
@@ -148,8 +149,8 @@ public class ControladorAdminUsers {
 	 * Post:
 	 * @return
 	 */
-	//el Boolean indica quin dels dos tipus de format d'entrada és, el Boolean retorna 0 si no hi ha errors, 1 si no es reconeix l'URL o 2 si és algun altre tipus d'error
-	public Integer introFitx(String URL, Boolean enllaços) {return 1;}
+	//el Boolean indica quin dels dos tipus de format d'entrada ï¿½s, el Boolean retorna 0 si no hi ha errors, 1 si no es reconeix l'URL o 2 si ï¿½s algun altre tipus d'error
+	public Integer introFitx(String URL, Boolean enllasos) {return 1;}
 	
 	/**
 	 * Pre:

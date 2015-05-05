@@ -27,7 +27,7 @@ public class MainProvisional {
  		System.out.println("PANTALLA :");
 		System.out.println("Tria entre les seguents opcions:");
 		System.out.println(" ");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		while(true) {
@@ -45,7 +45,7 @@ public class MainProvisional {
 	 
 	
 	private static void visualitzarCategoria(String quina){
-		System.out.println("Funció no acabada d'implementar, encara no es pot navegar per la resta de Categories o Pagines ");
+		System.out.println("Funciï¿½ no acabada d'implementar, encara no es pot navegar per la resta de Categories o Pagines ");
 		System.out.println("PANTALLA DE VISUALITZACIO D'UNA CATEGORIA");
 		System.out.println("Nom:"+ mc.getGraf().getCategoria(quina).getNom());
 		System.out.println("Categories a les que apunta:");
@@ -65,7 +65,7 @@ public class MainProvisional {
 		String auxp = s.next();
 		return;}
 	private static void visualitzarPagina(String quina) {
-		System.out.println("Funció no acabada d'implementar, encara no es pot navegar per la resta de Categories ");
+		System.out.println("Funciï¿½ no acabada d'implementar, encara no es pot navegar per la resta de Categories ");
 		System.out.println("PANTALLA DE VISUALITZACIO D'UNA PAGINA");
 		System.out.println("Nom:"+ mc.getGraf().getPagina(quina).getNom());
 		System.out.println("Categories a les que apunta:");
@@ -88,7 +88,7 @@ public class MainProvisional {
 		}
 		Integer cerca2= mc.getContUser().addNovaCerca(mc.getUserActual());
 		System.out.println("Indica amb un numero del 0 al 10 la importancia que li vols donar als seguents criteris: ");
-		System.out.println("Atencio! Si es fa servir el criteri de triar un subconjunt de categories, nomes es tindran en compte, a mes a mes, els criteris de relacio i semblança ");
+		System.out.println("Atencio! Si es fa servir el criteri de triar un subconjunt de categories, nomes es tindran en compte, a mes a mes, els criteris de relacio i semblanï¿½a ");
 		Integer relacions, sembla, alg, tipus, paraulain, dada;
 		ArrayList<String> subconj, evitaCat, evitaPag;
 		String pare, paraulast;
@@ -147,7 +147,7 @@ public class MainProvisional {
 		System.out.println("2. Algorisme Newmann-Girvan");
 		System.out.println("2. Algorisme Clique percolation");
 		System.out.print("Abans tenies " + mc.getContUser().getAlgCerca(mc.getUserActual(), cercaactual)+ ", valor nou?");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		alg = s.nextInt();
 		tipus = dada= 0;
 		Boolean omplint = true;
@@ -155,17 +155,17 @@ public class MainProvisional {
 			switch(alg) {
 			case 1:
 				tipus = 1;
-				System.out.println("Digues amb un numero del 0 al 100, la dispersió desitjada");
+				System.out.println("Digues amb un numero del 0 al 100, la dispersiï¿½ desitjada");
 				dada = s.nextInt();
 				omplint = false;
 				break;
 			case 2:
 				System.out.println("has seleccionat fer la cerca amb l'algorisme de Newmann-Girvan :");
 				System.out.println("Tria entre les seguents opcions:");
-				System.out.println("1. Buscar a partir de la dispersió: ");
+				System.out.println("1. Buscar a partir de la dispersiï¿½: ");
 				System.out.println("2. Buscar a partir d'un nombre de comunitats desitjat");
 				System.out.println("3. Buscar a partir de la max Betweenes");
-				System.out.print("Numero d'opció:");
+				System.out.print("Numero d'opciï¿½:");
 				int n = 0;
 				n = s.nextInt();
 				Boolean fet = false;
@@ -173,7 +173,7 @@ public class MainProvisional {
 					switch(n) {
 					case 1:
 						tipus = 1;
-						System.out.print("Digues amb un numero del 0 al 100, la dispersió desitjada: ");
+						System.out.print("Digues amb un numero del 0 al 100, la dispersiï¿½ desitjada: ");
 						dada = s.nextInt();
 						fet = true;
 						break;
@@ -199,7 +199,7 @@ public class MainProvisional {
 				break;
 			case 3:
 				tipus = 0;
-				System.out.print("Digues amb un numero del 0 al 100, la dispersió desitjada: ");
+				System.out.print("Digues amb un numero del 0 al 100, la dispersiï¿½ desitjada: ");
 				dada = s.nextInt();
 				omplint = false;
 				break;
@@ -210,7 +210,7 @@ public class MainProvisional {
 			}
 			mc.getContUser().addCriterisCerca(true, mc.getUserActual(), cerca2, paraulast, paraulain, relacions, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare);
 		}
-		System.out.println("Comença la Cerca de Comunitats, aquest procés pot tardar uns minuts, si us plau, tingues paciencia");
+		System.out.println("Comenï¿½a la Cerca de Comunitats, aquest procï¿½s pot tardar uns minuts, si us plau, tingues paciencia");
 		if(!mc.getContUser().ferCerca(mc.getUserActual(), cerca2)) {
 			System.out.println("La Cerca no s'ha pogut realitzar.");
 			if(mc.getContUser().isAdmin(mc.getUserActual())) opcionsAdmin();
@@ -226,7 +226,7 @@ public class MainProvisional {
 			System.out.println("3. Modificar els criteris ");
 			//mes modificar les comunitats obtingudes!!!!!
 			System.out.println("4. Enrere ");
-			System.out.print("Numero d'opció:");
+			System.out.print("Numero d'opciï¿½:");
 			int n1 = 0;
 			n1 = s.nextInt();
 			Boolean modifica = true;
@@ -263,7 +263,7 @@ public class MainProvisional {
 			System.out.println("Tria entre les seguents opcions de modificacio:");
 			System.out.println("1. Modificar els criteris ");
 			System.out.println("2. Enrere ");
-			System.out.print("Numero d'opció:");
+			System.out.print("Numero d'opciï¿½:");
 			int n1 = 0;
 			n1 = s.nextInt();
 			Boolean modifica = true;
@@ -350,7 +350,7 @@ public class MainProvisional {
 		System.out.println("3. Visualitzar Categoria");
 		System.out.println("4. Guardar la Cerca");
 		System.out.println("5. Enrere ");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		while(true) {
@@ -379,7 +379,7 @@ public class MainProvisional {
 				System.out.println("3. Visualitzar Categoria (NO IMPLEMENTAT ENCARA)");
 				System.out.println("4. Guardar la Cerca");
 				System.out.println("5. Enrere ");
-				System.out.print("Numero d'opció:");
+				System.out.print("Numero d'opciï¿½:");
 				n = s.nextInt();
 				break;
 			case 5:
@@ -413,7 +413,7 @@ public class MainProvisional {
 		System.out.println("1. Fer admin a un usuari ja existent ");
 		System.out.println("2. Crear un nou usuari admin");
 		System.out.println("3. Tornar Enrere");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		while(true) {
@@ -448,10 +448,10 @@ public class MainProvisional {
 	}
 	private static void esborraDades(){
 		System.out.println("PANTALLA D'ELIMINACIO DE TOTES LES DADES DEL GRAF SISTEMA:");
-		System.out.println("Segur que vols eliminar????? Aquesta acció és irreversible i deixa el sisteme sense categories ni pàgines");
+		System.out.println("Segur que vols eliminar????? Aquesta acciï¿½ ï¿½s irreversible i deixa el sisteme sense categories ni pï¿½gines");
 		System.out.println("1. Si ");
 		System.out.println("2. No! Torna enrere ");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		while(true) {
@@ -470,7 +470,7 @@ public class MainProvisional {
 			}
 		}
 	}
-	private static void introduirDesDeFitxer() {System.out.println("Funció no implementada encara ");}
+	private static void introduirDesDeFitxer() {System.out.println("Funciï¿½ no implementada encara ");}
 	
 	private static void esborraClients() {
 		ArrayList<String> usuaris =	mc.getContUser().getUsers();
@@ -494,12 +494,12 @@ public class MainProvisional {
 	private static void introduirDades() {
 		System.out.println("PANTALLA D'INTRODUCCIO DE DADES:");
 		System.out.println("Tria entre les seguents opcions:");
-		System.out.println("1. Introduir dades a partir de fitxer d'enllaços ");
+		System.out.println("1. Introduir dades a partir de fitxer d'enllaï¿½os ");
 		System.out.println("2. Introduir categories manualment (NO IMPLEMENTAT)");
 		System.out.println("3. Introduir pagines manualment (NO IMPLEMENTAT) ");
-		System.out.println("4. Introduir enllaç manualment (NO IMPLEMENTAT)");
+		System.out.println("4. Introduir enllaï¿½ manualment (NO IMPLEMENTAT)");
 		System.out.println("5. Enrere ");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		Boolean segueix = true;
@@ -532,15 +532,15 @@ public class MainProvisional {
 		}
 //OPCIONS CLIENT + ADMIN	
 	private static void buscaEntreCategoriesAdmin() {
-		System.out.println("Funció no acabada d'implementar encara, ara per ara només mostra les categories existents i en pots visualitzar ");
-		//Quan estigui fet el ControladorAdminsUsers, ho farà des d'allà
+		System.out.println("Funciï¿½ no acabada d'implementar encara, ara per ara nomï¿½s mostra les categories existents i en pots visualitzar ");
+		//Quan estigui fet el ControladorAdminsUsers, ho farï¿½ des d'allï¿½
 		Collection<Categoria> aux = mc.getGraf().getCategories();
 		Iterator<Categoria> it = aux.iterator();
 		while(it.hasNext()) System.out.println(it.next().getNom());
 		System.out.println("Tria entre les seguents opcions:");
 		System.out.println("1. Visualitzar alguna Categoria ");
 		System.out.println("2. Enrere ");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		Boolean entra = true;
@@ -566,8 +566,8 @@ public class MainProvisional {
 		opcionsAdmin();
 		}	
 	private static void buscaEntreCategoriesClient() {
-		System.out.println("Funció no acabada d'implementar encara, ara per ara només mostra les categories existents ");
-		//Quan estigui fet el ControladorAdminsUsers, ho farà des d'allà
+		System.out.println("Funciï¿½ no acabada d'implementar encara, ara per ara nomï¿½s mostra les categories existents ");
+		//Quan estigui fet el ControladorAdminsUsers, ho farï¿½ des d'allï¿½
 		Collection<Categoria> aux = mc.getGraf().getCategories();
 		Iterator<Categoria> it = aux.iterator();
 		while(it.hasNext()) System.out.println(it.next().getNom());
@@ -576,13 +576,13 @@ public class MainProvisional {
 		opcionsClient();
 	}
 	private static void buscarEntreCategoriesPaginesAdmin() {
-		System.out.println("Funció no acabada d'implementar encara, ara per ara només mostra les categories i pagines existents ");
+		System.out.println("Funciï¿½ no acabada d'implementar encara, ara per ara nomï¿½s mostra les categories i pagines existents ");
 		System.out.println("CATEGORIES:");
 		Collection<Categoria> aux = mc.getGraf().getCategories();
 		Iterator<Categoria> it = aux.iterator();
 		while(it.hasNext()) System.out.println(it.next().getNom());
 		System.out.println("PAGINES:");
-		//Quan estigui fet el ControladorAdminsUsers, ho farà des d'allà
+		//Quan estigui fet el ControladorAdminsUsers, ho farï¿½ des d'allï¿½
 		Collection<Pagina> aux2 = mc.getGraf().getPagines();
 		Iterator<Pagina> it2 = aux2.iterator();
 		while(it2.hasNext()) System.out.println(it2.next().getNom());
@@ -591,13 +591,13 @@ public class MainProvisional {
 		 opcionsAdmin();
 	}
 	private static void buscarEntreCategoriesPaginesClient() {
-		System.out.println("Funció no acabada d'implementar encara, ara per ara només mostra les categories i pagines existents ");
+		System.out.println("Funciï¿½ no acabada d'implementar encara, ara per ara nomï¿½s mostra les categories i pagines existents ");
 		System.out.println("CATEGORIES:");
 		Collection<Categoria> aux = mc.getGraf().getCategories();
 		Iterator<Categoria> it = aux.iterator();
 		while(it.hasNext()) System.out.println(it.next().getNom());
 		System.out.println("PAGINES:");
-		//Quan estigui fet el ControladorAdminsUsers, ho farà des d'allà
+		//Quan estigui fet el ControladorAdminsUsers, ho farï¿½ des d'allï¿½
 		Collection<Pagina> aux2 = mc.getGraf().getPagines();
 		Iterator<Pagina> it2 = aux2.iterator();
 		while(it2.hasNext()) System.out.println(it2.next().getNom());
@@ -606,15 +606,15 @@ public class MainProvisional {
 		opcionsClient();
 	}
 	private static void buscarEntrePaginesAdmin() {
-		System.out.println("Funció no acabada d'implementar encara, ara per ara només mostra les pagines existents ");
-		//Quan estigui fet el ControladorAdminsUsers, ho farà des d'allà
+		System.out.println("Funciï¿½ no acabada d'implementar encara, ara per ara nomï¿½s mostra les pagines existents ");
+		//Quan estigui fet el ControladorAdminsUsers, ho farï¿½ des d'allï¿½
 		Collection<Pagina> aux = mc.getGraf().getPagines();
 		Iterator<Pagina> it = aux.iterator();
 		while(it.hasNext()) System.out.println(it.next().getNom());
 		System.out.println("Tria entre les seguents opcions:");
 		System.out.println("1. Visualitzar alguna Pagina ");
 		System.out.println("2. Enrere ");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		Boolean entra = true;
@@ -649,7 +649,7 @@ public class MainProvisional {
 		System.out.println("1. Veure una de les pagines ");
 		System.out.println("2. Eliminar pagines ");
 		System.out.println("3. Enrere ");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		while(true) {
@@ -681,8 +681,8 @@ public class MainProvisional {
 		} */
 	}
 	private static void buscarEntrePaginesClient() {
-		System.out.println("Funció no acabada d'implementar encara, ara per ara només mostra les pagines existents ");
-		//Quan estigui fet el ControladorAdminsUsers, ho farà des d'allà
+		System.out.println("Funciï¿½ no acabada d'implementar encara, ara per ara nomï¿½s mostra les pagines existents ");
+		//Quan estigui fet el ControladorAdminsUsers, ho farï¿½ des d'allï¿½
 		Collection<Pagina> aux = mc.getGraf().getPagines();
 		Iterator<Pagina> it = aux.iterator();
 		while(it.hasNext()) System.out.println(it.next().getNom());
@@ -698,7 +698,7 @@ public class MainProvisional {
 		System.out.println("Tria entre les seguents opcions:");
 		System.out.println("1. Veure una de les pagines ");
 		System.out.println("2. Enrere ");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		while(true) {
@@ -728,9 +728,9 @@ public class MainProvisional {
 		}
 		
 		System.out.println("Indica amb un numero del 0 al 10 la importancia que li vols donar als seguents criteris: ");
-		System.out.println("Atencio! Si es fa servir el criteri de triar un subconjunt de categories, nomes es tindran en compte, a mes a mes, els criteris de relacio i semblança ");
-		System.out.println("Atencio! Si es fa servir el criteri de triar una paraula clau, nomes es tindran en compte, a mes a mes, els criteris d'ignorar, de relacio i semblança ");
-		System.out.println("Atencio! Si es fa servir el criteri de triar una categoria pare, nomes es tindran en compte, a mes a mes, els criteris d'ignorar, de relacio i semblança ");
+		System.out.println("Atencio! Si es fa servir el criteri de triar un subconjunt de categories, nomes es tindran en compte, a mes a mes, els criteris de relacio i semblanï¿½a ");
+		System.out.println("Atencio! Si es fa servir el criteri de triar una paraula clau, nomes es tindran en compte, a mes a mes, els criteris d'ignorar, de relacio i semblanï¿½a ");
+		System.out.println("Atencio! Si es fa servir el criteri de triar una categoria pare, nomes es tindran en compte, a mes a mes, els criteris d'ignorar, de relacio i semblanï¿½a ");
 		Integer relacions, sembla, alg, tipus, paraulain, dada;
 		ArrayList<String> subconj, evitaCat, evitaPag;
 		String pare, paraulast;
@@ -738,7 +738,7 @@ public class MainProvisional {
 		System.out.print("Importancia a les relacions entre categories (si val 0 nomes es premia les relacions cat-pag, 5 totes es premien amb la mateixa importancia i 10 nomes es premien les relacions entre cat-cat): ");
 		relacions= s.nextInt();
 		
-		System.out.print("Importancia en la semblança de nom de les categories, sent 0 a no donar-li importancia a que els noms s'assemblin i 10 que es premiï molt que s'assemblin");
+		System.out.print("Importancia en la semblanï¿½a de nom de les categories, sent 0 a no donar-li importancia a que els noms s'assemblin i 10 que es premiï¿½ molt que s'assemblin");
 		sembla = s.nextInt();
 		
 		System.out.println("Importancia que li vols donar a una paraula clau determinada");
@@ -783,7 +783,7 @@ public class MainProvisional {
 		System.out.println("1. Algorisme Louvain (NO FUNCIONA ENCARA, CLASSE COMPARTIDA)");
 		System.out.println("2. Algorisme Newmann-Girvan");
 		System.out.println("3. Algorisme Clique percolation (NO FUNCIONA ENCARA, CLASSE COMPARTIDA)");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		alg = s.nextInt();
 		tipus = dada= 0;
 		Boolean omplint = true;
@@ -791,17 +791,17 @@ public class MainProvisional {
 			switch(alg) {
 			case 1:
 				tipus = 0;
-				System.out.println("Digues amb un numero del 0 al 100, la dispersió desitjada");
+				System.out.println("Digues amb un numero del 0 al 100, la dispersiï¿½ desitjada");
 				dada = s.nextInt();
 				omplint = false;
 				break;
 			case 2:
 				System.out.println("has seleccionat fer la cerca amb l'algorisme de Newmann-Girvan :");
 				System.out.println("Tria entre les seguents opcions:");
-				System.out.println("1. Buscar a partir de la dispersió: ");
+				System.out.println("1. Buscar a partir de la dispersiï¿½: ");
 				System.out.println("2. Buscar a partir d'un nombre de comunitats desitjat");
 				System.out.println("3. Buscar a partir de la max Betweenes");
-				System.out.print("Numero d'opció:");
+				System.out.print("Numero d'opciï¿½:");
 				int n = 0;
 				n = s.nextInt();
 				Boolean fet = false;
@@ -809,7 +809,7 @@ public class MainProvisional {
 					switch(n) {
 					case 1:
 						tipus = 1;
-						System.out.print("Digues amb un numero del 0 al 100, la dispersió desitjada: ");
+						System.out.print("Digues amb un numero del 0 al 100, la dispersiï¿½ desitjada: ");
 						dada = s.nextInt();
 						fet = true;
 						break;
@@ -835,7 +835,7 @@ public class MainProvisional {
 				break;
 			case 3:
 				tipus = 0;
-				System.out.print("Digues amb un numero del 0 al 100, la dispersió desitjada: ");
+				System.out.print("Digues amb un numero del 0 al 100, la dispersiï¿½ desitjada: ");
 				dada = s.nextInt();
 				omplint = false;
 				break;
@@ -865,7 +865,7 @@ public class MainProvisional {
 		String sa = new String();
 		cri.setPare(sa);
 		mc.getConjUsers().getUser(mc.getUserActual()).getCerca(cercaactual).setCriterisSeleccio(cri);*/
-		System.out.println("Comença la Cerca de Comunitats, aquest procés pot tardar uns minuts, si us plau, tingues paciencia");
+		System.out.println("Comenï¿½a la Cerca de Comunitats, aquest procï¿½s pot tardar uns minuts, si us plau, tingues paciencia");
 		if(!mc.getContUser().ferCerca(mc.getUserActual(), cercaactual)) {
 			System.out.println("La Cerca no s'ha pogut realitzar.");
 			if(mc.getContUser().isAdmin(mc.getUserActual())) opcionsAdmin();
@@ -887,7 +887,7 @@ public class MainProvisional {
 		System.out.println("2. Entrar en una de les Cerques Antigues.");
 		System.out.println("3. Crear una nova Cerca de Comunitats ");
 		System.out.println("4. Enrere ");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		while(true) {
@@ -923,7 +923,7 @@ public class MainProvisional {
 		System.out.println("1. Canviar username");
 		System.out.println("2. Canviar password");
 		System.out.println("3. Sortir ");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		while(true) {
@@ -973,7 +973,7 @@ public class MainProvisional {
 		System.out.println("9. Visualitzar Conjunts de comunitats realitzats anteriorment ");
 		System.out.println("10. Modificar les propies dades d'usuari");
 		System.out.println("11. Sortir");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		while(true) {
@@ -1028,7 +1028,7 @@ public class MainProvisional {
 		System.out.println("5. Visualitzar Conjunts de comunitats realitzats anteriorment ");
 		System.out.println("6. Modificar les propies dades d'usuari");
 		System.out.println("7. Sortir");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n = 0;
 		n = s.nextInt();
 		while(true) {
@@ -1122,7 +1122,7 @@ public class MainProvisional {
 		System.out.println("1. Login");
 		System.out.println("2. Crear Client");
 		System.out.println("3. Tancar Programa");
-		System.out.print("Numero d'opció:");
+		System.out.print("Numero d'opciï¿½:");
 		int n=0;
 		n = s.nextInt();
 		while(true) {
@@ -1148,7 +1148,9 @@ public class MainProvisional {
 	 * 
 	 */
 	public static void main(String[] args) {
-		mc = new MacroControlador();
+	         Interficie.InterficiaProva aux = new Interficie.InterficiaProva();
+                  aux.setVisible(true);
+            mc = new MacroControlador();
 		//if(!mc.carregaDades()) System.out.println("Hi ha hagut algun problema al carregar les dades del graf la wiki");
 		if(!mc.carregaUsers()) System.out.println("Hi ha hagut algun problema al carregar les dades dels usuaris");
 		Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
@@ -1173,10 +1175,10 @@ public class MainProvisional {
 		mc.getContUser().addUser("admin", "admin");
 		mc.getContUser().addUser("client", "client");
 		mc.getContUser().addAdmin("admin");
-		System.out.println("Acabes d'entrar al main provisional del projecte de la Wikipedia, es mostraran les mateixes funcionalitats que en el projecte final però en mode consola.");
+		System.out.println("Acabes d'entrar al main provisional del projecte de la Wikipedia, es mostraran les mateixes funcionalitats que en el projecte final perï¿½ en mode consola.");
 		System.out.println("Com a caracteristica provisional, hi ha definits dos usuaris per defecte: (admin,admin) amb drets d'administrador i (client, client) com a usuari normal");
-		System.out.println("Per Poder visualitzar alguna categoria o pàgina, provisionalment, has d'entrar com a admin");
-		System.out.println("Com que falta el controladorAdminsUsers, la implementacio de les funcionalitats que han d'anar a traves seu es fan directament des del main o el macrocontrolador, això es provisional");
+		System.out.println("Per Poder visualitzar alguna categoria o pï¿½gina, provisionalment, has d'entrar com a admin");
+		System.out.println("Com que falta el controladorAdminsUsers, la implementacio de les funcionalitats que han d'anar a traves seu es fan directament des del main o el macrocontrolador, aixï¿½ es provisional");
 		System.out.println("Escriu alguna cosa per continuar");
 		s.next();
 		pantallaInici();
