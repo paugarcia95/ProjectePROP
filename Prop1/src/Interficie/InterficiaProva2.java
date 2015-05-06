@@ -16,12 +16,12 @@ import domini.Pagina;
  *
  * @author Cristina
  */
-public class InterficiaProva extends javax.swing.JFrame {
+public class InterficiaProva2 extends javax.swing.JFrame {
     static domini.MacroControlador macro;
     /**
      * Creates new form InterficiaProva
      */
-    public InterficiaProva() {
+    public InterficiaProva2() {
         initComponents();
         macro = new domini.MacroControlador();
         macro.getContUser().addUser("admin", "admin");
@@ -49,13 +49,12 @@ public class InterficiaProva extends javax.swing.JFrame {
         G.addCP(aux7, aux0);
         G.addPC(aux0, aux6);
         A_BuscaCat.setVisible(false);
+        A_BuscaCatPag.setVisible(false);
         A_BuscaPag.setVisible(false);
         A_OpcionsClient.setVisible(false);
         A_OpcionsAdmin.setVisible(false);
-        A_BuscaCatPag.setVisible(false);
-        A_CreaComunitat.setVisible(false);
-        A_CreaUsuari.setVisible(false);
-        //Wikipedia.setVisible(true);
+        ErrorUsername.setVisible(false);
+        Wikipedia.setVisible(false);
        // A_PantallaPrincipal.setVisible(true);
     }
 
@@ -69,6 +68,12 @@ public class InterficiaProva extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        jPanel1 = new javax.swing.JPanel();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        Wikipedia = new javax.swing.JInternalFrame();
+        ErrorUsername = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        Ok = new javax.swing.JButton();
         A_PantallaPrincipal = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -79,15 +84,6 @@ public class InterficiaProva extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Password = new javax.swing.JTextField();
-        A_CreaUsuari = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        NouUsername = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        NovaPassword = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         A_OpcionsClient = new javax.swing.JPanel();
         EnrereC = new javax.swing.JButton();
         BuscaCategories = new javax.swing.JButton();
@@ -107,21 +103,99 @@ public class InterficiaProva extends javax.swing.JFrame {
         LlistaPag = new javax.swing.JList();
         BVisPag = new javax.swing.JButton();
         A_BuscaCatPag = new javax.swing.JPanel();
-        BVisPag1 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
-        LlistaPag1 = new javax.swing.JList();
-        BVisCat1 = new javax.swing.JButton();
-        BOpC2 = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
-        LlistaCateg1 = new javax.swing.JList();
-        A_CreaComunitat = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Prova1");
 
-        jButton4.setText("Crea un nou usuari");
+        Wikipedia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        Wikipedia.setClosable(true);
+        Wikipedia.setIconifiable(true);
+        Wikipedia.setMaximizable(true);
+        Wikipedia.setTitle("Wikipedia");
+        Wikipedia.setToolTipText("whereeee?");
+        Wikipedia.setAutoscrolls(true);
+        Wikipedia.setComponentPopupMenu(jPopupMenu1);
+        Wikipedia.setDoubleBuffered(true);
+        Wikipedia.setInheritsPopupMenu(true);
+        Wikipedia.setName("Wikipedia_where?"); // NOI18N
+        Wikipedia.setOpaque(true);
+        try {
+            Wikipedia.setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
+        Wikipedia.setVisible(true);
+
+        jLabel5.setText("L'username no existeix, torna'l a introduir o crea una nova conta.");
+        jLabel5.setAlignmentY(1.5F);
+
+        Ok.setText("Ok");
+        Ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OkActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ErrorUsernameLayout = new javax.swing.GroupLayout(ErrorUsername);
+        ErrorUsername.setLayout(ErrorUsernameLayout);
+        ErrorUsernameLayout.setHorizontalGroup(
+            ErrorUsernameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ErrorUsernameLayout.createSequentialGroup()
+                .addGap(159, 159, 159)
+                .addComponent(Ok)
+                .addContainerGap(202, Short.MAX_VALUE))
+            .addGroup(ErrorUsernameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ErrorUsernameLayout.createSequentialGroup()
+                    .addGap(27, 27, 27)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                    .addGap(27, 27, 27)))
+        );
+        ErrorUsernameLayout.setVerticalGroup(
+            ErrorUsernameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ErrorUsernameLayout.createSequentialGroup()
+                .addContainerGap(147, Short.MAX_VALUE)
+                .addComponent(Ok)
+                .addGap(43, 43, 43))
+            .addGroup(ErrorUsernameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ErrorUsernameLayout.createSequentialGroup()
+                    .addGap(79, 79, 79)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(79, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout WikipediaLayout = new javax.swing.GroupLayout(Wikipedia.getContentPane());
+        Wikipedia.getContentPane().setLayout(WikipediaLayout);
+        WikipediaLayout.setHorizontalGroup(
+            WikipediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 426, Short.MAX_VALUE)
+            .addGroup(WikipediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(WikipediaLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(ErrorUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        WikipediaLayout.setVerticalGroup(
+            WikipediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 228, Short.MAX_VALUE)
+            .addGroup(WikipediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(WikipediaLayout.createSequentialGroup()
+                    .addGap(4, 4, 4)
+                    .addComponent(ErrorUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        jButton4.setText("JPanelForm1");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -193,13 +267,11 @@ public class InterficiaProva extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
-                                        .addGap(263, 263, 263)
+                                        .addComponent(jButton4)
+                                        .addGap(140, 140, 140)
                                         .addComponent(Exit))
-                                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jButton4)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         A_PantallaPrincipalLayout.setVerticalGroup(
             A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,109 +293,17 @@ public class InterficiaProva extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(71, 71, 71)
                         .addComponent(Login)))
-                .addGap(45, 45, 45)
-                .addComponent(jButton4)
-                .addGap(2, 2, 2)
-                .addComponent(Exit)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(Exit))
+                    .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(jButton4)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         Username.getAccessibleContext().setAccessibleName("Username");
-
-        jLabel7.setText("Creació d'un nou usuari");
-
-        NouUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NouUsernameActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("Username");
-
-        jButton1.setText("Comproba Disponibilitat");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setText("Password");
-
-        NovaPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NovaPasswordActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Crea");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Enrere");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout A_CreaUsuariLayout = new javax.swing.GroupLayout(A_CreaUsuari);
-        A_CreaUsuari.setLayout(A_CreaUsuariLayout);
-        A_CreaUsuariLayout.setHorizontalGroup(
-            A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                        .addGap(272, 272, 272)
-                        .addComponent(jLabel7))
-                    .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                                .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                                        .addGap(116, 116, 116)
-                                        .addComponent(jButton2))
-                                    .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(38, 38, 38)
-                                        .addComponent(NouUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(31, 31, 31)
-                                .addComponent(jButton1))
-                            .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(40, 40, 40)
-                                .addComponent(NovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(133, 133, 133)
-                                .addComponent(jButton3)))))
-                .addContainerGap(104, Short.MAX_VALUE))
-        );
-        A_CreaUsuariLayout.setVerticalGroup(
-            A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel7)
-                .addGap(40, 40, 40)
-                .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NouUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jButton1))
-                .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A_CreaUsuariLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(NovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
-                            .addComponent(jLabel9))
-                        .addGap(26, 26, 26)))
-                .addComponent(jButton2)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
 
         EnrereC.setText("Enrere");
         EnrereC.addActionListener(new java.awt.event.ActionListener() {
@@ -354,11 +334,6 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
 
         CreaCerca.setText("Crea una nova Cerca de Comunitats ");
-        CreaCerca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreaCercaActionPerformed(evt);
-            }
-        });
 
         BuscaCerques.setText("Visualitza Cerques realitzades anteriorment");
 
@@ -375,7 +350,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                     .addComponent(BuscaCerques, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
                 .addGap(150, 150, 150)
                 .addComponent(EnrereC)
-                .addGap(0, 684, Short.MAX_VALUE))
+                .addGap(0, 56, Short.MAX_VALUE))
         );
         A_OpcionsClientLayout.setVerticalGroup(
             A_OpcionsClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,7 +370,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                 .addComponent(CreaCerca)
                 .addGap(18, 18, 18)
                 .addComponent(BuscaCerques)
-                .addContainerGap(378, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout A_OpcionsAdminLayout = new javax.swing.GroupLayout(A_OpcionsAdmin);
@@ -547,131 +522,15 @@ public class InterficiaProva extends javax.swing.JFrame {
                 .addGap(326, 326, 326))
         );
 
-        BVisPag1.setText("Visualitza");
-        BVisPag1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BVisPag1ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.setBackground(new java.awt.Color(240, 240, 240));
-        jTextField3.setText("Aquestes són les pàgines existents:");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        LlistaPag1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(51, 51, 51)));
-        LlistaPag1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        LlistaPag1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-
-        BVisCat1.setText("Visualitza");
-        BVisCat1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BVisCat1ActionPerformed(evt);
-            }
-        });
-
-        BOpC2.setText("Enrere");
-        BOpC2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BOpC2ActionPerformed(evt);
-            }
-        });
-
-        jTextField4.setBackground(new java.awt.Color(240, 240, 240));
-        jTextField4.setText("Aquestes són les categories existents:");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-
-        LlistaCateg1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(51, 51, 51)));
-        LlistaCateg1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        LlistaCateg1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-
         javax.swing.GroupLayout A_BuscaCatPagLayout = new javax.swing.GroupLayout(A_BuscaCatPag);
         A_BuscaCatPag.setLayout(A_BuscaCatPagLayout);
         A_BuscaCatPagLayout.setHorizontalGroup(
             A_BuscaCatPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(A_BuscaCatPagLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(A_BuscaCatPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(A_BuscaCatPagLayout.createSequentialGroup()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 80, Short.MAX_VALUE))
-                    .addComponent(LlistaCateg1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(BOpC2)
-                .addGap(18, 18, 18)
-                .addGroup(A_BuscaCatPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LlistaPag1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(A_BuscaCatPagLayout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(BVisCat1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BVisPag1)
-                .addGap(128, 128, 128))
+            .addGap(0, 718, Short.MAX_VALUE)
         );
         A_BuscaCatPagLayout.setVerticalGroup(
             A_BuscaCatPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(A_BuscaCatPagLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(A_BuscaCatPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(A_BuscaCatPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(A_BuscaCatPagLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(A_BuscaCatPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LlistaCateg1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LlistaPag1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(A_BuscaCatPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BVisCat1)
-                            .addComponent(BVisPag1)))
-                    .addGroup(A_BuscaCatPagLayout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(BOpC2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel5.setText("Benvingut a la creació d'una nova Cerca de Comunitats!");
-
-        jLabel6.setText("Si us plau, omple totes les dades amb un * i tingues en compte les restriccions de les altres");
-
-        javax.swing.GroupLayout A_CreaComunitatLayout = new javax.swing.GroupLayout(A_CreaComunitat);
-        A_CreaComunitat.setLayout(A_CreaComunitatLayout);
-        A_CreaComunitatLayout.setHorizontalGroup(
-            A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(A_CreaComunitatLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addContainerGap(388, Short.MAX_VALUE))
-        );
-        A_CreaComunitatLayout.setVerticalGroup(
-            A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(A_CreaComunitatLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addContainerGap(510, Short.MAX_VALUE))
+            .addGap(0, 516, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -695,6 +554,11 @@ public class InterficiaProva extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
+                    .addGap(333, 333, 333)
+                    .addComponent(Wikipedia)
+                    .addContainerGap(333, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
                     .addGap(307, 307, 307)
                     .addComponent(A_BuscaPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(307, Short.MAX_VALUE)))
@@ -703,16 +567,6 @@ public class InterficiaProva extends javax.swing.JFrame {
                     .addGap(341, 341, 341)
                     .addComponent(A_BuscaCatPag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(341, 341, 341)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(650, 650, 650)
-                    .addComponent(A_CreaComunitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(650, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(650, 650, 650)
-                    .addComponent(A_CreaUsuari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(650, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -731,6 +585,11 @@ public class InterficiaProva extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
+                    .addGap(314, 314, 314)
+                    .addComponent(Wikipedia, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addContainerGap(345, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
                     .addGap(30, 30, 30)
                     .addComponent(A_BuscaPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(31, Short.MAX_VALUE)))
@@ -739,16 +598,6 @@ public class InterficiaProva extends javax.swing.JFrame {
                     .addGap(71, 71, 71)
                     .addComponent(A_BuscaCatPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(72, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(279, 279, 279)
-                    .addComponent(A_CreaComunitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(280, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(279, 279, 279)
-                    .addComponent(A_CreaUsuari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(280, Short.MAX_VALUE)))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -763,9 +612,12 @@ public class InterficiaProva extends javax.swing.JFrame {
         user= Username.getText();
         pass= Password.getText();
         if(!macro.getContUser().existsUser(user)) {
-            Error aux = new Error(this,true);
-            aux.ompletext("L'username no existeix, torna'l a introduir o crea una nova conta.");
-            aux.setVisible(true);
+            //ErrorUsername aux = new ErrorUsername(this,true);
+            //aux.setVisible(true);
+            A_PantallaPrincipal.setVisible(false);
+            Wikipedia.setVisible(true);
+            ErrorUsername.setVisible(true);
+            
         }
         else if(macro.getContUser().login(user, pass)){
             A_PantallaPrincipal.setVisible(false);
@@ -796,8 +648,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_LoginMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        A_PantallaPrincipal.setVisible(false);
-        A_CreaUsuari.setVisible(true);
+        //JPanelForm1 aux = new JPanelForm1();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void EnrereCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrereCActionPerformed
@@ -808,6 +659,9 @@ public class InterficiaProva extends javax.swing.JFrame {
     private void BuscaCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaCategoriesActionPerformed
         A_OpcionsClient.setVisible(false);
         A_BuscaCat.setVisible(true);
+       // BOpC.setVisible(true);
+        Object aux = new Object();
+        aux = macro.getGraf().getCategories();
         Collection<Categoria> auxc = macro.getGraf().getCategories();
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
@@ -817,29 +671,15 @@ public class InterficiaProva extends javax.swing.JFrame {
             ++cont;
         }
         LlistaCateg.setListData(aux2);
+      //  LlistaCateg.setVisible(true);
+       // A_BuscaCat.setVisible(true);
+        
+        //jList1.add(javax.swing.JTextField);
+// TODO add your handling code here:
     }//GEN-LAST:event_BuscaCategoriesActionPerformed
 
     private void BuscaCatPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaCatPagActionPerformed
-        A_OpcionsClient.setVisible(false);
-        A_BuscaCatPag.setVisible(true);
-        Collection<Pagina> auxc = macro.getGraf().getPagines();
-        Object[] aux2 = new Object[auxc.size()];
-        int cont = 0;
-        Iterator<Pagina> it = auxc.iterator();
-        while(it.hasNext()) {
-            aux2[cont] = it.next().getNom();
-            ++cont;
-        }
-        LlistaPag1.setListData(aux2);
-        Collection<Categoria> auxc1 = macro.getGraf().getCategories();
-        Object[] aux3 = new Object[auxc1.size()];
-        cont = 0;
-        Iterator<Categoria> it2 = auxc1.iterator();
-        while(it2.hasNext()) {
-            aux3[cont] = it2.next().getNom();
-            ++cont;
-        }
-        LlistaCateg1.setListData(aux3);
+        // TODO add your handling code here:
     }//GEN-LAST:event_BuscaCatPagActionPerformed
 
     private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameActionPerformed
@@ -904,95 +744,16 @@ public class InterficiaProva extends javax.swing.JFrame {
             Error despistat = new Error(this,true);
             despistat.ompletext("Has de seleccionar algun element de la llista!");
             despistat.setVisible(true);
+            
         }
     }//GEN-LAST:event_BVisPagActionPerformed
 
-    private void BVisPag1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVisPag1ActionPerformed
-       if(LlistaPag1.getSelectedIndices().length>0) {
-            String hy = LlistaPag1.getSelectedValue().toString();
-            VPagina aux = new VPagina(this,true);
-            Pagina auxi = macro.getGraf().getPagina(hy);
-            aux.NomPag(auxi);
-        }
-        else {
-            Error despistat = new Error(this,true);
-            despistat.ompletext("Has de seleccionar algun element de la llista!");
-            despistat.setVisible(true);
-        }
-    }//GEN-LAST:event_BVisPag1ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void BVisCat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVisCat1ActionPerformed
-        if(LlistaCateg1.getSelectedIndices().length>0) {
-            String hy = LlistaCateg1.getSelectedValue().toString();
-            VCategoria aux = new VCategoria(this,true);
-            Categoria auxi = macro.getGraf().getCategoria(hy);
-            aux.NomCat(auxi);
-        }
-        else {
-            Error despistat = new Error(this,true);
-            despistat.ompletext("Has de seleccionar algun element de la llista!");
-            despistat.setVisible(true);
-        }
-    }//GEN-LAST:event_BVisCat1ActionPerformed
-
-    private void BOpC2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BOpC2ActionPerformed
-        A_BuscaCatPag.setVisible(false);
-        A_OpcionsClient.setVisible(true);
-    }//GEN-LAST:event_BOpC2ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void NouUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NouUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NouUsernameActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Error aux = new Error(this, true);
-        String resultat;
-        if(macro.getConjUsers().exists(NouUsername.getText())) resultat = "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre";
-        else  resultat = "Aquest nom d'usuari està lliure, endavant";
-        aux.ompletext(resultat);
-        aux.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void NovaPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovaPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NovaPasswordActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        A_CreaUsuari.setVisible(false);
+    private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
+       // this.setVisible(false);
+        Wikipedia.setVisible(false);
+        ErrorUsername.setVisible(false);
         A_PantallaPrincipal.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(macro.getConjUsers().exists(NouUsername.getText())) {
-          Error aux = new Error(this, true);
-          aux.ompletext("Aquest nom d'usuari ja existeix, si us plau, tria'n un altre");
-          aux.setVisible(true);
-        }
-        else if(NovaPassword.getText().length()==0) {
-          Error aux = new Error(this, true);
-          aux.ompletext("Escriu una contrassenya siusplau");
-          aux.setVisible(true);
-        }
-        else {
-            macro.getContUser().addUser(NouUsername.getText(), NovaPassword.getText());
-            Error aux = new Error(this, true);
-          aux.ompletext("Felicitats, conta cread!");
-          aux.setVisible(true);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void CreaCercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreaCercaActionPerformed
-        A_OpcionsClient.setVisible(false);
-        A_CreaComunitat.setVisible(true);
-    }//GEN-LAST:event_CreaCercaActionPerformed
+    }//GEN-LAST:event_OkActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1011,20 +772,21 @@ public class InterficiaProva extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterficiaProva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterficiaProva2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterficiaProva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterficiaProva2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterficiaProva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterficiaProva2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterficiaProva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterficiaProva2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterficiaProva().setVisible(true);
+                new InterficiaProva2().setVisible(true);
                
             }
         });
@@ -1034,51 +796,38 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JPanel A_BuscaCat;
     private javax.swing.JPanel A_BuscaCatPag;
     private javax.swing.JPanel A_BuscaPag;
-    private javax.swing.JPanel A_CreaComunitat;
-    private javax.swing.JPanel A_CreaUsuari;
     private javax.swing.JPanel A_OpcionsAdmin;
     private javax.swing.JPanel A_OpcionsClient;
     private javax.swing.JPanel A_PantallaPrincipal;
     private javax.swing.JButton BOpC;
     private javax.swing.JButton BOpC1;
-    private javax.swing.JButton BOpC2;
     private javax.swing.JButton BVisCat;
-    private javax.swing.JButton BVisCat1;
     private javax.swing.JButton BVisPag;
-    private javax.swing.JButton BVisPag1;
     private javax.swing.JButton BuscaCatPag;
     private javax.swing.JButton BuscaCategories;
     private javax.swing.JButton BuscaCerques;
     private javax.swing.JButton BuscaPagines;
     private javax.swing.JButton CreaCerca;
     private javax.swing.JButton EnrereC;
+    private javax.swing.JPanel ErrorUsername;
     private javax.swing.JButton Exit;
     private javax.swing.JList LlistaCateg;
-    private javax.swing.JList LlistaCateg1;
     private javax.swing.JList LlistaPag;
-    private javax.swing.JList LlistaPag1;
     private javax.swing.JButton Login;
-    private javax.swing.JTextField NouUsername;
-    private javax.swing.JTextField NovaPassword;
+    private javax.swing.JButton Ok;
     private javax.swing.JTextField Password;
     private javax.swing.JTextField Username;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JInternalFrame Wikipedia;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -287,7 +287,8 @@ public class VCategoria extends javax.swing.JDialog {
             nova.setVisible(true);
         }
         else {
-            SeleccionaAlgo despistat = new SeleccionaAlgo(pare,true);
+            Error despistat = new Error(pare,true);
+            despistat.ompletext("Has de seleccionar algun element de la llista!");
             despistat.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -308,7 +309,8 @@ public class VCategoria extends javax.swing.JDialog {
             nova.setVisible(true);
         }
         else {
-            SeleccionaAlgo despistat = new SeleccionaAlgo(pare,true);
+            Error despistat = new Error(pare,true);
+            despistat.ompletext("Has de seleccionar algun element de la llista!");
             despistat.setVisible(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
