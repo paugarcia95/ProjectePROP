@@ -1,6 +1,7 @@
 package domini;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -35,12 +36,12 @@ public class EntradaSortidaDadesGraf {
 	 * @param G
 	 *            S'afegeixen a aquest graf els nous nodes i arestes
 	 * @param ruta
-	 *            Adreça on es troba el fitxer de text
+	 *            Adreï¿½a on es troba el fitxer de text
 	 * @return Un GrafDades amb les dades de "ruta"
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public void carregarGrafDades(GrafDades G, String ruta) throws FileNotFoundException, IOException {
+	public void carregarGrafDades(GrafDades G, File ruta) throws FileNotFoundException, IOException {
 		BufferedReader b = new BufferedReader(new FileReader(ruta));
 		String s;
 
@@ -70,7 +71,7 @@ public class EntradaSortidaDadesGraf {
 	}
 
 	/**
-	 * Guarda la configuració del graf G a un fitxer de text a "ruta".
+	 * Guarda la configuraciï¿½ del graf G a un fitxer de text a "ruta".
 	 * 
 	 * @param G
 	 *            Indica el graf de dades que es vol emmagatzemar
@@ -97,7 +98,7 @@ public class EntradaSortidaDadesGraf {
 				Iterator<Pagina> PC = c.getMapPC().values().iterator();
 				Iterator<Categoria> CsupC = c.getMapCSupC().values().iterator();
 				// Iterator<Categoria> CsubC = c.getMapCSubC().values().iterator();
-				// Aquest últim no cal ja que només amb els enllaços CsupC ja es
+				// Aquest ï¿½ltim no cal ja que nomï¿½s amb els enllaï¿½os CsupC ja es
 				// pot representar tot el graf
 
 				while (CP.hasNext()) {
@@ -133,14 +134,14 @@ public class EntradaSortidaDadesGraf {
 
 	/**
 	 * Tradueix un fitxer de dades d'un graf a un fitxer que permet al programa
-	 * DOT representar graficament un graf. El programa DOT només funciona
-	 * correctament si el graf té menys de 100 nodes aproximadament.
+	 * DOT representar graficament un graf. El programa DOT nomï¿½s funciona
+	 * correctament si el graf tï¿½ menys de 100 nodes aproximadament.
 	 * 
 	 * @param rutaGraf
 	 *            Ruta de directoris que indica on es troba el fitxer amb les
 	 *            dades del graf.
 	 * @param rutaImatgeTXT
-	 *            La ruta de l'arxiu de text de destí.
+	 *            La ruta de l'arxiu de text de destï¿½.
 	 */
 	public void traduirGrafDadesAImatge(String rutaGraf, String rutaImatgeTXT) {
 		String s;
@@ -222,7 +223,7 @@ public class EntradaSortidaDadesGraf {
 
 	/**
 	 * Llegeix del canal standard d'entrada una aresta (en format: node1
-	 * tipusEnllaç node2) i l'afegeix a G.
+	 * tipusEnllaï¿½ node2) i l'afegeix a G.
 	 * 
 	 * @param G
 	 *            El graf al que es vol afegir una Aresta.

@@ -3,6 +3,7 @@
  */
 package domini;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.TreeMap;
@@ -42,18 +43,14 @@ public class MacroControlador {
 		return cau.iniciCarregarDades();
 		
 	}
-	public Boolean carregaDadesFitxer(String ruta) {
+	public void carregaDadesFitxer(File fitxer) throws FileNotFoundException {
 		aux = new EntradaSortidaDadesGraf();
 		try {
-			aux.carregarGrafDades(gd,ruta);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			aux.carregarGrafDades(gd,fitxer);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return true;
 	}
 	public Boolean carregaUsers() {
 		return cu.iniciCarregarUsers();
@@ -83,16 +80,16 @@ public class MacroControlador {
 	public GrafDades getGraf(){ //PROVISIONAL
 		return gd;
 	}
-	public ConjuntUsuaris getConjUsers() {	//PROVISIONAL
-		return conj;
-	}
+	//public ConjuntUsuaris getConjUsers() {	//PROVISIONAL
+	//	return conj;
+	//}
 
         
         
         public static void main(String[] args) {
          Interficie.InterficiaProva aux = new Interficie.InterficiaProva();
          aux.setVisible(true);
-         while(true);
+         //while(true);
          
         }
 }
