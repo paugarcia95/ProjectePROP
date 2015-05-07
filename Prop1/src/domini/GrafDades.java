@@ -74,24 +74,24 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia cap relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna true, altrament retorna false
 	 */	
 	public Boolean addCC(Categoria cat1, Categoria cat2) {
 		if (cat1 == cat2 || cat1.getNom() == cat2.getNom()) return false;
-		if (categories.containsKey(cat1.getNom()) && categories.containsKey(cat2.getNom())) {
-			if (cat1.existsCC(cat2.getNom()) == 2 && cat2.existsCC(cat1.getNom()) == 1) { //ja existeix
-				return false;
-			}
-			if (cat1.existsCC(cat2.getNom()) == 1 && cat2.existsCC(cat1.getNom()) == 2) { //existeix la contraria
+		boolean conte1, conte2;
+		conte1 = categories.containsKey(cat1.getNom());
+		conte2 = categories.containsKey(cat2.getNom());
+		if (conte1 && conte2) {
+			if (cat1.existsCC(cat2.getNom()) == 2 /*&& cat2.existsCC(cat1.getNom()) == 1*/) { //ja existeix
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos  {(0,1),(0,2),(1,0),(1,1),(2,0),(2,2)}
 			//el cas (0,0) es tracta al final del metode
 		}
-		else if (!categories.containsKey(cat1.getNom()) && categories.containsKey(cat2.getNom())) {
+		else if (!conte1 && conte2) {
 			categories.put(cat1.getNom(), cat1);
 		}
-		else if (categories.containsKey(cat1.getNom()) && !categories.containsKey(cat2.getNom())) {
+		else if (conte1 && !conte2) {
 			categories.put(cat2.getNom(), cat2);
 		}
 		else {
@@ -105,29 +105,29 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia cap relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna true, altrament retorna false
 	 */	
 	public Boolean addCC(String categoria1, String categoria2) {
 		if (categoria1.equals(categoria2)) return false;
+		boolean conte1, conte2;
 		Categoria cat1, cat2;
-		if (categories.containsKey(categoria1) && categories.containsKey(categoria2)) {
+		conte1 = categories.containsKey(categoria1);
+		conte2 = categories.containsKey(categoria2);
+		if (conte1 && conte2) {
 			cat1 = categories.get(categoria1);
 			cat2 = categories.get(categoria2);
-			if (cat1.existsCC(categoria2) == 2 && cat2.existsCC(categoria1) == 1) { //ja existeix
-				return false;
-			}
-			if (cat1.existsCC(categoria2) == 1 && cat2.existsCC(categoria1) == 2) { //existeix la contraria
+			if (cat1.existsCC(categoria2) == 2 /*&& cat2.existsCC(categoria1) == 1*/) { //ja existeix
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos  {(0,1),(0,2),(1,0),(1,1),(2,0),(2,2)}
 			//el cas (0,0) es tracta al final del metode
 		}
-		else if (!categories.containsKey(categoria1) && categories.containsKey(categoria2)) {
+		else if (!conte1 && conte2) {
 			cat1 = new Categoria(categoria1);
 			categories.put(categoria1, cat1);
 			cat2 = categories.get(categoria2);
 		}
-		else if (categories.containsKey(categoria1) && !categories.containsKey(categoria2)) {
+		else if (conte1 && !conte2) {
 			cat1 = categories.get(categoria1);
 			cat2 = new Categoria(categoria2);
 			categories.put(categoria2, cat2);
@@ -145,23 +145,23 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia cap relació entre pag i cat ara pag apunta a cat i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre pag i cat ara pag apunta a cat i retorna true, altrament retorna false
 	 */
 	public Boolean addPC(Pagina pag, Categoria cat) {
-		if (pagines.containsKey(pag.getNom()) && categories.containsKey(cat.getNom())) {
-			if (pag.existsPC(cat.getNom()) == 1 && cat.existsCP(pag.getNom()) == 1) { //ja existeix
-				return false;
-			}
-			if (pag.existsPC(cat.getNom()) == 2 && cat.existsCP(pag.getNom()) == 2) { //existeix la contraria
+		boolean conte1, conte2;
+		conte1 = pagines.containsKey(pag.getNom());
+		conte2 = categories.containsKey(cat.getNom());
+		if (conte1 && conte2) {
+			if (pag.existsPC(cat.getNom()) == 1 /*&& cat.existsCP(pag.getNom()) == 1*/) { //ja existeix
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
 			//el cas (0,0) es tracta al final del metode
 		}
-		else if (!pagines.containsKey(pag.getNom()) && categories.containsKey(cat.getNom())) {
+		else if (!conte1 && conte2) {
 			pagines.put(pag.getNom(), pag);
 		}
-		else if (pagines.containsKey(pag.getNom()) && !categories.containsKey(cat.getNom())) {
+		else if (conte1 && !conte2) {
 			categories.put(cat.getNom(), cat);
 		}
 		else {
@@ -175,29 +175,29 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia cap relació entre pag i cat ara pag apunta a cat i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre pag i cat ara pag apunta a cat i retorna true, altrament retorna false
 	 */
 	public Boolean addPC(String pagina, String categoria) {
 		Categoria cat;
 		Pagina pag;
-		if (pagines.containsKey(pagina) && categories.containsKey(categoria)) {
+		boolean conte1, conte2;
+		conte1 = pagines.containsKey(pagina);
+		conte2 = categories.containsKey(categoria);
+		if (conte1 && conte2) {
 			pag = pagines.get(pagina);
 			cat = categories.get(categoria);
-			if (pag.existsPC(categoria) == 1 && cat.existsCP(pagina) == 1) { //ja existeix
-				return false;
-			}
-			if (pag.existsPC(categoria) == 2 && cat.existsCP(pagina) == 2) { //existeix la contraria
+			if (pag.existsPC(categoria) == 1 /*&& cat.existsCP(pagina) == 1*/) { //ja existeix
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
 			//el cas (0,0) es tracta al final del metode
 		}
-		else if (!pagines.containsKey(pagina) && categories.containsKey(categoria)) {
+		else if (!conte1 && conte2) {
 			pag = new Pagina(pagina);
 			pagines.put(pagina, pag);
 			cat = categories.get(categoria);
 		}
-		else if (pagines.containsKey(pagina) && !categories.containsKey(categoria)) {
+		else if (conte1 && !conte2) {
 			pag = pagines.get(pagina);
 			cat = new Categoria(categoria);
 			categories.put(categoria, cat);
@@ -215,23 +215,23 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia cap relació entre cat i pag ara cat apunta a pag i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre cat i pag ara cat apunta a pag i retorna true, altrament retorna false
 	 */
 	public Boolean addCP(Categoria cat, Pagina pag) {
-		if (categories.containsKey(cat.getNom()) && pagines.containsKey(pag.getNom())) {
-			if (cat.existsCP(pag.getNom()) == 2 && pag.existsPC(cat.getNom()) == 2) { //ja existeix
-				return false;
-			}
-			if (cat.existsCP(pag.getNom()) == 1 && pag.existsPC(cat.getNom()) == 1) { //existeix la contraria
+		boolean conte1, conte2;
+		conte1 = categories.containsKey(cat.getNom());
+		conte2 = pagines.containsKey(pag.getNom());
+		if (conte1 && conte2) {
+			if (cat.existsCP(pag.getNom()) == 2 /*&& pag.existsPC(cat.getNom()) == 2*/) { //ja existeix
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
 			//el cas (0,0) es tracta al final del metode
 		}
-		else if (!categories.containsKey(cat.getNom()) && pagines.containsKey(pag.getNom())) {
+		else if (!conte1 && conte2) {
 			categories.put(cat.getNom(), cat);
 		}
-		else if (categories.containsKey(cat.getNom()) && !pagines.containsKey(pag.getNom())) {
+		else if (conte1 && !conte2) {
 			pagines.put(pag.getNom(), pag);
 		}
 		else {
@@ -245,29 +245,29 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia cap relació entre cat i pag ara cat apunta a pag i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre cat i pag ara cat apunta a pag i retorna true, altrament retorna false
 	 */
 	public Boolean addCP(String categoria, String pagina) {
 		Pagina pag;
 		Categoria cat;
-		if (categories.containsKey(categoria) && pagines.containsKey(pagina)) {
+		boolean conte1, conte2;
+		conte1 = categories.containsKey(categoria);
+		conte2 = pagines.containsKey(pagina);
+		if (conte1 && conte2) {
 			cat = categories.get(categoria);
 			pag = pagines.get(pagina);
-			if (cat.existsCP(pagina) == 2 && pag.existsPC(categoria) == 2) { //ja existeix
-				return false;
-			}
-			if (cat.existsCP(pagina) == 1 && pag.existsPC(categoria) == 1) { //existeix la contraria
+			if (cat.existsCP(pagina) == 2 /*&& pag.existsPC(categoria) == 2*/) { //ja existeix
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
 			//el cas (0,0) es tracta al final del metode
 		}
-		else if (!categories.containsKey(categoria) && pagines.containsKey(pagina)) {
+		else if (!conte1 && conte2) {
 			cat = new Categoria(categoria);
 			categories.put(categoria, cat);
 			pag = pagines.get(pagina);
 		}
-		else if (categories.containsKey(categoria) && !pagines.containsKey(pagina)) {
+		else if (conte1 && !conte2) {
 			cat = categories.get(categoria);
 			pag = new Pagina(pagina);
 			pagines.put(pagina, pag);
