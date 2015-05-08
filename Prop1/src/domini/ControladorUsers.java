@@ -84,9 +84,10 @@ public class ControladorUsers {
 	 * @return identificador dins de l'usuari username de la nova cerca creada.
 	 */
 	public Integer addNovaCerca(String username) {
-		Integer aux = conj.getUser(username).addCerca(new CercaComunitats());
+                Usuari millor = conj.getUser(username);
+		Integer aux = millor.addCerca(new CercaComunitats());
 		conj.getUser(username).getCerca(aux).setUsuari(username);
-		Date act = new Date();		//Com s'obté la data actual?
+		Date act = new Date();		//Com s'obtï¿½ la data actual?
 		conj.getUser(username).getCerca(aux).setDataCreacio(act);
 		return aux;
 	}
@@ -107,7 +108,7 @@ public class ControladorUsers {
 	 * @param relacions
 	 * 			Importancia que se li vol donar a les relacions entre Categories.
 	 * @param sembla
-	 * 			Importancia que se li vol donar a la semblança entre els noms de les Categories.
+	 * 			Importancia que se li vol donar a la semblanï¿½a entre els noms de les Categories.
 	 * @param alg 
 	 * 			Indicador de quin algorisme es vol utilitzar.
 	 * @param tipus
@@ -243,7 +244,7 @@ public class ControladorUsers {
 	}
 	
 	/**
-	 * Executa el conjunt d'operacions necessàries per tal d'executar una Cerca de Comunitats.
+	 * Executa el conjunt d'operacions necessï¿½ries per tal d'executar una Cerca de Comunitats.
 	 *  
 	 * @param username
 	 * 			Username de l'usuari del es vol fer la CercaComunitats.

@@ -16,8 +16,8 @@ public class MacroControlador {
 	static ControladorUsers cu;
 	static ControladorAdminUsers cau;
 	static TraduccioiAlgorisme ta;
-	private GrafDades gd;
-	private ConjuntUsuaris conj;
+	static GrafDades gd;
+	static ConjuntUsuaris conj;
 	static String useractual;
 	EntradaSortidaDadesGraf aux;
 
@@ -75,6 +75,7 @@ public class MacroControlador {
 	}
 	
 	public String getUserActual() {
+           // System.out.println(useractual);
 		return useractual;
 	}
 	public GrafDades getGraf(){ //PROVISIONAL
@@ -87,7 +88,9 @@ public class MacroControlador {
         
         
         public static void main(String[] args) {
+          MacroControlador macro = new MacroControlador();
          Interficie.InterficiaProva aux = new Interficie.InterficiaProva();
+         aux.passaMacro(macro);
          aux.setVisible(true);
          //while(true);
          

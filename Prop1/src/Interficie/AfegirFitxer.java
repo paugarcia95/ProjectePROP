@@ -73,7 +73,7 @@ public class AfegirFitxer extends javax.swing.JDialog {
                         long abans =System.currentTimeMillis();
                         macro.carregaDadesFitxer(aux);
                         long despres = System.currentTimeMillis();
-                        System.out.println((despres-abans)/1000);
+                        System.out.println((despres-abans));
                         this.setVisible(false);
                     } catch (FileNotFoundException ex) {
                         Logger.getLogger(AfegirFitxer.class.getName()).log(Level.SEVERE, null, ex);

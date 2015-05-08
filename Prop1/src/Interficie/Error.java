@@ -11,6 +11,7 @@ package Interficie;
 public class Error extends javax.swing.JDialog {
 
     String texte;
+    String boto;
     /**
      * Creates new form DisponibilitatUser
      */
@@ -18,8 +19,9 @@ public class Error extends javax.swing.JDialog {
         super(parent, modal);
     }
 
-    public void ompletext(String omple){
+    public void ompletext(String omple, String bot){
         texte=omple;
+        boto = bot;
         initComponents();
     }
     /**
@@ -38,7 +40,7 @@ public class Error extends javax.swing.JDialog {
 
         jLabel1.setText(texte);
 
-        jButton1.setText("Ok");
+        jButton1.setText(boto);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
