@@ -23,6 +23,7 @@ public class VCategoria extends javax.swing.JDialog {
     public void NomCat(Categoria nomCateg) {
         cat = nomCateg.getNom();
         initComponents();
+        this.setAlwaysOnTop(false);
         //Categories a les que apunta
         Collection<String> auxc = macro.getGraf().getCategoria(cat).getMapCSubC().keySet();
         Object[] aux2;
@@ -297,7 +298,7 @@ public class VCategoria extends javax.swing.JDialog {
         }
         else {
             Error despistat = new Error(pare,true);
-            despistat.ompletext("Has de seleccionar algun element de la llista!");
+            despistat.ompletext("Has de seleccionar algun element de la llista!", "OK");
             despistat.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -319,7 +320,7 @@ public class VCategoria extends javax.swing.JDialog {
         }
         else {
             Error despistat = new Error(pare,true);
-            despistat.ompletext("Has de seleccionar algun element de la llista!");
+            despistat.ompletext("Has de seleccionar algun element de la llista!","Ok");
             despistat.setVisible(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed

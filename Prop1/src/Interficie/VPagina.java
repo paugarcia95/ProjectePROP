@@ -29,6 +29,7 @@ public class VPagina extends javax.swing.JDialog {
     public void NomPag(Pagina nomPag) {
         pag = nomPag.getNom();
         initComponents();
+        this.setAlwaysOnTop(false);
         //Categories a les que apunta
         Collection<String> auxc = macro.getGraf().getPagina(pag).getPC().keySet();
         Object[] aux2;
@@ -208,7 +209,7 @@ public class VPagina extends javax.swing.JDialog {
         }
         else {
             Error despistat = new Error(pare,true);
-            despistat.ompletext("Has de seleccionar algun element de la llista!");
+            despistat.ompletext("Has de seleccionar algun element de la llista!", "Ok");
             despistat.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

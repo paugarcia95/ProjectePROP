@@ -20,6 +20,10 @@ import domini.Pagina;
 import domini.Usuari;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Set;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 /**
@@ -28,6 +32,8 @@ import javax.swing.tree.TreePath;
  */
 public class InterficiaProva extends javax.swing.JFrame {
     static domini.MacroControlador macro;
+        //protected static final long SLEEEP = 3*1000;
+
     //Object[] Csubcat;
     /**
      * Creates new form InterficiaProva
@@ -188,6 +194,10 @@ public class InterficiaProva extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         LlistaPag1 = new javax.swing.JList();
         A_VeureUsers = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        UsersAct = new javax.swing.JList();
+        jButton10 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
         A_VisualitzaNovaCerca = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         Resultat = new javax.swing.JTree();
@@ -195,6 +205,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Prova1");
         setLocationByPlatform(true);
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jButton4.setText("Crea un nou usuari");
@@ -774,7 +785,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                                 .addComponent(NovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(133, 133, 133)
                                 .addComponent(jButton3)))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(1061, Short.MAX_VALUE))
         );
         A_CreaUsuariLayout.setVerticalGroup(
             A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -871,7 +882,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                         .addGap(150, 150, 150)
                         .addComponent(EnrereC))
                     .addComponent(jButton6))
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 816, Short.MAX_VALUE))
         );
         A_OpcionsClientLayout.setVerticalGroup(
             A_OpcionsClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -895,7 +906,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                 .addComponent(BuscaCerques)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         getContentPane().add(A_OpcionsClient, "card5");
@@ -914,14 +925,14 @@ public class InterficiaProva extends javax.swing.JFrame {
             .addGroup(A_OpcionsAdminLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton8)
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addContainerGap(1415, Short.MAX_VALUE))
         );
         A_OpcionsAdminLayout.setVerticalGroup(
             A_OpcionsAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(A_OpcionsAdminLayout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(jButton8)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(431, Short.MAX_VALUE))
         );
 
         getContentPane().add(A_OpcionsAdmin, "card6");
@@ -982,7 +993,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(BVisCat)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(1021, Short.MAX_VALUE))
         );
         A_BuscaCatLayout.setVerticalGroup(
             A_BuscaCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1056,7 +1067,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(183, 183, 183)
                         .addComponent(BOpC1)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(1062, Short.MAX_VALUE))
         );
         A_BuscaPagLayout.setVerticalGroup(
             A_BuscaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1070,7 +1081,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                 .addComponent(BVisPag)
                 .addGap(71, 71, 71))
         );
@@ -1187,19 +1198,56 @@ public class InterficiaProva extends javax.swing.JFrame {
 
         getContentPane().add(A_BuscaCatPag, "card9");
 
+        UsersAct.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane10.setViewportView(UsersAct);
+
+        jButton10.setText("Enrere");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setText("Aquests són els usuaris actuals:");
+
         javax.swing.GroupLayout A_VeureUsersLayout = new javax.swing.GroupLayout(A_VeureUsers);
         A_VeureUsers.setLayout(A_VeureUsersLayout);
         A_VeureUsersLayout.setHorizontalGroup(
             A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1532, Short.MAX_VALUE)
+            .addGroup(A_VeureUsersLayout.createSequentialGroup()
+                .addGroup(A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(A_VeureUsersLayout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(A_VeureUsersLayout.createSequentialGroup()
+                        .addGap(209, 209, 209)
+                        .addComponent(jButton10))
+                    .addGroup(A_VeureUsersLayout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(jLabel17)))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         A_VeureUsersLayout.setVerticalGroup(
             A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 521, Short.MAX_VALUE)
+            .addGroup(A_VeureUsersLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel17)
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(jButton10)
+                .addGap(51, 51, 51))
         );
 
         getContentPane().add(A_VeureUsers, "card10");
 
+        Resultat.setAutoscrolls(true);
+        Resultat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Resultat.setLargeModel(true);
         jScrollPane9.setViewportView(Resultat);
 
         javax.swing.GroupLayout A_VisualitzaNovaCercaLayout = new javax.swing.GroupLayout(A_VisualitzaNovaCerca);
@@ -1208,15 +1256,15 @@ public class InterficiaProva extends javax.swing.JFrame {
             A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(A_VisualitzaNovaCercaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(548, Short.MAX_VALUE))
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1282, Short.MAX_VALUE))
         );
         A_VisualitzaNovaCercaLayout.setVerticalGroup(
             A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(A_VisualitzaNovaCercaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         getContentPane().add(A_VisualitzaNovaCerca, "card11");
@@ -1572,15 +1620,10 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void CercaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CercaBActionPerformed
-        Error finestra = new Error(this,true);
-        finestra.ompletext("La cerca s'està realitzant, si us plau, tingues paciència", "Cancela");
+     /*   Espera finestra = new Espera(null,true);
+        finestra.ompletext("La cerca s'està realitzant, si us plau, tingues paciència");
         finestra.setVisible(true);
-        Thread t = new Thread() {
-          @Override
-          public void run() {
-              try{
-                  sleep(100);
-              } catch (InterruptedException ex){}
+*/
         Integer quina = macro.getContUser().addNovaCerca(macro.getUserActual());
         Integer quin, tipus;
         TreePath arbre =Algorismes.getSelectionModel().getSelectionPath();
@@ -1638,17 +1681,35 @@ public class InterficiaProva extends javax.swing.JFrame {
         System.out.println("he arribat aqui");
         macro.getContUser().ferCerca(macro.getUserActual(), quina);
         System.out.println("i he fet la cerca!");
-          }
-        };
-        t.start();
-        finestra.setVisible(false);
+       // finestra.setVisible(false);
         A_CreaComunitat.setVisible(false);
+       // Resultat.setModel(model);
+        DefaultMutableTreeNode arrel = new DefaultMutableTreeNode("Comunitats Obtingudes");
+        DefaultTreeModel Model = new DefaultTreeModel(arrel);
+       // Resultat.setModel(treeModel);
+        Integer numcom =  macro.getContUser().getNumComunitatsCerca(macro.getUserActual(), quina);
+	System.out.println("Hi ha "+numcom+ " comunitats: ");
+	for(Integer i = 1; i <= numcom; ++i) {
+            System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
+            DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i);
+        arrel.add(prim);
+            Set<String> auxm = macro.getContUser().getCatCerca(macro.getUserActual(), quina, i-1);
+            Iterator<String> it4 = auxm.iterator();
+            while(it4.hasNext()) {
+                String nom = it4.next();
+                System.out.println(nom);
+                DefaultMutableTreeNode seg = new DefaultMutableTreeNode(nom);
+                prim.add(seg);
+            }
+	}
+        Resultat.setModel(Model);
+        //Resultat.setRootVisible(false);
         A_VisualitzaNovaCerca.setVisible(true);
     }//GEN-LAST:event_CercaBActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         A_OpcionsAdmin.setVisible(false);
-        ArrayList<String> auxc = macro.getContUser().getUsers();
+        ArrayList<String> auxc = macro.getContUser().getCerquesComunitats(macro.getUserActual());
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
         Iterator<String> it = auxc.iterator();
@@ -1656,9 +1717,14 @@ public class InterficiaProva extends javax.swing.JFrame {
             aux2[cont] = it.next();
             ++cont;
         }
-        LlistaPag2.setListData(aux2);
+        UsersAct.setListData(aux2);
         A_VeureUsers.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        A_VeureUsers.setVisible(false);
+        A_OpcionsAdmin.setVisible(true);
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1755,7 +1821,9 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JTextField Password;
     private javax.swing.JTree Resultat;
     private javax.swing.JTextField Username;
+    private javax.swing.JList UsersAct;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1773,6 +1841,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1788,6 +1857,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
