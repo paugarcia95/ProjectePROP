@@ -1,12 +1,12 @@
 package cercaComunitats;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Vector;
 
 /**
- * La classe Graf implementa un graf ponderat no dirigit on els nodes sÛn Strings.
+ * La classe Graf implementa un graf ponderat no dirigit on els nodes s√≥n Strings.
  * @author Yoel Cabo
  *
  */
@@ -20,13 +20,13 @@ public class Graf {
 	 * Creadora per defecte.
 	 */
 	public Graf() {
-		Diccionari = new TreeMap<String,Integer>();
-		DiccionariInvers = new TreeMap<Integer,String>();
+		Diccionari = new HashMap<String,Integer>();
+		DiccionariInvers = new HashMap<Integer,String>();
 		Matriu = new Vector< Vector<Double> >();
 	}
 	
 	/**
-	 * Creadora a partir de HashSet. Crea un Graf que tÈ per nodes el contingut del HashSet.
+	 * Creadora a partir de HashSet. Crea un Graf que t√© per nodes el contingut del HashSet.
 	 * @param NodesInicials Nodes del Graf que es crea.
 	 */
 	public Graf(HashSet<String> NodesInicials) {
@@ -37,13 +37,16 @@ public class Graf {
 	}
 	
 	/**
-	 * Creadora per cÚpia a partir d'un Graf.
-	 * @param G Graf que es copiar‡.
+	 * Creadora per c√≤pia a partir d'un Graf.
+	 * @param G Graf que es copiar√†.
 	 */
 	public Graf(Graf G) {
-		Diccionari = new TreeMap<String,Integer>(G.Diccionari);
-		DiccionariInvers = new TreeMap<Integer,String>(G.DiccionariInvers);
-		Matriu = new Vector< Vector<Double> >(G.Matriu);
+		Diccionari = new HashMap<String,Integer>(G.Diccionari);
+		DiccionariInvers = new HashMap<Integer,String>(G.DiccionariInvers);
+		Matriu = new Vector< Vector<Double> >();
+		for (int i = 0; i < G.Matriu.size(); ++i) {
+			Matriu.add(new Vector<Double> (G.Matriu.get(i)));
+		}
 	}
 	
 	/**
@@ -112,7 +115,7 @@ public class Graf {
 	
 	/**
 	 * 
-	 * @param id Node a comprovar la existËncia.
+	 * @param id Node a comprovar la exist√®ncia.
 	 * @return true si existeix, false altrament.
 	 */
 	public Boolean existeixNode(String id) {
@@ -124,7 +127,7 @@ public class Graf {
 	 * @param a Un dels Nodes que connecta l'aresta.
 	 * @param b L'altre dels Nodes que connecta l'aresta.
 	 * @param Pes Pes de l'aresta entre a i b. Ha de ser >= 0.
-	 * @return false si l'aresta ja existia o no existeix un dels dos nodes o el pes no Ès correcte, true altrament.
+	 * @return false si l'aresta ja existia o no existeix un dels dos nodes o el pes no √©s correcte, true altrament.
 	 */
 	public Boolean addAresta(String a, String b, Double Pes) {
 		if (!Diccionari.containsKey(a) || !Diccionari.containsKey(b) || existeixAresta(a,b) || Pes < 0) return false;
@@ -163,7 +166,7 @@ public class Graf {
 	 * @param a Un dels Nodes que connecta l'aresta.
 	 * @param b L'altre dels Nodes que connecta l'aresta.
 	 * @param Pes Pes de l'aresta entre a i b. Ha de ser >= 0.
-	 * @return false si l'aresta no existia o si el Pes Ès incorrecte, true altrament.
+	 * @return false si l'aresta no existia o si el Pes √©s incorrecte, true altrament.
 	 */
 	public Boolean setPes(String a, String b, Double Pes) {
 		if (!existeixAresta(a,b) || Pes < 0) return false;
@@ -186,7 +189,7 @@ public class Graf {
 	/**
 	 * Donat un Node, retorna els Nodes adjacents a aquest.
 	 * @param id Node
-	 * @return Conjunt de nodes adjacent a id. Si id no existeix, el conjunt Ès buit.
+	 * @return Conjunt de nodes adjacent a id. Si id no existeix, el conjunt √©s buit.
 	 */
 	public HashSet<String> getAdjacents(String id) {
 		HashSet<String> Cjt = new HashSet<String>();

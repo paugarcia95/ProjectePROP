@@ -32,6 +32,14 @@ import javax.swing.tree.TreePath;
  */
 public class InterficiaProva extends javax.swing.JFrame {
     static domini.MacroControlador macro;
+    Integer cercaactual;
+    String algorisme;
+    Integer guardada;
+    //guardada=0 -> nova cerca sense guardar, crearla
+    //guardada=1  -> cerca no guardada
+    //guardada=2 -> cerca guardada
+    
+    
         //protected static final long SLEEEP = 3*1000;
 
     //Object[] Csubcat;
@@ -201,6 +209,18 @@ public class InterficiaProva extends javax.swing.JFrame {
         A_VisualitzaNovaCerca = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         Resultat = new javax.swing.JTree();
+        jButton12 = new javax.swing.JButton();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        CriterisNovaCerca = new javax.swing.JTextArea();
+        jButton13 = new javax.swing.JButton();
+        A_GuardaCerca = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Prova1");
@@ -631,33 +651,49 @@ public class InterficiaProva extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(A_CreaComunitatLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(CercaB))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(Crelacio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(23, 23, 23)
                                 .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(Csembla, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Cpc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(7, 7, 7)
-                                .addComponent(CpcImp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel16)
-                                    .addComponent(Cbusca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Cafegeix2)))
+                                    .addGroup(A_CreaComunitatLayout.createSequentialGroup()
+                                        .addGap(17, 17, 17)
+                                        .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel6)
+                                            .addComponent(CercaB))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel11)
+                                            .addComponent(Crelacio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(23, 23, 23)
+                                        .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel12)
+                                            .addComponent(Csembla, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(Cpc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(7, 7, 7)
+                                        .addComponent(CpcImp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel14)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel16)
+                                            .addComponent(Cbusca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Cafegeix2)))
+                                    .addGroup(A_CreaComunitatLayout.createSequentialGroup()
+                                        .addGap(152, 152, 152)
+                                        .addComponent(jLabel23)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Cdada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(A_CreaComunitatLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel18))
+                                    .addGroup(A_CreaComunitatLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel20)
+                                            .addComponent(jLabel19)))))
                             .addGroup(A_CreaComunitatLayout.createSequentialGroup()
                                 .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel15)
@@ -669,35 +705,25 @@ public class InterficiaProva extends javax.swing.JFrame {
                                         .addGap(31, 31, 31)
                                         .addComponent(EliminaCsub))
                                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(25, 25, 25)
                                 .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(A_CreaComunitatLayout.createSequentialGroup()
-                                        .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Cbusca2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CbuscaPag))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(A_CreaComunitatLayout.createSequentialGroup()
-                                        .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Cbusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CbuscaCat, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(A_CreaComunitatLayout.createSequentialGroup()
-                                .addGap(152, 152, 152)
-                                .addComponent(jLabel23)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Cdada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(A_CreaComunitatLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel18))
-                            .addGroup(A_CreaComunitatLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel20)
-                                    .addComponent(jLabel19))))))
+                                        .addGap(25, 25, 25)
+                                        .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(A_CreaComunitatLayout.createSequentialGroup()
+                                                .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(Cbusca2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(CbuscaPag))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(A_CreaComunitatLayout.createSequentialGroup()
+                                                .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(Cbusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(CbuscaCat, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A_CreaComunitatLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cafegeix3)
@@ -1059,9 +1085,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                         .addGap(214, 214, 214)
                         .addGroup(A_BuscaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(A_BuscaPagLayout.createSequentialGroup()
-                                .addComponent(BVisPag)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(BVisPag)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, A_BuscaPagLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1250,6 +1274,25 @@ public class InterficiaProva extends javax.swing.JFrame {
         Resultat.setLargeModel(true);
         jScrollPane9.setViewportView(Resultat);
 
+        jButton12.setText("Modificar Criteris");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        CriterisNovaCerca.setBackground(new java.awt.Color(240, 240, 240));
+        CriterisNovaCerca.setColumns(20);
+        CriterisNovaCerca.setRows(5);
+        jScrollPane11.setViewportView(CriterisNovaCerca);
+
+        jButton13.setText("Guardar");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout A_VisualitzaNovaCercaLayout = new javax.swing.GroupLayout(A_VisualitzaNovaCerca);
         A_VisualitzaNovaCerca.setLayout(A_VisualitzaNovaCercaLayout);
         A_VisualitzaNovaCercaLayout.setHorizontalGroup(
@@ -1257,17 +1300,105 @@ public class InterficiaProva extends javax.swing.JFrame {
             .addGroup(A_VisualitzaNovaCercaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1282, Short.MAX_VALUE))
+                .addGroup(A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(A_VisualitzaNovaCercaLayout.createSequentialGroup()
+                        .addGap(203, 203, 203)
+                        .addComponent(jButton12)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A_VisualitzaNovaCercaLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(877, Short.MAX_VALUE))
         );
         A_VisualitzaNovaCercaLayout.setVerticalGroup(
             A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(A_VisualitzaNovaCercaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(A_VisualitzaNovaCercaLayout.createSequentialGroup()
+                        .addGroup(A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton12)
+                            .addGroup(A_VisualitzaNovaCercaLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jButton13)))
+                        .addGap(49, 49, 49)
+                        .addComponent(jScrollPane11))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
         getContentPane().add(A_VisualitzaNovaCerca, "card11");
+
+        jLabel24.setText("Si us plau, introdueixi les seguents dades:");
+
+        jLabel25.setText("Nom:");
+
+        jLabel26.setText("Comentari:");
+
+        jButton14.setText("Guardar");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
+        jButton15.setText("Enrere");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout A_GuardaCercaLayout = new javax.swing.GroupLayout(A_GuardaCerca);
+        A_GuardaCerca.setLayout(A_GuardaCercaLayout);
+        A_GuardaCercaLayout.setHorizontalGroup(
+            A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(A_GuardaCercaLayout.createSequentialGroup()
+                .addGroup(A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(A_GuardaCercaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(A_GuardaCercaLayout.createSequentialGroup()
+                                .addComponent(jLabel26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(A_GuardaCercaLayout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addGap(24, 24, 24)
+                                .addGroup(A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel24)))))
+                    .addGroup(A_GuardaCercaLayout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jButton14)))
+                .addContainerGap(76, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A_GuardaCercaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton15)
+                .addGap(46, 46, 46))
+        );
+        A_GuardaCercaLayout.setVerticalGroup(
+            A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(A_GuardaCercaLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addGroup(A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addComponent(jButton15)
+                .addGap(7, 7, 7)
+                .addComponent(jButton14)
+                .addContainerGap(79, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(A_GuardaCerca, "card12");
 
         getAccessibleContext().setAccessibleDescription("");
 
@@ -1529,7 +1660,11 @@ public class InterficiaProva extends javax.swing.JFrame {
             ++cont;
         }
         LPTotes.setListData(aux2);
-        
+        guardada=0;
+        Algorismes.expandRow(1);
+        Algorismes.expandRow(3);
+        Algorismes.expandRow(7);
+        Algorismes.setSelectionRow(5);
         A_CreaComunitat.setVisible(true);
         }
     }//GEN-LAST:event_CreaCercaActionPerformed
@@ -1556,6 +1691,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         
     private void Cafegeix1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cafegeix1ActionPerformed
      	modelo.addElement(LCTotes.getSelectedValue());
+        System.out.println(LCTotes.getSelectedValue());
     }//GEN-LAST:event_Cafegeix1ActionPerformed
 
     private void EliminaCsubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaCsubActionPerformed
@@ -1572,8 +1708,13 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        A_CreaComunitat.setVisible(false);
-        A_OpcionsClient.setVisible(true);
+        if(guardada==1){
+            Error err = new Error(this,true);
+            err.ompletext("Atenció, si cliques a continuar, la cerca no es guardarà!(cal afegir la opcio de guardar aqui tambe)", "OK");
+            err.setVisible(true);
+        }
+            A_CreaComunitat.setVisible(false);
+            A_OpcionsClient.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void CbuscaPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaPagActionPerformed
@@ -1623,11 +1764,19 @@ public class InterficiaProva extends javax.swing.JFrame {
      /*   Espera finestra = new Espera(null,true);
         finestra.ompletext("La cerca s'està realitzant, si us plau, tingues paciència");
         finestra.setVisible(true);
-*/
+*/      
+ //FEM LA CERCA       
         Integer quina = macro.getContUser().addNovaCerca(macro.getUserActual());
         Integer quin, tipus;
+       
         TreePath arbre =Algorismes.getSelectionModel().getSelectionPath();
-        System.out.println("ruta: "+arbre);
+       // System.out.println(arbre.toString());
+        if(arbre.equals(null)) {
+            Error err = new Error(this,true);
+            err.ompletext("Has de seleccionar un algorisme i tipus de cerca", "OK");
+            err.setVisible(true);
+        }
+       // System.out.println("ruta: "+arbre);
         
         if(arbre.getPathComponent(1).toString().equals("Louvain")) {
             quin=1;
@@ -1636,74 +1785,132 @@ public class InterficiaProva extends javax.swing.JFrame {
         }
         else if(arbre.getPathComponent(1).toString().equals("Newman-Girvan")) {
             quin=2;
-            if(arbre.getPathComponent(2).equals("Dispersio")) tipus=0;
-            else if(arbre.getPathComponent(2).equals("Numero Categories")) tipus=1;
-            else tipus =2;
-            System.out.println("Newman-Girvan: quin 2 i tipus "+tipus);
+            if(arbre.getPathComponent(2).toString().equals("Dispersio")) tipus=1;
+            else if(arbre.getPathComponent(2).toString().equals("Numero Categories")) tipus=2;
+            else tipus =3;
+        //    System.out.println("Newman-Girvan: quin 2 i tipus "+tipus);
         }
         else {
             quin=3;
             tipus=0;
-            System.out.println("Newman-Girvan: quin "+quin+" i tipus "+tipus);
+         //   System.out.println("Newman-Girvan: quin "+quin+" i tipus "+tipus);
         }
         Integer num =(Integer)Cdada.getValue();
-        Component[] aux1=Lsub.getComponents();
-        Component[] aux2 = Lsub1.getComponents();
-        Component[] aux3 = Lsub2.getComponents();
-        int mida = aux1.length-1;
+        ListModel m = Lsub.getModel();
+        ListModel m2 = Lsub1.getModel();
+        ListModel m3 = Lsub2.getModel();
+        int mida = m.getSize();
+        System.out.println("Has seleccionat "+mida+" i es: "+ m.toString());
         int cont = 0;
         ArrayList<String> auxx1 = new ArrayList<String>();
         ArrayList<String> auxx2 = new ArrayList<String>();
         ArrayList<String> auxx3 = new ArrayList<String>();
         while (cont < mida) {
-            auxx1.add(aux1[cont].toString());
+            auxx1.add(m.getElementAt(cont).toString());
             ++cont;
         }
-        System.out.println("mida aux1: "+mida);
-        mida = aux2.length-1;
+       // System.out.println("mida aux1: "+mida);
+       // mida = aux2.length-1;
         cont = 0;
+        mida = m2.getSize();
         while (cont < mida) {
-            auxx2.add(aux2[cont].toString());
+            auxx2.add(m2.getElementAt(cont).toString());
             ++cont;
         }
-        System.out.println("mida aux2: "+mida);
-         mida = aux3.length-1;
+     //   System.out.println("mida aux2: "+mida);
+      //   mida = aux3.length-1;
         cont = 0;
+        mida = m3.getSize();
         while (cont < mida) {
-            auxx3.add(aux3[cont].toString());
+            auxx3.add(m3.getElementAt(cont).toString());
             ++cont;
         }
-        System.out.println("mida aux3: "+mida);
+       // System.out.println("mida aux3: "+mida);
         if(CpcImp.getValue()==0) Cpc.setText(new String());
         
-        System.out.println("user: "+macro.getUserActual()+ ", cerca num: "+quina+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText());
+        System.out.println("user: "+macro.getUserActual()+ ", cerca num: "+quina+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", quin: "+quin+", tipus: "+tipus+", num: "+num+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText());
         macro.getContUser().addCriterisCerca(false, macro.getUserActual(), quina, Cpc.getText(), CpcImp.getValue(), Crelacio.getValue(), Csembla.getValue(), quin, tipus, num, auxx1, auxx2, auxx3, Cbusca1.getText());
-        System.out.println("he arribat aqui");
+       // System.out.println("he arribat aqui");
         macro.getContUser().ferCerca(macro.getUserActual(), quina);
-        System.out.println("i he fet la cerca!");
-       // finestra.setVisible(false);
-        A_CreaComunitat.setVisible(false);
-       // Resultat.setModel(model);
+       // System.out.println("i he fet la cerca!");
+       
+//PREPAREM LA VISUALITZACIO D'AQUESTA CERCA
+    //ARBRE
         DefaultMutableTreeNode arrel = new DefaultMutableTreeNode("Comunitats Obtingudes");
         DefaultTreeModel Model = new DefaultTreeModel(arrel);
        // Resultat.setModel(treeModel);
         Integer numcom =  macro.getContUser().getNumComunitatsCerca(macro.getUserActual(), quina);
-	System.out.println("Hi ha "+numcom+ " comunitats: ");
+	//System.out.println("Hi ha "+numcom+ " comunitats: ");
 	for(Integer i = 1; i <= numcom; ++i) {
-            System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
+           // System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
             DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i);
         arrel.add(prim);
             Set<String> auxm = macro.getContUser().getCatCerca(macro.getUserActual(), quina, i-1);
             Iterator<String> it4 = auxm.iterator();
             while(it4.hasNext()) {
                 String nom = it4.next();
-                System.out.println(nom);
+             //   System.out.println(nom);
                 DefaultMutableTreeNode seg = new DefaultMutableTreeNode(nom);
                 prim.add(seg);
             }
 	}
         Resultat.setModel(Model);
-        //Resultat.setRootVisible(false);
+        
+        for (int i = 0; i < Resultat.getRowCount(); i++) Resultat.expandRow(i);
+
+    //TEXT AREA
+        //Preparem els strings en cada cas
+        cercaactual = quina;
+        int algo = macro.getContUser().getAlgCerca(macro.getUserActual(), cercaactual);
+        if(algo==1) algorisme = "Louvain";
+        else if(algo==2) algorisme = "Girvan-Newman";
+        else algorisme = "Clique";
+        String tipu;
+         algo = macro.getContUser().getAlgTipuCerca(macro.getUserActual(), cercaactual);
+        System.out.println("tipus: "+algo);
+        if(algo==1) tipu= "Dispersio";
+        else if(algo==2) tipu="Num Comunitats";
+        else tipu="Max Betw";
+        //Preparem les categories seleccionades
+        cont = 0;
+	mida = m.getSize();
+        StringBuilder sb = new StringBuilder();
+        while(cont<mida){
+            sb.append("\n   "+(cont+1)+". "+m.getElementAt(cont).toString());
+            ++cont;
+        }
+        String subcat = sb.toString();
+        //Preparem les categories a evitar
+        cont = 0;
+	mida = m2.getSize();
+        StringBuilder sb2 = new StringBuilder();
+        while(cont<mida){
+            sb2.append("\n   "+(cont+1)+". "+m2.getElementAt(cont).toString());
+            ++cont;
+        }
+        String evita = sb2.toString();
+        //Preparem les pagines a evitar
+        cont = 0;
+	mida = m3.getSize();
+        StringBuilder sb3 = new StringBuilder();
+        while(cont<mida){
+            sb3.append("\n   "+(cont+1)+". "+m3.getElementAt(cont).toString());
+            ++cont;
+        }
+        String ignora = sb3.toString();
+        //Imprimim
+        CriterisNovaCerca.setText("Algorisme: "+algorisme+"\nTipus de valor: "+tipu+"\nAmb la dada: "+macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaactual)+
+                "\nImportancia realció: "+macro.getContUser().getRelacioCerca(macro.getUserActual(), cercaactual)+
+                "\nImportancia semblança de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaactual)+
+                "\nParaula clau: "+macro.getContUser().getParaulaClauCerca(macro.getUserActual(), cercaactual)+
+                "\n     Amb importància: "+macro.getContUser().getParaulaImpCerca(macro.getUserActual(), cercaactual)+
+                "\nCategoria pare:"+macro.getContUser().getPareCerca(macro.getUserActual(), cercaactual)+
+                "\nConjunt de categories seleccionades:"+subcat+
+                "\nConjunt de categories ignorades:"+evita+
+                "\nConjunt de pàgines a ignorar:"+ignora);
+       
+        guardada=1;
+        A_CreaComunitat.setVisible(false);
         A_VisualitzaNovaCerca.setVisible(true);
     }//GEN-LAST:event_CercaBActionPerformed
 
@@ -1725,6 +1932,27 @@ public class InterficiaProva extends javax.swing.JFrame {
         A_VeureUsers.setVisible(false);
         A_OpcionsAdmin.setVisible(true);
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        A_VisualitzaNovaCerca.setVisible(false);
+        A_CreaComunitat.setVisible(true);
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        A_VisualitzaNovaCerca.setVisible(false);
+        A_GuardaCerca.setVisible(true);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        A_GuardaCerca.setVisible(false);
+        A_VisualitzaNovaCerca.setVisible(true);
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        A_GuardaCerca.setVisible(false);
+        if(!macro.getContUser().isAdmin(macro.getUserActual()))A_OpcionsClient.setVisible(true);
+        else A_OpcionsAdmin.setVisible(true);
+    }//GEN-LAST:event_jButton14ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1767,6 +1995,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JPanel A_BuscaPag;
     private javax.swing.JPanel A_CreaComunitat;
     private javax.swing.JPanel A_CreaUsuari;
+    private javax.swing.JPanel A_GuardaCerca;
     private javax.swing.JPanel A_OpcionsAdmin;
     private javax.swing.JPanel A_OpcionsClient;
     private javax.swing.JPanel A_PantallaPrincipal;
@@ -1799,6 +2028,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JSlider CpcImp;
     private javax.swing.JButton CreaCerca;
     private javax.swing.JSlider Crelacio;
+    private javax.swing.JTextArea CriterisNovaCerca;
     private javax.swing.JSlider Csembla;
     private javax.swing.JButton EliminaCsub;
     private javax.swing.JButton EnrereC;
@@ -1825,6 +2055,10 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1849,6 +2083,9 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1858,6 +2095,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1870,6 +2108,8 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
