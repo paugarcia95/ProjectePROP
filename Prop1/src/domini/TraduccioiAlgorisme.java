@@ -154,20 +154,23 @@ public class TraduccioiAlgorisme {
 				}
 			}
 			else {
-				if(cri.getPare().length() != 0) {
+				if(cri.getPare().length() != 0) { // Criteri Pare actiu
 					Map<String, Categoria> mapcatsubcat = graf.getCategoria(cri.getPare()).getMapCSubC(); //Adquireixo totes les seves subcategories de pare
 					Stack<String> pila = new Stack<String>(); // Monto una pila
+					Stack<String> visitats = new Stack<String>(); // Monto una pila
+					visitats.push(cri.getPare()); // Fico al pare com a visitat
 					for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves subcategories
 						pila.push(e.getNom()); // Les guardo a la pila;
+						visitats.push(e.getNom());//Guardo també els seus fills com a visitats
 					}
-					solucio.addNode(cri.getPare()); /// Afageixo el pare
+					solucio.addNode(cri.getPare()); /// Afageixo al pare al node solució
 					while(!pila.isEmpty()){
 						String aux = new String(pila.peek());
 						pila.pop();
 						solucio.addNode(aux);
 						Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(aux).getMapCSubC();
 						for(Categoria e2 : mapcatsubcat2.values()) { // Per a cadascuna de les seves subcategories
-							pila.push(e2.getNom()); // Les guardo a la pila;
+							if(!visitats.contains(e2.getNom()))  pila.push(e2.getNom()); // Les guardo a la pila;
 						}
 					}
 				}

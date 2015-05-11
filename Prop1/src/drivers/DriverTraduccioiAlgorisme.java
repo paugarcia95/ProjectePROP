@@ -83,6 +83,7 @@ public class DriverTraduccioiAlgorisme {
 			Categoria aux4 = new Categoria("fill");
 			G.addCC(aux2,aux4);
 			G.addCC(aux3,aux4);
+			//G.addCC(aux4,aux1);
 		}
 		
 		Criteris cri = new Criteris();
