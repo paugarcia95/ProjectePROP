@@ -40,14 +40,16 @@ public class DriverEntradaSortidaDadesGraf {
 		System.out.println("Escriu la ruta on vols llegir el graf");
 		String ruta = in.next();
 
-		try {
+	/*	try {
 			io.carregarGrafDades(G, ruta);
 			return G;
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
-		}
+		}*/
+                return G;
 	}
+        
 	// C:/Users/Pau/Desktop/cats.txt
 	public static void escriureGraf(EntradaSortidaDadesGraf io, GrafDades G) {
 		in = new Scanner(System.in);

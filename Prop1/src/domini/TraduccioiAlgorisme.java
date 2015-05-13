@@ -245,8 +245,13 @@ public class TraduccioiAlgorisme {
 	 */
 	public ArrayList<Comunitat> traduiricercar (GrafDades graf, Criteris cri) { // ÉS PRIVADA, ESTÀ EN PUBLICA PEL DRIVER
 		Graf utilitzable = new Graf();
+                long t1,t2,t3,t4;
+                t1= System.currentTimeMillis();
 		utilitzable = grafdadestograf(graf,cri);
+                t2= System.currentTimeMillis();
 		HashSet<HashSet<String>> solucio = new HashSet<HashSet<String>>();
+                System.out.println("Temps traducció: "+(t2-t1));
+                t3= System.currentTimeMillis();
 		if(cri.getAlgorisme() == 1) {
 			solucio = Louvain.executa(utilitzable, cri.getDada());
 		}
@@ -256,6 +261,8 @@ public class TraduccioiAlgorisme {
 			else solucio = AlgorismeNewmanGirvan.executabet(utilitzable,cri.getDada());
 		}
 		else solucio = Clique.executa(utilitzable, cri.getDada()); 
+                t4= System.currentTimeMillis();
+                System.out.println("Temps algorisme: "+(t4-t3));
 		ArrayList<Comunitat> retorna = new ArrayList<Comunitat>();
 		//it es un iterador que va recorrent el primer HashSet de HashSet<HashSet<String>> (el conjunt de comunitats
 		Iterator<HashSet<String>> it = solucio.iterator();

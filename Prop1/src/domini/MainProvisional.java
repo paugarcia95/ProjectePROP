@@ -508,7 +508,7 @@ public class MainProvisional {
 			case 1:
 				System.out.println("Introdueix la ruta del fitxer de dades que vols introduir (exemple: C:/Users/.../fitxer.txt)");
 				String ruta = s.next();
-				if(!mc.carregaDadesFitxer(ruta)) System.out.println("Hi ha hagut algun problema al carregar les dades del graf la wiki");
+				//if(!mc.carregaDadesFitxer(ruta)) System.out.println("Hi ha hagut algun problema al carregar les dades del graf la wiki");
 				introduirDades();
 				break;
 			case 2:

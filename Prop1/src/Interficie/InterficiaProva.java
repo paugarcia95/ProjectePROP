@@ -332,25 +332,25 @@ public class InterficiaProva extends javax.swing.JFrame {
         A_CreaComunitat.setAlignmentX(A_PantallaPrincipal.getAlignmentX());
         A_CreaComunitat.setAlignmentY(A_PantallaPrincipal.getAlignmentY());
 
-        jLabel5.setText("Benvingut a la creaci√≥ d'una nova Cerca de Comunitats!");
+        jLabel5.setText("Benvingut a la creaciÛ d'una nova Cerca de Comunitats!");
 
         jLabel6.setText("Si us plau, omple totes les dades amb un * i tingues en compte les restriccions de les altres");
 
-        jLabel10.setText("Indica amb un numero del 0 al 10 la import√†ncia que li vols dnar a la relaci√≥ entre categopries.");
+        jLabel10.setText("Indica amb un numero del 0 al 10 la import‡ncia que li vols dnar a la relaciÛ entre categopries.");
 
-        jLabel11.setText("0 nom√©s premia a les relacions amb les p√†gines, un 5 premia igual les relacions cat-cat que les cat-pag i un 10 nom√©s premia les relacions cat-cat");
+        jLabel11.setText("0 nomÈs premia a les relacions amb les p‡gines, un 5 premia igual les relacions cat-cat que les cat-pag i un 10 nomÈs premia les relacions cat-cat");
 
-        jLabel12.setText("Indica amb un n√∫mero del 0 al 10 la import√†ncia que li vols donar  a la semblan√ßa entre els noms de les categories");
+        jLabel12.setText("Indica amb un n˙mero del 0 al 10 la import‡ncia que li vols donar  a la semblanÁa entre els noms de les categories");
 
-        jLabel13.setText("Indica una paraula clau que vols que es tingui en compte i la seva import√†ncia:");
+        jLabel13.setText("Indica una paraula clau que vols que es tingui en compte i la seva import‡ncia:");
 
-        jLabel14.setText("Un 0 si no en vols cap, un 5 per tal de que les categories que es tinguin en compte tinguin com a m√≠nim la meitat d'aquesta paraula o 10 si l'han de contenir en la seva totalitat");
+        jLabel14.setText("Un 0 si no en vols cap, un 5 per tal de que les categories que es tinguin en compte tinguin com a mÌnim la meitat d'aquesta paraula o 10 si l'han de contenir en la seva totalitat");
 
         jLabel15.setText("Selecciona unes quantes categories entre les quals vols que es faci la cerca");
 
         jLabel16.setText("Selecciona la categoria pare a partir de la qual es tenen en compte tots els seus fills");
 
-        jLabel18.setText("Selecciona unes quantes categories i/o p√†gines les quals vols ignorar");
+        jLabel18.setText("Selecciona unes quantes categories i/o p‡gines les quals vols ignorar");
 
         Crelacio.setForeground(new java.awt.Color(0, 0, 153));
         Crelacio.setMajorTickSpacing(1);
@@ -527,7 +527,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Maxima Between");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Cliqu√©");
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("CliquÈ");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Dispersio");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
@@ -743,7 +743,7 @@ public class InterficiaProva extends javax.swing.JFrame {
 
         getContentPane().add(A_CreaComunitat, "card3");
 
-        jLabel7.setText("Creaci√≥ d'un nou usuari");
+        jLabel7.setText("CreaciÛ d'un nou usuari");
 
         NouUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -854,14 +854,14 @@ public class InterficiaProva extends javax.swing.JFrame {
             }
         });
 
-        BuscaPagines.setText("Busca entre les P√†gines");
+        BuscaPagines.setText("Busca entre les P‡gines");
         BuscaPagines.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscaPaginesActionPerformed(evt);
             }
         });
 
-        BuscaCatPag.setText("Busca entre les Categories i P√†gines");
+        BuscaCatPag.setText("Busca entre les Categories i P‡gines");
         BuscaCatPag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscaCatPagActionPerformed(evt);
@@ -971,7 +971,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
 
         jTextField1.setBackground(new java.awt.Color(240, 240, 240));
-        jTextField1.setText("Aquestes s√≥n les categories existents:");
+        jTextField1.setText("Aquestes sÛn les categories existents:");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -1052,7 +1052,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
 
         jTextField2.setBackground(new java.awt.Color(240, 240, 240));
-        jTextField2.setText("Aquestes s√≥n les p√†gines existents:");
+        jTextField2.setText("Aquestes sÛn les p‡gines existents:");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -1120,7 +1120,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
 
         jTextField3.setBackground(new java.awt.Color(240, 240, 240));
-        jTextField3.setText("Aquestes s√≥n les p√†gines existents:");
+        jTextField3.setText("Aquestes sÛn les p‡gines existents:");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -1142,7 +1142,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
 
         jTextField4.setBackground(new java.awt.Color(240, 240, 240));
-        jTextField4.setText("Aquestes s√≥n les categories existents:");
+        jTextField4.setText("Aquestes sÛn les categories existents:");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
@@ -1236,7 +1236,7 @@ public class InterficiaProva extends javax.swing.JFrame {
             }
         });
 
-        jLabel17.setText("Aquests s√≥n els usuaris actuals:");
+        jLabel17.setText("Aquests sÛn els usuaris actuals:");
 
         javax.swing.GroupLayout A_VeureUsersLayout = new javax.swing.GroupLayout(A_VeureUsers);
         A_VeureUsers.setLayout(A_VeureUsersLayout);
@@ -1599,7 +1599,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         Error aux = new Error(this, true);
         String resultat;
         if(macro.getContUser().existsUser(NouUsername.getText())) resultat = "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre";
-        else  resultat = "Aquest nom d'usuari est√† lliure, endavant";
+        else  resultat = "Aquest nom d'usuari est‡ lliure, endavant";
         aux.ompletext(resultat, "Ok");
         aux.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1710,7 +1710,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if(guardada==1){
             Error err = new Error(this,true);
-            err.ompletext("Atenci√≥, si cliques a continuar, la cerca no es guardar√†!(cal afegir la opcio de guardar aqui tambe)", "OK");
+            err.ompletext("AtenciÛ, si cliques a continuar, la cerca no es guardar‡!(cal afegir la opcio de guardar aqui tambe)", "OK");
             err.setVisible(true);
         }
             A_CreaComunitat.setVisible(false);
@@ -1762,13 +1762,14 @@ public class InterficiaProva extends javax.swing.JFrame {
 
     private void CercaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CercaBActionPerformed
      /*   Espera finestra = new Espera(null,true);
-        finestra.ompletext("La cerca s'est√† realitzant, si us plau, tingues paci√®ncia");
+        finestra.ompletext("La cerca s'est‡ realitzant, si us plau, tingues paciËncia");
         finestra.setVisible(true);
 */      
+        long t1,t2;
  //FEM LA CERCA       
         Integer quina = macro.getContUser().addNovaCerca(macro.getUserActual());
         Integer quin, tipus;
-       
+       t1= System.currentTimeMillis();
         TreePath arbre =Algorismes.getSelectionModel().getSelectionPath();
        // System.out.println(arbre.toString());
         if(arbre.equals(null)) {
@@ -1781,7 +1782,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         if(arbre.getPathComponent(1).toString().equals("Louvain")) {
             quin=1;
             tipus=0;
-            System.out.println("Louvain: quin 1 i tipus 0");
+         //   System.out.println("Louvain: quin 1 i tipus 0");
         }
         else if(arbre.getPathComponent(1).toString().equals("Newman-Girvan")) {
             quin=2;
@@ -1800,7 +1801,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         ListModel m2 = Lsub1.getModel();
         ListModel m3 = Lsub2.getModel();
         int mida = m.getSize();
-        System.out.println("Has seleccionat "+mida+" i es: "+ m.toString());
+      //  System.out.println("Has seleccionat "+mida+" i es: "+ m.toString());
         int cont = 0;
         ArrayList<String> auxx1 = new ArrayList<String>();
         ArrayList<String> auxx2 = new ArrayList<String>();
@@ -1827,13 +1828,14 @@ public class InterficiaProva extends javax.swing.JFrame {
         }
        // System.out.println("mida aux3: "+mida);
         if(CpcImp.getValue()==0) Cpc.setText(new String());
-        
-        System.out.println("user: "+macro.getUserActual()+ ", cerca num: "+quina+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", quin: "+quin+", tipus: "+tipus+", num: "+num+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText());
+        System.out.println("Fem la cerca amb "+macro.getGraf().getNombreCategories()+" categories i "+macro.getGraf().getNombrePagines()+" p‡gines.");
+        System.out.println("Alg: "+quin+", tipus: "+tipus+", user: "+macro.getUserActual()+ ", cerca num: "+quina+", numDada: "+num+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText());
         macro.getContUser().addCriterisCerca(false, macro.getUserActual(), quina, Cpc.getText(), CpcImp.getValue(), Crelacio.getValue(), Csembla.getValue(), quin, tipus, num, auxx1, auxx2, auxx3, Cbusca1.getText());
        // System.out.println("he arribat aqui");
         macro.getContUser().ferCerca(macro.getUserActual(), quina);
        // System.out.println("i he fet la cerca!");
-       
+       t2= System.currentTimeMillis();
+       System.out.println("Temps total cerca: "+ (t2-t1));
 //PREPAREM LA VISUALITZACIO D'AQUESTA CERCA
     //ARBRE
         DefaultMutableTreeNode arrel = new DefaultMutableTreeNode("Comunitats Obtingudes");
@@ -1867,7 +1869,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         else algorisme = "Clique";
         String tipu;
          algo = macro.getContUser().getAlgTipuCerca(macro.getUserActual(), cercaactual);
-        System.out.println("tipus: "+algo);
+  //      System.out.println("tipus: "+algo);
         if(algo==1) tipu= "Dispersio";
         else if(algo==2) tipu="Num Comunitats";
         else tipu="Max Betw";
@@ -1900,14 +1902,14 @@ public class InterficiaProva extends javax.swing.JFrame {
         String ignora = sb3.toString();
         //Imprimim
         CriterisNovaCerca.setText("Algorisme: "+algorisme+"\nTipus de valor: "+tipu+"\nAmb la dada: "+macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaactual)+
-                "\nImportancia realci√≥: "+macro.getContUser().getRelacioCerca(macro.getUserActual(), cercaactual)+
-                "\nImportancia semblan√ßa de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaactual)+
+                "\nImportancia realciÛ: "+macro.getContUser().getRelacioCerca(macro.getUserActual(), cercaactual)+
+                "\nImportancia semblanÁa de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaactual)+
                 "\nParaula clau: "+macro.getContUser().getParaulaClauCerca(macro.getUserActual(), cercaactual)+
-                "\n     Amb import√†ncia: "+macro.getContUser().getParaulaImpCerca(macro.getUserActual(), cercaactual)+
+                "\n     Amb import‡ncia: "+macro.getContUser().getParaulaImpCerca(macro.getUserActual(), cercaactual)+
                 "\nCategoria pare:"+macro.getContUser().getPareCerca(macro.getUserActual(), cercaactual)+
                 "\nConjunt de categories seleccionades:"+subcat+
                 "\nConjunt de categories ignorades:"+evita+
-                "\nConjunt de p√†gines a ignorar:"+ignora);
+                "\nConjunt de p‡gines a ignorar:"+ignora);
        
         guardada=1;
         A_CreaComunitat.setVisible(false);
