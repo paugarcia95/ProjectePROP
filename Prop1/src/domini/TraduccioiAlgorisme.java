@@ -251,6 +251,7 @@ public class TraduccioiAlgorisme {
                 t2= System.currentTimeMillis();
 		HashSet<HashSet<String>> solucio = new HashSet<HashSet<String>>();
                 System.out.println("Temps traducció: "+(t2-t1));
+                System.out.println("En el graf de l'algorisme hi ha "+utilitzable.getNodes().size()+" nodes");
                 t3= System.currentTimeMillis();
 		if(cri.getAlgorisme() == 1) {
 			solucio = Louvain.executa(utilitzable, cri.getDada());

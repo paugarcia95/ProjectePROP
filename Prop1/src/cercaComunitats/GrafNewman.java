@@ -149,11 +149,13 @@ public class GrafNewman extends Graf {
 	}
 	
 	public GrafNewman(Graf G) {
+
 		Diccionari = new TreeMap<String,Integer>(G.Diccionari);
 		DiccionariInvers = new TreeMap<Integer,String>(G.DiccionariInvers);
 		Matriu = new Vector< Vector<Double> >(G.Matriu);
 		maxNumCM = maxi = maxj = numCom = 0;
 		NCM = new int[Matriu.size()][Matriu.size()];
+
 	}
 
 	/**

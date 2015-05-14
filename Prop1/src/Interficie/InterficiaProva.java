@@ -72,6 +72,9 @@ public class InterficiaProva extends javax.swing.JFrame {
         G.addCP(aux7, aux0);
         G.addPC(aux0, aux6);
         Pagina aux8 = new Pagina("eril");
+        Categoria aux9 = new Categoria("aillat1");
+        Categoria aux10 = new Categoria("aillat2");
+        G.addCC(aux9,aux10);
 	G.addPagina(aux8);
     }
     public InterficiaProva() {

@@ -18,6 +18,7 @@ public class Clique {
     private static double pMax;
     private static double pMin;
     private static ArrayList<HashSet<String>> cliques; //Tendra TODOS los cliques ordenados del grafo "graph"
+    private static int axiliarcontrolador = 0;
 
     /**
      * Creadora por defecto.
@@ -312,6 +313,8 @@ public class Clique {
             if(m[i][j]==1) {
                 cs.addAll(obtenerComunidades(m,j,c)); //Obtenemos todos las comunidades que comparte j {su fila}
                 c[j] = 1;
+                System.out.println("He creat una nova comunitat "+ axiliarcontrolador);
+                ++axiliarcontrolador;
             }
         }
 

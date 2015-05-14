@@ -50,7 +50,12 @@ public class AlgorismeNewmanGirvan {
 	public static HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
 		ArrayList<HashSet<HashSet<String>>> storage = new ArrayList<HashSet<HashSet<String>>>();
 		int iterador = 0;
+            long t1, t2;
+            t1 = System.currentTimeMillis();
 		GrafNewman util = new GrafNewman(G);
+                util.invertirPesos();
+            t2 = System.currentTimeMillis();
+            System.out.println((t2-t1));
 		util.calcularEdgeBetween();
 		while (util.numComunitats() < G.size()) {
 			storage.add(iterador, util.comunitats());
@@ -76,6 +81,7 @@ public class AlgorismeNewmanGirvan {
 	 *         numcomunidades comunitats)
 	 */
 	public static HashSet<HashSet<String>> executaNum(Graf G, Integer numComunidades) {
+            
 		GrafNewman util = new GrafNewman(G);
 		util.calcularEdgeBetween();
 		Integer tamany = new Integer(G.getNodes().size());
