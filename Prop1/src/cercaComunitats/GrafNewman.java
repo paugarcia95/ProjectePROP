@@ -3,12 +3,14 @@
  */
 package cercaComunitats;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -23,6 +25,8 @@ public class GrafNewman extends Graf {
 	private Integer maxj;
 	private Integer maxNumCM;
 	private Integer numCom;
+        private ArrayList<ArrayList<Integer> > mateixaCom; 
+        
 
 	private class Aresta { 
 		public Integer node1;
@@ -155,6 +159,25 @@ public class GrafNewman extends Graf {
 		Matriu = new Vector< Vector<Double> >(G.Matriu);
 		maxNumCM = maxi = maxj = numCom = 0;
 		NCM = new int[Matriu.size()][Matriu.size()];
+                
+ ///PUC FER AIXO ON CADA POSICIO DEL PRIMER ARRAY ES UN NODE I
+ //EL SEGON HA DE CONTENIR TOTS ELS ALTRES NODES TAMBE?
+                mateixaCom = new ArrayList<ArrayList<Integer> >();
+                int mida = Matriu.size();
+                //Increases the capacity of this ArrayList instance, if necessary, to ensure that it can hold at least the number of elements specified by the minimum capacity argument.
+                //mateixaCom.ensureCapacity(mida*mida);
+                for(int i = 0; i < mida; ++i) {
+                    ArrayList<Integer> aux = new ArrayList<Integer>();
+                    //aux.ensureCapacity(mida);
+                    for(Integer j = 0; j < mida; ++j) if(i!=j)aux.add(j);
+                    mateixaCom.add(i, aux);
+                }
+              //  System.out.println(mateixaCom);
+                //for(Integer i = 0; i < mida;++i)System.out.println(mateixaCom.get(i));
+                
+              /*  for(int i = 0; i < mida;++i) {
+                    System.out.println("node "+i+" = "+ DiccionariInvers.get(i));
+                }*/
 
 	}
 
@@ -326,8 +349,56 @@ public class GrafNewman extends Graf {
 			for (int j = 0; j < NCM.length; ++j)
 				NCM[i][j] = 0;
 		}
+                
+                for(int i = 0; i < NCM.length;++i) {
+                    int numero = mateixaCom.get(i).size();
+                   //System.out.println("mida de comunitats connectades amb "+i+": "+numero+", son: "+mateixaCom.get(i));
+                    Stack<Integer> eliminar = new Stack<Integer>();
+                     new HashSet<Integer>();
+                    for(int j = 0; j < numero; ++j){
+                        
+                       // System.out.println("Estic intentant buscar cami entre "+i+" i "+mateixaCom.get(i).get(j));
+                        Queue<Aresta> cami = getCamiMinim(i, mateixaCom.get(i).get(j));
+                        // un cop trobat cada cami minim, sumar 1 a la pos de
+			// NCM
+			if (cami.size() > 0) {
+                            Iterator<Aresta> itc = cami.iterator();
+				while (itc.hasNext()) {
+					Aresta aux = itc.next();
+					Integer act = NCM[aux.node1][aux.node2];
+					NCM[aux.node1][aux.node2]=act + 1;
+					++act;
+					// mantenir el vertex per on passen mes camins
+					// minims (variables maxi, maxj i maxNumCM)
+					if (maxNumCM <= act) {
+						maxi = aux.node1;
+						maxj = aux.node2;
+						maxNumCM = act;
+					}
+				}
+			}
+                        else {
+                            eliminar.add(mateixaCom.get(i).get(j));
+                    //        System.out.println("els nodes "+DiccionariInvers.get(i)+" i "+DiccionariInvers.get(mateixaCom.get(i).get(j))+" ja no estan a la mateixa comunitat");
+                           // mateixaCom.get(i).remove(j);
+                        }
+                    }
+                    while(!eliminar.isEmpty()) {
+                        Integer quin =eliminar.remove(0);
+                        Integer parella = i;
+                     //   System.out.println("elimino de "+DiccionariInvers.get(i)+" la seva relació amb "+DiccionariInvers.get(quin));
+                     //   System.out.println("ABANS "+DiccionariInvers.get(i)+": "+mateixaCom.get(i));
+                        mateixaCom.get(i).remove(quin);
+                    //    System.out.println("DESPRES "+DiccionariInvers.get(i)+": "+mateixaCom.get(i));
+                      //  System.out.println("elimino de "+DiccionariInvers.get(quin)+" la seva relació amb "+DiccionariInvers.get(i));
+                    //    System.out.println("ABANS "+DiccionariInvers.get(quin)+": "+mateixaCom.get(quin));
+                        mateixaCom.get(quin).remove(parella);
+                   //     System.out.println("DESPRES "+DiccionariInvers.get(quin)+": "+mateixaCom.get(quin));
+                    }
+                }
+                
 		// Calcula el cami minim de cada node cap a tots els nodes
-		for (int i = 0; i < NCM.length; ++i)
+		/*for (int i = 0; i < NCM.length; ++i)
 			for (int j = 0; j < NCM.length; ++j) {
 				if (i != j) {
 				if (numCom < 4 || pertanyenMateixaComunitat(i, j)) {
@@ -353,6 +424,7 @@ public class GrafNewman extends Graf {
 					}
 				}
 			}
+                */
 		return null;
 	}
 
