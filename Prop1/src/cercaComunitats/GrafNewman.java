@@ -354,7 +354,7 @@ public class GrafNewman extends Graf {
                 System.out.println("He inicialitzat NCM a 0");
                 for(int i = 0; i < NCM.length;++i) {
                     int numero = mateixaCom.get(i).size();
-                      System.out.println("Estic buscant els camins minims de "+i+", que sta amb "+numero);
+                      System.out.print("Estic buscant els camins minims de "+i+", que sta amb "+numero);
                    //System.out.println("mida de comunitats connectades amb "+i+": "+numero+", son: "+mateixaCom.get(i));
                     Stack<Integer> eliminar = new Stack<Integer>();
                      new HashSet<Integer>();
@@ -398,6 +398,7 @@ public class GrafNewman extends Graf {
                         mateixaCom.get(quin).remove(parella);
                    //     System.out.println("DESPRES "+DiccionariInvers.get(quin)+": "+mateixaCom.get(quin));
                     }
+                    System.out.println(", i acaba amb: "+mateixaCom.get(i).size());
                 }
                 
 		// Calcula el cami minim de cada node cap a tots els nodes

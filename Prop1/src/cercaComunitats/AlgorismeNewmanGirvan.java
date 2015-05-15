@@ -59,7 +59,11 @@ public class AlgorismeNewmanGirvan {
                 Integer numero =util.numComunitats(); 
                 int aux = 0;
 		while ( numero< G.size()) {
-                        System.out.println("estic a la iteracio "+aux+", amb num de comunitats: "+numero);
+                        System.out.println("--------------------------------------------------------");
+                        System.out.println("--------------------------------------------------------");
+                        System.out.println("--------------------------------------------------------");
+                        System.out.println("--------------------------------------------------------");
+                        System.out.println("ITERACIO "+aux+", NUM COMUNITATS: "+numero);
 			storage.add(iterador, util.comunitats());
 			util.esborrarMaxim();
 			util.calcularEdgeBetween();
