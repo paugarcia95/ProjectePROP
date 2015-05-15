@@ -21,6 +21,7 @@ import java.util.Vector;
 public class GrafNewman extends Graf {
 
 	private int[][] NCM;
+       // private ArrayList<ArrayList<Integer> > MatriuNova;
 	private Integer maxi;
 	private Integer maxj;
 	private Integer maxNumCM;
@@ -148,6 +149,7 @@ public class GrafNewman extends Graf {
 	 */
 	public GrafNewman() {
 		super();
+                //MatriuNova
 		maxNumCM = maxi = maxj = numCom = 0;
 		NCM = new int[Matriu.size()][Matriu.size()];
 	}
@@ -349,9 +351,10 @@ public class GrafNewman extends Graf {
 			for (int j = 0; j < NCM.length; ++j)
 				NCM[i][j] = 0;
 		}
-                
+                System.out.println("He inicialitzat NCM a 0");
                 for(int i = 0; i < NCM.length;++i) {
                     int numero = mateixaCom.get(i).size();
+                      System.out.println("Estic buscant els camins minims de "+i+", que sta amb "+numero);
                    //System.out.println("mida de comunitats connectades amb "+i+": "+numero+", son: "+mateixaCom.get(i));
                     Stack<Integer> eliminar = new Stack<Integer>();
                      new HashSet<Integer>();
@@ -398,7 +401,8 @@ public class GrafNewman extends Graf {
                 }
                 
 		// Calcula el cami minim de cada node cap a tots els nodes
-		/*for (int i = 0; i < NCM.length; ++i)
+		/*for (int i = 0; i < NCM.length; ++i) {
+                    System.out.println("Estic buscant els camins minims de "+i);
 			for (int j = 0; j < NCM.length; ++j) {
 				if (i != j) {
 				if (numCom < 4 || pertanyenMateixaComunitat(i, j)) {
@@ -424,7 +428,7 @@ public class GrafNewman extends Graf {
 					}
 				}
 			}
-                */
+                }*/
 		return null;
 	}
 

@@ -50,18 +50,22 @@ public class AlgorismeNewmanGirvan {
 	public static HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
 		ArrayList<HashSet<HashSet<String>>> storage = new ArrayList<HashSet<HashSet<String>>>();
 		int iterador = 0;
-            long t1, t2;
-            t1 = System.currentTimeMillis();
+                System.out.println("Vaig a fer el cast");
 		GrafNewman util = new GrafNewman(G);
+                System.out.println("Vaig a invertir pesos");
                 util.invertirPesos();
-            t2 = System.currentTimeMillis();
-            System.out.println((t2-t1));
+                System.out.println("Començo");
 		util.calcularEdgeBetween();
-		while (util.numComunitats() < G.size()) {
+                Integer numero =util.numComunitats(); 
+                int aux = 0;
+		while ( numero< G.size()) {
+                        System.out.println("estic a la iteracio "+aux+", amb num de comunitats: "+numero);
 			storage.add(iterador, util.comunitats());
 			util.esborrarMaxim();
 			util.calcularEdgeBetween();
 			++iterador;
+                        numero = util.numComunitats();
+                        ++aux;
 		}
 		storage.add(iterador, util.comunitats());
 		Integer quitoca = new Integer(calculadora(iterador, percentatge));
@@ -83,6 +87,7 @@ public class AlgorismeNewmanGirvan {
 	public static HashSet<HashSet<String>> executaNum(Graf G, Integer numComunidades) {
             
 		GrafNewman util = new GrafNewman(G);
+                util.invertirPesos();
 		util.calcularEdgeBetween();
 		Integer tamany = new Integer(G.getNodes().size());
 		if(numComunidades > tamany) numComunidades = tamany; // En cas de q se'ns demani mes comunitats q nodes, canviem el valor
@@ -107,6 +112,7 @@ public class AlgorismeNewmanGirvan {
 	 */
 	public static HashSet<HashSet<String>> executabet(Graf G, Integer maxbetweness) {
 		GrafNewman util = new GrafNewman(G);
+                util.invertirPesos();
 		util.calcularEdgeBetween();
 		int maxactual = util.getMaxBetween(); // Variable amb el valor de maxbtw
 		while (maxactual > maxbetweness) {
