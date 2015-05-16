@@ -1,5 +1,6 @@
 package domini;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
@@ -447,6 +448,31 @@ public class GrafDades {
 	 */
 	public Collection<Pagina> getPagines() {
 		return pagines.values();
+	}
+	
+	
+	/**
+	 * Pre: Cert
+	 * Post: Retorna el nom de totes les categories del graf
+	 */
+	public ArrayList<String> getNomCategories() {
+		ArrayList<String> result = new ArrayList<String>();
+		for (Categoria cat : categories.values()) {
+			result.add(cat.getNom());
+	    }
+		return result;		
+	}
+	
+	/**
+	 * Pre: Cert
+	 * Post: Retorna el nom de totes les pagines del graf
+	 */
+	public ArrayList<String> getNomPagines() {
+		ArrayList<String> result = new ArrayList<String>();
+		for (Pagina pag : pagines.values()) {
+			result.add(pag.getNom());
+	    }
+		return result;	
 	}
 	
 }

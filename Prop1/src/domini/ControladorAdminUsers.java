@@ -6,6 +6,7 @@ package domini;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * @author cristina.fontanet
@@ -37,75 +38,132 @@ public class ControladorAdminUsers {
 
 //CONSULTORES///////////////////////////////////////////////////////////////////////////////
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Retorna el nom de totes les categories del graf
 	 */
-	public ArrayList<String>  getCategories() {return null;} 
+	public ArrayList<String>  getCategories() {
+		return gd.getNomCategories();
+	}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Retorna el nombre de categories que hi ha al graf
 	 */
-	public String getCategoria(Integer i) {return null;}
+	public Integer getNumCats() {
+		return gd.getNombreCategories();
+	}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les pàgines a les que apunta, altrament retorna null
 	 */
-	//nse si aquestes d'aqui abaix (idem x pag) es poden posar totes dins d'una funciï¿½, perï¿½ el fet de donar-li a la vista tots els atributs a partir d'strings es la unica manera q se m'ha acudit
-	public ArrayList<String> getCatCP(String Categoria) {return null;} 
+	public ArrayList<String> getCatCP(String nom) {
+		if (gd.existsCategoria(nom)) {
+			Collection<Pagina> CP = gd.getCategoria(nom).getMapCP().values();
+			ArrayList<String> result = new ArrayList<String>();
+			for(Pagina pag : CP) {
+				result.add(pag.getNom());
+			}
+			return result;
+		}
+		return null;
+	} 
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les pàgines que li apunten, altrament retorna null
 	 */
-	public ArrayList<String> getCatPC(String Categoria) {return null;}
+	public ArrayList<String> getCatPC(String nom) {
+		if (gd.existsCategoria(nom)) {
+			Collection<Pagina> PC = gd.getCategoria(nom).getMapPC().values();
+			ArrayList<String> result = new ArrayList<String>();
+			for(Pagina pag : PC) {
+				result.add(pag.getNom());
+			}
+			return result;
+		}
+		return null;
+	}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les seves super categories, altrament retorna null
 	 */
-	public ArrayList<String> getCsupC(String Categoria) {return null;}
+	public ArrayList<String> getCsupC(String nom) {
+		if (gd.existsCategoria(nom)) {
+			Collection<Categoria> CsupC = gd.getCategoria(nom).getMapCSupC().values();
+			ArrayList<String> result = new ArrayList<String>();
+			for(Categoria cat : CsupC) {
+				result.add(cat.getNom());
+			}
+			return result;
+		}
+		return null;
+	}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les seves sub categories, altrament retorna null
 	 */
-	public ArrayList<String> getCsubC(String Categoria) {return null;}
+	public ArrayList<String> getCsubC(String nom) {
+		if (gd.existsCategoria(nom)) {
+			Collection<Categoria> CsupbC = gd.getCategoria(nom).getMapCSubC().values();
+			ArrayList<String> result = new ArrayList<String>();
+			for(Categoria cat : CsupbC) {
+				result.add(cat.getNom());
+			}
+			return result;
+		}
+		return null;
+	}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Retorna el nom de totes les pàgines del graf
 	 */
-	public ArrayList<String> getPagines() {return null;}
+	public ArrayList<String> getPagines() {
+		return gd.getNomPagines();
+	}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Retorna el nombre de pàgines que hi ha al graf
 	 */
-	public String getPagina(Integer i) {return null;}
+	public Integer getNumPags() {
+		return gd.getNombrePagines();
+	}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si nom és el nom d'una Pàgina a GrafDades retorna les categories que li apunten, altrament retorna null
 	 */
-	public ArrayList<String> getPagCP(String Pagina) {return null;}
+	public ArrayList<String> getPagCP(String nom) {
+		if (gd.existsPagina(nom)) {
+			Collection<Categoria> CP = gd.getPagina(nom).getCP().values();
+			ArrayList<String> result = new ArrayList<String>();
+			for(Categoria cat : CP) {
+				result.add(cat.getNom());
+			}
+			return result;
+		}
+		return null;
+	}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si nom és el nom d'una Pàgina a GrafDades retorna les categories a les que apunta, altrament retorna null
 	 */
-	public ArrayList<String> getPagPC(String Pagina) {return null;}
+	public ArrayList<String> getPagPC(String nom) {
+		if (gd.existsPagina(nom)) {
+			Collection<Categoria> PC = gd.getPagina(nom).getPC().values();
+			ArrayList<String> result = new ArrayList<String>();
+			for(Categoria cat : PC) {
+				result.add(cat.getNom());
+			}
+			return result;
+		}
+		return null;
+	}
 
 //MODIFICADORES///////////////////////////////////////////////////////////////////////////////
 	
