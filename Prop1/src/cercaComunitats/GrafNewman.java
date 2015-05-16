@@ -159,25 +159,9 @@ public class GrafNewman extends Graf {
 	}
 	
 	public GrafNewman(Graf G) {
-            System.out.println("Llista de pesos Graf normal:");
-                for (int k = 0; k < G.llista.size(); ++k) {
-                    int num = G.llista.adjacents(k).size();
-                    System.out.print(k);
-                    for (int m = 0; m < num; ++m)
-                    System.out.print(", "+G.llista.get(k, m));
-                    System.out.println();
-                }
 		Diccionari = new TreeMap<String,Integer>(G.Diccionari);
 		DiccionariInvers = new TreeMap<Integer,String>(G.DiccionariInvers);
 		llista = new LlistaAdjacencia(G.llista);
-                System.out.println("Llista de pesos Graf Newman-Girvan:");
-                for (int k = 0; k < llista.size(); ++k) {
-                    int num = llista.adjacents(k).size();
-                    System.out.print(k);
-                    for (int m = 0; m < num; ++m)
-                    System.out.print(", "+llista.get(k, m));
-                    System.out.println();
-                }
 		maxNumCM = maxi = maxj = numCom = 0;
                 NCM = new ArrayList<HashMap<Integer,Integer> >();
 		//NCM = new int[Matriu.size()][Matriu.size()];
@@ -453,32 +437,23 @@ public class GrafNewman extends Graf {
 	 */
 	public Boolean invertirPesos() {
 		int nodes = llista.size();
-                System.out.println("llista anterior: ");
-                for (int k = 0; k < llista.size(); ++k) {
-                    int num = llista.adjacents(k).size();
-                    System.out.print(k);
-                    for (int m = 0; m < num; ++m)
-                    System.out.print(", "+llista.get(k, m));
-                    System.out.println();
-                }
 		if (nodes < 2) return false;
 		else {
-                    for(int i = 0; i < nodes; ++i) {
-                        int mida = llista.adjacents(i).size();
-			for (int j = 0; j < mida; ++j) {
+                    for(Integer i = 0; i < nodes; ++i) {
+                        for(Integer j: llista.adjacents(i).keySet()) {
                             double act = llista.get(i, j);
-                            if(act != 0.0 )llista.set(i, j, (1/act));
+                            double nou = 1/act;
+                            if(act != 0.0 ) llista.lista.get(i).put(j, 1/act);
                             else System.out.println("EEEEPS, hi ha una aresta amb pes 0.0 entre els nodes "+i+" i "+j);
                         }
                     }
-                System.out.println("llista posteriro: ");
+           /*     System.out.println("llista pesos posteriro: ");
                 for (int k = 0; k < llista.size(); ++k) {
-                    int num = llista.adjacents(k).size();
                     System.out.print(k);
-                    for (int m = 0; m < num; ++m)
+                    for (Integer m: llista.adjacents(k).keySet())
                     System.out.print(", "+llista.get(k, m));
                     System.out.println();
-                }
+                }*/
                     return true;
 		}
 	}
