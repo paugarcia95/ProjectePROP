@@ -93,7 +93,7 @@ public class GrafNewman extends Graf {
 	}
 
 	private static final class QueueVector {
-		private static Vector<Queue<Aresta>> Q;
+		private static ArrayList<Queue<Aresta>> Q;
 
 		/**
 		 * Constructora per defecte. (Pau)
@@ -103,12 +103,10 @@ public class GrafNewman extends Graf {
 		 * @return Un vector que conte tantes Queue (buides) com size indica
 		 */
 		public QueueVector(int size) {
-			Q = new Vector<Queue<Aresta>>();
-			Q.setSize(size);
-
-			for (int i = 0; i < size; ++i) {
-				Q.set(i, new LinkedList<Aresta>());
-			}
+			Q = new ArrayList<Queue<Aresta>>(size);
+                        for (int i = 0; i < size; i++) {
+                            Q.add(new LinkedList<Aresta>());
+                        }
 		}
 
 		/**
@@ -122,12 +120,10 @@ public class GrafNewman extends Graf {
 		public void push(int i, Aresta a) {
 			// El que fa aquest push es posar les arestes necessaries per
 			// arribar al primer node de l'aresta mes la nova aresta per
-			// arribar
-			// al seguent node
-
-			Queue<Aresta> aux = new LinkedList<Aresta>();
-			aux = new LinkedList<Aresta>(Q.get(a.node1));
-
+			// arribar al seguent node
+                        Q.get(i).clear();
+                        
+			Queue<Aresta> aux = new LinkedList<>(Q.get(a.node1));
 			while (!aux.isEmpty()) {
 				Q.get(i).add(aux.poll());
 			}
@@ -191,6 +187,7 @@ public class GrafNewman extends Graf {
 	private Set<Integer> getAdjacents(Integer posicio) {
                  return llista.adjacents(posicio).keySet();
 	}
+        
 
 	/**
 	 * Recorre una comunitat i va marcant com a true al vector visitats pels
@@ -277,44 +274,43 @@ public class GrafNewman extends Graf {
 		QueueVector camiMinim = new QueueVector(this.size());
 
 		// Vector que marca la distancia del nodeA a la resta de nodes
-		Vector<Double> distancia = new Vector<Double>();
-		distancia.setSize(this.size());
-
+		ArrayList<Double> distancia = new ArrayList<Double>(this.size());
+        
 		// Es com una cua de prioritat que ordena els nodes en una posicio mes
 		// curta al principi
 		PriorityQueue<ArestaPes> cola = new PriorityQueue<ArestaPes>(100, new ComparaValors());
 
 		// En un principi no se sap, i es marquen les distancies com a
 		// infinites
-		for (int i = 0; i < distancia.size(); ++i) {
-			distancia.set(i, Double.POSITIVE_INFINITY);
+		for (int i = 0; i < this.size(); ++i) {
+			distancia.add(Double.POSITIVE_INFINITY);
 		}
 
 		// La distancia del nodeA a ell mateix es 0
 		distancia.set(nodeA, 0.0);
-
-		cola.add(new ArestaPes(nodeA, distancia.get(nodeA)));
+		cola.add(new ArestaPes(nodeA, 0.0));
 
 		while (!cola.isEmpty()) {
 			ArestaPes a = cola.poll();
 			Integer u = a.aresta;
 
-			// Conte els nodes adjacents a "u"
-			Set<Integer> adjacents = this.getAdjacents(u);
-			Iterator<Integer> it2 = adjacents.iterator();
+			// Conte un iterador dels nodes adjacents a "u"
+			Iterator<Integer> it2 = this.getAdjacents(u).iterator();
 
 			while (it2.hasNext()) {
 				Integer v = it2.next();
-				Double pesUV = this.getPes(DiccionariInvers.get(u), DiccionariInvers.get(v));
+				Double pesUV = llista.get(u, v);
 
-				if (distancia.get(v) != -1.0 && distancia.get(u) != -1.0 && distancia.get(v) > distancia.get(u) + pesUV) {
+				if (distancia.get(v) > distancia.get(u) + pesUV) {
 					distancia.set(v, distancia.get(u) + pesUV);
 					cola.add(new ArestaPes(v, distancia.get(v)));
+                                        //Aquest push que es fa aquí és especial: insereix el camí per arribar fins
+                                        //a "u" i despres l'aresta de u a v.
 					camiMinim.push(v, new Aresta(u, v));
 				}
 			}
 		}
-		return camiMinim.getQueue(nodeB);
+		return camiMinim.getQueue(nodeB); 
 	}
 
 	/**

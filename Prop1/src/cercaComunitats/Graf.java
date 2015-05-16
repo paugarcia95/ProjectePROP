@@ -12,12 +12,12 @@ import java.util.Vector;
  */
 
 public class Graf {
-	protected static Map<String,Integer> Diccionari;
-	protected static Map<Integer,String> DiccionariInvers;
+	protected Map<String,Integer> Diccionari;
+	protected Map<Integer,String> DiccionariInvers;
 	protected LlistaAdjacencia llista;
 	
 	protected class LlistaAdjacencia {
-		private Vector< HashMap<Integer,Double> > lista;
+		protected Vector< HashMap<Integer,Double> > lista;
 		/**
 		 * Creadora per defecte.
 		 */

@@ -43,7 +43,7 @@ public class DriverGrafNewman extends GrafNewman {
 		}
 
 		System.out.println("");
-		System.out.println("Quina funció vol provar?");
+		System.out.println("Quina funciï¿½ vol provar?");
 		System.out.println("1. Integer getMaxBet()");
 		System.out.println("2. Boolean Calculate_edge_between()");
 		System.out.println("3. Boolean Invertir_pesos()");
