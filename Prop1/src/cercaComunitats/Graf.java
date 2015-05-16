@@ -14,15 +14,115 @@ import java.util.Vector;
 public class Graf {
 	protected Map<String,Integer> Diccionari;
 	protected Map<Integer,String> DiccionariInvers;
-	protected Vector< Vector<Double> > Matriu;
+	protected LlistaAdjacencia llista;
 	
+	protected class LlistaAdjacencia {
+		private Vector< HashMap<Integer,Double> > lista;
+		/**
+		 * Creadora per defecte.
+		 */
+		public LlistaAdjacencia() {
+			lista = new Vector< HashMap<Integer,Double> >();
+		}
+		
+		/**
+		 * Copiadora de llista de adjacències
+		 * @param l llista a copiar
+		 */
+		public LlistaAdjacencia(LlistaAdjacencia l) {
+			lista = new Vector< HashMap<Integer,Double> >(l.lista.size());
+			for (int i = 0; i < l.lista.size();++i) {
+				lista.add(new HashMap<Integer,Double>(l.lista.get(i)));
+			}
+		}
+		
+		/**
+		 * Comprova si existeix adjacencia entre i y j
+		 * @param i
+		 * @param j
+		 * @return true si existeix, sino false
+		 */
+		public Boolean exists(Integer i, Integer j) {
+			return lista.get(i).containsKey(j);
+		}
+		
+		/**
+		 * Consultora del pes entre i i j
+		 * @param i
+		 * @param j
+		 * @return pes entre i i j, si no hi ha aresta és 0
+		 */
+		public Double get(Integer i, Integer j) {
+			if(exists(i,j)) return lista.get(i).get(j); 
+			return 0.0;
+		}
+		
+		/**
+		 * Modificadora de pes
+		 * @param i node
+		 * @param j node
+		 * @param value pes
+		 */
+		public void set(Integer i, Integer j, Double value) {
+				lista.get(i).put(j, value);
+				lista.get(j).put(i, value);
+		}
+		
+		/**
+		 * Elimina el node amb index index
+		 * @param index
+		 */
+		public void remove(Integer index) {
+			for (int i = 0; i < lista.size(); ++i) {
+				lista.get(i).remove(index);
+			}
+			lista.remove((int) index);
+		}
+		
+		/**
+		 * consultora de la mida de la llista
+		 * @return mida de la llista
+		 */
+		public int size() {
+			return lista.size();
+		}
+		
+		/**
+		 * Afegeix un nou node.
+		 * @return index del node
+		 */
+		public Integer add() {
+			lista.add(new HashMap<Integer,Double>());
+			return llista.size()-1;
+		}
+		
+		/**
+		 * Remove de adyacencia.
+		 * Pone a 0 la adyacencia entre i y j.
+		 * @param i
+		 * @param j
+		 */
+		public void remove(Integer i, Integer j) {
+			set(i,j,0.0);
+		}
+		
+		/**
+		 * Consultora de adyacencia
+		 * @param i
+		 * @return Parejas de indice del nodo - Peso adyacentes.
+		 */
+		public HashMap<Integer,Double> adjacents(Integer i) {
+			return lista.get(i);
+		}
+		
+	}
 	/**
 	 * Creadora per defecte.
 	 */
 	public Graf() {
 		Diccionari = new HashMap<String,Integer>();
 		DiccionariInvers = new HashMap<Integer,String>();
-		Matriu = new Vector< Vector<Double> >();
+		llista = new LlistaAdjacencia();
 	}
 	
 	/**
@@ -37,16 +137,13 @@ public class Graf {
 	}
 	
 	/**
-	 * Creadora per còpia a partir d'un Graf.
-	 * @param G Graf que es copiarà.
+	 * Creadora per c�pia a partir d'un Graf.
+	 * @param G Graf que es copiar�.
 	 */
 	public Graf(Graf G) {
 		Diccionari = new HashMap<String,Integer>(G.Diccionari);
 		DiccionariInvers = new HashMap<Integer,String>(G.DiccionariInvers);
-		Matriu = new Vector< Vector<Double> >();
-		for (int i = 0; i < G.Matriu.size(); ++i) {
-			Matriu.add(new Vector<Double> (G.Matriu.get(i)));
-		}
+		llista = new LlistaAdjacencia(G.llista);
 	}
 	
 	/**
@@ -54,7 +151,7 @@ public class Graf {
 	 * @return Nombre de nodes del Graf.
 	 */
 	public Integer size() {
-		return Matriu.size();
+		return llista.size();
 	}
 	
 	/**
@@ -72,18 +169,7 @@ public class Graf {
 	 */
 	public Boolean addNode(String id) {
 		if (existeixNode(id)) return false;
-		Integer Posicio = Matriu.size();
-		Matriu.add(new Vector<Double>(Posicio+1));
-		
-		//Nova fila al final inicialitzada a 0.0
-		for(Integer i = 0; i < Matriu.size()-1; ++i){
-			Matriu.get(Posicio).add(0.0);
-		}
-		
-		//Nova columna al final inicialitzada a 0.0
-		for(Integer i = 0; i < Matriu.size(); ++i){
-			Matriu.get(i).add(0.0);
-		}
+		Integer Posicio = llista.add();
 		Diccionari.put(id,Posicio);
 		DiccionariInvers.put(Posicio,id);
 		return true;
@@ -97,11 +183,8 @@ public class Graf {
 	public Boolean removeNode(String id) {
 		if (!existeixNode(id)) return false;
 		Integer Posicio = Diccionari.get(id);
-		Integer Size = Matriu.size();
-		for (Integer i = 0; i < Size; ++i){
-			Matriu.get(i).remove((int) Posicio);
-		}
-		Matriu.remove((int) Posicio);
+		Integer Size = llista.size();
+		llista.remove(Posicio);
 		Diccionari.remove(id);
 		for (Integer i = Posicio; i < Size-1; ++i) {//TODO Corregir errores
 			String iString = DiccionariInvers.get(i+1);
@@ -115,7 +198,7 @@ public class Graf {
 	
 	/**
 	 * 
-	 * @param id Node a comprovar la existència.
+	 * @param id Node a comprovar la exist�ncia.
 	 * @return true si existeix, false altrament.
 	 */
 	public Boolean existeixNode(String id) {
@@ -127,12 +210,12 @@ public class Graf {
 	 * @param a Un dels Nodes que connecta l'aresta.
 	 * @param b L'altre dels Nodes que connecta l'aresta.
 	 * @param Pes Pes de l'aresta entre a i b. Ha de ser >= 0.
-	 * @return false si l'aresta ja existia o no existeix un dels dos nodes o el pes no és correcte, true altrament.
+	 * @return false si l'aresta ja existia o no existeix un dels dos nodes o el pes no �s correcte, true altrament.
 	 */
 	public Boolean addAresta(String a, String b, Double Pes) {
 		if (!Diccionari.containsKey(a) || !Diccionari.containsKey(b) || existeixAresta(a,b) || Pes < 0) return false;
-		Matriu.get(Diccionari.get(a)).set(Diccionari.get(b),Pes);
-		Matriu.get(Diccionari.get(b)).set(Diccionari.get(a),Pes);
+		llista.set(Diccionari.get(a),Diccionari.get(b),Pes);
+		llista.set(Diccionari.get(b),Diccionari.get(a),Pes);
 		return true;
 	}
 	
@@ -144,8 +227,7 @@ public class Graf {
 	 */
 	public Boolean removeAresta(String a, String b) {
 		if (!existeixAresta(a,b)) return false;
-		Matriu.get(Diccionari.get(a)).set(Diccionari.get(b),0.0);
-		Matriu.get(Diccionari.get(b)).set(Diccionari.get(a),0.0);
+		llista.remove(Diccionari.get(a),Diccionari.get(b));
 		return true;
 	}
 	
@@ -157,7 +239,7 @@ public class Graf {
 	 */
 	public Boolean existeixAresta(String a, String b) {
 		if (!Diccionari.containsKey(a) || !Diccionari.containsKey(b)) return false;
-		if (Matriu.get(Diccionari.get(a)).get(Diccionari.get(b)) <= 0.0) return false;
+		if (llista.get(Diccionari.get(a), Diccionari.get(b)) <= 0.0) return false;
 		return true;
 	}
 	
@@ -166,12 +248,11 @@ public class Graf {
 	 * @param a Un dels Nodes que connecta l'aresta.
 	 * @param b L'altre dels Nodes que connecta l'aresta.
 	 * @param Pes Pes de l'aresta entre a i b. Ha de ser >= 0.
-	 * @return false si l'aresta no existia o si el Pes és incorrecte, true altrament.
+	 * @return false si l'aresta no existia o si el Pes �s incorrecte, true altrament.
 	 */
 	public Boolean setPes(String a, String b, Double Pes) {
 		if (!existeixAresta(a,b) || Pes < 0) return false;
-		Matriu.get(Diccionari.get(a)).set(Diccionari.get(b),Pes);
-		Matriu.get(Diccionari.get(b)).set(Diccionari.get(a),Pes);
+		llista.set(Diccionari.get(a),Diccionari.get(b),Pes);
 		return true;
 	}
 	
@@ -183,7 +264,7 @@ public class Graf {
 	 */
 	public Double getPes(String a, String b) {
 		if (!existeixAresta(a,b)) return -1.0;
-		return Matriu.get(Diccionari.get(a)).get(Diccionari.get(b));
+		return llista.get(Diccionari.get(a),Diccionari.get(b));
 	}
 	
 	/**
@@ -195,9 +276,9 @@ public class Graf {
 		HashSet<String> Cjt = new HashSet<String>();
 		if(!existeixNode(id)) return Cjt;
 		Integer Posicio = Diccionari.get(id);
-		Integer N = Matriu.size();
+		Integer N = llista.size();
 		for(Integer j = 0; j < N; ++j) {
-			if (Matriu.get(Posicio).get(j) > 0.0) Cjt.add(DiccionariInvers.get(j));
+			if (llista.get(Posicio,j) > 0.0) Cjt.add(DiccionariInvers.get(j));
 		}
 		return Cjt;
 	}

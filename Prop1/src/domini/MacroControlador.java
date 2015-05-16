@@ -88,7 +88,7 @@ public class MacroControlador {
         
         
         public static void main(String[] args) {
-          MacroControlador macro = new MacroControlador();
+         MacroControlador macro = new MacroControlador();
          Interficie.InterficiaProva aux = new Interficie.InterficiaProva();
          aux.passaMacro(macro);
          aux.setVisible(true);

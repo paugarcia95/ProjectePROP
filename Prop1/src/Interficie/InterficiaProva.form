@@ -3,13 +3,15 @@
 <Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Prova1"/>
+    <Property name="title" type="java.lang.String" value="WIKIPEDIA"/>
     <Property name="locationByPlatform" type="boolean" value="true"/>
     <Property name="modalExclusionType" type="java.awt.Dialog$ModalExclusionType" editor="org.netbeans.modules.form.editors.EnumEditor">
       <Value id="TOOLKIT_EXCLUDE"/>
     </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <AccessibilityProperties>
+    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="WIKIPEDIA"/>
     <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
   </AccessibilityProperties>
   <SyntheticProperties>
@@ -1908,7 +1910,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f0" green="f0" red="f0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Aquestes s&#xf3;n les cerques realitzades:"/>
+            <Property name="text" type="java.lang.String" value="Cerques realitzades:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="BVisCat2">
@@ -1931,7 +1933,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JList" name="LlistaCateg2">
+            <Component class="javax.swing.JList" name="LlistaCerques">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">

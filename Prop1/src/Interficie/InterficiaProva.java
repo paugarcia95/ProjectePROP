@@ -22,6 +22,17 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.QUESTION_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_CANCEL_OPTION;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
+import static javax.swing.JOptionPane.YES_OPTION;
+import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
+import static javax.swing.JOptionPane.OK_OPTION;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import javax.swing.JTextField;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -37,20 +48,16 @@ public class InterficiaProva extends javax.swing.JFrame {
     Integer cercaactual;
     String algorisme;
     Integer guardada;
+    static String capsalera = "Wiki";
     //guardada=0 -> nova cerca sense guardar, crearla
     //guardada=1  -> cerca no guardada
     //guardada=2 -> cerca guardada
    private Boolean buida;
     //protected static final long SLEEEP = 3*1000;
     //Object[] Csubcat;
-    /**
-     * Creates new form InterficiaProva
-     */
-    public void passaMacro(domini.MacroControlador mc){
-        macro = mc;macro.getContUser().addUser("admin", "admin");
-	macro.getContUser().addUser("client", "client");
-	macro.getContUser().addAdmin("admin");
-        Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
+   
+   private void jocProves1(){
+       Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
 	Categoria aux2 = new Categoria("asexual");
 	GrafDades G = macro.getGraf();
 	G.addCC(aux1,aux2);
@@ -76,21 +83,67 @@ public class InterficiaProva extends javax.swing.JFrame {
         Categoria aux10 = new Categoria("aillat2");
         G.addCC(aux9,aux10);
 	G.addPagina(aux8);
+   } 
+   private void jocProves2(){
+       GrafDades G = macro.getGraf();
+       Categoria aux1 = new Categoria("sanitat"); // PROVA METGES
+			Categoria aux2 = new Categoria("metge");
+			G.addCC(aux1, aux2);
+			Categoria aux4 = new Categoria("metgessa");
+			G.addCC(aux1, aux4);
+			Categoria aux6 = new Categoria("uroleg");
+			G.addCC(aux2, aux6);
+			Pagina aux7 = new Pagina("agulla");
+			G.addCP(aux2, aux7);
+			G.addCP(aux4, aux7);
+			Categoria aux8 = new Categoria("ginecoleg");
+			G.addCC(aux4, aux8);
+			Categoria aux9 = new Categoria("traumatoleg");
+			G.addCC(aux4, aux9);
+			G.addCC(aux2, aux9);
+			Categoria aux10 = new Categoria("metgos");
+			G.addCC(aux2, aux10);
+			G.addCC(aux2, aux4);
+   }
+   private void jocProves3() {
+       GrafDades G = macro.getGraf();
+       Categoria aux1 = new Categoria("familia"); // Prova familia
+			Categoria aux2 = new Categoria("pare");
+			G.addCC(aux1,aux2);
+			Categoria aux3 = new Categoria("mare");
+			G.addCC(aux1,aux3);
+			Categoria aux4 = new Categoria("fill");
+			G.addCC(aux2,aux4);
+			G.addCC(aux3,aux4);
+   }
+    
+   /**
+     * Creates new form InterficiaProva
+     */
+    public void passaMacro(domini.MacroControlador mc){
+        macro = mc;
+        macro.getContUser().addUser("admin", "admin");
+	macro.getContUser().addUser("client", "client");
+	macro.getContUser().addAdmin("admin");
+        jocProves1();
     }
     public InterficiaProva() {
         //macro = new domini.MacroControlador();
         initComponents();
-        
         A_BuscaCat.setVisible(false);
-        A_BuscaPag.setVisible(false);
-        A_OpcionsClient.setVisible(false);
-        A_OpcionsAdmin.setVisible(false);
         A_BuscaCatPag.setVisible(false);
+        A_BuscaPag.setVisible(false);
         A_CreaComunitat.setVisible(false);
         A_CreaUsuari.setVisible(false);
+        A_GuardaCerca.setVisible(false);
+        A_OpcionsAdmin.setVisible(false);
+        A_OpcionsClient.setVisible(false);
         A_VeureUsers.setVisible(false);
+        A_VisualitzaCerques.setVisible(false);
+        A_VisualitzaNovaCerca.setVisible(false);
         this.setVisible(false);
         A_PantallaPrincipal.setVisible(true);
+       
     }
 
     private void login(){
@@ -98,9 +151,10 @@ public class InterficiaProva extends javax.swing.JFrame {
         user= Username.getText();
         pass= Password.getText();
         if(!macro.getContUser().existsUser(user)) {
-            Error aux = new Error(this,true);
+            JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, WARNING_MESSAGE);
+           /* Error aux = new Error(this,true);
             aux.ompletext("L'username no existeix, torna'l a introduir o crea una nova conta.", "Ok");
-            aux.setVisible(true);
+            aux.setVisible(true);*/
         }
         else if(macro.getContUser().login(user, pass)){
             A_PantallaPrincipal.setVisible(false);
@@ -109,9 +163,10 @@ public class InterficiaProva extends javax.swing.JFrame {
             else A_OpcionsClient.setVisible(true);
         }
         else {
-            Error aux = new Error(this,true);
+            JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, ERROR_MESSAGE);
+           /* Error aux = new Error(this,true);
             aux.ompletext("Password incorrecte, si us plau, torna a introduir les dades.", "Ok");
-            aux.setVisible(true);
+            aux.setVisible(true);*/
         }
     }
     private void ompleCategoriesExistents(JList quina){         //es pot millorar eficiència (que vagi carregant a mida q es va fent scroll)
@@ -174,9 +229,10 @@ public class InterficiaProva extends javax.swing.JFrame {
             aux.NomCat(auxi);
         }
         else {
-            Error despistat = new Error(this,true);
+            JOptionPane.showMessageDialog(this, "Has de seleccionar algun element de la llista!", capsalera, WARNING_MESSAGE);
+          /*  Error despistat = new Error(this,true);
             despistat.ompletext("Has de seleccionar algun element de la llista!", "Ok");
-            despistat.setVisible(true);
+            despistat.setVisible(true);*/
         }
     }
     private void visualitzarPaginaDe(JList quina){
@@ -187,42 +243,50 @@ public class InterficiaProva extends javax.swing.JFrame {
             aux.NomPag(auxi);
         }
         else {
-            Error despistat = new Error(this,true);
+            JOptionPane.showMessageDialog(this, "Has de seleccionar algun element de la llista!", capsalera, WARNING_MESSAGE);
+          /*  Error despistat = new Error(this,true);
             despistat.ompletext("Has de seleccionar algun element de la llista!", "Ok");
-            despistat.setVisible(true);
+            despistat.setVisible(true);*/
         }
     }
     private void comprovaUsername(){
+        if(macro.getContUser().existsUser(NouUsername.getText())) JOptionPane.showMessageDialog(this, "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre", capsalera, PLAIN_MESSAGE);
+        else JOptionPane.showMessageDialog(this, "Aquest nom d'usuari està lliure, endavant", capsalera, PLAIN_MESSAGE);
+        /*
         Error aux = new Error(this, true);
         String resultat;
         if(macro.getContUser().existsUser(NouUsername.getText())) resultat = "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre";
         else  resultat = "Aquest nom d'usuari està lliure, endavant";
         aux.ompletext(resultat, "Ok");
-        aux.setVisible(true);
+        aux.setVisible(true);*/
     }
     private void creaUserNou(){
         if(macro.getContUser().existsUser(NouUsername.getText())) {
-          Error aux = new Error(this, true);
+            JOptionPane.showMessageDialog(this, "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre", capsalera, WARNING_MESSAGE);
+         /* Error aux = new Error(this, true);
           aux.ompletext("Aquest nom d'usuari ja existeix, si us plau, tria'n un altre", "Ok");
-          aux.setVisible(true);
+          aux.setVisible(true);*/
         }
         else if(NovaPassword.getText().length()==0) {
-          Error aux = new Error(this, true);
+            JOptionPane.showMessageDialog(this, "Escriu una contrassenya siusplau", capsalera, WARNING_MESSAGE);
+         /* Error aux = new Error(this, true);
           aux.ompletext("Escriu una contrassenya siusplau", "Ok");
-          aux.setVisible(true);
+          aux.setVisible(true);*/
         }
         else {
             macro.getContUser().addUser(NouUsername.getText(), NovaPassword.getText());
-            Error aux = new Error(this, true);
+            JOptionPane.showMessageDialog(this, "Felicitats, conta creada!", capsalera, WARNING_MESSAGE);
+     /*       Error aux = new Error(this, true);
           aux.ompletext("Felicitats, conta cread!", "Ok");
-          aux.setVisible(true);
+          aux.setVisible(true);*/
         }
     }
     private void preaparaCreacioNovaCerca(){
         if(macro.getGraf().getNombreCategories()<= 0) {
-            Error err = new Error(this, true);
+            JOptionPane.showMessageDialog(this, "No es pot fer cap cerca ja que no hi ha Categories", capsalera, WARNING_MESSAGE);
+          /*  Error err = new Error(this, true);
             err.ompletext("No es pot fer cap cerca ja que no hi ha Categories", "Ok");
-            err.setVisible(true);
+            err.setVisible(true);*/
         }
         else {
         A_OpcionsClient.setVisible(false);
@@ -272,9 +336,10 @@ public class InterficiaProva extends javax.swing.JFrame {
         TreePath arbre =Algorismes.getSelectionModel().getSelectionPath();
        // System.out.println(arbre.toString());
         if(arbre.equals(null)) {
-            Error err = new Error(this,true);
+            JOptionPane.showMessageDialog(this, "Has de seleccionar un algorisme i tipus de cerca", capsalera, WARNING_MESSAGE);
+         /*   Error err = new Error(this,true);
             err.ompletext("Has de seleccionar un algorisme i tipus de cerca", "OK");
-            err.setVisible(true);
+            err.setVisible(true);*/
         }
        // System.out.println("ruta: "+arbre);
         
@@ -414,17 +479,19 @@ public class InterficiaProva extends javax.swing.JFrame {
         A_CreaComunitat.setVisible(false);
         A_VisualitzaNovaCerca.setVisible(true);
     }
-    /*private void carregaCerquesFetes(){
-        Collection<> auxc = macro.
+    private void carregaCerquesFetes(){
+        jTextField7.setText("Tens "+macro.getContUser().getCerquesComunitats(macro.getUserActual()).size()+" cerques fetes");
+        Collection<String> auxc = macro.getContUser().getCerquesComunitats(macro.getUserActual());
+        System.out.println("Les cerques son: "+auxc);
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
-        Iterator<Pagina> it = auxc.iterator();
+        Iterator<String> it = auxc.iterator();
         while(it.hasNext()) {
-            aux2[cont] = it.next().getNom();
+            aux2[cont] = it.next();
             ++cont;
         }
-        quina.setListData(aux2);
-    }*/
+        LlistaCerques.setListData(aux2);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -561,12 +628,13 @@ public class InterficiaProva extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         BVisCat2 = new javax.swing.JButton();
         jScrollPane12 = new javax.swing.JScrollPane();
-        LlistaCateg2 = new javax.swing.JList();
+        LlistaCerques = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Prova1");
+        setTitle("WIKIPEDIA");
         setLocationByPlatform(true);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
+        setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jButton4.setText("Crea un nou usuari");
@@ -1732,7 +1800,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
 
         jTextField7.setBackground(new java.awt.Color(240, 240, 240));
-        jTextField7.setText("Aquestes són les cerques realitzades:");
+        jTextField7.setText("Cerques realitzades:");
 
         BVisCat2.setText("Visualitza");
         BVisCat2.addActionListener(new java.awt.event.ActionListener() {
@@ -1744,14 +1812,14 @@ public class InterficiaProva extends javax.swing.JFrame {
         jScrollPane12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane12.setAutoscrolls(true);
 
-        LlistaCateg2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(51, 51, 51)));
-        LlistaCateg2.setModel(new javax.swing.AbstractListModel() {
+        LlistaCerques.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(51, 51, 51)));
+        LlistaCerques.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        LlistaCateg2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane12.setViewportView(LlistaCateg2);
+        LlistaCerques.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane12.setViewportView(LlistaCerques);
 
         javax.swing.GroupLayout A_VisualitzaCerquesLayout = new javax.swing.GroupLayout(A_VisualitzaCerques);
         A_VisualitzaCerques.setLayout(A_VisualitzaCerquesLayout);
@@ -1787,6 +1855,7 @@ public class InterficiaProva extends javax.swing.JFrame {
 
         getContentPane().add(A_VisualitzaCerques, "card13");
 
+        getAccessibleContext().setAccessibleName("WIKIPEDIA");
         getAccessibleContext().setAccessibleDescription("");
 
         bindingGroup.bind();
@@ -1883,12 +1952,23 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_AfegeixFitxerActionPerformed
     private void Enrere2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere2ActionPerformed
         if(guardada==1){
-            Error err = new Error(this,true);
+           int resposta = JOptionPane.showConfirmDialog(this, "Vols guardar la cerca actual?", capsalera, YES_NO_OPTION);
+           if(YES_OPTION ==resposta) {
+               A_CreaComunitat.setVisible(false);
+               A_GuardaCerca.setVisible(true);
+           }
+           else {
+               A_CreaComunitat.setVisible(false);
+               macro.getContUser().removeCerca(macro.getUserActual(), cercaactual);
+               if(macro.getContUser().isAdmin(macro.getUserActual())) A_OpcionsAdmin.setVisible(true);
+               else A_OpcionsClient.setVisible(true);
+           }
+          /*  Error err = new Error(this,true);
             err.ompletext("Atenció, si cliques a continuar, la cerca no es guardarà!(cal afegir la opcio de guardar aqui tambe)", "OK");
-            err.setVisible(true);
+            err.setVisible(true);*/
         }
-            A_CreaComunitat.setVisible(false);
-            A_OpcionsClient.setVisible(true);
+         //   A_CreaComunitat.setVisible(false);
+         //   A_OpcionsClient.setVisible(true);
     }//GEN-LAST:event_Enrere2ActionPerformed
     private void CbuscaPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaPagActionPerformed
         omplePaginesExistentsConcret(LPTotes,Cbusca2);
@@ -1949,20 +2029,28 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_Enrere10ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        A_GuardaCerca.setVisible(false);
+        if(!macro.getContUser().isAdmin(macro.getUserActual()))A_OpcionsClient.setVisible(true);
+        else A_OpcionsAdmin.setVisible(true);A_GuardaCerca.setVisible(false);
+        //macro.getContUser().add7
+        macro.getContUser().addNomCerca(macro.getUserActual(), cercaactual, jTextField5.getText());
+        macro.getContUser().addComentariCerca(macro.getUserActual(), cercaactual, jTextField6.getText());
+        //A_PantallaPrincipal.setVisible(false);
+        JOptionPane.showMessageDialog(this, "Felicitats, Cerca guardada!", capsalera, WARNING_MESSAGE);
+       /* Error aux = new Error(this,false);
+        aux.ompletext("Felicitats, Cerca guardada!", "Continua");
+        aux.setVisible(true);*/
+        guardada=2;
         if(!macro.getContUser().isAdmin(macro.getUserActual()))A_OpcionsClient.setVisible(true);
         else A_OpcionsAdmin.setVisible(true);
     }//GEN-LAST:event_jButton14ActionPerformed
-
     private void Enrere4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere4ActionPerformed
-        A_VeureUsers.setVisible(false);
-        A_OpcionsClient.setVisible(true);
+        A_OpcionsAdmin.setVisible(false);
+        A_PantallaPrincipal.setVisible(true);
     }//GEN-LAST:event_Enrere4ActionPerformed
 
     private void BVisCat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVisCat2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BVisCat2ActionPerformed
-
     private void EnrereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrereActionPerformed
         A_VisualitzaCerques.setVisible(false);
         if(macro.getContUser().isAdmin(macro.getUserActual())) A_OpcionsAdmin.setVisible(true);
@@ -1970,9 +2058,9 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_EnrereActionPerformed
 
     private void VisualitzaCerquesFetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisualitzaCerquesFetesActionPerformed
-      //  A_OpcionsClient.setVisible(false);
-      //  A_VisualitzaCerques.setVisible(true);
-      //  carregaCerquesFetes();
+       A_OpcionsClient.setVisible(false);
+       A_VisualitzaCerques.setVisible(true);
+       carregaCerquesFetes();
     }//GEN-LAST:event_VisualitzaCerquesFetesActionPerformed
 
     /**
@@ -2068,7 +2156,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JList LPTotes;
     private javax.swing.JList LlistaCateg;
     private javax.swing.JList LlistaCateg1;
-    private javax.swing.JList LlistaCateg2;
+    private javax.swing.JList LlistaCerques;
     private javax.swing.JList LlistaPag;
     private javax.swing.JList LlistaPag1;
     private javax.swing.JButton Login;

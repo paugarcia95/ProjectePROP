@@ -333,6 +333,18 @@ public class ControladorUsers {
 		for(int i = 0; i < num; ++i)comunitats.add(aux.getCerca(i).getNom());
 		return comunitats;
 	}
+        
+        /**
+	 * Consulta el nombre de Cerques de Comunitats realitzades per un usuari.
+	 * 
+	 * @param username
+	 * 			Nom de l'usuari del qual es vol consultar el nombre les Cerques.
+	 * 
+	 * @return nombre de cerques de comunitats guardades per l'usuari.
+	 */
+        public Integer getNumCerquesUser(String username){
+           return conj.getUser(username).getNumCerques();
+        }
 	
 	/**
 	 * Consulta la posicio d'una CercaComunitats dins de les fetes per un usuari a partir del seu nom.
