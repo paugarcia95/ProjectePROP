@@ -12,8 +12,8 @@ import java.util.Vector;
  */
 
 public class Graf {
-	protected Map<String,Integer> Diccionari;
-	protected Map<Integer,String> DiccionariInvers;
+	protected static Map<String,Integer> Diccionari;
+	protected static Map<Integer,String> DiccionariInvers;
 	protected LlistaAdjacencia llista;
 	
 	protected class LlistaAdjacencia {
