@@ -33,7 +33,9 @@ import static javax.swing.JOptionPane.YES_OPTION;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 import static javax.swing.JOptionPane.OK_OPTION;
 import static javax.swing.JOptionPane.PLAIN_MESSAGE;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
@@ -52,9 +54,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     //guardada=0 -> nova cerca sense guardar, crearla
     //guardada=1  -> cerca no guardada
     //guardada=2 -> cerca guardada
-   private Boolean buida;
-    //protected static final long SLEEEP = 3*1000;
-    //Object[] Csubcat;
+
    
    private void jocProves1(){
        Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
@@ -170,24 +170,24 @@ public class InterficiaProva extends javax.swing.JFrame {
         }
     }
     private void ompleCategoriesExistents(JList quina){         //es pot millorar eficiència (que vagi carregant a mida q es va fent scroll)
-        Collection<Categoria> auxc = macro.getGraf().getCategories();
+        Collection<String> auxc = macro.getContAdUs().getCategories();
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
-        Iterator<Categoria> it = auxc.iterator();
+        Iterator<String> it = auxc.iterator();
         while(it.hasNext()) {
-            aux2[cont] = it.next().getNom();
+            aux2[cont] = it.next();
             ++cont;
         }
         quina.setListData(aux2);
     }
     private void ompleCategoriesExistentsConcret(JList quina, JTextField don){
         String busca = don.getText();
-        Collection<Categoria> aux = macro.getGraf().getCategories();
-        Iterator<Categoria> it = aux.iterator();
+        Collection<String> aux = macro.getContAdUs().getCategories();
+        Iterator<String> it = aux.iterator();
         Object[] csub= new Object[aux.size()];
         int cont = 0;
         while(it.hasNext()){
-            String nom =it.next().getNom();
+            String nom =it.next();
             if(nom.contains(busca)) {
                 csub[cont] = nom;
                 ++cont;
@@ -196,24 +196,24 @@ public class InterficiaProva extends javax.swing.JFrame {
         quina.setListData(csub);
     }
     private void omplePaginesExistents(JList quina){
-        Collection<Pagina> auxc = macro.getGraf().getPagines();
+        Collection<String> auxc = macro.getContAdUs().getPagines();
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
-        Iterator<Pagina> it = auxc.iterator();
+        Iterator<String> it = auxc.iterator();
         while(it.hasNext()) {
-            aux2[cont] = it.next().getNom();
+            aux2[cont] = it.next();
             ++cont;
         }
         quina.setListData(aux2);
     }
     private void omplePaginesExistentsConcret(JList quina, JTextField don){
         String busca = don.getText();
-        Collection<Pagina> aux = macro.getGraf().getPagines();
-        Iterator<Pagina> it = aux.iterator();
+        Collection<String> aux = macro.getContAdUs().getPagines();
+        Iterator<String> it = aux.iterator();
         Object[] csub= new Object[aux.size()];
         int cont = 0;
         while(it.hasNext()){
-            String nom =it.next().getNom();
+            String nom =it.next();
             if(nom.contains(busca)) {
                 csub[cont] = nom;
                 ++cont;
@@ -281,32 +281,27 @@ public class InterficiaProva extends javax.swing.JFrame {
           aux.setVisible(true);*/
         }
     }
-    private void preaparaCreacioNovaCerca(){
-        if(macro.getGraf().getNombreCategories()<= 0) {
+    private void preaparaCreacioNovaCerca(Boolean modificacio){
+        if(macro.getContAdUs().getNumCats()<= 0) {
             JOptionPane.showMessageDialog(this, "No es pot fer cap cerca ja que no hi ha Categories", capsalera, WARNING_MESSAGE);
-          /*  Error err = new Error(this, true);
-            err.ompletext("No es pot fer cap cerca ja que no hi ha Categories", "Ok");
-            err.setVisible(true);*/
         }
         else {
-        A_OpcionsClient.setVisible(false);
-        buida=true;
-        Collection<Categoria> aux = macro.getGraf().getCategories();
-        Iterator<Categoria> it = aux.iterator();
+        Collection<String> aux = macro.getContAdUs().getCategories();
+        Iterator<String> it = aux.iterator();
         Object[] csub= new Object[aux.size()];
         int cont = 0;
         while(it.hasNext()){
-            csub[cont] = it.next().getNom();
+            csub[cont] = it.next();
             ++cont;
         }
         LCTotes.setListData(csub);
         
-        Collection<Pagina> auxc = macro.getGraf().getPagines();
+        Collection<String> auxc = macro.getContAdUs().getPagines();
         Object[] aux2 = new Object[auxc.size()];
         cont = 0;
-        Iterator<Pagina> it2 = auxc.iterator();
+        Iterator<String> it2 = auxc.iterator();
         while(it2.hasNext()) {
-            aux2[cont] = it2.next().getNom();
+            aux2[cont] = it2.next();
             ++cont;
         }
         LPTotes.setListData(aux2);
@@ -315,6 +310,64 @@ public class InterficiaProva extends javax.swing.JFrame {
         Algorismes.expandRow(3);
         Algorismes.expandRow(7);
         Algorismes.setSelectionRow(5);
+        if(modificacio) {
+            Collection<String> auxs = macro.getContUser().getSubCerca(macro.getUserActual(),cercaactual);
+            Object[] aux3 = new Object[auxs.size()];
+            cont = 0;
+            Iterator<String> it3 = auxs.iterator();
+            while(it3.hasNext()) {
+                aux3[cont] = it3.next();
+                ++cont;
+            }
+            Lsub.setListData(aux3);
+            
+            Collection<String> auxs2 = macro.getContUser().getEvitaPagCerca(macro.getUserActual(),cercaactual);
+            Object[] aux5 = new Object[auxs2.size()];
+            cont = 0;
+            Iterator<String> it5 = auxs2.iterator();
+            while(it5.hasNext()) {
+                aux5[cont] = it5.next();
+                ++cont;
+            }
+            Lsub2.setListData(aux3);
+            
+            Collection<String> auxs1 = macro.getContUser().getEvitaCatCerca(macro.getUserActual(),cercaactual);
+            Object[] aux4 = new Object[auxs1.size()];
+            cont = 0;
+            Iterator<String> it4 = auxs1.iterator();
+            while(it4.hasNext()) {
+                aux4[cont] = it4.next();
+                ++cont;
+            }
+            Lsub1.setListData(aux3);
+            
+            Cbusca1.setText(macro.getContUser().getPareCerca(macro.getUserActual(),cercaactual));
+            Cpc.setText(macro.getContUser().getParaulaClauCerca(macro.getUserActual(),cercaactual));
+            CpcImp.setValue(macro.getContUser().getParaulaImpCerca(macro.getUserActual(),cercaactual));
+            Csembla.setValue(macro.getContUser().getSembCerca(macro.getUserActual(),cercaactual));
+            Crelacio.setValue(macro.getContUser().getRelacioCerca(macro.getUserActual(),cercaactual));
+            Cdada.setValue(macro.getContUser().getAlgDadaCerca(macro.getUserActual(),cercaactual));
+            Integer alg = macro.getContUser().getAlgCerca(macro.getUserActual(),cercaactual);
+            if(alg==1) Algorismes.setSelectionRow(2);
+            else if(alg==2) {
+                Integer tipus= macro.getContUser().getAlgTipuCerca(macro.getUserActual(),cercaactual);
+                if(tipus==0) Algorismes.setSelectionRow(4);
+                else if(tipus==1)Algorismes.setSelectionRow(5);
+                else Algorismes.setSelectionRow(3);
+            }
+            else Algorismes.setSelectionRow(8);
+        }
+        else {
+            Lsub.removeAll();
+            Lsub1.removeAll();
+            Lsub2.removeAll();
+            Cbusca1.removeAll();
+            Cpc.removeAll();
+            CpcImp.setValue(0);
+            Csembla.setValue(5);
+            Crelacio.setValue(5);
+            Cdada.setValue(0);
+        }
         A_CreaComunitat.setVisible(true);
         }
     }
@@ -323,14 +376,92 @@ public class InterficiaProva extends javax.swing.JFrame {
         aux.passarmacro(macro);
         aux.setVisible(true);
     }
+    private void visualitzaCerca(Boolean guardada,JTree arbre, JTextArea on) {
+        //PREPAREM LA VISUALITZACIO D'AQUESTA CERCA
+    //ARBRE
+        DefaultMutableTreeNode arrel = new DefaultMutableTreeNode("Comunitats Obtingudes");
+        DefaultTreeModel Model = new DefaultTreeModel(arrel);
+       // Resultat.setModel(treeModel);
+        Integer numcom =  macro.getContUser().getNumComunitatsCerca(macro.getUserActual(), cercaactual);
+	//System.out.println("Hi ha "+numcom+ " comunitats: ");
+	for(Integer i = 1; i <= numcom; ++i) {
+           // System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
+            DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i);
+            arrel.add(prim);
+            Set<String> auxm = macro.getContUser().getCatCerca(macro.getUserActual(), cercaactual, i-1);
+            Iterator<String> it4 = auxm.iterator();
+            while(it4.hasNext()) {
+                String nom = it4.next();
+                DefaultMutableTreeNode seg = new DefaultMutableTreeNode(nom);
+                prim.add(seg);
+            }
+	}
+        arbre.setModel(Model);
+        
+        for (int i = 0; i < arbre.getRowCount(); i++) arbre.expandRow(i);
+
+    //TEXT AREA
+        //Preparem els strings en cada cas
+
+        int algo = macro.getContUser().getAlgCerca(macro.getUserActual(), cercaactual);
+        if(algo==1) algorisme = "Louvain";
+        else if(algo==2) algorisme = "Girvan-Newman";
+        else algorisme = "Clique";
+        String tipu;
+        algo = macro.getContUser().getAlgTipuCerca(macro.getUserActual(), cercaactual);
+        if(algo==1) tipu= "Dispersio";
+        else if(algo==2) tipu="Num Comunitats";
+        else tipu="Max Betw";
+        //Preparem les categories seleccionades
+        int cont = 0;
+        ArrayList<String> aux = macro.getContUser().getSubCerca(macro.getUserActual(), cercaactual);
+        StringBuilder sb = new StringBuilder();
+        for(String nom:aux) {
+            sb.append("\n   "+(cont+1)+". "+nom);
+            ++cont;
+        }
+        String subcat = sb.toString();
+        //Preparem les categories a evitar
+        cont = 0;
+        ArrayList<String> aux2 = macro.getContUser().getEvitaCatCerca(macro.getUserActual(), cercaactual);
+        StringBuilder sb2 = new StringBuilder();
+        for(String nom:aux2) {
+            sb2.append("\n   "+(cont+1)+". "+nom);
+            ++cont;
+        }
+        String evita = sb2.toString();
+        //Preparem les pagines a evitar
+        cont = 0;
+        ArrayList<String> aux3 = macro.getContUser().getEvitaPagCerca(macro.getUserActual(), cercaactual);
+        StringBuilder sb3 = new StringBuilder();
+        for(String nom:aux3) {
+            sb3.append("\n   "+(cont+1)+". "+nom);
+            ++cont;
+        }
+        String ignora = sb3.toString();
+        //Imprimim
+        String guard = "";
+        if(guardada)  {
+            StringBuilder sb4 = new StringBuilder();
+            sb4.append("Nom: "+macro.getContUser().getNomCerca(macro.getUserActual(), cercaactual));
+            sb4.append("\nComentari: "+macro.getContUser().getComentariCerca(macro.getUserActual(), cercaactual)+"\n");
+            guard=sb4.toString();
+        }
+        on.setText(guard+"Algorisme: "+algorisme+"\nTipus de valor: "+tipu+"\nAmb la dada: "+macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaactual)+
+                "\nImportancia realció: "+macro.getContUser().getRelacioCerca(macro.getUserActual(), cercaactual)+
+                "\nImportancia semblança de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaactual)+
+                "\nParaula clau: "+macro.getContUser().getParaulaClauCerca(macro.getUserActual(), cercaactual)+
+                "\n     Amb importància: "+macro.getContUser().getParaulaImpCerca(macro.getUserActual(), cercaactual)+
+                "\nCategoria pare:"+macro.getContUser().getPareCerca(macro.getUserActual(), cercaactual)+
+                "\nConjunt de categories seleccionades:"+subcat+
+                "\nConjunt de categories ignorades:"+evita+
+                "\nConjunt de pàgines a ignorar:"+ignora);
+    }
     private void ferCerca(){
-        /*   Espera finestra = new Espera(null,true);
-        finestra.ompletext("La cerca s'està realitzant, si us plau, tingues paciència");
-        finestra.setVisible(true);
-*/      
         long t1,t2;
  //FEM LA CERCA       
         Integer quina = macro.getContUser().addNovaCerca(macro.getUserActual());
+        cercaactual = quina;
         Integer quin, tipus;
        t1= System.currentTimeMillis();
         TreePath arbre =Algorismes.getSelectionModel().getSelectionPath();
@@ -392,7 +523,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         }
        // System.out.println("mida aux3: "+mida);
         if(CpcImp.getValue()==0) Cpc.setText(new String());
-        System.out.println("Fem la cerca amb "+macro.getGraf().getNombreCategories()+" categories i "+macro.getGraf().getNombrePagines()+" pàgines.");
+        System.out.println("Fem la cerca amb "+macro.getContAdUs().getNumCats()+" categories i "+macro.getContAdUs().getNumPags()+" pàgines.");
         System.out.println("Alg: "+quin+", tipus: "+tipus+", user: "+macro.getUserActual()+ ", cerca num: "+quina+", numDada: "+num+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText());
         macro.getContUser().addCriterisCerca(false, macro.getUserActual(), quina, Cpc.getText(), CpcImp.getValue(), Crelacio.getValue(), Csembla.getValue(), quin, tipus, num, auxx1, auxx2, auxx3, Cbusca1.getText());
        // System.out.println("he arribat aqui");
@@ -400,84 +531,7 @@ public class InterficiaProva extends javax.swing.JFrame {
        // System.out.println("i he fet la cerca!");
        t2= System.currentTimeMillis();
        System.out.println("Temps total cerca: "+ (t2-t1));
-//PREPAREM LA VISUALITZACIO D'AQUESTA CERCA
-    //ARBRE
-        DefaultMutableTreeNode arrel = new DefaultMutableTreeNode("Comunitats Obtingudes");
-        DefaultTreeModel Model = new DefaultTreeModel(arrel);
-       // Resultat.setModel(treeModel);
-        Integer numcom =  macro.getContUser().getNumComunitatsCerca(macro.getUserActual(), quina);
-	//System.out.println("Hi ha "+numcom+ " comunitats: ");
-	for(Integer i = 1; i <= numcom; ++i) {
-           // System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
-            DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i);
-        arrel.add(prim);
-            Set<String> auxm = macro.getContUser().getCatCerca(macro.getUserActual(), quina, i-1);
-            Iterator<String> it4 = auxm.iterator();
-            while(it4.hasNext()) {
-                String nom = it4.next();
-             //   System.out.println(nom);
-                DefaultMutableTreeNode seg = new DefaultMutableTreeNode(nom);
-                prim.add(seg);
-            }
-	}
-        Resultat.setModel(Model);
-        
-        for (int i = 0; i < Resultat.getRowCount(); i++) Resultat.expandRow(i);
-
-    //TEXT AREA
-        //Preparem els strings en cada cas
-        cercaactual = quina;
-        int algo = macro.getContUser().getAlgCerca(macro.getUserActual(), cercaactual);
-        if(algo==1) algorisme = "Louvain";
-        else if(algo==2) algorisme = "Girvan-Newman";
-        else algorisme = "Clique";
-        String tipu;
-         algo = macro.getContUser().getAlgTipuCerca(macro.getUserActual(), cercaactual);
-  //      System.out.println("tipus: "+algo);
-        if(algo==1) tipu= "Dispersio";
-        else if(algo==2) tipu="Num Comunitats";
-        else tipu="Max Betw";
-        //Preparem les categories seleccionades
-        cont = 0;
-	mida = m.getSize();
-        StringBuilder sb = new StringBuilder();
-        while(cont<mida){
-            sb.append("\n   "+(cont+1)+". "+m.getElementAt(cont).toString());
-            ++cont;
-        }
-        String subcat = sb.toString();
-        //Preparem les categories a evitar
-        cont = 0;
-	mida = m2.getSize();
-        StringBuilder sb2 = new StringBuilder();
-        while(cont<mida){
-            sb2.append("\n   "+(cont+1)+". "+m2.getElementAt(cont).toString());
-            ++cont;
-        }
-        String evita = sb2.toString();
-        //Preparem les pagines a evitar
-        cont = 0;
-	mida = m3.getSize();
-        StringBuilder sb3 = new StringBuilder();
-        while(cont<mida){
-            sb3.append("\n   "+(cont+1)+". "+m3.getElementAt(cont).toString());
-            ++cont;
-        }
-        String ignora = sb3.toString();
-        //Imprimim
-        CriterisNovaCerca.setText("Algorisme: "+algorisme+"\nTipus de valor: "+tipu+"\nAmb la dada: "+macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaactual)+
-                "\nImportancia realció: "+macro.getContUser().getRelacioCerca(macro.getUserActual(), cercaactual)+
-                "\nImportancia semblança de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaactual)+
-                "\nParaula clau: "+macro.getContUser().getParaulaClauCerca(macro.getUserActual(), cercaactual)+
-                "\n     Amb importància: "+macro.getContUser().getParaulaImpCerca(macro.getUserActual(), cercaactual)+
-                "\nCategoria pare:"+macro.getContUser().getPareCerca(macro.getUserActual(), cercaactual)+
-                "\nConjunt de categories seleccionades:"+subcat+
-                "\nConjunt de categories ignorades:"+evita+
-                "\nConjunt de pàgines a ignorar:"+ignora);
-       
         guardada=1;
-        A_CreaComunitat.setVisible(false);
-        A_VisualitzaNovaCerca.setVisible(true);
     }
     private void carregaCerquesFetes(){
         jTextField7.setText("Tens "+macro.getContUser().getCerquesComunitats(macro.getUserActual()).size()+" cerques fetes");
@@ -492,6 +546,18 @@ public class InterficiaProva extends javax.swing.JFrame {
         }
         LlistaCerques.setListData(aux2);
     }
+    private void carregaUsers() {
+        ArrayList<String> auxc = macro.getContUser().getUsers();;
+        Object[] aux2 = new Object[auxc.size()];
+        int cont = 0;
+        Iterator<String> it = auxc.iterator();
+        while(it.hasNext()) {
+            aux2[cont] = it.next();
+            ++cont;
+        }
+        UsersAct.setListData(aux2);
+    }
+            
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -629,6 +695,15 @@ public class InterficiaProva extends javax.swing.JFrame {
         BVisCat2 = new javax.swing.JButton();
         jScrollPane12 = new javax.swing.JScrollPane();
         LlistaCerques = new javax.swing.JList();
+        A_VisualitzacioCercaAntiga = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        CriterisNovaCerca1 = new javax.swing.JTextArea();
+        Enrere11 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        Resultat1 = new javax.swing.JTree();
+        Enrere12 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WIKIPEDIA");
@@ -1747,28 +1822,27 @@ public class InterficiaProva extends javax.swing.JFrame {
         A_GuardaCercaLayout.setHorizontalGroup(
             A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(A_GuardaCercaLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(A_GuardaCercaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(A_GuardaCercaLayout.createSequentialGroup()
-                                .addComponent(jLabel26)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(A_GuardaCercaLayout.createSequentialGroup()
-                                .addComponent(jLabel25)
-                                .addGap(24, 24, 24)
-                                .addGroup(A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel24)))))
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(A_GuardaCercaLayout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(jButton14)))
+                        .addComponent(jLabel25)
+                        .addGap(24, 24, 24)
+                        .addGroup(A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24))))
                 .addContainerGap(76, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A_GuardaCercaLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(Enrere10)
                 .addGap(46, 46, 46))
+            .addGroup(A_GuardaCercaLayout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(jButton14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         A_GuardaCercaLayout.setVerticalGroup(
             A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1855,6 +1929,92 @@ public class InterficiaProva extends javax.swing.JFrame {
 
         getContentPane().add(A_VisualitzaCerques, "card13");
 
+        CriterisNovaCerca1.setBackground(new java.awt.Color(240, 240, 240));
+        CriterisNovaCerca1.setColumns(20);
+        CriterisNovaCerca1.setRows(5);
+        jScrollPane13.setViewportView(CriterisNovaCerca1);
+
+        Enrere11.setText("Modificar Criteris");
+        Enrere11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Enrere11ActionPerformed(evt);
+            }
+        });
+
+        jButton15.setText("Modificar Nom");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+
+        Resultat1.setAutoscrolls(true);
+        Resultat1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Resultat1.setLargeModel(true);
+        jScrollPane14.setViewportView(Resultat1);
+
+        Enrere12.setText("Enrere");
+        Enrere12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Enrere12ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Modificar Comentari");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout A_VisualitzacioCercaAntigaLayout = new javax.swing.GroupLayout(A_VisualitzacioCercaAntiga);
+        A_VisualitzacioCercaAntiga.setLayout(A_VisualitzacioCercaAntigaLayout);
+        A_VisualitzacioCercaAntigaLayout.setHorizontalGroup(
+            A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(Enrere11)
+                        .addGap(123, 123, 123)
+                        .addComponent(Enrere12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton15)
+                    .addComponent(jButton3))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        A_VisualitzacioCercaAntigaLayout.setVerticalGroup(
+            A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Enrere11)
+                            .addComponent(Enrere12))
+                        .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jScrollPane13))
+                            .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jButton15)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(A_VisualitzacioCercaAntiga, "card14");
+
         getAccessibleContext().setAccessibleName("WIKIPEDIA");
         getAccessibleContext().setAccessibleDescription("");
 
@@ -1928,7 +2088,8 @@ public class InterficiaProva extends javax.swing.JFrame {
         creaUserNou();
     }//GEN-LAST:event_jButton2ActionPerformed
     private void CreaCercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreaCercaActionPerformed
-        preaparaCreacioNovaCerca();
+        preaparaCreacioNovaCerca(false);
+        A_OpcionsClient.setVisible(false);
     }//GEN-LAST:event_CreaCercaActionPerformed
 
     private void CanviaDadesUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CanviaDadesUserActionPerformed
@@ -1995,20 +2156,14 @@ public class InterficiaProva extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_jButton11ActionPerformed
     private void CercaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CercaBActionPerformed
-     ferCerca();
+        ferCerca();
+        visualitzaCerca(false,Resultat, CriterisNovaCerca);
+        A_CreaComunitat.setVisible(false);
+        A_VisualitzaNovaCerca.setVisible(true);
     }//GEN-LAST:event_CercaBActionPerformed
-
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        carregaUsers();
         A_OpcionsAdmin.setVisible(false);
-        ArrayList<String> auxc = macro.getContUser().getUsers();;
-        Object[] aux2 = new Object[auxc.size()];
-        int cont = 0;
-        Iterator<String> it = auxc.iterator();
-        while(it.hasNext()) {
-            aux2[cont] = it.next();
-            ++cont;
-        }
-        UsersAct.setListData(aux2);
         A_VeureUsers.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
     private void Enrere8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere8ActionPerformed
@@ -2031,7 +2186,6 @@ public class InterficiaProva extends javax.swing.JFrame {
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         if(!macro.getContUser().isAdmin(macro.getUserActual()))A_OpcionsClient.setVisible(true);
         else A_OpcionsAdmin.setVisible(true);A_GuardaCerca.setVisible(false);
-        //macro.getContUser().add7
         macro.getContUser().addNomCerca(macro.getUserActual(), cercaactual, jTextField5.getText());
         macro.getContUser().addComentariCerca(macro.getUserActual(), cercaactual, jTextField6.getText());
         //A_PantallaPrincipal.setVisible(false);
@@ -2049,7 +2203,10 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_Enrere4ActionPerformed
 
     private void BVisCat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVisCat2ActionPerformed
-        // TODO add your handling code here:
+        cercaactual = macro.getContUser().getNumCerca(macro.getUserActual(), LlistaCerques.getSelectedValue().toString());
+        visualitzaCerca(true,Resultat1, CriterisNovaCerca1);
+        A_VisualitzaCerques.setVisible(false);
+        A_VisualitzacioCercaAntiga.setVisible(true);
     }//GEN-LAST:event_BVisCat2ActionPerformed
     private void EnrereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrereActionPerformed
         A_VisualitzaCerques.setVisible(false);
@@ -2062,6 +2219,33 @@ public class InterficiaProva extends javax.swing.JFrame {
        A_VisualitzaCerques.setVisible(true);
        carregaCerquesFetes();
     }//GEN-LAST:event_VisualitzaCerquesFetesActionPerformed
+
+    private void Enrere11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere11ActionPerformed
+        int resposta = JOptionPane.showOptionDialog(this,"Vols crear una nova cerca o sobreescriure aquesta?", capsalera,YES_NO_CANCEL_OPTION,QUESTION_MESSAGE,null,new Object[]{"Conserva aquesta","Modifica aquesta","Cancelar"},"i tu?");
+        if(resposta==0) {
+            cercaactual = macro.getContUser().getNumCerca(macro.getUserActual(), LlistaCerques.getSelectedValue().toString());
+            preaparaCreacioNovaCerca(true);
+        }
+        else if (resposta==1){
+            System.out.println("Es marca la 2");
+        }
+    }//GEN-LAST:event_Enrere11ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        String nouNom =JOptionPane.showInputDialog(this,"Escriu el nou nom",QUESTION_MESSAGE);
+        macro.getContUser().addNomCerca(macro.getUserActual(), cercaactual, nouNom);
+        visualitzaCerca(true,Resultat1,CriterisNovaCerca1);
+    }//GEN-LAST:event_jButton15ActionPerformed
+    private void Enrere12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere12ActionPerformed
+        A_VisualitzacioCercaAntiga.setVisible(false);
+        A_VisualitzaCerques.setVisible(true);
+    }//GEN-LAST:event_Enrere12ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String nouComen =JOptionPane.showInputDialog(this,"Escriu el nou nom",QUESTION_MESSAGE);
+        macro.getContUser().addComentariCerca(macro.getUserActual(), cercaactual, nouComen);
+        visualitzaCerca(true,Resultat1,CriterisNovaCerca1);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2111,6 +2295,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JPanel A_VeureUsers;
     private javax.swing.JPanel A_VisualitzaCerques;
     private javax.swing.JPanel A_VisualitzaNovaCerca;
+    private javax.swing.JPanel A_VisualitzacioCercaAntiga;
     private javax.swing.JButton AfegeixFitxer;
     private javax.swing.JTree Algorismes;
     private javax.swing.JButton BVisCat;
@@ -2138,11 +2323,14 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JButton CreaCerca;
     private javax.swing.JSlider Crelacio;
     private javax.swing.JTextArea CriterisNovaCerca;
+    private javax.swing.JTextArea CriterisNovaCerca1;
     private javax.swing.JSlider Csembla;
     private javax.swing.JButton EliminaCsub;
     private javax.swing.JButton Enrere;
     private javax.swing.JButton Enrere1;
     private javax.swing.JButton Enrere10;
+    private javax.swing.JButton Enrere11;
+    private javax.swing.JButton Enrere12;
     private javax.swing.JButton Enrere2;
     private javax.swing.JButton Enrere3;
     private javax.swing.JButton Enrere4;
@@ -2170,6 +2358,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JTextField NovaPassword;
     private javax.swing.JTextField Password;
     private javax.swing.JTree Resultat;
+    private javax.swing.JTree Resultat1;
     private javax.swing.JTextField Username;
     private javax.swing.JList UsersAct;
     private javax.swing.JButton VisualitzaCerquesFetes;
@@ -2177,7 +2366,9 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -2211,6 +2402,8 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;

@@ -174,8 +174,7 @@ public class GrafNewman extends Graf {
 		maxNumCM = maxi = maxj = numCom = 0;
                 NCM = new ArrayList<HashMap<Integer,Integer> >();
 		//NCM = new int[Matriu.size()][Matriu.size()];
-	}
-	
+	}	
 	public GrafNewman(Graf G) {
 		Diccionari = new TreeMap<String,Integer>(G.Diccionari);
 		DiccionariInvers = new TreeMap<Integer,String>(G.DiccionariInvers);
@@ -204,7 +203,6 @@ public class GrafNewman extends Graf {
                 mateixaCom.add(i, aux);
             }
 	}
-
 	/**
 	 * Agrupa els nodes adjacents al donat. (Cristina)
 	 * 
@@ -215,9 +213,7 @@ public class GrafNewman extends Graf {
 	 */
 	private Set<Integer> getAdjacents(Integer posicio) {
                  return llista.adjacents(posicio).keySet();
-	}
-        
-
+	}      
 	/**
 	 * Recorre una comunitat i va marcant com a true al vector visitats pels
 	 * nodes que passa. Retorna les comunitats que pertanyen al nodeOrigen (Pau)
@@ -247,7 +243,6 @@ public class GrafNewman extends Graf {
 		}
 		return comunitat;
 	}
-
 	/**
 	 * Indica si el nodeA i el nodeB pertanyen a la mateixa comunitat (Pau)
 	 * 
@@ -267,7 +262,6 @@ public class GrafNewman extends Graf {
 
 		return visitats.get(nodeB);
 	}
-
 	/**
 	 * Recorre una comunitat i va marcant com a true al vector visitats pels
 	 * nodes que passa (Pau)
@@ -339,7 +333,6 @@ public class GrafNewman extends Graf {
 		}
 		return camiMinim;
 	}
-
 	/**
 	 * Indica el maxim nombre de camins minims que passen entre dos nodes del
 	 * graf.
@@ -350,7 +343,6 @@ public class GrafNewman extends Graf {
 	public Integer getMaxBetween() {
 		return maxNumCM;
 	}
-
 	/**
 	 * Calcula el nombre de camins minims que passen per cada vertex. (Cristina)
 	 * 
@@ -365,10 +357,27 @@ public class GrafNewman extends Graf {
                 }
    
             for(int i = 0; i < NCM.size();++i) {
+                QueueVector camins = getCamiMinim(i);
+                for(int j=0; j < NCM.size();++j) {
+                    while(!camins.getQueue(j).isEmpty()) {
+                        Aresta aux = camins.pop(j);
+                        Integer act = NCM.get(aux.node1).get(aux.node2);
+                        ++act;
+                        NCM.get(aux.node1).put(aux.node2,act);
+                        NCM.get(aux.node2).put(aux.node1,act);
+			// mantenir el vertex per on passen mes camins
+			// minims (variables maxi, maxj i maxNumCM)
+                        if (maxNumCM <= act) {
+                            maxi = aux.node1;
+                            maxj = aux.node2;
+                            maxNumCM = act;
+                        }
+                    }
+                }
               //  int numero = mateixaCom.get(i).size();
        // System.out.print("Estic buscant els camins minims de "+i+", que sta amb "+numero);
                 //System.out.println("mida de comunitats connectades amb "+i+": "+numero+", son: "+mateixaCom.get(i));
-                Deque<Integer> eliminar = new ArrayDeque<>();
+          /*      Deque<Integer> eliminar = new ArrayDeque<>();
                 for(Integer j: mateixaCom.get(i)){
                 // System.out.println("Estic intentant buscar cami entre "+i+" i "+mateixaCom.get(i).get(j));
                     Queue<Aresta> cami = getCamiMinim(i, j);
@@ -405,7 +414,7 @@ public class GrafNewman extends Graf {
 	        //    System.out.println("ABANS "+DiccionariInvers.get(quin)+": "+mateixaCom.get(quin));
                     mateixaCom.get(quin).remove(i);
 	       //     System.out.println("DESPRES "+DiccionariInvers.get(quin)+": "+mateixaCom.get(quin));
-                }
+                }*/
                 //System.out.println(", i acaba amb: "+mateixaCom.get(i).size());
             }
 		return true;
