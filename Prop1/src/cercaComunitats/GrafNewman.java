@@ -3,10 +3,9 @@
  */
 package cercaComunitats;
 
-import java.util.ArrayDeque;
+
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -28,9 +27,14 @@ public class GrafNewman extends Graf {
 	private Integer maxj;           //Node j del maxNUMCM
 	private Integer maxNumCM;       //Maxim nombre de camins minims que passen per qualsevol aresta
 	private Integer numCom;     //Numero de comunitats actuals
-        private ArrayList<ArrayList<Integer> > mateixaCom; //llistat de nodes als que cada node pot arribar
         
-
+        public Integer getNumArestes(){
+            Integer num = 0;
+            for(HashMap<Integer,Integer> aresta: NCM) {
+                num+=aresta.size();
+            }
+            return num/2;
+        }
 	private class Aresta { 
 		public Integer node1;
 		public Integer node2;
@@ -173,7 +177,6 @@ public class GrafNewman extends Graf {
                 //MatriuNova
 		maxNumCM = maxi = maxj = numCom = 0;
                 NCM = new ArrayList<HashMap<Integer,Integer> >();
-		//NCM = new int[Matriu.size()][Matriu.size()];
 	}	
 	public GrafNewman(Graf G) {
 		Diccionari = new TreeMap<String,Integer>(G.Diccionari);
@@ -188,20 +191,6 @@ public class GrafNewman extends Graf {
                     }
                     NCM.add(aux);
                 }
-		//NCM = new int[Matriu.size()][Matriu.size()];
-                
- ///PUC FER AIXO ON CADA POSICIO DEL PRIMER ARRAY ES UN NODE I
- //EL SEGON HA DE CONTENIR TOTS ELS ALTRES NODES TAMBE?
-            mateixaCom = new ArrayList<ArrayList<Integer> >();
-            int mida = llista.size();
-            //Increases the capacity of this ArrayList instance, if necessary, to ensure that it can hold at least the number of elements specified by the minimum capacity argument.
-            //mateixaCom.ensureCapacity(mida*mida);
-            for(int i = 0; i < mida; ++i) {
-                ArrayList<Integer> aux = new ArrayList<Integer>();
-                //aux.ensureCapacity(mida);
-                for(Integer j = 0; j < mida; ++j) if(i!=j)aux.add(j);
-                mateixaCom.add(i, aux);
-            }
 	}
 	/**
 	 * Agrupa els nodes adjacents al donat. (Cristina)
@@ -365,8 +354,7 @@ public class GrafNewman extends Graf {
                         ++act;
                         NCM.get(aux.node1).put(aux.node2,act);
                         NCM.get(aux.node2).put(aux.node1,act);
-			// mantenir el vertex per on passen mes camins
-			// minims (variables maxi, maxj i maxNumCM)
+			// mantenir el vertex per on passen mes camins minims (variables maxi, maxj i maxNumCM)
                         if (maxNumCM <= act) {
                             maxi = aux.node1;
                             maxj = aux.node2;
@@ -374,48 +362,6 @@ public class GrafNewman extends Graf {
                         }
                     }
                 }
-              //  int numero = mateixaCom.get(i).size();
-       // System.out.print("Estic buscant els camins minims de "+i+", que sta amb "+numero);
-                //System.out.println("mida de comunitats connectades amb "+i+": "+numero+", son: "+mateixaCom.get(i));
-          /*      Deque<Integer> eliminar = new ArrayDeque<>();
-                for(Integer j: mateixaCom.get(i)){
-                // System.out.println("Estic intentant buscar cami entre "+i+" i "+mateixaCom.get(i).get(j));
-                    Queue<Aresta> cami = getCamiMinim(i, j);
-                // un cop trobat cada cami minim, sumar 1 a la pos de NCM
-                    if (cami.size() > 0) {
-                        Iterator<Aresta> itc = cami.iterator();
-                        while (itc.hasNext()) {
-                            Aresta aux = itc.next();
-                            Integer act = NCM.get(aux.node1).get(aux.node2);
-                            ++act;
-                            NCM.get(aux.node1).put(aux.node2,act);
-                            NCM.get(aux.node2).put(aux.node1,act);
-			// mantenir el vertex per on passen mes camins
-			// minims (variables maxi, maxj i maxNumCM)
-                            if (maxNumCM <= act) {
-                                maxi = aux.node1;
-                                maxj = aux.node2;
-                                maxNumCM = act;
-                            }
-                        }
-                    }
-                    else {
-                        eliminar.push(mateixaCom.get(i).get(j));
-	        //        System.out.println("els nodes "+DiccionariInvers.get(i)+" i "+DiccionariInvers.get(mateixaCom.get(i).get(j))+" ja no estan a la mateixa comunitat");
-                    }
-                }
-                while(!eliminar.isEmpty()) {
-                    Integer quin = eliminar.pop();
-	         //   System.out.println("elimino de "+DiccionariInvers.get(i)+" la seva relaci� amb "+DiccionariInvers.get(quin));
-	         //   System.out.println("ABANS "+DiccionariInvers.get(i)+": "+mateixaCom.get(i));
-                    mateixaCom.get(i).remove(quin);
-	        //    System.out.println("DESPRES "+DiccionariInvers.get(i)+": "+mateixaCom.get(i));
-	          //  System.out.println("elimino de "+DiccionariInvers.get(quin)+" la seva relaci� amb "+DiccionariInvers.get(i));
-	        //    System.out.println("ABANS "+DiccionariInvers.get(quin)+": "+mateixaCom.get(quin));
-                    mateixaCom.get(quin).remove(i);
-	       //     System.out.println("DESPRES "+DiccionariInvers.get(quin)+": "+mateixaCom.get(quin));
-                }*/
-                //System.out.println(", i acaba amb: "+mateixaCom.get(i).size());
             }
 		return true;
 	}
@@ -431,7 +377,7 @@ public class GrafNewman extends Graf {
                 for(Integer j: llista.adjacents(nodes).keySet()) {
                     double act = llista.get(nodes, j);
                     if(act != 0.0 ) llista.setDirected(nodes,j,(1/act));
-                    else System.out.println("EEEEPS, hi ha una aresta amb pes 0.0 entre els nodes "+nodes+" i "+j);
+                    //else System.out.println("EEEEPS, hi ha una aresta amb pes 0.0 entre els nodes "+nodes+" i "+j);
                 }
              }
            return true;
@@ -449,7 +395,7 @@ public class GrafNewman extends Graf {
                         llista.remove(maxi, maxj);
                         NCM.get(maxi).remove(maxj);
                         NCM.get(maxj).remove(maxi);
-			if (!pertanyenMateixaComunitat(maxi, maxj)) {       //AQUI ES POT MILLORAR EFICIENCIA, ACTUALITZAR DIRECTAMENT ELS Q QUEDEN SEPARATS EN COMUNITATS DIFERENTS RECORRENT-LOS TOTS I ELIMINANT DIRECTAMENT, SENSE HAVER DE COMPROBAR RES
+			if (!pertanyenMateixaComunitat(maxi, maxj)) {
 				numCom = 0;
 				numComunitats();
 			}
@@ -470,25 +416,25 @@ public class GrafNewman extends Graf {
 	 * @return Nombre de comunitats del graf
 	 */
 	public Integer numComunitats() {
-			HashSet<String> nodes = this.getNodes();
-			Iterator<String> it = nodes.iterator();
-			Integer numComunitats = 0;
+		HashSet<String> nodes = this.getNodes();
+		Iterator<String> it = nodes.iterator();
+		Integer numComunitats = 0;
 
-			Vector<Boolean> visitats = new Vector<Boolean>();
-			visitats.setSize(this.size());
-			for (int i = 0; i < visitats.size(); ++i)
-				visitats.set(i, false);
+		Vector<Boolean> visitats = new Vector<Boolean>();
+		visitats.setSize(this.size());
+		for (int i = 0; i < visitats.size(); ++i)
+                    visitats.set(i, false);
 			
-			while (it.hasNext()) {
-				Integer n = Diccionari.get(it.next());
-				if (!visitats.get(n)) {
-					visitats.set(n, true);
-					recorrerComunitat(n, visitats);
-					++numComunitats;
-				}
+		while (it.hasNext()) {
+                    Integer n = Diccionari.get(it.next());
+			if (!visitats.get(n)) {
+                            visitats.set(n, true);
+                            recorrerComunitat(n, visitats);
+                            ++numComunitats;
 			}
-			numCom = numComunitats;
-			return numCom;
+		}
+		numCom = numComunitats;
+		return numCom;
 	}
 
 	/**
