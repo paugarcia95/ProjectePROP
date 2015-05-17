@@ -131,6 +131,29 @@ public class GrafNewman extends Graf {
 		}
 
 		/**
+		 * Retorna i elimina el primer element de la cua de la posiciÃ³ i. (Pau)
+		 * 
+		 * @param i
+		 *            Posicio on es troba la cua desitjada
+		 * @return El primer element de la cua de la posiciÃ³ i
+		 */
+		public Aresta pop(int i) {
+			return Q.get(i).poll();
+		}
+
+		/**
+		 * Retorna, pero NO elimina, el primer element de la cua de la posiciÃ³
+		 * i. (Pau)
+		 * 
+		 * @param i
+		 *            Posicio on es troba la cua desitjada
+		 * @return El primer element de la cua de la posiciÃ³ i
+		 */
+		public Aresta top(int i) {
+			return Q.get(i).peek();
+		}
+
+		/**
 		 * Retorna la cua de la posicio i. (Pau)
 		 * 
 		 * @param i
@@ -267,15 +290,13 @@ public class GrafNewman extends Graf {
 		}
 	}
 	/**
-	 * Calcula el cami minim des del nodeA al nodeB. (Pau)
+	 * Calcula el cami minim des del nodeA a la resta de nodes. (Pau)
 	 * 
 	 * @param nodeA
 	 *            El node d'un dels extrems del cami.
-	 * @param nodeB
-	 *            El node de l'altre extrem.
-	 * @return Una cua de les arestes per on passa.
+	 * @return Un vector de cues de les arestes per on passen els camins minims.
 	 */
-	private Queue<Aresta> getCamiMinim(int nodeA, int nodeB) {
+	private QueueVector getCamiMinim(int nodeA) {
 		// Implementat amb Dijkstra
 		QueueVector camiMinim = new QueueVector(this.size());
 
@@ -310,13 +331,13 @@ public class GrafNewman extends Graf {
 				if (distancia.get(v) > distancia.get(u) + pesUV) {
 					distancia.set(v, distancia.get(u) + pesUV);
 					cola.add(new ArestaPes(v, distancia.get(v)));
-                                        //Aquest push que es fa aquí és especial: insereix el camí per arribar fins
+                                        //Aquest push que es fa aquï¿½ ï¿½s especial: insereix el camï¿½ per arribar fins
                                         //a "u" i despres l'aresta de u a v.
 					camiMinim.push(v, new Aresta(u, v));
 				}
 			}
 		}
-		return camiMinim.getQueue(nodeB); 
+		return camiMinim;
 	}
 
 	/**
