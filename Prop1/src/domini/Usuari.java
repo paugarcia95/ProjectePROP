@@ -33,7 +33,7 @@ public class Usuari {
 	
 	public Usuari() {
 		username = "NoIndicat";
-		admin = Boolean.FALSE;
+		admin = false;
 		cerquesFetes = new ArrayList<CercaComunitats>();
 		nCerques = 0;
 		eliminats = new LinkedList<Integer>();

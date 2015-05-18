@@ -331,11 +331,19 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si nom era una key de categories amb una assignació nom ja no és key de categories i retorna true, altrament retorna false
+	 * Post: Si nom era una key de categories amb una assignació nom ja no és key de categories ni existeix cap relació amb aquesta Categoria i retorna true, altrament retorna false
 	 */
 	public Boolean removeCategoria(String nom) {
 		if (categories.containsKey(nom)) {
-			categories.remove(nom);
+			Categoria c = categories.remove(nom);
+			Map<String, Pagina> CpPc = c.getMapCP();
+			for (Pagina pag : CpPc.values()) pag.removeCP(nom);
+			CpPc = c.getMapPC();
+			for (Pagina pag : CpPc.values()) pag.removePC(nom);
+			Map<String, Categoria> CSubcCsupc = c.getMapCSubC();
+			for (Categoria cat : CSubcCsupc.values()) cat.removeCsupC(nom);
+			CSubcCsupc = c.getMapCSupC();
+			for (Categoria cat : CSubcCsupc.values()) cat.removeCsubC(nom);
 			return true;
 		}
 		return false;
@@ -343,11 +351,15 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si nom era una key de pagines amb una assignació ja no és key de pagines i retorna true, altrament retorna false
+	 * Post: Si nom era una key de pagines amb una assignació ja no és key de pagines ni existeix cap relació amb aquesta Pàgina i retorna true, altrament retorna false
 	 */
 	public Boolean removePagina(String nom) {
 		if (pagines.containsKey(nom)) {
-			pagines.remove(nom);
+			Pagina p = pagines.remove(nom);			
+			Map<String, Categoria> PcCp = p.getPC();
+			for (Categoria cat : PcCp.values()) cat.removePC(nom);
+			PcCp = p.getCP();
+			for (Categoria cat : PcCp.values()) cat.removeCP(nom);
 			return true;
 		}
 		return false;
@@ -371,7 +383,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si existia una Categoria amb nom == nomAntic ara nom = nomNou i retorna true, altrament retorna false
+	 * Post: Si existia una Categoria amb nom == nomAntic i cap Categoria amb nom == nomNou ara nom = nomNou i retorna true, altrament retorna false
 	 */
 	public Boolean setNomCategoria(String nomAntic, String nomNou) {
 		if (nomAntic.equals(nomNou)) return false;
@@ -410,7 +422,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si existia una Pagina amb nom == nomAntic ara nom = nomNou i retorna true, altrament retorna false
+	 * Post: Si existia una Pàgina amb nom == nomAntic i cap Pàgina amb nom == nomNou ara nom = nomNou i retorna true, altrament retorna false
 	 */
 	public Boolean setNomPagina(String nomAntic, String nomNou) {
 		if (pagines.containsKey(nomAntic) && !pagines.containsKey(nomNou)) {

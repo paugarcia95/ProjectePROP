@@ -218,11 +218,13 @@ public class ControladorAdminUsers {
 	public Boolean addEnllac(String inici, String fin, Integer tipus) {return true;}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si no existia cap Categoria amb nom == nom es crea i retorna true, altrament retorna false
 	 */
-	public Boolean addCateg(String nom) {return true;}
+	public Boolean addCateg(String nom) {
+		Categoria cat = new Categoria(nom);
+		return gd.addCategoria(cat);
+	}
 	
 	/**
 	 * Pre:
@@ -253,12 +255,12 @@ public class ControladorAdminUsers {
 	public Boolean addCsubC(String nom_cat, ArrayList<String> Sub) {return true;}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si existia una Categoria amb nom == nomAntic i cap Categoria amb nom == nomNou ara nom = nomNou i retorna true, altrament retorna false
 	 */
-	//els set abans eren Modifica_
-	public Boolean setNomCateg(String nom_antic, String nom) {return true;}
+	public Boolean setNomCateg(String nomAntic, String nomNou) {
+		return gd.setNomCategoria(nomAntic, nomNou);
+	}
 	
 	/**
 	 * Pre:
@@ -289,11 +291,13 @@ public class ControladorAdminUsers {
 	public Boolean setCsubC(String nom_cat, ArrayList<String> Sub) {return true;}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si no existia cap Pàgina amb nom == nom es crea i retorna true, altrament retorna false
 	 */
-	public Boolean addPagina(String nom) {return true;}
+	public Boolean addPagina(String nom) {
+		Pagina pag = new Pagina(nom);
+		return gd.addPagina(pag);
+	}
 	
 	/**
 	 * Pre:
@@ -310,11 +314,12 @@ public class ControladorAdminUsers {
 	public Boolean addPPC(String nom_pag, ArrayList<String> PCs) {return true;}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si existia una Pàgina amb nom == nomAntic i cap Pàgina amb nom == nomNou ara nom = nomNou i retorna true, altrament retorna false
 	 */
-	public Boolean setNomPagina(String nom_antic, String nom_nou) {return true;}
+	public Boolean setNomPagina(String nomAntic, String nomNou) {
+		return gd.setNomPagina(nomAntic, nomNou);
+	}
 	
 	/**
 	 * Pre:
@@ -331,16 +336,18 @@ public class ControladorAdminUsers {
 	public Boolean setPPC(String nom_pag, ArrayList<String> PCs) {return true;}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si existia una Pàgina amb nom == nom ja no ni existeix cap relació amb aquesta Pàgina i retorna true, altrament retorna false
 	 */
-	public Boolean removePag(String nom) {return true;}
+	public Boolean removePag(String nom) {
+		return gd.removePagina(nom);
+	}
 	
 	/**
-	 * Pre:
-	 * Post:
-	 * @return
+	 * Pre: Cert
+	 * Post: Si existia una Categoria amb nom == nom ja no ni existeix cap relació amb aquesta Categoria i retorna true, altrament retorna false
 	 */
-	public Boolean removeCateg(String nom) {return true;}
+	public Boolean removeCateg(String nom) {
+		return gd.removeCategoria(nom);
+	}
 }
