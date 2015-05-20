@@ -13,11 +13,13 @@ import java.util.TreeMap;
  *
  */
 public class MacroControlador {
-	static ControladorUsers cu;
-	static ControladorAdminUsers cau;
+    
+	static domini.ControladorUsers cu;
+        //static domini.MacroControlador macro;
+	static domini.ControladorAdminUsers cau;
 	static TraduccioiAlgorisme ta;
-	static GrafDades gd;
-	static ConjuntUsuaris conj;
+	static domini.GrafDades gd;
+	static domini.ConjuntUsuaris conj;
 	static String useractual;
 	EntradaSortidaDadesGraf aux;
 
@@ -58,8 +60,8 @@ public class MacroControlador {
 	
 	public void eliminarDadesGraf(){
 		gd = new GrafDades();
-		cau.actualitzaRefs(conj, gd);
-		cu.actualitzaRefs(conj, gd);
+		//cau.actualitzaRefs(conj, gd);
+		//cu.actualitzaRefs(conj, gd);
 	}
 	
 	
@@ -88,11 +90,8 @@ public class MacroControlador {
         
         
         public static void main(String[] args) {
-         MacroControlador macro = new MacroControlador();
          Interficie.InterficiaProva aux = new Interficie.InterficiaProva();
-         aux.passaMacro(macro);
          aux.setVisible(true);
-         //while(true);
          
         }
 }

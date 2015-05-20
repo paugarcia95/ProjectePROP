@@ -19,11 +19,15 @@ public class VPagina extends javax.swing.JDialog {
     String pag;
     Frame pare;
     String noSelect="  No n'hi ha cap";
+    static domini.MacroControlador macro;
+    static boolean admin;
     /**
      * Creates new form VPagina
      */
-    public VPagina(java.awt.Frame parent, boolean modal) {
+    public VPagina(java.awt.Frame parent, boolean modal, Boolean adm,domini.MacroControlador mac) {
         super(parent, modal);
+        admin = adm;
+        macro = mac;
     }
 
     public void NomPag(Pagina nomPag) {
@@ -197,20 +201,17 @@ public class VPagina extends javax.swing.JDialog {
         //nova.setVisible(true);
         if(CApunta.getSelectedIndices().length>0 && !CApunta.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApunta.getSelectedValue().toString();
-            nova = new VCategoria(pare, true);
+            nova = new VCategoria(pare, true,admin, macro);
             nova.NomCat(macro.getGraf().getCategoria(hy));
-            nova.setVisible(true);
         }
         else if(CApuntada.getSelectedIndices().length>0 && !CApuntada.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApuntada.getSelectedValue().toString();
-            nova = new VCategoria(pare, true);
+            nova = new VCategoria(pare, true,admin, macro);
             nova.NomCat(macro.getGraf().getCategoria(hy));
-            nova.setVisible(true);
         }
         else {
             Error despistat = new Error(pare,true);
             despistat.ompletext("Has de seleccionar algun element de la llista!", "Ok");
-            despistat.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -244,7 +245,7 @@ public class VPagina extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VPagina dialog = new VPagina(new javax.swing.JFrame(), true);
+                VPagina dialog = new VPagina(new javax.swing.JFrame(), true,admin, macro);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

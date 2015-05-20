@@ -3,6 +3,9 @@
  */
 package domini;
 
+import static domini.MacroControlador.gd;
+import static domini.MacroControlador.conj;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,9 +18,9 @@ import java.util.Collection;
 public class ControladorAdminUsers {
 	//PRIVAT
 	//	Atribut: una constant amb inici
-	private GrafDades gd;
+	//private GrafDades gd;
 	@SuppressWarnings("unused")
-	private ConjuntUsuaris conj;
+	//private ConjuntUsuaris conj;
 	EntradaSortidaDadesGraf aux;
 	String rutaXDefecte = "C:/Users/Cristina/Google Drive/UNI/PROP/Projecte/cats.txt";
 	//PUBLIC
@@ -27,15 +30,14 @@ public class ControladorAdminUsers {
          * @param nouu
 	 */
 	public ControladorAdminUsers(GrafDades noug, ConjuntUsuaris nouu) {
-		gd= noug;
-		conj = nouu;
+		/*gd= noug;
+		conj = nouu;*/
 	}
 	
-	public void actualitzaRefs(ConjuntUsuaris nouu, GrafDades noug) {
+	/*public void actualitzaRefs(ConjuntUsuaris nouu, GrafDades noug) {
 		conj = nouu;
 		gd = noug;
-	}
-
+	}*/
 //CONSULTORES///////////////////////////////////////////////////////////////////////////////
 	/**
 	 * Pre: Cert

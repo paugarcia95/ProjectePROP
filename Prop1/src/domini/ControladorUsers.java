@@ -9,13 +9,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import static domini.MacroControlador.gd;
+import static domini.MacroControlador.conj;
 /**
  * @author cristina.fontanet
  *
  */
 public class ControladorUsers {
-	private ConjuntUsuaris conj;
-	private GrafDades gd;
+	//private ConjuntUsuaris conj;
+	//private GrafDades gd;
 
 // CREADORA///////////////////////////////////////////////////////////////////////////////
 
@@ -28,14 +30,14 @@ public class ControladorUsers {
 	 * 			Graf de dades existent en la memoria del programa.
 	 */
 	public ControladorUsers(ConjuntUsuaris nouu, GrafDades noug) {
-		conj = nouu;
-		gd = noug;
+		/*conj = nouu;
+		gd = noug;*/
 	}
 	
-	public void actualitzaRefs(ConjuntUsuaris nouu, GrafDades noug) {
+	/*public void actualitzaRefs(ConjuntUsuaris nouu, GrafDades noug) {
 		conj = nouu;
 		gd = noug;
-	}
+	}*/
 // MODIFICADORES///////////////////////////////////////////////////////////////////////////////
 
 	/**
