@@ -274,6 +274,73 @@ public class EntradaSortidaDadesGraf {
 	}
 
 	public void guardarGrafDades(GrafDades G, File ruta) {
+		FileWriter fichEscr = null;
+		PrintWriter docE = null;
+
+		try {
+			// Arxiu d'escriptura
+			fichEscr = new FileWriter(ruta);
+			docE = new PrintWriter(fichEscr);
+
+			docE.println("|CATEGORIES|");
+
+			Iterator<Categoria> it = G.getCategories().iterator();
+
+			while (it.hasNext()) {
+				Categoria c = it.next();
+				String c1 = c.getNom();
+
+				docE.println(c1 + " *");
+
+				Iterator<Pagina> CP = c.getMapCP().values().iterator();
+				Iterator<Pagina> PC = c.getMapPC().values().iterator();
+				Iterator<Categoria> CsupC = c.getMapCSupC().values().iterator();
+
+				docE.println("| " + c.getMapCP().values().size());
+
+				while (CP.hasNext()) {
+					Pagina p = CP.next();
+					docE.println(p.getNom());
+				}
+
+				docE.println("| " + c.getMapPC().values().size());
+
+				while (PC.hasNext()) {
+					Pagina p = PC.next();
+					docE.println(p.getNom());
+				}
+
+				docE.println("| " + c.getMapCSupC().values().size());
+
+				while (CsupC.hasNext()) {
+					Categoria c2 = CsupC.next();
+					docE.println(c2.getNom());
+				}
+			}
+
+			docE.println("|PAGINES|");
+
+			Iterator<Pagina> it2 = G.getPagines().iterator();
+
+			docE.println("*N " + G.getPagines().size());
+
+			while (it2.hasNext()) {
+				docE.println(it2.next().getNom() + " * ");
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("Error a l'escriure a l'arxiu");
+		} finally {
+			try {
+				// Nos aseguramos que se cierra el fichero.
+				if (null != docE)
+					docE.close();
+			} catch (Exception e2) {
+				System.out.println(e2);
+				System.out.println("Error al tancar l'arxiu");
+			}
+		}
 
 	}
 
