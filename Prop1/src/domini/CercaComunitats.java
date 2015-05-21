@@ -142,7 +142,7 @@ public class CercaComunitats {
 	private class CustomComparator implements Comparator<Comunitat> {
 		@Override
 		public int compare(Comunitat c1, Comunitat c2) {
-			return c1.getNumeroDeCategories()-c2.getNumeroDeCategories(); //crec que s'ha d'invertir per ordenar descendentment
+			return c2.getNumeroDeCategories()-c1.getNumeroDeCategories();
 		}
 	}
 	
