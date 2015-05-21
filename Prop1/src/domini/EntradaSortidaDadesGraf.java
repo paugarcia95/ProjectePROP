@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -19,7 +20,7 @@ import java.util.StringTokenizer;
 public class EntradaSortidaDadesGraf {
 
 	/**
-	 * Creadora per defecte. La ruta per defecte d'inicialitza a null.
+	 * Creadora per defecte.
 	 * 
 	 */
 	public EntradaSortidaDadesGraf() {
@@ -28,7 +29,8 @@ public class EntradaSortidaDadesGraf {
 
 
 	/**
-	 * Carrega les dades d'un fitxer de text a un graf.
+	 * Carrega les dades d'un fitxer de text a un graf. El fitxer te el format
+	 * predeterminat d'una Wikipedia
 	 * 
 	 * S'afegeixen a G els nodes i/o arestes indicats pel fitxer de text a
 	 * "ruta"
@@ -36,12 +38,12 @@ public class EntradaSortidaDadesGraf {
 	 * @param G
 	 *            S'afegeixen a aquest graf els nous nodes i arestes
 	 * @param ruta
-	 *            Adre�a on es troba el fitxer de text
+	 *            Adreca on es troba el fitxer de text
 	 * @return Un GrafDades amb les dades de "ruta"
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public void carregarGrafDades(GrafDades G, File ruta) throws FileNotFoundException, IOException {
+	public void llegirGrafDades(GrafDades G, File ruta) throws FileNotFoundException, IOException {
 		BufferedReader b = new BufferedReader(new FileReader(ruta));
 		String s;
 
@@ -266,4 +268,22 @@ public class EntradaSortidaDadesGraf {
 
 		return true;
 	}
+
+	public void carregarGrafDades(GrafDades G, File ruta) {
+
+	}
+
+	public void guardarGrafDades(GrafDades G, File ruta) {
+
+	}
+
+	public void carregarUsuaris(Map<String, Usuari> usuaris, File ruta) {
+
+	}
+
+	public void guardarUsuaris(Map<String, Usuari> usuaris, File ruta) {
+
+	}
+
 }
+
