@@ -1,9 +1,9 @@
 package domini;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * @author Dani
@@ -15,9 +15,7 @@ public class CercaComunitats {
 	private String nom, comentari, usuari;
 	private Date dataCreacio, dataModificacio;
 	private Criteris criterisSeleccio;
-	private Integer nComunitats;
 	private ArrayList<Comunitat> comunitats;
-	private Queue<Integer> eliminats;
 	
 	/**
 	 * Pre: dataCreacio < dataModif, usuari existeix, no existeix cap CercaComunitats amb el mateix nom per a usuari
@@ -30,24 +28,18 @@ public class CercaComunitats {
 		this.usuari = usuari;
 		dataModificacio = dataModif;
 		this.comentari = comentari;
-		nComunitats = comunitats.size();
 		this.comunitats = comunitats;
-		eliminats = new LinkedList<Integer>();
 	}
 	
 	public CercaComunitats(String nom) {
 		this.nom = nom;
 		dataCreacio = new Date();
-		nComunitats = 0;
 		comunitats = new ArrayList<Comunitat>();
-		eliminats = new LinkedList<Integer>();
 	}
 	
 	public CercaComunitats() {
 		dataCreacio = new Date();
-		nComunitats = 0;
 		comunitats = new ArrayList<Comunitat>();
-		eliminats = new LinkedList<Integer>();
 	}
 	
 	public String getNom() {
@@ -103,38 +95,26 @@ public class CercaComunitats {
 	 * Post: Retorna la Comunitat amb índex i
 	 */	 
 	public Comunitat getComunitat(Integer i) {
-		if (i < comunitats.size()) return comunitats.get(i);
+		if (i >= 0 && i < comunitats.size()) return comunitats.get(i);
 		return null;
 	}
 	
 	/**
 	 * Pre: Cert
-	 * Post: Retorna el nombre de comunitats que componen la cerca
+	 * Post: Retorna el nombre de comunitats que componen la cerca i les ordena per nombre de categories
 	 */
 	public Integer getNumComunitats() {
-		return nComunitats;
+		Collections.sort(comunitats, new CustomComparator());
+		return comunitats.size();
 	}	
 	
 	/**
 	 * Pre: comunitat no pertany a comunitats
-	 * Post: comunitat pertanty a comunitats amb índex retornat && nComunitats s'incrementa
+	 * Post: comunitat pertanty a comunitats amb índex retornat
 	 */
 	public Integer addComunitat(Comunitat comunitat) {
-		int i;
-		if(eliminats.isEmpty()) {
-			i = nComunitats;
-			if (i == comunitats.size()) { //sempre que eliminats.isEmpty s'ha de complir això
-				comunitats.add(i, comunitat);
-				++nComunitats;
-				return i;
-			}
-		}
-		else {
-			i = eliminats.poll(); //primer index buit
-		}
-		comunitats.set(i, comunitat);
-		++nComunitats;
-		return i;
+		comunitats.add(comunitat);
+		return comunitats.size() - 1;
 	}
 	
 	/** 
@@ -142,10 +122,11 @@ public class CercaComunitats {
 	 * Post: La Comunitat amb índex i ja no pertany a comunitats && nComunitats es decrementada
 	 */
 	public Boolean removeComunitat(Integer i) {
-		comunitats.set(i,null);
-		eliminats.add(i);
-		--nComunitats;
-		return true;
+		if (i >= 0 && i < comunitats.size()) {
+			comunitats.remove(i);
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -153,8 +134,16 @@ public class CercaComunitats {
 	 * Post: comunitats = array i nComunitats = array.size()
 	 */
 	public void setComunitats(ArrayList<Comunitat> array) {
-		nComunitats = array.size();
-		this.comunitats = array;
+		if (array == null) comunitats = new ArrayList<Comunitat>();
+		comunitats = array;
+	}
+	
+	
+	private class CustomComparator implements Comparator<Comunitat> {
+		@Override
+		public int compare(Comunitat c1, Comunitat c2) {
+			return c1.getNumeroDeCategories()-c2.getNumeroDeCategories(); //crec que s'ha d'invertir per ordenar descendentment
+		}
 	}
 	
 }

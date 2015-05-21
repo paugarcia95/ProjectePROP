@@ -32,7 +32,7 @@ public class MacroControlador {
 		conj = new ConjuntUsuaris();
 		gd = new GrafDades();
 		cu = new ControladorUsers(conj, gd);
-		cau = new ControladorAdminUsers(gd, conj);
+		cau = new ControladorAdminUsers();
 		ta = new TraduccioiAlgorisme();
 	}
 	

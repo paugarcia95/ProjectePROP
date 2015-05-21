@@ -1,7 +1,6 @@
 package domini;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.ArrayList;
 
 /**
  * @author Dani
@@ -11,16 +10,16 @@ import java.util.TreeMap;
 public class Comunitat {
 	
 	private Integer id;
-	private Map<String, Categoria> categoriesComunitat;
+	private ArrayList<String> categoriesComunitat;
 		
 	public Comunitat(Integer id) {
 		this.id = id;
-		categoriesComunitat = new TreeMap<String, Categoria>();
+		categoriesComunitat = new ArrayList<String>();
 	}
 	
 	public Comunitat() {
 		id = -1;
-		categoriesComunitat = new TreeMap<String, Categoria>();
+		categoriesComunitat = new ArrayList<String>();
 	}
 	
 	public Integer getId() {
@@ -35,24 +34,20 @@ public class Comunitat {
 		return categoriesComunitat.size();	
 	}
 	
-	public Categoria getCat(String nom) {
+	/*public Categoria getCat(String nom) { AIXÒ JA NO FUNCIONA JA QUE ARA GUARDA STRINGS
 		return categoriesComunitat.get(nom);
-	}
+	}*/
 	
-	public void addCat(Categoria c) {
-		categoriesComunitat.put(c.getNom(), c);
+	public void addCat(String categoria) {
+		categoriesComunitat.add(categoria);
 	}
 	
 	public void removeCat(String categoria) {
 		categoriesComunitat.remove(categoria);
 	}
 	
-	public Map<String, Categoria> getMapCat() {
+	public ArrayList<String> getCategories() {
 		return categoriesComunitat;
-	}
-	
-	public void setMapCat(Map<String, Categoria> mapa) {
-		categoriesComunitat = mapa;
 	}
 	
 }

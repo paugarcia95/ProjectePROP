@@ -21,16 +21,9 @@ public class ControladorAdminUsers {
 	String rutaXDefecte = "C:/Users/Cristina/Google Drive/UNI/PROP/Projecte/cats.txt";
 	//PUBLIC
 //CONSTRUCTORA
-	/**
-	 * @param noug
-         * @param nouu
-	 */
-	public ControladorAdminUsers() {}
+
+	public ControladorAdminUsers() {/* inicialitzar aux? (EntradaSortidaDadesGraf) */}
 	
-	/*public void actualitzaRefs(ConjuntUsuaris nouu, GrafDades noug) {
-		conj = nouu;
-		gd = noug;
-	}*/
 //CONSULTORES///////////////////////////////////////////////////////////////////////////////
 	/**
 	 * Pre: Cert

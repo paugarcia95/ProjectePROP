@@ -291,7 +291,7 @@ public class TraduccioiAlgorisme {
 			while(it2.hasNext()){
                             String impr= it2.next();
                             System.out.println("    "+impr);
-				aux.addCat(graf.getCategoria(impr));
+				aux.addCat(impr);
 			}
 			aux.setId(idaux);
 			++idaux;

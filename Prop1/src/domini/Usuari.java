@@ -14,8 +14,6 @@ public class Usuari {
 	private String username, password;
 	private Boolean admin;
 	private ArrayList<CercaComunitats> cerquesFetes;
-	private Integer nCerques;
-	private Queue<Integer> eliminats;
 	
 	
 	/**
@@ -27,16 +25,12 @@ public class Usuari {
         this.password = password;
         this.admin = admin;
         cerquesFetes = new ArrayList<CercaComunitats>();
-        nCerques = 0;
-        eliminats = new LinkedList<Integer>();
 	}
 	
 	public Usuari() {
 		username = "NoIndicat";
 		admin = false;
 		cerquesFetes = new ArrayList<CercaComunitats>();
-		nCerques = 0;
-		eliminats = new LinkedList<Integer>();
 	}
 	
 	/**
@@ -92,7 +86,7 @@ public class Usuari {
 	 * Post: Retorna el nombre de cerques que té l'usuari
 	 */
 	public Integer getNumCerques() {
-		return nCerques;
+		return cerquesFetes.size();
 	}
 	
 	/**
@@ -100,7 +94,7 @@ public class Usuari {
 	 * Post: Retorna la CercaComunitats amb índex i
 	 */
 	public CercaComunitats getCerca(Integer i) {
-		if (i >= 0 && i < cerquesFetes.size()) return cerquesFetes.get(i); //pot retornar null si i és l'índex d'una cerca eliminada
+		if (i >= 0 && i < cerquesFetes.size()) return cerquesFetes.get(i);
 		else return null;
 	}
 	
@@ -125,7 +119,7 @@ public class Usuari {
 	public Integer getPosCerca(String s) {
 		for (int i = 0; i < cerquesFetes.size(); i++) {
 	        CercaComunitats cerca = cerquesFetes.get(i);
-	        if (cerca != null && s.equals(cerca.getNom())) {
+	        if (s.equals(cerca.getNom())) {
 	        	return i;
 	        }
 	    }
@@ -142,25 +136,15 @@ public class Usuari {
 	}
 	
 	/**
-	 * Pre: c.nom és únic a cerquesFetes
+	 * Pre: Cert
 	 * Post: S'incrementa nCerques i c pertany a cerquesFetes
 	 */
 	public Integer addCerca(CercaComunitats c) {
-		int i;
-		if(eliminats.isEmpty()) {
-			i = nCerques;
-			if (i == cerquesFetes.size()) { //sempre que eliminats.isEmpty s'ha de complir això
-				cerquesFetes.add(i, c);
-				++nCerques;
-				return i;
-			}
+		if (c != null) {
+			cerquesFetes.add(c);
+			return cerquesFetes.size() - 1;
 		}
-		else {
-			i = eliminats.poll(); //primer índex buit
-		}
-		cerquesFetes.set(i, c);
-		++nCerques;
-		return i;		
+		return null;
 	}
 	
 	/**
@@ -168,12 +152,10 @@ public class Usuari {
 	 * Post: Si c pertanyia a cerquesFetes ja no és a cerquesFetes, es decrementa nCerques i retorna true, altrament retorna false
 	 */
 	public Boolean removeCerca(CercaComunitats c) {
-		int i = cerquesFetes.indexOf(c);
-		if (i == -1) return false;
-		cerquesFetes.set(i, null);
-		--nCerques;
-		eliminats.add(i);
-		return true;
+		if (c != null) {
+			return cerquesFetes.remove(c);
+		}
+		return false;
 	}
 	
 	/**
@@ -181,12 +163,14 @@ public class Usuari {
 	 * Post: Si s era el nom d'una cerca a cerquesFetes, aquesta cerca no és a cerquesFetes, es decrementa nCerques i retorna cert, altrament retorna false
 	 */
 	public Boolean removeCerca(String s) {
-		int i = this.getPosCerca(s);
-		if (i == -1) return false;
-		cerquesFetes.set(i, null);
-		--nCerques;
-		eliminats.add(i);
-		return true;
+		if (s != null) {
+			int i = this.getPosCerca(s);
+			if (i != -1)  {
+				cerquesFetes.remove(i);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -194,10 +178,8 @@ public class Usuari {
 	 * Post: Si i era l'índex d'una cercaFeta cerquesFetes ja no conté la CercaComunitats i retorna true, retorna false altrament
 	 */
 	public Boolean removeCerca(Integer i) {
-		if (i >= 0 && i < cerquesFetes.size() && cerquesFetes.get(i) != null) {
-			cerquesFetes.set(i, null);
-			--nCerques;
-			eliminats.add(i);
+		if (i >= 0 && i < cerquesFetes.size()) {
+			cerquesFetes.remove(i);
 			return true;
 		}
 		return false;
