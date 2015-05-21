@@ -87,13 +87,4 @@ public class MacroControlador {
 	//	return conj;
 	//}
 
-        
-        
-        public static void main(String[] args) {
-         Interficie.InterficiaProva aux = new Interficie.InterficiaProva();
-         aux.setVisible(true);
-         
-        }
 }
-
-

@@ -5,6 +5,9 @@
  */
 package Interficie;
 
+
+//jung
+
 //import static Interficie.InterficiaProva.macro;
 import static Interficie.InterficiaProva.*;
 import static Interficie.InterficiaProva.comp;
@@ -12,11 +15,15 @@ import static Interficie.InterficiaProva.cercaactual;
 import static Interficie.InterficiaProva.guardada;
 import domini.Categoria;
 import domini.Pagina;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
+import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -37,7 +44,10 @@ import javax.swing.tree.TreePath;
  * @author Cristina
  */
 public class ControladorVistes {
-     public void ompleCategoriesExistents(JList quina){         //es pot millorar eficiència (que vagi carregant a mida q es va fent scroll)
+    static JList<String> CategList;  
+    static JList<String> PagList; 
+
+    public void ompleCategoriesExistents(JList quina){         //es pot millorar eficiència (que vagi carregant a mida q es va fent scroll)
         Collection<String> auxc = macro.getContAdUs().getCategories();
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
@@ -93,23 +103,23 @@ public class ControladorVistes {
     public void visualitzarCategoriaDe(JList quina){
         if(quina.getSelectedIndices().length>0) {
             String hy = quina.getSelectedValue().toString();
-            VCategoria aux = new VCategoria(comp,true,macro.getContUser().isAdmin(macro.getUserActual()), macro);
-            Categoria auxi = macro.getGraf().getCategoria(hy);
-            aux.NomCat(auxi);
+            VCategoria aux = new VCategoria(comp,true,macro.getContUser().isAdmin(macro.getUserActual()));
+            CategList = quina;
+            aux.NomCat(macro.getGraf().getCategoria(hy));
         }
         else {
-            JOptionPane.showMessageDialog(comp, "Has de seleccionar algun element de la llista!", capsalera, WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
         }
     }
     public void visualitzarPaginaDe(JList quina){
         if(quina.getSelectedIndices().length>0) {
             String hy = quina.getSelectedValue().toString();
-            VPagina aux = new VPagina(comp,true, macro.getContUser().isAdmin(macro.getUserActual()),macro );
-            Pagina auxi = macro.getGraf().getPagina(hy);
-            aux.NomPag(auxi);
+            VPagina aux = new VPagina(comp,true, macro.getContUser().isAdmin(macro.getUserActual()));
+            PagList = quina;
+            aux.NomPag(macro.getGraf().getPagina(hy));
         }
         else {
-            JOptionPane.showMessageDialog(comp, "Has de seleccionar algun element de la llista!", capsalera, WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna pàgina de la llista!", capsalera, WARNING_MESSAGE);
         }
     }
     public void comprovaUsername(JTextField NouUser){
@@ -422,7 +432,12 @@ public class ControladorVistes {
         UsersAct.setListData(aux2);
     }
     
-    
+            
+    public static void main(String[] args) {
+         Interficie.InterficiaProva aux = new Interficie.InterficiaProva();
+         aux.setVisible(true);
+         
+   }
     
     
 }

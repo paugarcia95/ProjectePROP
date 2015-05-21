@@ -32,10 +32,10 @@ public class GrafNewman extends Graf {
             Integer num = 0;
             int aux = 0;
             for(HashMap<Integer,Integer> aresta: NCM) {
-                System.out.println("El node "+DiccionariInvers.get(aux)+" te "+aresta.size()+" arestes");
+               // System.out.println("El node "+DiccionariInvers.get(aux)+" te "+aresta.size()+" arestes");
                 num+=aresta.size();
                 ++aux;
-                System.out.println("En portem acumulades: "+num);
+                //System.out.println("En portem acumulades: "+num);
             }
             return num/2;
         }

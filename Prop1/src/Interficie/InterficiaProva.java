@@ -155,6 +155,7 @@ public class InterficiaProva extends javax.swing.JFrame {
 
     public InterficiaProva() {
         //macro = new domini.MacroControlador();
+        primera=true;
         macro = new MacroControlador();
         initComponents();
         A_BuscaCat.setVisible(false);
@@ -173,9 +174,9 @@ public class InterficiaProva extends javax.swing.JFrame {
         comp = this;
         provisional();
         vista = new ControladorVistes();
-       
+        
     }
-
+    
     
             
     /**
@@ -186,7 +187,6 @@ public class InterficiaProva extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         A_PantallaPrincipal = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
@@ -281,6 +281,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         BVisCat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         LlistaCateg = new javax.swing.JList();
+        jProgressBar1 = new javax.swing.JProgressBar();
         A_BuscaPag = new javax.swing.JPanel();
         Enrere6 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
@@ -1142,7 +1143,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                         .addComponent(jButton8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5)))
-                .addContainerGap(946, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         A_OpcionsAdminLayout.setVerticalGroup(
             A_OpcionsAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1170,7 +1171,7 @@ public class InterficiaProva extends javax.swing.JFrame {
                 .addComponent(VisualitzaCerquesFetes1)
                 .addGap(18, 18, 18)
                 .addComponent(CanviaDadesUser1)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         getContentPane().add(A_OpcionsAdmin, "card6");
@@ -1209,12 +1210,10 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
         LlistaCateg.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTextField1, org.jdesktop.beansbinding.ObjectProperty.create(), LlistaCateg, org.jdesktop.beansbinding.BeanProperty.create("elements"));
-        binding.setSourceNullValue(null);
-        bindingGroup.addBinding(binding);
-
         jScrollPane1.setViewportView(LlistaCateg);
         LlistaCateg.getAccessibleContext().setAccessibleName("LlistaCateg");
+
+        jProgressBar1.setBackground(new java.awt.Color(153, 204, 0));
 
         javax.swing.GroupLayout A_BuscaCatLayout = new javax.swing.GroupLayout(A_BuscaCat);
         A_BuscaCat.setLayout(A_BuscaCatLayout);
@@ -1233,6 +1232,10 @@ public class InterficiaProva extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(BVisCat)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A_BuscaCatLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141))
         );
         A_BuscaCatLayout.setVerticalGroup(
             A_BuscaCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1252,7 +1255,9 @@ public class InterficiaProva extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A_BuscaCatLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(118, 118, 118))))
+                        .addGap(69, 69, 69)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))))
         );
 
         getContentPane().add(A_BuscaCat, "card7");
@@ -1872,9 +1877,6 @@ public class InterficiaProva extends javax.swing.JFrame {
         getContentPane().add(A_CanviaDadesUser, "card15");
 
         getAccessibleContext().setAccessibleDescription("");
-
-        bindingGroup.bind();
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1957,7 +1959,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_CbuscaCatActionPerformed
     private void Cafegeix1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cafegeix1ActionPerformed
      	modelo.addElement(LCTotes.getSelectedValue());
-        System.out.println(LCTotes.getSelectedValue());
+        //System.out.println(LCTotes.getSelectedValue());
     }//GEN-LAST:event_Cafegeix1ActionPerformed
     private void EliminaCsubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaCsubActionPerformed
           if(modelo.getSize()>0){
@@ -2108,10 +2110,6 @@ public class InterficiaProva extends javax.swing.JFrame {
     private void A_VeureUsersComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeureUsersComponentShown
         vista.carregaUsers(UsersAct);
     }//GEN-LAST:event_A_VeureUsersComponentShown
-    private void A_BuscaCatComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_BuscaCatComponentShown
-        ControladorVistes aux = new ControladorVistes();
-        aux.ompleCategoriesExistents(LlistaCateg);
-    }//GEN-LAST:event_A_BuscaCatComponentShown
     private void LlistaPagComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_LlistaPagComponentShown
         ControladorVistes aux = new ControladorVistes();
         aux.omplePaginesExistents(LlistaPag);
@@ -2129,7 +2127,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         try {
             cercaactual= macro.getContUser().getNumCerca(macro.getUserActual(), LlistaCerques.getSelectedValue().toString());
         }
-        catch(Exception primera){
+        catch(Exception prime){
             
         }
     }//GEN-LAST:event_A_VisualitzaCerquesComponentHidden
@@ -2180,16 +2178,20 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_A_CanviaDadesUserComponentShown
 
     private void A_BuscaPagComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_BuscaPagComponentShown
-       ControladorVistes aux = new ControladorVistes();
-        aux.omplePaginesExistents(LlistaPag);
+        vista.omplePaginesExistents(LlistaPag);
     }//GEN-LAST:event_A_BuscaPagComponentShown
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar totes les dades?", capsalera, YES_NO_OPTION);
         if(resposta==YES_OPTION) {
             macro.getContAdUs().eliminarDades();
+            System.out.println("He eliminat les dades");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void A_BuscaCatComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_BuscaCatComponentShown
+        vista.ompleCategoriesExistents(LlistaCateg);
+    }//GEN-LAST:event_A_BuscaCatComponentShown
 
     /**
      * @param args the command line arguments
@@ -2359,6 +2361,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -2380,6 +2383,5 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
