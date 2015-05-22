@@ -3,7 +3,6 @@
  */
 package cercaComunitats;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -49,35 +48,17 @@ public class AlgorismeNewmanGirvan {
 	 */
 	public static HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
 		GrafNewman util = new GrafNewman(G);
-                int arestes = util.getNumArestes();
-                util.invertirPesos();
+        int arestes = util.getNumArestes();
+        util.invertirPesos();
 		util.calcularEdgeBetween();
 		int quitoca = calculadora(arestes, percentatge);
-                int iterador = 0;
+        int iterador = 0;
 		while ( iterador< quitoca) {
 			util.esborrarMaxim();
 			util.calcularEdgeBetween();
 			++iterador;
 		}
 		return util.comunitats();
-            
-            /*ArrayList<HashSet<HashSet<String>>> storage = new ArrayList<HashSet<HashSet<String>>>();
-		int iterador = 0;
-		GrafNewman util = new GrafNewman(G);
-                util.invertirPesos();
-		util.calcularEdgeBetween();
-                Integer numero =util.numComunitats(); 
-		while ( numero< G.size()) {
-			storage.add(iterador, util.comunitats());
-			util.esborrarMaxim();
-			util.calcularEdgeBetween();
-			++iterador;
-                        numero = util.numComunitats();
-		}
-		storage.add(iterador, util.comunitats());
-		Integer quitoca = new Integer(calculadora(iterador, percentatge));
-		return storage.get(quitoca); */
-
 	}
 
 	/**
