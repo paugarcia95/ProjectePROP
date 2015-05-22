@@ -91,6 +91,21 @@ public class TraduccioiAlgorisme {
 		return solucio;
 	}
 	
+	private Double calcularpesentreparescomuns(Categoria c1, Categoria c2, Criteris cri){
+		Double solucio = new Double(0);	
+		
+		////////////**************Criteri de cat-cat i cat-pg********/////////////
+		Integer temp = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg
+		if(temp == 5) solucio += 5;
+		else if(temp > 5) solucio += (5+(temp-5));
+		else solucio += 5-(5-temp);
+		/////////////*********************************************///////////
+		
+		
+		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
+		return solucio;
+	}
+	
 	
 	/**
 	 * Calcula el pes entre dues categories que apunten a una mateixa pagina
@@ -202,6 +217,18 @@ public class TraduccioiAlgorisme {
 			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
 					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
+				}
+				for(Categoria gg : mapcatsubcat.values()) {
+					if (!gg.equals(e)) { // SI no existeix
+						if(solucio.existeixNode(e.getNom()) && solucio.existeixNode(gg.getNom()) && !solucio.existeixAresta(gg.getNom(), e.getNom()) && !solucio.existeixAresta(e.getNom(), gg.getNom())) {
+							solucio.addAresta(gg.getNom(), e.getNom(), calcularpesentreparescomuns(e,gg,cri));
+						}
+						else { // Si ja existeix la relació
+							Double temp = solucio.getPes(gg.getNom(), e.getNom());
+							temp += calcularpesentreparescomuns(e,gg,cri);
+							solucio.setPes(gg.getNom(), e.getNom(), temp);
+						}
+					}
 				}
 			}
 		}
