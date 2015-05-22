@@ -339,7 +339,7 @@ public class MainProvisional {
 		System.out.println("Hi ha "+numcom+ " comunitats: ");
 		for(Integer i = 1; i <= numcom; ++i) {
 			System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
-				Set<String> aux1 = mc.getContUser().getCatCerca(mc.getUserActual(), cercaactual, i-1);
+				ArrayList<String> aux1 = mc.getContUser().getCatCerca(mc.getUserActual(), cercaactual, i-1);
 				Iterator<String> it4 = aux1.iterator();
 				while(it4.hasNext())System.out.println(it4.next());
 		}

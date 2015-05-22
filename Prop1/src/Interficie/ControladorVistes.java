@@ -27,8 +27,15 @@ import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.QUESTION_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_CANCEL_OPTION;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
+import static javax.swing.JOptionPane.YES_OPTION;
+import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
+import static javax.swing.JOptionPane.OK_OPTION;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
@@ -257,7 +264,7 @@ public class ControladorVistes {
            // System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
             DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i);
             arrel.add(prim);
-            Set<String> auxm = macro.getContUser().getCatCerca(macro.getUserActual(), cercaactual, i-1);
+            ArrayList<String> auxm = macro.getContUser().getCatCerca(macro.getUserActual(), cercaactual, i-1);
             Iterator<String> it4 = auxm.iterator();
             while(it4.hasNext()) {
                 String nom = it4.next();
@@ -408,7 +415,7 @@ public class ControladorVistes {
         guardada=1;
     }
     public void carregaCerquesFetes(JTextField jTextField7,JList LlistaCerques){
-        jTextField7.setText("Tens "+macro.getContUser().getCerquesComunitats(macro.getUserActual()).size()+" cerques fetes");
+        jTextField7.setText("Tens "+macro.getContUser().getNumCerquesUser(macro.getUserActual())+" cerques fetes");
         Collection<String> auxc = macro.getContUser().getCerquesComunitats(macro.getUserActual());
         System.out.println("Les cerques son: "+auxc);
         Object[] aux2 = new Object[auxc.size()];

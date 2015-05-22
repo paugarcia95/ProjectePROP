@@ -12,6 +12,7 @@ import static Interficie.ControladorVistes.CategList;
 import static Interficie.InterficiaProva.comp;
 import domini.Categoria;
 import java.awt.Frame;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
@@ -102,7 +103,16 @@ public class VCategoria extends javax.swing.JDialog {
         }
         apuntadaP.setListData(aux2);
     }
-    
+    private void omplirModificacions(){
+        Collection<String> auxc = macro.getGraf().getCategoria(cat).getMapCSubC().keySet();
+        for(String cat: auxc)modelom.addElement(cat);
+        auxc = macro.getGraf().getCategoria(cat).getMapCSupC().keySet();
+        for(String cat: auxc)modelo1.addElement(cat);
+        auxc = macro.getGraf().getCategoria(cat).getMapCP().keySet();
+        for(String cat: auxc)modelo3.addElement(cat);
+        auxc = macro.getGraf().getCategoria(cat).getMapPC().keySet();
+        for(String cat: auxc)modelo2.addElement(cat);
+    }
     public void NomCat(Categoria nomCateg) {
         cat = nomCateg.getNom();
         System.out.println(cat);
@@ -116,8 +126,8 @@ public class VCategoria extends javax.swing.JDialog {
     /**
      * Creates new form VCategoria
      */
-    public VCategoria(java.awt.Frame parent, boolean modal, boolean adm) {
-        super(parent, modal);
+    public VCategoria(java.awt.Frame parent, boolean modalitat, boolean adm) {
+        super(parent, modalitat);
         pare = parent;
         admin = adm;
     }
@@ -209,9 +219,9 @@ public class VCategoria extends javax.swing.JDialog {
 
         jLabel3.setText("Catgories que l'apunten:");
 
-        jLabel4.setText("Pàgines a les que apunta:");
+        jLabel4.setText("P?gines a les que apunta:");
 
-        jLabel5.setText("Pàgines que l'apunten:");
+        jLabel5.setText("P?gines que l'apunten:");
 
         jButton1.setText("Visualitza Categoria");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +230,7 @@ public class VCategoria extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Visualitza Pàgina");
+        jButton2.setText("Visualitza P?gina");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -308,11 +318,11 @@ public class VCategoria extends javax.swing.JDialog {
                             .addGroup(A_VisualitzaCategLayout.createSequentialGroup()
                                 .addComponent(jScrollPane3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18))
+                                .addComponent(jButton1))
                             .addGroup(A_VisualitzaCategLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(A_VisualitzaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -322,11 +332,11 @@ public class VCategoria extends javax.swing.JDialog {
                             .addGroup(A_VisualitzaCategLayout.createSequentialGroup()
                                 .addComponent(jScrollPane4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18))
+                                .addComponent(jButton2))
                             .addGroup(A_VisualitzaCategLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(A_VisualitzaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -369,6 +379,9 @@ public class VCategoria extends javax.swing.JDialog {
         );
 
         A_ModificaCateg.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                A_ModificaCategComponentHidden(evt);
+            }
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 A_ModificaCategComponentShown(evt);
             }
@@ -379,7 +392,7 @@ public class VCategoria extends javax.swing.JDialog {
         jLabel7.setBackground(new java.awt.Color(250, 250, 250));
         jLabel7.setText("Categories a les que apunta:");
 
-        CApunta1.setModel(modelo3);
+        PApuntada1.setModel(modelo3);
         PApuntada1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         PApuntada1.setDragEnabled(true);
         PApuntada1.setDropMode(javax.swing.DropMode.INSERT);
@@ -395,11 +408,11 @@ public class VCategoria extends javax.swing.JDialog {
         CApunta1.setValueIsAdjusting(true);
         jScrollPane7.setViewportView(CApunta1);
 
-        jLabel8.setText("Pàgines a les que apunta:");
+        jLabel8.setText("P?gines a les que apunta:");
 
         jLabel9.setText("Catgories que l'apunten:");
 
-        CApunta1.setModel(modelo1);
+        CApuntada1.setModel(modelo1);
         CApuntada1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         CApuntada1.setDragEnabled(true);
         CApuntada1.setDropMode(javax.swing.DropMode.INSERT);
@@ -407,9 +420,9 @@ public class VCategoria extends javax.swing.JDialog {
         CApuntada1.setValueIsAdjusting(true);
         jScrollPane8.setViewportView(CApuntada1);
 
-        jLabel10.setText("Pàgines que l'apunten:");
+        jLabel10.setText("P?gines que l'apunten:");
 
-        CApunta1.setModel(modelo2);
+        PApunta1.setModel(modelo2);
         PApunta1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         PApunta1.setDragEnabled(true);
         PApunta1.setDropMode(javax.swing.DropMode.INSERT);
@@ -432,7 +445,7 @@ public class VCategoria extends javax.swing.JDialog {
 
         jLabel11.setText("Categories existents:");
 
-        jLabel12.setText("Pàgines existents");
+        jLabel12.setText("P?gines existents");
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -483,6 +496,11 @@ public class VCategoria extends javax.swing.JDialog {
         });
 
         jButton4.setText("Guardar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A_ModificaCategLayout = new javax.swing.GroupLayout(A_ModificaCateg);
         A_ModificaCateg.setLayout(A_ModificaCategLayout);
@@ -705,7 +723,7 @@ public class VCategoria extends javax.swing.JDialog {
         vista.ompleCategoriesExistents(jList1);
         Nom.setText(cat);
         A_VisualitzaCateg.setVisible(false);
-        omplirDades(CApunta1,CApuntada1,PApunta1,PApuntada1);
+        omplirModificacions();
         A_ModificaCateg.setVisible(true);
     }//GEN-LAST:event_A_ModificaCategComponentShown
 
@@ -719,19 +737,36 @@ public class VCategoria extends javax.swing.JDialog {
 
     private void AfegeixCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixCActionPerformed
         modelom.addElement(jList1.getSelectedValue());
-        System.out.println(jList1.getSelectedValue());
-        pack();
+        System.out.println("Afegeixo la categoria " +jList1.getSelectedValue());
+        //pack();
     }//GEN-LAST:event_AfegeixCActionPerformed
 
     private void EliminaC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaC1ActionPerformed
         if(modelom.getSize()>0){
+            System.out.println("Mida modelom: "+modelom.getSize());
               int n = CApunta1.getSelectedIndex();
+              System.out.println("Elimino la categoria que est? a la pos "+n);
               modelom.removeElementAt(n);
-              CApunta1.list();
-              CApunta1.setVisible(true);
+              //CApunta1.list();
+              //CApunta1.setVisible(true);
           }
-        pack();
+        //pack();
     }//GEN-LAST:event_EliminaC1ActionPerformed
+
+    private void A_ModificaCategComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_ModificaCategComponentHidden
+        modelom.removeAllElements();
+        modelo1.removeAllElements();
+        modelo2.removeAllElements();
+        modelo3.removeAllElements();
+    }//GEN-LAST:event_A_ModificaCategComponentHidden
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ArrayList<String> categs = new ArrayList<String>();
+        for(int i = 0; i < modelom.size();++i){
+            categs.add(modelom.getElementAt(i).toString());
+        }
+        macro.getContAdUs().setCsubC(cat, categs);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

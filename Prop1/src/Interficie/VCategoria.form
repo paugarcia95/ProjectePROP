@@ -75,13 +75,13 @@
                                   <Component id="jScrollPane3" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="177" max="-2" attributes="0"/>
@@ -94,13 +94,13 @@
                                   <Component id="jScrollPane4" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane5" min="-2" pref="181" max="-2" attributes="0"/>
@@ -355,6 +355,7 @@
     </Container>
     <Container class="javax.swing.JPanel" name="A_ModificaCateg">
       <Events>
+        <EventHandler event="componentHidden" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="A_ModificaCategComponentHidden"/>
         <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="A_ModificaCategComponentShown"/>
       </Events>
 
@@ -556,7 +557,7 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="modelo3 = new DefaultListModel();"/>
                 <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private DefaultListModel modelo3;"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CApunta1.setModel(modelo3);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="PApuntada1.setModel(modelo3);"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -610,7 +611,7 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="modelo1 = new DefaultListModel();"/>
                 <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private DefaultListModel modelo1;"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CApunta1.setModel(modelo1);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CApuntada1.setModel(modelo1);"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -637,7 +638,7 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="modelo2 = new DefaultListModel();"/>
                 <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private DefaultListModel modelo2;"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CApunta1.setModel(modelo2);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="PApunta1.setModel(modelo2);"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -774,6 +775,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

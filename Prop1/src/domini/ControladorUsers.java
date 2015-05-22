@@ -623,8 +623,8 @@ public class ControladorUsers {
 	 * 
 	 * @return Conjunt de noms de les categories de la comunitat de la CercaComunitats a resoldre.
 	 */
-	public Set<String> getCatCerca(String username, Integer quina, Integer com) {
-		Map<String,Categoria> aux = conj.getUser(username).getCerca(quina).getComunitat(com).getMapCat();
-		return aux.keySet();
+	public ArrayList<String> getCatCerca(String username, Integer quina, Integer com) {
+		ArrayList<String> aux = conj.getUser(username).getCerca(quina).getComunitat(com).getCategories();
+		return aux;
 	}
 }

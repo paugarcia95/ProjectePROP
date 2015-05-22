@@ -260,6 +260,7 @@
     </Container>
     <Container class="javax.swing.JPanel" name="A_ModificaPag">
       <Events>
+        <EventHandler event="componentHidden" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="A_ModificaPagComponentHidden"/>
         <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="A_ModificaPagComponentShown"/>
       </Events>
 
@@ -473,7 +474,7 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="modelo1 = new DefaultListModel();"/>
                 <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private DefaultListModel modelo1;"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CApunta1.setModel(modelo1);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CApuntada1.setModel(modelo1);"/>
               </AuxValues>
             </Component>
           </SubComponents>

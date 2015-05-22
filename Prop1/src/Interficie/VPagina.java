@@ -37,10 +37,10 @@ public class VPagina extends javax.swing.JDialog {
     /**
      * Creates new form VPagina
      */
-    public VPagina(java.awt.Frame parent, boolean modal, Boolean adm) {
-        super(parent, modal);
+    public VPagina(java.awt.Frame parent, boolean modalitat, Boolean adm) {
+        super(parent, modalitat);
+        pare=parent;
         admin = adm;
-       // macro = mac;
     }
     private void omplirDades(JList CApunta, JList CApuntada){
         //Categories a les que apunta
@@ -78,7 +78,13 @@ public class VPagina extends javax.swing.JDialog {
         }
         CApuntada.setListData(aux2);
     }
-
+    
+    private void omplirModificacions(){
+        Collection<String> aux = macro.getContAdUs().getPagPC(pag);
+        for(String pag: aux) modelom.addElement(pag);
+        aux = macro.getContAdUs().getPagCP(pag);
+        for(String pag: aux) modelo1.addElement(pag);
+    }
     public void NomPag(Pagina nomPag) {
         pag = nomPag.getNom();
         initComponents();
@@ -141,7 +147,7 @@ public class VPagina extends javax.swing.JDialog {
         NomC.setText(pag);
         NomC.setAutoscrolls(true);
 
-        jLabel1.setText("Nom Pàgina:");
+        jLabel1.setText("Nom P?gina:");
 
         jLabel2.setBackground(new java.awt.Color(250, 250, 250));
         jLabel2.setText("Comunitats a les que apunta:");
@@ -171,14 +177,14 @@ public class VPagina extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(CApuntada);
 
-        jButton3.setText("Modifica Pàgina");
+        jButton3.setText("Modifica P?gina");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Eliminar Pàgina");
+        jButton5.setText("Eliminar P?gina");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -261,6 +267,9 @@ public class VPagina extends javax.swing.JDialog {
         );
 
         A_ModificaPag.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                A_ModificaPagComponentHidden(evt);
+            }
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 A_ModificaPagComponentShown(evt);
             }
@@ -293,7 +302,7 @@ public class VPagina extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setText("Nom de la pàgina:");
+        jLabel6.setText("Nom de la p?gina:");
 
         AfegeixC1.setText("Afegeix");
 
@@ -306,7 +315,7 @@ public class VPagina extends javax.swing.JDialog {
 
         jLabel9.setText("Catgories que l'apunten:");
 
-        CApunta1.setModel(modelo1);
+        CApuntada1.setModel(modelo1);
         CApuntada1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         CApuntada1.setDragEnabled(true);
         CApuntada1.setDropMode(javax.swing.DropMode.INSERT);
@@ -460,11 +469,15 @@ public class VPagina extends javax.swing.JDialog {
             String hy = CApunta.getSelectedValue().toString();
             nova = new VCategoria(pare, true,admin);
             nova.NomCat(macro.getGraf().getCategoria(hy));
+           nova.setAlwaysOnTop(true);
+           nova.setFocusable(true);
         }
         else if(CApuntada.getSelectedIndices().length>0 && !CApuntada.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApuntada.getSelectedValue().toString();
             nova = new VCategoria(pare, true,admin);
             nova.NomCat(macro.getGraf().getCategoria(hy));
+           nova.setAlwaysOnTop(true);
+           nova.setFocusable(true);
         }
         else {
             JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
@@ -477,7 +490,7 @@ public class VPagina extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar aquesta pàgina?", capsalera, YES_NO_OPTION);
+        int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar aquesta p?gina?", capsalera, YES_NO_OPTION);
         if(resposta==YES_OPTION) {
             macro.getContAdUs().removePag(pag);
             vista.omplePaginesExistents(PagList);
@@ -505,9 +518,6 @@ public class VPagina extends javax.swing.JDialog {
         if(modelom.getSize()>0){
             int n = CApunta1.getSelectedIndex();
             modelom.remove(n);
-            //CApunta1.list();
-           // CApunta1.
-            //CApunta1.setVisible(true);
         }
     }//GEN-LAST:event_EliminaC1ActionPerformed
 
@@ -515,9 +525,14 @@ public class VPagina extends javax.swing.JDialog {
         vista.ompleCategoriesExistents(jList1);
         Nom.setText(pag);
         A_VeurePag.setVisible(false);
-        omplirDades(CApunta1,CApuntada1);
+        omplirModificacions();
         A_ModificaPag.setVisible(true);
     }//GEN-LAST:event_A_ModificaPagComponentShown
+
+    private void A_ModificaPagComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_ModificaPagComponentHidden
+       modelom.removeAllElements();
+       modelo1.removeAllElements();
+    }//GEN-LAST:event_A_ModificaPagComponentHidden
 
     /**
      * @param args the command line arguments
