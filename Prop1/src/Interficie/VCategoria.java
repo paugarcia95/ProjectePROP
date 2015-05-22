@@ -35,7 +35,7 @@ public class VCategoria extends javax.swing.JDialog {
     
     private void omplirDades(JList apuntaC, JList apuntadaC, JList aputaP, JList apuntadaP){
         //Categories a les que apunta
-        Collection<String> auxc = macro.getGraf().getCategoria(cat).getMapCSubC().keySet();
+        Collection<String> auxc = macro.getContAdUs().getCsubC(cat);
         Object[] aux2;
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
@@ -53,7 +53,7 @@ public class VCategoria extends javax.swing.JDialog {
         apuntaC.setListData(aux2);    
         
         //Categories que l'apunten
-        auxc = macro.getGraf().getCategoria(cat).getMapCSupC().keySet();
+        auxc = macro.getContAdUs().getCsupC(cat);
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
             int cont = 0;
@@ -70,7 +70,7 @@ public class VCategoria extends javax.swing.JDialog {
         apuntadaC.setListData(aux2);
         
         //Pagines a les que apunta
-        auxc = macro.getGraf().getCategoria(cat).getMapCP().keySet();
+        auxc = macro.getContAdUs().getCatCP(cat);
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
             int cont = 0;
@@ -87,7 +87,7 @@ public class VCategoria extends javax.swing.JDialog {
         aputaP.setListData(aux2);
         
         //Pagines que l'apunten
-        auxc = macro.getGraf().getCategoria(cat).getMapPC().keySet();
+        auxc = macro.getContAdUs().getCatPC(cat);
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
             int cont = 0;
@@ -104,17 +104,17 @@ public class VCategoria extends javax.swing.JDialog {
         apuntadaP.setListData(aux2);
     }
     private void omplirModificacions(){
-        Collection<String> auxc = macro.getGraf().getCategoria(cat).getMapCSubC().keySet();
+        Collection<String> auxc = macro.getContAdUs().getCsubC(cat);
         for(String cat: auxc)modelom.addElement(cat);
-        auxc = macro.getGraf().getCategoria(cat).getMapCSupC().keySet();
+        auxc = macro.getContAdUs().getCsupC(cat);
         for(String cat: auxc)modelo1.addElement(cat);
-        auxc = macro.getGraf().getCategoria(cat).getMapCP().keySet();
+        auxc = macro.getContAdUs().getCatCP(cat);
         for(String cat: auxc)modelo3.addElement(cat);
-        auxc = macro.getGraf().getCategoria(cat).getMapPC().keySet();
+        auxc = macro.getContAdUs().getCatPC(cat);
         for(String cat: auxc)modelo2.addElement(cat);
     }
-    public void NomCat(Categoria nomCateg) {
-        cat = nomCateg.getNom();
+    public void NomCat(String nomCateg) {
+        cat = nomCateg;
         System.out.println(cat);
         initComponents();
         A_ModificaCateg.setVisible(false);
@@ -663,12 +663,12 @@ public class VCategoria extends javax.swing.JDialog {
         if(CApunta.getSelectedIndices().length>0 && !CApunta.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApunta.getSelectedValue().toString();
             nova = new VCategoria(pare, true,admin);
-            nova.NomCat(macro.getGraf().getCategoria(hy));
+            nova.NomCat(hy);
         }
         else if(CApuntada.getSelectedIndices().length>0 && !CApuntada.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApuntada.getSelectedValue().toString();
             nova = new VCategoria(pare, true,admin);
-            nova.NomCat(macro.getGraf().getCategoria(hy));
+            nova.NomCat(hy);
         }
         else {
             JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
@@ -681,12 +681,12 @@ public class VCategoria extends javax.swing.JDialog {
         if(PApunta.getSelectedIndices().length>0 && !PApunta.getSelectedValue().toString().equals(noSelect)) {
             String hy = PApunta.getSelectedValue().toString();
             nova = new VPagina(pare, true, admin);
-            nova.NomPag(macro.getGraf().getPagina(hy));
+            nova.NomPag(hy);
         }
         else if(PApuntada.getSelectedIndices().length>0 && !PApuntada.getSelectedValue().toString().equals(noSelect)) {
             String hy = PApuntada.getSelectedValue().toString();
             nova = new VPagina(pare, true, admin);
-            nova.NomPag(macro.getGraf().getPagina(hy));
+            nova.NomPag(hy);
         }
         else {
             JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);

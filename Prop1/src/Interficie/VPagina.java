@@ -44,7 +44,7 @@ public class VPagina extends javax.swing.JDialog {
     }
     private void omplirDades(JList CApunta, JList CApuntada){
         //Categories a les que apunta
-        Collection<String> auxc = macro.getGraf().getPagina(pag).getPC().keySet();
+        Collection<String> auxc = macro.getContAdUs().getPagPC(pag);
         Object[] aux2;
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
@@ -62,7 +62,7 @@ public class VPagina extends javax.swing.JDialog {
         CApunta.setListData(aux2);    
         
         //Categories que l'apunten
-        auxc = macro.getGraf().getPagina(pag).getCP().keySet();
+        auxc = macro.getContAdUs().getPagCP(pag);
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
             int cont = 0;
@@ -85,8 +85,8 @@ public class VPagina extends javax.swing.JDialog {
         aux = macro.getContAdUs().getPagCP(pag);
         for(String pag: aux) modelo1.addElement(pag);
     }
-    public void NomPag(Pagina nomPag) {
-        pag = nomPag.getNom();
+    public void NomPag(String nomPag) {
+        pag = nomPag;
         initComponents();
         this.setAlwaysOnTop(false);
         modelo = new DefaultListModel();
@@ -468,14 +468,14 @@ public class VPagina extends javax.swing.JDialog {
         if(CApunta.getSelectedIndices().length>0 && !CApunta.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApunta.getSelectedValue().toString();
             nova = new VCategoria(pare, true,admin);
-            nova.NomCat(macro.getGraf().getCategoria(hy));
+            nova.NomCat(hy);
            nova.setAlwaysOnTop(true);
            nova.setFocusable(true);
         }
         else if(CApuntada.getSelectedIndices().length>0 && !CApuntada.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApuntada.getSelectedValue().toString();
             nova = new VCategoria(pare, true,admin);
-            nova.NomCat(macro.getGraf().getCategoria(hy));
+            nova.NomCat(hy);
            nova.setAlwaysOnTop(true);
            nova.setFocusable(true);
         }

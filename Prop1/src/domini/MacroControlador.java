@@ -43,7 +43,6 @@ public class MacroControlador {
 	}
 	public Boolean carregaDades() {
 		return cau.iniciCarregarDades();
-		
 	}
 	public void carregaDadesFitxer(File fitxer) throws FileNotFoundException {
 		aux = new EntradaSortidaDadesGraf();

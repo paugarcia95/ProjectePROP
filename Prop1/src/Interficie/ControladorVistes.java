@@ -54,7 +54,7 @@ public class ControladorVistes {
     static JList<String> CategList;  
     static JList<String> PagList; 
 
-    public void ompleCategoriesExistents(JList quina){         //es pot millorar eficiència (que vagi carregant a mida q es va fent scroll)
+    public void ompleCategoriesExistents(JList quina){         //es pot millorar efici?ncia (que vagi carregant a mida q es va fent scroll)
         Collection<String> auxc = macro.getContAdUs().getCategories();
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
@@ -112,7 +112,7 @@ public class ControladorVistes {
             String hy = quina.getSelectedValue().toString();
             VCategoria aux = new VCategoria(comp,true,macro.getContUser().isAdmin(macro.getUserActual()));
             CategList = quina;
-            aux.NomCat(macro.getGraf().getCategoria(hy));
+            aux.NomCat(hy);
         }
         else {
             JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
@@ -123,15 +123,15 @@ public class ControladorVistes {
             String hy = quina.getSelectedValue().toString();
             VPagina aux = new VPagina(comp,true, macro.getContUser().isAdmin(macro.getUserActual()));
             PagList = quina;
-            aux.NomPag(macro.getGraf().getPagina(hy));
+            aux.NomPag(hy);
         }
         else {
-            JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna pàgina de la llista!", capsalera, WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna p?gina de la llista!", capsalera, WARNING_MESSAGE);
         }
     }
     public void comprovaUsername(JTextField NouUser){
         if(macro.getContUser().existsUser(NouUser.getText())) JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre", capsalera, PLAIN_MESSAGE);
-        else JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari està lliure, endavant", capsalera, PLAIN_MESSAGE);
+        else JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari est? lliure, endavant", capsalera, PLAIN_MESSAGE);
     }
     public void creaUserNou(JTextField NouUsername, JTextField NovaPassword){
         if(macro.getContUser().existsUser(NouUsername.getText())) {
@@ -323,20 +323,20 @@ public class ControladorVistes {
             sb4.append("\nComentari: "+macro.getContUser().getComentariCerca(macro.getUserActual(), cercaactual));
             Date data = macro.getContUser().getDataCreacioCerca(macro.getUserActual(), cercaactual);
             System.out.println("COMPARACIO DATES: "+data.compareTo(new Date()));
-            if(data== null ) sb4.append("\nData creació: encara no s'ha modificat");
-            else sb4.append("\nData creació: "+data);
-            sb4.append("\nData ultima modificació: "+macro.getContUser().getDataModificacioCerca(macro.getUserActual(), cercaactual)+"\n");
+            if(data== null ) sb4.append("\nData creaci?: encara no s'ha modificat");
+            else sb4.append("\nData creaci?: "+data);
+            sb4.append("\nData ultima modificaci?: "+macro.getContUser().getDataModificacioCerca(macro.getUserActual(), cercaactual)+"\n");
             guard=sb4.toString();
         }
         on.setText(guard+"Algorisme: "+algorisme+"\nTipus de valor: "+tipu+"\nAmb la dada: "+macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaactual)+
-                "\nImportancia realció: "+macro.getContUser().getRelacioCerca(macro.getUserActual(), cercaactual)+
-                "\nImportancia semblança de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaactual)+
+                "\nImportancia realci?: "+macro.getContUser().getRelacioCerca(macro.getUserActual(), cercaactual)+
+                "\nImportancia semblan?a de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaactual)+
                 "\nParaula clau: "+macro.getContUser().getParaulaClauCerca(macro.getUserActual(), cercaactual)+
-                "\n     Amb importància: "+macro.getContUser().getParaulaImpCerca(macro.getUserActual(), cercaactual)+
+                "\n     Amb import?ncia: "+macro.getContUser().getParaulaImpCerca(macro.getUserActual(), cercaactual)+
                 "\nCategoria pare:"+macro.getContUser().getPareCerca(macro.getUserActual(), cercaactual)+
                 "\nConjunt de categories seleccionades:"+subcat+
                 "\nConjunt de categories ignorades:"+evita+
-                "\nConjunt de pàgines a ignorar:"+ignora);
+                "\nConjunt de p?gines a ignorar:"+ignora);
     }
     public void ferCerca(JTree Algorismes, JSpinner Cdada, JList Lsub, JList Lsub2, JList Lsub1, JSlider CpcImp, JTextField Cpc, JSlider Csembla, JSlider Crelacio, JTextField Cbusca1){
         long t1,t2;
@@ -404,7 +404,7 @@ public class ControladorVistes {
         }
        // System.out.println("mida aux3: "+mida);
         if(CpcImp.getValue()==0) Cpc.setText(new String());
-        System.out.println("Fem la cerca amb "+macro.getContAdUs().getNumCats()+" categories i "+macro.getContAdUs().getNumPags()+" pàgines.");
+        System.out.println("Fem la cerca amb "+macro.getContAdUs().getNumCats()+" categories i "+macro.getContAdUs().getNumPags()+" p?gines.");
         System.out.println("Alg: "+quin+", tipus: "+tipus+", user: "+macro.getUserActual()+ ", cerca num: "+quina+", numDada: "+num+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText());
         macro.getContUser().addCriterisCerca(false, macro.getUserActual(), quina, Cpc.getText(), CpcImp.getValue(), Crelacio.getValue(), Csembla.getValue(), quin, tipus, num, auxx1, auxx2, auxx3, Cbusca1.getText());
        // System.out.println("he arribat aqui");
