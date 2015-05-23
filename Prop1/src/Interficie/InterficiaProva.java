@@ -10,13 +10,17 @@ import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
-
+import static cercaComunitats.AlgorismeNewmanGirvan.arestes;
+import static cercaComunitats.AlgorismeNewmanGirvan.iterador;
 import domini.Categoria;
 import domini.GrafDades;
 import domini.MacroControlador;
 import domini.Pagina;
 import java.awt.Component;
 import java.awt.Frame;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
@@ -37,8 +41,13 @@ import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.ProgressMonitor;
+import javax.swing.Timer;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 /**
@@ -57,7 +66,10 @@ public class InterficiaProva extends javax.swing.JFrame {
     Boolean primera; //variable per evitar excepcions en els pannels que tenen accions en amagar
     static ControladorVistes vista;
     static Frame comp;
-   
+    private ProgressMonitor progressMonitor;
+   private Thread hilo;
+   private Timer timer;
+   public static Boolean userAdmin;
    
     
     
@@ -96,6 +108,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         A_PantallaPrincipal.setVisible(true);
         comp = this;
         vista = new ControladorVistes();
+        userAdmin=false;
         provisional();
         
     }
@@ -240,12 +253,13 @@ public class InterficiaProva extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         LlistaPag1 = new javax.swing.JList();
         A_VeureUsers = new javax.swing.JPanel();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        UsersAct = new javax.swing.JList();
         Enrere8 = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
+        modusers = new DefaultListModel();
+        UsersAct = new javax.swing.JList();
+        jButton19 = new javax.swing.JButton();
         A_VisualitzaNovaCerca = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         Resultat = new javax.swing.JTree();
@@ -1405,17 +1419,13 @@ public class InterficiaProva extends javax.swing.JFrame {
         getContentPane().add(A_BuscaCatPag, "card9");
 
         A_VeureUsers.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                A_VeureUsersComponentHidden(evt);
+            }
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 A_VeureUsersComponentShown(evt);
             }
         });
-
-        UsersAct.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane10.setViewportView(UsersAct);
 
         Enrere8.setText("Enrere");
         Enrere8.addActionListener(new java.awt.event.ActionListener() {
@@ -1434,6 +1444,25 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
 
         jButton18.setText("Fer Admin");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+
+        UsersAct.setModel(modusers);
+        UsersAct.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        UsersAct.setDragEnabled(true);
+        UsersAct.setDropMode(javax.swing.DropMode.INSERT);
+        UsersAct.setFocusable(false);
+        UsersAct.setValueIsAdjusting(true);
+
+        jButton19.setText("Crea un nou usuari Administrador");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A_VeureUsersLayout = new javax.swing.GroupLayout(A_VeureUsers);
         A_VeureUsers.setLayout(A_VeureUsersLayout);
@@ -1443,14 +1472,18 @@ public class InterficiaProva extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(UsersAct, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton17)
-                            .addComponent(jButton18)
-                            .addComponent(Enrere8))
-                        .addGap(0, 8, Short.MAX_VALUE))
+                            .addGroup(A_VeureUsersLayout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jButton17))
+                            .addGroup(A_VeureUsersLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton19)
+                                    .addComponent(Enrere8)
+                                    .addComponent(jButton18))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(A_VeureUsersLayout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addGap(93, 93, 93))))
@@ -1460,18 +1493,21 @@ public class InterficiaProva extends javax.swing.JFrame {
             .addGroup(A_VeureUsersLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel17)
-                .addGap(31, 31, 31)
                 .addGroup(A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                        .addComponent(jButton17)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton18)
-                        .addGap(18, 18, 18)
-                        .addComponent(Enrere8)
+                        .addComponent(UsersAct, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(40, Short.MAX_VALUE))))
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Enrere8)
+                        .addContainerGap(50, Short.MAX_VALUE))))
         );
 
         getContentPane().add(A_VeureUsers, "card10");
@@ -1506,6 +1542,11 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
 
         jButton10.setText("<<<<");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton12.setText(">>>>");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -1970,6 +2011,12 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_Enrere1ActionPerformed
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         vista.creaUserNou(NouUsername, NovaPassword);
+        if(userAdmin) {
+                userAdmin=false;
+                A_OpcionsAdmin.setVisible(true);
+        }
+        else A_PantallaPrincipal.setVisible(true);
+        A_CreaUsuari.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
     private void CreaCercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreaCercaActionPerformed
         vista.preaparaCreacioNovaCerca(false, LCTotes, LPTotes, Algorismes, Lsub, Lsub2, Lsub1, Cbusca1, Cpc, CpcImp, Csembla, Crelacio, Cdada);
@@ -2054,12 +2101,48 @@ public class InterficiaProva extends javax.swing.JFrame {
           }
         Lsub2.clearSelection();
     }//GEN-LAST:event_jButton11ActionPerformed
-    private void CercaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CercaBActionPerformed
-        if(vista.ferCerca(Algorismes, Cdada, Lsub, Lsub2, Lsub1, CpcImp, Cpc, Csembla, Crelacio, Cbusca1)) {
-            vista.visualitzaCerca(false,Resultat, CriterisNovaCerca);
-            A_CreaComunitat.setVisible(false);
-            A_VisualitzaNovaCerca.setVisible(true);
+class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent evt) {
+            if (progressMonitor.isCanceled() || !hilo.isAlive()) {
+                progressMonitor.close();
+                hilo.interrupt();
+                Toolkit.getDefaultToolkit().beep();
+                timer.stop();
+                CercaB.setEnabled(true);
+            } else {
+                progressMonitor.setNote(iterador.toString());
+                progressMonitor.setProgress(iterador);
+                //taskOutput.append(task.getMessage() + newline);
+               // taskOutput.setCaretPosition(taskOutput.getDocument().getLength());
+            }
         }
+    }
+    private void CercaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CercaBActionPerformed
+        Runnable cerca = new Runnable() {
+        public void run() {
+            try {
+            if(vista.ferCerca(Algorismes, Cdada, Lsub, Lsub2, Lsub1, CpcImp, Cpc, Csembla, Crelacio, Cbusca1)) {
+                vista.visualitzaCerca(false,Resultat, CriterisNovaCerca);
+                A_CreaComunitat.setVisible(false);
+                A_VisualitzaNovaCerca.setVisible(true);
+            }
+            }
+            catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        };
+        hilo = new Thread(cerca);
+        hilo.start();
+        timer = new Timer(1000, new TimerListener());
+        timer.start();
+        progressMonitor = new ProgressMonitor(this,"Estem realitzant la cerca de comunitats, si us plau, tingues paciència","",0,arestes);
+        progressMonitor.setProgress(0);
+        progressMonitor.setMillisToDecideToPopup(2*1000);
+        CercaB.setEnabled(false);
+       /* Espera sp = new Espera();
+        sp.setVisible(true);*/
     }//GEN-LAST:event_CercaBActionPerformed
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         A_OpcionsAdmin.setVisible(false);
@@ -2148,7 +2231,8 @@ public class InterficiaProva extends javax.swing.JFrame {
         NovaPassword.setText("");
     }//GEN-LAST:event_NouUsernameComponentShown
     private void A_VeureUsersComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeureUsersComponentShown
-        vista.carregaUsers(UsersAct);
+        vista.carregaUsers(modusers);
+        
     }//GEN-LAST:event_A_VeureUsersComponentShown
     private void LlistaPagComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_LlistaPagComponentShown
         ControladorVistes aux = new ControladorVistes();
@@ -2238,21 +2322,20 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_ResultatMouseDragged
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        if(Resultat.getSelectionCount()>0){
-           // int[] remove = Resultat.getSelectionRows();
-            TreePath[] pat = Resultat.getSelectionPaths();
-            for(TreePath aux: pat){
-                System.out.println("vull eliminar a "+aux.getLastPathComponent().toString());
-                //System.out.println(aux);
-                //String ahu = Resultat.getComponent(2).toString();
-                modelos.addElement(aux.getLastPathComponent().toString());
-                //Resultat.remove(aux.getLastPathComponent());
-                //Resultat.remove(aux);
-            }
-                Resultat.removeSelectionPaths(pat);
-            //Resultat.getModel();
-            
-        }
+    DefaultMutableTreeNode node = (DefaultMutableTreeNode) Resultat.getLastSelectedPathComponent();
+    if (node == null)JOptionPane.showMessageDialog(this, "Has de seleccionar una categoria!", capsalera, WARNING_MESSAGE);
+    else {
+        Object nodeInfo = node.getUserObject();
+
+    if (node.isLeaf()) {
+        
+    DefaultTreeModel aux = (DefaultTreeModel)Resultat.getModel();
+         modelos.addElement(node.toString());
+        aux.removeNodeFromParent(node);
+    } else {
+        JOptionPane.showMessageDialog(this, "Has de seleccionar una categoria, no una comunitat!", capsalera, WARNING_MESSAGE);
+    }
+    }
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -2266,8 +2349,61 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_AlgorismesValueChanged
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
+        if(UsersAct.getSelectedIndices().length>0) {
+            Boolean segueix = true;
+            if(UsersAct.getSelectedValue().toString().equals("admin")) JOptionPane.showMessageDialog(this, "Aquest usuari no es pot eliminar", capsalera, WARNING_MESSAGE);
+            else {
+            if(UsersAct.getSelectedValue().toString().equals(macro.getUserActual())) {
+                int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar-te a tu mateix?", capsalera, YES_NO_OPTION);
+                if(resposta==YES_OPTION) {
+                    A_PantallaPrincipal.setVisible(true);
+                    A_VeureUsers.setVisible(false);
+                }
+                else  segueix = false;
+            }
+            if(segueix) {
+            macro.getContUser().removeUser(UsersAct.getSelectedValue().toString());
+            modusers.removeElement(UsersAct.getSelectedValue().toString());
+            }
+            }
+        }
+        else JOptionPane.showMessageDialog(this, "Has de seleccionar quin usuari vols eliminar!", capsalera, WARNING_MESSAGE);
+
     }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        if(UsersAct.getSelectedIndices().length>0) {
+            macro.getContUser().addAdmin(UsersAct.getSelectedValue().toString());
+            JOptionPane.showMessageDialog(this, "Felicitats, aquest usuari ja és admin!", capsalera, WARNING_MESSAGE);
+        }
+        else JOptionPane.showMessageDialog(this, "Has de seleccionar quin usuari vols fer admninistrador!", capsalera, WARNING_MESSAGE);
+
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        userAdmin = true;
+        A_CreaUsuari.setVisible(true);
+        A_VeureUsers.setVisible(false);
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void A_VeureUsersComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeureUsersComponentHidden
+        modusers.removeAllElements();
+    }//GEN-LAST:event_A_VeureUsersComponentHidden
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        if(Penjades.getSelectedIndex()>=0) {
+        DefaultTreeModel nou = (DefaultTreeModel)Resultat.getModel();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) Resultat.getLastSelectedPathComponent();
+        //macro.getContUser().get
+        if (node == null)JOptionPane.showMessageDialog(this, "Has de seleccionar a quina comunitat vols afegir la comunitat seleccionada!", capsalera, WARNING_MESSAGE);
+        else {
+        TreeNode pare = node.getParent();
+        if (node.isLeaf())nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)pare, pare.getChildCount());
+        else nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)node, node.getChildCount());
+        }
+        }
+        else JOptionPane.showMessageDialog(this, "Has de seleccionar quina categoria vols afegir!", capsalera, WARNING_MESSAGE);
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2395,6 +2531,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JTree Resultat1;
     private javax.swing.JTextField Username;
     private javax.swing.JList UsersAct;
+    private DefaultListModel modusers;
     private javax.swing.JButton VisualitzaCerquesFetes;
     private javax.swing.JButton VisualitzaCerquesFetes1;
     private javax.swing.JButton jButton1;
@@ -2407,6 +2544,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -2446,7 +2584,6 @@ public class InterficiaProva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;

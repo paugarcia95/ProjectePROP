@@ -115,10 +115,11 @@ public class VCategoria extends javax.swing.JDialog {
     }
     public void NomCat(String nomCateg) {
         cat = nomCateg;
-        System.out.println(cat);
+        //System.out.println(cat);
         initComponents();
+        A_VisualitzaCateg.setVisible(false);
         A_ModificaCateg.setVisible(false);
-        omplirDades(CApunta ,CApuntada,PApunta,PApuntada);
+        
         A_VisualitzaCateg.setVisible(true);
         this.setAlwaysOnTop(false);
         this.setVisible(true);
@@ -230,6 +231,12 @@ public class VCategoria extends javax.swing.JDialog {
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
+            }
+        });
+
+        A_VisualitzaCateg.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                A_VisualitzaCategComponentShown(evt);
             }
         });
 
@@ -785,6 +792,7 @@ public class VCategoria extends javax.swing.JDialog {
 
     private void AfegeixCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixCActionPerformed
         if(!modelom.contains(jList1.getSelectedValue()))modelom.addElement(jList1.getSelectedValue());
+        jList1.clearSelection();
     }//GEN-LAST:event_AfegeixCActionPerformed
 
     private void EliminaC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaC1ActionPerformed
@@ -801,10 +809,21 @@ public class VCategoria extends javax.swing.JDialog {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         ArrayList<String> categs = new ArrayList<String>();
-        for(int i = 0; i < modelom.size();++i){
-            categs.add(modelom.getElementAt(i).toString());
-        }
+        for(int i = 0; i < modelom.size();++i) categs.add(modelom.getElementAt(i).toString());
         macro.getContAdUs().setCsubC(cat, categs);
+        categs = new ArrayList<String>();
+        for(int i = 0; i < modelo1.size();++i) categs.add(modelo1.getElementAt(i).toString());
+        macro.getContAdUs().setCsupC(cat, categs);
+        categs = new ArrayList<String>();
+        for(int i = 0; i < modelo2.size();++i) categs.add(modelo2.getElementAt(i).toString());
+        macro.getContAdUs().setCatPC(cat, categs);
+        categs = new ArrayList<String>();
+        for(int i = 0; i < modelo3.size();++i) categs.add(modelo3.getElementAt(i).toString());
+        macro.getContAdUs().setCatCP(cat, categs);
+        macro.getContAdUs().setNomCateg(cat, Nom.getText());
+        cat = Nom.getText();
+        A_VisualitzaCateg.setVisible(true);
+        A_ModificaCateg.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         visualitzaCatBut(CApuntada);
@@ -828,13 +847,20 @@ public class VCategoria extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton10ActionPerformed
     private void AfegeixC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixC1ActionPerformed
         if(!modelo1.contains(jList1.getSelectedValue()))modelo1.addElement(jList1.getSelectedValue());
+        jList1.clearSelection();
     }//GEN-LAST:event_AfegeixC1ActionPerformed
     private void AfegeixP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixP2ActionPerformed
         if(!modelo2.contains(jList2.getSelectedValue()))modelo2.addElement(jList2.getSelectedValue());
+        jList2.clearSelection();
     }//GEN-LAST:event_AfegeixP2ActionPerformed
     private void AfegeixP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixP1ActionPerformed
         if(!modelo3.contains(jList2.getSelectedValue()))modelo3.addElement(jList2.getSelectedValue());
+        jList2.clearSelection();
     }//GEN-LAST:event_AfegeixP1ActionPerformed
+
+    private void A_VisualitzaCategComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzaCategComponentShown
+        omplirDades(CApunta ,CApuntada,PApunta,PApuntada);
+    }//GEN-LAST:event_A_VisualitzaCategComponentShown
 
     /**
      * @param args the command line arguments

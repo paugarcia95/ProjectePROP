@@ -559,14 +559,15 @@ public class VPagina extends javax.swing.JDialog {
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         ArrayList<String> aux = new ArrayList<String>();
-        Component[] nous = CApuntada1.getComponents();
-        for(Component un: nous) aux.add(un.toString());
-        macro.getContAdUs().setPCP(pag, aux);
+        int mida = modelom.getSize();
+        for(int i = 0; i < mida; ++i)aux.add(modelom.getElementAt(i).toString());
+        macro.getContAdUs().setPagCP(pag, aux);
         aux = new ArrayList<String>();
-        nous = CApunta1.getComponents();
-        for(Component un: nous) aux.add(un.toString());
-        macro.getContAdUs().setPPC(pag, aux);
+        mida = modelo1.getSize();
+        for(int i = 0; i < mida; ++i) aux.add(modelo1.getElementAt(i).toString());
+        macro.getContAdUs().setPagPC(pag, aux);
         macro.getContAdUs().setNomPagina(pag, Nom.getText());
+        pag = Nom.getText();
         A_VeurePag.setVisible(true);
         A_ModificaPag.setVisible(false);
         

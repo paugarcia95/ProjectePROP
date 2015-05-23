@@ -10,7 +10,8 @@ import java.util.HashSet;
  *
  */
 public class AlgorismeNewmanGirvan {
-
+        public static int arestes;
+        public static Integer iterador;
 	/**
 	 * 
 	 * Creadora per defecte
@@ -47,21 +48,19 @@ public class AlgorismeNewmanGirvan {
 	 *         dispersió requerit
 	 */
 	public static HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
-            
-            
-                            long t1= System.currentTimeMillis();
+                iterador = 0;
+                long t1= System.currentTimeMillis();
 		GrafNewman util = new GrafNewman(G);
-                int arestes = util.getNumArestes();
+                arestes = util.getNumArestes();
                 util.invertirPesos();
-		util.calcularEdgeBetween();
+		util.calcularEdgeBetweenv2();
 		int quitoca = calculadora(arestes, percentatge);
                 System.out.println("El graf te "+arestes+ " arestes, i he de fer "+quitoca+" iteracions");
-                int iterador = 0;
 		while ( iterador< quitoca) {
                     System.out.println("Vaig x la iteracio "+iterador+", temps: "+ (System.currentTimeMillis()-t1));
                     t1 = System.currentTimeMillis();
 			util.esborrarMaxim();
-			util.calcularEdgeBetween();
+			util.calcularEdgeBetweenv2();
 			++iterador;
                         
 		}

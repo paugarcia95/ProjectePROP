@@ -54,6 +54,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="A_VisualitzaCateg">
+      <Events>
+        <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="A_VisualitzaCategComponentShown"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">

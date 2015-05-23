@@ -16,6 +16,7 @@ import static Interficie.InterficiaProva.*;
 import domini.Categoria;
 import domini.GrafDades;
 import domini.Pagina;
+import static Interficie.InterficiaProva.userAdmin;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -208,6 +210,9 @@ public class ControladorVistes {
         else {
             macro.getContUser().addUser(NouUsername.getText(), NovaPassword.getText());
             JOptionPane.showMessageDialog(comp, "Felicitats, conta creada!", capsalera, WARNING_MESSAGE);
+            if(userAdmin) {
+                macro.getContUser().addAdmin(NouUsername.getText());
+            }
         }
     }
     public void canviaDadesUser(JTextField NouUsername1, JTextField NovaPassword1){
@@ -494,8 +499,11 @@ public class ControladorVistes {
         }
         LlistaCerques.setListData(aux2);
     }
-    public void carregaUsers(JList UsersAct) {
-        ArrayList<String> auxc = macro.getContUser().getUsers();;
+    public void carregaUsers(DefaultListModel UsersAct) {
+        ArrayList<String> auxc = macro.getContUser().getUsers();
+        for(String us: auxc)UsersAct.addElement(us);
+        
+      /*  ArrayList<String> auxc = macro.getContUser().getUsers();;
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
         Iterator<String> it = auxc.iterator();
@@ -503,7 +511,7 @@ public class ControladorVistes {
             aux2[cont] = it.next();
             ++cont;
         }
-        UsersAct.setListData(aux2);
+        UsersAct.setListData(aux2);*/
     }
     
             

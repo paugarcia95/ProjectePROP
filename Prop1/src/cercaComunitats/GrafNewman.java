@@ -27,7 +27,6 @@ public class GrafNewman extends Graf {
 	private Integer maxj;           //Node j del maxNUMCM
 	private Integer maxNumCM;       //Maxim nombre de camins minims que passen per qualsevol aresta
 	private Integer numCom;     //Numero de comunitats actuals
-       
         
         /**
  * Floyd-Warshall algorithm. Finds all shortest paths among all pairs of nodes
@@ -113,7 +112,7 @@ public Boolean calcularEdgeBetweenv3() {
             }
             dist.set(nodeA, 0.0);
             Comparator<ArcP> compara = new arcPCCompara();
-            PriorityQueue<ArcP> q = new PriorityQueue<ArcP>(0,compara);  //definir comparador!
+            PriorityQueue<ArcP> q = new PriorityQueue<ArcP>(1,compara);  //definir comparador!
             q.add(new ArcP(0.0,nodeA));
             while(!q.isEmpty()){
                 Integer u = q.peek().node2;
