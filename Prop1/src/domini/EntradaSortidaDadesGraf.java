@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
@@ -499,12 +500,143 @@ public class EntradaSortidaDadesGraf {
 		}
 	}
 
-	public void carregarUsuaris(Map<String, Usuari> usuaris, File ruta) {
+	public void carregarUsuaris(Map<String, Usuari> MapUsuaris, File ruta) {
 
 	}
 
-	public void guardarUsuaris(Map<String, Usuari> usuaris, File ruta) {
+	public void guardarUsuaris(Map<String, Usuari> MapUsuaris, File ruta) {
+	/* 
+	 Format:
+	 
+	 usurname password esAdmin numCerques {
+	 	(CERQUES)
+		 nomComunitat Comentari DataCreacio DataModificacio nAlgorisme nDada nRelacioCat
+		 			 	nSemblaNom nTipuCerca nEvitaCat nEvitaPag nSubconjCat Paraula Valor
+		 { (EVITACAT)
+		 c1
+		 c2
+		 c3
+		 ...
+		 cn 
+		 }
+		 { (EVITAPAG)
+		 p1
+		 p2
+		 p3
+		 ...
+		 pn
+		 }
+		 { (SUBCONJ_DE_CATEGORIES)
+		 c1
+		 c2
+		 c3
+		 ...
+		 cn
+		 }
+		 
+		 * NumComunitats
+		 { (COMUNITATS)
+				 id numeroCategories
+				 { (CATEGORIES)
+				 c1
+				 c2
+				 c3
+				 ...
+				 cn
+				 }
+		  } 
+	 }
+	
+	 */	
+		PrintWriter docE = null;
 
+		try {
+			docE = new PrintWriter(new FileWriter(ruta));
+			Iterator<Usuari> usuaris = MapUsuaris.values().iterator();
+
+			while (usuaris.hasNext()) {
+				Usuari user = usuaris.next();
+				docE.println(
+						user.getUsername().replace(" ", "+")	 + " " + 
+						user.getPassword().replace(" ", "+")	 + " " +
+						user.esAdmin() 							 + " " + 
+						user.getNumCerques() 					 
+						);
+				
+				for (int i = 0; i < user.getNumCerques(); ++i) {
+					CercaComunitats c = user.getCerca(i);
+					
+					if (c.getNom().equals("")) 			docE.print("|NULL| ");
+					else docE.print(c.getNom().replace(" ", "+") + " ");
+					if (c.getComentari().equals("")) 	docE.print("|NULL| ");
+					else docE.print(c.getComentari().replace(" ", "+") + " ");
+					
+					docE.print(
+							c.getDataCreacio() 					+ " " + 
+							c.getDataModificacio() 				+ " "
+							);
+
+					Criteris criteris = c.getCriterisSeleccio();
+					docE.print(
+							criteris.getAlgorisme() 	+ " " + 
+							criteris.getDada() 			+ " " +
+							criteris.getRelacionsCat() 	+ " " +
+							criteris.getSemblaNom() 	+ " " + 
+							criteris.getTipuCerca() 	+ " "
+							);
+
+					ArrayList<String> evitaCat = criteris.getEvitaCat();
+					ArrayList<String> evitaPag = criteris.getEvitaPag();
+					ArrayList<String> subconj = criteris.getSubconjCat();
+					
+					docE.println(
+							evitaCat.size() 							+ " " + 
+							evitaPag.size() 							+ " " +
+							subconj.size()  							+ " " +
+							criteris.getParaulaClau().getParaula() 		+ " " +
+							criteris.getParaulaClau().getNum()			+ " "
+							);
+					
+					for (int j = 0; j < evitaCat.size(); ++j) {
+						docE.println(evitaCat.get(j));
+					}
+					for (int j = 0; j < evitaPag.size(); ++j) {
+						docE.println(evitaPag.get(j));
+					}
+					for (int j = 0; j < subconj.size(); ++j) {
+						docE.println(subconj.get(j));
+					}
+					
+					docE.println("* " + c.getNumComunitats()); //Digit de control
+					
+					for (int j = 0; j < c.getNumComunitats(); ++j) {
+						Comunitat com = c.getComunitat(j);
+						docE.print(
+								com.getId() + " " +
+								com.getNumeroDeCategories() + " "
+								);
+						
+						ArrayList<String> cats = com.getCategories();
+						for (int k = 0; k < com.getNumeroDeCategories(); ++k) {
+							docE.println(cats.get(k));
+						}
+					}
+				}
+			}
+			docE.println("**FIN**");
+		} catch (Exception e) {
+			System.out.println(e);
+			error(2);
+		} finally {
+			try {
+				// Nos aseguramos que se cierra el fichero.
+				if (null != docE)
+					docE.close();
+			} catch (Exception e2) {
+				System.out.println(e2);
+				error(7);
+			}
+		}
 	}
 
 	/**
