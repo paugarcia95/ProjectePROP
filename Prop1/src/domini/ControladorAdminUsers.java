@@ -264,15 +264,37 @@ public class ControladorAdminUsers {
 	 * Post:
 	 */
 	public Boolean setCatCP(String nomCat, ArrayList<String> cPs) {
-		return gd.setCatCP(nomCat, cPs);
+		ArrayList<String> memoria = new ArrayList<String>();
+		for (String relacio: gd.getCategoria(nomCat).getMapCP().keySet()) memoria.add(relacio);
+		
+		ArrayList<String> eliminar = new ArrayList<String>();
+		for (String s: memoria) if(!cPs.remove(s)) eliminar.add(s);
+		
+		boolean retorn = true;
+		Categoria cat = gd.getCategoria(nomCat);
+		for (String s: eliminar) gd.removeCP(cat, gd.getPagina(s));
+		for (String s: cPs) if (!gd.addCP(nomCat, s)) retorn = false;		
+		
+		return retorn;
 	}
 	
 	/**TODO
 	 * Pre:
 	 * Post:
 	 */
-	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {
-		return gd.setCatPC(nomCat, pCs);
+	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {		
+		ArrayList<String> memoria = new ArrayList<String>();
+		for (String relacio: gd.getCategoria(nomCat).getMapPC().keySet()) memoria.add(relacio);
+		
+		ArrayList<String> eliminar = new ArrayList<String>();
+		for (String s: memoria) if(!pCs.remove(s)) eliminar.add(s);
+		
+		boolean retorn = true;
+		Categoria cat = gd.getCategoria(nomCat);
+		for (String s: eliminar) gd.removePC(gd.getPagina(s), cat);
+		for (String s: pCs) if (!gd.addPC(s, nomCat)) retorn = false;		
+		
+		return retorn;
 	}
 	
 	/**TODO
@@ -280,7 +302,18 @@ public class ControladorAdminUsers {
 	 * Post:
 	 */
 	public Boolean setCsupC(String nomCat, ArrayList<String> sup) {
-		return gd.setCsupC(nomCat, sup);
+		ArrayList<String> memoria = new ArrayList<String>();
+		for (String relacio: gd.getCategoria(nomCat).getMapCSupC().keySet()) memoria.add(relacio);
+		
+		ArrayList<String> eliminar = new ArrayList<String>();
+		for (String s: memoria) if(!sup.remove(s)) eliminar.add(s);
+		
+		boolean retorn = true;
+		Categoria cat = gd.getCategoria(nomCat);
+		for (String s: eliminar) gd.removeCC(gd.getCategoria(s), cat);
+		for (String s: sup) if (!gd.addCC(s, nomCat)) retorn = false;
+		
+		return retorn;
 	}
 	
 	/**TODO
@@ -288,7 +321,18 @@ public class ControladorAdminUsers {
 	 * Post:
 	 */
 	public Boolean setCsubC(String nomCat, ArrayList<String> sub) {
-		return gd.setCsubC(nomCat, sub);
+		ArrayList<String> memoria = new ArrayList<String>();
+		for (String relacio: gd.getCategoria(nomCat).getMapCSubC().keySet()) memoria.add(relacio);
+		
+		ArrayList<String> eliminar = new ArrayList<String>();
+		for (String s: memoria) if(!sub.remove(s)) eliminar.add(s);
+		
+		boolean retorn = true;
+		Categoria cat = gd.getCategoria(nomCat);
+		for (String s: eliminar) gd.removeCC(cat, gd.getCategoria(s));
+		for (String s: sub) if (!gd.addCC(nomCat, s)) retorn = false;
+		
+		return retorn;
 	}
 	
 	/**
@@ -325,7 +369,18 @@ public class ControladorAdminUsers {
 	 * Post:
 	 */
 	public Boolean setPagCP(String nomPag, ArrayList<String> cPs) {
-		return gd.setPagCP(nomPag, cPs);
+		ArrayList<String> memoria = new ArrayList<String>();
+		for (String relacio: gd.getPagina(nomPag).getCP().keySet()) memoria.add(relacio);
+		
+		ArrayList<String> eliminar = new ArrayList<String>();
+		for (String s: memoria) if(!cPs.remove(s)) eliminar.add(s);
+		
+		boolean retorn = true;
+		Pagina pag = gd.getPagina(nomPag);
+		for (String s: eliminar) gd.removeCP(gd.getCategoria(s), pag);
+		for (String s: cPs) if (!gd.addCP(s, nomPag)) retorn = false;		
+		
+		return retorn;
 	}
 	
 	/**TODO
@@ -333,7 +388,18 @@ public class ControladorAdminUsers {
 	 * Post:
 	 */
 	public Boolean setPagPC(String nomPag, ArrayList<String> pCs) {
-		return gd.setPagPC(nomPag, pCs);
+		ArrayList<String> memoria = new ArrayList<String>();
+		for (String relacio: gd.getPagina(nomPag).getPC().keySet()) memoria.add(relacio);
+		
+		ArrayList<String> eliminar = new ArrayList<String>();
+		for (String s: memoria) if(!pCs.remove(s)) eliminar.add(s);
+		
+		boolean retorn = true;
+		Pagina pag = gd.getPagina(nomPag);
+		for (String s: eliminar) gd.removePC(pag, gd.getCategoria(s));
+		for (String s: pCs) if (!gd.addPC(nomPag, s)) retorn = false;		
+		
+		return retorn;
 	}
 	
 	/**

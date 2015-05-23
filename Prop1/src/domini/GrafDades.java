@@ -449,7 +449,7 @@ public class GrafDades {
 	/**
 	 * Pre: Cert
 	 * Post: TODO
-	 */	
+	 *	
 	public Boolean setCatCP(String nomCat, ArrayList<String> cPs) {
 		Categoria aux;
 		if (categories.containsKey(nomCat)) {
@@ -474,7 +474,7 @@ public class GrafDades {
 	/**
 	 * Pre: Cert
 	 * Post: TODO
-	 */	
+	 *	
 	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {
 		Categoria aux;
 		if (categories.containsKey(nomCat)) {
@@ -499,7 +499,7 @@ public class GrafDades {
 	/**
 	 * Pre: Cert
 	 * Post: TODO
-	 */	
+	 *
 	public Boolean setCsupC(String nomCat, ArrayList<String> sup) {
 		Categoria aux;
 		if (categories.containsKey(nomCat)) {
@@ -524,7 +524,7 @@ public class GrafDades {
 	/**
 	 * Pre: Cert
 	 * Post: TODO
-	 */	
+	 *
 	public Boolean setCsubC(String nomCat, ArrayList<String> sub) {
 		Categoria aux;
 		if (categories.containsKey(nomCat)) {
@@ -549,7 +549,7 @@ public class GrafDades {
 	/**
 	 * Pre: Cert
 	 * Post: TODO
-	 */	
+	 *
 	public Boolean setPagCP(String nomPag, ArrayList<String> cPs) {
 		Pagina aux;
 		if (pagines.containsKey(nomPag)) {
@@ -574,7 +574,7 @@ public class GrafDades {
 	/**
 	 * Pre: Cert
 	 * Post: TODO
-	 */	
+	 *
 	public Boolean setPagPC(String nomPag, ArrayList<String> pCs) {
 		Pagina aux;
 		if (pagines.containsKey(nomPag)) {
