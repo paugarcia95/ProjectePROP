@@ -178,7 +178,6 @@ public class ControladorAdminUsers {
 	/**
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
 	public Boolean carregarFitxerEnllacosInserir(String ruta) {return true;}
 	
@@ -186,10 +185,9 @@ public class ControladorAdminUsers {
 	/**
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
 	public Boolean eliminarDades(){
-		gd = new GrafDades();
+		gd = new GrafDades(); //TODO Pre Post
 		return true;
 	}
 	
@@ -220,30 +218,38 @@ public class ControladorAdminUsers {
 	/**
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean addCP(String nom_cat, ArrayList<String> CPs ) {return true;}
+	public Boolean addCatCP(String nomCat, ArrayList<String> cPs ) {
+		for (String nomPag: cPs) gd.addCP(nomCat, nomPag); //TODO Pre Post boolean i Lucid
+		return true;
+	}
 	
 	/**
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean addPC(String nom_cat, ArrayList<String> PCs) {return true;}
+	public Boolean addCatPC(String nomCat, ArrayList<String> pCs) {
+		for (String nomPag: pCs) gd.addPC(nomPag, nomCat); //TODO Pre Post boolean i Lucid
+		return true;
+	}
 	
 	/**
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean addCsupC(String nom_cat, ArrayList<String> Sup) {return true;}
+	public Boolean addCsupC(String nomCat, ArrayList<String> sup) {
+		for (String aux: sup) gd.addCC(aux, nomCat);  //TODO Pre Post boolean i Lucid
+		return true;
+	}
 	
 	/**
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean addCsubC(String nom_cat, ArrayList<String> Sub) {return true;}
+	public Boolean addCsubC(String nomCat, ArrayList<String> sub) {
+		for (String aux: sub) gd.addCC(nomCat, aux); //TODO Pre Post boolean i Lucid
+		return true;
+	}
 	
 	/**
 	 * Pre: Cert
@@ -253,33 +259,37 @@ public class ControladorAdminUsers {
 		return gd.setNomCategoria(nomAntic, nomNou);
 	}
 	
-	/**
+	/**TODO
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean setCP(String nom_cat, ArrayList<String> CPs) {return true;}
+	public Boolean setCatCP(String nomCat, ArrayList<String> cPs) {
+		return gd.setCatCP(nomCat, cPs);
+	}
 	
-	/**
+	/**TODO
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean setPC(String nom_cat, ArrayList<String> PCs) {return true;}
+	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {
+		return gd.setCatPC(nomCat, pCs);
+	}
 	
-	/**
+	/**TODO
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean setCsupC(String nom_cat, ArrayList<String> Sup) {return true;}
+	public Boolean setCsupC(String nomCat, ArrayList<String> sup) {
+		return gd.setCsupC(nomCat, sup);
+	}
 	
-	/**
+	/**TODO
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean setCsubC(String nom_cat, ArrayList<String> Sub) {return true;}
+	public Boolean setCsubC(String nomCat, ArrayList<String> sub) {
+		return gd.setCsubC(nomCat, sub);
+	}
 	
 	/**
 	 * Pre: Cert
@@ -293,16 +303,14 @@ public class ControladorAdminUsers {
 	/**
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean addPCP(String nom_pag, ArrayList<String> CPs) {return true;}
+	public Boolean addPagCP(String nomPag, ArrayList<String> cPs) {return true;}
 	
 	/**
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean addPPC(String nom_pag, ArrayList<String> PCs) {return true;}
+	public Boolean addPagPC(String nomPag, ArrayList<String> pCs) {return true;}
 	
 	/**
 	 * Pre: Cert
@@ -312,19 +320,21 @@ public class ControladorAdminUsers {
 		return gd.setNomPagina(nomAntic, nomNou);
 	}
 	
-	/**
+	/**TODO
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean setPCP(String nom_pag, ArrayList<String> CPs) {return true;}
+	public Boolean setPagCP(String nomPag, ArrayList<String> cPs) {
+		return gd.setPagCP(nomPag, cPs);
+	}
 	
-	/**
+	/**TODO
 	 * Pre:
 	 * Post:
-	 * @return
 	 */
-	public Boolean setPPC(String nom_pag, ArrayList<String> PCs) {return true;}
+	public Boolean setPagPC(String nomPag, ArrayList<String> pCs) {
+		return gd.setPagPC(nomPag, pCs);
+	}
 	
 	/**
 	 * Pre: Cert

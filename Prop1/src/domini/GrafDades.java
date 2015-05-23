@@ -448,6 +448,156 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
+	 * Post: TODO
+	 */	
+	public Boolean setCatCP(String nomCat, ArrayList<String> cPs) {
+		Categoria aux;
+		if (categories.containsKey(nomCat)) {
+			aux = categories.get(nomCat);
+			Map<String, Pagina> CP = aux.getMapCP();
+			for (Pagina pag : CP.values())
+			{
+				pag.removeCP(nomCat);
+			}
+		}
+		else {
+			aux = new Categoria(nomCat);
+			categories.put(nomCat, aux);
+		}
+		boolean retorn = true;
+		for (String nomPag: cPs) {
+			if (!this.addCP(nomCat, nomPag)) retorn = false;
+		}
+		return retorn;
+	}
+	
+	/**
+	 * Pre: Cert
+	 * Post: TODO
+	 */	
+	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {
+		Categoria aux;
+		if (categories.containsKey(nomCat)) {
+			aux = categories.get(nomCat);
+			Map<String, Pagina> PC = aux.getMapPC();
+			for (Pagina pag : PC.values())
+			{
+				pag.removePC(nomCat);
+			}
+		}
+		else {
+			aux = new Categoria(nomCat);
+			categories.put(nomCat, aux);
+		}
+		boolean retorn = true;
+		for (String nomPag: pCs) {
+			if (!this.addPC(nomCat, nomPag)) retorn = false;
+		}
+		return retorn;
+	}
+	
+	/**
+	 * Pre: Cert
+	 * Post: TODO
+	 */	
+	public Boolean setCsupC(String nomCat, ArrayList<String> sup) {
+		Categoria aux;
+		if (categories.containsKey(nomCat)) {
+			aux = categories.get(nomCat);
+			Map<String, Categoria> CsupC = aux.getMapCSupC();
+			for (Categoria cat : CsupC.values())
+			{
+				cat.removeCsubC(nomCat);
+			}
+		}
+		else {
+			aux = new Categoria(nomCat);
+			categories.put(nomCat, aux);
+		}
+		boolean retorn = true;
+		for (String nomAux: sup) {
+			if (!this.addCC(nomAux, nomCat)) retorn = false;
+		}
+		return retorn;
+	}
+	
+	/**
+	 * Pre: Cert
+	 * Post: TODO
+	 */	
+	public Boolean setCsubC(String nomCat, ArrayList<String> sub) {
+		Categoria aux;
+		if (categories.containsKey(nomCat)) {
+			aux = categories.get(nomCat);
+			Map<String, Categoria> CsubC = aux.getMapCSubC();
+			for (Categoria cat : CsubC.values())
+			{
+				cat.removeCsupC(nomCat);
+			}
+		}
+		else {
+			aux = new Categoria(nomCat);
+			categories.put(nomCat, aux);
+		}
+		boolean retorn = true;
+		for (String nomAux: sub) {
+			if (!this.addCC(nomCat, nomAux)) retorn = false;
+		}
+		return retorn;
+	}
+	
+	/**
+	 * Pre: Cert
+	 * Post: TODO
+	 */	
+	public Boolean setPagCP(String nomPag, ArrayList<String> cPs) {
+		Pagina aux;
+		if (pagines.containsKey(nomPag)) {
+			aux = pagines.get(nomPag);
+			Map<String, Categoria> CP = aux.getCP();
+			for (Categoria cat : CP.values())
+			{
+				cat.removeCP(nomPag);
+			}
+		}
+		else {
+			aux = new Pagina(nomPag);
+			pagines.put(nomPag, aux);
+		}
+		boolean retorn = true;
+		for (String nomCat: cPs) {
+			if (!this.addCP(nomCat, nomPag)) retorn = false;
+		}
+		return retorn;
+	}
+	
+	/**
+	 * Pre: Cert
+	 * Post: TODO
+	 */	
+	public Boolean setPagPC(String nomPag, ArrayList<String> pCs) {
+		Pagina aux;
+		if (pagines.containsKey(nomPag)) {
+			aux = pagines.get(nomPag);
+			Map<String, Categoria> PC = aux.getPC();
+			for (Categoria cat : PC.values())
+			{
+				cat.removePC(nomPag);
+			}
+		}
+		else {
+			aux = new Pagina(nomPag);
+			pagines.put(nomPag, aux);
+		}
+		boolean retorn = true;
+		for (String nomCat: pCs) {
+			if (!this.addPC(nomCat, nomPag)) retorn = false;
+		}
+		return retorn;
+	}
+	
+	/**
+	 * Pre: Cert
 	 * Post: Retorna el conjunt de categories
 	 */
 	public Collection<Categoria> getCategories() {
