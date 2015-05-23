@@ -183,11 +183,11 @@ public class ControladorAdminUsers {
 	
 	
 	/**
-	 * Pre:
-	 * Post:
+	 * Pre: Cert
+	 * Post: La Wikipedia és buida
 	 */
 	public Boolean eliminarDades(){
-		gd = new GrafDades(); //TODO Pre Post
+		gd = new GrafDades();
 		return true;
 	}
 	
@@ -216,39 +216,43 @@ public class ControladorAdminUsers {
 	}
 	
 	/**
-	 * Pre:
-	 * Post:
+	 * Pre: Cert
+	 * Post: La Categoria amb nom == nomCat apunta a les pàgines a cPs i retorna true, retorna false altrament
 	 */
 	public Boolean addCatCP(String nomCat, ArrayList<String> cPs ) {
-		for (String nomPag: cPs) gd.addCP(nomCat, nomPag); //TODO Pre Post boolean i Lucid
-		return true;
+		boolean retorn = true;
+		for (String nomPag: cPs) if (!gd.addCP(nomCat, nomPag)) retorn = false;
+		return retorn;
 	}
 	
 	/**
-	 * Pre:
-	 * Post:
+	 * Pre: Cert
+	 * Post: La Categoria amb nom == nomCat és apuntada per les pàgines a pCs i retorna true, retorna false altrament
 	 */
 	public Boolean addCatPC(String nomCat, ArrayList<String> pCs) {
-		for (String nomPag: pCs) gd.addPC(nomPag, nomCat); //TODO Pre Post boolean i Lucid
-		return true;
+		boolean retorn = true;
+		for (String nomPag: pCs) if (!gd.addPC(nomPag, nomCat)) retorn = false;
+		return retorn;
 	}
 	
 	/**
-	 * Pre:
-	 * Post:
+	 * Pre: Cert
+	 * Post: La Categoria amb nom == nomCat és subcategoria de les categories a sup i retorna true, retorna false altrament
 	 */
 	public Boolean addCsupC(String nomCat, ArrayList<String> sup) {
-		for (String aux: sup) gd.addCC(aux, nomCat);  //TODO Pre Post boolean i Lucid
-		return true;
+		boolean retorn = true;
+		for (String aux: sup) if (!gd.addCC(aux, nomCat)) retorn = false;
+		return retorn;
 	}
 	
 	/**
-	 * Pre:
-	 * Post:
+	 * Pre: Cert
+	 * Post: La Categoria amb nom == nomCat és supercategoria de les categories a sub i retorna true, retorna false altrament
 	 */
 	public Boolean addCsubC(String nomCat, ArrayList<String> sub) {
-		for (String aux: sub) gd.addCC(nomCat, aux); //TODO Pre Post boolean i Lucid
-		return true;
+		boolean retorn = true;
+		for (String aux: sub) if (!gd.addCC(nomCat, aux)) retorn = false;
+		return retorn;
 	}
 	
 	/**
@@ -259,9 +263,9 @@ public class ControladorAdminUsers {
 		return gd.setNomCategoria(nomAntic, nomNou);
 	}
 	
-	/**TODO
-	 * Pre:
-	 * Post:
+	/**
+	 * Pre: Existeix una Categoria a GrafDades amb nom == nomCat
+	 * Post: La Categoria amb nom == nomCat només apunta a les pàgines a cPs i retorna true, retorna false altrament
 	 */
 	public Boolean setCatCP(String nomCat, ArrayList<String> cPs) {
 		ArrayList<String> memoria = new ArrayList<String>();
@@ -278,9 +282,9 @@ public class ControladorAdminUsers {
 		return retorn;
 	}
 	
-	/**TODO
-	 * Pre:
-	 * Post:
+	/**
+	 * Pre: Existeix una Categoria a GrafDades amb nom == nomCat
+	 * Post: La Categoria amb nom == nomCat només és apuntada per les pàgines a pCs i retorna true, retorna false altrament
 	 */
 	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {		
 		ArrayList<String> memoria = new ArrayList<String>();
@@ -297,9 +301,9 @@ public class ControladorAdminUsers {
 		return retorn;
 	}
 	
-	/**TODO
-	 * Pre:
-	 * Post:
+	/**
+	 * Pre: Existeix una Categoria a GrafDades amb nom == nomCat
+	 * Post: La Categoria amb nom == nomCat només és subcategoria de les categories a sup i retorna true, retorna false altrament
 	 */
 	public Boolean setCsupC(String nomCat, ArrayList<String> sup) {
 		ArrayList<String> memoria = new ArrayList<String>();
@@ -316,9 +320,9 @@ public class ControladorAdminUsers {
 		return retorn;
 	}
 	
-	/**TODO
-	 * Pre:
-	 * Post:
+	/**
+	 * Pre: Existeix una Categoria a GrafDades amb nom == nomCat
+	 * Post: La Categoria amb nom == nomCat només és supercategoria de les categories a sub i retorna true, retorna false altrament
 	 */
 	public Boolean setCsubC(String nomCat, ArrayList<String> sub) {
 		ArrayList<String> memoria = new ArrayList<String>();
@@ -344,17 +348,25 @@ public class ControladorAdminUsers {
 		return gd.addPagina(pag);
 	}
 	
-	/**
-	 * Pre:
-	 * Post:
+	/** TODO
+	 * Pre: Cert
+	 * Post: La Pàgina amb nom == nomPag és apuntada per les categories a cPs i retorna true, retorna false altrament
 	 */
-	public Boolean addPagCP(String nomPag, ArrayList<String> cPs) {return true;}
+	public Boolean addPagCP(String nomPag, ArrayList<String> cPs) {
+		boolean retorn = true;
+		for (String nomCat: cPs) if (!gd.addCP(nomCat, nomPag)) retorn = false;
+		return retorn;
+	}
 	
-	/**
-	 * Pre:
-	 * Post:
+	/** TODO
+	 * Pre: Cert
+	 * Post: La Pàgina amb nom == nomPag apunta a les categories a pCs i retorna true, retorna false altrament
 	 */
-	public Boolean addPagPC(String nomPag, ArrayList<String> pCs) {return true;}
+	public Boolean addPagPC(String nomPag, ArrayList<String> pCs) {
+		boolean retorn = true;
+		for (String nomCat: pCs) if (!gd.addPC(nomPag, nomCat)) retorn = false;
+		return retorn;
+	}
 	
 	/**
 	 * Pre: Cert
@@ -364,9 +376,9 @@ public class ControladorAdminUsers {
 		return gd.setNomPagina(nomAntic, nomNou);
 	}
 	
-	/**TODO
-	 * Pre:
-	 * Post:
+	/**
+	 * Pre: Existeix una Pàgina a GrafDades amb nom == nomPag
+	 * Post: La Pàgina amb nom == nomPag només és apuntada per les categories a cPs i retorna true, retorna false altrament
 	 */
 	public Boolean setPagCP(String nomPag, ArrayList<String> cPs) {
 		ArrayList<String> memoria = new ArrayList<String>();
@@ -383,9 +395,9 @@ public class ControladorAdminUsers {
 		return retorn;
 	}
 	
-	/**TODO
-	 * Pre:
-	 * Post:
+	/**
+	 * Pre: Existeix una Pàgina a GrafDades amb nom == nomPag
+	 * Post: La Pàgina amb nom == nomPag només apunta a les categories a pCs i retorna true, retorna false altrament
 	 */
 	public Boolean setPagPC(String nomPag, ArrayList<String> pCs) {
 		ArrayList<String> memoria = new ArrayList<String>();
