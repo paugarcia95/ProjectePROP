@@ -29,6 +29,7 @@ public class Usuari {
 	
 	public Usuari() {
 		username = "NoIndicat";
+		password = "PerDefecte";
 		admin = false;
 		cerquesFetes = new ArrayList<CercaComunitats>();
 	}
