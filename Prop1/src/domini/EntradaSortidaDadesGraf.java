@@ -75,16 +75,19 @@ public class EntradaSortidaDadesGraf {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e);
+			error(3);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e);
+			error(1);
 		} finally {
 			try {
 				if (b != null) {
 					b.close();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println(e);
+				error(7);
 			}
 		}
 	}
@@ -298,11 +301,16 @@ public class EntradaSortidaDadesGraf {
 			if ((s = b.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(s);
 				if (!st.hasMoreTokens() || !st.nextToken().equals("|CATEGORIES|")) {
-					error(4);
+					error(5);
 					return;
 				}
 				if (st.hasMoreTokens()) {
-					nCats = Integer.valueOf(st.nextToken());
+					try {
+						nCats = Integer.valueOf(st.nextToken());
+					} catch (NumberFormatException e) {
+						error(4);
+						return;
+					}
 				} else {
 					error(4);
 					return;
@@ -372,7 +380,12 @@ public class EntradaSortidaDadesGraf {
 					}
 				}
 				if (st.hasMoreTokens()) {
-					nPags = Integer.valueOf(st.nextToken());
+					try {
+						nPags = Integer.valueOf(st.nextToken());
+					} catch (NumberFormatException e) {
+						error(4);
+						return;
+					}
 				} else {
 					error(4);
 					return;
@@ -399,16 +412,19 @@ public class EntradaSortidaDadesGraf {
 			}
 
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e);
+			error(3);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e);
+			error(1);
 		} finally {
 			try {
 				if (b != null) {
 					b.close();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println(e);
+				error(7);
 			}
 		}
 	}
