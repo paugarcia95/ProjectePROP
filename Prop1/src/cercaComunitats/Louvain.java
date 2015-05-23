@@ -27,7 +27,6 @@ public class Louvain {
 			primera.add(act);
 			Comunidades.add(primera);
 			Mapa.put(act, primera);
-			
 		}
 		Historia.addElement(Mapa);
 		calcPertenencia();

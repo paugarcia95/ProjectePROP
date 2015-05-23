@@ -488,10 +488,10 @@ public Boolean calcularEdgeBetweenv3() {
             for(int i = 0; i < NCM.size();++i) {
                 QueueVector camins = getCamiMinim(i);
                 for(int j=0; j < NCM.size();++j) {
-                    System.out.println("Cami de "+DiccionariInvers.get(i)+" a "+DiccionariInvers.get(j)+": ");
+                   // System.out.println("Cami de "+DiccionariInvers.get(i)+" a "+DiccionariInvers.get(j)+": ");
                     while(!camins.getQueue(j).isEmpty()) {
                         Aresta aux = camins.pop(j);
-                        System.out.println(aux);
+                       // System.out.println(aux);
                         //System.out.println(", de "+DiccionariInvers.get(aux.node1)+ " a "+DiccionariInvers.get(aux.node2));
                         Integer act = NCM.get(aux.node1).get(aux.node2);
                         ++act;

@@ -143,4 +143,5 @@ public class GrafLouvain extends Graf {
 		return sumaPesosAdjacentsInclusiva(Comunitat) - sumaPesos(Comunitat);
 	}
 	
+	
 }
