@@ -43,33 +43,50 @@ public class EntradaSortidaDadesGraf {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public void llegirGrafDades(GrafDades G, File ruta) throws FileNotFoundException, IOException {
-		BufferedReader b = new BufferedReader(new FileReader(ruta));
+	public void llegirGrafDades(GrafDades G, File ruta) {
+		BufferedReader b = null;
 		String s;
 
-		while ((s = b.readLine()) != null) {
-			StringTokenizer st = new StringTokenizer(s);
+		try {
+			b = new BufferedReader(new FileReader(ruta));
 
-			while (st.hasMoreTokens() && st.countTokens() >= 4) {
-				String word1 = st.nextToken();
-				st.nextToken();
-				String link = st.nextToken();
-				String word2 = st.nextToken();
-				st.nextToken();
+			while ((s = b.readLine()) != null) {
+				StringTokenizer st = new StringTokenizer(s);
 
-				if (link.equals("CsubC"))
-					G.addCC(word1, word2);
-				else if (link.equals("CsupC"))
-					G.addCC(word2, word1);
-				else if (link.equals("CP"))
-					G.addCP(word1, word2);
-				else if (link.equals("PC"))
-					G.addPC(word1, word2);
-				else
-					System.out.println("Error al crear el graf: Comprova la sintaxi de l'entrada");
+				while (st.hasMoreTokens() && st.countTokens() >= 4) {
+					String word1 = st.nextToken();
+					st.nextToken();
+					String link = st.nextToken();
+					String word2 = st.nextToken();
+					st.nextToken();
+
+					if (link.equals("CsubC"))
+						G.addCC(word1, word2);
+					else if (link.equals("CsupC"))
+						G.addCC(word2, word1);
+					else if (link.equals("CP"))
+						G.addCP(word1, word2);
+					else if (link.equals("PC"))
+						G.addPC(word1, word2);
+					else {
+						error(4);
+						return;
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (b != null) {
+					b.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
-		b.close();
 	}
 
 	/**
@@ -100,7 +117,7 @@ public class EntradaSortidaDadesGraf {
 				Iterator<Pagina> PC = c.getMapPC().values().iterator();
 				Iterator<Categoria> CsupC = c.getMapCSupC().values().iterator();
 				// Iterator<Categoria> CsubC = c.getMapCSubC().values().iterator();
-				// Aquest �ltim no cal ja que nom�s amb els enlla�os CsupC ja es
+				// Aquest ultim no cal ja que nom�s amb els enlla�os CsupC ja es
 				// pot representar tot el graf
 
 				while (CP.hasNext()) {
@@ -121,7 +138,7 @@ public class EntradaSortidaDadesGraf {
 
 		} catch (Exception e) {
 			System.out.println(e);
-			System.out.println("Error a l'escriure a l'arxiu");
+			error(3);
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
@@ -129,7 +146,7 @@ public class EntradaSortidaDadesGraf {
 					docE.close();
 			} catch (Exception e2) {
 				System.out.println(e2);
-				System.out.println("Error al tancar l'arxiu");
+				error(7);
 			}
 		}
 	}
@@ -187,7 +204,7 @@ public class EntradaSortidaDadesGraf {
 					else if (link.equals("CsupC")) {
 						docE.println(word2 + " -> " + word1);
 					} else {
-						System.out.println("Error al crear el graf: Comprova la sintaxi de l'entrada");
+						error(4);
 						docE.close();
 						docL.close();
 						return;
@@ -203,7 +220,7 @@ public class EntradaSortidaDadesGraf {
 
 		} catch (Exception e) {
 			System.out.println(e);
-			System.out.println("Error: no s'ha trobat el fitxer o no s'hi pot escriure");
+			error(3);
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
@@ -211,21 +228,21 @@ public class EntradaSortidaDadesGraf {
 					docE.close();
 			} catch (Exception e2) {
 				System.out.println(e2);
-				System.out.println("Error: no es pot tancar el fitxer d'escriptura");
+				error(7);
 			}
 			try {
 				if (null != docL)
 					docL.close();
 			} catch (Exception e2) {
 				System.out.println(e2);
-				System.out.println("Error: no es pot tancar el fitxer de lectura");
+				error(7);
 			}
 		}
 	}
 
 	/**
 	 * Llegeix del canal standard d'entrada una aresta (en format: node1
-	 * tipusEnlla� node2) i l'afegeix a G.
+	 * tipusEnllac node2) i l'afegeix a G.
 	 * 
 	 * @param G
 	 *            El graf al que es vol afegir una Aresta.
@@ -270,7 +287,124 @@ public class EntradaSortidaDadesGraf {
 	}
 
 	public void carregarGrafDades(GrafDades G, File ruta) {
+		BufferedReader b = null;
+		try {
+			b = new BufferedReader(new FileReader(ruta));
+			String s;
+			int nCats=0;
+			int nPags=0;
+			int iter = 0;
+			
+			if ((s = b.readLine()) != null) {
+				StringTokenizer st = new StringTokenizer(s);
+				if (!st.hasMoreTokens() || !st.nextToken().equals("|CATEGORIES|")) {
+					error(4);
+					return;
+				}
+				if (st.hasMoreTokens()) {
+					nCats = Integer.valueOf(st.nextToken());
+				} else {
+					error(4);
+					return;
+				}
+				
+			} else {
+				error(5);
+				return;
+			}
+			
+			while (iter < nCats && (s = b.readLine()) != null) {
+				// linia a linia
+				String[] enllacos = s.split("\\|");
+				if (enllacos.length < 1) {
+					error(4);
+					return;
+				} else if (enllacos.length == 1) {
+					if (!G.existsCategoria(enllacos[0]))
+						G.addCategoria(new Categoria(enllacos[0]));
+				}
+				String c = enllacos[0];
 
+				for (int i = 1; i < enllacos.length; ++i) {
+					// de "|" a "|"
+					String[] c2 = enllacos[i].split(" ");
+
+					if (i == 1) {
+						// CP
+						for (int j = 0; j < c2.length; ++j) {
+							// de categoria en categoria
+							if (!c2[j].equals("")) {
+								G.addCP(c, c2[j]);
+							}
+						}
+					} else if (i == 2) {
+						// PC
+						for (int k = 0; k < c2.length; ++k) {
+							if (!c2[k].equals("")) {
+								G.addPC(c2[k], c);
+							}
+						}
+					} else if (i == 3) {
+						// CC
+						for (int k = 0; k < c2.length; ++k) {
+							if (!c2[k].equals("")) {
+								G.addCC(c2[k], c);
+							}
+						}
+					} else if (i != 0) {
+						error(4);
+						return;
+					}
+				}
+				++iter;
+			}
+
+			if ((s = b.readLine()) != null) {
+				StringTokenizer st = new StringTokenizer(s);
+				if (!st.hasMoreTokens() || !st.nextToken().equals("|PAGINES|")) {
+					error(4);
+					return;
+				}
+				if (st.hasMoreTokens()) {
+					nPags = Integer.valueOf(st.nextToken());
+				} else {
+					error(4);
+					return;
+				}
+
+			} else {
+				error(5);
+				return;
+			}
+
+			iter = 0;
+			while (iter < nPags && (s = b.readLine()) != null) {
+				if (s.contains(" ")) {
+					error(4);
+					return;
+				}
+				if (!G.existsPagina(s))
+					G.addPagina(new Pagina(s));
+				++iter;
+			}
+
+			if (!b.readLine().equals("**FIN**")) {
+				error(6);
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (b != null) {
+					b.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void guardarGrafDades(GrafDades G, File ruta) {
@@ -282,55 +416,55 @@ public class EntradaSortidaDadesGraf {
 			fichEscr = new FileWriter(ruta);
 			docE = new PrintWriter(fichEscr);
 
-			docE.println("|CATEGORIES|");
+			docE.print("|CATEGORIES| " + G.getNombreCategories());
 
 			Iterator<Categoria> it = G.getCategories().iterator();
 
 			while (it.hasNext()) {
+				docE.println();
 				Categoria c = it.next();
 				String c1 = c.getNom();
 
-				docE.println(c1 + " *");
+				docE.print(c1);
 
 				Iterator<Pagina> CP = c.getMapCP().values().iterator();
 				Iterator<Pagina> PC = c.getMapPC().values().iterator();
 				Iterator<Categoria> CsupC = c.getMapCSupC().values().iterator();
 
-				docE.println("| " + c.getMapCP().values().size());
+				docE.print("|");
 
 				while (CP.hasNext()) {
 					Pagina p = CP.next();
-					docE.println(p.getNom());
+					docE.print(p.getNom() + " ");
 				}
 
-				docE.println("| " + c.getMapPC().values().size());
+				docE.print("|");
 
 				while (PC.hasNext()) {
 					Pagina p = PC.next();
-					docE.println(p.getNom());
+					docE.print(p.getNom() + " ");
 				}
 
-				docE.println("| " + c.getMapCSupC().values().size());
+				docE.print("|");
 
 				while (CsupC.hasNext()) {
 					Categoria c2 = CsupC.next();
-					docE.println(c2.getNom());
+					docE.print(c2.getNom() + " ");
 				}
 			}
-
-			docE.println("|PAGINES|");
+			docE.println();
+			docE.println("|PAGINES| " + G.getNombrePagines());
 
 			Iterator<Pagina> it2 = G.getPagines().iterator();
 
-			docE.println("*N " + G.getPagines().size());
-
 			while (it2.hasNext()) {
-				docE.println(it2.next().getNom() + " * ");
+				docE.println(it2.next().getNom());
 			}
+			docE.print("**FIN**");
 
 		} catch (Exception e) {
 			System.out.println(e);
-			System.out.println("Error a l'escriure a l'arxiu");
+			error(2);
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
@@ -338,10 +472,9 @@ public class EntradaSortidaDadesGraf {
 					docE.close();
 			} catch (Exception e2) {
 				System.out.println(e2);
-				System.out.println("Error al tancar l'arxiu");
+				error(7);
 			}
 		}
-
 	}
 
 	public void carregarUsuaris(Map<String, Usuari> usuaris, File ruta) {
@@ -350,6 +483,52 @@ public class EntradaSortidaDadesGraf {
 
 	public void guardarUsuaris(Map<String, Usuari> usuaris, File ruta) {
 
+	}
+
+	/**
+	 * Escriu l'error amb codi d'error e per pantalla
+	 * 
+	 * @exception 1: Error de lectura
+	 * @exception 2: Error d'escrpitura
+	 * @exception 3: No s'ha trobat el fitxer
+	 * @exception 4: Error en la sintaxi del fitxer d'entrada
+	 * @exception 5: Fitxer d'entrada sense dades
+	 * @exception 6: L'arxiu s'ha llegit correctament però pot contenir errors.
+	 *            Revisa la sintaxi per si de cas
+	 * @exception 7: Error al tancar l'arxiu
+	 * @exception default
+	 *                : Error indeterminat
+	 * 
+	 * @param e
+	 *            Codi de l'error
+	 */
+	private void error(int e) {
+		switch (e) {
+			case 1 :
+				System.out.println("Error de lectura");
+				return;
+			case 2 :
+				System.out.println("Error d'escrpitura");
+				return;
+			case 3 :
+				System.out.println("No s'ha trobat el fitxer");
+				return;
+			case 4 :
+				System.out.println("Error en la sintaxi del fitxer d'entrada");
+				return;
+			case 5 :
+				System.out.println("Fitxer d'entrada sense dades");
+				return;
+			case 6 :
+				System.out
+						.println("L'arxiu s'ha llegit correctament però pot contenir errors. Revisa la sintaxi per si de cas");
+				return;
+			case 7 :
+				System.out.println("Error al tancar l'arxiu");
+				return;
+			default :
+				System.out.println("Error indeterminat");
+		}
 	}
 
 }
