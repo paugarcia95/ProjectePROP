@@ -27,7 +27,95 @@ public class GrafNewman extends Graf {
 	private Integer maxj;           //Node j del maxNUMCM
 	private Integer maxNumCM;       //Maxim nombre de camins minims que passen per qualsevol aresta
 	private Integer numCom;     //Numero de comunitats actuals
+       
+        private class ArcP{
+            public Double pes;
+            public Integer node2;
+		/**
+		 * Constructora per defecte. (Cris)
+		 * 
+		 * @param node1
+		 *            El node d'un dels extrems de l'aresta.
+		 * @param nodeB
+		 *            El node de l'altre extrem.
+		 * @return Una Aresta formada per node1 i node2
+		 **/
+		public ArcP(Double pes, int node2) {
+			this.pes = pes;
+			this.node2 = node2;
+		}
+        };
+        public class arcPCCompara implements Comparator<ArcP> {
+            @Override
+            public int compare(ArcP x, ArcP y) {
+                return (int)(x.pes*100-y.pes*100);
+            }
+        }
+        private ArrayList<Queue<Aresta> > getCamiMinimv2(Integer nodeA){
+            ArrayList<Queue<Aresta> > result = new ArrayList<Queue<Aresta> >();
+            int num = llista.size();
+            ArrayList<Double> dist = new ArrayList<Double>();
+            ArrayList<Boolean> visit = new ArrayList<Boolean> ();
+            for(int i = 0; i < num; ++i){
+                dist.add(Double.POSITIVE_INFINITY);
+                visit.add(false);
+                result.add(new LinkedList<Aresta>() );
+            }
+            dist.set(nodeA, 0.0);
+            Comparator<ArcP> compara = new arcPCCompara();
+            PriorityQueue<ArcP> q = new PriorityQueue<ArcP>(10,compara);  //definir comparador!
+            q.add(new ArcP(0.0,nodeA));
+            while(!q.isEmpty()){
+                Integer u = q.peek().node2;
+                q.poll();
+                if(! visit.get(u)) {
+                    visit.set(u, true);
+                    //int ta = this.getAdjacents(u).size();
+                    for(Integer comp: this.getAdjacents(u)){
+                        if(dist.get(comp)> dist.get(u)+llista.get(u, comp)) {
+                            dist.set(comp, dist.get(u)+llista.get(u, comp));
+                            Queue<Aresta> aux = result.get(comp);
+                            aux.add(new Aresta(comp,u));
+                            result.set(comp, aux);
+                            q.add(new ArcP(dist.get(comp),comp));
+                        }
+                    }
+                }
+            }
+            return result;
+        }
         
+        
+        
+        public Boolean calcularEdgeBetweenv2() {
+		// Posem a 0 tots els camins minims per "comencar" la nova ronda
+            for(HashMap<Integer,Integer> i: NCM)
+                for(Integer j: i.keySet()){
+                    i.put(j, 0);
+                }
+   
+            for(int i = 0; i < NCM.size();++i) {
+                ArrayList<Queue<Aresta> > camins = getCamiMinimv2(i);
+                for(int j=0; j < NCM.size();++j) {
+                    while(!camins.get(j).isEmpty()) {
+                        Aresta aux = camins.get(j).poll();
+                        Integer act = NCM.get(aux.node1).get(aux.node2);
+                        ++act;
+                        NCM.get(aux.node1).put(aux.node2,act);
+                        NCM.get(aux.node2).put(aux.node1,act);
+			// mantenir el vertex per on passen mes camins minims (variables maxi, maxj i maxNumCM)
+                        if (maxNumCM <= act) {
+                            maxi = aux.node1;
+                            maxj = aux.node2;
+                            maxNumCM = act;
+                        }
+                    }
+                }
+            }
+		return true;
+	}
+        
+
         public Integer getNumArestes(){
             Integer num = 0;
             int aux = 0;
@@ -42,7 +130,6 @@ public class GrafNewman extends Graf {
 	private class Aresta { 
 		public Integer node1;
 		public Integer node2;
-
 		/**
 		 * Constructora per defecte. (Cris)
 		 * 
@@ -286,7 +373,6 @@ public class GrafNewman extends Graf {
 	private QueueVector getCamiMinim(int nodeA) {
 		// Implementat amb Dijkstra
 		QueueVector camiMinim = new QueueVector(this.size());
-
 		// Vector que marca la distancia del nodeA a la resta de nodes
 		ArrayList<Double> distancia = new ArrayList<Double>(this.size());
         
@@ -352,8 +438,11 @@ public class GrafNewman extends Graf {
             for(int i = 0; i < NCM.size();++i) {
                 QueueVector camins = getCamiMinim(i);
                 for(int j=0; j < NCM.size();++j) {
+                    System.out.println("Cami de "+DiccionariInvers.get(i)+" a "+DiccionariInvers.get(j)+": ");
                     while(!camins.getQueue(j).isEmpty()) {
                         Aresta aux = camins.pop(j);
+                        System.out.println(aux);
+                        //System.out.println(", de "+DiccionariInvers.get(aux.node1)+ " a "+DiccionariInvers.get(aux.node2));
                         Integer act = NCM.get(aux.node1).get(aux.node2);
                         ++act;
                         NCM.get(aux.node1).put(aux.node2,act);

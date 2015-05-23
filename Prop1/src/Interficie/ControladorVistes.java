@@ -80,8 +80,8 @@ public class ControladorVistes {
         Pagina aux8 = new Pagina("eril");
         Categoria aux9 = new Categoria("aillat1");
         Categoria aux10 = new Categoria("aillat2");
-        Categoria aux11 = new Categoria("sexu");
-        G.addCategoria(aux11);
+       // Categoria aux11 = new Categoria("sexu");
+        //G.addCategoria(aux11);
         G.addCC(aux9,aux10);
 	G.addPagina(aux8);
    } 
@@ -306,7 +306,7 @@ public class ControladorVistes {
             Cbusca1.removeAll();
             Cpc.removeAll();
             CpcImp.setValue(0);
-            Csembla.setValue(0);
+            Csembla.setValue(5);
             Crelacio.setValue(5);
             Cdada.setValue(0);
         }
@@ -350,8 +350,8 @@ public class ControladorVistes {
         else algorisme = "Clique";
         String tipu;
         algo = macro.getContUser().getAlgTipuCerca(macro.getUserActual(), cercaactual);
-        if(algo==0) tipu= "Dispersio";
-        else if(algo==1) tipu="Num Comunitats";
+        if(algo==1) tipu= "Dispersio";
+        else if(algo==2) tipu="Num Comunitats";
         else tipu="Max Betw";
         //Preparem les categories seleccionades
         int cont = 0;

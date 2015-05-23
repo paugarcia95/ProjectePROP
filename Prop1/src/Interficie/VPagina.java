@@ -92,11 +92,9 @@ public class VPagina extends javax.swing.JDialog {
     public void NomPag(String nomPag) {
         pag = nomPag;
         initComponents();
+        A_VeurePag.setVisible(false);
         this.setAlwaysOnTop(false);
-        //modelo = new DefaultListModel();
-        //CApunta1.setModel(modelo);
         A_ModificaPag.setVisible(false);
-        omplirDades(CApunta, CApuntada);
         A_VeurePag.setVisible(true);
         this.setVisible(true);
     }
@@ -143,9 +141,15 @@ public class VPagina extends javax.swing.JDialog {
         CbuscaCat = new javax.swing.JButton();
         EliminaC1 = new javax.swing.JButton();
         EliminaC2 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        A_VeurePag.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                A_VeurePagComponentShown(evt);
+            }
+        });
 
         NomC.setBackground(new java.awt.Color(255, 255, 255));
         NomC.setText(pag);
@@ -309,6 +313,11 @@ public class VPagina extends javax.swing.JDialog {
         jLabel6.setText("Nom de la pàgina:");
 
         AfegeixC1.setText("Afegeix");
+        AfegeixC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AfegeixC1ActionPerformed(evt);
+            }
+        });
 
         Enrere.setText("Enrere");
         Enrere.addActionListener(new java.awt.event.ActionListener() {
@@ -342,11 +351,16 @@ public class VPagina extends javax.swing.JDialog {
         });
 
         EliminaC2.setText("Elimina");
-
-        jButton2.setText("Guardar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        EliminaC2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                EliminaC2ActionPerformed(evt);
+            }
+        });
+
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
             }
         });
 
@@ -387,7 +401,7 @@ public class VPagina extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(A_ModificaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Enrere)
-                            .addComponent(jButton2))))
+                            .addComponent(Guardar))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         A_ModificaPagLayout.setVerticalGroup(
@@ -397,7 +411,7 @@ public class VPagina extends javax.swing.JDialog {
                 .addGroup(A_ModificaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(Nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(Guardar))
                 .addGap(18, 18, 18)
                 .addGroup(A_ModificaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -508,9 +522,8 @@ public class VPagina extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void AfegeixCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixCActionPerformed
-         modelom.addElement(jList1.getSelectedValue());
-
-// modelom.addElement(jList1.getSelectedValue());
+        modelom.addElement(jList1.getSelectedValue());
+        jList1.clearSelection();
     }//GEN-LAST:event_AfegeixCActionPerformed
 
     private void EnrereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrereActionPerformed
@@ -528,6 +541,7 @@ public class VPagina extends javax.swing.JDialog {
             int n = CApunta1.getSelectedIndex();
             modelom.remove(n);
         }
+        CApunta1.clearSelection();
     }//GEN-LAST:event_EliminaC1ActionPerformed
 
     private void A_ModificaPagComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_ModificaPagComponentShown
@@ -543,7 +557,7 @@ public class VPagina extends javax.swing.JDialog {
        modelo1.removeAllElements();
     }//GEN-LAST:event_A_ModificaPagComponentHidden
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         ArrayList<String> aux = new ArrayList<String>();
         Component[] nous = CApuntada1.getComponents();
         for(Component un: nous) aux.add(un.toString());
@@ -552,8 +566,28 @@ public class VPagina extends javax.swing.JDialog {
         nous = CApunta1.getComponents();
         for(Component un: nous) aux.add(un.toString());
         macro.getContAdUs().setPPC(pag, aux);
+        macro.getContAdUs().setNomPagina(pag, Nom.getText());
+        A_VeurePag.setVisible(true);
+        A_ModificaPag.setVisible(false);
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void A_VeurePagComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeurePagComponentShown
+        omplirDades(CApunta,CApuntada);
+    }//GEN-LAST:event_A_VeurePagComponentShown
+
+    private void AfegeixC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixC1ActionPerformed
+       modelo1.addElement(jList1.getSelectedValue());
+       jList1.clearSelection();
+    }//GEN-LAST:event_AfegeixC1ActionPerformed
+
+    private void EliminaC2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaC2ActionPerformed
+       if(modelo1.getSize()>0){
+            int n = CApuntada1.getSelectedIndex();
+            modelo1.remove(n);
+        }
+        CApuntada1.clearSelection();
+    }//GEN-LAST:event_EliminaC2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -613,10 +647,10 @@ public class VPagina extends javax.swing.JDialog {
     private javax.swing.JButton EliminaC1;
     private javax.swing.JButton EliminaC2;
     private javax.swing.JButton Enrere;
+    private javax.swing.JButton Guardar;
     private javax.swing.JTextField Nom;
     private javax.swing.JLabel NomC;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;

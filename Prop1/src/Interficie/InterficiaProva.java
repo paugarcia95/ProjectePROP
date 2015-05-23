@@ -59,23 +59,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     static Frame comp;
    
    
-    public void login(){
-        String user, pass;
-        user= Username.getText();
-        pass= Password.getText();
-        if(!macro.getContUser().existsUser(user)) {
-            JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, WARNING_MESSAGE);
-        }
-        else if(macro.getContUser().login(user, pass)){
-            A_PantallaPrincipal.setVisible(false);
-            macro.setUserActual(user);
-            if(macro.getContUser().isAdmin(user)) A_OpcionsAdmin.setVisible(true);
-            else A_OpcionsClient.setVisible(true);
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, ERROR_MESSAGE);
-        }
-    }
+    
     
     
     
@@ -117,7 +101,23 @@ public class InterficiaProva extends javax.swing.JFrame {
     }
     
     
-            
+     public void login(){
+        String user, pass;
+        user= Username.getText();
+        pass= Password.getText();
+        if(!macro.getContUser().existsUser(user)) {
+            JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, WARNING_MESSAGE);
+        }
+        else if(macro.getContUser().login(user, pass)){
+            A_PantallaPrincipal.setVisible(false);
+            macro.setUserActual(user);
+            if(macro.getContUser().isAdmin(user)) A_OpcionsAdmin.setVisible(true);
+            else A_OpcionsClient.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, ERROR_MESSAGE);
+        }
+    }       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

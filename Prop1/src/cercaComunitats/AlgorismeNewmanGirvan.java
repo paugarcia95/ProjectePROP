@@ -47,16 +47,23 @@ public class AlgorismeNewmanGirvan {
 	 *         dispersió requerit
 	 */
 	public static HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
+            
+            
+                            long t1= System.currentTimeMillis();
 		GrafNewman util = new GrafNewman(G);
-        int arestes = util.getNumArestes();
-        util.invertirPesos();
+                int arestes = util.getNumArestes();
+                util.invertirPesos();
 		util.calcularEdgeBetween();
 		int quitoca = calculadora(arestes, percentatge);
-        int iterador = 0;
+                System.out.println("El graf te "+arestes+ " arestes, i he de fer "+quitoca+" iteracions");
+                int iterador = 0;
 		while ( iterador< quitoca) {
+                    System.out.println("Vaig x la iteracio "+iterador+", temps: "+ (System.currentTimeMillis()-t1));
+                    t1 = System.currentTimeMillis();
 			util.esborrarMaxim();
 			util.calcularEdgeBetween();
 			++iterador;
+                        
 		}
 		return util.comunitats();
 	}
@@ -73,7 +80,7 @@ public class AlgorismeNewmanGirvan {
 	 *         numcomunidades comunitats)
 	 */
 	public static HashSet<HashSet<String>> executaNum(Graf G, Integer numComunidades) {
-            
+            System.out.println("executo num comunitats");
 		GrafNewman util = new GrafNewman(G);
                 util.invertirPesos();
 		util.calcularEdgeBetween();
