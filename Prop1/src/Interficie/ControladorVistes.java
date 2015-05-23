@@ -10,10 +10,11 @@ package Interficie;
 
 //import static Interficie.InterficiaProva.macro;
 import static Interficie.InterficiaProva.*;
-import static Interficie.InterficiaProva.comp;
-import static Interficie.InterficiaProva.cercaactual;
-import static Interficie.InterficiaProva.guardada;
+//import static Interficie.InterficiaProva.comp;
+//import static Interficie.InterficiaProva.cercaactual;
+//import static Interficie.InterficiaProva.guardada;
 import domini.Categoria;
+import domini.GrafDades;
 import domini.Pagina;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -54,6 +55,70 @@ public class ControladorVistes {
     static JList<String> CategList;  
     static JList<String> PagList; 
 
+    public void jocProves1(){
+       Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
+	Categoria aux2 = new Categoria("asexual");
+	GrafDades G = macro.getGraf();
+	G.addCC(aux1,aux2);
+	Categoria aux3 = new Categoria("heterosexual");
+	G.addCC(aux1,aux3);
+	Categoria aux4 = new Categoria("homosexual");
+	G.addCC(aux1, aux4);
+	Categoria aux5 = new Categoria("sexe");
+	G.addCC(aux1,aux5);
+	Categoria aux6 = new Categoria("embaras");
+	G.addCC(aux3,aux6);
+	G.addCC(aux5, aux6);
+	Categoria aux7 = new Categoria("infertil");
+	G.addCC(aux4, aux7);
+	G.addCC(aux2, aux7);
+	G.addCC(aux3,aux4);
+	Pagina aux0 = new Pagina("esteril");
+	G.addPagina(aux0);
+        G.addCP(aux7, aux0);
+        G.addPC(aux0, aux6);
+        Pagina aux8 = new Pagina("eril");
+        Categoria aux9 = new Categoria("aillat1");
+        Categoria aux10 = new Categoria("aillat2");
+        Categoria aux11 = new Categoria("sexu");
+        G.addCategoria(aux11);
+        G.addCC(aux9,aux10);
+	G.addPagina(aux8);
+   } 
+   public void jocProves2(){
+       GrafDades G = macro.getGraf();
+       Categoria aux1 = new Categoria("sanitat"); // PROVA METGES
+			Categoria aux2 = new Categoria("metge");
+			G.addCC(aux1, aux2);
+			Categoria aux4 = new Categoria("metgessa");
+			G.addCC(aux1, aux4);
+			Categoria aux6 = new Categoria("uroleg");
+			G.addCC(aux2, aux6);
+			Pagina aux7 = new Pagina("agulla");
+			G.addCP(aux2, aux7);
+			G.addCP(aux4, aux7);
+			Categoria aux8 = new Categoria("ginecoleg");
+			G.addCC(aux4, aux8);
+			Categoria aux9 = new Categoria("traumatoleg");
+			G.addCC(aux4, aux9);
+			G.addCC(aux2, aux9);
+			Categoria aux10 = new Categoria("metgos");
+			G.addCC(aux2, aux10);
+			G.addCC(aux2, aux4);
+   }
+   public void jocProves3() {
+       GrafDades G = macro.getGraf();
+       Categoria aux1 = new Categoria("familia"); // Prova familia
+			Categoria aux2 = new Categoria("pare");
+			G.addCC(aux1,aux2);
+			Categoria aux3 = new Categoria("mare");
+			G.addCC(aux1,aux3);
+			Categoria aux4 = new Categoria("fill");
+			G.addCC(aux2,aux4);
+			G.addCC(aux3,aux4);
+   }
+    
+    
     public void ompleCategoriesExistents(JList quina){         //es pot millorar efici?ncia (que vagi carregant a mida q es va fent scroll)
         Collection<String> auxc = macro.getContAdUs().getCategories();
         Object[] aux2 = new Object[auxc.size()];
@@ -338,7 +403,7 @@ public class ControladorVistes {
                 "\nConjunt de categories ignorades:"+evita+
                 "\nConjunt de p?gines a ignorar:"+ignora);
     }
-    public void ferCerca(JTree Algorismes, JSpinner Cdada, JList Lsub, JList Lsub2, JList Lsub1, JSlider CpcImp, JTextField Cpc, JSlider Csembla, JSlider Crelacio, JTextField Cbusca1){
+    public Boolean ferCerca(JTree Algorismes, JSpinner Cdada, JList Lsub, JList Lsub2, JList Lsub1, JSlider CpcImp, JTextField Cpc, JSlider Csembla, JSlider Crelacio, JTextField Cbusca1){
         long t1,t2;
  //FEM LA CERCA       
         Integer quina = macro.getContUser().addNovaCerca(macro.getUserActual());
@@ -346,15 +411,16 @@ public class ControladorVistes {
         Integer quin, tipus;
        t1= System.currentTimeMillis();
         TreePath arbre =Algorismes.getSelectionModel().getSelectionPath();
-       // System.out.println(arbre.toString());
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) Algorismes.getLastSelectedPathComponent();
+
         if(arbre.equals(null)) {
             JOptionPane.showMessageDialog(comp, "Has de seleccionar un algorisme i tipus de cerca", capsalera, WARNING_MESSAGE);
-         /*   Error err = new Error(this,true);
-            err.ompletext("Has de seleccionar un algorisme i tipus de cerca", "OK");
-            err.setVisible(true);*/
+            return false;
         }
-       // System.out.println("ruta: "+arbre);
-        
+        if(!node.isLeaf()){
+            JOptionPane.showMessageDialog(comp, "Has de seleccionar un tipus d'execució de l'algorisme!", capsalera, WARNING_MESSAGE);
+            return false;
+        }
         if(arbre.getPathComponent(1).toString().equals("Louvain")) {
             quin=1;
             tipus=0;
@@ -413,6 +479,7 @@ public class ControladorVistes {
        t2= System.currentTimeMillis();
        System.out.println("Temps total cerca: "+ (t2-t1));
         guardada=1;
+        return true;
     }
     public void carregaCerquesFetes(JTextField jTextField7,JList LlistaCerques){
         jTextField7.setText("Tens "+macro.getContUser().getNumCerquesUser(macro.getUserActual())+" cerques fetes");

@@ -12,7 +12,9 @@ import static Interficie.InterficiaProva.capsalera;
 import static Interficie.InterficiaProva.comp;
 import static Interficie.VCategoria.admin;
 import domini.Pagina;
+import java.awt.Component;
 import java.awt.Frame;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
@@ -31,7 +33,7 @@ public class VPagina extends javax.swing.JDialog {
     String pag;
     Frame pare;
     String noSelect="  No n'hi ha cap";
-    DefaultListModel modelo;
+    //DefaultListModel modelo;
     //static domini.MacroControlador macro;
     static boolean admin;
     /**
@@ -81,16 +83,18 @@ public class VPagina extends javax.swing.JDialog {
     
     private void omplirModificacions(){
         Collection<String> aux = macro.getContAdUs().getPagPC(pag);
+        System.out.println("PC: "+aux);
         for(String pag: aux) modelom.addElement(pag);
-        aux = macro.getContAdUs().getPagCP(pag);
-        for(String pag: aux) modelo1.addElement(pag);
+        Collection<String> auxi = macro.getContAdUs().getPagCP(pag);
+        System.out.println("CP: "+auxi);
+        for(String pag: auxi) modelo1.addElement(pag);
     }
     public void NomPag(String nomPag) {
         pag = nomPag;
         initComponents();
         this.setAlwaysOnTop(false);
-        modelo = new DefaultListModel();
-        CApunta1.setModel(modelo);
+        //modelo = new DefaultListModel();
+        //CApunta1.setModel(modelo);
         A_ModificaPag.setVisible(false);
         omplirDades(CApunta, CApuntada);
         A_VeurePag.setVisible(true);
@@ -147,7 +151,7 @@ public class VPagina extends javax.swing.JDialog {
         NomC.setText(pag);
         NomC.setAutoscrolls(true);
 
-        jLabel1.setText("Nom P?gina:");
+        jLabel1.setText("Nom Pàgina:");
 
         jLabel2.setBackground(new java.awt.Color(250, 250, 250));
         jLabel2.setText("Comunitats a les que apunta:");
@@ -177,14 +181,14 @@ public class VPagina extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(CApuntada);
 
-        jButton3.setText("Modifica P?gina");
+        jButton3.setText("Modifica Pàgina");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Eliminar P?gina");
+        jButton5.setText("Eliminar Pàgina");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -302,7 +306,7 @@ public class VPagina extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setText("Nom de la p?gina:");
+        jLabel6.setText("Nom de la pàgina:");
 
         AfegeixC1.setText("Afegeix");
 
@@ -340,6 +344,11 @@ public class VPagina extends javax.swing.JDialog {
         EliminaC2.setText("Elimina");
 
         jButton2.setText("Guardar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A_ModificaPagLayout = new javax.swing.GroupLayout(A_ModificaPag);
         A_ModificaPag.setLayout(A_ModificaPagLayout);
@@ -499,7 +508,7 @@ public class VPagina extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void AfegeixCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixCActionPerformed
-         modelo.addElement(jList1.getSelectedValue());
+         modelom.addElement(jList1.getSelectedValue());
 
 // modelom.addElement(jList1.getSelectedValue());
     }//GEN-LAST:event_AfegeixCActionPerformed
@@ -533,6 +542,18 @@ public class VPagina extends javax.swing.JDialog {
        modelom.removeAllElements();
        modelo1.removeAllElements();
     }//GEN-LAST:event_A_ModificaPagComponentHidden
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ArrayList<String> aux = new ArrayList<String>();
+        Component[] nous = CApuntada1.getComponents();
+        for(Component un: nous) aux.add(un.toString());
+        macro.getContAdUs().setPCP(pag, aux);
+        aux = new ArrayList<String>();
+        nous = CApunta1.getComponents();
+        for(Component un: nous) aux.add(un.toString());
+        macro.getContAdUs().setPPC(pag, aux);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
