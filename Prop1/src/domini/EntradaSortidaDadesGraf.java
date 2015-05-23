@@ -362,8 +362,14 @@ public class EntradaSortidaDadesGraf {
 			if ((s = b.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(s);
 				if (!st.hasMoreTokens() || !st.nextToken().equals("|PAGINES|")) {
-					error(4);
-					return;
+					error(6);
+					// Intenta recuperar l'error
+					while (((s = b.readLine()) != null)) {
+						if ((st = new StringTokenizer(s)).hasMoreTokens() 
+								&& st.nextToken().equals("|PAGINES|")) {
+							break;
+						}
+					}
 				}
 				if (st.hasMoreTokens()) {
 					nPags = Integer.valueOf(st.nextToken());
@@ -496,8 +502,7 @@ public class EntradaSortidaDadesGraf {
 	 * @exception 6: L'arxiu s'ha llegit correctament però pot contenir errors.
 	 *            Revisa la sintaxi per si de cas
 	 * @exception 7: Error al tancar l'arxiu
-	 * @exception default
-	 *                : Error indeterminat
+	 * @exception default: Error indeterminat
 	 * 
 	 * @param e
 	 *            Codi de l'error
