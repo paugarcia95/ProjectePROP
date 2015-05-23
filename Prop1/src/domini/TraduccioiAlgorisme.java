@@ -144,7 +144,7 @@ public class TraduccioiAlgorisme {
 		
 		if(cri.getSubconjCat().size() != 0) {// Si aquest criteri està actiu...(subconjunt)
 			for(Categoria cataux : llistat) {
-				if(cri.getSubconjCat().contains(cataux)) {// I està a la llista d'acceptats
+				if(cri.getSubconjCat().contains(cataux.getNom())) {// I està a la llista d'acceptats
 					solucio.addNode(cataux.getNom()); // L'afegim
 				}
 			}
@@ -199,7 +199,7 @@ public class TraduccioiAlgorisme {
 			if(cri.getEvitaCat().size() != 0) { // Si el criteri d'ignorar està actiu
 				HashSet<String> llistatactual = solucio.getNodes(); // Agafo tots els nodes afegits fins llavors
 				for(String it : llistatactual) {
-					if(cri.getEvitaCat().contains(graf.getCategoria(it))) { // Miro si estan a la llista d'ignorats
+					if(cri.getEvitaCat().contains(it)) { // Miro si estan a la llista d'ignorats
 						solucio.removeNode(it); // I l'elimino si escau
 					}
 				}

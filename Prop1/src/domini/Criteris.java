@@ -11,13 +11,13 @@ public class Criteris {
 	
 	private ParaulaValor paraulaClau;
 	private Integer relacionsCat, semblaNom, algorisme, tipuCerca, dada;
-	private ArrayList<Categoria> subconjCat, evitaCat;
-	private ArrayList<Pagina> evitaPag;
+	private ArrayList<String> subconjCat, evitaCat;
+	private ArrayList<String> evitaPag;
 	private String pare;
 	
 	
 	
-	public Criteris(ParaulaValor paraula, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<Categoria> subconj, ArrayList<Categoria> evitaCat, ArrayList<Pagina> evitaPag, String pare) {
+	public Criteris(ParaulaValor paraula, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare) {
 		paraulaClau = paraula;
 		relacionsCat = relacions;
 		semblaNom = sembla;
@@ -37,9 +37,9 @@ public class Criteris {
 		algorisme = 2;
 		dada = 5;
 		tipuCerca = 1;
-		subconjCat = new ArrayList<Categoria>();
-		evitaCat = new ArrayList<Categoria>();
-		evitaPag = new ArrayList<Pagina>();
+		subconjCat = new ArrayList<String>();
+		evitaCat = new ArrayList<String>();
+		evitaPag = new ArrayList<String>();
 		pare = new String();
 	}
 
@@ -91,27 +91,27 @@ public class Criteris {
 		this.dada = dada;
 	}
 	
-	public ArrayList<Categoria> getSubconjCat() {
+	public ArrayList<String> getSubconjCat() {
 		return subconjCat;
 	}
 	
-	public void setSubconjCat(ArrayList<Categoria> subconj) {
+	public void setSubconjCat(ArrayList<String> subconj) {
 		subconjCat = subconj;
 	}
 	
-	public ArrayList<Categoria> getEvitaCat() {
+	public ArrayList<String> getEvitaCat() {
 		return evitaCat;
 	}
 	
-	public void setEvitaCat(ArrayList<Categoria> evita) {
+	public void setEvitaCat(ArrayList<String> evita) {
 		evitaCat = evita;
 	}
 	
-	public ArrayList<Pagina> getEvitaPag() {
+	public ArrayList<String> getEvitaPag() {
 		return evitaPag;
 	}
 	
-	public void setEvitaPag(ArrayList<Pagina> evita) {
+	public void setEvitaPag(ArrayList<String> evita) {
 		evitaPag = evita;
 	}
 	
