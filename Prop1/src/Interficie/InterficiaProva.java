@@ -140,6 +140,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         A_PantallaPrincipal = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
@@ -271,6 +272,7 @@ public class InterficiaProva extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         modelos = new DefaultListModel();
         Penjades = new javax.swing.JList();
+        jButton20 = new javax.swing.JButton();
         A_GuardaCerca = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -1186,6 +1188,10 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
         LlistaCateg.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTextField1, org.jdesktop.beansbinding.ObjectProperty.create(), LlistaCateg, org.jdesktop.beansbinding.BeanProperty.create("elements"));
+        binding.setSourceNullValue(null);
+        bindingGroup.addBinding(binding);
+
         jScrollPane1.setViewportView(LlistaCateg);
         LlistaCateg.getAccessibleContext().setAccessibleName("LlistaCateg");
 
@@ -1559,6 +1565,13 @@ public class InterficiaProva extends javax.swing.JFrame {
         Penjades.setFocusable(false);
         Penjades.setValueIsAdjusting(true);
 
+        jButton20.setText("Afegir Comunitat");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout A_VisualitzaNovaCercaLayout = new javax.swing.GroupLayout(A_VisualitzaNovaCerca);
         A_VisualitzaNovaCerca.setLayout(A_VisualitzaNovaCercaLayout);
         A_VisualitzaNovaCercaLayout.setHorizontalGroup(
@@ -1577,10 +1590,11 @@ public class InterficiaProva extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton10)
-                            .addComponent(jButton12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton12)
+                            .addComponent(jButton20))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Penjades, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(561, Short.MAX_VALUE))
+                .addContainerGap(517, Short.MAX_VALUE))
         );
         A_VisualitzaNovaCercaLayout.setVerticalGroup(
             A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1597,7 +1611,9 @@ public class InterficiaProva extends javax.swing.JFrame {
                                 .addGap(105, 105, 105)
                                 .addComponent(jButton10)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton12))
+                                .addComponent(jButton12)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton20))
                             .addGroup(A_VisualitzaNovaCercaLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1936,6 +1952,8 @@ public class InterficiaProva extends javax.swing.JFrame {
 
         getAccessibleContext().setAccessibleDescription("");
 
+        bindingGroup.bind();
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -2198,7 +2216,7 @@ class TimerListener implements ActionListener {
         Enumeration e = root.preorderEnumeration();
         while(e.hasMoreElements()){
         System.out.println(e.nextElement());
-    }
+        }
         A_GuardaCerca.setVisible(true);
     }//GEN-LAST:event_jButton13ActionPerformed
     private void Enrere10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere10ActionPerformed
@@ -2224,10 +2242,13 @@ class TimerListener implements ActionListener {
         A_PantallaPrincipal.setVisible(true);
     }//GEN-LAST:event_Enrere4ActionPerformed
     private void BVisCat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVisCat2ActionPerformed
+        if(LlistaCerques.getSelectedIndex()>=0) {
         cercaactual = macro.getContUser().getNumCerca(macro.getUserActual(), LlistaCerques.getSelectedValue().toString());
         vista.visualitzaCerca(true,Resultat1, CriterisNovaCerca1);
         A_VisualitzaCerques.setVisible(false);
         A_VisualitzacioCercaAntiga.setVisible(true);
+        }
+        else JOptionPane.showMessageDialog(comp, "Has de seleccionar a quina cerca vols visualitzar!", capsalera, WARNING_MESSAGE);
     }//GEN-LAST:event_BVisCat2ActionPerformed
     private void EnrereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrereActionPerformed
         A_VisualitzaCerques.setVisible(false);
@@ -2411,6 +2432,17 @@ class TimerListener implements ActionListener {
         vista.afegeixCatComun(Resultat,modelos, Penjades);
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        macro.getContUser().addComunitatCerca(macro.getUserActual(), cercaactual);
+        DefaultTreeModel arb = (DefaultTreeModel)Resultat.getModel();
+        
+        DefaultMutableTreeNode act = (DefaultMutableTreeNode)arb.getRoot();
+        
+        System.out.println(act.getChildCount());
+        arb.insertNodeInto(new DefaultMutableTreeNode("Comunitat "+(act.getChildCount()+1)), act, act.getChildCount());
+        //Resultat.repaint();
+    }//GEN-LAST:event_jButton20ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2552,6 +2584,7 @@ class TimerListener implements ActionListener {
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -2609,5 +2642,6 @@ class TimerListener implements ActionListener {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

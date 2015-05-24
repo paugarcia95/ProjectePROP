@@ -46,12 +46,7 @@ public class MacroControlador {
 	}
 	public void carregaDadesFitxer(File fitxer) throws FileNotFoundException {
 		aux = new EntradaSortidaDadesGraf();
-		try {
 			aux.llegirGrafDades(gd,fitxer);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	public Boolean carregaUsers() {
 		return cu.iniciCarregarUsers();

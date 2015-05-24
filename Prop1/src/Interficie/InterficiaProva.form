@@ -1835,12 +1835,13 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton12" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton20" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="Penjades" min="-2" pref="265" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="561" max="32767" attributes="0"/>
+                  <EmptySpace pref="517" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1861,6 +1862,8 @@
                                   <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jButton12" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jButton20" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1968,6 +1971,14 @@
             <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private DefaultListModel modelos;"/>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Penjades.setModel(modelos);"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton20">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Afegir Comunitat"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton20ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

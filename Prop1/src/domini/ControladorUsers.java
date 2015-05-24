@@ -183,6 +183,9 @@ public class ControladorUsers {
             return conj.getUser(username).getCerca(Cerca).getComunitat(Comunitat).getNumeroDeCategories();
         }
         
+        public Integer addComunitatCerca(String username, Integer Cerca){
+            return conj.getUser(username).getCerca(Cerca).addComunitat(new Comunitat());
+        }
 	/**
 	 * Assigna una password a un usuari existent.
 	 *  

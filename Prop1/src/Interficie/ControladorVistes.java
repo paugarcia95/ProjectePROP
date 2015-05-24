@@ -9,10 +9,11 @@ package Interficie;
 //jung
 
 //import static Interficie.InterficiaProva.macro;
-import static Interficie.InterficiaProva.*;
-//import static Interficie.InterficiaProva.comp;
-//import static Interficie.InterficiaProva.cercaactual;
-//import static Interficie.InterficiaProva.guardada;
+import static Interficie.InterficiaProva.macro;
+import static Interficie.InterficiaProva.comp;
+import static Interficie.InterficiaProva.capsalera;
+import static Interficie.InterficiaProva.cercaactual;
+import static Interficie.InterficiaProva.guardada;
 import domini.Categoria;
 import domini.GrafDades;
 import domini.Pagina;
@@ -394,11 +395,11 @@ public class ControladorVistes {
             StringBuilder sb4 = new StringBuilder();
             sb4.append("Nom: "+macro.getContUser().getNomCerca(macro.getUserActual(), cercaactual));
             sb4.append("\nComentari: "+macro.getContUser().getComentariCerca(macro.getUserActual(), cercaactual));
-            Date data = macro.getContUser().getDataCreacioCerca(macro.getUserActual(), cercaactual);
-            System.out.println("COMPARACIO DATES: "+data.compareTo(new Date()));
-            if(data== null ) sb4.append("\nData creaci?: encara no s'ha modificat");
-            else sb4.append("\nData creaci?: "+data);
-            sb4.append("\nData ultima modificaci?: "+macro.getContUser().getDataModificacioCerca(macro.getUserActual(), cercaactual)+"\n");
+            sb4.append("\nData creació: "+macro.getContUser().getDataCreacioCerca(macro.getUserActual(), cercaactual));
+            Date data = macro.getContUser().getDataModificacioCerca(macro.getUserActual(), cercaactual);
+            //System.out.println("COMPARACIO DATES: "+data.compareTo(new Date()));
+            if(data== null ) sb4.append("\nData ultima modificació: encara no s'ha modificat\n");
+            else sb4.append("\nData ultima modificació: "+data +"\n");
             guard=sb4.toString();
         }
         on.setText(guard+"Algorisme: "+algorisme+"\nTipus de valor: "+tipu+"\nAmb la dada: "+macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaactual)+
@@ -551,11 +552,12 @@ public class ControladorVistes {
         else {
             Integer num;
         TreeNode pare = node.getParent();
-        if (node.isLeaf()) {
+        if (!pare.equals(node.getRoot())) {
             nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)pare, pare.getChildCount());
             num = Integer.parseInt(pare.toString().substring(10))-1;
         }
         else {
+            nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)node, node.getChildCount());
             num = Integer.parseInt(node.toString().substring(10))-1;
  
         }
