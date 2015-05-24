@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Set;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -139,7 +140,6 @@ public class InterficiaProva extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         A_PantallaPrincipal = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
@@ -1186,10 +1186,6 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
         LlistaCateg.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTextField1, org.jdesktop.beansbinding.ObjectProperty.create(), LlistaCateg, org.jdesktop.beansbinding.BeanProperty.create("elements"));
-        binding.setSourceNullValue(null);
-        bindingGroup.addBinding(binding);
-
         jScrollPane1.setViewportView(LlistaCateg);
         LlistaCateg.getAccessibleContext().setAccessibleName("LlistaCateg");
 
@@ -1940,8 +1936,6 @@ public class InterficiaProva extends javax.swing.JFrame {
 
         getAccessibleContext().setAccessibleDescription("");
 
-        bindingGroup.bind();
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -2103,18 +2097,18 @@ public class InterficiaProva extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            if (progressMonitor.isCanceled() || !hilo.isAlive()) {
-                progressMonitor.close();
-                hilo.interrupt();
+            if (/*progressMonitor.isCanceled() ||*/ !hilo.isAlive()) {
+                //progressMonitor.close();
+                //hilo.interrupt();
                 Toolkit.getDefaultToolkit().beep();
                 timer.stop();
-                CercaB.setEnabled(true);
-            } else {
+            
+           } /* else {
                 progressMonitor.setNote(iterador.toString());
                 progressMonitor.setProgress(iterador);
                 //taskOutput.append(task.getMessage() + newline);
                // taskOutput.setCaretPosition(taskOutput.getDocument().getLength());
-            }
+            }*/
         }
     }
     private void CercaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CercaBActionPerformed
@@ -2122,9 +2116,43 @@ class TimerListener implements ActionListener {
         public void run() {
             try {
             if(vista.ferCerca(Algorismes, Cdada, Lsub, Lsub2, Lsub1, CpcImp, Cpc, Csembla, Crelacio, Cbusca1)) {
+                System.out.println("Hi vaig x el codi normal");
+                CercaB.setEnabled(true);
+            Crelacio.setEnabled(true);
+            Csembla.setEnabled(true);
+            Cpc.setEnabled(true);
+            CpcImp.setEnabled(true);
+            Cafegeix1.setEnabled(true);
+            Cafegeix2.setEnabled(true);
+            Cafegeix3.setEnabled(true);
+            Cafegeix4.setEnabled(true);
+                
+            if(A_CreaComunitat.isVisible()) {
                 vista.visualitzaCerca(false,Resultat, CriterisNovaCerca);
-                A_CreaComunitat.setVisible(false);
+                 A_CreaComunitat.setVisible(false);
                 A_VisualitzaNovaCerca.setVisible(true);
+            }
+            else {
+                int resposta = JOptionPane.showConfirmDialog(comp, "La cerca ja ha acabat. vols visualitzar-la ara?", capsalera, YES_NO_OPTION);
+             if(YES_OPTION ==resposta) {
+                vista.visualitzaCerca(false,Resultat, CriterisNovaCerca);
+                A_BuscaCat.setVisible(false);
+                A_BuscaCatPag.setVisible(false);
+                A_BuscaPag.setVisible(false);
+                A_CreaComunitat.setVisible(false);
+                A_CreaUsuari.setVisible(false);
+                A_GuardaCerca.setVisible(false);
+                A_OpcionsAdmin.setVisible(false);
+                A_OpcionsClient.setVisible(false);
+                A_VeureUsers.setVisible(false);
+                A_VisualitzaCerques.setVisible(false);
+                A_VisualitzaNovaCerca.setVisible(true);
+           }
+           else {
+               String nouComen =JOptionPane.showInputDialog(comp,"Escriu el nom de la nova cerca",QUESTION_MESSAGE);
+               macro.getContUser().addNomCerca(macro.getUserActual(), cercaactual, nouComen);
+           }
+            }
             }
             }
             catch (Exception e) 
@@ -2136,11 +2164,19 @@ class TimerListener implements ActionListener {
         hilo = new Thread(cerca);
         hilo.start();
         timer = new Timer(1000, new TimerListener());
+        //progressMonitor = new ProgressMonitor(this,"Estem realitzant la cerca de comunitats, si us plau, tingues paciència","",0,arestes);
         timer.start();
-        progressMonitor = new ProgressMonitor(this,"Estem realitzant la cerca de comunitats, si us plau, tingues paciència","",0,arestes);
-        progressMonitor.setProgress(0);
-        progressMonitor.setMillisToDecideToPopup(2*1000);
+        //progressMonitor.setProgress(0);
+        //progressMonitor.setMillisToDecideToPopup(2*1000);
         CercaB.setEnabled(false);
+        Crelacio.setEnabled(false);
+        Csembla.setEnabled(false);
+        Cpc.setEnabled(false);
+        CpcImp.setEnabled(false);
+        Cafegeix1.setEnabled(false);
+        Cafegeix2.setEnabled(false);
+        Cafegeix3.setEnabled(false);
+        Cafegeix4.setEnabled(false);
        /* Espera sp = new Espera();
         sp.setVisible(true);*/
     }//GEN-LAST:event_CercaBActionPerformed
@@ -2158,7 +2194,11 @@ class TimerListener implements ActionListener {
     }//GEN-LAST:event_Enrere9ActionPerformed
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         A_VisualitzaNovaCerca.setVisible(false);
-        
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode)Resultat.getModel().getRoot();
+        Enumeration e = root.preorderEnumeration();
+        while(e.hasMoreElements()){
+        System.out.println(e.nextElement());
+    }
         A_GuardaCerca.setVisible(true);
     }//GEN-LAST:event_jButton13ActionPerformed
     private void Enrere10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere10ActionPerformed
@@ -2398,7 +2438,11 @@ class TimerListener implements ActionListener {
         if (node == null)JOptionPane.showMessageDialog(this, "Has de seleccionar a quina comunitat vols afegir la comunitat seleccionada!", capsalera, WARNING_MESSAGE);
         else {
         TreeNode pare = node.getParent();
-        if (node.isLeaf())nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)pare, pare.getChildCount());
+        if (node.isLeaf()) {
+            nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)pare, pare.getChildCount());
+            System.out.print("Afegeixo a la comunitat: " +pare.toString());
+            //macro.getContUser().getCerquesComunitats(macro.getUserActual()).get(cercaactual).
+        }
         else nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)node, node.getChildCount());
         }
         }
@@ -2603,6 +2647,5 @@ class TimerListener implements ActionListener {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

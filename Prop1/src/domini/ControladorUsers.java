@@ -165,6 +165,11 @@ public class ControladorUsers {
 		conj.getUser(username).getCerca(i).setComentari(comentari);
 	}
 	
+        
+        public void addComunitatCerca() {
+            
+        }
+        
 	/**
 	 * Assigna una password a un usuari existent.
 	 *  
