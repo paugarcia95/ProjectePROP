@@ -5,21 +5,17 @@ package domini;
 
 import static domini.MacroControlador.gd;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author cristina.fontanet
+ * @author Dani
  *
  */
 public class ControladorAdminUsers {
-	//PRIVAT
-	//	Atribut: una constant amb inici
-	EntradaSortidaDadesGraf aux;
-	String rutaXDefecte = "C:/Users/Cristina/Google Drive/UNI/PROP/Projecte/cats.txt";
-	//PUBLIC
+	
+	private EntradaSortidaDadesGraf aux;
+	private String rutaXDefecte = "C:/Users/Cristina/Google Drive/UNI/PROP/Projecte/cats.txt";
 //CONSTRUCTORA
 
 	public ControladorAdminUsers() {/* inicialitzar aux? (EntradaSortidaDadesGraf) */}
@@ -268,15 +264,12 @@ public class ControladorAdminUsers {
 	 * Post: La Categoria amb nom == nomCat només apunta a les pàgines a cPs i retorna true, retorna false altrament
 	 */
 	public Boolean setCatCP(String nomCat, ArrayList<String> cPs) {
-		ArrayList<String> memoria = new ArrayList<String>();
-		for (String relacio: gd.getCategoria(nomCat).getMapCP().keySet()) memoria.add(relacio);
-		
-		ArrayList<String> eliminar = new ArrayList<String>();
-		for (String s: memoria) if(!cPs.remove(s)) eliminar.add(s);
+		Categoria cat = gd.getCategoria(nomCat);
+		for (String relacio: gd.getCategoria(nomCat).getMapCP().keySet()) {
+			if(!cPs.remove(relacio)) gd.removeCP(cat, gd.getPagina(relacio));
+		}
 		
 		boolean retorn = true;
-		Categoria cat = gd.getCategoria(nomCat);
-		for (String s: eliminar) gd.removeCP(cat, gd.getPagina(s));
 		for (String s: cPs) if (!gd.addCP(nomCat, s)) retorn = false;		
 		
 		return retorn;
@@ -286,16 +279,13 @@ public class ControladorAdminUsers {
 	 * Pre: Existeix una Categoria a GrafDades amb nom == nomCat
 	 * Post: La Categoria amb nom == nomCat només és apuntada per les pàgines a pCs i retorna true, retorna false altrament
 	 */
-	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {		
-		ArrayList<String> memoria = new ArrayList<String>();
-		for (String relacio: gd.getCategoria(nomCat).getMapPC().keySet()) memoria.add(relacio);
-		
-		ArrayList<String> eliminar = new ArrayList<String>();
-		for (String s: memoria) if(!pCs.remove(s)) eliminar.add(s);
+	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {
+		Categoria cat = gd.getCategoria(nomCat);
+		for (String relacio: gd.getCategoria(nomCat).getMapPC().keySet()) {
+			if(!pCs.remove(relacio)) gd.removePC(gd.getPagina(relacio), cat);
+		}
 		
 		boolean retorn = true;
-		Categoria cat = gd.getCategoria(nomCat);
-		for (String s: eliminar) gd.removePC(gd.getPagina(s), cat);
 		for (String s: pCs) if (!gd.addPC(s, nomCat)) retorn = false;		
 		
 		return retorn;
@@ -306,15 +296,12 @@ public class ControladorAdminUsers {
 	 * Post: La Categoria amb nom == nomCat només és subcategoria de les categories a sup i retorna true, retorna false altrament
 	 */
 	public Boolean setCsupC(String nomCat, ArrayList<String> sup) {
-		ArrayList<String> memoria = new ArrayList<String>();
-		for (String relacio: gd.getCategoria(nomCat).getMapCSupC().keySet()) memoria.add(relacio);
-		
-		ArrayList<String> eliminar = new ArrayList<String>();
-		for (String s: memoria) if(!sup.remove(s)) eliminar.add(s);
+		Categoria cat = gd.getCategoria(nomCat);
+		for (String relacio: gd.getCategoria(nomCat).getMapCSupC().keySet()) {
+			if(!sup.remove(relacio)) gd.removeCC(gd.getCategoria(relacio), cat);		
+		}
 		
 		boolean retorn = true;
-		Categoria cat = gd.getCategoria(nomCat);
-		for (String s: eliminar) gd.removeCC(gd.getCategoria(s), cat);
 		for (String s: sup) if (!gd.addCC(s, nomCat)) retorn = false;
 		
 		return retorn;
@@ -325,15 +312,12 @@ public class ControladorAdminUsers {
 	 * Post: La Categoria amb nom == nomCat només és supercategoria de les categories a sub i retorna true, retorna false altrament
 	 */
 	public Boolean setCsubC(String nomCat, ArrayList<String> sub) {
-		ArrayList<String> memoria = new ArrayList<String>();
-		for (String relacio: gd.getCategoria(nomCat).getMapCSubC().keySet()) memoria.add(relacio);
-		
-		ArrayList<String> eliminar = new ArrayList<String>();
-		for (String s: memoria) if(!sub.remove(s)) eliminar.add(s);
-		
-		boolean retorn = true;
 		Categoria cat = gd.getCategoria(nomCat);
-		for (String s: eliminar) gd.removeCC(cat, gd.getCategoria(s));
+		for (String relacio: gd.getCategoria(nomCat).getMapCSubC().keySet()) {
+			if(!sub.remove(relacio)) gd.removeCC(cat, gd.getCategoria(relacio));
+		}
+		
+		boolean retorn = true;		 
 		for (String s: sub) if (!gd.addCC(nomCat, s)) retorn = false;
 		
 		return retorn;
@@ -381,15 +365,12 @@ public class ControladorAdminUsers {
 	 * Post: La Pàgina amb nom == nomPag només és apuntada per les categories a cPs i retorna true, retorna false altrament
 	 */
 	public Boolean setPagCP(String nomPag, ArrayList<String> cPs) {
-		ArrayList<String> memoria = new ArrayList<String>();
-		for (String relacio: gd.getPagina(nomPag).getCP().keySet()) memoria.add(relacio);
-		
-		ArrayList<String> eliminar = new ArrayList<String>();
-		for (String s: memoria) if(!cPs.remove(s)) eliminar.add(s);
+		Pagina pag = gd.getPagina(nomPag);
+		for (String relacio: gd.getPagina(nomPag).getCP().keySet()){
+			if(!cPs.remove(relacio)) gd.removeCP(gd.getCategoria(relacio), pag);
+		}
 		
 		boolean retorn = true;
-		Pagina pag = gd.getPagina(nomPag);
-		for (String s: eliminar) gd.removeCP(gd.getCategoria(s), pag);
 		for (String s: cPs) if (!gd.addCP(s, nomPag)) retorn = false;		
 		
 		return retorn;
@@ -400,15 +381,12 @@ public class ControladorAdminUsers {
 	 * Post: La Pàgina amb nom == nomPag només apunta a les categories a pCs i retorna true, retorna false altrament
 	 */
 	public Boolean setPagPC(String nomPag, ArrayList<String> pCs) {
-		ArrayList<String> memoria = new ArrayList<String>();
-		for (String relacio: gd.getPagina(nomPag).getPC().keySet()) memoria.add(relacio);
-		
-		ArrayList<String> eliminar = new ArrayList<String>();
-		for (String s: memoria) if(!pCs.remove(s)) eliminar.add(s);
+		Pagina pag = gd.getPagina(nomPag);
+		for (String relacio: gd.getPagina(nomPag).getPC().keySet()) {
+			if(!pCs.remove(relacio)) gd.removePC(pag, gd.getCategoria(relacio));
+		}
 		
 		boolean retorn = true;
-		Pagina pag = gd.getPagina(nomPag);
-		for (String s: eliminar) gd.removePC(pag, gd.getCategoria(s));
 		for (String s: pCs) if (!gd.addPC(nomPag, s)) retorn = false;		
 		
 		return retorn;

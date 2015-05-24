@@ -104,7 +104,7 @@ public class CercaComunitats {
 	 * Post: Retorna el nombre de comunitats que componen la cerca i les ordena per nombre de categories
 	 */
 	public Integer getNumComunitats() {
-		Collections.sort(comunitats, new CustomComparator());
+		Collections.sort(comunitats, new CustomComparator()); //Potser l'hem de moure a una funció que sigui només ordenar
 		return comunitats.size();
 	}	
 	
