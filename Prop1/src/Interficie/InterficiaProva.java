@@ -22,8 +22,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.PriorityQueue;
 import java.util.Set;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -62,8 +64,9 @@ public class InterficiaProva extends javax.swing.JFrame {
     static Integer guardada;
     static String capsalera = "Wiki";
     //guardada=0 -> nova cerca sense guardar, crearla
-    //guardada=1  -> cerca no guardada
+    //guardada=1  -> cerca no guardada, preguntar si la volen guardar
     //guardada=2 -> cerca guardada
+    //guardada=3 -> volem sobreescriue una cerca ja guardada
     Boolean primera; //variable per evitar excepcions en els pannels que tenen accions en amagar
     static ControladorVistes vista;
     static Frame comp;
@@ -71,6 +74,7 @@ public class InterficiaProva extends javax.swing.JFrame {
    private Thread hilo;
    private Timer timer;
    public static Boolean userAdmin;
+   public static PriorityQueue<Integer> comunaEliminar;
    
     
     
@@ -92,6 +96,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     public InterficiaProva() {
         //macro = new domini.MacroControlador();
         primera=true;
+        comunaEliminar = new PriorityQueue<>();
         macro = new MacroControlador();
         initComponents();
         A_BuscaCat.setVisible(false);
@@ -129,7 +134,7 @@ public class InterficiaProva extends javax.swing.JFrame {
             else A_OpcionsClient.setVisible(true);
         }
         else {
-            JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "La contrassenya es incorrecta.", capsalera, ERROR_MESSAGE);
         }
     }       
     /**
@@ -296,6 +301,11 @@ public class InterficiaProva extends javax.swing.JFrame {
         Resultat1 = new javax.swing.JTree();
         Enrere12 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
+        modelos1 = new DefaultListModel();
+        Penjades1 = new javax.swing.JList();
+        jButton22 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
         A_CanviaDadesUser = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         NouUsername1 = new javax.swing.JTextField();
@@ -1514,6 +1524,15 @@ public class InterficiaProva extends javax.swing.JFrame {
 
         getContentPane().add(A_VeureUsers, "card10");
 
+        A_VisualitzaNovaCerca.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                A_VisualitzaNovaCercaComponentHidden(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                A_VisualitzaNovaCercaComponentShown(evt);
+            }
+        });
+
         Resultat.setAutoscrolls(true);
         Resultat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Resultat.setLargeModel(true);
@@ -1773,6 +1792,15 @@ public class InterficiaProva extends javax.swing.JFrame {
 
         getContentPane().add(A_VisualitzaCerques, "card13");
 
+        A_VisualitzacioCercaAntiga.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                A_VisualitzacioCercaAntigaComponentHidden(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                A_VisualitzacioCercaAntigaComponentShown(evt);
+            }
+        });
+
         CriterisNovaCerca1.setBackground(new java.awt.Color(240, 240, 240));
         CriterisNovaCerca1.setColumns(20);
         CriterisNovaCerca1.setRows(5);
@@ -1811,6 +1839,35 @@ public class InterficiaProva extends javax.swing.JFrame {
             }
         });
 
+        jButton21.setText("Afegir Comunitat");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+
+        Penjades1.setModel(modelos1);
+        Penjades1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        Penjades1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Penjades1.setDragEnabled(true);
+        Penjades1.setDropMode(javax.swing.DropMode.INSERT);
+        Penjades1.setFocusable(false);
+        Penjades1.setValueIsAdjusting(true);
+
+        jButton22.setText("<<<<");
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
+
+        jButton23.setText(">>>>");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout A_VisualitzacioCercaAntigaLayout = new javax.swing.GroupLayout(A_VisualitzacioCercaAntiga);
         A_VisualitzacioCercaAntiga.setLayout(A_VisualitzacioCercaAntigaLayout);
         A_VisualitzacioCercaAntigaLayout.setHorizontalGroup(
@@ -1818,40 +1875,51 @@ public class InterficiaProva extends javax.swing.JFrame {
             .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
                         .addComponent(Enrere11)
-                        .addGap(123, 123, 123)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
                         .addComponent(Enrere12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                    .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
+                        .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton22)
+                            .addComponent(jButton23)
+                            .addComponent(jButton21))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Penjades1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton15)
-                    .addComponent(jButton3))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         A_VisualitzacioCercaAntigaLayout.setVerticalGroup(
             A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
                         .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Enrere11)
+                            .addComponent(jButton15)
+                            .addComponent(jButton3)
                             .addComponent(Enrere12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane13)
                             .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(jScrollPane13))
-                            .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jButton15)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3)
+                                .addGroup(A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(A_VisualitzacioCercaAntigaLayout.createSequentialGroup()
+                                        .addGap(87, 87, 87)
+                                        .addComponent(jButton22)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton23)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton21))
+                                    .addComponent(Penjades1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -1867,7 +1935,7 @@ public class InterficiaProva extends javax.swing.JFrame {
 
         jLabel27.setText("Si us plau, introdueixi les noves dades d'usuari desitjades:");
 
-        jButton6.setText("Crea");
+        jButton6.setText("Canvia");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -2134,8 +2202,7 @@ class TimerListener implements ActionListener {
         public void run() {
             try {
             if(vista.ferCerca(Algorismes, Cdada, Lsub, Lsub2, Lsub1, CpcImp, Cpc, Csembla, Crelacio, Cbusca1)) {
-                System.out.println("Hi vaig x el codi normal");
-                CercaB.setEnabled(true);
+            System.out.println("Hi vaig x el codi normal");
             Crelacio.setEnabled(true);
             Csembla.setEnabled(true);
             Cpc.setEnabled(true);
@@ -2144,15 +2211,21 @@ class TimerListener implements ActionListener {
             Cafegeix2.setEnabled(true);
             Cafegeix3.setEnabled(true);
             Cafegeix4.setEnabled(true);
+            CercaB.setEnabled(true);
                 
             if(A_CreaComunitat.isVisible()) {
                 vista.visualitzaCerca(false,Resultat, CriterisNovaCerca);
-                 A_CreaComunitat.setVisible(false);
-                A_VisualitzaNovaCerca.setVisible(true);
+                A_CreaComunitat.setVisible(false);
+                if(guardada==3) A_VisualitzacioCercaAntiga.setVisible(true);
+                else {
+                    guardada=1;
+                        A_VisualitzaNovaCerca.setVisible(true);
+                        }
             }
             else {
                 int resposta = JOptionPane.showConfirmDialog(comp, "La cerca ja ha acabat. vols visualitzar-la ara?", capsalera, YES_NO_OPTION);
              if(YES_OPTION ==resposta) {
+                 guardada=1;
                 vista.visualitzaCerca(false,Resultat, CriterisNovaCerca);
                 A_BuscaCat.setVisible(false);
                 A_BuscaCatPag.setVisible(false);
@@ -2168,6 +2241,7 @@ class TimerListener implements ActionListener {
            }
            else {
                String nouComen =JOptionPane.showInputDialog(comp,"Escriu el nom de la nova cerca",QUESTION_MESSAGE);
+              guardada=2;
                macro.getContUser().addNomCerca(macro.getUserActual(), cercaactual, nouComen);
            }
             }
@@ -2262,11 +2336,17 @@ class TimerListener implements ActionListener {
     private void Enrere11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere11ActionPerformed
         int resposta = JOptionPane.showOptionDialog(this,"Vols crear una nova cerca o sobreescriure aquesta?", capsalera,YES_NO_CANCEL_OPTION,QUESTION_MESSAGE,null,new Object[]{"Conserva aquesta","Modifica aquesta","Cancelar"},"i tu?");
         if(resposta==0) {
+            guardada=0;
             vista.preaparaCreacioNovaCerca(true, LCTotes, LPTotes, Algorismes, Lsub, Lsub2, Lsub1, Cbusca1, Cpc, CpcImp, Csembla, Crelacio, Cdada);
             A_VisualitzacioCercaAntiga.setVisible(false);
+            A_CreaComunitat.setVisible(true);
         }
         else if (resposta==1){
             System.out.println("Es marca la 2");
+            guardada=3;
+            vista.preaparaCreacioNovaCerca(true, LCTotes, LPTotes, Algorismes, Lsub, Lsub2, Lsub1, Cbusca1, Cpc, CpcImp, Csembla, Crelacio, Cdada);
+            A_VisualitzacioCercaAntiga.setVisible(false);
+            A_CreaComunitat.setVisible(true);
         }
     }//GEN-LAST:event_Enrere11ActionPerformed
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
@@ -2433,15 +2513,58 @@ class TimerListener implements ActionListener {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        macro.getContUser().addComunitatCerca(macro.getUserActual(), cercaactual);
+        Integer quina = macro.getContUser().addComunitatCerca(macro.getUserActual(), cercaactual)+1;
+        System.out.println("Afegeico la comunitat: "+quina);
         DefaultTreeModel arb = (DefaultTreeModel)Resultat.getModel();
         
         DefaultMutableTreeNode act = (DefaultMutableTreeNode)arb.getRoot();
-        
-        System.out.println(act.getChildCount());
-        arb.insertNodeInto(new DefaultMutableTreeNode("Comunitat "+(act.getChildCount()+1)), act, act.getChildCount());
-        //Resultat.repaint();
+
+        arb.insertNodeInto(new DefaultMutableTreeNode("Comunitat "+quina), act, act.getChildCount());
+        comunaEliminar.add(quina-1);
     }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void A_VisualitzaNovaCercaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzaNovaCercaComponentShown
+        comunaEliminar = new PriorityQueue<>(1, Collections.reverseOrder());
+    }//GEN-LAST:event_A_VisualitzaNovaCercaComponentShown
+
+    private void A_VisualitzaNovaCercaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzaNovaCercaComponentHidden
+       System.out.print("Elimino les comunitats:");
+        while(!comunaEliminar.isEmpty()) {
+            System.out.print(" "+comunaEliminar.peek());
+            macro.getContUser().removeComunitatCerca(macro.getUserActual(),cercaactual,comunaEliminar.poll());
+        }
+        System.out.println();
+    }//GEN-LAST:event_A_VisualitzaNovaCercaComponentHidden
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        Integer quina = macro.getContUser().addComunitatCerca(macro.getUserActual(), cercaactual)+1;
+        System.out.println("Afegeico la comunitat: "+quina);
+        DefaultTreeModel arb = (DefaultTreeModel)Resultat1.getModel();
+        
+        DefaultMutableTreeNode act = (DefaultMutableTreeNode)arb.getRoot();
+
+        arb.insertNodeInto(new DefaultMutableTreeNode("Comunitat "+quina), act, act.getChildCount());
+        comunaEliminar.add(quina-1);
+    }//GEN-LAST:event_jButton21ActionPerformed
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        vista.afegeixCatComun(Resultat1,modelos1, Penjades1);
+    }//GEN-LAST:event_jButton22ActionPerformed
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        vista.treuCatComun(Resultat1,modelos1);
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void A_VisualitzacioCercaAntigaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzacioCercaAntigaComponentShown
+        comunaEliminar = new PriorityQueue<>(1, Collections.reverseOrder());
+    }//GEN-LAST:event_A_VisualitzacioCercaAntigaComponentShown
+
+    private void A_VisualitzacioCercaAntigaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzacioCercaAntigaComponentHidden
+        System.out.print("Elimino les comunitats:");
+        while(!comunaEliminar.isEmpty()) {
+            System.out.print(" "+comunaEliminar.peek());
+            macro.getContUser().removeComunitatCerca(macro.getUserActual(),cercaactual,comunaEliminar.poll());
+        }
+        System.out.println();
+    }//GEN-LAST:event_A_VisualitzacioCercaAntigaComponentHidden
 
     /**
      * @param args the command line arguments
@@ -2565,6 +2688,8 @@ class TimerListener implements ActionListener {
     private javax.swing.JTextField Password;
     private javax.swing.JList Penjades;
     private DefaultListModel modelos;
+    private javax.swing.JList Penjades1;
+    private DefaultListModel modelos1;
     private javax.swing.JTree Resultat;
     private javax.swing.JTree Resultat1;
     private javax.swing.JTextField Username;
@@ -2585,6 +2710,9 @@ class TimerListener implements ActionListener {
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

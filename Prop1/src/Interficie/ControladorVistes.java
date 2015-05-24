@@ -14,6 +14,7 @@ import static Interficie.InterficiaProva.comp;
 import static Interficie.InterficiaProva.capsalera;
 import static Interficie.InterficiaProva.cercaactual;
 import static Interficie.InterficiaProva.guardada;
+import static Interficie.InterficiaProva.comunaEliminar;
 import domini.Categoria;
 import domini.GrafDades;
 import domini.Pagina;
@@ -22,8 +23,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
@@ -220,7 +223,7 @@ public class ControladorVistes {
         }
     }
     public void canviaDadesUser(JTextField NouUsername1, JTextField NovaPassword1){
-        if(macro.getContUser().existsUser(NouUsername1.getText())) {
+        if(!macro.getUserActual().equals(NouUsername1.getText()) && macro.getContUser().existsUser(NouUsername1.getText())) {
             JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre", capsalera, WARNING_MESSAGE);
         }
         else if(NovaPassword1.getText().length()==0) {
@@ -237,30 +240,13 @@ public class ControladorVistes {
             JOptionPane.showMessageDialog(comp, "No es pot fer cap cerca ja que no hi ha Categories", capsalera, WARNING_MESSAGE);
         }
         else {
-        Collection<String> aux = macro.getContAdUs().getCategories();
-        Iterator<String> it = aux.iterator();
-        Object[] csub= new Object[aux.size()];
-        int cont = 0;
-        while(it.hasNext()){
-            csub[cont] = it.next();
-            ++cont;
-        }
-        LCTotes.setListData(csub);
-        
-        Collection<String> auxc = macro.getContAdUs().getPagines();
-        Object[] aux2 = new Object[auxc.size()];
-        cont = 0;
-        Iterator<String> it2 = auxc.iterator();
-        while(it2.hasNext()) {
-            aux2[cont] = it2.next();
-            ++cont;
-        }
-        LPTotes.setListData(aux2);
-        guardada=0;
+        ompleCategoriesExistents(LCTotes);
+        omplePaginesExistents(LPTotes);
         Algorismes.expandRow(1);
         Algorismes.expandRow(3);
         Algorismes.expandRow(7);
         Algorismes.setSelectionRow(5);
+        int cont;
         if(modificacio) {
             Collection<String> auxs = macro.getContUser().getSubCerca(macro.getUserActual(),cercaactual);
             Object[] aux3 = new Object[auxs.size()];
@@ -302,13 +288,14 @@ public class ControladorVistes {
             if(alg==1) Algorismes.setSelectionRow(2);
             else if(alg==2) {
                 Integer tipus= macro.getContUser().getAlgTipuCerca(macro.getUserActual(),cercaactual);
-                if(tipus==0) Algorismes.setSelectionRow(4);
-                else if(tipus==1)Algorismes.setSelectionRow(5);
-                else Algorismes.setSelectionRow(3);
+                if(tipus==1) Algorismes.setSelectionRow(4);
+                else if(tipus==2)Algorismes.setSelectionRow(5);
+                else Algorismes.setSelectionRow(6);
             }
             else Algorismes.setSelectionRow(8);
         }
         else {
+            guardada=0;
             Lsub.removeAll();
             Lsub1.removeAll();
             Lsub2.removeAll();
@@ -328,6 +315,7 @@ public class ControladorVistes {
     }
     public void visualitzaCerca(Boolean guardada,JTree arbre, JTextArea on) {
         //PREPAREM LA VISUALITZACIO D'AQUESTA CERCA
+        //comunaEliminar = new PriorityQueue<>(1, Collections.reverseOrder());
     //ARBRE
         DefaultMutableTreeNode arrel = new DefaultMutableTreeNode("Comunitats Obtingudes");
         DefaultTreeModel Model = new DefaultTreeModel(arrel);
@@ -415,8 +403,7 @@ public class ControladorVistes {
     public Boolean ferCerca(JTree Algorismes, JSpinner Cdada, JList Lsub, JList Lsub2, JList Lsub1, JSlider CpcImp, JTextField Cpc, JSlider Csembla, JSlider Crelacio, JTextField Cbusca1){
         long t1,t2;
  //FEM LA CERCA       
-        Integer quina = macro.getContUser().addNovaCerca(macro.getUserActual());
-        cercaactual = quina;
+        if(guardada!=3)cercaactual = macro.getContUser().addNovaCerca(macro.getUserActual());
         Integer quin, tipus;
        t1= System.currentTimeMillis();
         TreePath arbre =Algorismes.getSelectionModel().getSelectionPath();
@@ -480,14 +467,13 @@ public class ControladorVistes {
        // System.out.println("mida aux3: "+mida);
         if(CpcImp.getValue()==0) Cpc.setText(new String());
         System.out.println("Fem la cerca amb "+macro.getContAdUs().getNumCats()+" categories i "+macro.getContAdUs().getNumPags()+" p?gines.");
-        System.out.println("Alg: "+quin+", tipus: "+tipus+", user: "+macro.getUserActual()+ ", cerca num: "+quina+", numDada: "+num+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText());
-        macro.getContUser().addCriterisCerca(false, macro.getUserActual(), quina, Cpc.getText(), CpcImp.getValue(), Crelacio.getValue(), Csembla.getValue(), quin, tipus, num, auxx1, auxx2, auxx3, Cbusca1.getText());
+        System.out.println("Alg: "+quin+", tipus: "+tipus+", user: "+macro.getUserActual()+ ", cerca num: "+cercaactual+", numDada: "+num+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText());
+        macro.getContUser().addCriterisCerca(false, macro.getUserActual(), cercaactual, Cpc.getText(), CpcImp.getValue(), Crelacio.getValue(), Csembla.getValue(), quin, tipus, num, auxx1, auxx2, auxx3, Cbusca1.getText());
        // System.out.println("he arribat aqui");
-        macro.getContUser().ferCerca(macro.getUserActual(), quina);
+        macro.getContUser().ferCerca(macro.getUserActual(), cercaactual);
        // System.out.println("i he fet la cerca!");
        t2= System.currentTimeMillis();
        System.out.println("Temps total cerca: "+ (t2-t1));
-        guardada=1;
         return true;
     }
     public void carregaCerquesFetes(JTextField jTextField7,JList LlistaCerques){
@@ -532,9 +518,10 @@ public class ControladorVistes {
         DefaultTreeModel aux = (DefaultTreeModel)Resultat.getModel();
          modelos.addElement(node.toString());
         aux.removeNodeFromParent(node);
-        if(macro.getContUser().getNumCatComunitatCerca(macro.getUserActual(),cercaactual,num).equals(0)) {
+        if(macro.getContUser().getNumCatComunitatCerca(macro.getUserActual(),cercaactual,num)==0) {
             System.out.println("Ordeno eliminar a la comunitat "+num);
-            macro.getContUser().removeComunitatCerca(macro.getUserActual(),cercaactual,num);
+            comunaEliminar.add(num);
+            //macro.getContUser().removeComunitatCerca(macro.getUserActual(),cercaactual,num);
             aux.removeNodeFromParent(pare);
         }
     } else {
@@ -560,10 +547,14 @@ public class ControladorVistes {
             nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)node, node.getChildCount());
             num = Integer.parseInt(node.toString().substring(10))-1;
  
+            System.out.println("Afegeixo a la comunitat "+node.toString().substring(10)+" la categoria"+Penjades.getSelectedValue().toString());
         }
         System.out.println("Vull afegir a la comunitat: " +num);
         if(!macro.getContUser().addCatComunitatCerca(macro.getUserActual(), cercaactual, num,Penjades.getSelectedValue().toString())) System.out.println("ERROR en afegir");
-            
+        if(comunaEliminar.contains(num)){
+            comunaEliminar.remove(num);
+            System.out.println("Trec de la llista d'eliminar a "+num);
+        }
         modelos.remove(Penjades.getSelectedIndex());
         }
         }
