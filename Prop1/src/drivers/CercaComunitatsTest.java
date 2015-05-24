@@ -29,9 +29,9 @@ public class CercaComunitatsTest extends TestCase{
 	
 	public void testConstructorAtributs() {
 		ParaulaValor p = new ParaulaValor("Medicina", 5);
-		ArrayList<Categoria> sub = new ArrayList<Categoria>();
-		ArrayList<Categoria> evitaCategoria = new ArrayList<Categoria>();
-		ArrayList<Pagina> evitaPagina = new ArrayList<Pagina>();
+		ArrayList<String> sub = new ArrayList<String>();
+		ArrayList<String> evitaCategoria = new ArrayList<String>();
+		ArrayList<String> evitaPagina = new ArrayList<String>();
 		Criteris c = new Criteris(p, 1, 2, 3, 4, 5, sub, evitaCategoria, evitaPagina, "Metge");
 		Date ara = new Date();
 		CercaComunitats ce = new CercaComunitats("Nom", ara, c, "username", ara, "coment", new ArrayList<Comunitat>());
@@ -72,9 +72,9 @@ public class CercaComunitatsTest extends TestCase{
 	
 	public void testSetNom() {
 		ParaulaValor p = new ParaulaValor("Medicina", 5);
-		ArrayList<Categoria> sub = new ArrayList<Categoria>();
-		ArrayList<Categoria> evitaCategoria = new ArrayList<Categoria>();
-		ArrayList<Pagina> evitaPagina = new ArrayList<Pagina>();
+		ArrayList<String> sub = new ArrayList<String>();
+		ArrayList<String> evitaCategoria = new ArrayList<String>();
+		ArrayList<String> evitaPagina = new ArrayList<String>();
 		Criteris c = new Criteris(p, 1, 2, 3, 4, 5, sub, evitaCategoria, evitaPagina, "Metge");
 		Date ara = new Date();
 		CercaComunitats ce = new CercaComunitats("Nom", ara, c, "username", ara, "coment", new ArrayList<Comunitat>());
@@ -84,9 +84,9 @@ public class CercaComunitatsTest extends TestCase{
 	
 	public void testSetDataCreacio() {
 		ParaulaValor p = new ParaulaValor("Medicina", 5);
-		ArrayList<Categoria> sub = new ArrayList<Categoria>();
-		ArrayList<Categoria> evitaCategoria = new ArrayList<Categoria>();
-		ArrayList<Pagina> evitaPagina = new ArrayList<Pagina>();
+		ArrayList<String> sub = new ArrayList<String>();
+		ArrayList<String> evitaCategoria = new ArrayList<String>();
+		ArrayList<String> evitaPagina = new ArrayList<String>();
 		Criteris c = new Criteris(p, 1, 2, 3, 4, 5, sub, evitaCategoria, evitaPagina, "Metge");
 		Date ara = new Date();
 		CercaComunitats ce = new CercaComunitats("Nom", ara, c, "username", ara, "coment", new ArrayList<Comunitat>());
@@ -97,9 +97,9 @@ public class CercaComunitatsTest extends TestCase{
 	
 	public void testSetCriterisSeleccio() {
 		ParaulaValor p = new ParaulaValor("Medicina", 5);
-		ArrayList<Categoria> sub = new ArrayList<Categoria>();
-		ArrayList<Categoria> evitaCategoria = new ArrayList<Categoria>();
-		ArrayList<Pagina> evitaPagina = new ArrayList<Pagina>();
+		ArrayList<String> sub = new ArrayList<String>();
+		ArrayList<String> evitaCategoria = new ArrayList<String>();
+		ArrayList<String> evitaPagina = new ArrayList<String>();
 		Criteris c = new Criteris(p, 1, 2, 3, 4, 5, sub, evitaCategoria, evitaPagina, "Metge");
 		Date ara = new Date();
 		CercaComunitats ce = new CercaComunitats("Nom", ara, c, "username", ara, "coment", new ArrayList<Comunitat>());
@@ -110,9 +110,9 @@ public class CercaComunitatsTest extends TestCase{
 	
 	public void testSetComentari() {
 		ParaulaValor p = new ParaulaValor("Medicina", 5);
-		ArrayList<Categoria> sub = new ArrayList<Categoria>();
-		ArrayList<Categoria> evitaCategoria = new ArrayList<Categoria>();
-		ArrayList<Pagina> evitaPagina = new ArrayList<Pagina>();
+		ArrayList<String> sub = new ArrayList<String>();
+		ArrayList<String> evitaCategoria = new ArrayList<String>();
+		ArrayList<String> evitaPagina = new ArrayList<String>();
 		Criteris c = new Criteris(p, 1, 2, 3, 4, 5, sub, evitaCategoria, evitaPagina, "Metge");
 		Date ara = new Date();
 		CercaComunitats ce = new CercaComunitats("Nom", ara, c, "username", ara, "coment", new ArrayList<Comunitat>());
@@ -122,9 +122,9 @@ public class CercaComunitatsTest extends TestCase{
 	
 	public void testSetUsuari() {
 		ParaulaValor p = new ParaulaValor("Medicina", 5);
-		ArrayList<Categoria> sub = new ArrayList<Categoria>();
-		ArrayList<Categoria> evitaCategoria = new ArrayList<Categoria>();
-		ArrayList<Pagina> evitaPagina = new ArrayList<Pagina>();
+		ArrayList<String> sub = new ArrayList<String>();
+		ArrayList<String> evitaCategoria = new ArrayList<String>();
+		ArrayList<String> evitaPagina = new ArrayList<String>();
 		Criteris c = new Criteris(p, 1, 2, 3, 4, 5, sub, evitaCategoria, evitaPagina, "Metge");
 		Date ara = new Date();
 		CercaComunitats ce = new CercaComunitats("Nom", ara, c, "username", ara, "coment", new ArrayList<Comunitat>());
@@ -134,9 +134,9 @@ public class CercaComunitatsTest extends TestCase{
 	
 	public void testSetDataModificacio() {
 		ParaulaValor p = new ParaulaValor("Medicina", 5);
-		ArrayList<Categoria> sub = new ArrayList<Categoria>();
-		ArrayList<Categoria> evitaCategoria = new ArrayList<Categoria>();
-		ArrayList<Pagina> evitaPagina = new ArrayList<Pagina>();
+		ArrayList<String> sub = new ArrayList<String>();
+		ArrayList<String> evitaCategoria = new ArrayList<String>();
+		ArrayList<String> evitaPagina = new ArrayList<String>();
 		Criteris c = new Criteris(p, 1, 2, 3, 4, 5, sub, evitaCategoria, evitaPagina, "Metge");
 		Date ara = new Date();
 		CercaComunitats ce = new CercaComunitats("Nom", ara, c, "username", ara, "coment", new ArrayList<Comunitat>());
@@ -147,17 +147,23 @@ public class CercaComunitatsTest extends TestCase{
 	
 	public void testSetComunitats() {
 		ParaulaValor p = new ParaulaValor("Medicina", 5);
-		ArrayList<Categoria> sub = new ArrayList<Categoria>();
-		ArrayList<Categoria> evitaCategoria = new ArrayList<Categoria>();
-		ArrayList<Pagina> evitaPagina = new ArrayList<Pagina>();
+		ArrayList<String> sub = new ArrayList<String>();
+		ArrayList<String> evitaCategoria = new ArrayList<String>();
+		ArrayList<String> evitaPagina = new ArrayList<String>();
 		Criteris c = new Criteris(p, 1, 2, 3, 4, 5, sub, evitaCategoria, evitaPagina, "Metge");
 		Date ara = new Date();
 		CercaComunitats ce = new CercaComunitats("Nom", ara, c, "username", ara, "coment", new ArrayList<Comunitat>());
 		ArrayList<Comunitat> co = new ArrayList<Comunitat>();
-		co.add(new Comunitat());
+		Comunitat aux = new Comunitat();
+		co.add(aux);
 		ce.setComunitats(co);
 		assertTrue("No ha canviat comunitats", ce.getNumComunitats() == 1);
 		assertNotNull("No ha canviat comunitats", ce.getComunitat(0));
+		//EXTRA remove
+		ce.removeComunitat(0);
+		//assertTrue("No ha canviat comunitats al fer remove", ce.getComunitat(0) == aux);
+		//assertNull("No ha esborrat comunitat", ce.getComunitat(0));
+		assertTrue("No ha esborrat comunitats", ce.getNumComunitats() == 0);
 	}
 	
 }

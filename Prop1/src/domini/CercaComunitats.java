@@ -122,13 +122,14 @@ public class CercaComunitats {
 	 */
 	public Boolean removeComunitat(Integer i) {
 		if (i >= 0 && i < comunitats.size()) {
-			comunitats.remove(i);
+			int aux = i;
+			comunitats.remove(aux); // el compilador no feia unboxing i no eliminava l'item amb index i
 			return true;
 		}
 		return false;
 	}
 	
-	/**TODO
+	/**
 	 * Pre: Cert
 	 * Post: categoria pertanty a la Comunitat amb índex comunitat i retorna true, retorna false altrament
 	 */
@@ -139,7 +140,7 @@ public class CercaComunitats {
 		return false;
 	}
 	
-	/**TODO
+	/**
 	 * Pre: Cert
 	 * Post: categoria no pertany a la Comunitat amb índex comunitat i retorna true, retorna false altrament
 	 */
