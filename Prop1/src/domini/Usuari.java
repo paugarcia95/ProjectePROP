@@ -178,7 +178,7 @@ public class Usuari {
 	 */
 	public Boolean removeCerca(Integer i) {
 		if (i >= 0 && i < cerquesFetes.size()) {
-			cerquesFetes.remove(i);
+			cerquesFetes.remove(i.intValue());
 			return true;
 		}
 		return false;

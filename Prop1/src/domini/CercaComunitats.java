@@ -122,8 +122,7 @@ public class CercaComunitats {
 	 */
 	public Boolean removeComunitat(Integer i) {
 		if (i >= 0 && i < comunitats.size()) {
-			int aux = i;
-			comunitats.remove(aux); // el compilador no feia unboxing i no eliminava l'item amb index i
+			comunitats.remove(i.intValue()); // el compilador no feia unboxing i no eliminava l'item amb index i
 			return true;
 		}
 		return false;
