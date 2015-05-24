@@ -104,7 +104,6 @@ public class CercaComunitats {
 	 * Post: Retorna el nombre de comunitats que componen la cerca i les ordena per nombre de categories
 	 */
 	public Integer getNumComunitats() {
-		Collections.sort(comunitats, new CustomComparator()); //Potser l'hem de moure a una funció que sigui només ordenar
 		return comunitats.size();
 	}	
 	
@@ -119,7 +118,7 @@ public class CercaComunitats {
 	
 	/** 
 	 * Pre: i es l'índex d'una Comunitat existent a comunitats && i < comunitas.size()
-	 * Post: La Comunitat amb índex i ja no pertany a comunitats && nComunitats es decrementada
+	 * Post: La Comunitat amb índex i ja no pertany a comunitats
 	 */
 	public Boolean removeComunitat(Integer i) {
 		if (i >= 0 && i < comunitats.size()) {
@@ -129,6 +128,28 @@ public class CercaComunitats {
 		return false;
 	}
 	
+	/**TODO
+	 * Pre: Cert
+	 * Post: categoria pertanty a la Comunitat amb índex comunitat i retorna true, retorna false altrament
+	 */
+	public Boolean addCategoriaComunitat(Integer comunitat, String categoria) {
+		if (comunitat >= 0 && comunitat < comunitats.size()) {
+			return comunitats.get(comunitat).addCat(categoria);
+		}
+		return false;
+	}
+	
+	/**TODO
+	 * Pre: Cert
+	 * Post: categoria no pertany a la Comunitat amb índex comunitat i retorna true, retorna false altrament
+	 */
+	public Boolean removeCategoriaComunitat(Integer comunitat, String categoria) {
+		if (comunitat >= 0 && comunitat < comunitats.size()) {
+			return comunitats.get(comunitat).removeCat(categoria);
+		}
+		return false;
+	}
+		
 	/**
 	 * Pre: Cert
 	 * Post: comunitats = array i nComunitats = array.size()
@@ -136,6 +157,14 @@ public class CercaComunitats {
 	public void setComunitats(ArrayList<Comunitat> array) {
 		if (array == null) comunitats = new ArrayList<Comunitat>();
 		comunitats = array;
+	}
+	
+	/**
+	 * Pre: Cert
+	 * Post: Les comunitats estan ordenades de més a menys categories
+	 */
+	public void ordenaComunitats() {
+		Collections.sort(comunitats, new CustomComparator());
 	}
 	
 	

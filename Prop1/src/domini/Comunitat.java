@@ -34,16 +34,14 @@ public class Comunitat {
 		return categoriesComunitat.size();	
 	}
 	
-	/*public Categoria getCat(String nom) { AIXÒ JA NO FUNCIONA JA QUE ARA GUARDA STRINGS
-		return categoriesComunitat.get(nom);
-	}*/
-	
-	public void addCat(String categoria) {
+	public Boolean addCat(String categoria) {
+		for (String nom: categoriesComunitat) if(nom.equals(categoria)) return false;
 		categoriesComunitat.add(categoria);
+		return true;
 	}
 	
-	public void removeCat(String categoria) {
-		categoriesComunitat.remove(categoria);
+	public Boolean removeCat(String categoria) {
+		return categoriesComunitat.remove(categoria);
 	}
 	
 	public ArrayList<String> getCategories() {
