@@ -39,6 +39,7 @@ import static javax.swing.JOptionPane.YES_OPTION;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 import static javax.swing.JOptionPane.OK_OPTION;
 import static javax.swing.JOptionPane.PLAIN_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
@@ -47,6 +48,8 @@ import javax.swing.JTree;
 import javax.swing.ListModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 /**
@@ -514,7 +517,57 @@ public class ControladorVistes {
         UsersAct.setListData(aux2);*/
     }
     
+    
+    public void treuCatComun(JTree Resultat, DefaultListModel modelos){
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) Resultat.getLastSelectedPathComponent();
+    if (node == null)JOptionPane.showMessageDialog(comp, "Has de seleccionar una categoria!", capsalera, WARNING_MESSAGE);
+    else {
+    DefaultMutableTreeNode pare = (DefaultMutableTreeNode)node.getParent();
+    if (!pare.equals(node.getRoot())) {
+        Integer num = Integer.parseInt(pare.toString().substring(10))-1;
+        System.out.println("Vull eliminar de la comunitat: " +num+" la categoria "+node.toString());
+        if(!macro.getContUser().removeCatComunitatCerca(macro.getUserActual(), cercaactual, num,node.toString() )) System.out.println("ERROR en eliminar");
+        
+        DefaultTreeModel aux = (DefaultTreeModel)Resultat.getModel();
+         modelos.addElement(node.toString());
+        aux.removeNodeFromParent(node);
+        if(macro.getContUser().getNumCatComunitatCerca(macro.getUserActual(),cercaactual,num).equals(0)) {
+            System.out.println("Ordeno eliminar a la comunitat "+num);
+            macro.getContUser().removeComunitatCerca(macro.getUserActual(),cercaactual,num);
+            aux.removeNodeFromParent(pare);
+        }
+    } else {
+        JOptionPane.showMessageDialog(comp, "Has de seleccionar una categoria, no una comunitat!", capsalera, WARNING_MESSAGE);
+    }
+    }
+    }
+        
+    public void afegeixCatComun(JTree Resultat,DefaultListModel modelos, JList Penjades) {
+    if(Penjades.getSelectedIndex()>=0) {
+        DefaultTreeModel nou = (DefaultTreeModel)Resultat.getModel();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) Resultat.getLastSelectedPathComponent();
+        //macro.getContUser().get
+        if (node == null)JOptionPane.showMessageDialog(comp, "Has de seleccionar a quina comunitat vols afegir la comunitat seleccionada!", capsalera, WARNING_MESSAGE);
+        else {
+            Integer num;
+        TreeNode pare = node.getParent();
+        if (node.isLeaf()) {
+            nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)pare, pare.getChildCount());
+            num = Integer.parseInt(pare.toString().substring(10))-1;
+        }
+        else {
+            num = Integer.parseInt(node.toString().substring(10))-1;
+ 
+        }
+        System.out.println("Vull afegir a la comunitat: " +num);
+        if(!macro.getContUser().addCatComunitatCerca(macro.getUserActual(), cercaactual, num,Penjades.getSelectedValue().toString())) System.out.println("ERROR en afegir");
             
+        modelos.remove(Penjades.getSelectedIndex());
+        }
+        }
+        else JOptionPane.showMessageDialog(comp, "Has de seleccionar quina categoria vols afegir!", capsalera, WARNING_MESSAGE);
+
+    }
     public static void main(String[] args) {
          Interficie.InterficiaProva aux = new Interficie.InterficiaProva();
          aux.setVisible(true);

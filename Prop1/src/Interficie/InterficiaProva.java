@@ -67,7 +67,7 @@ public class InterficiaProva extends javax.swing.JFrame {
     Boolean primera; //variable per evitar excepcions en els pannels que tenen accions en amagar
     static ControladorVistes vista;
     static Frame comp;
-    private ProgressMonitor progressMonitor;
+    //private ProgressMonitor progressMonitor;
    private Thread hilo;
    private Timer timer;
    public static Boolean userAdmin;
@@ -2340,11 +2340,9 @@ class TimerListener implements ActionListener {
         NouUsername1.setText(macro.getUserActual());
         NovaPassword1.setText("");
     }//GEN-LAST:event_A_CanviaDadesUserComponentShown
-
     private void A_BuscaPagComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_BuscaPagComponentShown
         vista.omplePaginesExistents(LlistaPag);
     }//GEN-LAST:event_A_BuscaPagComponentShown
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar totes les dades?", capsalera, YES_NO_OPTION);
         if(resposta==YES_OPTION) {
@@ -2352,30 +2350,14 @@ class TimerListener implements ActionListener {
             System.out.println("He eliminat les dades");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-
     private void A_BuscaCatComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_BuscaCatComponentShown
         vista.ompleCategoriesExistents(LlistaCateg);
     }//GEN-LAST:event_A_BuscaCatComponentShown
-
     private void ResultatMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResultatMouseDragged
         ///MOUSE MOTION DRAG
     }//GEN-LAST:event_ResultatMouseDragged
-
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-    DefaultMutableTreeNode node = (DefaultMutableTreeNode) Resultat.getLastSelectedPathComponent();
-    if (node == null)JOptionPane.showMessageDialog(this, "Has de seleccionar una categoria!", capsalera, WARNING_MESSAGE);
-    else {
-        Object nodeInfo = node.getUserObject();
-
-    if (node.isLeaf()) {
-        
-    DefaultTreeModel aux = (DefaultTreeModel)Resultat.getModel();
-         modelos.addElement(node.toString());
-        aux.removeNodeFromParent(node);
-    } else {
-        JOptionPane.showMessageDialog(this, "Has de seleccionar una categoria, no una comunitat!", capsalera, WARNING_MESSAGE);
-    }
-    }
+    vista.treuCatComun(Resultat,modelos);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -2383,11 +2365,9 @@ class TimerListener implements ActionListener {
        Afegeix nou = new Afegeix();
        nou.setVisible(true);
     }//GEN-LAST:event_jButton16ActionPerformed
-
     private void AlgorismesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_AlgorismesValueChanged
 
     }//GEN-LAST:event_AlgorismesValueChanged
-
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         if(UsersAct.getSelectedIndices().length>0) {
             Boolean segueix = true;
@@ -2410,7 +2390,6 @@ class TimerListener implements ActionListener {
         else JOptionPane.showMessageDialog(this, "Has de seleccionar quin usuari vols eliminar!", capsalera, WARNING_MESSAGE);
 
     }//GEN-LAST:event_jButton17ActionPerformed
-
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         if(UsersAct.getSelectedIndices().length>0) {
             macro.getContUser().addAdmin(UsersAct.getSelectedValue().toString());
@@ -2419,7 +2398,6 @@ class TimerListener implements ActionListener {
         else JOptionPane.showMessageDialog(this, "Has de seleccionar quin usuari vols fer admninistrador!", capsalera, WARNING_MESSAGE);
 
     }//GEN-LAST:event_jButton18ActionPerformed
-
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         userAdmin = true;
         A_CreaUsuari.setVisible(true);
@@ -2429,24 +2407,8 @@ class TimerListener implements ActionListener {
     private void A_VeureUsersComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeureUsersComponentHidden
         modusers.removeAllElements();
     }//GEN-LAST:event_A_VeureUsersComponentHidden
-
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if(Penjades.getSelectedIndex()>=0) {
-        DefaultTreeModel nou = (DefaultTreeModel)Resultat.getModel();
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) Resultat.getLastSelectedPathComponent();
-        //macro.getContUser().get
-        if (node == null)JOptionPane.showMessageDialog(this, "Has de seleccionar a quina comunitat vols afegir la comunitat seleccionada!", capsalera, WARNING_MESSAGE);
-        else {
-        TreeNode pare = node.getParent();
-        if (node.isLeaf()) {
-            nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)pare, pare.getChildCount());
-            System.out.print("Afegeixo a la comunitat: " +pare.toString());
-            //macro.getContUser().getCerquesComunitats(macro.getUserActual()).get(cercaactual).
-        }
-        else nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)node, node.getChildCount());
-        }
-        }
-        else JOptionPane.showMessageDialog(this, "Has de seleccionar quina categoria vols afegir!", capsalera, WARNING_MESSAGE);
+        vista.afegeixCatComun(Resultat,modelos, Penjades);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     /**

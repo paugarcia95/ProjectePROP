@@ -166,8 +166,21 @@ public class ControladorUsers {
 	}
 	
         
-        public void addComunitatCerca() {
-            
+        public Boolean addCatComunitatCerca(String username, Integer Cerca, Integer Comunitat, String categoria) {
+            return conj.getUser(username).getCerca(Cerca).addCategoriaComunitat(Comunitat, categoria);
+        }
+        
+        public Boolean removeCatComunitatCerca(String username, Integer Cerca, Integer Comunitat, String categoria) {
+            return conj.getUser(username).getCerca(Cerca).removeCategoriaComunitat(Comunitat, categoria);
+        }
+        
+        public void removeComunitatCerca(String username, Integer Cerca, Integer Comunitat) {
+            if(!conj.getUser(username).getCerca(Cerca).removeComunitat(Comunitat)) System.out.println("Error en eliminar la comunitat");
+            else System.out.println("S'ha eliminat correctament. num comunitats: "+conj.getUser(username).getCerca(Cerca).getNumComunitats());
+        }
+        
+        public Integer getNumCatComunitatCerca(String username, Integer Cerca, Integer Comunitat){
+            return conj.getUser(username).getCerca(Cerca).getComunitat(Comunitat).getNumeroDeCategories();
         }
         
 	/**
