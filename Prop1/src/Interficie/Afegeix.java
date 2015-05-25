@@ -16,6 +16,7 @@ public class Afegeix extends javax.swing.JPanel {
      */
     public Afegeix() {
         initComponents();
+        this.setVisible(true);
     }
 
     /**
@@ -46,9 +47,9 @@ public class Afegeix extends javax.swing.JPanel {
 
         jButton22.setText("Afegeix des de fitxer");
 
-        jButton23.setText("Afegeix Enlla?");
+        jButton23.setText("Afegeix Enllaç");
 
-        jButton24.setText("Afegeix P?gina");
+        jButton24.setText("Afegeix Pàgina");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,9 +107,9 @@ public class Afegeix extends javax.swing.JPanel {
 
         jButton17.setText("Afegeix des de fitxer");
 
-        jButton20.setText("Afegeix Enlla?");
+        jButton20.setText("Afegeix Enllaç");
 
-        jButton19.setText("Afegeix P?gina");
+        jButton19.setText("Afegeix Pàgina");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -136,8 +137,6 @@ public class Afegeix extends javax.swing.JPanel {
                 .addComponent(jButton20)
                 .addContainerGap(174, Short.MAX_VALUE))
         );
-
-        getAccessibleContext().setAccessibleParent(this);
     }// </editor-fold>//GEN-END:initComponents
 
 

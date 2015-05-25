@@ -15,12 +15,24 @@ import static Interficie.InterficiaProva.capsalera;
 import static Interficie.InterficiaProva.cercaactual;
 import static Interficie.InterficiaProva.guardada;
 import static Interficie.InterficiaProva.comunaEliminar;
+
+
+/*import static Interficie.Taules.macro;
+import static Interficie.Taules.comp;
+import static Interficie.Taules.capsalera;
+import static Interficie.Taules.cercaactual;
+import static Interficie.Taules.guardada;
+import static Interficie.Taules.comunaEliminar;*/
+
+
 import domini.Categoria;
 import domini.GrafDades;
 import domini.Pagina;
 import static Interficie.InterficiaProva.userAdmin;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,8 +41,11 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -64,6 +79,7 @@ public class ControladorVistes {
     static JList<String> CategList;  
     static JList<String> PagList; 
 
+    
     public void jocProves1(){
        Categoria aux1 = new Categoria("sexualitat"); // Prova Sexualitat
 	Categoria aux2 = new Categoria("asexual");
@@ -309,9 +325,23 @@ public class ControladorVistes {
         }
     }
     public void afegirFitxer(){
-        AfegirFitxer aux = new AfegirFitxer(comp,true);
-        aux.passarmacro(macro);
-        aux.setVisible(true);
+        JFileChooser input = new JFileChooser();
+        int result = input.showOpenDialog(comp);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File aux =input.getSelectedFile();
+                if(aux != null) {
+                try {
+                    System.out.println(aux);
+                    long abans =System.currentTimeMillis();
+                    macro.carregaDadesFitxer(aux);
+                    long despres = System.currentTimeMillis();
+                    System.out.println("Temps carregar fitxer: "+(despres-abans));
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(ControladorVistes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
+                else System.out.println("Error, el fitxer es buit");
+        }
     }
     public void visualitzaCerca(Boolean guardada,JTree arbre, JTextArea on) {
         //PREPAREM LA VISUALITZACIO D'AQUESTA CERCA
@@ -563,7 +593,9 @@ public class ControladorVistes {
     }
     public static void main(String[] args) {
          Interficie.InterficiaProva aux = new Interficie.InterficiaProva();
-         aux.setVisible(true);
+        //InterficieFinal aux = new InterficieFinal(); 
+       //Interficie.Interficia1 aux = new Interficie.Interficia1();
+        aux.setVisible(true);
          
    }
     

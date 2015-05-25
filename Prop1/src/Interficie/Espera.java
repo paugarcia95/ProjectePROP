@@ -5,7 +5,7 @@
  */
 package Interficie;
 
-import cercaComunitats.AlgorismeNewmanGirvan.arestes;
+import static cercaComunitats.AlgorismeNewmanGirvan.arestes;
 /**
  *
  * @author Cristina
