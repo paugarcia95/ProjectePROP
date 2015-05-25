@@ -68,7 +68,24 @@ public class TraduccioiAlgorisme {
 	 * @param cri Criteris passats
 	 * @return Retorna el pes de la relacio entre les dues categories C1 i C2
 	 */
-	private Double calcularpesentrecategories(Categoria c1, Categoria c2, Criteris cri){
+	  
+	private Double calcularpespares(Categoria c1, Categoria c2, Criteris cri, GrafDades graf){
+		Double solucio = new Double(0);
+		Integer temp2 = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg FUTUR CANVI DE VARIABLE PER AQUEST CRITERI
+		Map<String, Categoria> mapcatsubcat = graf.getCategoria(c1.getNom()).getMapCSupC(); //Adquireixo totes les seves supercategories
+		Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(c2.getNom()).getMapCSupC(); //Adquireixo totes les seves supercategories
+		for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves supercategories
+			for(Categoria s : mapcatsubcat2.values()) { // Per a cadascuna de les seves supercategories
+				if(e.getNom().equals(s.getNom())) { // Si el pare es el mateix
+					if(temp2 == 5) solucio += 5;
+					else if(temp2 > 5) solucio += (5+(temp2-5));
+					else solucio += 5-(5-temp2);
+				}
+			}
+		}
+		return solucio;
+	}
+	private Double calcularpesentrecategories(Categoria c1, Categoria c2, Criteris cri, GrafDades graf){
 		Double solucio = new Double(0);	
 		
 		////////////**************Criteri de cat-cat i cat-pg********/////////////
@@ -85,6 +102,11 @@ public class TraduccioiAlgorisme {
 			solucio += cri.getSemblaNom()*aux;
 		}
 		/////////////////////////////////////////////////
+		
+		/////////////Criteri pares comuns /////////
+		solucio += calcularpespares(c1,c2,cri,graf);
+		
+		///////////////////////////////////////////
 		
 		
 		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
@@ -216,39 +238,30 @@ public class TraduccioiAlgorisme {
 			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
 			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
-					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
+					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri,graf)); // I si hi està, afageixo el pes
 					System.out.println("ENTRE CATS");
 					System.out.println(it +" Y EL OTRO ORIG "+ e.getNom());
 				}
+				else if(solucio.existeixNode(e.getNom()) && solucio.existeixAresta(e.getNom(), it)) { // El caso raro enq  se añade antes por apdre que por estar relacionadas
+					Double auxx = solucio.getPes(it, e.getNom());
+					System.out.println("CASO RARO" + auxx );
+					auxx += calcularpespares(graf.getCategoria(it),e,cri,graf);
+					solucio.setPes(it, e.getNom(), auxx);
+					
+				}
 				for(Categoria gg : mapcatsubcat.values()) { // Evaluacion de padre en común
-					if (!e.getNom().equals(gg.getNom())) { // SI no son el mateix
-						
-						Map<String, Categoria> mapcatsubcat1 = graf.getCategoria(e.getNom()).getMapCSupC(); // Agafo els seus pares
-						Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(gg.getNom()).getMapCSupC(); // I els pares d'aquest altre
-						for(Categoria mir1 : mapcatsubcat1.values()) {// Per tots els seus pares
-							for(Categoria mir2 : mapcatsubcat2.values()) { // Miro a veure els apres d l'altre
-								if (mir1.getNom().equals(mir2.getNom())) { // I si coincideixen, afegeixo
-									System.out.println("PADRE EN COMUN");
-									if(solucio.existeixNode(e.getNom()) && solucio.existeixNode(gg.getNom()) && !solucio.existeixAresta(gg.getNom(), e.getNom()) && !solucio.existeixAresta(e.getNom(), gg.getNom())) {
-										System.out.println("CREACION PORQ NO EXISTIA");
-										System.out.println(gg.getNom()+" Y EL OTRO "+ e.getNom());
-										solucio.addAresta(gg.getNom(), e.getNom(), calcularpesentreparescomuns(e,gg,cri));
-										System.out.println(calcularpesentreparescomuns(e,gg,cri));
-									}
-									/*else { // Si ja existeix la relació
-										System.out.println("SUMA DE PESOS");
-										usado.add(e.getNom());
-										System.out.println(gg.getNom()+" Y EL OTRO2 "+ e.getNom());
-										Double temp = solucio.getPes(gg.getNom(), e.getNom());
-										temp += calcularpesentreparescomuns(e,gg,cri);
-										solucio.setPes(gg.getNom(), e.getNom(), temp);
-									}*/
-								}
+					if ( !e.getNom().equals(gg.getNom())) { // SI no son el mateix
+							
+							if(solucio.existeixNode(e.getNom()) && solucio.existeixNode(gg.getNom()) && !solucio.existeixAresta(gg.getNom(), e.getNom()) && !solucio.existeixAresta(e.getNom(), gg.getNom())) {
+								System.out.println("PADRE EN COMUN");
+								System.out.println("CREACION PORQ NO EXISTIA");
+								System.out.println(gg.getNom()+" Y EL OTRO "+ e.getNom());
+								solucio.addAresta(gg.getNom(), e.getNom(), calcularpesentreparescomuns(e,gg,cri));
+								System.out.println(calcularpesentreparescomuns(e,gg,cri));
 							}
 						}
 					}
 				}
-			}
 		}
 		//////////////////////////////////////////////////////////////
 		
