@@ -217,16 +217,34 @@ public class TraduccioiAlgorisme {
 			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
 					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
+					System.out.println("ENTRE CATS");
+					System.out.println(it +" Y EL OTRO ORIG "+ e.getNom());
 				}
-				for(Categoria gg : mapcatsubcat.values()) {
-					if (!gg.equals(e)) { // SI no existeix
-						if(solucio.existeixNode(e.getNom()) && solucio.existeixNode(gg.getNom()) && !solucio.existeixAresta(gg.getNom(), e.getNom()) && !solucio.existeixAresta(e.getNom(), gg.getNom())) {
-							solucio.addAresta(gg.getNom(), e.getNom(), calcularpesentreparescomuns(e,gg,cri));
-						}
-						else { // Si ja existeix la relació
-							Double temp = solucio.getPes(gg.getNom(), e.getNom());
-							temp += calcularpesentreparescomuns(e,gg,cri);
-							solucio.setPes(gg.getNom(), e.getNom(), temp);
+				for(Categoria gg : mapcatsubcat.values()) { // Evaluacion de padre en común
+					if (!e.getNom().equals(gg.getNom())) { // SI no son el mateix
+						
+						Map<String, Categoria> mapcatsubcat1 = graf.getCategoria(e.getNom()).getMapCSupC(); // Agafo els seus pares
+						Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(gg.getNom()).getMapCSupC(); // I els pares d'aquest altre
+						for(Categoria mir1 : mapcatsubcat1.values()) {// Per tots els seus pares
+							for(Categoria mir2 : mapcatsubcat2.values()) { // Miro a veure els apres d l'altre
+								if (mir1.getNom().equals(mir2.getNom())) { // I si coincideixen, afegeixo
+									System.out.println("PADRE EN COMUN");
+									if(solucio.existeixNode(e.getNom()) && solucio.existeixNode(gg.getNom()) && !solucio.existeixAresta(gg.getNom(), e.getNom()) && !solucio.existeixAresta(e.getNom(), gg.getNom())) {
+										System.out.println("CREACION PORQ NO EXISTIA");
+										System.out.println(gg.getNom()+" Y EL OTRO "+ e.getNom());
+										solucio.addAresta(gg.getNom(), e.getNom(), calcularpesentreparescomuns(e,gg,cri));
+										System.out.println(calcularpesentreparescomuns(e,gg,cri));
+									}
+									/*else { // Si ja existeix la relació
+										System.out.println("SUMA DE PESOS");
+										usado.add(e.getNom());
+										System.out.println(gg.getNom()+" Y EL OTRO2 "+ e.getNom());
+										Double temp = solucio.getPes(gg.getNom(), e.getNom());
+										temp += calcularpesentreparescomuns(e,gg,cri);
+										solucio.setPes(gg.getNom(), e.getNom(), temp);
+									}*/
+								}
+							}
 						}
 					}
 				}
@@ -255,7 +273,6 @@ public class TraduccioiAlgorisme {
 						else {
 							Double calc = new Double(calcularpesentrecatpag(cri));
 							solucio.addAresta(seguiment.get(q).getNom(), seguiment.get(u).getNom(),calc );
-							
 						}
 					}
 				}
