@@ -20,6 +20,7 @@ public class BuscaPag extends javax.swing.JPanel {
     public BuscaPag(JFrame par) {
         initComponents();
         pare = (InterficiaProva1)par;
+        
     }
 
     /**

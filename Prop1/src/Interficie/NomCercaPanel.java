@@ -16,6 +16,7 @@ public class NomCercaPanel extends javax.swing.JPanel {
      */
     public NomCercaPanel() {
         initComponents();
+        
     }
 
     /**

@@ -13,6 +13,7 @@ import static cercaComunitats.AlgorismeNewmanGirvan.arestes;
 public class Espera extends javax.swing.JDialog {
     protected static final long SLEEEP = 3*1000;
     String texte;
+    
     /**
      * Creates new form Espera
      */

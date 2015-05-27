@@ -16,6 +16,7 @@ public class CanviaDadesUser extends javax.swing.JPanel {
      */
     public CanviaDadesUser() {
         initComponents();
+        
     }
 
     /**

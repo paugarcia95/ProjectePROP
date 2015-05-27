@@ -40,6 +40,7 @@ public class CreaComunitat extends javax.swing.JPanel {
    private Thread hilo;
    private Timer timer;
    
+   
    class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
             if (/*progressMonitor.isCanceled() ||*/ !hilo.isAlive()) {

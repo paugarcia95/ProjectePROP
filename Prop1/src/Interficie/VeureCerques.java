@@ -15,6 +15,7 @@ import javax.swing.JFrame;
  * @author Cristina
  */
 public class VeureCerques extends javax.swing.JPanel {
+	
 
     private InterficiaProva1 pare;
     /**

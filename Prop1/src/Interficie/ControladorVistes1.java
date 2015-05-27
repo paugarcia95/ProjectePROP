@@ -148,7 +148,7 @@ public class ControladorVistes1 {
         int result = input.showSaveDialog(comp);
         if (result == JFileChooser.APPROVE_OPTION) {
             File aux =input.getSelectedFile();
-            macro.getContAdUs().guardaDades(aux);
+            //macro.getContAdUs().guardaDades(aux);
         }
     }
     public void ompleCategoriesExistents(JList quina){         //es pot millorar efici?ncia (que vagi carregant a mida q es va fent scroll)

@@ -28,6 +28,7 @@ import javax.swing.JFrame;
 public class VeureUsers extends javax.swing.JPanel {
 
     private InterficiaProva1 pare;
+    
     /**
      * Creates new form VeureUsers
      */

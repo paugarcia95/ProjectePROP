@@ -14,6 +14,7 @@ import static Interficie.InterficiaProva1.vista;
  */
 public class Inici extends javax.swing.JPanel {
     private InterficiaProva1 pare;
+    
     /**
      * Creates new form Inici
      */

@@ -75,6 +75,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
    public static Boolean userAdmin;
    public static PriorityQueue<Integer> comunaEliminar;
    
+   
    public void guardaCerca(Component quin, int num){
        guardada = 2;
        A_GuardaCerca = new GuardaCerca(this);

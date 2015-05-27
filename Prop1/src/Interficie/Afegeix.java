@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 import static javax.swing.JOptionPane.YES_OPTION;
 
-
 /**
  *
  * @author Cristina
@@ -23,6 +22,7 @@ public class Afegeix extends javax.swing.JPanel {
     public Afegeix() {
         initComponents();
         this.setVisible(true);
+        
     }
 
     /**

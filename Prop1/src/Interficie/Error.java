@@ -12,6 +12,7 @@ public class Error extends javax.swing.JDialog {
 
     String texte;
     String boto;
+    
     /**
      * Creates new form DisponibilitatUser
      */

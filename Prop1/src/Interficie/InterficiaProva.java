@@ -1212,10 +1212,6 @@ public class InterficiaProva extends javax.swing.JFrame {
         });
         LlistaCateg.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTextField1, org.jdesktop.beansbinding.ObjectProperty.create(), LlistaCateg, org.jdesktop.beansbinding.BeanProperty.create("elements"));
-        binding.setSourceNullValue(null);
-        bindingGroup.addBinding(binding);
-
         jScrollPane1.setViewportView(LlistaCateg);
         LlistaCateg.getAccessibleContext().setAccessibleName("LlistaCateg");
 
@@ -2110,7 +2106,6 @@ public class InterficiaProva extends javax.swing.JFrame {
 
         getAccessibleContext().setAccessibleDescription("");
 
-        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
@@ -2908,6 +2903,5 @@ class TimerListener implements ActionListener {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

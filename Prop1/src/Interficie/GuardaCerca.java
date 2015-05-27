@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 public class GuardaCerca extends javax.swing.JPanel {
 
     private InterficiaProva1 pare;
+    
     /**
      * Creates new form GuardaCerca
      */

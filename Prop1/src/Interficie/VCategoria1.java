@@ -5,11 +5,11 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva.capsalera;
-import static Interficie.InterficiaProva.macro;
-import static Interficie.InterficiaProva.vista;
-import static Interficie.ControladorVistes.CategList;
-import static Interficie.InterficiaProva.comp;
+import static Interficie.InterficiaProva1.capsalera;
+import static Interficie.InterficiaProva1.macro;
+import static Interficie.InterficiaProva1.vista;
+import static Interficie.ControladorVistes1.CategList;
+import static Interficie.InterficiaProva1.comp;
 import domini.Categoria;
 import java.awt.Frame;
 import java.util.ArrayList;
@@ -26,12 +26,15 @@ import static javax.swing.JOptionPane.YES_OPTION;
  *
  * @author Cristina
  */
-public class VCategoria extends javax.swing.JDialog {
+public class VCategoria1 extends javax.swing.JDialog {
     String cat;
     Frame pare;
     String noSelect="  No n'hi ha cap";
     //static domini.MacroControlador macro;
     static boolean admin;
+    
+  
+    
     
     private void omplirDades(JList apuntaC, JList apuntadaC, JList aputaP, JList apuntadaP){
         //Categories a les que apunta
@@ -148,12 +151,11 @@ public class VCategoria extends javax.swing.JDialog {
         if(mod.getSize()>0) mod.removeElementAt(quina.getSelectedIndex());
     }
     /**
-     * Creates new form VCategoria
+     * Creates new form VCategoria1
      */
-    public VCategoria(java.awt.Frame parent, boolean modalitat, boolean adm) {
-        super(parent, modalitat);
-        pare = parent;
-        admin = adm;
+    public VCategoria1(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
     }
 
     /**
@@ -228,11 +230,6 @@ public class VCategoria extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
-            }
-        });
 
         A_VisualitzaCateg.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -717,23 +714,31 @@ public class VCategoria extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(A_VisualitzaCateg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 1450, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(290, 290, 290)
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(A_VisualitzaCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(A_ModificaCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(434, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(A_VisualitzaCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 549, Short.MAX_VALUE))
+            .addGap(0, 599, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(225, 225, 225)
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(A_VisualitzaCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(A_ModificaCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(233, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -749,9 +754,10 @@ public class VCategoria extends javax.swing.JDialog {
         PApunta.clearSelection();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        if(!admin)jPanel2.setVisible(false);
-    }//GEN-LAST:event_formComponentShown
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        A_ModificaCateg.setVisible(true);
+        A_VisualitzaCateg.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar aquesta categoria?", capsalera, YES_NO_OPTION);
@@ -762,50 +768,72 @@ public class VCategoria extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        A_ModificaCateg.setVisible(true);
-        A_VisualitzaCateg.setVisible(false);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        visualitzaCatBut(CApuntada);
+        CApuntada.clearSelection();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void EnrereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrereActionPerformed
-         A_ModificaCateg.setVisible(false);
-        A_VisualitzaCateg.setVisible(true);
-    }//GEN-LAST:event_EnrereActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        visualitzaPagBut(PApuntada);
+        PApuntada.clearSelection();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void A_ModificaCategComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_ModificaCategComponentShown
-       // ControladorVistes aux = new ControladorVistes();
-        vista.omplePaginesExistents(jList2);
-        vista.ompleCategoriesExistents(jList1);
-        Nom.setText(cat);
-        A_VisualitzaCateg.setVisible(false);
-        omplirModificacions();
-        A_ModificaCateg.setVisible(true);
-    }//GEN-LAST:event_A_ModificaCategComponentShown
-
-    private void CbuscaPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaPagActionPerformed
-       vista.omplePaginesExistentsConcret(jList2,Cbusca2);
-    }//GEN-LAST:event_CbuscaPagActionPerformed
-
-    private void CbuscaCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaCatActionPerformed
-        vista.ompleCategoriesExistentsConcret(jList1,Cbusca);
-    }//GEN-LAST:event_CbuscaCatActionPerformed
-
-    private void AfegeixCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixCActionPerformed
-        if(!modelom.contains(jList1.getSelectedValue()))modelom.addElement(jList1.getSelectedValue());
-        jList1.clearSelection();
-    }//GEN-LAST:event_AfegeixCActionPerformed
+    private void A_VisualitzaCategComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzaCategComponentShown
+        omplirDades(CApunta ,CApuntada,PApunta,PApuntada);
+    }//GEN-LAST:event_A_VisualitzaCategComponentShown
 
     private void EliminaC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaC1ActionPerformed
         if(CApunta1.getSelectedIndex()>=0) eliminabut(modelom,CApunta1);
         else JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
     }//GEN-LAST:event_EliminaC1ActionPerformed
 
-    private void A_ModificaCategComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_ModificaCategComponentHidden
-        modelom.removeAllElements();
-        modelo1.removeAllElements();
-        modelo2.removeAllElements();
-        modelo3.removeAllElements();
-    }//GEN-LAST:event_A_ModificaCategComponentHidden
+    private void EliminaC2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaC2ActionPerformed
+        if(CApuntada1.getSelectedIndex()>=0) eliminabut(modelo1,CApuntada1);
+        else JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
+    }//GEN-LAST:event_EliminaC2ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        if(PApunta1.getSelectedIndex()>=0) eliminabut(modelo2,PApunta1);
+        else JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna pagina de la llista!", capsalera, WARNING_MESSAGE);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        if(PApuntada1.getSelectedIndex()>=0) eliminabut(modelo3,PApuntada1);
+        else JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna pagina de la llista!", capsalera, WARNING_MESSAGE);
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void AfegeixCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixCActionPerformed
+        if(!modelom.contains(jList1.getSelectedValue()))modelom.addElement(jList1.getSelectedValue());
+        jList1.clearSelection();
+    }//GEN-LAST:event_AfegeixCActionPerformed
+
+    private void AfegeixP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixP1ActionPerformed
+        if(!modelo3.contains(jList2.getSelectedValue()))modelo3.addElement(jList2.getSelectedValue());
+        jList2.clearSelection();
+    }//GEN-LAST:event_AfegeixP1ActionPerformed
+
+    private void AfegeixP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixP2ActionPerformed
+        if(!modelo2.contains(jList2.getSelectedValue()))modelo2.addElement(jList2.getSelectedValue());
+        jList2.clearSelection();
+    }//GEN-LAST:event_AfegeixP2ActionPerformed
+
+    private void AfegeixC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixC1ActionPerformed
+        if(!modelo1.contains(jList1.getSelectedValue()))modelo1.addElement(jList1.getSelectedValue());
+        jList1.clearSelection();
+    }//GEN-LAST:event_AfegeixC1ActionPerformed
+
+    private void EnrereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrereActionPerformed
+        A_ModificaCateg.setVisible(false);
+        A_VisualitzaCateg.setVisible(true);
+    }//GEN-LAST:event_EnrereActionPerformed
+
+    private void CbuscaPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaPagActionPerformed
+        vista.omplePaginesExistentsConcret(jList2,Cbusca2);
+    }//GEN-LAST:event_CbuscaPagActionPerformed
+
+    private void CbuscaCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaCatActionPerformed
+        vista.ompleCategoriesExistentsConcret(jList1,Cbusca);
+    }//GEN-LAST:event_CbuscaCatActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         ArrayList<String> categs = new ArrayList<String>();
@@ -825,42 +853,23 @@ public class VCategoria extends javax.swing.JDialog {
         A_VisualitzaCateg.setVisible(true);
         A_ModificaCateg.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        visualitzaCatBut(CApuntada);
-        CApuntada.clearSelection();
-    }//GEN-LAST:event_jButton6ActionPerformed
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        visualitzaPagBut(PApuntada);
-        PApuntada.clearSelection();
-    }//GEN-LAST:event_jButton7ActionPerformed
-    private void EliminaC2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaC2ActionPerformed
-        if(CApuntada1.getSelectedIndex()>=0) eliminabut(modelo1,CApuntada1);
-        else JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
-    }//GEN-LAST:event_EliminaC2ActionPerformed
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        if(PApunta1.getSelectedIndex()>=0) eliminabut(modelo2,PApunta1);
-        else JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna pagina de la llista!", capsalera, WARNING_MESSAGE);
-    }//GEN-LAST:event_jButton9ActionPerformed
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if(PApuntada1.getSelectedIndex()>=0) eliminabut(modelo3,PApuntada1);
-        else JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna pagina de la llista!", capsalera, WARNING_MESSAGE);
-    }//GEN-LAST:event_jButton10ActionPerformed
-    private void AfegeixC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixC1ActionPerformed
-        if(!modelo1.contains(jList1.getSelectedValue()))modelo1.addElement(jList1.getSelectedValue());
-        jList1.clearSelection();
-    }//GEN-LAST:event_AfegeixC1ActionPerformed
-    private void AfegeixP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixP2ActionPerformed
-        if(!modelo2.contains(jList2.getSelectedValue()))modelo2.addElement(jList2.getSelectedValue());
-        jList2.clearSelection();
-    }//GEN-LAST:event_AfegeixP2ActionPerformed
-    private void AfegeixP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixP1ActionPerformed
-        if(!modelo3.contains(jList2.getSelectedValue()))modelo3.addElement(jList2.getSelectedValue());
-        jList2.clearSelection();
-    }//GEN-LAST:event_AfegeixP1ActionPerformed
 
-    private void A_VisualitzaCategComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzaCategComponentShown
-        omplirDades(CApunta ,CApuntada,PApunta,PApuntada);
-    }//GEN-LAST:event_A_VisualitzaCategComponentShown
+    private void A_ModificaCategComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_ModificaCategComponentHidden
+        modelom.removeAllElements();
+        modelo1.removeAllElements();
+        modelo2.removeAllElements();
+        modelo3.removeAllElements();
+    }//GEN-LAST:event_A_ModificaCategComponentHidden
+
+    private void A_ModificaCategComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_ModificaCategComponentShown
+        // ControladorVistes aux = new ControladorVistes();
+        vista.omplePaginesExistents(jList2);
+        vista.ompleCategoriesExistents(jList1);
+        Nom.setText(cat);
+        A_VisualitzaCateg.setVisible(false);
+        omplirModificacions();
+        A_ModificaCateg.setVisible(true);
+    }//GEN-LAST:event_A_ModificaCategComponentShown
 
     /**
      * @param args the command line arguments
@@ -879,21 +888,26 @@ public class VCategoria extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VCategoria1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VCategoria1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VCategoria1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VCategoria1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VCategoria dialog = new VCategoria(new javax.swing.JFrame(), true,admin);
-                
+                VCategoria1 dialog = new VCategoria1(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
                 dialog.setVisible(true);
             }
         });

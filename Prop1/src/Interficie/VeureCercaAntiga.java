@@ -22,6 +22,7 @@ import javax.swing.tree.DefaultTreeModel;
 public class VeureCercaAntiga extends javax.swing.JPanel {
 
     private InterficiaProva1 pare;
+    
     /**
      * Creates new form VeureCercaAntiga
      */

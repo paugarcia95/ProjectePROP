@@ -21,6 +21,7 @@ public class PantallaPrincipal extends javax.swing.JPanel {
         initComponents();
         this.setVisible(true);
         aux = (Taules)auxi;
+        
     }
 
     /**

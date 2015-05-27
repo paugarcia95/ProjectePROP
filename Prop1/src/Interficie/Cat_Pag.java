@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 public class Cat_Pag extends javax.swing.JPanel {
     //private InterficiaProva1 aux;
     private InterficiaProva1 aux;
+    
     /**
      * Creates new form Cat_Pag
      */
