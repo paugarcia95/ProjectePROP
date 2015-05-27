@@ -69,7 +69,7 @@ public class TraduccioiAlgorisme {
 	 * @return Retorna el pes de la relacio entre les dues categories C1 i C2
 	 */
 	  
-	private Double calcularpespares(Categoria c1, Categoria c2, Criteris cri, GrafDades graf){
+	/*private Double calcularpespares(Categoria c1, Categoria c2, Criteris cri, GrafDades graf){
 		Double solucio = new Double(0);
 		Integer temp2 = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg FUTUR CANVI DE VARIABLE PER AQUEST CRITERI
 		Map<String, Categoria> mapcatsubcat = graf.getCategoria(c1.getNom()).getMapCSupC(); //Adquireixo totes les seves supercategories
@@ -84,7 +84,7 @@ public class TraduccioiAlgorisme {
 			}
 		}
 		return solucio;
-	}
+	}*/
 	private Double calcularpesentrecategories(Categoria c1, Categoria c2, Criteris cri, GrafDades graf){
 		Double solucio = new Double(0);	
 		
@@ -102,27 +102,6 @@ public class TraduccioiAlgorisme {
 			solucio += cri.getSemblaNom()*aux;
 		}
 		/////////////////////////////////////////////////
-		
-		/////////////Criteri pares comuns /////////
-		solucio += calcularpespares(c1,c2,cri,graf);
-		
-		///////////////////////////////////////////
-		
-		
-		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
-		return solucio;
-	}
-	
-	private Double calcularpesentreparescomuns(Categoria c1, Categoria c2, Criteris cri){
-		Double solucio = new Double(0);	
-		
-		////////////**************Criteri de cat-cat i cat-pg********/////////////
-		Integer temp = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg
-		if(temp == 5) solucio += 5;
-		else if(temp > 5) solucio += (5+(temp-5));
-		else solucio += 5-(5-temp);
-		/////////////*********************************************///////////
-		
 		
 		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
 		return solucio;
@@ -234,35 +213,39 @@ public class TraduccioiAlgorisme {
 		
 		//////////////////ENTRE CATEGORIES////////////////////////
 		HashSet<String> llistatactual = solucio.getNodes(); // Llista dels nodes a Solució (Graf)
+		Map<String,String> jacreat;
 		for(String it : llistatactual) { // Per a cada node del graf( a seques)
 			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
 			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
 					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri,graf)); // I si hi està, afageixo el pes
-					System.out.println("ENTRE CATS");
-					System.out.println(it +" Y EL OTRO ORIG "+ e.getNom());
-				}
-				else if(solucio.existeixNode(e.getNom()) && solucio.existeixAresta(e.getNom(), it)) { // El caso raro enq  se añade antes por apdre que por estar relacionadas
-					Double auxx = solucio.getPes(it, e.getNom());
-					System.out.println("CASO RARO" + auxx );
-					auxx += calcularpespares(graf.getCategoria(it),e,cri,graf);
-					solucio.setPes(it, e.getNom(), auxx);
+				} // ESTO ES CREAR UNICAMENTE LAS RELACIONES ENTRE SUBCATS
+			}
+			for (Categoria s : mapcatsubcat.values()) { // RELACIONES ENTRE SI LES SUBCATS DE IT
+				for (Categoria q : mapcatsubcat.values()) {
+					if(jacreat.)
 					
 				}
-				for(Categoria gg : mapcatsubcat.values()) { // Evaluacion de padre en común
-					if ( !e.getNom().equals(gg.getNom())) { // SI no son el mateix
-							
-							if(solucio.existeixNode(e.getNom()) && solucio.existeixNode(gg.getNom()) && !solucio.existeixAresta(gg.getNom(), e.getNom()) && !solucio.existeixAresta(e.getNom(), gg.getNom())) {
-								System.out.println("PADRE EN COMUN");
-								System.out.println("CREACION PORQ NO EXISTIA");
-								System.out.println(gg.getNom()+" Y EL OTRO "+ e.getNom());
-								solucio.addAresta(gg.getNom(), e.getNom(), calcularpesentreparescomuns(e,gg,cri));
-								System.out.println(calcularpesentreparescomuns(e,gg,cri));
-							}
+			}
+			
+			Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(it).getMapCSupC(); //Adquireixo totes les seves subcategories
+			for(Categoria gg : mapcatsubcat2.values()) { // Evaluacion de padre en común
+						if(solucio.existeixNode(it) && solucio.existeixNode(gg.getNom()) && !solucio.existeixAresta(gg.getNom(), it) && !solucio.existeixAresta(it, gg.getNom())) {
+							System.out.println("ENTRE SUPERCATS");
+							System.out.println(gg.getNom()+" Y EL OTRO "+ it);
+							solucio.addAresta(gg.getNom(),it, calcularpesentrecategories(graf.getCategoria(it),gg,cri,graf));
 						}
 					}
 				}
-		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		//////////////////////////////////////////////////////////////
 		
 		/////////////ENTRE PAGINES//////////////////
