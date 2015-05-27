@@ -22,10 +22,12 @@ import java.util.StringTokenizer;
 public class EntradaSortidaDadesGraf {
 
 	private File rutaPerDefecte;
-
-	private final String ARXIU_DADES_GRAF = "graf.wdb/";
-	private final String ARXIU_DADES_USUARIS = "usuaris.wdb/";
-	private final String EXTENSIO_DADES_CERQUES = ".udb/";
+	
+	private final String DIRECTORI_USERS 		= "\\userData\\";
+	private final String DIRECTORI_GRAF 		= "\\graphData\\";
+	private final String ARXIU_DADES_GRAF 		= DIRECTORI_GRAF  + "graf.wdb";
+	private final String ARXIU_DADES_USUARIS 	= DIRECTORI_USERS + "usuaris.wdb";
+	private final String EXTENSIO_DADES_CERQUES = ".udb";
 
 	/**
 	 * Creadora per defecte.
@@ -33,7 +35,7 @@ public class EntradaSortidaDadesGraf {
 	 */
 	public EntradaSortidaDadesGraf() {
 		super();
-		rutaPerDefecte = new File("");
+		rutaPerDefecte = new File(".\\data\\");
 	}
 
 	/**
@@ -118,7 +120,7 @@ public class EntradaSortidaDadesGraf {
 	}
 
 	/**
-	 * Guarda la configuraci� del graf G a un fitxer de text a "ruta".
+	 * Guarda la configuracio del graf G a un fitxer de text a "ruta".
 	 * 
 	 * @param G
 	 *            Indica el graf de dades que es vol emmagatzemar
@@ -437,8 +439,8 @@ public class EntradaSortidaDadesGraf {
 			}
 
 		} catch (FileNotFoundException e) {
-			System.out.println(e);
-			error(3);
+			// No fa res perque no es un error no trobar l'arxiu, ja que pot ser
+			// que sigui la primera vegada que inici el programa
 		} catch (IOException e) {
 			System.out.println(e);
 			error(1);
@@ -459,6 +461,22 @@ public class EntradaSortidaDadesGraf {
 		PrintWriter docE = null;
 
 		try {
+			// Creo el directori si no existeix i esborro tots els arxius que hi
+			// havia
+
+			File ubicacioDades = new File(rutaPerDefecte + DIRECTORI_GRAF);
+			if (!ubicacioDades.exists()) {
+				ubicacioDades.mkdirs();
+			}
+			File[] ficheros = ubicacioDades.listFiles();
+			File f = null;
+			if (ubicacioDades.exists()) {
+				for (int x = 0; x < ficheros.length; x++) {
+					f = new File(ficheros[x].toString());
+					f.delete();
+				}
+			}
+
 			// Arxiu d'escriptura
 			fichEscr = new FileWriter(rutaPerDefecte + ARXIU_DADES_GRAF);
 			docE = new PrintWriter(fichEscr);
@@ -526,6 +544,7 @@ public class EntradaSortidaDadesGraf {
 
 	public void carregarUsuaris(Map<String, Usuari> MapUsuaris) {
 		BufferedReader b = null;
+
 		try {
 			b = new BufferedReader(new FileReader(rutaPerDefecte + ARXIU_DADES_USUARIS));
 			String s;
@@ -574,8 +593,8 @@ public class EntradaSortidaDadesGraf {
 			}
 
 		} catch (FileNotFoundException e) {
-			System.out.println(e);
-			error(3);
+			// No fa res perque no es un error no trobar l'arxiu, ja que pot ser
+			// que sigui la primera vegada que inici el programa
 		} catch (IOException e) {
 			System.out.println(e);
 			error(1);
@@ -597,7 +616,8 @@ public class EntradaSortidaDadesGraf {
 		ArrayList<CercaComunitats> result = new ArrayList<CercaComunitats>();
 		
 		try {
-			b = new BufferedReader(new FileReader(rutaPerDefecte + user.getUsername().replace(" ", "+")
+			b = new BufferedReader(new FileReader(rutaPerDefecte + DIRECTORI_USERS
+					+ user.getUsername().replace(" ", "+")
 					+ EXTENSIO_DADES_CERQUES));
 			String s;
 
@@ -765,13 +785,24 @@ public class EntradaSortidaDadesGraf {
 			return result;
 	}
 
-
-
 	public void guardarUsuaris(Map<String, Usuari> MapUsuaris) {
 
 		PrintWriter docE = null;
 
 		try {
+			File ubicacioDades = new File(rutaPerDefecte + DIRECTORI_USERS);
+
+			if (!ubicacioDades.exists()) {
+				ubicacioDades.mkdirs();
+			}
+
+			File[] ficheros = ubicacioDades.listFiles();
+			if (ubicacioDades.exists()) {
+				for (int i = 0; i < ficheros.length; i++) {
+					ficheros[i].delete();
+				}
+			}
+
 			docE = new PrintWriter(new FileWriter(rutaPerDefecte + ARXIU_DADES_USUARIS));
 			Iterator<Usuari> usuaris = MapUsuaris.values().iterator();
 
@@ -808,7 +839,8 @@ public class EntradaSortidaDadesGraf {
 		PrintWriter docE = null;
 
 		try {
-			docE = new PrintWriter(new FileWriter(rutaPerDefecte + user.getUsername().replace(" ", "+")
+			docE = new PrintWriter(new FileWriter(rutaPerDefecte + DIRECTORI_USERS
+					+ user.getUsername().replace(" ", "+")
 					+ EXTENSIO_DADES_CERQUES));
 
 			// Num Cerques
