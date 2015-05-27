@@ -14,11 +14,12 @@ import java.util.Collection;
  */
 public class ControladorAdminUsers {
 	
-	private EntradaSortidaDadesGraf aux;
-	private String rutaXDefecte = "C:/Users/Cristina/Google Drive/UNI/PROP/Projecte/cats.txt";
+	private EntradaSortidaDadesGraf aux;	
 //CONSTRUCTORA
 
-	public ControladorAdminUsers() {/* inicialitzar aux? (EntradaSortidaDadesGraf) */}
+	public ControladorAdminUsers() {
+		aux = new EntradaSortidaDadesGraf();
+	}
 	
 //CONSULTORES///////////////////////////////////////////////////////////////////////////////
 	/**
@@ -151,24 +152,14 @@ public class ControladorAdminUsers {
 
 //MODIFICADORES///////////////////////////////////////////////////////////////////////////////
 	
-	/**
+	/** TODO
 	 * Pre:
 	 * Post: Carrega en el graf les dades del fitxer per defecte
 	 * @return true si s'ha carregat tot correctament, false si hi ha hagut algun error.
 	 */
 	public Boolean iniciCarregarDades() {
-		aux = new EntradaSortidaDadesGraf();
-	/*	try {
-			aux.carregarGrafDades(gd,rutaXDefecte);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		return true;
-		
+		aux.carregarGrafDades(gd);
+		return true;		
 	}
 	
 	/**
@@ -332,7 +323,7 @@ public class ControladorAdminUsers {
 		return gd.addPagina(pag);
 	}
 	
-	/** TODO
+	/**
 	 * Pre: Cert
 	 * Post: La Pàgina amb nom == nomPag és apuntada per les categories a cPs i retorna true, retorna false altrament
 	 */
@@ -342,7 +333,7 @@ public class ControladorAdminUsers {
 		return retorn;
 	}
 	
-	/** TODO
+	/**
 	 * Pre: Cert
 	 * Post: La Pàgina amb nom == nomPag apunta a les categories a pCs i retorna true, retorna false altrament
 	 */

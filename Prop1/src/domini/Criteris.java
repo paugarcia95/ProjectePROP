@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Criteris {
 	
 	private ParaulaValor paraulaClau;
-	private Integer relacionsCat, semblaNom, algorisme, tipuCerca, dada;
+	private Integer relacionsCat, relacionsSubs, relacionsSuper, semblaNom, algorisme, tipuCerca, dada;
 	private ArrayList<String> subconjCat, evitaCat;
 	private ArrayList<String> evitaPag;
 	private String pare;
@@ -57,6 +57,22 @@ public class Criteris {
 	
 	public void setRelacionsCat(Integer relacions) {
 		relacionsCat = relacions;
+	}
+	
+	public Integer getRelacionsSubs() {
+		return relacionsSubs;
+	}
+
+	public void setRelacionsSubs(Integer relacionsSubs) {
+		this.relacionsSubs = relacionsSubs;
+	}
+
+	public Integer getRelacionsSuper() {
+		return relacionsSuper;
+	}
+
+	public void setRelacionsSuper(Integer relacionsSuper) {
+		this.relacionsSuper = relacionsSuper;
 	}
 	
 	public Integer getSemblaNom() {

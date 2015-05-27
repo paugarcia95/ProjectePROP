@@ -54,6 +54,12 @@ public class DriverTraduccioiAlgorisme {
 			Categoria aux10 = new Categoria("metgos");
 			G.addCC(aux2, aux10);
 			G.addCC(aux2, aux4);
+			Categoria aux11 = new Categoria("operacio");
+			G.addCC(aux11, aux2);
+			G.addCC(aux11, aux4);
+            Pagina aux12 = new Pagina("agulla22222");
+            G.addCP(aux2, aux12);
+            G.addCP(aux4, aux12);
 		}
 		
 		else if(jj == 2) {
@@ -83,7 +89,7 @@ public class DriverTraduccioiAlgorisme {
 			Categoria aux4 = new Categoria("fill");
 			G.addCC(aux2,aux4);
 			G.addCC(aux3,aux4);
-			//G.addCC(aux4,aux1);
+			G.addCC(aux4,aux1);
 		}
 		
 		Criteris cri = new Criteris();
@@ -92,9 +98,9 @@ public class DriverTraduccioiAlgorisme {
 		
 		cri.setRelacionsCat(5); // Relacions cat-pg
 		cri.setTipuCerca(2); ///???
-		ArrayList<Categoria> c2 = new ArrayList<Categoria>(); // Subconjunt
-		ArrayList<Categoria> c = new ArrayList<Categoria>(); // Evitar
-		ArrayList<Pagina> s = new ArrayList<Pagina>();
+		ArrayList<String> c2 = new ArrayList<String>(); // Subconjunt
+		ArrayList<String> c = new ArrayList<String>(); // Evitar
+		ArrayList<String> s = new ArrayList<String>();
 		cri.setSubconjCat(c2);
 		ParaulaValor utilitzable = new ParaulaValor("ho", 0);
 		cri.setParaulaClau(utilitzable);

@@ -5,6 +5,7 @@ package domini;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,9 +21,15 @@ import cercaComunitats.Louvain;
  * @author Rafa
  *
  */
+
+
 public class TraduccioiAlgorisme {
 
-	
+	/**
+	 * Calcula la similaritat
+	 * @param s1 String s2 String
+	 * @return Retorna la similaritat que tenen les cats
+	 */
 	  private static double similarity(String s1, String s2) {
 	        Double solu = new Double (0);
 	        
@@ -86,22 +93,6 @@ public class TraduccioiAlgorisme {
 		}
 		/////////////////////////////////////////////////
 		
-		
-		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
-		return solucio;
-	}
-	
-	private Double calcularpesentreparescomuns(Categoria c1, Categoria c2, Criteris cri){
-		Double solucio = new Double(0);	
-		
-		////////////**************Criteri de cat-cat i cat-pg********/////////////
-		Integer temp = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg
-		if(temp == 5) solucio += 5;
-		else if(temp > 5) solucio += (5+(temp-5));
-		else solucio += 5-(5-temp);
-		/////////////*********************************************///////////
-		
-		
 		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
 		return solucio;
 	}
@@ -126,6 +117,19 @@ public class TraduccioiAlgorisme {
 		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
 		return solucio;
 		
+	}
+	
+	/**
+	 * Diu si una relacio és "artificial",e sa  dir, creades per sub/sup categories comuns
+	 * @param c1 Categoria c2 Categoria
+	 * @return True si es artificial, false si no ho és
+	 */
+	private Boolean mirarartificial(Categoria c1, Categoria c2, Map<String,ArrayList<String>> jacreat) {
+		ArrayList<String> aux = jacreat.get(c1.getNom());
+		if(aux != null && aux.contains(c2.getNom())) return true;
+		ArrayList<String> aux2 = jacreat.get(c2.getNom());
+		if(aux2 != null && aux2.contains(c1.getNom())) return true;
+		return false;
 	}
 	
 	
@@ -210,47 +214,149 @@ public class TraduccioiAlgorisme {
 		
 		///////////////ANEM A CREAR LES ARESTES AMB PESOS////////////////////////
 		
-		//////////////////ENTRE CATEGORIES////////////////////////
+		//////////////////ENTRE SUBCATEGORIES////////////////////////
 		HashSet<String> llistatactual = solucio.getNodes(); // Llista dels nodes a Solució (Graf)
 		for(String it : llistatactual) { // Per a cada node del graf( a seques)
 			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
 			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
 					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
-					System.out.println("ENTRE CATS");
-					System.out.println(it +" Y EL OTRO ORIG "+ e.getNom());
-				}
-				for(Categoria gg : mapcatsubcat.values()) { // Evaluacion de padre en común
-					if (!e.getNom().equals(gg.getNom())) { // SI no son el mateix
-						
-						Map<String, Categoria> mapcatsubcat1 = graf.getCategoria(e.getNom()).getMapCSupC(); // Agafo els seus pares
-						Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(gg.getNom()).getMapCSupC(); // I els pares d'aquest altre
-						for(Categoria mir1 : mapcatsubcat1.values()) {// Per tots els seus pares
-							for(Categoria mir2 : mapcatsubcat2.values()) { // Miro a veure els apres d l'altre
-								if (mir1.getNom().equals(mir2.getNom())) { // I si coincideixen, afegeixo
-									System.out.println("PADRE EN COMUN");
-									if(solucio.existeixNode(e.getNom()) && solucio.existeixNode(gg.getNom()) && !solucio.existeixAresta(gg.getNom(), e.getNom()) && !solucio.existeixAresta(e.getNom(), gg.getNom())) {
-										System.out.println("CREACION PORQ NO EXISTIA");
-										System.out.println(gg.getNom()+" Y EL OTRO "+ e.getNom());
-										solucio.addAresta(gg.getNom(), e.getNom(), calcularpesentreparescomuns(e,gg,cri));
-										System.out.println(calcularpesentreparescomuns(e,gg,cri));
-									}
-									/*else { // Si ja existeix la relació
-										System.out.println("SUMA DE PESOS");
-										usado.add(e.getNom());
-										System.out.println(gg.getNom()+" Y EL OTRO2 "+ e.getNom());
-										Double temp = solucio.getPes(gg.getNom(), e.getNom());
-										temp += calcularpesentreparescomuns(e,gg,cri);
-										solucio.setPes(gg.getNom(), e.getNom(), temp);
-									}*/
-								}
+				} // ESTO ES CREAR UNICAMENTE LAS RELACIONES ENTRE SUBCATS
+			}
+		}
+		
+		/////////////// CREAR RELACIONS ENTRE LES SUBCATS DE UNA CAT ////////////
+		
+		for(String it : llistatactual) { // Per a cada node del graf( a seques)
+			Map<String,ArrayList<String>> jacreat = new HashMap<String,ArrayList<String>>();
+			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); 
+			for (Categoria s : mapcatsubcat.values()) { // RELACIONES ENTRE SI LES SUBCATS DE IT
+				for (Categoria q : mapcatsubcat.values()) {
+					if(!s.getNom().equals(q.getNom())) {
+						if(solucio.addAresta(s.getNom(), q.getNom(), calcularpesentrecategories(s,q,cri))){ // Si no existeix l'aresta la creem
+							ArrayList<String> aux = jacreat.get(s.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+							if(aux == null) {
+								ArrayList<String> aux3 = new ArrayList<String>();
+								aux3.add(q.getNom());
+								jacreat.put(s.getNom(), aux3);
 							}
+							else {
+								aux.add(q.getNom());
+								jacreat.put(s.getNom(), aux);
+							}
+							
+							ArrayList<String> aux2 = jacreat.get(q.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+							if(aux2 == null) {
+								ArrayList<String> aux3 = new ArrayList<String>();
+								aux3.add(s.getNom());
+								jacreat.put(q.getNom(), aux3);
+							}
+							else {
+								aux2.add(s.getNom());
+								jacreat.put(q.getNom(), aux2);
+							}
+						}
+						else if(!mirarartificial(s,q,jacreat)) { // En el cas de q no hagi pogut crear l'aresta perq aquesta ja existia, mirem si No era artificial
+							ArrayList<String> aux = jacreat.get(s.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL" ( tot i q no ho sigui, ho maquem)
+							if(aux == null) {
+								ArrayList<String> aux3 = new ArrayList<String>();
+								aux3.add(q.getNom());
+								jacreat.put(s.getNom(), aux3);
+							}
+							else {
+								aux.add(q.getNom());
+								jacreat.put(s.getNom(), aux);
+							}
+							
+							ArrayList<String> aux2 = jacreat.get(q.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+							if(aux2 == null) {
+								ArrayList<String> aux3 = new ArrayList<String>();
+								aux3.add(s.getNom());
+								jacreat.put(q.getNom(), aux3);
+							}
+							else {
+								aux2.add(s.getNom());
+								jacreat.put(q.getNom(), aux2);
+							}
+							
+							Double temp = solucio.getPes(s.getNom(), q.getNom());
+							temp += calcularpesentrecategories(s,q,cri);
+							solucio.setPes(s.getNom(), q.getNom(), temp);
 						}
 					}
 				}
 			}
 		}
+		
+
 		//////////////////////////////////////////////////////////////
+		
+		/////////////// CREAR RELACIONS ENTRE LES SUPERCATS DE UNA CAT ////////////
+			
+		for(String it : llistatactual) { // Per a cada node del graf( a seques)
+			Map<String,ArrayList<String>> jacreat = new HashMap<String,ArrayList<String>>();
+			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSupC(); 
+			for (Categoria s : mapcatsubcat.values()) { // RELACIONES ENTRE SI LES SUBCATS DE IT
+				for (Categoria q : mapcatsubcat.values()) {
+					if(!s.getNom().equals(q.getNom())) {
+						if(solucio.addAresta(s.getNom(), q.getNom(), calcularpesentrecategories(s,q,cri))){ // Si no existeix l'aresta la creem
+							ArrayList<String> aux = jacreat.get(s.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+							if(aux == null) {
+								ArrayList<String> aux3 = new ArrayList<String>();
+								aux3.add(q.getNom());
+								jacreat.put(s.getNom(), aux3);
+							}
+							else {
+								aux.add(q.getNom());
+								jacreat.put(s.getNom(), aux);
+							}
+							
+							ArrayList<String> aux2 = jacreat.get(q.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+							if(aux2 == null) {
+								ArrayList<String> aux3 = new ArrayList<String>();
+								aux3.add(s.getNom());
+								jacreat.put(q.getNom(), aux3);
+							}
+							else {
+								aux2.add(s.getNom());
+								jacreat.put(q.getNom(), aux2);
+							}
+						}
+						else if(!mirarartificial(s,q,jacreat)) { // En el cas de q no hagi pogut crear l'aresta perq aquesta ja existia, mirem si No era artificial
+							ArrayList<String> aux = jacreat.get(s.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL" ( tot i q no ho sigui, ho maquem)
+							if(aux == null) {
+								ArrayList<String> aux3 = new ArrayList<String>();
+								aux3.add(q.getNom());
+								jacreat.put(s.getNom(), aux3);
+							}
+							else {
+								aux.add(q.getNom());
+								jacreat.put(s.getNom(), aux);
+							}
+							
+							ArrayList<String> aux2 = jacreat.get(q.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+							if(aux2 == null) {
+								ArrayList<String> aux3 = new ArrayList<String>();
+								aux3.add(s.getNom());
+								jacreat.put(q.getNom(), aux3);
+							}
+							else {
+								aux2.add(s.getNom());
+								jacreat.put(q.getNom(), aux2);
+							}
+							
+							Double temp = solucio.getPes(s.getNom(), q.getNom());
+							temp += calcularpesentrecategories(s,q,cri);
+							solucio.setPes(s.getNom(), q.getNom(), temp);
+						}
+					}
+				}
+			}
+		}
+		
+	
+		//////////////////////////////////////////////////////////////
+		
 		
 		/////////////ENTRE PAGINES//////////////////
 		Collection<Pagina> paginat = graf.getPagines();
