@@ -21,9 +21,15 @@ import cercaComunitats.Louvain;
  * @author Rafa
  *
  */
+
+
 public class TraduccioiAlgorisme {
 
-	
+	/**
+	 * Calcula la similaritat
+	 * @param s1 String s2 String
+	 * @return Retorna la similaritat que tenen les cats
+	 */
 	  private static double similarity(String s1, String s2) {
 	        Double solu = new Double (0);
 	        
@@ -69,23 +75,6 @@ public class TraduccioiAlgorisme {
 	 * @param cri Criteris passats
 	 * @return Retorna el pes de la relacio entre les dues categories C1 i C2
 	 */
-	  
-	/*private Double calcularpespares(Categoria c1, Categoria c2, Criteris cri, GrafDades graf){
-		Double solucio = new Double(0);
-		Integer temp2 = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg FUTUR CANVI DE VARIABLE PER AQUEST CRITERI
-		Map<String, Categoria> mapcatsubcat = graf.getCategoria(c1.getNom()).getMapCSupC(); //Adquireixo totes les seves supercategories
-		Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(c2.getNom()).getMapCSupC(); //Adquireixo totes les seves supercategories
-		for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves supercategories
-			for(Categoria s : mapcatsubcat2.values()) { // Per a cadascuna de les seves supercategories
-				if(e.getNom().equals(s.getNom())) { // Si el pare es el mateix
-					if(temp2 == 5) solucio += 5;
-					else if(temp2 > 5) solucio += (5+(temp2-5));
-					else solucio += 5-(5-temp2);
-				}
-			}
-		}
-		return solucio;
-	}*/
 	private Double calcularpesentrecategories(Categoria c1, Categoria c2, Criteris cri){
 		Double solucio = new Double(0);	
 		
@@ -292,7 +281,6 @@ public class TraduccioiAlgorisme {
 							
 							Double temp = solucio.getPes(s.getNom(), q.getNom());
 							temp += calcularpesentrecategories(s,q,cri);
-							System.out.println("UNO ES" + s.getNom() +" Y MAS "+ q.getNom() + " VALORSITO " +temp);
 							solucio.setPes(s.getNom(), q.getNom(), temp);
 						}
 					}
@@ -359,7 +347,6 @@ public class TraduccioiAlgorisme {
 							
 							Double temp = solucio.getPes(s.getNom(), q.getNom());
 							temp += calcularpesentrecategories(s,q,cri);
-							System.out.println("UNO ES" + s.getNom() +" Y MAS "+ q.getNom() + " VALORSITO " +temp);
 							solucio.setPes(s.getNom(), q.getNom(), temp);
 						}
 					}

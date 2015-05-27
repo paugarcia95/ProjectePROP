@@ -53,7 +53,13 @@ public class DriverTraduccioiAlgorisme {
 			G.addCC(aux2, aux9);
 			Categoria aux10 = new Categoria("metgos");
 			G.addCC(aux2, aux10);
-			//G.addCC(aux2, aux4);
+			G.addCC(aux2, aux4);
+			Categoria aux11 = new Categoria("operacio");
+			G.addCC(aux11, aux2);
+			G.addCC(aux11, aux4);
+            Pagina aux12 = new Pagina("agulla22222");
+            G.addCP(aux2, aux12);
+            G.addCP(aux4, aux12);
 		}
 		
 		else if(jj == 2) {
