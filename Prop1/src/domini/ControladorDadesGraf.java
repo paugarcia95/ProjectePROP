@@ -12,14 +12,14 @@ import java.util.Collection;
  * @author Dani
  *
  */
-public class ControladorAdminUsers {
+public class ControladorDadesGraf {
 	
-	private EntradaSortidaDadesGraf aux;	
+	//private EntradaSortidaDades aux;	
 //CONSTRUCTORA
 
-	public ControladorAdminUsers() {
-		aux = new EntradaSortidaDadesGraf();
-	}
+	public ControladorDadesGraf() {
+		//aux = new EntradaSortidaDades();
+	} 
 	
 //CONSULTORES///////////////////////////////////////////////////////////////////////////////
 	/**
@@ -157,25 +157,24 @@ public class ControladorAdminUsers {
 	 * Post: Carrega en el graf les dades del fitxer per defecte
 	 * @return true si s'ha carregat tot correctament, false si hi ha hagut algun error.
 	 */
-	public Boolean iniciCarregarDades() {
+	/*public Boolean iniciCarregarDades() {
 		aux.carregarGrafDades(gd);
 		return true;		
-	}
+	}*/
 	
 	/**
 	 * Pre:
 	 * Post:
 	 */
-	public Boolean carregarFitxerEnllacosInserir(String ruta) {return true;}
+	//public Boolean carregarFitxerEnllacosInserir(String ruta) {return true;}
 	
 	
 	/**
 	 * Pre: Cert
 	 * Post: La Wikipedia és buida
 	 */
-	public Boolean eliminarDades(){
+	public void eliminarDades(){
 		gd = new GrafDades();
-		return true;
 	}
 	
 	/**
@@ -184,7 +183,7 @@ public class ControladorAdminUsers {
 	 * @return
 	 */
 	//el Boolean indica quin dels dos tipus de format d'entrada ï¿½s, el Boolean retorna 0 si no hi ha errors, 1 si no es reconeix l'URL o 2 si ï¿½s algun altre tipus d'error
-	public Integer introFitx(String URL, Boolean enllasos) {return 1;}
+	//public Integer introFitx(String URL, Boolean enllasos) {return 1;}
 	
 	/**
 	 * Pre:

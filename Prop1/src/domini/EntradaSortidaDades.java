@@ -19,7 +19,7 @@ import java.util.StringTokenizer;
  *
  */
 
-public class EntradaSortidaDadesGraf {
+public class EntradaSortidaDades {
 
 	private File rutaPerDefecte;
 	
@@ -33,7 +33,7 @@ public class EntradaSortidaDadesGraf {
 	 * Creadora per defecte.
 	 * 
 	 */
-	public EntradaSortidaDadesGraf() {
+	public EntradaSortidaDades() {
 		super();
 		rutaPerDefecte = new File(".\\data\\");
 	}
@@ -42,7 +42,7 @@ public class EntradaSortidaDadesGraf {
 	 * Creadora amb ruta per defecte
 	 * 
 	 */
-	public EntradaSortidaDadesGraf(File rutaPerDefecte) {
+	public EntradaSortidaDades(File rutaPerDefecte) {
 		super();
 		this.rutaPerDefecte = rutaPerDefecte;
 	}
@@ -551,7 +551,7 @@ public class EntradaSortidaDadesGraf {
 
 			int iter = 0;
 			final int nUsuaris;
-
+                        System.out.println("Estic aqui 1");
 			if ((s = b.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(s);
 				if (st.hasMoreTokens()) {
@@ -572,10 +572,12 @@ public class EntradaSortidaDadesGraf {
 
 			while (iter < nUsuaris && (s = b.readLine()) != null) {
 				Usuari user;
-
+                                
 				String[] userData = s.split(" ");
+                        System.out.println(userData[0]);
 				user = new Usuari(userData[0].replace('+', ' '), userData[1].replace('+', ' '),
 						userData[2].equals("true"));
+                                System.out.println(user.getUsername());
 				ArrayList<CercaComunitats> cerques = carregaDadesUsuari(user);
 				if (cerques != null) {
 					for (int i = 0; i < cerques.size(); ++i) {
@@ -584,13 +586,15 @@ public class EntradaSortidaDadesGraf {
 					}
 				} else
 					break;
-
+                                MapUsuaris.put(user.getUsername(), user);
 				++iter;
 			}
 
 			if (!b.readLine().equals("**END**") || iter < nUsuaris) {
 				error(6);
 			}
+                        
+                        
 
 		} catch (FileNotFoundException e) {
 			// No fa res perque no es un error no trobar l'arxiu, ja que pot ser
@@ -1014,8 +1018,7 @@ public class EntradaSortidaDadesGraf {
 				System.out.println("Fitxer d'entrada sense dades");
 				return;
 			case 6 :
-				System.out
-						.println("L'arxiu s'ha llegit correctament però pot contenir errors. Revisa la sintaxi per si de cas");
+				System.out.println("L'arxiu s'ha llegit correctament però pot contenir errors. Revisa la sintaxi per si de cas");
 				return;
 			case 7 :
 				System.out.println("Error al tancar l'arxiu");

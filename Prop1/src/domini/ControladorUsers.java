@@ -34,6 +34,10 @@ public class ControladorUsers {
 		gd = noug;*/
 	}
 	
+      /*  public Map<String,Usuari>  getMapa(){
+           return conj.getMap();
+       }*/
+        
 	/*public void actualitzaRefs(ConjuntUsuaris nouu, GrafDades noug) {
 		conj = nouu;
 		gd = noug;
@@ -128,9 +132,9 @@ public class ControladorUsers {
 	 * 
 	 * @return false si hi ha hagut algun error, true altrament.
 	 */
-	public Boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare ) {
+	public Boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare,Integer relacionsSubs,Integer relacionsSuper ) {
 		ParaulaValor par = new ParaulaValor(paraulast, paraulain);
-		Criteris aux = new Criteris(par, relacions, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare);
+		Criteris aux = new Criteris(par, relacions, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare,relacionsSubs, relacionsSuper);
 		conj.getUser(username).getCerca(i).setCriterisSeleccio(aux);
 		if(modifica) conj.getUser(username).getCerca(i).setDataModificacio(new Date());
 		return true;
@@ -483,6 +487,17 @@ public class ControladorUsers {
 		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getRelacionsCat();
 	}
 	
+        
+        
+        public Integer getRelacionsSubsCerca(String username, Integer quina) {
+            return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getRelacionsSubs();
+        }
+        
+        public Integer getRelacionsSuperCerca(String username, Integer quina) {
+            return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getRelacionsSuper();
+        }
+        
+        
 	/**
 	 * Consulta la importancia entre la semblansa entre els noms de les categories d'una certa Cerca de Comunitats realitzada per un usuari.
 	 * 

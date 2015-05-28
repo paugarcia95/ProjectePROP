@@ -3,7 +3,7 @@ package drivers;
 import java.io.IOException;
 import java.util.Scanner;
 
-import domini.EntradaSortidaDadesGraf;
+import domini.EntradaSortidaDades;
 import domini.GrafDades;
 
 /**
@@ -15,7 +15,7 @@ public class DriverEntradaSortidaDadesGraf {
 
 	private static Scanner in;
 
-	public static GrafDades creaGraf(EntradaSortidaDadesGraf io) {
+	public static GrafDades creaGraf(EntradaSortidaDades io) {
 		GrafDades G = new GrafDades();
 
 		System.out.println("Crea Graf");
@@ -29,7 +29,7 @@ public class DriverEntradaSortidaDadesGraf {
 		return G;
 	}
 
-	public static GrafDades llegirFitxer(EntradaSortidaDadesGraf io) {
+	public static GrafDades llegirFitxer(EntradaSortidaDades io) {
 		in = new Scanner(System.in);
 		System.out.println("Llegir Graf");
 		System.out.println("---------");
@@ -51,7 +51,7 @@ public class DriverEntradaSortidaDadesGraf {
 	}
         
 	// C:/Users/Pau/Desktop/cats.txt
-	public static void escriureGraf(EntradaSortidaDadesGraf io, GrafDades G) {
+	public static void escriureGraf(EntradaSortidaDades io, GrafDades G) {
 		in = new Scanner(System.in);
 		System.out.println("Escriure Graf");
 		System.out.println("---------");
@@ -74,7 +74,7 @@ public class DriverEntradaSortidaDadesGraf {
 			System.out.println("4. Llegir les entrades del graf una a una i escriure'n la seva representació gràfica (cal haver especificat una ruta per defecte per guardar el graf auxiliar)");
 			System.out.println("5. Sortir");
 
-			EntradaSortidaDadesGraf io = new EntradaSortidaDadesGraf();
+			EntradaSortidaDades io = new EntradaSortidaDades();
 			in = new Scanner(System.in);
 			switch (in.nextInt()) {
 				case 1 :

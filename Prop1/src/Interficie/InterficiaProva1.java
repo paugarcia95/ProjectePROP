@@ -221,13 +221,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         A_CanviaDadesUser = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         A_VeureUsers = new javax.swing.JPanel();
-        Enrere8 = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
-        modusers = new DefaultListModel();
-        UsersAct = new javax.swing.JList();
-        jButton19 = new javax.swing.JButton();
         A_VisualitzaNovaCerca = new javax.swing.JPanel();
         A_GuardaCerca = new javax.swing.JPanel();
         A_VisualitzacioCercaAntiga = new javax.swing.JPanel();
@@ -555,87 +548,15 @@ public class InterficiaProva1 extends javax.swing.JFrame {
             }
         });
 
-        Enrere8.setText("Enrere");
-        Enrere8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Enrere8ActionPerformed(evt);
-            }
-        });
-
-        jLabel17.setText("Aquests són els usuaris actuals:");
-
-        jButton17.setText("Elimina");
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
-            }
-        });
-
-        jButton18.setText("Fer Admin");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
-            }
-        });
-
-        UsersAct.setModel(modusers);
-        UsersAct.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        UsersAct.setDragEnabled(true);
-        UsersAct.setDropMode(javax.swing.DropMode.INSERT);
-        UsersAct.setFocusable(false);
-        UsersAct.setValueIsAdjusting(true);
-
-        jButton19.setText("Crea un nou usuari Administrador");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout A_VeureUsersLayout = new javax.swing.GroupLayout(A_VeureUsers);
         A_VeureUsers.setLayout(A_VeureUsersLayout);
         A_VeureUsersLayout.setHorizontalGroup(
             A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                        .addComponent(UsersAct, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jButton17))
-                            .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton19)
-                                    .addComponent(Enrere8)
-                                    .addComponent(jButton18))))
-                        .addGap(0, 1080, Short.MAX_VALUE))
-                    .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(93, 93, 93))))
+            .addGap(0, 1532, Short.MAX_VALUE)
         );
         A_VeureUsersLayout.setVerticalGroup(
             A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel17)
-                .addGroup(A_VeureUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(UsersAct, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(A_VeureUsersLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Enrere8)
-                        .addContainerGap(386, Short.MAX_VALUE))))
+            .addGap(0, 562, Short.MAX_VALUE)
         );
 
         getContentPane().add(A_VeureUsers, "card10");
@@ -730,10 +651,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void Enrere8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere8ActionPerformed
-        A_VeureUsers.setVisible(false);
-        A_OpcionsAdmin.setVisible(true);
-    }//GEN-LAST:event_Enrere8ActionPerformed
     private void A_GuardaCercaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_GuardaCercaComponentShown
        jTextField5.setText("");
        jTextField6.setText("");
@@ -747,44 +664,8 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_A_VeureUsersComponentShown
 
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        if(UsersAct.getSelectedIndices().length>0) {
-            Boolean segueix = true;
-            if(UsersAct.getSelectedValue().toString().equals("admin")) JOptionPane.showMessageDialog(this, "Aquest usuari no es pot eliminar", capsalera, WARNING_MESSAGE);
-            else {
-            if(UsersAct.getSelectedValue().toString().equals(macro.getUserActual())) {
-                int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar-te a tu mateix?", capsalera, YES_NO_OPTION);
-                if(resposta==YES_OPTION) {
-                    A_PantallaPrincipal.setVisible(true);
-                    A_VeureUsers.setVisible(false);
-                }
-                else  segueix = false;
-            }
-            if(segueix) {
-            macro.getContUser().removeUser(UsersAct.getSelectedValue().toString());
-            modusers.removeElement(UsersAct.getSelectedValue().toString());
-            }
-            }
-        }
-        else JOptionPane.showMessageDialog(this, "Has de seleccionar quin usuari vols eliminar!", capsalera, WARNING_MESSAGE);
-
-    }//GEN-LAST:event_jButton17ActionPerformed
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        if(UsersAct.getSelectedIndices().length>0) {
-            macro.getContUser().addAdmin(UsersAct.getSelectedValue().toString());
-            JOptionPane.showMessageDialog(this, "Felicitats, aquest usuari ja és admin!", capsalera, WARNING_MESSAGE);
-        }
-        else JOptionPane.showMessageDialog(this, "Has de seleccionar quin usuari vols fer admninistrador!", capsalera, WARNING_MESSAGE);
-
-    }//GEN-LAST:event_jButton18ActionPerformed
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        userAdmin = true;
-        A_CreaUsuari.setVisible(true);
-        A_VeureUsers.setVisible(false);
-    }//GEN-LAST:event_jButton19ActionPerformed
-
     private void A_VeureUsersComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeureUsersComponentHidden
-        modusers.removeAllElements();
+        //modusers.removeAllElements();
     }//GEN-LAST:event_A_VeureUsersComponentHidden
 
     private void A_VisualitzaNovaCercaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzaNovaCercaComponentShown
@@ -902,22 +783,15 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     private javax.swing.JPanel A_VisualitzaCerques;
     private javax.swing.JPanel A_VisualitzaNovaCerca;
     private javax.swing.JPanel A_VisualitzacioCercaAntiga;
-    private javax.swing.JButton Enrere8;
     private javax.swing.JButton Exit;
     private javax.swing.JButton Login;
     private javax.swing.JTextField NouUsername;
     private javax.swing.JTextField NovaPassword;
     private javax.swing.JTextField Password;
     private javax.swing.JTextField Username;
-    private javax.swing.JList UsersAct;
-    private DefaultListModel modusers;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

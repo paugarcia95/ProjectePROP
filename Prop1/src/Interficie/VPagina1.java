@@ -96,9 +96,10 @@ public class VPagina1 extends javax.swing.JDialog {
     /**
      * Creates new form VPagina1
      */
-    public VPagina1(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
+    public VPagina1(java.awt.Frame parent, boolean modalitat, Boolean adm) {
+        super(parent, modalitat);
+        pare=parent;
+        admin = adm;
     }
 
     /**
@@ -497,17 +498,17 @@ public class VPagina1 extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
         }*/
 
-        VCategoria nova;
+        VCategoria1 nova;
         if(CApunta.getSelectedIndices().length>0 && !CApunta.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApunta.getSelectedValue().toString();
-            nova = new VCategoria(pare, true,admin);
+            nova = new VCategoria1(pare, true,admin);
             nova.NomCat(hy);
             nova.setAlwaysOnTop(true);
             nova.setFocusable(true);
         }
         else if(CApuntada.getSelectedIndices().length>0 && !CApuntada.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApuntada.getSelectedValue().toString();
-            nova = new VCategoria(pare, true,admin);
+            nova = new VCategoria1(pare, true,admin);
             nova.NomCat(hy);
             nova.setAlwaysOnTop(true);
             nova.setFocusable(true);
@@ -630,7 +631,7 @@ public class VPagina1 extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VPagina1 dialog = new VPagina1(new javax.swing.JFrame(), true);
+                VPagina1 dialog = new VPagina1(new javax.swing.JFrame(), true, admin);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -26,7 +26,7 @@ import domini.TraduccioiAlgorisme;
 public class DriverAlgorismeNewmanGirvan {
 	
 	public static void main(String[] args) {
-		Criteris cri = new Criteris();
+	/*	Criteris cri = new Criteris();
 		cri.setAlgorisme(2);
 		cri.setDada(2);
 		GrafDades G = new GrafDades();
@@ -78,6 +78,6 @@ public class DriverAlgorismeNewmanGirvan {
 			System.out.print("Comunitat " + itit);
 			System.out.print(uu);
 			++itit;
-		}
+		}*/
 	}
 }

@@ -19,7 +19,7 @@ public class CriterisTest extends TestCase{
 		super("CriterisTest");
 	}
 	
-	protected void setUp() throws Exception {
+/*	protected void setUp() throws Exception {
 		super.setUp();
 	}
 	
@@ -160,5 +160,5 @@ public class CriterisTest extends TestCase{
 		c.setPare("Nou");
 		assertTrue("No ha canviat el pare", c.getPare().equals("Nou"));
 	}
-
+*/
 }

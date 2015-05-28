@@ -27,6 +27,7 @@ import static javax.swing.JOptionPane.YES_OPTION;
  * @author Cristina
  */
 public class VCategoria1 extends javax.swing.JDialog {
+   
     String cat;
     Frame pare;
     String noSelect="  No n'hi ha cap";
@@ -130,7 +131,7 @@ public class VCategoria1 extends javax.swing.JDialog {
     private void visualitzaPagBut(JList quina){
         if(quina.getSelectedIndices().length>0 && !quina.getSelectedValue().toString().equals(noSelect)) {
             String hy = quina.getSelectedValue().toString();
-            VPagina nova = new VPagina(pare, true, admin);
+            VPagina1 nova = new VPagina1(pare, true, admin);
             nova.NomPag(hy);
         }
         else {
@@ -140,7 +141,7 @@ public class VCategoria1 extends javax.swing.JDialog {
     private void visualitzaCatBut(JList quina){
         if(quina.getSelectedIndices().length>0 && !quina.getSelectedValue().toString().equals(noSelect)) {
             String hy = quina.getSelectedValue().toString();
-            VCategoria nova = new VCategoria(pare, true,admin);
+            VCategoria1 nova = new VCategoria1(pare, true,admin);
             nova.NomCat(hy);
         }
         else {
@@ -153,9 +154,11 @@ public class VCategoria1 extends javax.swing.JDialog {
     /**
      * Creates new form VCategoria1
      */
-    public VCategoria1(java.awt.Frame parent, boolean modal) {
+    public VCategoria1(java.awt.Frame parent, boolean modal, boolean adm) {
         super(parent, modal);
-        initComponents();
+        pare = parent;
+        admin = adm;
+        //initComponents();
     }
 
     /**
@@ -901,7 +904,7 @@ public class VCategoria1 extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VCategoria1 dialog = new VCategoria1(new javax.swing.JFrame(), true);
+                VCategoria1 dialog = new VCategoria1(new javax.swing.JFrame(), true, admin);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

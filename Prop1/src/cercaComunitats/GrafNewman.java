@@ -28,54 +28,6 @@ public class GrafNewman extends Graf {
 	private Integer maxNumCM;       //Maxim nombre de camins minims que passen per qualsevol aresta
 	private Integer numCom;     //Numero de comunitats actuals
         
-        /**
- * Floyd-Warshall algorithm. Finds all shortest paths among all pairs of nodes
- * @param d matrix of distances (Integer.MAX_VALUE represents positive infinity)
- * @return matrix of predecessors
- */
-public static int[][] floydWarshall(int[][] d) {
-    int[][] p = constructInitialMatixOfPredecessors(d);
-    for (int k = 0; k < d.length; k++) {
-        for (int i = 0; i < d.length; i++) {
-            for (int j = 0; j < d.length; j++) {
-                if (d[i][k] == Integer.MAX_VALUE || d[k][j] == Integer.MAX_VALUE) {
-                    continue;                  
-                }
-                
-                if (d[i][j] > d[i][k] + d[k][j]) {
-                    d[i][j] = d[i][k] + d[k][j];
-                    p[i][j] = p[k][j];
-                }
-
-            }
-        }
-    }
-    return p;
-}
-
-/**
- * Constructs matrix P0
- * @param d matrix of lengths
- * @return P0
- */
-private static int[][] constructInitialMatixOfPredecessors(int[][] d) {
-    int[][] p = new int[d.length][d.length];
-    for (int i = 0; i < d.length; i++) {
-        for (int j = 0; j < d.length; j++) {
-            if (d[i][j] != 0 && d[i][j] != Integer.MAX_VALUE) {
-                p[i][j] = i;
-            } else {
-                p[i][j] = -1;
-            }
-        }
-    }
-    return p;
-}
-
-public Boolean calcularEdgeBetweenv3() {
-    return true;
-}
-        
         
         private class ArcP{
             public Double pes;
@@ -100,7 +52,7 @@ public Boolean calcularEdgeBetweenv3() {
                 return (int)(x.pes*100-y.pes*100);
             }
         }
-        private ArrayList<Queue<Aresta> > getCamiMinimv2(Integer nodeA){
+        private ArrayList<Queue<Aresta> > getCamiMinim(Integer nodeA){
             ArrayList<Queue<Aresta> > result = new ArrayList<Queue<Aresta> >();
             int num = llista.size();
             ArrayList<Double> dist = new ArrayList<Double>();
@@ -136,7 +88,7 @@ public Boolean calcularEdgeBetweenv3() {
         
         
         
-        public Boolean calcularEdgeBetweenv2() {
+        public Boolean calcularEdgeBetween() {
 		// Posem a 0 tots els camins minims per "comencar" la nova ronda
             for(HashMap<Integer,Integer> i: NCM)
                 for(Integer j: i.keySet()){
@@ -144,7 +96,7 @@ public Boolean calcularEdgeBetweenv3() {
                 }
    
             for(int i = 0; i < NCM.size();++i) {
-                ArrayList<Queue<Aresta> > camins = getCamiMinimv2(i);
+                ArrayList<Queue<Aresta> > camins = getCamiMinim(i);
                 for(int j=0; j < NCM.size();++j) {
                     while(!camins.get(j).isEmpty()) {
                         Aresta aux = camins.get(j).poll();
@@ -194,120 +146,6 @@ public Boolean calcularEdgeBetweenv3() {
 		}
 	};
 
-	private static final class ArestaPes {
-		public Integer aresta;
-		public Double pes;
-
-		/**
-		 * Constructora per defecte. (Pau)
-		 * 
-		 * @param aresta
-		 *            Es el node d'un dels extrems de l'aresta (A la funcio on
-		 *            s'utilitza representa el node a on es vol anar).
-		 * @param pes
-		 *            Representa el pes de l'aresta formada per el node d'origen
-		 *            i "aresta".
-		 * @return Una ArestaPes amb aresta i pes.
-		 */
-		public ArestaPes(int aresta, double pes) {
-			this.aresta = aresta;
-			this.pes = pes;
-		}
-	}
-
-	private static final class ComparaValors implements Comparator<ArestaPes> {
-		/**
-		 * Compara l'aresta les arestes mitjancant el seu pes. (Pau)
-		 * 
-		 * @param o1
-		 *            Una Aresta.
-		 * @param o2
-		 *            L'altra Aresta.
-		 * @return Un enter positiu si o1 te un pes mes gran que o2, 0 si tenen
-		 *         el mateix pes i un enter negatiu si o2 te un pes major a o1.
-		 */
-		@Override
-		public int compare(ArestaPes o1, ArestaPes o2) {
-			// Es multiplica el valor per 100 per no perdre precisio a la
-			// comparacio de doubles (ja que despres es fa un cast a integer i
-			// es perden els decimals)
-			return (int) (o1.pes * 100 - o2.pes * 100);
-		}
-	}
-
-	private static final class QueueVector {
-		private static ArrayList<Queue<Aresta>> Q;
-
-		/**
-		 * Constructora per defecte. (Pau)
-		 * 
-		 * @param size
-		 *            Representa el tamany del vector
-		 * @return Un vector que conte tantes Queue (buides) com size indica
-		 */
-		public QueueVector(int size) {
-			Q = new ArrayList<Queue<Aresta>>(size);
-                        for (int i = 0; i < size; i++) {
-                            Q.add(new LinkedList<Aresta>());
-                        }
-		}
-
-		/**
-		 * Insereix l'element "a" a la cua de la posicio "i" (Pau)
-		 * 
-		 * @param i
-		 *            Posicio on es vol inserir
-		 * @param a
-		 *            Aresta que es vol inserir
-		 */
-		public void push(int i, Aresta a) {
-			// El que fa aquest push es posar les arestes necessaries per
-			// arribar al primer node de l'aresta mes la nova aresta per
-			// arribar al seguent node
-                        Q.get(i).clear();
-                        
-			Queue<Aresta> aux = new LinkedList<>(Q.get(a.node1));
-			while (!aux.isEmpty()) {
-				Q.get(i).add(aux.poll());
-			}
-
-			Q.get(i).add(a);
-		}
-
-		/**
-		 * Retorna i elimina el primer element de la cua de la posició i. (Pau)
-		 * 
-		 * @param i
-		 *            Posicio on es troba la cua desitjada
-		 * @return El primer element de la cua de la posició i
-		 */
-		public Aresta pop(int i) {
-			return Q.get(i).poll();
-		}
-
-		/**
-		 * Retorna, pero NO elimina, el primer element de la cua de la posició
-		 * i. (Pau)
-		 * 
-		 * @param i
-		 *            Posicio on es troba la cua desitjada
-		 * @return El primer element de la cua de la posició i
-		 */
-		public Aresta top(int i) {
-			return Q.get(i).peek();
-		}
-
-		/**
-		 * Retorna la cua de la posicio i. (Pau)
-		 * 
-		 * @param i
-		 *            Posicio on es troba la cua desitjada
-		 * @return La cua de la posicio i
-		 */
-		public Queue<Aresta> getQueue(int i) {
-			return Q.get(i);
-		}
-	}
 
 	/**
 	 * Creadora per defecte. (Cristina)
@@ -412,55 +250,7 @@ public Boolean calcularEdgeBetweenv3() {
 			}
 		}
 	}
-	/**
-	 * Calcula el cami minim des del nodeA a la resta de nodes. (Pau)
-	 * 
-	 * @param nodeA
-	 *            El node d'un dels extrems del cami.
-	 * @return Un vector de cues de les arestes per on passen els camins minims.
-	 */
-	private QueueVector getCamiMinim(int nodeA) {
-		// Implementat amb Dijkstra
-		QueueVector camiMinim = new QueueVector(this.size());
-		// Vector que marca la distancia del nodeA a la resta de nodes
-		ArrayList<Double> distancia = new ArrayList<Double>(this.size());
-        
-		// Es com una cua de prioritat que ordena els nodes en una posicio mes
-		// curta al principi
-		PriorityQueue<ArestaPes> cola = new PriorityQueue<ArestaPes>(100, new ComparaValors());
-
-		// En un principi no se sap, i es marquen les distancies com a
-		// infinites
-		for (int i = 0; i < this.size(); ++i) {
-			distancia.add(Double.POSITIVE_INFINITY);
-		}
-
-		// La distancia del nodeA a ell mateix es 0
-		distancia.set(nodeA, 0.0);
-		cola.add(new ArestaPes(nodeA, 0.0));
-
-		while (!cola.isEmpty()) {
-			ArestaPes a = cola.poll();
-			Integer u = a.aresta;
-
-			// Conte un iterador dels nodes adjacents a "u"
-			Iterator<Integer> it2 = this.getAdjacents(u).iterator();
-
-			while (it2.hasNext()) {
-				Integer v = it2.next();
-				Double pesUV = llista.get(u, v);
-
-				if (distancia.get(v) > distancia.get(u) + pesUV) {
-					distancia.set(v, distancia.get(u) + pesUV);
-					cola.add(new ArestaPes(v, distancia.get(v)));
-                                        //Aquest push que es fa aqu� �s especial: insereix el cam� per arribar fins
-                                        //a "u" i despres l'aresta de u a v.
-					camiMinim.push(v, new Aresta(u, v));
-				}
-			}
-		}
-		return camiMinim;
-	}
+	
 	/**
 	 * Indica el maxim nombre de camins minims que passen entre dos nodes del
 	 * graf.
@@ -470,42 +260,6 @@ public Boolean calcularEdgeBetweenv3() {
 	 */
 	public Integer getMaxBetween() {
 		return maxNumCM;
-	}
-	/**
-	 * Calcula el nombre de camins minims que passen per cada vertex. (Cristina)
-	 * 
-	 * @return true si s'ha pogut calcular tot correctament, false si hi ha
-	 *         hagut algun error.
-	 */
-	public Boolean calcularEdgeBetween() {
-		// Posem a 0 tots els camins minims per "comencar" la nova ronda
-            for(HashMap<Integer,Integer> i: NCM)
-                for(Integer j: i.keySet()){
-                    i.put(j, 0);
-                }
-   
-            for(int i = 0; i < NCM.size();++i) {
-                QueueVector camins = getCamiMinim(i);
-                for(int j=0; j < NCM.size();++j) {
-                   // System.out.println("Cami de "+DiccionariInvers.get(i)+" a "+DiccionariInvers.get(j)+": ");
-                    while(!camins.getQueue(j).isEmpty()) {
-                        Aresta aux = camins.pop(j);
-                       // System.out.println(aux);
-                        //System.out.println(", de "+DiccionariInvers.get(aux.node1)+ " a "+DiccionariInvers.get(aux.node2));
-                        Integer act = NCM.get(aux.node1).get(aux.node2);
-                        ++act;
-                        NCM.get(aux.node1).put(aux.node2,act);
-                        NCM.get(aux.node2).put(aux.node1,act);
-			// mantenir el vertex per on passen mes camins minims (variables maxi, maxj i maxNumCM)
-                        if (maxNumCM <= act) {
-                            maxi = aux.node1;
-                            maxj = aux.node2;
-                            maxNumCM = act;
-                        }
-                    }
-                }
-            }
-		return true;
 	}
 
 	/**

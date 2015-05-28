@@ -17,6 +17,10 @@ public class ConjuntUsuaris {
 		users = new TreeMap<String, Usuari>();
 	}
 	
+       public Map<String,Usuari>  getMap(){
+           return users;
+       }
+        
 	/**
 	 * Pre: u no existeix a Users
 	 * Post: u pertany a Users

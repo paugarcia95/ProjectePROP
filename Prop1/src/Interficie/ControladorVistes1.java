@@ -207,7 +207,7 @@ public class ControladorVistes1 {
     public void visualitzarCategoriaDe(JList quina){
         if(quina.getSelectedIndices().length>0) {
             String hy = quina.getSelectedValue().toString();
-            VCategoria aux = new VCategoria(comp,true,macro.getContUser().isAdmin(macro.getUserActual()));
+            VCategoria1 aux = new VCategoria1(comp,true,macro.getContUser().isAdmin(macro.getUserActual()));
             CategList = quina;
             aux.NomCat(hy);
         }
@@ -218,7 +218,7 @@ public class ControladorVistes1 {
     public void visualitzarPaginaDe(JList quina){
         if(quina.getSelectedIndices().length>0) {
             String hy = quina.getSelectedValue().toString();
-            VPagina aux = new VPagina(comp,true, macro.getContUser().isAdmin(macro.getUserActual()));
+            VPagina1 aux = new VPagina1(comp,true, macro.getContUser().isAdmin(macro.getUserActual()));
             PagList = quina;
             aux.NomPag(hy);
         }
