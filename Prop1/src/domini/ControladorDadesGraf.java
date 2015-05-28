@@ -13,13 +13,9 @@ import java.util.Collection;
  *
  */
 public class ControladorDadesGraf {
-	
-	//private EntradaSortidaDades aux;	
-//CONSTRUCTORA
 
-	public ControladorDadesGraf() {
-		//aux = new EntradaSortidaDades();
-	} 
+
+	public ControladorDadesGraf() {} 
 	
 //CONSULTORES///////////////////////////////////////////////////////////////////////////////
 	/**
@@ -190,7 +186,7 @@ public class ControladorDadesGraf {
 	 * Post:
 	 * @return
 	 */
-	public Boolean addEnllac(String inici, String fin, Integer tipus) {return true;}
+	//public Boolean addEnllac(String inici, String fin, Integer tipus) {return true;}
 	
 	/**
 	 * Pre: Cert

@@ -17,9 +17,11 @@ public class Criteris {
 	
 	
 	
-	public Criteris(ParaulaValor paraula, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare,Integer relacionsSubs,Integer relacionsSuper) {
+	public Criteris(ParaulaValor paraula, Integer relacionsCat, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare, Integer relacionsSubs, Integer relacionsSuper) {
 		paraulaClau = paraula;
-		relacionsCat = relacions;
+		this.relacionsCat = relacionsCat;
+		this.relacionsSubs = relacionsSubs;
+        this.relacionsSuper = relacionsSuper;
 		semblaNom = sembla;
 		algorisme = alg;
 		tipuCerca = tipus;
@@ -28,19 +30,17 @@ public class Criteris {
 		this.evitaCat = evitaCat;
 		this.evitaPag = evitaPag;
 		this.pare = pare;
-                this.relacionsSubs = relacionsSubs;
-                this.relacionsSuper = relacionsSuper;
 	}
 	
 	public Criteris() {
 		paraulaClau = new ParaulaValor();
 		relacionsCat = 5;
+		relacionsSubs = 5;
+        relacionsSuper = 5;
 		semblaNom = 0;
 		algorisme = 2;
 		dada = 5;
 		tipuCerca = 1;
-                relacionsSubs = 5;
-                relacionsSuper = 5;
 		subconjCat = new ArrayList<String>();
 		evitaCat = new ArrayList<String>();
 		evitaPag = new ArrayList<String>();

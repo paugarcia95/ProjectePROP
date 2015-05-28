@@ -16,10 +16,6 @@ public class ConjuntUsuaris {
 	public ConjuntUsuaris() {
 		users = new TreeMap<String, Usuari>();
 	}
-	
-       public Map<String,Usuari>  getMap(){
-           return users;
-       }
         
 	/**
 	 * Pre: u no existeix a Users
@@ -78,6 +74,14 @@ public class ConjuntUsuaris {
 	public Set<String> getUsers() {
 		return users.keySet();
 	}
+	
+	/**
+	 * Pre: Cert
+	 * Post: Retorna el mapa users
+	 */	
+	public Map<String,Usuari> getMap(){
+        return users;
+    }
 	
 	/**
 	 * Pre: Cert
