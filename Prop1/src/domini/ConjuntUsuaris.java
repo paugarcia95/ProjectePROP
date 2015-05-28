@@ -18,10 +18,11 @@ public class ConjuntUsuaris {
 	}
         
 	/**
-	 * Pre: u no existeix a Users
+	 * Pre: Cert
 	 * Post: u pertany a Users
 	 */
 	public Boolean addUser(Usuari u) {
+		if (users.containsKey(u.getUsername())) return false;
 		users.put(u.getUsername(), u);
 		return true;
 	}
