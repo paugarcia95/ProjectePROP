@@ -76,10 +76,11 @@ public class InterficiaProva1 extends javax.swing.JFrame {
    public static PriorityQueue<Integer> comunaEliminar;
    
    
-   public void guardaCerca(Component quin, int num){
+   public void guardaCerca(Component quin){
        guardada = 2;
        A_GuardaCerca = new GuardaCerca(this);
        AP_Cerques.setComponentAt(AP_Cerques.getSelectedIndex(), quin);
+       
        //AP_Cerques.remove(quin);
    } 
    public void visualitzaCercaAntiga() {
@@ -105,7 +106,12 @@ public class InterficiaProva1 extends javax.swing.JFrame {
 	macro.getContUser().addAdmin("admin");
         vista.jocProves1();
    }
-   
+   public void canviarACercaGuardada(){
+      AP_Cerques.remove(AP_Cerques.getSelectedIndex());
+      visualitzaCercaAntiga();
+     // A_VisualitzacioCercaAntiga = new VeureCercaAntiga(this);
+     // AP_Cerques.add(A_VisualitzacioCercaAntiga);
+   }
    public final void obreOpcions(){
        if(macro.getContUser().isAdmin(macro.getUserActual())) A_OpcionsAdmin.setVisible(true);
        else A_OpcionsClient.setVisible(true);
@@ -123,12 +129,17 @@ public class InterficiaProva1 extends javax.swing.JFrame {
             //AP_Principal.setEnabled(false);
             macro.setUserActual(user);
             AP_Client.setVisible(true);
-            
-            A_VisualitzaCerques = new VeureCerques(this);
-        AP_Cerques.add(A_VisualitzaCerques, "Totes");
-        AP_Client.add(AP_Cerques, "Cerques guardades");
-        A_CanviaDadesUser = new CanviaDadesUser();
-        AP_Client.add(A_CanviaDadesUser, "Dades d'usuari");
+            if(primera) {
+                A_VisualitzaCerques = new VeureCerques(this);
+                AP_Cerques.add(A_VisualitzaCerques, "Totes");
+                AP_Client.add(AP_Cerques, "Cerques guardades");
+                A_CanviaDadesUser = new CanviaDadesUser();
+            AP_Client.add(A_CanviaDadesUser, "Dades d'usuari"); 
+            primera = false;
+            }
+            else {
+                // AP_Client.setComponentAt(6, A_CanviaDadesUser);
+            }
             
             
             if(macro.getContUser().isAdmin(user)) {
@@ -145,8 +156,12 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         }
     }
    public final void logout(){
-       AP_Principal.setVisible(true);
        AP_Client.setVisible(false);
+       AP_Principal.add(A_CreaUsuari, "Crea nou usuari");
+       AP_Principal.setVisible(true);
+       AP_Client.remove(A_VeureUsers);
+       AP_Client.remove(jPanel1);
+       AP_Client.remove(A_CreaUsuari);
    }
    /**
      * Creates new form InterficiaProva
@@ -168,7 +183,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         AP_Client.add(A_BuscaCat, "Categories");
         A_BuscaPag = new BuscaPag(this);
         AP_Client.add(A_BuscaPag, "Pàgines");
-        A_BuscaCatPag = new Cat_Pag(this);
+        A_BuscaCatPag = new BuscaCatPag(this);
         AP_Client.add(A_BuscaCatPag, "Categories i pagines");
         A_CreaComunitat = new CreaComunitat(this,AP_Client);
         AP_Client.add(A_CreaComunitat, "Fer Cerca");

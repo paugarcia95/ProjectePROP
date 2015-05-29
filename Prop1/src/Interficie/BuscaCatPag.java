@@ -15,14 +15,14 @@ import javax.swing.JFrame;
  *
  * @author Cristina
  */
-public class Cat_Pag extends javax.swing.JPanel {
+public class BuscaCatPag extends javax.swing.JPanel {
     //private InterficiaProva1 aux;
     private InterficiaProva1 aux;
     
     /**
      * Creates new form Cat_Pag
      */
-    public Cat_Pag(JFrame auxi) {
+    public BuscaCatPag(JFrame auxi) {
         //super(new BorderLayout());
         initComponents();
         aux = (InterficiaProva1)auxi;

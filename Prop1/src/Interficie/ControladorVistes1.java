@@ -258,7 +258,7 @@ public class ControladorVistes1 {
             JOptionPane.showMessageDialog(comp, "Felicitats, dades d'usuari canviades!", capsalera, WARNING_MESSAGE);
         }
     }
-    public void preaparaCreacioNovaCerca(Boolean modificacio,JList LCTotes, JList LPTotes, JTree Algorismes, JList Lsub, JList Lsub2, JList Lsub1, JTextField Cbusca1, JTextField Cpc, JSlider CpcImp, JSlider Csembla, JSlider Crelacio, JSpinner Cdada){
+    public void preaparaCreacioNovaCerca(Boolean modificacio,JList LCTotes, JList LPTotes, JTree Algorismes, JList Lsub, JList Lsub2, JList Lsub1, JTextField Cbusca1, JTextField Cpc, JSlider CpcImp, JSlider Csembla, JSlider Crelacio, JSpinner Cdada,JSlider Crelacio1,JSlider Crelacio2){
         if(macro.getContAdUs().getNumCats()<= 0) {
             JOptionPane.showMessageDialog(comp, "No es pot fer cap cerca ja que no hi ha Categories", capsalera, WARNING_MESSAGE);
         }
@@ -306,6 +306,8 @@ public class ControladorVistes1 {
             CpcImp.setValue(macro.getContUser().getParaulaImpCerca(macro.getUserActual(),cercaactual));
             Csembla.setValue(macro.getContUser().getSembCerca(macro.getUserActual(),cercaactual));
             Crelacio.setValue(macro.getContUser().getRelacioCerca(macro.getUserActual(),cercaactual));
+            Crelacio1.setValue(macro.getContUser().getRelacionsSubsCerca(macro.getUserActual(),cercaactual));
+            Crelacio2.setValue(macro.getContUser().getRelacionsSuperCerca(macro.getUserActual(),cercaactual));;
             Cdada.setValue(macro.getContUser().getAlgDadaCerca(macro.getUserActual(),cercaactual));
             Integer alg = macro.getContUser().getAlgCerca(macro.getUserActual(),cercaactual);
             if(alg==1) Algorismes.setSelectionRow(2);
@@ -327,6 +329,8 @@ public class ControladorVistes1 {
             CpcImp.setValue(0);
             Csembla.setValue(5);
             Crelacio.setValue(5);
+            Crelacio1.setValue(5);
+            Crelacio2.setValue(5);
             Cdada.setValue(0);
         }
         }
@@ -337,15 +341,11 @@ public class ControladorVistes1 {
         if (result == JFileChooser.APPROVE_OPTION) {
             File aux =input.getSelectedFile();
                 if(aux != null) {
-                try {
                     System.out.println(aux);
                     long abans =System.currentTimeMillis();
                     macro.carregaDadesFitxer(aux);
                     long despres = System.currentTimeMillis();
                     System.out.println("Temps carregar fitxer: "+(despres-abans));
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(ControladorVistes.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 }
                 else System.out.println("Error, el fitxer es buit");
         }
@@ -437,7 +437,7 @@ public class ControladorVistes1 {
                 "\nConjunt de categories ignorades:"+evita+
                 "\nConjunt de p?gines a ignorar:"+ignora);
     }
-    public Boolean ferCerca(JTree Algorismes, JSpinner Cdada, JList Lsub, JList Lsub2, JList Lsub1, JSlider CpcImp, JTextField Cpc, JSlider Csembla, JSlider Crelacio, JTextField Cbusca1){
+    public Boolean ferCerca(JTree Algorismes, JSpinner Cdada, JList Lsub, JList Lsub2, JList Lsub1, JSlider CpcImp, JTextField Cpc, JSlider Csembla, JSlider Crelacio, JTextField Cbusca1,JSlider Crelacio1,JSlider Crelacio2){
         long t1,t2;
  //FEM LA CERCA       
         if(guardada!=3)cercaactual = macro.getContUser().addNovaCerca(macro.getUserActual());
@@ -504,9 +504,9 @@ public class ControladorVistes1 {
        // System.out.println("mida aux3: "+mida);
         if(CpcImp.getValue()==0) Cpc.setText(new String());
         System.out.println("Fem la cerca amb "+macro.getContAdUs().getNumCats()+" categories i "+macro.getContAdUs().getNumPags()+" p?gines.");
-        System.out.println("Alg: "+quin+", tipus: "+tipus+", user: "+macro.getUserActual()+ ", cerca num: "+cercaactual+", numDada: "+num+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText());
-        macro.getContUser().addCriterisCerca(false, macro.getUserActual(), cercaactual, Cpc.getText(), CpcImp.getValue(), Crelacio.getValue(), Csembla.getValue(), quin, tipus, num, auxx1, auxx2, auxx3, Cbusca1.getText());
-       // System.out.println("he arribat aqui");
+        System.out.println("Alg: "+quin+", tipus: "+tipus+", user: "+macro.getUserActual()+ ", cerca num: "+cercaactual+", numDada: "+num+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText()+ ", imp CSub: "+Crelacio1.getValue()+", imp Csup"+Crelacio2.getValue());
+        macro.getContUser().addCriterisCerca(false, macro.getUserActual(), cercaactual, Cpc.getText(), CpcImp.getValue(), Crelacio.getValue(), Csembla.getValue(), quin, tipus, num, auxx1, auxx2, auxx3, Cbusca1.getText(), Crelacio1.getValue(), Crelacio2.getValue());
+        // System.out.println("he arribat aqui");
         macro.getContUser().ferCerca(macro.getUserActual(), cercaactual);
        // System.out.println("i he fet la cerca!");
        t2= System.currentTimeMillis();

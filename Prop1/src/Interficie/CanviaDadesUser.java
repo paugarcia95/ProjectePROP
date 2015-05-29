@@ -5,6 +5,8 @@
  */
 package Interficie;
 
+import static Interficie.InterficiaProva1.macro;
+import static Interficie.InterficiaProva1.vista;
 /**
  *
  * @author Cristina
@@ -32,10 +34,15 @@ public class CanviaDadesUser extends javax.swing.JPanel {
         NovaPassword1 = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        Enrere13 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         NouUsername1 = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLabel29.setText("Username");
 
@@ -45,13 +52,6 @@ public class CanviaDadesUser extends javax.swing.JPanel {
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
-            }
-        });
-
-        Enrere13.setText("Enrere");
-        Enrere13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Enrere13ActionPerformed(evt);
             }
         });
 
@@ -87,10 +87,8 @@ public class CanviaDadesUser extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel28)
                         .addGap(40, 40, 40)
-                        .addComponent(NovaPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133)
-                        .addComponent(Enrere13)))
-                .addGap(0, 20, Short.MAX_VALUE))
+                        .addComponent(NovaPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,10 +107,8 @@ public class CanviaDadesUser extends javax.swing.JPanel {
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Enrere13)
-                            .addComponent(jLabel28))
-                        .addGap(26, 26, 26)))
+                        .addComponent(jLabel28)
+                        .addGap(35, 35, 35)))
                 .addComponent(jButton6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -122,19 +118,16 @@ public class CanviaDadesUser extends javax.swing.JPanel {
         vista.comprovaUsername(NouUsername1);
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void Enrere13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere13ActionPerformed
-        A_CanviaDadesUser.setVisible(false);
-        if(macro.getContUser().isAdmin(macro.getUserActual())) A_OpcionsAdmin.setVisible(true);
-        else A_OpcionsClient.setVisible(true);
-    }//GEN-LAST:event_Enrere13ActionPerformed
-
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         vista.canviaDadesUser(NouUsername1, NovaPassword1);
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        NouUsername1.setText(macro.getUserActual());
+    }//GEN-LAST:event_formComponentShown
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Enrere13;
     private javax.swing.JTextField NouUsername1;
     private javax.swing.JTextField NovaPassword1;
     private javax.swing.JButton jButton6;

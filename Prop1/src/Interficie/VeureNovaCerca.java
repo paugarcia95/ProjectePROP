@@ -5,6 +5,7 @@
  */
 package Interficie;
 
+import static Interficie.InterficiaProva1.cercaactual;
 import static Interficie.InterficiaProva1.comunaEliminar;
 import static Interficie.InterficiaProva1.vista;
 import static Interficie.InterficiaProva1.guardada;
@@ -12,7 +13,12 @@ import static Interficie.InterficiaProva1.macro;
 import java.util.Enumeration;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
+import static javax.swing.JOptionPane.OK_OPTION;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 /**
@@ -189,12 +195,24 @@ public class VeureNovaCerca extends javax.swing.JPanel {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         //A_VisualitzaNovaCerca.setVisible(false);
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode)Resultat.getModel().getRoot();
+      //  DefaultMutableTreeNode root = (DefaultMutableTreeNode)Resultat.getModel().getRoot();
         /*Enumeration e = root.preorderEnumeration();
         while(e.hasMoreElements()){
             System.out.println(e.nextElement());
         }*/
-        pare.guardaCerca(this);
+     /*   JDialog aux = new GuardarCerca(pare, false);
+        aux.setVisible(true);*/
+        if(guardada==2) pare.visualitzaCercaAntiga();
+        GuardaCerca auxi = new GuardaCerca(pare);
+        int result = JOptionPane.showConfirmDialog(this, auxi,"Entra les dades requerides", PLAIN_MESSAGE);
+       // JOptionPane.showConfirmDialog(this, auxi,"Entra les dades requerides", PLAIN_MESSAGE);
+        if(result == OK_OPTION) {
+            pare.canviarACercaGuardada();
+          /*  System.out.println("Nom: "+auxi.getName()+", comentari: "+auxi.getComentari());
+            macro.getContUser().addNomCerca(macro.getUserActual(),cercaactual,auxi.getName());
+            macro.getContUser().addComentariCerca(macro.getUserActual(),cercaactual,auxi.getComentari());*/
+        }
+        //pare.guardaCerca(this);
         //this = new 
         //A_GuardaCerca.setVisible(true);
     }//GEN-LAST:event_jButton13ActionPerformed

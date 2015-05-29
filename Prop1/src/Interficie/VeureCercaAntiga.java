@@ -41,7 +41,6 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton3 = new javax.swing.JButton();
-        Enrere12 = new javax.swing.JButton();
         modelos1 = new DefaultListModel();
         Penjades1 = new javax.swing.JList();
         jButton21 = new javax.swing.JButton();
@@ -54,17 +53,16 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
         jScrollPane14 = new javax.swing.JScrollPane();
         Resultat1 = new javax.swing.JTree();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
+
         jButton3.setText("Modificar Comentari");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
-            }
-        });
-
-        Enrere12.setText("Enrere");
-        Enrere12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Enrere12ActionPerformed(evt);
             }
         });
 
@@ -135,9 +133,7 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(Enrere12))
+                        .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton22)
@@ -158,8 +154,7 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Enrere11)
                             .addComponent(jButton15)
-                            .addComponent(jButton3)
-                            .addComponent(Enrere12))
+                            .addComponent(jButton3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane13)
@@ -184,11 +179,6 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
         macro.getContUser().addComentariCerca(macro.getUserActual(), cercaactual, nouComen);
         vista.visualitzaCerca(true,Resultat1,CriterisNovaCerca1);
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void Enrere12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere12ActionPerformed
-        A_VisualitzacioCercaAntiga.setVisible(false);
-        A_VisualitzaCerques.setVisible(true);
-    }//GEN-LAST:event_Enrere12ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         Integer quina = macro.getContUser().addComunitatCerca(macro.getUserActual(), cercaactual)+1;
@@ -232,11 +222,14 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_Enrere11ActionPerformed
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+       // pare.visualitzaCercaAntiga();
+    }//GEN-LAST:event_formComponentShown
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea CriterisNovaCerca1;
     private javax.swing.JButton Enrere11;
-    private javax.swing.JButton Enrere12;
     private javax.swing.JList Penjades1;
     private DefaultListModel modelos1;
     private javax.swing.JTree Resultat1;
