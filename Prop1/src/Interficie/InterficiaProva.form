@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.8" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="WIKIPEDIA"/>
@@ -439,7 +439,7 @@
                                                   </Group>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="jScrollPane8" min="-2" pref="249" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
@@ -483,7 +483,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -555,7 +555,7 @@
             <Property name="value" type="int" value="5"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="inheritsPopupMenu" type="boolean" value="true"/>
             <Property name="valueIsAdjusting" type="boolean" value="true"/>
@@ -593,7 +593,7 @@
             <Property name="value" type="int" value="5"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="inheritsPopupMenu" type="boolean" value="true"/>
             <Property name="valueIsAdjusting" type="boolean" value="true"/>
@@ -613,7 +613,7 @@
             <Property name="value" type="int" value="0"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="inheritsPopupMenu" type="boolean" value="true"/>
             <Property name="valueIsAdjusting" type="boolean" value="true"/>
@@ -859,7 +859,7 @@
             <Property name="value" type="int" value="5"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="inheritsPopupMenu" type="boolean" value="true"/>
             <Property name="valueIsAdjusting" type="boolean" value="true"/>
@@ -879,7 +879,7 @@
             <Property name="value" type="int" value="5"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="inheritsPopupMenu" type="boolean" value="true"/>
             <Property name="valueIsAdjusting" type="boolean" value="true"/>
@@ -972,7 +972,7 @@
                       </Group>
                   </Group>
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="350" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1190,7 +1190,7 @@
                           <Component id="jButton16" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="100" max="32767" attributes="0"/>
+                  <EmptySpace pref="946" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1225,7 +1225,7 @@
                   <Component id="VisualitzaCerquesFetes1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="CanviaDadesUser1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="57" max="32767" attributes="0"/>
+                  <EmptySpace pref="223" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1353,7 +1353,7 @@
                           <Component id="jScrollPane1" alignment="0" min="-2" pref="352" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="159" max="32767" attributes="0"/>
+                  <EmptySpace pref="1170" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1375,7 +1375,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="308" max="-2" attributes="0"/>
-                  <EmptySpace pref="116" max="32767" attributes="0"/>
+                  <EmptySpace pref="161" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1500,7 +1500,7 @@
                           <Component id="CbuscaPag2" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="160" max="32767" attributes="0"/>
+                  <EmptySpace pref="1344" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1521,7 +1521,7 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="BVisPag" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="86" max="32767" attributes="0"/>
+                  <EmptySpace pref="337" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1653,7 +1653,7 @@
                           <Component id="CbuscaPag1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="111" max="32767" attributes="0"/>
+                  <EmptySpace pref="828" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1860,7 +1860,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1080" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
@@ -1890,7 +1890,7 @@
                           <Component id="jButton19" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="Enrere8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="50" max="32767" attributes="0"/>
+                          <EmptySpace pref="386" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -2041,7 +2041,7 @@
               <Properties>
                 <Property name="autoscrolls" type="boolean" value="true"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Default Cursor"/>
+                  <Color id="Cursor Por defecto"/>
                 </Property>
                 <Property name="largeModel" type="boolean" value="true"/>
               </Properties>
@@ -2105,7 +2105,7 @@
           <Properties>
             <Property name="selectionMode" type="int" value="0"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="dragEnabled" type="boolean" value="true"/>
             <Property name="dropMode" type="javax.swing.DropMode" editor="org.netbeans.modules.form.editors.EnumEditor">
@@ -2173,7 +2173,7 @@
                           <Component id="jButton14" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="1272" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -2196,7 +2196,7 @@
                   <Component id="Enrere10" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   <Component id="jButton14" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="79" max="32767" attributes="0"/>
+                  <EmptySpace pref="323" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -2264,7 +2264,7 @@
                       <Component id="BVisCat2" min="-2" max="-2" attributes="0"/>
                       <Component id="Enrere" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="1075" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -2285,7 +2285,7 @@
                           <Component id="jScrollPane12" min="-2" pref="308" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace pref="204" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -2395,7 +2395,7 @@
                           <Component id="jScrollPane13" min="-2" pref="345" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="80" max="32767" attributes="0"/>
+                  <EmptySpace pref="537" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -2426,13 +2426,13 @@
                                       </Group>
                                       <Component id="Penjades1" alignment="0" min="-2" pref="290" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="170" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Component id="jScrollPane14" min="-2" pref="451" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="23" max="32767" attributes="0"/>
+                  <EmptySpace pref="62" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -2483,7 +2483,7 @@
               <Properties>
                 <Property name="autoscrolls" type="boolean" value="true"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Default Cursor"/>
+                  <Color id="Cursor Por defecto"/>
                 </Property>
                 <Property name="largeModel" type="boolean" value="true"/>
               </Properties>
@@ -2518,7 +2518,7 @@
           <Properties>
             <Property name="selectionMode" type="int" value="0"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="dragEnabled" type="boolean" value="true"/>
             <Property name="dropMode" type="javax.swing.DropMode" editor="org.netbeans.modules.form.editors.EnumEditor">
@@ -2598,7 +2598,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="1085" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -2629,7 +2629,7 @@
                       </Group>
                   </Group>
                   <Component id="jButton6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="313" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -2690,12 +2690,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1532" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="562" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

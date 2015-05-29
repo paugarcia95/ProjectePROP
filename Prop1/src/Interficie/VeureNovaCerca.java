@@ -5,12 +5,16 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.cercaactual;
+import static Interficie.InterficiaProva1.capsalera;
 import static Interficie.InterficiaProva1.comunaEliminar;
+import static Interficie.InterficiaProva1.cercaactual;
 import static Interficie.InterficiaProva1.vista;
 import static Interficie.InterficiaProva1.guardada;
+import static Interficie.InterficiaProva1.auxguard;
 import static Interficie.InterficiaProva1.macro;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.PriorityQueue;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
@@ -19,6 +23,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 import static javax.swing.JOptionPane.OK_OPTION;
 import static javax.swing.JOptionPane.PLAIN_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 /**
@@ -26,15 +31,16 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Cristina
  */
 public class VeureNovaCerca extends javax.swing.JPanel {
-
+    private Integer numcerca;
     private InterficiaProva1 pare;
     
     /**
      * Creates new form VisualitzaCerca
      */
-    public VeureNovaCerca(JFrame par) {
+    public VeureNovaCerca(JFrame par, Integer cerca) {
         initComponents();
         pare = (InterficiaProva1)par;
+        numcerca = cerca;
     }
 
     /**
@@ -57,8 +63,12 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         ModificarCriterisBut = new javax.swing.JButton();
         jScrollPane11 = new javax.swing.JScrollPane();
         CriterisNovaCerca = new javax.swing.JTextArea();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
             }
@@ -81,11 +91,6 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         Resultat.setAutoscrolls(true);
         Resultat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Resultat.setLargeModel(true);
-        Resultat.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                ResultatMouseDragged(evt);
-            }
-        });
         jScrollPane9.setViewportView(Resultat);
 
         jButton13.setText("Guardar");
@@ -122,6 +127,13 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         CriterisNovaCerca.setRows(5);
         jScrollPane11.setViewportView(CriterisNovaCerca);
 
+        jToggleButton1.setText("Tanca sense guardar");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,7 +146,9 @@ public class VeureNovaCerca extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ModificarCriterisBut)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton13))
+                        .addComponent(jButton13)
+                        .addGap(18, 18, 18)
+                        .addComponent(jToggleButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -155,7 +169,8 @@ public class VeureNovaCerca extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ModificarCriterisBut)
-                            .addComponent(jButton13))
+                            .addComponent(jButton13)
+                            .addComponent(jToggleButton1))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(105, 105, 105)
@@ -175,7 +190,7 @@ public class VeureNovaCerca extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        Integer quina = macro.getContUser().addComunitatCerca(macro.getUserActual(), cercaactual)+1;
+        Integer quina = macro.getContUser().addComunitatCerca(macro.getUserActual(), numcerca)+1;
         System.out.println("Afegeico la comunitat: "+quina);
         DefaultTreeModel arb = (DefaultTreeModel)Resultat.getModel();
 
@@ -186,50 +201,53 @@ public class VeureNovaCerca extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        vista.afegeixCatComun(Resultat,modelos, Penjades);
+        vista.afegeixCatComun(Resultat,modelos, Penjades, numcerca);
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void ResultatMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResultatMouseDragged
-        ///MOUSE MOTION DRAG
-    }//GEN-LAST:event_ResultatMouseDragged
-
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        //A_VisualitzaNovaCerca.setVisible(false);
-      //  DefaultMutableTreeNode root = (DefaultMutableTreeNode)Resultat.getModel().getRoot();
-        /*Enumeration e = root.preorderEnumeration();
-        while(e.hasMoreElements()){
-            System.out.println(e.nextElement());
-        }*/
-     /*   JDialog aux = new GuardarCerca(pare, false);
-        aux.setVisible(true);*/
-        if(guardada==2) pare.visualitzaCercaAntiga();
         GuardaCerca auxi = new GuardaCerca(pare);
         int result = JOptionPane.showConfirmDialog(this, auxi,"Entra les dades requerides", PLAIN_MESSAGE);
-       // JOptionPane.showConfirmDialog(this, auxi,"Entra les dades requerides", PLAIN_MESSAGE);
         if(result == OK_OPTION) {
-            pare.canviarACercaGuardada();
-          /*  System.out.println("Nom: "+auxi.getName()+", comentari: "+auxi.getComentari());
-            macro.getContUser().addNomCerca(macro.getUserActual(),cercaactual,auxi.getName());
-            macro.getContUser().addComentariCerca(macro.getUserActual(),cercaactual,auxi.getComentari());*/
+            if(auxi.getName().length()>0) {
+                macro.getContUser().addNomCerca(macro.getUserActual(),numcerca,auxi.getName());
+                macro.getContUser().addComentariCerca(macro.getUserActual(),numcerca,auxi.getComentari());
+                pare.canviarACercaGuardada();
+            }
+            else JOptionPane.showMessageDialog(this, "Has d'introduir un nom.", capsalera, WARNING_MESSAGE);
         }
-        //pare.guardaCerca(this);
-        //this = new 
-        //A_GuardaCerca.setVisible(true);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        vista.treuCatComun(Resultat,modelos);
+        vista.treuCatComun(Resultat,modelos, numcerca);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void ModificarCriterisButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarCriterisButActionPerformed
-        A_VisualitzaNovaCerca.setVisible(false);
-        A_CreaComunitat.setVisible(true);
+        cercaactual=numcerca;
+        pare.modificaCercaGuardada();
     }//GEN-LAST:event_ModificarCriterisButActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        cercaactual = numcerca;
+        System.out.println("Mostro la nova cerca");
+        vista.visualitzaCerca(false, Resultat, CriterisNovaCerca, numcerca);
         guardada=1;
-        
+        comunaEliminar = new PriorityQueue<>(1, Collections.reverseOrder());
     }//GEN-LAST:event_formComponentShown
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+       System.out.print("Elimino les comunitats:");
+        while(!comunaEliminar.isEmpty()) {
+            System.out.print(" "+comunaEliminar.peek());
+            macro.getContUser().removeComunitatCerca(macro.getUserActual(),numcerca,comunaEliminar.poll());
+        }
+        System.out.println();
+    }//GEN-LAST:event_formComponentHidden
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+      macro.getContUser().removeCerca(macro.getUserActual(),numcerca);
+      auxguard = 0;
+      pare.eliminaTab(this);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -244,5 +262,6 @@ public class VeureNovaCerca extends javax.swing.JPanel {
     private javax.swing.JButton jButton20;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

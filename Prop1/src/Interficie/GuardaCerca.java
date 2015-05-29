@@ -29,6 +29,14 @@ public class GuardaCerca extends javax.swing.JPanel {
         pare = (InterficiaProva1)par;
 
     }
+    
+    public String getComentari(){
+        return jTextField6.getText();
+    }
+    
+    public String getName(){
+        return jTextField5.getText();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,9 +53,19 @@ public class GuardaCerca extends javax.swing.JPanel {
         jLabel24 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
         addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentRemoved(java.awt.event.ContainerEvent evt) {
                 formComponentRemoved(evt);
+            }
+        });
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                formFocusLost(evt);
             }
         });
 
@@ -56,6 +74,12 @@ public class GuardaCerca extends javax.swing.JPanel {
         jLabel25.setText("Nom:");
 
         jLabel24.setText("Si us plau, introdueixi les seguents dades:");
+
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -96,9 +120,26 @@ public class GuardaCerca extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentRemoved
-        macro.getContUser().addNomCerca(macro.getUserActual(),cercaactual,jTextField5.getText());
+        System.out.println("2. Guardo nom: "+jTextField5.getText()+ " i comentari: "+ jTextField6.getText());
+       macro.getContUser().addNomCerca(macro.getUserActual(),cercaactual,jTextField5.getText());
         macro.getContUser().addComentariCerca(macro.getUserActual(),cercaactual,jTextField6.getText());
     }//GEN-LAST:event_formComponentRemoved
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+       System.out.println("1. Guardo nom: "+jTextField5.getText()+ " i comentari: "+ jTextField6.getText());
+        macro.getContUser().addNomCerca(macro.getUserActual(),cercaactual,jTextField5.getText());
+        macro.getContUser().addComentariCerca(macro.getUserActual(),cercaactual,jTextField6.getText());
+    }//GEN-LAST:event_formComponentHidden
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
+         System.out.println("3. Guardo nom: "+jTextField5.getText()+ " i comentari: "+ jTextField6.getText());
+        macro.getContUser().addNomCerca(macro.getUserActual(),cercaactual,jTextField5.getText());
+        macro.getContUser().addComentariCerca(macro.getUserActual(),cercaactual,jTextField6.getText());
+    }//GEN-LAST:event_formFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

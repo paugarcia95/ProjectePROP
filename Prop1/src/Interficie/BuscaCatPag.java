@@ -228,8 +228,8 @@ public class BuscaCatPag extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
-       vista.omplePaginesExistents(LlistaPag1);
-        vista.ompleCategoriesExistents(LlistaCateg1);
+      /* vista.omplePaginesExistents(LlistaPag1);
+        vista.ompleCategoriesExistents(LlistaCateg1);*/
     }//GEN-LAST:event_formComponentAdded
 
 

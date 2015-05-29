@@ -67,7 +67,12 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     //guardada=1  -> cerca no guardada, preguntar si la volen guardar
     //guardada=2 -> cerca guardada
     //guardada=3 -> volem sobreescriue una cerca ja guardada
+    //guardada=4 -> volem modificar una cerca sense guardar, no se'n poden fer de noves!
     Boolean primera; //variable per evitar excepcions en els pannels que tenen accions en amagar
+    static Integer auxguard;
+    //auxguard= 0 -> es pot crear una nova cerca sense problemes
+    //auxguard= 1 -> s'ha de sobrescriure la nova cerca cercaactual
+    //auxguard= 2 -> no es pot crear cap nova cerca, ja n'hi ha una sense guardar
     static ControladorVistes1 vista;
     static Frame comp;
     //int pos;
@@ -76,27 +81,39 @@ public class InterficiaProva1 extends javax.swing.JFrame {
    public static PriorityQueue<Integer> comunaEliminar;
    
    
-   public void guardaCerca(Component quin){
-       guardada = 2;
-       A_GuardaCerca = new GuardaCerca(this);
-       AP_Cerques.setComponentAt(AP_Cerques.getSelectedIndex(), quin);
-       
+   public void guardaCerca(Component quin) {}
+   public void canviarACercaGuardada(){
+      AP_Cerques.remove(AP_Cerques.getSelectedIndex());
+      AP_Client.setEnabledAt(4, true);
+      AP_Cerques.setEnabledAt(0, true);
+      /* for(int i = 0; i < AP_Cerques.getComponentCount(); ++i) {
+         AP_Cerques.setEnabledAt(i, true);
+       }*/
+      visualitzaCercaAntiga();
+   } 
+   public void creaAdminNou(){
+       A_CreaUsuari = new NouUser(this);
+       AP_Client.setComponentAt(9, A_CreaUsuari);
+   }
+   public void eliminaTab(Component quin){
+       AP_Cerques.remove(quin);
+   }
+   public void modificaCercaGuardada(){
+       AP_Client.setEnabledAt(4, true);
+       auxguard = 1;
+       AP_Client.setSelectedIndex(4);
+   }
+   public void obreOpcions(){
+     //  if(macro.getContUser().isAdmin(macro.getUserActual())) A_OpcionsAdmin.setVisible(true);
+     //  else A_OpcionsClient.setVisible(true);
+   }{
+    System.out.println("Aqui crido a la funcio obreOpcions de InterficiaProva1, s'ha d'implementar");  
+    /* guardada = 2;
+       Panell = new GuardaCerca(this);
+       AP_Cerques.setComponentAt(AP_Cerques.getSelectedIndex(), Panell);
+       */
        //AP_Cerques.remove(quin);
    } 
-   public void visualitzaCercaAntiga() {
-       A_VisualitzacioCercaAntiga = new VeureCercaAntiga(this);
-       AP_Cerques.add(A_VisualitzacioCercaAntiga, macro.getContUser().getNomCerca(macro.getUserActual(), cercaactual));
-   }   
-    
-   public void visualitzaCercaNova() {
-       NovaCerca = new VeureNovaCerca(this);
-       //AP_Client.add(A_VisualitzaNovaCerca, 5);
-       AP_Cerques.add(NovaCerca, "Sense guardar");
-       //AP_Client.setComponentAt(5, A_VisualitzaNovaCerca);
-       //AP_Client.revalidate();
-       AP_Client.setSelectedIndex(5);
-       AP_Cerques.setSelectedIndex(AP_Cerques.getComponentCount()-1);
-   }
    private void provisional(){
         Username.setText("admin");
         Password.setText("admin");
@@ -106,61 +123,81 @@ public class InterficiaProva1 extends javax.swing.JFrame {
 	macro.getContUser().addAdmin("admin");
         vista.jocProves1();
    }
-   public void canviarACercaGuardada(){
-      AP_Cerques.remove(AP_Cerques.getSelectedIndex());
-      visualitzaCercaAntiga();
-     // A_VisualitzacioCercaAntiga = new VeureCercaAntiga(this);
-     // AP_Cerques.add(A_VisualitzacioCercaAntiga);
+   public void retornaCreacioAdmins(){
+   if(userAdmin) {
+            userAdmin=false;
+            A_VeureUsers = new VeureUsers(this);
+            
+           /* AP_Principal.setVisible(false);
+            AP_Client.setVisible(true);*/
+            //A_OpcionsAdmin.setVisible(true);
+        }
+        else {
+            AP_Principal.setSelectedIndex(0);
+        }  
    }
-   public final void obreOpcions(){
-       if(macro.getContUser().isAdmin(macro.getUserActual())) A_OpcionsAdmin.setVisible(true);
-       else A_OpcionsClient.setVisible(true);
+   public void revalidaCerques(){
+       AP_Cerques.setSelectedIndex(0);
+   }
+   public void visualitzaCercaAntiga() {
+       javax.swing.JPanel Panells = new VeureCercaAntiga(this, cercaactual);
+       AP_Cerques.add(Panells, macro.getContUser().getNomCerca(macro.getUserActual(), cercaactual));
+       AP_Cerques.setSelectedComponent(Panells);
+   }  
+   public void visualitzaCercaNova() {
+       System.out.println("auxguard: "+auxguard);
+       if(auxguard!=1) {
+           Panell = new VeureNovaCerca(this, cercaactual);
+           AP_Cerques.add(Panell, "Sense guardar");
+       }
+       AP_Client.setSelectedIndex(5);
+       AP_Cerques.setSelectedIndex(AP_Cerques.getComponentCount()-1);
+       AP_Client.setEnabledAt(4, false);
+       AP_Cerques.setEnabledAt(0, false);
+       /*for(int i = 0; i < AP_Cerques.getComponentCount()-1; ++i) {
+            AP_Cerques.setEnabledAt(i, false);
+       }*/
    }
    public void login(){
         String user, pass;
         user= Username.getText();
         pass= Password.getText();
-        if(!macro.getContUser().existsUser(user)) {
-            JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, WARNING_MESSAGE);
-        }
+        if(!macro.getContUser().existsUser(user)) JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, WARNING_MESSAGE);
         else if(macro.getContUser().login(user, pass)){
-            //A_PantallaPrincipal.setVisible(false);
-            AP_Principal.setVisible(false);
-            //AP_Principal.setEnabled(false);
             macro.setUserActual(user);
-            AP_Client.setVisible(true);
+            auxguard = 0;
             if(primera) {
-                A_VisualitzaCerques = new VeureCerques(this);
-                AP_Cerques.add(A_VisualitzaCerques, "Totes");
+                A_CerquesGuardades = new VeureCerques(this);
+                AP_Cerques.add(A_CerquesGuardades, "Totes");
                 AP_Client.add(AP_Cerques, "Cerques guardades");
-                A_CanviaDadesUser = new CanviaDadesUser();
-            AP_Client.add(A_CanviaDadesUser, "Dades d'usuari"); 
-            primera = false;
+                Panell = new CanviaDadesUser();
+                AP_Client.add(Panell, "Dades d'usuari"); 
+                primera = false;
             }
             else {
                 // AP_Client.setComponentAt(6, A_CanviaDadesUser);
             }
-            
-            
             if(macro.getContUser().isAdmin(user)) {
-                jPanel1 = new Afegeix();
-                AP_Client.add(jPanel1, "Afegeix");
+                A_Afegeix = new Afegeix();
+                AP_Client.add(A_Afegeix, "Afegeix");
                 A_VeureUsers = new VeureUsers(this);
                 AP_Client.add(A_VeureUsers, "Usuaris existents");
-                AP_Client.add(A_CreaUsuari, "Nou admin");
+              //  AP_Client.add(A_CreaUsuari, "Nou admin");
             }
+            AP_Client.setVisible(true);
+            AP_Principal.setVisible(false);
             
         }
         else {
             JOptionPane.showMessageDialog(this, "La contrassenya es incorrecta.", capsalera, ERROR_MESSAGE);
         }
     }
-   public final void logout(){
+   public void logout(){
        AP_Client.setVisible(false);
        AP_Principal.add(A_CreaUsuari, "Crea nou usuari");
        AP_Principal.setVisible(true);
        AP_Client.remove(A_VeureUsers);
-       AP_Client.remove(jPanel1);
+       AP_Client.remove(A_Afegeix);
        AP_Client.remove(A_CreaUsuari);
    }
    /**
@@ -177,24 +214,28 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         userAdmin=false;
         initComponents();
         this.setVisible(false);
-        A_Inici = new Inici(this);
-        AP_Client.add(A_Inici, "Inici");
-        A_BuscaCat = new BuscaCat(this);
+        Panell = new Inici(this);
+        AP_Client.add(Panell, "Inici");
+        Panell = new BuscaCat(this);
+        AP_Client.add(Panell, "Categories");
+        Panell = new BuscaPag(this);
+        AP_Client.add(Panell, "Pàgines");
+        Panell = new BuscaCatPag(this);
+        AP_Client.add(Panell, "Categories i pagines");
+        Panell = new CreaComunitat(this,AP_Client);
+        AP_Client.add(Panell, "Fer Cerca");
+       /* A_BuscaCat = new BuscaCat(this);
         AP_Client.add(A_BuscaCat, "Categories");
         A_BuscaPag = new BuscaPag(this);
         AP_Client.add(A_BuscaPag, "Pàgines");
         A_BuscaCatPag = new BuscaCatPag(this);
         AP_Client.add(A_BuscaCatPag, "Categories i pagines");
         A_CreaComunitat = new CreaComunitat(this,AP_Client);
-        AP_Client.add(A_CreaComunitat, "Fer Cerca");
+        AP_Client.add(A_CreaComunitat, "Fer Cerca");*/
         //A_VisualitzaCerques = new VeureNovaCerca(this);
         
         //jPanel1.setVisible(false);
         provisional();
-        
-    }
-    
-    private void addAfegeix(){
         
     }
             
@@ -226,19 +267,13 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         NovaPassword = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         AP_Client = new javax.swing.JTabbedPane();
-        A_Inici = new javax.swing.JPanel();
+        Panell = new javax.swing.JPanel();
         AP_Cerques = new javax.swing.JTabbedPane();
-        A_BuscaCat = new javax.swing.JPanel();
-        A_BuscaPag = new javax.swing.JPanel();
-        A_BuscaCatPag = new javax.swing.JPanel();
-        A_CreaComunitat = new javax.swing.JPanel();
-        A_VisualitzaCerques = new javax.swing.JPanel();
-        A_CanviaDadesUser = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        A_FerCerca = new javax.swing.JPanel();
+        A_CerquesGuardades = new javax.swing.JPanel();
+        A_Afegeix = new javax.swing.JPanel();
         A_VeureUsers = new javax.swing.JPanel();
-        A_VisualitzaNovaCerca = new javax.swing.JPanel();
-        A_GuardaCerca = new javax.swing.JPanel();
-        A_VisualitzacioCercaAntiga = new javax.swing.JPanel();
+        A_NouAdmin = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WIKIPEDIA");
@@ -295,7 +330,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
                                 .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Login)
                                     .addComponent(Exit))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1010, Short.MAX_VALUE))
         );
         A_PantallaPrincipalLayout.setVerticalGroup(
             A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,7 +352,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(70, 70, 70)
                         .addComponent(jLabel1)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         Username.getAccessibleContext().setAccessibleName("Username");
@@ -355,36 +390,32 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         A_CreaUsuariLayout.setHorizontalGroup(
             A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(A_CreaUsuariLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
                     .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                        .addGap(272, 272, 272)
-                        .addComponent(jLabel7))
-                    .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
                         .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                                .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                                        .addGap(116, 116, 116)
-                                        .addComponent(jButton2))
-                                    .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(38, 38, 38)
-                                        .addComponent(NouUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(31, 31, 31)
-                                .addComponent(jButton1))
+                                .addGap(116, 116, 116)
+                                .addComponent(jButton2))
                             .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(40, 40, 40)
-                                .addComponent(NovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(1078, Short.MAX_VALUE))
+                                .addComponent(jLabel8)
+                                .addGap(38, 38, 38)
+                                .addComponent(NouUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton1))
+                    .addGroup(A_CreaUsuariLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(40, 40, 40)
+                        .addComponent(NovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         A_CreaUsuariLayout.setVerticalGroup(
             A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(57, 57, 57)
                 .addComponent(jLabel7)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NouUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
@@ -399,7 +430,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addGap(35, 35, 35)))
                 .addComponent(jButton2)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         AP_Principal.addTab("Crea nou usuari", A_CreaUsuari);
@@ -413,146 +444,70 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         });
         getContentPane().add(AP_Client, "card16");
 
-        javax.swing.GroupLayout A_IniciLayout = new javax.swing.GroupLayout(A_Inici);
-        A_Inici.setLayout(A_IniciLayout);
-        A_IniciLayout.setHorizontalGroup(
-            A_IniciLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PanellLayout = new javax.swing.GroupLayout(Panell);
+        Panell.setLayout(PanellLayout);
+        PanellLayout.setHorizontalGroup(
+            PanellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1532, Short.MAX_VALUE)
         );
-        A_IniciLayout.setVerticalGroup(
-            A_IniciLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanellLayout.setVerticalGroup(
+            PanellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 562, Short.MAX_VALUE)
         );
 
-        getContentPane().add(A_Inici, "card18");
+        getContentPane().add(Panell, "card18");
         getContentPane().add(AP_Cerques, "card16");
 
-        A_BuscaCat.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                A_BuscaCatComponentShown(evt);
-            }
-        });
+        A_FerCerca.setAlignmentX(A_PantallaPrincipal.getAlignmentX());
+        A_FerCerca.setAlignmentY(A_PantallaPrincipal.getAlignmentY());
 
-        javax.swing.GroupLayout A_BuscaCatLayout = new javax.swing.GroupLayout(A_BuscaCat);
-        A_BuscaCat.setLayout(A_BuscaCatLayout);
-        A_BuscaCatLayout.setHorizontalGroup(
-            A_BuscaCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout A_FerCercaLayout = new javax.swing.GroupLayout(A_FerCerca);
+        A_FerCerca.setLayout(A_FerCercaLayout);
+        A_FerCercaLayout.setHorizontalGroup(
+            A_FerCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1532, Short.MAX_VALUE)
         );
-        A_BuscaCatLayout.setVerticalGroup(
-            A_BuscaCatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        A_FerCercaLayout.setVerticalGroup(
+            A_FerCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 562, Short.MAX_VALUE)
         );
 
-        getContentPane().add(A_BuscaCat, "card7");
+        getContentPane().add(A_FerCerca, "card3");
 
-        A_BuscaPag.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                A_BuscaPagComponentShown(evt);
-            }
-        });
-
-        javax.swing.GroupLayout A_BuscaPagLayout = new javax.swing.GroupLayout(A_BuscaPag);
-        A_BuscaPag.setLayout(A_BuscaPagLayout);
-        A_BuscaPagLayout.setHorizontalGroup(
-            A_BuscaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1532, Short.MAX_VALUE)
-        );
-        A_BuscaPagLayout.setVerticalGroup(
-            A_BuscaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(A_BuscaPag, "card8");
-
-        A_BuscaCatPag.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                A_BuscaCatPagformComponentShown(evt);
-            }
-        });
-
-        javax.swing.GroupLayout A_BuscaCatPagLayout = new javax.swing.GroupLayout(A_BuscaCatPag);
-        A_BuscaCatPag.setLayout(A_BuscaCatPagLayout);
-        A_BuscaCatPagLayout.setHorizontalGroup(
-            A_BuscaCatPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1532, Short.MAX_VALUE)
-        );
-        A_BuscaCatPagLayout.setVerticalGroup(
-            A_BuscaCatPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(A_BuscaCatPag, "card13");
-
-        A_CreaComunitat.setAlignmentX(A_PantallaPrincipal.getAlignmentX());
-        A_CreaComunitat.setAlignmentY(A_PantallaPrincipal.getAlignmentY());
-
-        javax.swing.GroupLayout A_CreaComunitatLayout = new javax.swing.GroupLayout(A_CreaComunitat);
-        A_CreaComunitat.setLayout(A_CreaComunitatLayout);
-        A_CreaComunitatLayout.setHorizontalGroup(
-            A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1532, Short.MAX_VALUE)
-        );
-        A_CreaComunitatLayout.setVerticalGroup(
-            A_CreaComunitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(A_CreaComunitat, "card3");
-
-        A_VisualitzaCerques.addComponentListener(new java.awt.event.ComponentAdapter() {
+        A_CerquesGuardades.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
-                A_VisualitzaCerquesComponentHidden(evt);
+                A_CerquesGuardadesComponentHidden(evt);
             }
             public void componentShown(java.awt.event.ComponentEvent evt) {
-                A_VisualitzaCerquesComponentShown(evt);
+                A_CerquesGuardadesComponentShown(evt);
             }
         });
 
-        javax.swing.GroupLayout A_VisualitzaCerquesLayout = new javax.swing.GroupLayout(A_VisualitzaCerques);
-        A_VisualitzaCerques.setLayout(A_VisualitzaCerquesLayout);
-        A_VisualitzaCerquesLayout.setHorizontalGroup(
-            A_VisualitzaCerquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout A_CerquesGuardadesLayout = new javax.swing.GroupLayout(A_CerquesGuardades);
+        A_CerquesGuardades.setLayout(A_CerquesGuardadesLayout);
+        A_CerquesGuardadesLayout.setHorizontalGroup(
+            A_CerquesGuardadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1532, Short.MAX_VALUE)
         );
-        A_VisualitzaCerquesLayout.setVerticalGroup(
-            A_VisualitzaCerquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        A_CerquesGuardadesLayout.setVerticalGroup(
+            A_CerquesGuardadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 562, Short.MAX_VALUE)
         );
 
-        getContentPane().add(A_VisualitzaCerques, "card13");
+        getContentPane().add(A_CerquesGuardades, "card13");
 
-        A_CanviaDadesUser.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                A_CanviaDadesUserComponentShown(evt);
-            }
-        });
-
-        javax.swing.GroupLayout A_CanviaDadesUserLayout = new javax.swing.GroupLayout(A_CanviaDadesUser);
-        A_CanviaDadesUser.setLayout(A_CanviaDadesUserLayout);
-        A_CanviaDadesUserLayout.setHorizontalGroup(
-            A_CanviaDadesUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout A_AfegeixLayout = new javax.swing.GroupLayout(A_Afegeix);
+        A_Afegeix.setLayout(A_AfegeixLayout);
+        A_AfegeixLayout.setHorizontalGroup(
+            A_AfegeixLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1532, Short.MAX_VALUE)
         );
-        A_CanviaDadesUserLayout.setVerticalGroup(
-            A_CanviaDadesUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        A_AfegeixLayout.setVerticalGroup(
+            A_AfegeixLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 562, Short.MAX_VALUE)
         );
 
-        getContentPane().add(A_CanviaDadesUser, "card15");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1532, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, "card10");
+        getContentPane().add(A_Afegeix, "card10");
 
         A_VeureUsers.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -576,68 +531,18 @@ public class InterficiaProva1 extends javax.swing.JFrame {
 
         getContentPane().add(A_VeureUsers, "card10");
 
-        A_VisualitzaNovaCerca.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                A_VisualitzaNovaCercaComponentHidden(evt);
-            }
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                A_VisualitzaNovaCercaComponentShown(evt);
-            }
-        });
-
-        javax.swing.GroupLayout A_VisualitzaNovaCercaLayout = new javax.swing.GroupLayout(A_VisualitzaNovaCerca);
-        A_VisualitzaNovaCerca.setLayout(A_VisualitzaNovaCercaLayout);
-        A_VisualitzaNovaCercaLayout.setHorizontalGroup(
-            A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout A_NouAdminLayout = new javax.swing.GroupLayout(A_NouAdmin);
+        A_NouAdmin.setLayout(A_NouAdminLayout);
+        A_NouAdminLayout.setHorizontalGroup(
+            A_NouAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1532, Short.MAX_VALUE)
         );
-        A_VisualitzaNovaCercaLayout.setVerticalGroup(
-            A_VisualitzaNovaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        A_NouAdminLayout.setVerticalGroup(
+            A_NouAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 562, Short.MAX_VALUE)
         );
 
-        getContentPane().add(A_VisualitzaNovaCerca, "card11");
-
-        A_GuardaCerca.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                A_GuardaCercaComponentShown(evt);
-            }
-        });
-
-        javax.swing.GroupLayout A_GuardaCercaLayout = new javax.swing.GroupLayout(A_GuardaCerca);
-        A_GuardaCerca.setLayout(A_GuardaCercaLayout);
-        A_GuardaCercaLayout.setHorizontalGroup(
-            A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1532, Short.MAX_VALUE)
-        );
-        A_GuardaCercaLayout.setVerticalGroup(
-            A_GuardaCercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(A_GuardaCerca, "card12");
-
-        A_VisualitzacioCercaAntiga.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                A_VisualitzacioCercaAntigaComponentHidden(evt);
-            }
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                A_VisualitzacioCercaAntigaComponentShown(evt);
-            }
-        });
-
-        javax.swing.GroupLayout A_VisualitzacioCercaAntigaLayout = new javax.swing.GroupLayout(A_VisualitzacioCercaAntiga);
-        A_VisualitzacioCercaAntiga.setLayout(A_VisualitzacioCercaAntigaLayout);
-        A_VisualitzacioCercaAntigaLayout.setHorizontalGroup(
-            A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1532, Short.MAX_VALUE)
-        );
-        A_VisualitzacioCercaAntigaLayout.setVerticalGroup(
-            A_VisualitzacioCercaAntigaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(A_VisualitzacioCercaAntiga, "card14");
+        getContentPane().add(A_NouAdmin, "card18");
 
         getAccessibleContext().setAccessibleDescription("");
 
@@ -666,83 +571,36 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void A_GuardaCercaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_GuardaCercaComponentShown
-       jTextField5.setText("");
-       jTextField6.setText("");
-    }//GEN-LAST:event_A_GuardaCercaComponentShown
     private void NouUsernameComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_NouUsernameComponentShown
         NouUsername.setText("");
         NovaPassword.setText("");
     }//GEN-LAST:event_NouUsernameComponentShown
-    private void A_VeureUsersComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeureUsersComponentShown
-        vista.carregaUsers(modusers);
+
+    private void AP_ClientComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AP_ClientComponentShown
         
+    }//GEN-LAST:event_AP_ClientComponentShown
+
+    private void A_VeureUsersComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeureUsersComponentShown
+        // vista.carregaUsers(modusers);
+
     }//GEN-LAST:event_A_VeureUsersComponentShown
 
     private void A_VeureUsersComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeureUsersComponentHidden
         //modusers.removeAllElements();
     }//GEN-LAST:event_A_VeureUsersComponentHidden
 
-    private void A_VisualitzaNovaCercaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzaNovaCercaComponentShown
-        comunaEliminar = new PriorityQueue<>(1, Collections.reverseOrder());
-    }//GEN-LAST:event_A_VisualitzaNovaCercaComponentShown
+    private void A_CerquesGuardadesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_CerquesGuardadesComponentShown
+        //vista.carregaCerquesFetes(jTextField7, LlistaCerques);
+    }//GEN-LAST:event_A_CerquesGuardadesComponentShown
 
-    private void A_VisualitzaNovaCercaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzaNovaCercaComponentHidden
-       System.out.print("Elimino les comunitats:");
-        while(!comunaEliminar.isEmpty()) {
-            System.out.print(" "+comunaEliminar.peek());
-            macro.getContUser().removeComunitatCerca(macro.getUserActual(),cercaactual,comunaEliminar.poll());
-        }
-        System.out.println();
-    }//GEN-LAST:event_A_VisualitzaNovaCercaComponentHidden
-
-    private void A_VisualitzacioCercaAntigaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzacioCercaAntigaComponentShown
-        comunaEliminar = new PriorityQueue<>(1, Collections.reverseOrder());
-    }//GEN-LAST:event_A_VisualitzacioCercaAntigaComponentShown
-
-    private void A_VisualitzacioCercaAntigaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzacioCercaAntigaComponentHidden
-        System.out.print("Elimino les comunitats:");
-        while(!comunaEliminar.isEmpty()) {
-            System.out.print(" "+comunaEliminar.peek());
-            macro.getContUser().removeComunitatCerca(macro.getUserActual(),cercaactual,comunaEliminar.poll());
-        }
-        System.out.println();
-    }//GEN-LAST:event_A_VisualitzacioCercaAntigaComponentHidden
-
-    private void A_CanviaDadesUserComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_CanviaDadesUserComponentShown
-        NouUsername1.setText(macro.getUserActual());
-        NovaPassword1.setText("");
-    }//GEN-LAST:event_A_CanviaDadesUserComponentShown
-
-    private void A_VisualitzaCerquesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzaCerquesComponentShown
-        vista.carregaCerquesFetes(jTextField7, LlistaCerques);
-    }//GEN-LAST:event_A_VisualitzaCerquesComponentShown
-
-    private void A_VisualitzaCerquesComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VisualitzaCerquesComponentHidden
-        try {
+    private void A_CerquesGuardadesComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_CerquesGuardadesComponentHidden
+        /*   try {
             cercaactual= macro.getContUser().getNumCerca(macro.getUserActual(), LlistaCerques.getSelectedValue().toString());
         }
         catch(Exception prime){
 
-        }
-    }//GEN-LAST:event_A_VisualitzaCerquesComponentHidden
-
-    private void A_BuscaCatPagformComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_BuscaCatPagformComponentShown
-        vista.omplePaginesExistents(LlistaPag1);
-        vista.ompleCategoriesExistents(LlistaCateg1);
-    }//GEN-LAST:event_A_BuscaCatPagformComponentShown
-
-    private void A_BuscaPagComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_BuscaPagComponentShown
-        vista.omplePaginesExistents(LlistaPag);
-    }//GEN-LAST:event_A_BuscaPagComponentShown
-
-    private void A_BuscaCatComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_BuscaCatComponentShown
-        vista.ompleCategoriesExistents(LlistaCateg);
-    }//GEN-LAST:event_A_BuscaCatComponentShown
-
-    private void AP_ClientComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AP_ClientComponentShown
-        
-    }//GEN-LAST:event_AP_ClientComponentShown
+        }*/
+    }//GEN-LAST:event_A_CerquesGuardadesComponentHidden
 
     /**
      * @param args the command line arguments
@@ -780,28 +638,22 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         });
     }
 
-    private javax.swing.JPanel NovaCerca;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane AP_Cerques;
     private javax.swing.JTabbedPane AP_Client;
     private javax.swing.JTabbedPane AP_Principal;
-    private javax.swing.JPanel A_BuscaCat;
-    private javax.swing.JPanel A_BuscaCatPag;
-    private javax.swing.JPanel A_BuscaPag;
-    private javax.swing.JPanel A_CanviaDadesUser;
-    private javax.swing.JPanel A_CreaComunitat;
+    private javax.swing.JPanel A_Afegeix;
+    private javax.swing.JPanel A_CerquesGuardades;
     private javax.swing.JPanel A_CreaUsuari;
-    private javax.swing.JPanel A_GuardaCerca;
-    private javax.swing.JPanel A_Inici;
+    private javax.swing.JPanel A_FerCerca;
+    private javax.swing.JPanel A_NouAdmin;
     private javax.swing.JPanel A_PantallaPrincipal;
     private javax.swing.JPanel A_VeureUsers;
-    private javax.swing.JPanel A_VisualitzaCerques;
-    private javax.swing.JPanel A_VisualitzaNovaCerca;
-    private javax.swing.JPanel A_VisualitzacioCercaAntiga;
     private javax.swing.JButton Exit;
     private javax.swing.JButton Login;
     private javax.swing.JTextField NouUsername;
     private javax.swing.JTextField NovaPassword;
+    private javax.swing.JPanel Panell;
     private javax.swing.JTextField Password;
     private javax.swing.JTextField Username;
     private javax.swing.JButton jButton1;
@@ -813,6 +665,5 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

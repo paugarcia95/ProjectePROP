@@ -8,6 +8,7 @@ package Interficie;
 import static Interficie.InterficiaProva1.vista;
 import static Interficie.InterficiaProva1.macro;
 import static Interficie.InterficiaProva1.userAdmin;
+import static Interficie.InterficiaProva1.capsalera;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
@@ -51,7 +52,6 @@ public class VeureUsers extends javax.swing.JPanel {
         UsersAct = new javax.swing.JList();
         jButton17 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
-        Enrere8 = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -88,13 +88,6 @@ public class VeureUsers extends javax.swing.JPanel {
             }
         });
 
-        Enrere8.setText("Enrere");
-        Enrere8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Enrere8ActionPerformed(evt);
-            }
-        });
-
         jLabel17.setText("Aquests són els usuaris actuals:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -114,7 +107,6 @@ public class VeureUsers extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton19)
-                                    .addComponent(Enrere8)
                                     .addComponent(jButton18))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -130,7 +122,7 @@ public class VeureUsers extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(UsersAct, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 22, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jButton17)
@@ -138,9 +130,7 @@ public class VeureUsers extends javax.swing.JPanel {
                         .addComponent(jButton18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Enrere8)
-                        .addContainerGap(15, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -160,8 +150,8 @@ public class VeureUsers extends javax.swing.JPanel {
                 if(UsersAct.getSelectedValue().toString().equals(macro.getUserActual())) {
                     int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar-te a tu mateix?", capsalera, YES_NO_OPTION);
                     if(resposta==YES_OPTION) {
-                        A_PantallaPrincipal.setVisible(true);
-                        A_VeureUsers.setVisible(false);
+                      /*  A_PantallaPrincipal.setVisible(true);
+                        A_VeureUsers.setVisible(false);*/
                     }
                     else  segueix = false;
                 }
@@ -176,14 +166,10 @@ public class VeureUsers extends javax.swing.JPanel {
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         userAdmin = true;
-        A_CreaUsuari.setVisible(true);
-        A_VeureUsers.setVisible(false);
+        pare.creaAdminNou();
+       /* A_CreaUsuari.setVisible(true);
+        A_VeureUsers.setVisible(false);*/
     }//GEN-LAST:event_jButton19ActionPerformed
-
-    private void Enrere8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enrere8ActionPerformed
-        A_VeureUsers.setVisible(false);
-        A_OpcionsAdmin.setVisible(true);
-    }//GEN-LAST:event_Enrere8ActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         vista.carregaUsers(modusers);
@@ -191,7 +177,6 @@ public class VeureUsers extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Enrere8;
     private javax.swing.JList UsersAct;
     private DefaultListModel modusers;
     private javax.swing.JButton jButton17;

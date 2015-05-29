@@ -124,6 +124,7 @@ public class CanviaDadesUser extends javax.swing.JPanel {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         NouUsername1.setText(macro.getUserActual());
+        NovaPassword1.setText("");
     }//GEN-LAST:event_formComponentShown
 
 

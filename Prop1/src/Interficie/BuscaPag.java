@@ -145,7 +145,7 @@ public class BuscaPag extends javax.swing.JPanel {
     }//GEN-LAST:event_formComponentShown
         
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
-        vista.omplePaginesExistents(LlistaPag);
+       // vista.omplePaginesExistents(LlistaPag);
     }//GEN-LAST:event_formComponentAdded
 
 

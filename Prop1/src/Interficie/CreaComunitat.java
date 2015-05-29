@@ -10,6 +10,7 @@ import static Interficie.InterficiaProva1.guardada;
 import static Interficie.InterficiaProva1.capsalera;
 import static Interficie.InterficiaProva1.comp;
 import static Interficie.InterficiaProva1.cercaactual;
+import static Interficie.InterficiaProva1.auxguard;
 import static Interficie.InterficiaProva1.macro;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -641,11 +642,16 @@ public class CreaComunitat extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void CercaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CercaBActionPerformed
+    if(auxguard ==2) JOptionPane.showMessageDialog(comp, "Ja tens una cerca sense guardar oberta, si us plau, guarda-la o descarta-la abans de crear-ne una de nova", capsalera, WARNING_MESSAGE);
+    else {
         Runnable cerca = new Runnable() {
             public void run() {
                 try {
-                    if(vista.ferCerca(Algorismes, Cdada, Lsub, Lsub2, Lsub1, CpcImp, Cpc, Csembla, Crelacio, Cbusca1, Crelacio1, Crelacio2)) {
+                       if(vista.ferCerca(Algorismes, Cdada, Lsub, Lsub2, Lsub1, CpcImp, Cpc, Csembla, Crelacio, Cbusca1, Crelacio1, Crelacio2)){
+                        
                         Crelacio.setEnabled(true);
+                        Crelacio1.setEnabled(true);
+                        Crelacio2.setEnabled(true);
                         Csembla.setEnabled(true);
                         Cpc.setEnabled(true);
                         CpcImp.setEnabled(true);
@@ -654,7 +660,8 @@ public class CreaComunitat extends javax.swing.JPanel {
                         Cafegeix3.setEnabled(true);
                         Cafegeix4.setEnabled(true);
                         CercaB.setEnabled(true);
-                        
+                        Algorismes.setEnabled(true);
+                        pare.revalidaCerques();
                         if(taula.getSelectedIndex()==4) {
                             pare.visualitzaCercaNova();
                         }
@@ -687,6 +694,8 @@ public class CreaComunitat extends javax.swing.JPanel {
         //progressMonitor.setMillisToDecideToPopup(2*1000);
         CercaB.setEnabled(false);
         Crelacio.setEnabled(false);
+        Crelacio1.setEnabled(false);
+        Crelacio2.setEnabled(false);
         Csembla.setEnabled(false);
         Cpc.setEnabled(false);
         CpcImp.setEnabled(false);
@@ -694,8 +703,10 @@ public class CreaComunitat extends javax.swing.JPanel {
         Cafegeix2.setEnabled(false);
         Cafegeix3.setEnabled(false);
         Cafegeix4.setEnabled(false);
+        Algorismes.setEnabled(false);
         /* Espera sp = new Espera();
         sp.setVisible(true);*/
+    }
     }//GEN-LAST:event_CercaBActionPerformed
 
     private void AlgorismesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_AlgorismesValueChanged
@@ -703,7 +714,10 @@ public class CreaComunitat extends javax.swing.JPanel {
     }//GEN-LAST:event_AlgorismesValueChanged
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        vista.preaparaCreacioNovaCerca(false, LCTotes, LPTotes, Algorismes, Lsub, Lsub2, Lsub1, Cbusca1, Cpc, CpcImp, Csembla, Crelacio, Cdada,Crelacio1,Crelacio2);
+        Boolean nova;
+        if(auxguard==0) nova = false;
+        else nova = true;
+        vista.preaparaCreacioNovaCerca(nova, LCTotes, LPTotes, Algorismes, Lsub, Lsub2, Lsub1, Cbusca1, Cpc, CpcImp, Csembla, Crelacio, Cdada,Crelacio1,Crelacio2);
     }//GEN-LAST:event_formComponentShown
 
 

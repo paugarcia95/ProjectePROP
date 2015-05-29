@@ -2370,8 +2370,8 @@ class TimerListener implements ActionListener {
                 if(guardada==3) A_VisualitzacioCercaAntiga.setVisible(true);
                 else {
                     guardada=1;
-                        A_VisualitzaNovaCerca.setVisible(true);
-                        }
+                    A_VisualitzaNovaCerca.setVisible(true);
+                }
             }
             else {
                 int resposta = JOptionPane.showConfirmDialog(comp, "La cerca ja ha acabat. vols visualitzar-la ara?", capsalera, YES_NO_OPTION);

@@ -44,6 +44,9 @@ public class VeureCerques extends javax.swing.JPanel {
         jTextField7 = new javax.swing.JTextField();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
             }
@@ -123,6 +126,10 @@ public class VeureCerques extends javax.swing.JPanel {
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
         vista.carregaCerquesFetes(jTextField7, LlistaCerques);
     }//GEN-LAST:event_formComponentAdded
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+       //cercaactual= macro.getContUser().getNumCerca(macro.getUserActual(), LlistaCerques.getSelectedValue().toString());
+    }//GEN-LAST:event_formComponentHidden
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
