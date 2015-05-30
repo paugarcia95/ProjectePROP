@@ -49,7 +49,6 @@ public class MacroControlador {
         
 	public void carregaDadesFitxer(File fitxer) {
             aux.llegirGrafDades(gd,fitxer);
-            //aux.carregarGrafDades(gd);
 	}
 	public Boolean carregaUsers() {
 		return cu.iniciCarregarUsers();

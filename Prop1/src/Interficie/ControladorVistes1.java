@@ -8,7 +8,7 @@ import static Interficie.InterficiaProva1.comp;
 import static Interficie.InterficiaProva1.capsalera;
 import static Interficie.InterficiaProva1.cercaactual;
 import static Interficie.InterficiaProva1.auxguard;
-import static Interficie.InterficiaProva1.guardada;
+//import static Interficie.InterficiaProva1.guardada;
 import static Interficie.InterficiaProva1.comunaEliminar;
 import static Interficie.InterficiaProva1.userAdmin;
 
@@ -387,7 +387,7 @@ public class ControladorVistes1 {
             else Algorismes.setSelectionRow(8);
         }
         else {
-            guardada=0;
+            //guardada=0;
             Lsub.removeAll();
             Lsub1.removeAll();
             Lsub2.removeAll();
@@ -618,8 +618,6 @@ public class ControladorVistes1 {
    }    
     public static void main(String[] args) {
          Interficie.InterficiaProva1 aux = new Interficie.InterficiaProva1();
-        //InterficieFinal aux = new InterficieFinal(); 
-       //Interficie.Interficia1 aux = new Interficie.Interficia1();
         aux.setVisible(true);
          
    }

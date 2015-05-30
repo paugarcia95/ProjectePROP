@@ -4,7 +4,6 @@
 package Interficie;
 
 import static Interficie.InterficiaProva1.vista;
-import static Interficie.InterficiaProva1.guardada;
 import static Interficie.InterficiaProva1.capsalera;
 import static Interficie.InterficiaProva1.comp;
 import static Interficie.InterficiaProva1.cercaactual;
@@ -675,12 +674,10 @@ public class CreaComunitat extends javax.swing.JPanel {
                             else {
                                 int resposta = JOptionPane.showConfirmDialog(comp, "La cerca ja ha acabat. vols visualitzar-la ara?", capsalera, YES_NO_OPTION);
                                 if(YES_OPTION ==resposta) {
-                                    guardada=1;
                                     pare.visualitzaCercaNova();
                                 }
                                 else {
                                     String nouComen =JOptionPane.showInputDialog(comp,"Escriu el nom de la nova cerca",QUESTION_MESSAGE);
-                                    guardada=2;
                                     macro.getContUser().addNomCerca(macro.getUserActual(), cercaactual, nouComen);
                                 }
                             }

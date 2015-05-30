@@ -68,7 +68,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     static Interficie.ControladorRafa rafa;
     static Integer cercaactual;
     String algorisme;
-    static Integer guardada;
+    //static Integer guardada;
     static String capsalera = "Wiki";
     static javax.swing.JTabbedPane AP_Afegeix = new javax.swing.JTabbedPane();
     static javax.swing.JPanel A_Afegeix = new javax.swing.JPanel();
@@ -167,19 +167,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
 	macro.getContUser().addAdmin("admin");
         vista.jocProves1();
    }
-  /* public void retornaCreacioAdmins(){
-   if(userAdmin) {
-            userAdmin=false;
-            A_VeureUsers = new VeureUsers(this);
-            
-           /* AP_Principal.setVisible(false);
-            AP_Client.setVisible(true);
-            //A_OpcionsAdmin.setVisible(true);
-        }
-        else {
-            AP_Principal.setSelectedIndex(0);
-        }  
-   }*/
    public void revalidaCerques(){
        AP_Cerques.setSelectedIndex(0);
    }
