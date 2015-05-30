@@ -278,7 +278,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         Panell = new CreaComunitat(this,AP_Client);
         AP_Client.add(Panell, "Fer Cerca");
         if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
-        //macro.carregaUsers();
+        
         provisional();
         
     }
