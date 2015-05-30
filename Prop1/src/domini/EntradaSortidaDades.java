@@ -567,7 +567,7 @@ public class EntradaSortidaDades {
 			}
 			docE.print("**END**");
 
-		} catch (Exception e) {
+		} catch (IOException e) {
 			error(2);
 		} finally {
 			try {
@@ -641,7 +641,8 @@ public class EntradaSortidaDades {
 				++iter;
 			}
 
-			if (!b.readLine().equals("**END**") || iter < nUsuaris) {
+			String aux;
+			if ((aux = b.readLine()) != null && !aux.equals("**END**") || iter < nUsuaris) {
 				error(6);
 			}
 
@@ -693,7 +694,6 @@ public class EntradaSortidaDades {
 					nCerques = Integer.valueOf(st.nextToken());
 				} else
 					return errorAuxiliar(8);
-
 			} else
 				return errorAuxiliar(5);
 
@@ -703,6 +703,7 @@ public class EntradaSortidaDades {
 
 				if (info.length != 11)
 					return errorAuxiliar(8);
+
 
 				Date creacio = carregarData(info[2]);
 				Date modificacio = carregarData(info[3]);
@@ -722,7 +723,7 @@ public class EntradaSortidaDades {
 				// alg, dada, rel, semb, tipus;
 				// 1 2 3 4 5
 
-				if (creacio != null && modificacio != null && !error && criteris.length == 8) {
+				if (creacio != null && !error && criteris.length == 8) {
 					int iter2 = 0;
 					ArrayList<String> subconj, evitaCat, evitaPag;
 					subconj = new ArrayList<String>();
@@ -737,7 +738,7 @@ public class EntradaSortidaDades {
 					}
 
 					if (iter2 < SIZEevitaCat || !b.readLine().equals("*")) {
-						return errorAuxiliar(8);
+							return errorAuxiliar(8);
 					}
 
 					// Llegeixo el vector evitaPag
@@ -747,7 +748,7 @@ public class EntradaSortidaDades {
 						++iter2;
 					}
 					if (iter2 < SIZEevitaPag || !b.readLine().equals("*")) {
-						return errorAuxiliar(8);
+							return errorAuxiliar(8);
 					}
 
 					// Llegeixo el vector subconj
@@ -757,7 +758,7 @@ public class EntradaSortidaDades {
 						++iter2;
 					}
 					if (iter2 < SIZEsubconj || !b.readLine().equals("*")) {
-						return errorAuxiliar(8);
+							return errorAuxiliar(8);
 					}
 					
 					//Llegeixo les comunitats
@@ -766,7 +767,7 @@ public class EntradaSortidaDades {
 					while (iter2 < numComunitats && (s = b.readLine()) != null && !error) {
 						String[] auxi = s.split(" ");
 						if (auxi.length != 2) {
-							return errorAuxiliar(8);
+								return errorAuxiliar(8);
 						}
 						int id = Integer.parseInt(auxi[0]);
 						int nCats = Integer.parseInt(auxi[1]);
@@ -781,27 +782,27 @@ public class EntradaSortidaDades {
 						++iter2;
 					}
 					if (iter2 < numComunitats || !b.readLine().equals("*")) {
-						return errorAuxiliar(8);
+							return errorAuxiliar(8);
 					}
 
 					// Amb la informació de tot el fitxer munto la
 					// cercaDeComunitats
-					Criteris cri = new Criteris(new ParaulaValor(info[8], Integer.valueOf(info[9])), criteris[0],
-							criteris[1],
-							criteris[2], criteris[3], criteris[4], criteris[5], criteris[6], criteris[7], subconj,
-							evitaCat, evitaPag, info[10]);
+					Criteris cri = new Criteris(
+							new ParaulaValor(info[8].replace("NULL", ""), Integer.valueOf(info[9])), criteris[0],
+							criteris[1], criteris[2], criteris[3], criteris[4], criteris[5], criteris[6], criteris[7],
+							subconj, evitaCat, evitaPag, info[10].replace("NULL", ""));
 					CercaComunitats cerca = new CercaComunitats(info[0].replace('+', ' '), creacio, cri,
 							user.getUsername(), modificacio, info[1].replace('+', ' '),
 							comunitats);
 					result.add(cerca);
 				}
 				else {
-					return errorAuxiliar(8);
+						return errorAuxiliar(8);
 				}
 				++iter;
 			}
-
-			if (!b.readLine().equals("**END**") || iter < nCerques) {
+			String aux;
+			if (((aux = b.readLine()) != null && !aux.equals("**END**")) || iter < nCerques) {
 				error(6);
 			}
 		} catch (FileNotFoundException e) {
@@ -941,15 +942,18 @@ public class EntradaSortidaDades {
 				ArrayList<String> subconj = criteris.getSubconjCat();
 
 				String pare = "NULL";
+				String paraula = "NULL";
 				if (!criteris.getPare().equals(""))
 					pare = criteris.getPare();
+				if (!criteris.getParaulaClau().getParaula().equals("")) 
+					paraula = criteris.getParaulaClau().getParaula();
 
 				// SIZEevitaCat SIZEevitaPag SIZEsubconj paraula clau
 				docE.println(
 						evitaCat.size() 						+ " " + 
 						evitaPag.size() 						+ " " + 
 						subconj.size() 							+ " " +
-						criteris.getParaulaClau().getParaula() 	+ " " + 
+						paraula								 	+ " " + 
 						criteris.getParaulaClau().getNum() 		+ " " +
 						pare
 						);
@@ -993,7 +997,7 @@ public class EntradaSortidaDades {
 				docE.println("*");
 			}
 			docE.println("**END**");
-		} catch (Exception e) {
+		} catch (IOException e) {
 			error(2);
 		} finally {
 			try {
@@ -1014,6 +1018,9 @@ public class EntradaSortidaDades {
 	 */
 	@SuppressWarnings("deprecation")
 	private String escriuData(Date data) {
+		if (data == null)
+			return "NULL";
+
 		return
 		data.getDay() 		+ "+" + 
 		data.getMonth() 	+ "+" + 
@@ -1032,6 +1039,9 @@ public class EntradaSortidaDades {
 	 */
 	@SuppressWarnings("deprecation")
 	private Date carregarData(String data) {
+		if (data.equals("NULL"))
+			return null;
+
 		String[] aux = data.split("\\+");
 		if (aux.length != 6) {
 			error(8);
