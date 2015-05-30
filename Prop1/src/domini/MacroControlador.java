@@ -15,7 +15,6 @@ import java.util.TreeMap;
 public class MacroControlador {
     
 	static domini.ControladorUsers cu;
-        //static domini.MacroControlador macro;
 	static domini.ControladorDadesGraf cau;
 	static TraduccioiAlgorisme ta;
 	static domini.GrafDades gd;
@@ -43,9 +42,7 @@ public class MacroControlador {
 		useractual = user;
 	}
 	public void carregaDades() {
-		//return cau.iniciCarregarDades();
             aux.carregarGrafDades(gd);
-            
             aux.carregarUsuaris(conj.getMap());
             
 	}
@@ -66,8 +63,6 @@ public class MacroControlador {
 	
 	public void eliminarDadesGraf(){
 		gd = new GrafDades();
-		//cau.actualitzaRefs(conj, gd);
-		//cu.actualitzaRefs(conj, gd);
 	}
 	
 	

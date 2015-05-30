@@ -5,19 +5,12 @@ package Interficie;
 
 import static Interficie.InterficiaProva1.vista;
 import static Interficie.InterficiaProva1.macro;
-import static Interficie.InterficiaProva1.userAdmin;
 import static Interficie.InterficiaProva1.capsalera;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.QUESTION_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_CANCEL_OPTION;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 import static javax.swing.JOptionPane.YES_OPTION;
-import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
-import static javax.swing.JOptionPane.OK_OPTION;
-import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 /**
@@ -161,8 +154,7 @@ public class VeureUsers extends javax.swing.JPanel {
        pare.creaAdminNou();
         vista.carregaUsers(modusers);
     }//GEN-LAST:event_creaNouActionPerformed
-
-    /*
+     /*
     * En iniciar sessio, es carreguen els usuaris existents
     */
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded

@@ -266,12 +266,9 @@ public class ControladorVistes1 {
         return true;
     }
     public void netejaArbreCerca(Integer numcerca) {
-        System.out.print("Elimino les comunitats:");
         while(!comunaEliminar.isEmpty()) {
-            System.out.print(" "+comunaEliminar.peek());
             macro.getContUser().removeComunitatCerca(macro.getUserActual(),numcerca,comunaEliminar.poll());
         }
-        System.out.println();
     }
     public void ompleCategoriesExistents(JList quina){         //es pot millorar efici?ncia (que vagi carregant a mida q es va fent scroll)
         Collection<String> auxc = macro.getContAdUs().getCategories();

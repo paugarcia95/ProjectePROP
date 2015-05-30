@@ -13,6 +13,7 @@ import javax.swing.ListModel;
 import static cercaComunitats.AlgorismeNewmanGirvan.arestes;
 import static cercaComunitats.AlgorismeNewmanGirvan.iterador;
 import domini.Categoria;
+import domini.EntradaSortidaDades;
 import domini.GrafDades;
 import domini.MacroControlador;
 import domini.Pagina;
@@ -104,8 +105,9 @@ public class InterficiaProva1 extends javax.swing.JFrame {
        AP_Client.setComponentAt(4, Panell);
    }
    public void cancelaCerca(){
-       hilo.interrupt();
+       hilo.stop();
        interrumput = true;
+       desactivaEspera();
        //hilo.st
    }
    public void canviarACercaGuardada(){
@@ -149,7 +151,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
    public void obreOpcions(){
      //  if(macro.getContUser().isAdmin(macro.getUserActual())) A_OpcionsAdmin.setVisible(true);
      //  else A_OpcionsClient.setVisible(true);
-   }{
     System.out.println("Aqui crido a la funcio obreOpcions de InterficiaProva1, s'ha d'implementar");  
     /* guardada = 2;
        Panell = new GuardaCerca(this);
@@ -257,7 +258,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
      */
 
     public InterficiaProva1() {
-        //macro = new domini.MacroControlador();
         primera=true;
         comunaEliminar = new PriorityQueue<>();
         macro = new MacroControlador();
@@ -277,17 +277,8 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         AP_Client.add(Panell, "Categories i pagines");
         Panell = new CreaComunitat(this,AP_Client);
         AP_Client.add(Panell, "Fer Cerca");
-       /* A_BuscaCat = new BuscaCat(this);
-        AP_Client.add(A_BuscaCat, "Categories");
-        A_BuscaPag = new BuscaPag(this);
-        AP_Client.add(A_BuscaPag, "Pàgines");
-        A_BuscaCatPag = new BuscaCatPag(this);
-        AP_Client.add(A_BuscaCatPag, "Categories i pagines");
-        A_CreaComunitat = new CreaComunitat(this,AP_Client);
-        AP_Client.add(A_CreaComunitat, "Fer Cerca");*/
-        //A_VisualitzaCerques = new VeureNovaCerca(this);
-        
-        //jPanel1.setVisible(false);
+        macro.carregaDades();
+        //macro.carregaUsers();
         provisional();
         
     }
@@ -570,6 +561,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         login();
     }//GEN-LAST:event_LoginActionPerformed
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        macro.guardaDades();
         System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_ExitActionPerformed
 

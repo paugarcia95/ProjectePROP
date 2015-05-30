@@ -287,7 +287,7 @@ public class VPagina1 extends javax.swing.JDialog {
             }
         });
 
-        jLabel11.setText("Categories existents:");
+        jLabel11.setText("Pagines existents:");
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -297,7 +297,7 @@ public class VPagina1 extends javax.swing.JDialog {
         jScrollPane10.setViewportView(jList1);
 
         jLabel7.setBackground(new java.awt.Color(250, 250, 250));
-        jLabel7.setText("Categories a les que apunta:");
+        jLabel7.setText("Pagines a les que apunta:");
 
         CApunta1.setModel(modelom);
         CApunta1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -330,7 +330,7 @@ public class VPagina1 extends javax.swing.JDialog {
             }
         });
 
-        jLabel9.setText("Catgories que l'apunten:");
+        jLabel9.setText("Pagines que l'apunten:");
 
         CApuntada1.setModel(modelo1);
         CApuntada1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -482,22 +482,6 @@ public class VPagina1 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /* VCategoria nova;
-
-        if(CApunta.getSelectedIndices().length>0 && !CApunta.getSelectedValue().toString().equals(noSelect)) {
-            String hy = CApunta.getSelectedValue().toString();
-            nova = new VCategoria(pare, true,admin);
-            nova.NomCat(macro.getGraf().getCategoria(hy));
-        }
-        else if(CApuntada.getSelectedIndices().length>0 && !CApuntada.getSelectedValue().toString().equals(noSelect)) {
-            String hy = CApuntada.getSelectedValue().toString();
-            nova = new VCategoria(pare, true,admin);
-            nova.NomCat(macro.getGraf().getCategoria(hy));
-        }
-        else {
-            JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
-        }*/
-
         VCategoria1 nova;
         if(CApunta.getSelectedIndices().length>0 && !CApunta.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApunta.getSelectedValue().toString();
@@ -552,8 +536,7 @@ public class VPagina1 extends javax.swing.JDialog {
     }//GEN-LAST:event_EnrereActionPerformed
 
     private void CbuscaCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaCatActionPerformed
-        ControladorVistes aux = new ControladorVistes();
-        aux.ompleCategoriesExistentsConcret(jList1,Cbusca);
+        vista.ompleCategoriesExistentsConcret(jList1,Cbusca);
     }//GEN-LAST:event_CbuscaCatActionPerformed
 
     private void EliminaC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaC1ActionPerformed

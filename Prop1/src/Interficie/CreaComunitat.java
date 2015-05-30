@@ -669,8 +669,6 @@ public class CreaComunitat extends javax.swing.JPanel {
                        if(vista.ferCerca(Algorismes,(Integer)Cdada.getValue(), Lsub, Lsub2, Lsub1, CpcImp.getValue(), Cpc, Csembla.getValue(), CrelacioCat.getValue(), Cbusca1, CrelacioPag.getValue(), Crelacio2.getValue(), Crelacio3.getValue())){
                         pare.desactivaEspera();
                         pare.revalidaCerques();
-                        if(interrumput) pare.desactivaEspera();
-                        else {
                             if(taula.getSelectedIndex()==4) {
                                 pare.visualitzaCercaNova();
                             }
@@ -686,7 +684,6 @@ public class CreaComunitat extends javax.swing.JPanel {
                                     macro.getContUser().addNomCerca(macro.getUserActual(), cercaactual, nouComen);
                                 }
                             }
-                        }
                     }
                 }
                 catch (Exception e)

@@ -381,7 +381,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Categories existents:"/>
+            <Property name="text" type="java.lang.String" value="Pagines existents:"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane10">
@@ -411,7 +411,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="fa" red="fa" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Categories a les que apunta:"/>
+            <Property name="text" type="java.lang.String" value="Pagines a les que apunta:"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane7">
@@ -469,7 +469,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Catgories que l&apos;apunten:"/>
+            <Property name="text" type="java.lang.String" value="Pagines que l&apos;apunten:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Cbusca">
