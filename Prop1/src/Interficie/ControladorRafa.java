@@ -19,13 +19,13 @@ public class ControladorRafa {
                 A_Afegeix = new Afegeix();
                 AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
                 A_Afegeix = new AfegirCat();
-                AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
+                AP_Afegeix.add(A_Afegeix,"Afegir Categoria");
                 A_Afegeix = new AfegirPag();
-                AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
+                AP_Afegeix.add(A_Afegeix,"Afegir Pàgina");
                 A_Afegeix = new AfegirEnll();
-                AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
+                AP_Afegeix.add(A_Afegeix,"Afegir Enllaç");
                 A_Afegeix = new EliminarDades();
-                AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
+                AP_Afegeix.add(A_Afegeix,"Eliminació de dades");
     }
     
     /*public void canviaAASFADFG(){
