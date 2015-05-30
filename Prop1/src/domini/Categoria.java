@@ -51,9 +51,9 @@ public class Categoria {
 	 * Pre: Cert
 	 * Post: Retorna 0 si no existeix ni cP ni pC, 1 si és pC i 2 si es cP
 	 */
-	public Integer existsCP(String nom_pagina) {
-		if(pC.containsKey(nom_pagina)) return 1;
-		if(cP.containsKey(nom_pagina)) return 2;
+	public Integer existsCP(String nomPagina) {
+		if(pC.containsKey(nomPagina)) return 1;
+		if(cP.containsKey(nomPagina)) return 2;
 		return 0;
 	}
 	
@@ -61,9 +61,9 @@ public class Categoria {
 	 * Pre: Cert
 	 * Post: Retorna 0 si no hi ha ni cSupC ni cSubC, 1 si és cSupC i 2 si és cSubC
 	 */
-	public Integer existsCC(String nom_categoria) {
-		if(cSupC.containsKey(nom_categoria)) return 1;
-		if(cSubC.containsKey(nom_categoria)) return 2;
+	public Integer existsCC(String nomCategoria) {
+		if(cSupC.containsKey(nomCategoria)) return 1;
+		if(cSubC.containsKey(nomCategoria)) return 2;
 		return 0;
 	}
 	

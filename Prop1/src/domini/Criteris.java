@@ -36,7 +36,7 @@ public class Criteris {
 	public Criteris() {
 		paraulaClau = new ParaulaValor();
 		relacionsCat = 5;
-		relacionsCat = 5;
+		relacionsPag = 5;
 		relacionsSubs = 5;
         relacionsSuper = 5;
 		semblaNom = 0;
