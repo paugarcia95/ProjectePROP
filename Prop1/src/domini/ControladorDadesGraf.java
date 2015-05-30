@@ -17,7 +17,7 @@ public class ControladorDadesGraf {
 
 	public ControladorDadesGraf() {} 
 	
-//CONSULTORES///////////////////////////////////////////////////////////////////////////////
+
 	/**
 	 * Pre: Cert
 	 * Post: Retorna el nom de totes les categories del graf
@@ -145,8 +145,6 @@ public class ControladorDadesGraf {
 		}
 		return null;
 	}
-
-//MODIFICADORES///////////////////////////////////////////////////////////////////////////////
 	
 	/** TODO
 	 * Pre:

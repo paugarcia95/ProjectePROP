@@ -87,7 +87,7 @@ public class GrafDades {
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos  {(0,1),(0,2),(1,0),(1,1),(2,0),(2,2)}
-			//el cas (0,0) es tracta al final del metode
+			//els casos (0,0) i (1,2) es tracten al final del metode
 		}
 		else if (!conte1 && conte2) {
 			categories.put(cat1.getNom(), cat1);
@@ -121,7 +121,7 @@ public class GrafDades {
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos  {(0,1),(0,2),(1,0),(1,1),(2,0),(2,2)}
-			//el cas (0,0) es tracta al final del metode
+			//els casos (0,0) i (1,2) es tracten al final del metode
 		}
 		else if (!conte1 && conte2) {
 			cat1 = new Categoria(categoria1);
@@ -157,7 +157,7 @@ public class GrafDades {
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
-			//el cas (0,0) es tracta al final del metode
+			//els casos (0,0) i (2,2) es tracten al final del metode
 		}
 		else if (!conte1 && conte2) {
 			pagines.put(pag.getNom(), pag);
@@ -191,7 +191,7 @@ public class GrafDades {
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
-			//el cas (0,0) es tracta al final del metode
+			//els casos (0,0) i (2,2) es tracten al final del metode
 		}
 		else if (!conte1 && conte2) {
 			pag = new Pagina(pagina);
@@ -227,7 +227,7 @@ public class GrafDades {
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
-			//el cas (0,0) es tracta al final del metode
+			//el casos (0,0) i (1,1) es tracten al final del metode
 		}
 		else if (!conte1 && conte2) {
 			categories.put(cat.getNom(), cat);
@@ -261,7 +261,7 @@ public class GrafDades {
 				return false;
 			}
 			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
-			//el cas (0,0) es tracta al final del metode
+			//els casos (0,0) i (1,1) es tracten al final del metode
 		}
 		else if (!conte1 && conte2) {
 			cat = new Categoria(categoria);
