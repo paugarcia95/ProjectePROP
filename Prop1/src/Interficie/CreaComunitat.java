@@ -9,7 +9,9 @@ import static Interficie.InterficiaProva1.capsalera;
 import static Interficie.InterficiaProva1.comp;
 import static Interficie.InterficiaProva1.cercaactual;
 import static Interficie.InterficiaProva1.auxguard;
+import static Interficie.InterficiaProva1.interrumput
 import static Interficie.InterficiaProva1.macro;
+import static Interficie.InterficiaProva1.hilo;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -663,37 +665,26 @@ public class CreaComunitat extends javax.swing.JPanel {
         Runnable cerca = new Runnable() {
             public void run() {
                 try {
+                        interrumput = false;
                        if(vista.ferCerca(Algorismes,(Integer)Cdada.getValue(), Lsub, Lsub2, Lsub1, CpcImp.getValue(), Cpc, Csembla.getValue(), CrelacioCat.getValue(), Cbusca1, CrelacioPag.getValue(), Crelacio2.getValue(), Crelacio3.getValue())){
-                        
-        System.out.println("Desbloquejo botons perque ja he acabat!!!!!!!");
-                      /*  CrelacioCat.setEnabled(true);
-                        CrelacioPag.setEnabled(true);
-                        Crelacio2.setEnabled(true);
-                        Crelacio3.setEnabled(true);
-                        Csembla.setEnabled(true);
-                        Cpc.setEnabled(true);
-                        CpcImp.setEnabled(true);
-                        Cafegeix1.setEnabled(true);
-                        Cafegeix2.setEnabled(true);
-                        Cafegeix3.setEnabled(true);
-                        Cafegeix4.setEnabled(true);
-                        CercaB.setEnabled(true);
-                        Algorismes.setEnabled(true);*/
                         pare.desactivaEspera();
                         pare.revalidaCerques();
-                        if(taula.getSelectedIndex()==4) {
-                            pare.visualitzaCercaNova();
-                        }
+                        if(interrumput) pare.desactivaEspera();
                         else {
-                            int resposta = JOptionPane.showConfirmDialog(comp, "La cerca ja ha acabat. vols visualitzar-la ara?", capsalera, YES_NO_OPTION);
-                            if(YES_OPTION ==resposta) {
-                                guardada=1;
+                            if(taula.getSelectedIndex()==4) {
                                 pare.visualitzaCercaNova();
                             }
                             else {
-                                String nouComen =JOptionPane.showInputDialog(comp,"Escriu el nom de la nova cerca",QUESTION_MESSAGE);
-                                guardada=2;
-                                macro.getContUser().addNomCerca(macro.getUserActual(), cercaactual, nouComen);
+                                int resposta = JOptionPane.showConfirmDialog(comp, "La cerca ja ha acabat. vols visualitzar-la ara?", capsalera, YES_NO_OPTION);
+                                if(YES_OPTION ==resposta) {
+                                    guardada=1;
+                                    pare.visualitzaCercaNova();
+                                }
+                                else {
+                                    String nouComen =JOptionPane.showInputDialog(comp,"Escriu el nom de la nova cerca",QUESTION_MESSAGE);
+                                    guardada=2;
+                                    macro.getContUser().addNomCerca(macro.getUserActual(), cercaactual, nouComen);
+                                }
                             }
                         }
                     }
@@ -704,23 +695,9 @@ public class CreaComunitat extends javax.swing.JPanel {
                 }
             }
         };
-        Thread hilo = new Thread(cerca);
+        hilo = new Thread(cerca);
         hilo.start();
         pare.activaEspera();
-      /*  System.out.println("Bloquejo botons en fer la cerca");
-        CercaB.setEnabled(false);
-        CrelacioCat.setEnabled(false);
-        CrelacioPag.setEnabled(false);
-        Crelacio2.setEnabled(false);
-        Crelacio3.setEnabled(false);
-        Csembla.setEnabled(false);
-        Cpc.setEnabled(false);
-        CpcImp.setEnabled(false);
-        Cafegeix1.setEnabled(false);
-        Cafegeix2.setEnabled(false);
-        Cafegeix3.setEnabled(false);
-        Cafegeix4.setEnabled(false);
-        Algorismes.setEnabled(false);*/
     }
     }//GEN-LAST:event_CercaBActionPerformed
     /*

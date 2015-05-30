@@ -84,6 +84,8 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     //private ProgressMonitor progressMonitor;
    public static Boolean userAdmin;
    public static PriorityQueue<Integer> comunaEliminar;
+   public static Thread hilo;
+   public static Boolean interrumput;
    
    
   //public void guardaCerca(Component quin) {}
@@ -91,12 +93,17 @@ public class InterficiaProva1 extends javax.swing.JFrame {
        AP_Client.setEnabledAt(4, true);
    }
    public void activaEspera() {
-       Panell = new PantallaEspera();
+       Panell = new PantallaEspera(this);
        AP_Client.setComponentAt(4, Panell);
    }
    public void desactivaEspera() {
        Panell = new CreaComunitat(this,AP_Client);
        AP_Client.setComponentAt(4, Panell);
+   }
+   public void cancelaCerca(){
+       hilo.interrupt();
+       interrumput = true;
+       //hilo.st
    }
    public void canviarACercaGuardada(){
       AP_Cerques.remove(AP_Cerques.getSelectedIndex());
@@ -113,8 +120,8 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         AP_Cerques.setTitleAt(AP_Cerques.getSelectedIndex(), nouNom);
     }
    public void creaAdminNou(){
-       A_CreaUsuari = new NouUser(this);
-       AP_Client.setComponentAt(8, A_CreaUsuari);
+       Panell = new NouUser(this);
+       AP_Client.setComponentAt(8, Panell);
    }
    public void eliminaTab(Component quin){
        AP_Cerques.remove(quin);
@@ -156,22 +163,26 @@ public class InterficiaProva1 extends javax.swing.JFrame {
 	macro.getContUser().addAdmin("admin");
         vista.jocProves1();
    }
-   public void retornaCreacioAdmins(){
+  /* public void retornaCreacioAdmins(){
    if(userAdmin) {
             userAdmin=false;
             A_VeureUsers = new VeureUsers(this);
             
            /* AP_Principal.setVisible(false);
-            AP_Client.setVisible(true);*/
+            AP_Client.setVisible(true);
             //A_OpcionsAdmin.setVisible(true);
         }
         else {
             AP_Principal.setSelectedIndex(0);
         }  
-   }
+   }*/
    public void revalidaCerques(){
        AP_Cerques.setSelectedIndex(0);
    }
+   public void tornaVeureUsers(){
+      Panell = new VeureUsers(this);
+      AP_Client.setComponentAt(8, Panell);
+    }
    public void visualitzaCercaAntiga() {
        javax.swing.JPanel Panells = new VeureCercaAntiga(this, cercaactual);
        AP_Cerques.add(Panells, macro.getContUser().getNomCerca(macro.getUserActual(), cercaactual));
@@ -188,15 +199,13 @@ public class InterficiaProva1 extends javax.swing.JFrame {
        AP_Client.setSelectedIndex(5);
        AP_Cerques.setSelectedIndex(AP_Cerques.getComponentCount()-1);
        AP_Client.setEnabledAt(4, false);
-       //AP_Cerques.setEnabledAt(0, false);
-       /*for(int i = 0; i < AP_Cerques.getComponentCount()-1; ++i) {
-            AP_Cerques.setEnabledAt(i, false);
-       }*/
    }
    public void login(){
+       
         String user, pass;
         user= Username.getText();
         pass= Password.getText();
+        userAdmin=true;
         if(!macro.getContUser().existsUser(user)) JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, WARNING_MESSAGE);
         else if(macro.getContUser().login(user, pass)){
             macro.setUserActual(user);
@@ -214,13 +223,15 @@ public class InterficiaProva1 extends javax.swing.JFrame {
             }
             if(macro.getContUser().isAdmin(user)) {
                 A_Afegeix = new Afegeix();
-                AP_Client.add(A_Afegeix, "Afegeix");
+                AP_Afegeix.add(A_Afegeix,"Burro");
+                AP_Client.add(AP_Afegeix, "Afegeix");
                 A_VeureUsers = new VeureUsers(this);
                 AP_Client.add(A_VeureUsers, "Usuaris existents");
               //  AP_Client.add(A_CreaUsuari, "Nou admin");
             }
             AP_Client.setVisible(true);
             AP_Principal.setVisible(false);
+            AP_Client.setSelectedIndex(0);
             
         }
         else {
@@ -229,11 +240,15 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     }
    public void logout(){
        AP_Client.setVisible(false);
+       //Panell = new NouUser(this);
        AP_Principal.add(A_CreaUsuari, "Crea nou usuari");
        AP_Principal.setVisible(true);
-       AP_Client.remove(A_VeureUsers);
-       AP_Client.remove(A_Afegeix);
-       AP_Client.remove(A_CreaUsuari);
+       if(AP_Client.getComponentCount()>7) {
+        AP_Client.remove(8);
+        AP_Client.remove(7);
+       }
+        userAdmin=false;
+      // AP_Client.remove(A_CreaUsuari);
    }
    /**
      * Creates new form InterficiaProva
@@ -246,7 +261,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         macro = new MacroControlador();
         vista = new ControladorVistes1();
         comp = this;
-        userAdmin=false;
+        userAdmin= false;
         initComponents();
         this.setVisible(false);
         Panell = new Inici(this);
@@ -304,6 +319,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         AP_Client = new javax.swing.JTabbedPane();
         Panell = new javax.swing.JPanel();
         AP_Cerques = new javax.swing.JTabbedPane();
+        AP_Afegeix = new javax.swing.JTabbedPane();
         A_FerCerca = new javax.swing.JPanel();
         A_CerquesGuardades = new javax.swing.JPanel();
         A_Afegeix = new javax.swing.JPanel();
@@ -394,13 +410,13 @@ public class InterficiaProva1 extends javax.swing.JFrame {
 
         AP_Principal.addTab("Iniciar Sessió", A_PantallaPrincipal);
 
-        jLabel7.setText("Creació d'un nou usuari");
-
-        NouUsername.addComponentListener(new java.awt.event.ComponentAdapter() {
+        A_CreaUsuari.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
-                NouUsernameComponentShown(evt);
+                A_CreaUsuariComponentShown(evt);
             }
         });
+
+        jLabel7.setText("Creació d'un nou usuari");
 
         jLabel8.setText("Username");
 
@@ -471,12 +487,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         AP_Principal.addTab("Crea nou usuari", A_CreaUsuari);
 
         getContentPane().add(AP_Principal, "card17");
-
-        AP_Client.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                AP_ClientComponentShown(evt);
-            }
-        });
         getContentPane().add(AP_Client, "card16");
 
         javax.swing.GroupLayout PanellLayout = new javax.swing.GroupLayout(Panell);
@@ -494,6 +504,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
 
         AP_Cerques.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(AP_Cerques, "card16");
+        getContentPane().add(AP_Afegeix, "card11");
 
         A_FerCerca.setAlignmentX(A_PantallaPrincipal.getAlignmentX());
         A_FerCerca.setAlignmentY(A_PantallaPrincipal.getAlignmentY());
@@ -510,15 +521,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         );
 
         getContentPane().add(A_FerCerca, "card3");
-
-        A_CerquesGuardades.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                A_CerquesGuardadesComponentHidden(evt);
-            }
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                A_CerquesGuardadesComponentShown(evt);
-            }
-        });
 
         javax.swing.GroupLayout A_CerquesGuardadesLayout = new javax.swing.GroupLayout(A_CerquesGuardades);
         A_CerquesGuardades.setLayout(A_CerquesGuardadesLayout);
@@ -545,15 +547,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         );
 
         getContentPane().add(A_Afegeix, "card10");
-
-        A_VeureUsers.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                A_VeureUsersComponentHidden(evt);
-            }
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                A_VeureUsersComponentShown(evt);
-            }
-        });
 
         javax.swing.GroupLayout A_VeureUsersLayout = new javax.swing.GroupLayout(A_VeureUsers);
         A_VeureUsers.setLayout(A_VeureUsersLayout);
@@ -592,52 +585,19 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_ExitActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        vista.creaUserNou(NouUsername, NovaPassword);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         vista.comprovaUsername(NouUsername.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        vista.creaUserNou(NouUsername, NovaPassword);
-        if(userAdmin) {
-                userAdmin=false;
-                AP_Principal.setVisible(false);
-                AP_Client.setVisible(true);
-                //A_OpcionsAdmin.setVisible(true);
-        }
-        else {
-            AP_Principal.setSelectedIndex(0);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void NouUsernameComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_NouUsernameComponentShown
+    private void A_CreaUsuariComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_CreaUsuariComponentShown
         NouUsername.setText("");
         NovaPassword.setText("");
-    }//GEN-LAST:event_NouUsernameComponentShown
-
-    private void AP_ClientComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AP_ClientComponentShown
-        
-    }//GEN-LAST:event_AP_ClientComponentShown
-
-    private void A_VeureUsersComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeureUsersComponentShown
-        // vista.carregaUsers(modusers);
-
-    }//GEN-LAST:event_A_VeureUsersComponentShown
-
-    private void A_VeureUsersComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_VeureUsersComponentHidden
-        //modusers.removeAllElements();
-    }//GEN-LAST:event_A_VeureUsersComponentHidden
-
-    private void A_CerquesGuardadesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_CerquesGuardadesComponentShown
-        //vista.carregaCerquesFetes(jTextField7, LlistaCerques);
-    }//GEN-LAST:event_A_CerquesGuardadesComponentShown
-
-    private void A_CerquesGuardadesComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_CerquesGuardadesComponentHidden
-        /*   try {
-            cercaactual= macro.getContUser().getNumCerca(macro.getUserActual(), LlistaCerques.getSelectedValue().toString());
-        }
-        catch(Exception prime){
-
-        }*/
-    }//GEN-LAST:event_A_CerquesGuardadesComponentHidden
+    }//GEN-LAST:event_A_CreaUsuariComponentShown
 
     /**
      * @param args the command line arguments
@@ -676,6 +636,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane AP_Afegeix;
     private javax.swing.JTabbedPane AP_Cerques;
     private javax.swing.JTabbedPane AP_Client;
     private javax.swing.JTabbedPane AP_Principal;

@@ -197,6 +197,13 @@ public class ControladorUsers {
             return conj.getUser(username).getCerca(Cerca).getComunitat(Comunitat).getNumeroDeCategories();
         }
         
+        public Boolean existsAdmin() {
+            for(String user: conj.getUsers()) {
+                if(conj.getUser(user).esAdmin())return true;
+            }
+            return false;
+        }
+        
         public Integer addComunitatCerca(String username, Integer Cerca){
             return conj.getUser(username).getCerca(Cerca).addComunitat(new Comunitat());
         }

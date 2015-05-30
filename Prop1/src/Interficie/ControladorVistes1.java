@@ -176,16 +176,23 @@ public class ControladorVistes1 {
             JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre", capsalera, WARNING_MESSAGE);
         }
         else if(NovaPassword.getText().length()==0) {
-            JOptionPane.showMessageDialog(comp, "Escriu una contrassenya siusplau", capsalera, WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(comp, "Escriu una contrassenya siusplau", capsalera, ERROR_MESSAGE);
         }
         else {
             macro.getContUser().addUser(NouUsername.getText(), NovaPassword.getText());
-            JOptionPane.showMessageDialog(comp, "Felicitats, conta creada!", capsalera, WARNING_MESSAGE);
-            if(userAdmin) {
+            if(userAdmin) System.out.println("Vinc des d'un admin");
+            if(userAdmin) macro.getContUser().addAdmin(NouUsername.getText());
+            else if(!macro.getContUser().existsAdmin()) {
                 macro.getContUser().addAdmin(NouUsername.getText());
+                JOptionPane.showMessageDialog(comp, "Felicitats, conta creada, ets administrador!", capsalera,INFORMATION_MESSAGE);
             }
+            else JOptionPane.showMessageDialog(comp, "Felicitats, conta creada.", capsalera,INFORMATION_MESSAGE);
         }
     }  
+    public Boolean espoteliminar(String nom){
+        if(nom.contains("[ad]")) return false;
+        else return true;
+    }
     public Boolean ferCerca(JTree Algorismes, Integer Cdada, JList Lsub, JList Lsub2, JList Lsub1, Integer CpcImp, JTextField Cpc, Integer Csembla, Integer CrelacioCat, JTextField Cbusca1,Integer CrelacioPag,Integer CrelacioSuper, Integer CrelacioSub){
         long t1,t2;
  //RECOLLIM LES DADES PER A FER LA CERCA       
@@ -422,7 +429,7 @@ public class ControladorVistes1 {
     }
     }
     }   
-
+    
     
     public void guardaDades() {
         JFileChooser input = new JFileChooser();
