@@ -30,7 +30,7 @@ public class TraduccioiAlgorisme {
 	 * @param s1 String s2 String
 	 * @return Retorna la similaritat que tenen les cats
 	 */
-	  private static double similarity(String s1, String s2) {
+	  /*private static double similarity(String s1, String s2) {
 	        Double solu = new Double (0);
 	        
 
@@ -65,8 +65,25 @@ public class TraduccioiAlgorisme {
 	        }
 	        
 	        return solu;
-	    }
+	    }*/
 	
+	  public static double similarity(String a, String b) {
+	        a = a.toLowerCase();
+	        b = b.toLowerCase();
+	        int [] costs = new int [b.length() + 1];
+	        for (int j = 0; j < costs.length; j++)
+	            costs[j] = j;
+	        for (int i = 1; i <= a.length(); i++) {
+	            costs[0] = i;
+	            int nw = i - 1;
+	            for (int j = 1; j <= b.length(); j++) {
+	                int cj = Math.min(1 + Math.min(costs[j], costs[j - 1]), a.charAt(i - 1) == b.charAt(j - 1) ? nw : nw + 1);
+	                nw = costs[j];
+	                costs[j] = cj;
+	            }
+	        }
+	        return costs[b.length()];
+	    }
 	
 	/**
 	 * Calcula el pes entre dues categories donades
@@ -78,8 +95,8 @@ public class TraduccioiAlgorisme {
 	private Double calcularpesentrecategories(Categoria c1, Categoria c2, Criteris cri, Integer potenciador){
 		Double solucio = new Double(0);	
 		
-		////////////**************Criteri de cat-cat i cat-pg********/////////////
-		Integer temp = potenciador; // Criteri de cat-cat i cat-pg
+		////////////**************Criteri de cat-cat, cat-sub o cat-sup********/////////////
+		Integer temp = potenciador; //Potenciador és la variable q toac(, é s a dir, la variable Cat-Cat, cat-sub o cat-supr)
 		if(temp == 5) solucio += 5;
 		else if(temp > 5) solucio += (5+(temp-5));
 		else solucio += 5-(5-temp);
@@ -88,7 +105,9 @@ public class TraduccioiAlgorisme {
 		/////////// Criteri Semblança //////////////////
 		if(cri.getSemblaNom() != 0) { // Si  està actiu
 			Double aux = similarity(c1.getNom(),c2.getNom());
-			solucio += cri.getSemblaNom()*aux;
+			if(aux > 5) aux = 0.0;
+			else aux = 6 - aux;
+			solucio += cri.getSemblaNom()+aux;
 		}
 		/////////////////////////////////////////////////
 		

@@ -97,6 +97,10 @@ public class DriverTraduccioiAlgorisme {
 		cri.setDada(2);
 		
 		cri.setRelacionsCat(5); // Relacions cat-pg
+		cri.setRelacionsPag(5);
+		cri.setRelacionsSubs(5);
+		cri.setRelacionsSuper(5);
+		
 		cri.setTipuCerca(2); ///???
 		ArrayList<String> c2 = new ArrayList<String>(); // Subconjunt
 		ArrayList<String> c = new ArrayList<String>(); // Evitar
@@ -106,7 +110,7 @@ public class DriverTraduccioiAlgorisme {
 		cri.setParaulaClau(utilitzable);
 		cri.setEvitaCat(c);
 		cri.setEvitaPag(s);
-		cri.setSemblaNom(0);
+		cri.setSemblaNom(5);
 		String sa = new String();
 		cri.setPare(sa);
 		
