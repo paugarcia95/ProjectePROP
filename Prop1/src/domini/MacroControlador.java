@@ -60,7 +60,6 @@ public class MacroControlador {
              if(aux.guardarGrafDades(gd)) return false;
              if(aux.guardarUsuaris(conj.getMap()))return false;
              return true;
-             
         }
 	
 	public void eliminarDadesGraf(){
