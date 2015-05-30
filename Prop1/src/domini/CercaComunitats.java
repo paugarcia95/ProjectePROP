@@ -101,7 +101,7 @@ public class CercaComunitats {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Retorna el nombre de comunitats que componen la cerca i les ordena per nombre de categories
+	 * Post: Retorna el nombre de comunitats que componen la cerca
 	 */
 	public Integer getNumComunitats() {
 		return comunitats.size();
