@@ -64,10 +64,13 @@ import javax.swing.tree.TreePath;
  */
 public class InterficiaProva1 extends javax.swing.JFrame {
     static domini.MacroControlador macro;
+    static Interficie.ControladorRafa rafa;
     static Integer cercaactual;
     String algorisme;
     static Integer guardada;
     static String capsalera = "Wiki";
+    static javax.swing.JTabbedPane AP_Afegeix = new javax.swing.JTabbedPane();
+    static javax.swing.JPanel A_Afegeix = new javax.swing.JPanel();
     //guardada=0 -> nova cerca sense guardar, crearla
     //guardada=1  -> cerca no guardada, preguntar si la volen guardar
     //guardada=2 -> cerca guardada
@@ -222,8 +225,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
                 // AP_Client.setComponentAt(6, A_CanviaDadesUser);
             }
             if(macro.getContUser().isAdmin(user)) {
-                A_Afegeix = new Afegeix();
-                AP_Afegeix.add(A_Afegeix,"Burro");
+                rafa.ini();
                 AP_Client.add(AP_Afegeix, "Afegeix");
                 A_VeureUsers = new VeureUsers(this);
                 AP_Client.add(A_VeureUsers, "Usuaris existents");
@@ -260,6 +262,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         comunaEliminar = new PriorityQueue<>();
         macro = new MacroControlador();
         vista = new ControladorVistes1();
+        rafa = new ControladorRafa();
         comp = this;
         userAdmin= false;
         initComponents();
@@ -319,10 +322,8 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         AP_Client = new javax.swing.JTabbedPane();
         Panell = new javax.swing.JPanel();
         AP_Cerques = new javax.swing.JTabbedPane();
-        AP_Afegeix = new javax.swing.JTabbedPane();
         A_FerCerca = new javax.swing.JPanel();
         A_CerquesGuardades = new javax.swing.JPanel();
-        A_Afegeix = new javax.swing.JPanel();
         A_VeureUsers = new javax.swing.JPanel();
         A_NouAdmin = new javax.swing.JPanel();
 
@@ -504,7 +505,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
 
         AP_Cerques.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(AP_Cerques, "card16");
-        getContentPane().add(AP_Afegeix, "card11");
 
         A_FerCerca.setAlignmentX(A_PantallaPrincipal.getAlignmentX());
         A_FerCerca.setAlignmentY(A_PantallaPrincipal.getAlignmentY());
@@ -534,19 +534,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         );
 
         getContentPane().add(A_CerquesGuardades, "card13");
-
-        javax.swing.GroupLayout A_AfegeixLayout = new javax.swing.GroupLayout(A_Afegeix);
-        A_Afegeix.setLayout(A_AfegeixLayout);
-        A_AfegeixLayout.setHorizontalGroup(
-            A_AfegeixLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1532, Short.MAX_VALUE)
-        );
-        A_AfegeixLayout.setVerticalGroup(
-            A_AfegeixLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(A_Afegeix, "card10");
 
         javax.swing.GroupLayout A_VeureUsersLayout = new javax.swing.GroupLayout(A_VeureUsers);
         A_VeureUsers.setLayout(A_VeureUsersLayout);
@@ -634,13 +621,11 @@ public class InterficiaProva1 extends javax.swing.JFrame {
             }
         });
     }
-
+//public javax.swing.JTabbedPane AP_Afegeix;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane AP_Afegeix;
     private javax.swing.JTabbedPane AP_Cerques;
     private javax.swing.JTabbedPane AP_Client;
     private javax.swing.JTabbedPane AP_Principal;
-    private javax.swing.JPanel A_Afegeix;
     private javax.swing.JPanel A_CerquesGuardades;
     private javax.swing.JPanel A_CreaUsuari;
     private javax.swing.JPanel A_FerCerca;
