@@ -32,6 +32,12 @@ public class PantallaEspera extends javax.swing.JPanel {
         jTextArea2 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
+        addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                formComponentAdded(evt);
+            }
+        });
+
         jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea1.setColumns(20);
@@ -42,11 +48,7 @@ public class PantallaEspera extends javax.swing.JPanel {
         jTextArea2.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
-        jTextArea2.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                jTextArea2ComponentAdded(evt);
-            }
-        });
+        jTextArea2.setFocusable(false);
         jScrollPane2.setViewportView(jTextArea2);
 
         jButton1.setText("Cancela Cerca");
@@ -81,16 +83,17 @@ public class PantallaEspera extends javax.swing.JPanel {
                 .addContainerGap(68, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    /*
-    * En mostrar-se la pantalla d'espera, es mostra un missatge i els criteris seleccionats per a la cerca
-    */
-    private void jTextArea2ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jTextArea2ComponentAdded
-        vista.omplePantallaEspera(jTextArea2);
-    }//GEN-LAST:event_jTextArea2ComponentAdded
 
+   /*
+    * Es cancela la cerca de comunitats que s'estava realitzant
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         pare.cancelaCerca();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
+        vista.omplePantallaEspera(jTextArea2);
+    }//GEN-LAST:event_formComponentAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

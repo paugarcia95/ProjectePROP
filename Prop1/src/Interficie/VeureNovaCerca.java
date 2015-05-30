@@ -7,7 +7,6 @@ import static Interficie.InterficiaProva1.capsalera;
 import static Interficie.InterficiaProva1.comunaEliminar;
 import static Interficie.InterficiaProva1.cercaactual;
 import static Interficie.InterficiaProva1.vista;
-import static Interficie.InterficiaProva1.guardada;
 import static Interficie.InterficiaProva1.auxguard;
 import static Interficie.InterficiaProva1.macro;
 import java.util.Collections;
@@ -30,7 +29,7 @@ public class VeureNovaCerca extends javax.swing.JPanel {
     private InterficiaProva1 pare;
     
     /**
-     * Creates new form VisualitzaCerca
+     * Creates new form VisualitzaNovaCerca
      */
     public VeureNovaCerca(JFrame par, Integer cerca) {
         initComponents();
@@ -250,15 +249,17 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         cercaactual=numcerca;
         pare.modificaCercaGuardada();
     }//GEN-LAST:event_ButModificarCriterisActionPerformed
-
+    /*
+    * En mostrar-se el panell, s'omplen les dades de la cerca
+    */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         cercaactual = numcerca;
-        System.out.println("Mostro la nova cerca");
         vista.visualitzaCerca(false, Resultat, CriterisNovaCerca, numcerca);
-        guardada=1;
         comunaEliminar = new PriorityQueue<>(1, Collections.reverseOrder());
     }//GEN-LAST:event_formComponentShown
-
+    /*
+    * En desapareixer el panell, s'actualitzen els canvis de l'arbre
+    */
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
       vista.netejaArbreCerca(numcerca);
     }//GEN-LAST:event_formComponentHidden

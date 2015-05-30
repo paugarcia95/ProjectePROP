@@ -9,7 +9,6 @@ import static Interficie.InterficiaProva1.vista;
 import static Interficie.InterficiaProva1.macro;
 import static Interficie.InterficiaProva1.cercaactual;
 import static Interficie.InterficiaProva1.capsalera;
-import static Interficie.InterficiaProva1.guardada;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;

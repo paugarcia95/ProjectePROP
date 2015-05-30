@@ -27,17 +27,17 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="ModificaCriterisB" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton15" min="-2" max="-2" attributes="0"/>
+                      <Component id="butModNom" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ButModComentari" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="ButTanca" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jButton22" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton23" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton21" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="butAfegeixComuni" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Penjades1" min="-2" pref="265" max="-2" attributes="0"/>
@@ -57,9 +57,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ModificaCriterisB" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton15" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="butModNom" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ButModComentari" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ButTanca" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -72,7 +72,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jButton23" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jButton21" min="-2" max="-2" attributes="0"/>
+                                      <Component id="butAfegeixComuni" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="Penjades1" alignment="0" min="-2" pref="290" max="-2" attributes="0"/>
                               </Group>
@@ -88,12 +88,12 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="ButModComentari">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar Comentari"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButModComentariActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JList" name="Penjades1">
@@ -115,12 +115,12 @@
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Penjades1.setModel(modelos1);"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton21">
+    <Component class="javax.swing.JButton" name="butAfegeixComuni">
       <Properties>
         <Property name="text" type="java.lang.String" value="Afegir Comunitat"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton21ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butAfegeixComuniActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton23">
@@ -157,12 +157,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton15">
+    <Component class="javax.swing.JButton" name="butModNom">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar Nom"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton15ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butModNomActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ModificaCriterisB">
@@ -191,12 +191,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="ButTanca">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tanca"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButTancaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
