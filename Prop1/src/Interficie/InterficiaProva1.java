@@ -90,6 +90,14 @@ public class InterficiaProva1 extends javax.swing.JFrame {
    public void activaCerca(){
        AP_Client.setEnabledAt(4, true);
    }
+   public void activaEspera() {
+       Panell = new PantallaEspera();
+       AP_Client.setComponentAt(4, Panell);
+   }
+   public void desactivaEspera() {
+       Panell = new CreaComunitat(this,AP_Client);
+       AP_Client.setComponentAt(4, Panell);
+   }
    public void canviarACercaGuardada(){
       AP_Cerques.remove(AP_Cerques.getSelectedIndex());
       System.out.println("Guardem la cerca i auxguard= 0");
@@ -585,7 +593,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_ExitActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        vista.comprovaUsername(NouUsername);
+        vista.comprovaUsername(NouUsername.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         vista.creaUserNou(NouUsername, NovaPassword);

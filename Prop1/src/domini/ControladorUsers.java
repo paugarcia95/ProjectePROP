@@ -132,9 +132,10 @@ public class ControladorUsers {
 	 * 
 	 * @return false si hi ha hagut algun error, true altrament.
 	 */
-	public Boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacions, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare,Integer relacionsSubs,Integer relacionsSuper ) {
+	public Boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacionsCat, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare, Integer relacioPag, Integer  relacioSuper, Integer relacioSub ) {
 		ParaulaValor par = new ParaulaValor(paraulast, paraulain);
-		Criteris aux = new Criteris(par, relacions, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare,relacionsSubs, relacionsSuper);
+                
+		Criteris aux = new Criteris(par, relacionsCat,relacioPag,relacioSub,relacioSuper, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare);
 		conj.getUser(username).getCerca(i).setCriterisSeleccio(aux);
 		if(modifica) conj.getUser(username).getCerca(i).setDataModificacio(new Date());
 		return true;
@@ -178,6 +179,15 @@ public class ControladorUsers {
             return conj.getUser(username).getCerca(Cerca).removeCategoriaComunitat(Comunitat, categoria);
         }
         
+        public Integer getSubRelCerca(String username, Integer quina) {
+            return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getRelacionsSubs();
+        }
+        public Integer getSupRelCerca(String username, Integer quina) {
+            return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getRelacionsSuper();
+        }
+        public Integer getpagRelCerca(String username, Integer quina) {
+            return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getRelacionsPag();
+        }
         public void removeComunitatCerca(String username, Integer Cerca, Integer Comunitat) {
             if(!conj.getUser(username).getCerca(Cerca).removeComunitat(Comunitat)) System.out.println("Error en eliminar la comunitat");
             else System.out.println("S'ha eliminat correctament. num comunitats: "+conj.getUser(username).getCerca(Cerca).getNumComunitats());

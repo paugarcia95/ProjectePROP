@@ -127,7 +127,7 @@ public class NouUser extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        vista.comprovaUsername(NouUsername);
+        vista.comprovaUsername(NouUsername.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void NouUsernameComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_NouUsernameComponentShown

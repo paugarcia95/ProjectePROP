@@ -1,11 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Controlador de la interficie
  */
 package Interficie;
-//jung
-
 
 import static Interficie.InterficiaProva1.macro;
 import static Interficie.InterficiaProva1.comp;
@@ -171,9 +167,9 @@ public class ControladorVistes1 {
         }
         UsersAct.setListData(aux2);*/
     }
-    public void comprovaUsername(JTextField NouUser){
-        if(macro.getContUser().existsUser(NouUser.getText())) JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre", capsalera, PLAIN_MESSAGE);
-        else JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari est? lliure, endavant", capsalera, PLAIN_MESSAGE);
+    public void comprovaUsername(String NouUser){
+        if(macro.getContUser().existsUser(NouUser)) JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre", capsalera, PLAIN_MESSAGE);
+        else JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari esta lliure, endavant", capsalera, PLAIN_MESSAGE);
     }
     public void creaUserNou(JTextField NouUsername, JTextField NovaPassword){
         if(macro.getContUser().existsUser(NouUsername.getText())) {
@@ -189,8 +185,8 @@ public class ControladorVistes1 {
                 macro.getContUser().addAdmin(NouUsername.getText());
             }
         }
-    }
-    public Boolean ferCerca(JTree Algorismes, JSpinner Cdada, JList Lsub, JList Lsub2, JList Lsub1, JSlider CpcImp, JTextField Cpc, JSlider Csembla, JSlider Crelacio, JTextField Cbusca1,JSlider Crelacio1,JSlider Crelacio2){
+    }  
+    public Boolean ferCerca(JTree Algorismes, Integer Cdada, JList Lsub, JList Lsub2, JList Lsub1, Integer CpcImp, JTextField Cpc, Integer Csembla, Integer CrelacioCat, JTextField Cbusca1,Integer CrelacioPag,Integer CrelacioSuper, Integer CrelacioSub){
         long t1,t2;
  //RECOLLIM LES DADES PER A FER LA CERCA       
        // if(guardada!=3)cercaactual = macro.getContUser().addNovaCerca(macro.getUserActual());
@@ -222,7 +218,7 @@ public class ControladorVistes1 {
             quin=3;
             tipus=0;
         }
-        Integer num =(Integer)Cdada.getValue();
+        
         ListModel m = Lsub.getModel();
         ListModel m2 = Lsub1.getModel();
         ListModel m3 = Lsub2.getModel();
@@ -250,12 +246,12 @@ public class ControladorVistes1 {
             ++cont;
         }
        
-        if(CpcImp.getValue()==0) Cpc.setText(new String());
+        if(CpcImp==0) Cpc.setText(new String());
         ////////////////////////////////////////////////////////////////////////////////////////
         System.out.println("Fem la cerca amb "+macro.getContAdUs().getNumCats()+" categories i "+macro.getContAdUs().getNumPags()+" p?gines.");
-        System.out.println("Alg: "+quin+", tipus: "+tipus+", user: "+macro.getUserActual()+ ", cerca num: "+cercaactual+", numDada: "+num+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp.getValue()+", imp relacio: "+ Crelacio.getValue()+", imp sembla: "+  Csembla.getValue()+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText()+ ", imp CSub: "+Crelacio1.getValue()+", imp Csup"+Crelacio2.getValue());
-        macro.getContUser().addCriterisCerca(false, macro.getUserActual(), cercaactual, Cpc.getText(), CpcImp.getValue(), Crelacio.getValue(), Csembla.getValue(), quin, tipus, num, auxx1, auxx2, auxx3, Cbusca1.getText(), Crelacio1.getValue(), Crelacio2.getValue());
-        
+        System.out.println("Alg: "+quin+", tipus: "+tipus+", user: "+macro.getUserActual()+ ", cerca num: "+cercaactual+", numDada: "+Cdada+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp+", imp relacio: "+ CrelacioCat+", imp sembla: "+  Csembla+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText()+ ", imp CSub: "+CrelacioPag+", imp Csup"+CrelacioSuper);
+        macro.getContUser().addCriterisCerca(false, macro.getUserActual(), cercaactual, Cpc.getText(), CpcImp, CrelacioCat, Csembla, quin, tipus, Cdada, auxx1, auxx2, auxx3, Cbusca1.getText(), CrelacioPag, CrelacioSuper, CrelacioSub);
+                                                
         macro.getContUser().ferCerca(macro.getUserActual(), cercaactual);
        
        t2= System.currentTimeMillis();
@@ -322,7 +318,9 @@ public class ControladorVistes1 {
         }
         quina.setListData(csub);
     }
-        
+    public void omplePantallaEspera(JTextArea quin){
+        ompleCriteris(quin, cercaactual,false);
+    }
     public void preaparaCreacioNovaCerca(Boolean modificacio,JList LCTotes, JList LPTotes, JTree Algorismes, JList Lsub, JList Lsub2, JList Lsub1, JTextField Cbusca1, JTextField Cpc, JSlider CpcImp, JSlider Csembla, JSlider Crelacio, JSpinner Cdada,JSlider Crelacio1,JSlider Crelacio2){
         if(macro.getContAdUs().getNumCats()<= 0) {
             JOptionPane.showMessageDialog(comp, "No es pot fer cap cerca ja que no hi ha Categories", capsalera, WARNING_MESSAGE);
@@ -457,33 +455,7 @@ public class ControladorVistes1 {
             JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna p?gina de la llista!", capsalera, WARNING_MESSAGE);
         }
     }
-   
-    public void visualitzaCerca(Boolean guardada,JTree arbre, JTextArea on, Integer cercaaqui) {
-        //PREPAREM LA VISUALITZACIO D'AQUESTA CERCA
-        //comunaEliminar = new PriorityQueue<>(1, Collections.reverseOrder());
-    //ARBRE
-        DefaultMutableTreeNode arrel = new DefaultMutableTreeNode("Comunitats Obtingudes");
-        DefaultTreeModel Model = new DefaultTreeModel(arrel);
-       // Resultat.setModel(treeModel);
-        Integer numcom =  macro.getContUser().getNumComunitatsCerca(macro.getUserActual(), cercaaqui);
-	//System.out.println("Hi ha "+numcom+ " comunitats: ");
-	for(Integer i = 1; i <= numcom; ++i) {
-           // System.out.println("	A la " + i+ " comunitat hi ha les categories: ");
-            DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i);
-            arrel.add(prim);
-            ArrayList<String> auxm = macro.getContUser().getCatCerca(macro.getUserActual(), cercaaqui, i-1);
-            Iterator<String> it4 = auxm.iterator();
-            while(it4.hasNext()) {
-                String nom = it4.next();
-                DefaultMutableTreeNode seg = new DefaultMutableTreeNode(nom);
-                prim.add(seg);
-            }
-	}
-        arbre.setModel(Model);
-        
-        for (int i = 0; i < arbre.getRowCount(); i++) arbre.expandRow(i);
-
-    //TEXT AREA
+    public void ompleCriteris(JTextArea on, Integer cercaaqui, Boolean guardada) {
         //Preparem els strings en cada cas
         String algorisme;
         int algo = macro.getContUser().getAlgCerca(macro.getUserActual(), cercaaqui);
@@ -495,6 +467,7 @@ public class ControladorVistes1 {
         if(algo==1) tipu= "Dispersio";
         else if(algo==2) tipu="Num Comunitats";
         else tipu="Max Betw";
+        
         //Preparem les categories seleccionades
         int cont = 0;
         ArrayList<String> aux = macro.getContUser().getSubCerca(macro.getUserActual(), cercaaqui);
@@ -530,20 +503,49 @@ public class ControladorVistes1 {
             sb4.append("\nComentari: "+macro.getContUser().getComentariCerca(macro.getUserActual(), cercaaqui));
             sb4.append("\nData creació: "+macro.getContUser().getDataCreacioCerca(macro.getUserActual(), cercaaqui));
             Date data = macro.getContUser().getDataModificacioCerca(macro.getUserActual(), cercaaqui);
-            //System.out.println("COMPARACIO DATES: "+data.compareTo(new Date()));
             if(data== null ) sb4.append("\nData ultima modificació: encara no s'ha modificat\n");
             else sb4.append("\nData ultima modificació: "+data +"\n");
             guard=sb4.toString();
         }
-        on.setText(guard+"Algorisme: "+algorisme+"\nTipus de valor: "+tipu+"\nAmb la dada: "+macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaaqui)+
-                "\nImportancia realci?: "+macro.getContUser().getRelacioCerca(macro.getUserActual(), cercaaqui)+
-                "\nImportancia semblan?a de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaaqui)+
+        on.setText(guard+"Algorisme: "+algorisme+
+                "\nTipus de valor: "+tipu+
+                "\nAmb la dada: "+macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaaqui)+
+                "\nImportancia de les realcions entre categories: "+macro.getContUser().getRelacioCerca(macro.getUserActual(), cercaaqui)+
+                "\nImportancia semblança de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaaqui)+
+                "\nImportancia de les subcategories: "+ macro.getContUser().getSubRelCerca(macro.getUserActual(), cercaaqui)+
+                "\nImportancia de les supercategories: "+macro.getContUser().getSupRelCerca(macro.getUserActual(), cercaaqui)+
+                "\nImportancia de les pagines: "+macro.getContUser().getpagRelCerca(macro.getUserActual(), cercaaqui)+
                 "\nParaula clau: "+macro.getContUser().getParaulaClauCerca(macro.getUserActual(), cercaaqui)+
-                "\n     Amb import?ncia: "+macro.getContUser().getParaulaImpCerca(macro.getUserActual(), cercaaqui)+
+                "\n     Amb importància: "+macro.getContUser().getParaulaImpCerca(macro.getUserActual(), cercaaqui)+
                 "\nCategoria pare:"+macro.getContUser().getPareCerca(macro.getUserActual(), cercaaqui)+
                 "\nConjunt de categories seleccionades:"+subcat+
                 "\nConjunt de categories ignorades:"+evita+
-                "\nConjunt de p?gines a ignorar:"+ignora);
+                "\nConjunt de pàgines a ignorar:"+ignora);
+    }
+    public void visualitzaCerca(Boolean guardada,JTree arbre, JTextArea on, Integer cercaaqui) {
+        //PREPAREM LA VISUALITZACIO D'AQUESTA CERCA
+    //ARBRE
+        DefaultMutableTreeNode arrel = new DefaultMutableTreeNode("Comunitats Obtingudes");
+        DefaultTreeModel Model = new DefaultTreeModel(arrel);
+        Integer numcom =  macro.getContUser().getNumComunitatsCerca(macro.getUserActual(), cercaaqui);
+	
+	for(Integer i = 1; i <= numcom; ++i) {
+            DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i);
+            arrel.add(prim);
+            ArrayList<String> auxm = macro.getContUser().getCatCerca(macro.getUserActual(), cercaaqui, i-1);
+            Iterator<String> it4 = auxm.iterator();
+            while(it4.hasNext()) {
+                String nom = it4.next();
+                DefaultMutableTreeNode seg = new DefaultMutableTreeNode(nom);
+                prim.add(seg);
+            }
+	}
+        arbre.setModel(Model);
+        
+        for (int i = 0; i < arbre.getRowCount(); i++) arbre.expandRow(i);
+
+    //TEXT AREA
+       ompleCriteris(on,cercaaqui,guardada);
         
     }
 
