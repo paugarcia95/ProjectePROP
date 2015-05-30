@@ -75,16 +75,15 @@ public class TraduccioiAlgorisme {
 	 * @param cri Criteris passats
 	 * @return Retorna el pes de la relacio entre les dues categories C1 i C2
 	 */
-	private Double calcularpesentrecategories(Categoria c1, Categoria c2, Criteris cri){
+	private Double calcularpesentrecategories(Categoria c1, Categoria c2, Criteris cri, Integer potenciador){
 		Double solucio = new Double(0);	
 		
 		////////////**************Criteri de cat-cat i cat-pg********/////////////
-		Integer temp = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg
+		Integer temp = potenciador; // Criteri de cat-cat i cat-pg
 		if(temp == 5) solucio += 5;
 		else if(temp > 5) solucio += (5+(temp-5));
 		else solucio += 5-(5-temp);
 		/////////////*********************************************///////////
-		
 		
 		/////////// Criteri Semblança //////////////////
 		if(cri.getSemblaNom() != 0) { // Si  està actiu
@@ -107,7 +106,7 @@ public class TraduccioiAlgorisme {
 		Double solucio = new Double(0);	
 		
 		////////////**************Criteri de cat-cat i cat-pg********/////////////
-		Integer temp = cri.getRelacionsCat(); // Criteri de cat-cat i cat-pg
+		Integer temp = cri.getRelacionsPag(); // Criteri de cat-cat i cat-pg
 		if(temp == 5) solucio += 5;
 		else if(temp > 5) solucio += 5-(temp-5);
 		else solucio += (5+(5-temp));
@@ -220,7 +219,7 @@ public class TraduccioiAlgorisme {
 			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
 			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
 				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
-					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri)); // I si hi està, afageixo el pes
+					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri,cri.getRelacionsCat())); // I si hi està, afageixo el pes
 				} // ESTO ES CREAR UNICAMENTE LAS RELACIONES ENTRE SUBCATS
 			}
 		}
@@ -233,7 +232,7 @@ public class TraduccioiAlgorisme {
 			for (Categoria s : mapcatsubcat.values()) { // RELACIONES ENTRE SI LES SUBCATS DE IT
 				for (Categoria q : mapcatsubcat.values()) {
 					if(!s.getNom().equals(q.getNom())) {
-						if(solucio.addAresta(s.getNom(), q.getNom(), calcularpesentrecategories(s,q,cri))){ // Si no existeix l'aresta la creem
+						if(solucio.addAresta(s.getNom(), q.getNom(), calcularpesentrecategories(s,q,cri, cri.getRelacionsSubs()))){ // Si no existeix l'aresta la creem
 							ArrayList<String> aux = jacreat.get(s.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
 							if(aux == null) {
 								ArrayList<String> aux3 = new ArrayList<String>();
@@ -280,7 +279,7 @@ public class TraduccioiAlgorisme {
 							}
 							
 							Double temp = solucio.getPes(s.getNom(), q.getNom());
-							temp += calcularpesentrecategories(s,q,cri);
+							temp += calcularpesentrecategories(s,q,cri,cri.getRelacionsSubs());
 							solucio.setPes(s.getNom(), q.getNom(), temp);
 						}
 					}
@@ -299,7 +298,7 @@ public class TraduccioiAlgorisme {
 			for (Categoria s : mapcatsubcat.values()) { // RELACIONES ENTRE SI LES SUBCATS DE IT
 				for (Categoria q : mapcatsubcat.values()) {
 					if(!s.getNom().equals(q.getNom())) {
-						if(solucio.addAresta(s.getNom(), q.getNom(), calcularpesentrecategories(s,q,cri))){ // Si no existeix l'aresta la creem
+						if(solucio.addAresta(s.getNom(), q.getNom(), calcularpesentrecategories(s,q,cri,cri.getRelacionsSuper()))){ // Si no existeix l'aresta la creem
 							ArrayList<String> aux = jacreat.get(s.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
 							if(aux == null) {
 								ArrayList<String> aux3 = new ArrayList<String>();
@@ -346,7 +345,7 @@ public class TraduccioiAlgorisme {
 							}
 							
 							Double temp = solucio.getPes(s.getNom(), q.getNom());
-							temp += calcularpesentrecategories(s,q,cri);
+							temp += calcularpesentrecategories(s,q,cri,cri.getRelacionsSuper());
 							solucio.setPes(s.getNom(), q.getNom(), temp);
 						}
 					}
@@ -356,7 +355,6 @@ public class TraduccioiAlgorisme {
 		
 	
 		//////////////////////////////////////////////////////////////
-		
 		
 		/////////////ENTRE PAGINES//////////////////
 		Collection<Pagina> paginat = graf.getPagines();
