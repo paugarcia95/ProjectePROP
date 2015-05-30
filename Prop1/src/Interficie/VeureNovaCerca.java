@@ -51,19 +51,20 @@ public class VeureNovaCerca extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jButton20 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        ButAfegirComunitat = new javax.swing.JButton();
+        ButAfegirArbre = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
         Resultat = new javax.swing.JTree();
-        jButton13 = new javax.swing.JButton();
+        ButGuardar = new javax.swing.JButton();
         modelos = new DefaultListModel();
         Penjades = new javax.swing.JList();
-        jButton12 = new javax.swing.JButton();
-        ModificarCriterisBut = new javax.swing.JButton();
+        ButTreureArbre = new javax.swing.JButton();
+        ButModificarCriteris = new javax.swing.JButton();
         jScrollPane11 = new javax.swing.JScrollPane();
         CriterisNovaCerca = new javax.swing.JTextArea();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        ButTancar = new javax.swing.JToggleButton();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -73,32 +74,66 @@ public class VeureNovaCerca extends javax.swing.JPanel {
                 formComponentShown(evt);
             }
         });
+        setLayout(new java.awt.GridBagLayout());
 
-        jButton20.setText("Afegir Comunitat");
-        jButton20.addActionListener(new java.awt.event.ActionListener() {
+        ButAfegirComunitat.setText("Afegir Comunitat");
+        ButAfegirComunitat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton20ActionPerformed(evt);
+                ButAfegirComunitatActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 18, 0, 0);
+        add(ButAfegirComunitat, gridBagConstraints);
 
-        jButton10.setText("<<<<");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        ButAfegirArbre.setText("<<<<");
+        ButAfegirArbre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                ButAfegirArbreActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(105, 18, 0, 0);
+        add(ButAfegirArbre, gridBagConstraints);
 
         Resultat.setAutoscrolls(true);
         Resultat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Resultat.setLargeModel(true);
         jScrollPane9.setViewportView(Resultat);
 
-        jButton13.setText("Guardar");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 217;
+        gridBagConstraints.ipady = 428;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(18, 18, 11, 0);
+        add(jScrollPane9, gridBagConstraints);
+
+        ButGuardar.setText("Guardar");
+        ButGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                ButGuardarActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 0);
+        add(ButGuardar, gridBagConstraints);
 
         Penjades.setModel(modelos);
         Penjades.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -107,89 +142,76 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         Penjades.setDropMode(javax.swing.DropMode.INSERT);
         Penjades.setFocusable(false);
         Penjades.setValueIsAdjusting(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.ipadx = 265;
+        gridBagConstraints.ipady = 290;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 6, 0, 10);
+        add(Penjades, gridBagConstraints);
 
-        jButton12.setText(">>>>");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        ButTreureArbre.setText(">>>>");
+        ButTreureArbre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                ButTreureArbreActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 18, 0, 0);
+        add(ButTreureArbre, gridBagConstraints);
 
-        ModificarCriterisBut.setText("Modificar Criteris");
-        ModificarCriterisBut.addActionListener(new java.awt.event.ActionListener() {
+        ButModificarCriteris.setText("Modificar Criteris");
+        ButModificarCriteris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarCriterisButActionPerformed(evt);
+                ButModificarCriterisActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 0);
+        add(ButModificarCriteris, gridBagConstraints);
 
         CriterisNovaCerca.setBackground(new java.awt.Color(240, 240, 240));
         CriterisNovaCerca.setColumns(20);
         CriterisNovaCerca.setRows(5);
         jScrollPane11.setViewportView(CriterisNovaCerca);
 
-        jToggleButton1.setText("Tanca sense guardar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 322;
+        gridBagConstraints.ipady = 469;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(11, 10, 11, 0);
+        add(jScrollPane11, gridBagConstraints);
+
+        ButTancar.setText("Tanca sense guardar");
+        ButTancar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                ButTancarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ModificarCriterisBut)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton13)
-                        .addGap(18, 18, 18)
-                        .addComponent(jToggleButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton10)
-                            .addComponent(jButton12)
-                            .addComponent(jButton20))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Penjades, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane11)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ModificarCriterisBut)
-                            .addComponent(jButton13)
-                            .addComponent(jToggleButton1))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(105, 105, 105)
-                                .addComponent(jButton10)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton12)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton20))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Penjades, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 0);
+        add(ButTancar, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+    private void ButAfegirComunitatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAfegirComunitatActionPerformed
         Integer quina = macro.getContUser().addComunitatCerca(macro.getUserActual(), numcerca)+1;
         System.out.println("Afegeico la comunitat: "+quina);
         DefaultTreeModel arb = (DefaultTreeModel)Resultat.getModel();
@@ -198,33 +220,35 @@ public class VeureNovaCerca extends javax.swing.JPanel {
 
         arb.insertNodeInto(new DefaultMutableTreeNode("Comunitat "+quina), act, act.getChildCount());
         comunaEliminar.add(quina-1);
-    }//GEN-LAST:event_jButton20ActionPerformed
+        System.out.println("Afegeixo a eliminar: "+(quina-1));
+    }//GEN-LAST:event_ButAfegirComunitatActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void ButAfegirArbreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAfegirArbreActionPerformed
         vista.afegeixCatComun(Resultat,modelos, Penjades, numcerca);
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_ButAfegirArbreActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void ButGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButGuardarActionPerformed
         GuardaCerca auxi = new GuardaCerca(pare);
         int result = JOptionPane.showConfirmDialog(this, auxi,"Entra les dades requerides", PLAIN_MESSAGE);
         if(result == OK_OPTION) {
             if(auxi.getName().length()>0) {
                 macro.getContUser().addNomCerca(macro.getUserActual(),numcerca,auxi.getName());
                 macro.getContUser().addComentariCerca(macro.getUserActual(),numcerca,auxi.getComentari());
+                vista.netejaArbreCerca(numcerca);
                 pare.canviarACercaGuardada();
             }
             else JOptionPane.showMessageDialog(this, "Has d'introduir un nom.", capsalera, WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_ButGuardarActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void ButTreureArbreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButTreureArbreActionPerformed
         vista.treuCatComun(Resultat,modelos, numcerca);
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_ButTreureArbreActionPerformed
 
-    private void ModificarCriterisButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarCriterisButActionPerformed
+    private void ButModificarCriterisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButModificarCriterisActionPerformed
         cercaactual=numcerca;
         pare.modificaCercaGuardada();
-    }//GEN-LAST:event_ModificarCriterisButActionPerformed
+    }//GEN-LAST:event_ButModificarCriterisActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         cercaactual = numcerca;
@@ -235,33 +259,29 @@ public class VeureNovaCerca extends javax.swing.JPanel {
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-       System.out.print("Elimino les comunitats:");
-        while(!comunaEliminar.isEmpty()) {
-            System.out.print(" "+comunaEliminar.peek());
-            macro.getContUser().removeComunitatCerca(macro.getUserActual(),numcerca,comunaEliminar.poll());
-        }
-        System.out.println();
+      vista.netejaArbreCerca(numcerca);
     }//GEN-LAST:event_formComponentHidden
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void ButTancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButTancarActionPerformed
       macro.getContUser().removeCerca(macro.getUserActual(),numcerca);
       auxguard = 0;
+      pare.activaCerca();
       pare.eliminaTab(this);
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_ButTancarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButAfegirArbre;
+    private javax.swing.JButton ButAfegirComunitat;
+    private javax.swing.JButton ButGuardar;
+    private javax.swing.JButton ButModificarCriteris;
+    private javax.swing.JToggleButton ButTancar;
+    private javax.swing.JButton ButTreureArbre;
     private javax.swing.JTextArea CriterisNovaCerca;
-    private javax.swing.JButton ModificarCriterisBut;
     private javax.swing.JList Penjades;
     private DefaultListModel modelos;
     private javax.swing.JTree Resultat;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton20;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

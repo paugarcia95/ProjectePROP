@@ -372,7 +372,7 @@
         <Property name="value" type="int" value="5"/>
         <Property name="autoscrolls" type="boolean" value="true"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
+          <Color id="Default Cursor"/>
         </Property>
         <Property name="inheritsPopupMenu" type="boolean" value="true"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
@@ -410,7 +410,7 @@
         <Property name="value" type="int" value="5"/>
         <Property name="autoscrolls" type="boolean" value="true"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
+          <Color id="Default Cursor"/>
         </Property>
         <Property name="inheritsPopupMenu" type="boolean" value="true"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
@@ -430,7 +430,7 @@
         <Property name="value" type="int" value="0"/>
         <Property name="autoscrolls" type="boolean" value="true"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
+          <Color id="Default Cursor"/>
         </Property>
         <Property name="inheritsPopupMenu" type="boolean" value="true"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
@@ -668,7 +668,7 @@
         <Property name="value" type="int" value="5"/>
         <Property name="autoscrolls" type="boolean" value="true"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
+          <Color id="Default Cursor"/>
         </Property>
         <Property name="inheritsPopupMenu" type="boolean" value="true"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>
@@ -688,7 +688,7 @@
         <Property name="value" type="int" value="5"/>
         <Property name="autoscrolls" type="boolean" value="true"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
+          <Color id="Default Cursor"/>
         </Property>
         <Property name="inheritsPopupMenu" type="boolean" value="true"/>
         <Property name="valueIsAdjusting" type="boolean" value="true"/>

@@ -17,7 +17,11 @@ import domini.GrafDades;
 import domini.MacroControlador;
 import domini.Pagina;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +31,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.PriorityQueue;
 import java.util.Set;
+import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -71,7 +76,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     Boolean primera; //variable per evitar excepcions en els pannels que tenen accions en amagar
     static Integer auxguard;
     //auxguard= 0 -> es pot crear una nova cerca sense problemes
-    //auxguard= 1 -> s'ha de sobrescriure la nova cerca cercaactual
+    //auxguard= 1 -> s'ha de sobrescriure la cerca cercaactual
     //auxguard= 2 -> no es pot crear cap nova cerca, ja n'hi ha una sense guardar
     static ControladorVistes1 vista;
     static Frame comp;
@@ -81,9 +86,14 @@ public class InterficiaProva1 extends javax.swing.JFrame {
    public static PriorityQueue<Integer> comunaEliminar;
    
    
-   public void guardaCerca(Component quin) {}
+  //public void guardaCerca(Component quin) {}
+   public void activaCerca(){
+       AP_Client.setEnabledAt(4, true);
+   }
    public void canviarACercaGuardada(){
       AP_Cerques.remove(AP_Cerques.getSelectedIndex());
+      System.out.println("Guardem la cerca i auxguard= 0");
+      auxguard = 0;
       AP_Client.setEnabledAt(4, true);
       AP_Cerques.setEnabledAt(0, true);
       /* for(int i = 0; i < AP_Cerques.getComponentCount(); ++i) {
@@ -91,16 +101,31 @@ public class InterficiaProva1 extends javax.swing.JFrame {
        }*/
       visualitzaCercaAntiga();
    } 
+   public void canviaNomTaula(String nouNom){
+        AP_Cerques.setTitleAt(AP_Cerques.getSelectedIndex(), nouNom);
+    }
    public void creaAdminNou(){
        A_CreaUsuari = new NouUser(this);
-       AP_Client.setComponentAt(9, A_CreaUsuari);
+       AP_Client.setComponentAt(8, A_CreaUsuari);
    }
    public void eliminaTab(Component quin){
        AP_Cerques.remove(quin);
    }
+   public Boolean espotvisualitzar(String nom) {
+       for(int i = 1; i < AP_Cerques.getComponentCount(); ++i) {
+            if(AP_Cerques.getTitleAt(i).equals(nom)) return false;
+       }
+       return true;
+   }
    public void modificaCercaGuardada(){
        AP_Client.setEnabledAt(4, true);
+       System.out.println("Vull modificar una cerca ja existent, auxguard = 1");
        auxguard = 1;
+       AP_Client.setSelectedIndex(4);
+   }
+   public void novaCerca(){
+       AP_Client.setEnabledAt(4, true);
+       auxguard = 0;
        AP_Client.setSelectedIndex(4);
    }
    public void obreOpcions(){
@@ -145,15 +170,17 @@ public class InterficiaProva1 extends javax.swing.JFrame {
        AP_Cerques.setSelectedComponent(Panells);
    }  
    public void visualitzaCercaNova() {
-       System.out.println("auxguard: "+auxguard);
+       System.out.println("Visualitzacio cerac nova, auxguard: "+auxguard);
        if(auxguard!=1) {
            Panell = new VeureNovaCerca(this, cercaactual);
            AP_Cerques.add(Panell, "Sense guardar");
        }
+       System.out.println("Visualitzacio cerac nova, posem auxguard a 2 ");
+       auxguard = 2;
        AP_Client.setSelectedIndex(5);
        AP_Cerques.setSelectedIndex(AP_Cerques.getComponentCount()-1);
        AP_Client.setEnabledAt(4, false);
-       AP_Cerques.setEnabledAt(0, false);
+       //AP_Cerques.setEnabledAt(0, false);
        /*for(int i = 0; i < AP_Cerques.getComponentCount()-1; ++i) {
             AP_Cerques.setEnabledAt(i, false);
        }*/
@@ -408,7 +435,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addGap(40, 40, 40)
                         .addComponent(NovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(1078, Short.MAX_VALUE))
         );
         A_CreaUsuariLayout.setVerticalGroup(
             A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,7 +457,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addGap(35, 35, 35)))
                 .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
 
         AP_Principal.addTab("Crea nou usuari", A_CreaUsuari);
@@ -456,6 +483,8 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         );
 
         getContentPane().add(Panell, "card18");
+
+        AP_Cerques.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(AP_Cerques, "card16");
 
         A_FerCerca.setAlignmentX(A_PantallaPrincipal.getAlignmentX());

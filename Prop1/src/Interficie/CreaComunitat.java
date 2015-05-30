@@ -649,6 +649,7 @@ public class CreaComunitat extends javax.swing.JPanel {
                 try {
                        if(vista.ferCerca(Algorismes, Cdada, Lsub, Lsub2, Lsub1, CpcImp, Cpc, Csembla, Crelacio, Cbusca1, Crelacio1, Crelacio2)){
                         
+        System.out.println("Desbloquejo botons perque ja he acabat!!!!!!!");
                         Crelacio.setEnabled(true);
                         Crelacio1.setEnabled(true);
                         Crelacio2.setEnabled(true);
@@ -687,11 +688,12 @@ public class CreaComunitat extends javax.swing.JPanel {
         };
         hilo = new Thread(cerca);
         hilo.start();
-        timer = new Timer(1000, new TimerListener());
+       // timer = new Timer(1000, new TimerListener());
         //progressMonitor = new ProgressMonitor(this,"Estem realitzant la cerca de comunitats, si us plau, tingues paciència","",0,arestes);
-        timer.start();
+      // timer.start();
         //progressMonitor.setProgress(0);
         //progressMonitor.setMillisToDecideToPopup(2*1000);
+        System.out.println("Bloquejo botons en fer la cerca");
         CercaB.setEnabled(false);
         Crelacio.setEnabled(false);
         Crelacio1.setEnabled(false);
@@ -715,6 +717,7 @@ public class CreaComunitat extends javax.swing.JPanel {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         Boolean nova;
+        System.out.println("Mostra Fer cerca, amb auxguard: "+auxguard);
         if(auxguard==0) nova = false;
         else nova = true;
         vista.preaparaCreacioNovaCerca(nova, LCTotes, LPTotes, Algorismes, Lsub, Lsub2, Lsub1, Cbusca1, Cpc, CpcImp, Csembla, Crelacio, Cdada,Crelacio1,Crelacio2);

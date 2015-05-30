@@ -10,6 +10,7 @@ import static Interficie.InterficiaProva1.capsalera;
 import static Interficie.InterficiaProva1.vista;
 import static Interficie.InterficiaProva1.cercaactual;
 import static Interficie.InterficiaProva1.comp;
+import javax.swing.DefaultListModel;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
@@ -39,6 +40,7 @@ public class VeureCerques extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane12 = new javax.swing.JScrollPane();
+        modcerques = new DefaultListModel();
         LlistaCerques = new javax.swing.JList();
         BVisCat2 = new javax.swing.JButton();
         jTextField7 = new javax.swing.JTextField();
@@ -61,11 +63,7 @@ public class VeureCerques extends javax.swing.JPanel {
         jScrollPane12.setAutoscrolls(true);
 
         LlistaCerques.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(51, 51, 51)));
-        LlistaCerques.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        LlistaCerques.setModel(modcerques);
         LlistaCerques.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane12.setViewportView(LlistaCerques);
 
@@ -111,7 +109,8 @@ public class VeureCerques extends javax.swing.JPanel {
     private void BVisCat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVisCat2ActionPerformed
         if(LlistaCerques.getSelectedIndex()>=0) {
             cercaactual = macro.getContUser().getNumCerca(macro.getUserActual(), LlistaCerques.getSelectedValue().toString());
-            pare.visualitzaCercaAntiga();
+            if(pare.espotvisualitzar(LlistaCerques.getSelectedValue().toString()))pare.visualitzaCercaAntiga();
+            else JOptionPane.showMessageDialog(comp, "No es poden visualitzar dos cerques amb el mateix nom", capsalera, WARNING_MESSAGE);
             /*vista.visualitzaCerca(true,Resultat1, CriterisNovaCerca1);
             A_VisualitzaCerques.setVisible(false);
             A_VisualitzacioCercaAntiga.setVisible(true);*/
@@ -135,6 +134,7 @@ public class VeureCerques extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BVisCat2;
     private javax.swing.JList LlistaCerques;
+    private DefaultListModel modcerques;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables

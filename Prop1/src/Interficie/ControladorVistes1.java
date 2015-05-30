@@ -87,9 +87,9 @@ public class ControladorVistes1 {
             else {
                 nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)node, node.getChildCount());
                 num = Integer.parseInt(node.toString().substring(10))-1;
-                System.out.println("Afegeixo a la comunitat "+node.toString().substring(10)+" la categoria"+Penjades.getSelectedValue().toString());
+               // System.out.println("Afegeixo a la comunitat "+node.toString().substring(10)+" la categoria"+Penjades.getSelectedValue().toString());
            }
-            System.out.println("Vull afegir a la comunitat: " +num);
+           // System.out.println("Vull afegir a la comunitat: " +num);
             if(!macro.getContUser().addCatComunitatCerca(macro.getUserActual(), cercaaqui, num,Penjades.getSelectedValue().toString())) System.out.println("ERROR en afegir");
             if(comunaEliminar.contains(num)){
                 comunaEliminar.remove(num);
@@ -130,9 +130,17 @@ public class ControladorVistes1 {
             JOptionPane.showMessageDialog(comp, "Felicitats, dades d'usuari canviades!", capsalera, WARNING_MESSAGE);
         }
     }
+    
     public void carregaCerquesFetes(JTextField jTextField7,JList LlistaCerques){
-        jTextField7.setText("Tens "+macro.getContUser().getNumCerquesUser(macro.getUserActual())+" cerques fetes");
-        Collection<String> auxc = macro.getContUser().getCerquesComunitats(macro.getUserActual());
+        DefaultListModel llista = (DefaultListModel)LlistaCerques.getModel();
+        boolean noguardat = false;
+        ArrayList<String> aux = macro.getContUser().getCerquesComunitats(macro.getUserActual());
+        llista.removeAllElements();
+        for(String cerca: aux) {
+            if(cerca!=null) llista.addElement(cerca);
+            else noguardat = true;
+        }
+       /* Collection<String> auxc = macro.getContUser().getCerquesComunitats(macro.getUserActual());
         System.out.println("Les cerques son: "+auxc);
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
@@ -141,11 +149,17 @@ public class ControladorVistes1 {
             aux2[cont] = it.next();
             ++cont;
         }
-        LlistaCerques.setListData(aux2);
+        LlistaCerques.setListData(aux2);*/
+        if(noguardat)jTextField7.setText("Tens "+(macro.getContUser().getNumCerquesUser(macro.getUserActual())-1)+" cerques fetes");
+        else jTextField7.setText("Tens "+macro.getContUser().getNumCerquesUser(macro.getUserActual())+" cerques fetes");
     }
     public void carregaUsers(DefaultListModel UsersAct) {
         ArrayList<String> auxc = macro.getContUser().getUsers();
-        for(String us: auxc)UsersAct.addElement(us);
+        UsersAct.removeAllElements();
+        for(String us: auxc) {
+            if(macro.getContUser().isAdmin(us))UsersAct.addElement(us.concat(" [ad]"));
+            else UsersAct.addElement(us);
+        }
         
       /*  ArrayList<String> auxc = macro.getContUser().getUsers();;
         Object[] aux2 = new Object[auxc.size()];
@@ -248,7 +262,14 @@ public class ControladorVistes1 {
        System.out.println("Temps total cerca: "+ (t2-t1));
         return true;
     }
-    
+    public void netejaArbreCerca(Integer numcerca) {
+        System.out.print("Elimino les comunitats:");
+        while(!comunaEliminar.isEmpty()) {
+            System.out.print(" "+comunaEliminar.peek());
+            macro.getContUser().removeComunitatCerca(macro.getUserActual(),numcerca,comunaEliminar.poll());
+        }
+        System.out.println();
+    }
     public void ompleCategoriesExistents(JList quina){         //es pot millorar efici?ncia (que vagi carregant a mida q es va fent scroll)
         Collection<String> auxc = macro.getContAdUs().getCategories();
         Object[] aux2 = new Object[auxc.size()];
