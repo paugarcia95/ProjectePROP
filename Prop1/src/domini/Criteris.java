@@ -10,16 +10,17 @@ import java.util.ArrayList;
 public class Criteris {
 	
 	private ParaulaValor paraulaClau;
-	private Integer relacionsCat, relacionsSubs, relacionsSuper, semblaNom, algorisme, tipuCerca, dada;
+	private Integer relacionsCat, relacionsPag, relacionsSubs, relacionsSuper, semblaNom, algorisme, tipuCerca, dada;
 	private ArrayList<String> subconjCat, evitaCat;
 	private ArrayList<String> evitaPag;
 	private String pare;
 	
 	
 	
-	public Criteris(ParaulaValor paraula, Integer relacionsCat, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare, Integer relacionsSubs, Integer relacionsSuper) {
+	public Criteris(ParaulaValor paraula, Integer relacionsCat, Integer relacionsPag, Integer relacionsSubs, Integer relacionsSuper, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare) {
 		paraulaClau = paraula;
 		this.relacionsCat = relacionsCat;
+		this.relacionsPag = relacionsPag;
 		this.relacionsSubs = relacionsSubs;
         this.relacionsSuper = relacionsSuper;
 		semblaNom = sembla;
@@ -34,6 +35,7 @@ public class Criteris {
 	
 	public Criteris() {
 		paraulaClau = new ParaulaValor();
+		relacionsCat = 5;
 		relacionsCat = 5;
 		relacionsSubs = 5;
         relacionsSuper = 5;
@@ -61,6 +63,14 @@ public class Criteris {
 	
 	public void setRelacionsCat(Integer relacions) {
 		relacionsCat = relacions;
+	}
+	
+	public Integer getRelacionsPag() {
+		return relacionsPag;
+	}
+
+	public void setRelacionsPag(Integer relacionsPag) {
+		this.relacionsPag = relacionsPag;
 	}
 	
 	public Integer getRelacionsSubs() {
