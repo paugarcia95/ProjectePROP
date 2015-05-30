@@ -41,7 +41,7 @@ public class EntradaSortidaDades {
 	}
 
 	/**
-	 * Creadora amb ruta per defecte
+	 * Creadora amb ruta per defecte.
 	 * 
 	 */
 	public EntradaSortidaDades(File rutaPerDefecte) {
@@ -49,21 +49,38 @@ public class EntradaSortidaDades {
 		this.rutaPerDefecte = rutaPerDefecte;
 	}
 
+	/**
+	 * Estableix la ruta per defecte on es guarden les dades de persistencia.
+	 * 
+	 * @param rutaPerDefecte
+	 *            Directori on es guardaran les dades del programa
+	 */
 	public void setRutaPerDefecte(File rutaPerDefecte) {
 		this.rutaPerDefecte = rutaPerDefecte;
 	}
 
+	/**
+	 * Consultora de la ruta per defecte on es guarden les dades.
+	 * 
+	 * @return La ruta per defecte
+	 */
 	public File getRutaPerDefecte() {
 		return rutaPerDefecte;
 	}
 
+	/**
+	 * Retorna l'error que hi ha hagut en l'execucio anterior. Si no n'hi ha
+	 * hagut cap, retorna el de la ultima amb error o "Error?".
+	 * 
+	 * @return Un String amb l'error que s'ha produit
+	 */
 	public String getError() {
 		return codiError;
 	}
 
 	/**
-	 * Carrega les dades d'un fitxer de text a un graf. El fitxer te el format
-	 * predeterminat d'una Wikipedia
+	 * Carrega les dades d'un fitxer de text (escrit en format usuari) a un
+	 * graf. El fitxer te el format predeterminat d'una Wikipedia.
 	 * 
 	 * S'afegeixen a G els nodes i/o arestes indicats pel fitxer de text a
 	 * "ruta"
@@ -72,12 +89,15 @@ public class EntradaSortidaDades {
 	 *            S'afegeixen a aquest graf els nous nodes i arestes
 	 * @param ruta
 	 *            Adreca on es troba el fitxer de text
-	 * @return Un GrafDades amb les dades de "ruta"
-	 * @throws IOException
-	 * @throws FileNotFoundException
+	 * @return Un boolea que indica si hi ha hagut un error en la
+	 *         lectura/escriptura.
 	 */
 	public Boolean llegirGrafDades(GrafDades G, File ruta) {
 		errorEnExecucio = false;
+
+		if (G == null)
+			return error(-1);
+
 		BufferedReader b = null;
 		String s;
 
@@ -127,10 +147,13 @@ public class EntradaSortidaDades {
 	 * Guarda la configuracio del graf G a un fitxer de text a "ruta".
 	 * 
 	 * @param G
-	 *            Indica el graf de dades que es vol emmagatzemar
+	 *            Indica el graf de dades que es vol emmagatzemar en format
+	 *            usuari
 	 * @param ruta
 	 *            Indica la ruta de directoris i el fitxer on es vol guardar el
 	 *            graf
+	 * @return Un boolea que indica si hi ha hagut un error en la
+	 *         lectura/escriptura.
 	 */
 	public Boolean escriureGrafDadesEnFitxer(GrafDades G, String ruta) {
 		errorEnExecucio = false;
@@ -152,7 +175,7 @@ public class EntradaSortidaDades {
 				Iterator<Pagina> PC = c.getMapPC().values().iterator();
 				Iterator<Categoria> CsupC = c.getMapCSupC().values().iterator();
 				// Iterator<Categoria> CsubC = c.getMapCSubC().values().iterator();
-				// Aquest ultim no cal ja que nom�s amb els enlla�os CsupC ja es
+				// Aquest ultim no cal ja que nomes amb els enllacos CsupC ja es
 				// pot representar tot el graf
 
 				while (CP.hasNext()) {
@@ -187,15 +210,16 @@ public class EntradaSortidaDades {
 
 	/**
 	 * Tradueix un fitxer de dades d'un graf a un fitxer que permet al programa
-	 * DOT representar graficament un graf. El programa DOT nom�s funciona
-	 * correctament si el graf t� menys de 100 nodes aproximadament.
+	 * DOT representar graficament un graf. El programa DOT nomes funciona
+	 * correctament si el graf te menys de 100 nodes aproximadament.
 	 * 
 	 * @param rutaGraf
 	 *            Ruta de directoris que indica on es troba el fitxer amb les
 	 *            dades del graf.
 	 * @param rutaImatgeTXT
 	 *            La ruta de l'arxiu de text de dest�.
-	 * @return
+	 * @return Un boolea que indica si hi ha hagut un error en la
+	 *         lectura/escriptura.
 	 */
 	public Boolean traduirGrafDadesAImatge(String rutaGraf, String rutaImatgeTXT) {
 		errorEnExecucio = false;
@@ -317,8 +341,24 @@ public class EntradaSortidaDades {
 		return true;
 	}
 
+	/**
+	 * Carrega les dades d'un fitxer de text a un graf. El fitxer te el format
+	 * intern del programa.
+	 * 
+	 * S'afegeixen a G els nodes i/o arestes indicats pel fitxer de text a la
+	 * rutaPerDefecte
+	 * 
+	 * @param G
+	 *            S'afegeixen a aquest graf els nous nodes i arestes
+	 * @return Un boolea que indica si hi ha hagut un error en la
+	 *         lectura/escriptura.
+	 */
 	public Boolean carregarGrafDades(GrafDades G) {
 		errorEnExecucio = false;
+
+		if (G == null)
+			return error(-1);
+
 		BufferedReader b = null;
 		try {
 			b = new BufferedReader(new FileReader(rutaPerDefecte + ARXIU_DADES_GRAF));
@@ -442,8 +482,21 @@ public class EntradaSortidaDades {
 		return errorEnExecucio;
 	}
 
+	/**
+	 * Guarda la configuracio del graf G a un fitxer de text a la rutaPerDefecte
+	 * 
+	 * @param G
+	 *            Indica el graf de dades que es vol emmagatzemar en format
+	 *            usuari
+	 * @return Un boolea que indica si hi ha hagut un error en la
+	 *         lectura/escriptura.
+	 */
 	public Boolean guardarGrafDades(GrafDades G) {
 		errorEnExecucio = false;
+
+		if (G == null)
+			return error(-1);
+
 		FileWriter fichEscr = null;
 		PrintWriter docE = null;
 
@@ -528,8 +581,21 @@ public class EntradaSortidaDades {
 		return errorEnExecucio;
 	}
 
+	/**
+	 * Carrega la informacio dels usuaris que es troba a RutaPerDefecte
+	 * 
+	 * @param MapUsuaris
+	 *            Map on s'emmagatzemaran totes les dades llegides
+	 * @return Un boolea que indica si hi ha hagut un error en la
+	 *         lectura/escriptura.
+	 */
 	public Boolean carregarUsuaris(Map<String, Usuari> MapUsuaris) {
 		errorEnExecucio = false;
+
+		if (MapUsuaris == null) {
+			return error(-1);
+		}
+
 		BufferedReader b = null;
 
 		try {
@@ -598,7 +664,15 @@ public class EntradaSortidaDades {
 		return errorEnExecucio;
 	}
 
-
+	/**
+	 * Retorna la informacio carregada de l'usuari "user" que es troba en
+	 * RutaPerDefecte. Si succeeix algun error, retorna una arrayList nul·la.
+	 * 
+	 * @param user
+	 *            usuari del qual es vol llegir la informacio
+	 * @return Una ArrayList de totes les cerques de comunitats que te
+	 *         emmagatzemades l'usuari en el seu fitxer
+	 */
 	private ArrayList<CercaComunitats> carregaDadesUsuari(Usuari user) {
 		BufferedReader b = null;
 		boolean error = false;
@@ -748,8 +822,23 @@ public class EntradaSortidaDades {
 		return result;
 	}
 
+	/**
+	 * Guarda la informacio dels usuaris que es troben al MapUsuaris a un fitxer
+	 * de text a rutaPerDefecte
+	 * 
+	 * @param MapUsuaris
+	 *            Conte la informacio de tots els usuaris que es desitja
+	 *            emmagatzemar
+	 * @return Un boolea que indica si hi ha hagut un error en la
+	 *         lectura/escriptura.
+	 */
 	public Boolean guardarUsuaris(Map<String, Usuari> MapUsuaris) {
 		errorEnExecucio = false;
+
+		if (MapUsuaris == null) {
+			return error(-1);
+		}
+
 		PrintWriter docE = null;
 
 		try {
@@ -796,6 +885,12 @@ public class EntradaSortidaDades {
 		return errorEnExecucio;
 	}
 
+	/**
+	 * Guarda la informacio de l'usuari en la rutaPerDefecte
+	 * 
+	 * @param user
+	 *            Conte la informacio de l'usuari
+	 */
 	private void guardaDadesUsuari(Usuari user) {
 		PrintWriter docE = null;
 
@@ -911,7 +1006,12 @@ public class EntradaSortidaDades {
 		}
 	}
 	
-
+	/**
+	 * Transforma la data en String
+	 * 
+	 * @param data
+	 *            es una data
+	 */
 	@SuppressWarnings("deprecation")
 	private String escriuData(Date data) {
 		return
@@ -923,6 +1023,13 @@ public class EntradaSortidaDades {
 		data.getSeconds();
 	}
 	
+	/**
+	 * Transforma una cadena de numeros de llargada 6 separada per "+" en una
+	 * data
+	 * 
+	 * @param data
+	 *            String que te el format correcte d'una data
+	 */
 	@SuppressWarnings("deprecation")
 	private Date carregarData(String data) {
 		String[] aux = data.split("\\+");
@@ -956,8 +1063,9 @@ public class EntradaSortidaDades {
 	 * @exception 6: L'arxiu s'ha llegit correctament però pot contenir errors.
 	 *            Revisa la sintaxi per si de cas
 	 * @exception 7: Error al tancar l'arxiu
-	 * @exception 8: Error al carregar les dades
-	 * @exception default: Error indeterminat
+	 * @exception 8: Error al carregar les dades del programa
+	 * @exception default
+	 *                : Error indeterminat
 	 * 
 	 * @param e
 	 *            Codi de l'error
@@ -987,6 +1095,9 @@ public class EntradaSortidaDades {
 				break;
 			case 8:
 				codiError = "Error al carregar les dades del programa: les dades han estat danyades";
+				break;
+			case -1 :
+				codiError = "La variable que m'has passat per guardar les dades es nul·la!";
 				break;
 			default :
 				codiError = "Error indeterminat";
