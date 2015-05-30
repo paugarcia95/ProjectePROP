@@ -67,6 +67,12 @@ public class TraduccioiAlgorisme {
 	        return solu;
 	    }*/
 	
+	/**
+	 * Calcula la similaritat entre dues paraules
+	 * @param a String a comparar
+	 * @param b String a comparar
+	 * @return Retorna el numero de canvis q fan falta per a que aquelles paraules siguin iguals
+	 */
 	  public static double similarity(String a, String b) {
 	        a = a.toLowerCase();
 	        b = b.toLowerCase();
@@ -90,6 +96,7 @@ public class TraduccioiAlgorisme {
 	 * @param c1 Categoria primera
 	 * @param c2 Categoria segona
 	 * @param cri Criteris passats
+	 * @param potenciador Criteri sobre el qual es calcula com de forta serà la relació
 	 * @return Retorna el pes de la relacio entre les dues categories C1 i C2
 	 */
 	private Double calcularpesentrecategories(Categoria c1, Categoria c2, Criteris cri, Integer potenciador){
