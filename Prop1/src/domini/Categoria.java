@@ -15,6 +15,11 @@ public class Categoria {
 	private Map<String, Categoria> cSubC, cSupC; //cSubC conté les seves subcategories, cSupC conté les seves supercategories
 	
 	
+	/**
+	 * Crea una Categoria amb el nom especificat sense cap relació.
+	 * 
+	 * @param nom nom que posar a la categoria
+	 */
 	public Categoria(String nom) {
 		this.nom = nom;
 		cP = new TreeMap<String, Pagina>();
@@ -23,6 +28,9 @@ public class Categoria {
 		cSupC = new TreeMap<String, Categoria>();
 	}
 	
+	/**
+	 * Crea una Categoria amb nom "NoIndicat" sense cap relació.
+	 */
 	public Categoria() {
 		nom = "NoIndicat";
 		cP = new TreeMap<String, Pagina>();
@@ -32,24 +40,25 @@ public class Categoria {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna el nom
+	 * @return el <code>nom</code> de la categoria
 	 */
 	public String getNom() {
 		return nom;
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: this.nom = nom
+	 * 
+	 * @param nom nom que posar a la categoria
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna 0 si no existeix ni cP ni pC, 1 si és pC i 2 si es cP
+	 * Retorna 1 si la pàgina l'apunta, 2 si apunta a la pàgina, 0 si no té relació.
+	 * 
+	 * @param nomPagina nom de la pàgina amb la qual busca la relació
+	 * @return 0 si no existeix ni <code>cP</code> ni <code>pC</code>, 1 si és <code>pC</code> i 2 si es <code>cP</code>
 	 */
 	public Integer existsCP(String nomPagina) {
 		if(pC.containsKey(nomPagina)) return 1;
@@ -58,8 +67,10 @@ public class Categoria {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna 0 si no hi ha ni cSupC ni cSubC, 1 si és cSupC i 2 si és cSubC
+	 * Retorna 1 si la categoria és supercategoria, 2 si és subcategoria, 0 si no té relació.
+	 * 
+	 * @param nomCategoria nom de la categoria amb la qual busca la relació
+	 * @return 0 si no hi ha ni <code>cSupC</code> ni <code>cSubC</code>, 1 si és <code>cSupC</code> i 2 si és <code>cSubC</code>
 	 */
 	public Integer existsCC(String nomCategoria) {
 		if(cSupC.containsKey(nomCategoria)) return 1;
@@ -68,32 +79,32 @@ public class Categoria {
 	}
 	
 	/**
-	 * Pre: pagina no pertany a cP
-	 * Post: pagina pertany a cP
+	 * 
+	 * @param pagina la pàgina que no pertany a <code>cP</code> i serà inserida
 	 */
 	public void addCP(Pagina pagina) {
 		cP.put(pagina.getNom(), pagina);
 	}
 	
 	/**
-	 * Pre: pagina no pertany a pC
-	 * Post: pagina pertany a pC
+	 * 
+	 * @param pagina la pàgina que no pertany a <code>pC</code> i serà inserida
 	 */
 	public void addPC(Pagina pagina) {
 		pC.put(pagina.getNom(), pagina);
 	}
 	
 	/**
-	 * Pre: categoria no pertany a cSupC
-	 * Post: categoria pertany a cSupC
+	 * 
+	 * @param categoria la categoria que no pertany a <code>cSupC</code> i serà inserida
 	 */
 	public void addCsupC(Categoria categoria) {
 		cSupC.put(categoria.nom, categoria);
 	}
 	
 	/**
-	 * Pre: categoria no pertany a cSubC
-	 * Post: categoria pertany a cSubC
+	 * 
+	 * @param categoria la categoria que no pertany a <code>cSubC</code> i serà inserida
 	 */
 	public void addCsubC(Categoria categoria) {
 		cSubC.put(categoria.nom, categoria);

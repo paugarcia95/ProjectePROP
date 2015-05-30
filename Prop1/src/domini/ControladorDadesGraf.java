@@ -36,7 +36,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les pàgines a les que apunta, altrament retorna null
+	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les pàgines a les que apunta, altrament retorna <code>null</code>
 	 */
 	public ArrayList<String> getCatCP(String nom) {
 		if (gd.existsCategoria(nom)) {
@@ -52,7 +52,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les pàgines que li apunten, altrament retorna null
+	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les pàgines que li apunten, altrament retorna <code>null</code>
 	 */
 	public ArrayList<String> getCatPC(String nom) {
 		if (gd.existsCategoria(nom)) {
@@ -68,7 +68,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les seves super categories, altrament retorna null
+	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les seves super categories, altrament retorna <code>null</code>
 	 */
 	public ArrayList<String> getCsupC(String nom) {
 		if (gd.existsCategoria(nom)) {
@@ -84,7 +84,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les seves sub categories, altrament retorna null
+	 * Post: Si nom és el nom d'una Categoria a GrafDades retorna les seves sub categories, altrament retorna <code>null</code>
 	 */
 	public ArrayList<String> getCsubC(String nom) {
 		if (gd.existsCategoria(nom)) {
@@ -116,7 +116,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si nom és el nom d'una Pàgina a GrafDades retorna les categories que li apunten, altrament retorna null
+	 * Post: Si nom és el nom d'una Pàgina a GrafDades retorna les categories que li apunten, altrament retorna <code>null</code>
 	 */
 	public ArrayList<String> getPagCP(String nom) {
 		if (gd.existsPagina(nom)) {
@@ -132,7 +132,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si nom és el nom d'una Pàgina a GrafDades retorna les categories a les que apunta, altrament retorna null
+	 * Post: Si nom és el nom d'una Pàgina a GrafDades retorna les categories a les que apunta, altrament retorna <code>null</code>
 	 */
 	public ArrayList<String> getPagPC(String nom) {
 		if (gd.existsPagina(nom)) {
@@ -149,7 +149,7 @@ public class ControladorDadesGraf {
 	/** TODO
 	 * Pre:
 	 * Post: Carrega en el graf les dades del fitxer per defecte
-	 * @return true si s'ha carregat tot correctament, false si hi ha hagut algun error.
+	 * @return <code>true</code> si s'ha carregat tot correctament, <code>false</code> si hi ha hagut algun error.
 	 */
 	/*public Boolean iniciCarregarDades() {
 		aux.carregarGrafDades(gd);
@@ -188,7 +188,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia cap Categoria amb nom == nom es crea i retorna true, altrament retorna false
+	 * Post: Si no existia cap Categoria amb nom == nom es crea i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean addCateg(String nom) {
 		Categoria cat = new Categoria(nom);
@@ -197,7 +197,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: La Categoria amb nom == nomCat apunta a les pàgines a cPs i retorna true, retorna false altrament
+	 * Post: La Categoria amb nom == nomCat apunta a les pàgines a cPs i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean addCatCP(String nomCat, ArrayList<String> cPs ) {
 		boolean retorn = true;
@@ -207,7 +207,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: La Categoria amb nom == nomCat és apuntada per les pàgines a pCs i retorna true, retorna false altrament
+	 * Post: La Categoria amb nom == nomCat és apuntada per les pàgines a pCs i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean addCatPC(String nomCat, ArrayList<String> pCs) {
 		boolean retorn = true;
@@ -217,7 +217,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: La Categoria amb nom == nomCat és subcategoria de les categories a sup i retorna true, retorna false altrament
+	 * Post: La Categoria amb nom == nomCat és subcategoria de les categories a sup i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean addCsupC(String nomCat, ArrayList<String> sup) {
 		boolean retorn = true;
@@ -227,7 +227,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: La Categoria amb nom == nomCat és supercategoria de les categories a sub i retorna true, retorna false altrament
+	 * Post: La Categoria amb nom == nomCat és supercategoria de les categories a sub i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean addCsubC(String nomCat, ArrayList<String> sub) {
 		boolean retorn = true;
@@ -237,7 +237,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si existia una Categoria amb nom == nomAntic i cap Categoria amb nom == nomNou ara nom = nomNou i retorna true, altrament retorna false
+	 * Post: Si existia una Categoria amb nom == nomAntic i cap Categoria amb nom == nomNou ara nom = nomNou i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean setNomCateg(String nomAntic, String nomNou) {
 		return gd.setNomCategoria(nomAntic, nomNou);
@@ -245,7 +245,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Existeix una Categoria a GrafDades amb nom == nomCat
-	 * Post: La Categoria amb nom == nomCat només apunta a les pàgines a cPs i retorna true, retorna false altrament
+	 * Post: La Categoria amb nom == nomCat només apunta a les pàgines a cPs i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean setCatCP(String nomCat, ArrayList<String> cPs) {
 		Categoria cat = gd.getCategoria(nomCat);
@@ -261,7 +261,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Existeix una Categoria a GrafDades amb nom == nomCat
-	 * Post: La Categoria amb nom == nomCat només és apuntada per les pàgines a pCs i retorna true, retorna false altrament
+	 * Post: La Categoria amb nom == nomCat només és apuntada per les pàgines a pCs i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {
 		Categoria cat = gd.getCategoria(nomCat);
@@ -277,7 +277,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Existeix una Categoria a GrafDades amb nom == nomCat
-	 * Post: La Categoria amb nom == nomCat només és subcategoria de les categories a sup i retorna true, retorna false altrament
+	 * Post: La Categoria amb nom == nomCat només és subcategoria de les categories a sup i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean setCsupC(String nomCat, ArrayList<String> sup) {
 		Categoria cat = gd.getCategoria(nomCat);
@@ -293,7 +293,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Existeix una Categoria a GrafDades amb nom == nomCat
-	 * Post: La Categoria amb nom == nomCat només és supercategoria de les categories a sub i retorna true, retorna false altrament
+	 * Post: La Categoria amb nom == nomCat només és supercategoria de les categories a sub i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean setCsubC(String nomCat, ArrayList<String> sub) {
 		Categoria cat = gd.getCategoria(nomCat);
@@ -309,7 +309,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia cap Pàgina amb nom == nom es crea i retorna true, altrament retorna false
+	 * Post: Si no existia cap Pàgina amb nom == nom es crea i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean addPagina(String nom) {
 		Pagina pag = new Pagina(nom);
@@ -318,7 +318,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: La Pàgina amb nom == nomPag és apuntada per les categories a cPs i retorna true, retorna false altrament
+	 * Post: La Pàgina amb nom == nomPag és apuntada per les categories a cPs i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean addPagCP(String nomPag, ArrayList<String> cPs) {
 		boolean retorn = true;
@@ -328,7 +328,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: La Pàgina amb nom == nomPag apunta a les categories a pCs i retorna true, retorna false altrament
+	 * Post: La Pàgina amb nom == nomPag apunta a les categories a pCs i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean addPagPC(String nomPag, ArrayList<String> pCs) {
 		boolean retorn = true;
@@ -338,7 +338,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si existia una Pàgina amb nom == nomAntic i cap Pàgina amb nom == nomNou ara nom = nomNou i retorna true, altrament retorna false
+	 * Post: Si existia una Pàgina amb nom == nomAntic i cap Pàgina amb nom == nomNou ara nom = nomNou i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean setNomPagina(String nomAntic, String nomNou) {
 		return gd.setNomPagina(nomAntic, nomNou);
@@ -346,7 +346,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Existeix una Pàgina a GrafDades amb nom == nomPag
-	 * Post: La Pàgina amb nom == nomPag només és apuntada per les categories a cPs i retorna true, retorna false altrament
+	 * Post: La Pàgina amb nom == nomPag només és apuntada per les categories a cPs i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean setPagCP(String nomPag, ArrayList<String> cPs) {
 		Pagina pag = gd.getPagina(nomPag);
@@ -362,7 +362,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Existeix una Pàgina a GrafDades amb nom == nomPag
-	 * Post: La Pàgina amb nom == nomPag només apunta a les categories a pCs i retorna true, retorna false altrament
+	 * Post: La Pàgina amb nom == nomPag només apunta a les categories a pCs i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean setPagPC(String nomPag, ArrayList<String> pCs) {
 		Pagina pag = gd.getPagina(nomPag);
@@ -378,7 +378,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si existia una Pàgina amb nom == nom ja no ni existeix cap relació amb aquesta Pàgina i retorna true, altrament retorna false
+	 * Post: Si existia una Pàgina amb nom == nom ja no ni existeix cap relació amb aquesta Pàgina i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean removePag(String nom) {
 		return gd.removePagina(nom);
@@ -386,7 +386,7 @@ public class ControladorDadesGraf {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si existia una Categoria amb nom == nom ja no ni existeix cap relació amb aquesta Categoria i retorna true, altrament retorna false
+	 * Post: Si existia una Categoria amb nom == nom ja no ni existeix cap relació amb aquesta Categoria i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean removeCateg(String nom) {
 		return gd.removeCategoria(nom);

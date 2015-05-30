@@ -34,7 +34,7 @@ public class Usuari {
 	
 	/**
 	 * Pre: Cert
-	 * Post: admin = true
+	 * Post: admin = <code>true</code>
 	 */
 	public void ferAdmin() {
 		admin = true;				
@@ -99,7 +99,7 @@ public class Usuari {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si s és el nom d'una cerca de l'usuari retorna aquesta cerca, altrament retorna null
+	 * Post: Si s és el nom d'una cerca de l'usuari retorna aquesta cerca, altrament retorna <code>null</code>
 	 */
 	public CercaComunitats getCerca(String s) {
 		for (int i = 0; i < cerquesFetes.size(); i++) {
@@ -148,7 +148,7 @@ public class Usuari {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si c pertanyia a cerquesFetes ja no és a cerquesFetes, es decrementa nCerques i retorna true, altrament retorna false
+	 * Post: Si c pertanyia a cerquesFetes ja no és a cerquesFetes, es decrementa nCerques i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean removeCerca(CercaComunitats c) {
 		if (c != null) {
@@ -159,7 +159,7 @@ public class Usuari {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si s era el nom d'una cerca a cerquesFetes, aquesta cerca no és a cerquesFetes, es decrementa nCerques i retorna cert, altrament retorna false
+	 * Post: Si s era el nom d'una cerca a cerquesFetes, aquesta cerca no és a cerquesFetes, es decrementa nCerques i retorna cert, altrament retorna <code>false</code>
 	 */
 	public Boolean removeCerca(String s) {
 		if (s != null) {
@@ -174,7 +174,7 @@ public class Usuari {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si i era l'índex d'una cercaFeta cerquesFetes ja no conté la CercaComunitats i retorna true, retorna false altrament
+	 * Post: Si i era l'índex d'una cercaFeta cerquesFetes ja no conté la CercaComunitats i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean removeCerca(Integer i) {
 		if (i >= 0 && i < cerquesFetes.size()) {

@@ -130,7 +130,7 @@ public class CercaComunitats {
 	
 	/**
 	 * Pre: Cert
-	 * Post: categoria pertanty a la Comunitat amb índex comunitat i retorna true, retorna false altrament
+	 * Post: categoria pertanty a la Comunitat amb índex comunitat i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean addCategoriaComunitat(Integer comunitat, String categoria) {
 		if (comunitat >= 0 && comunitat < comunitats.size()) {
@@ -141,7 +141,7 @@ public class CercaComunitats {
 	
 	/**
 	 * Pre: Cert
-	 * Post: categoria no pertany a la Comunitat amb índex comunitat i retorna true, retorna false altrament
+	 * Post: categoria no pertany a la Comunitat amb índex comunitat i retorna <code>true</code>, retorna <code>false</code> altrament
 	 */
 	public Boolean removeCategoriaComunitat(Integer comunitat, String categoria) {
 		if (comunitat >= 0 && comunitat < comunitats.size()) {

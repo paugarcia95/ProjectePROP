@@ -55,7 +55,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si cat no existia a categories ara és l'assignació de la key cat.Nom i retorna true, altrament retorna false
+	 * Post: Si cat no existia a categories ara és l'assignació de la key cat.Nom i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean addCategoria(Categoria cat) {
 		if (categories.containsKey(cat.getNom())) return false;
@@ -65,7 +65,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si pag no existia a pagines ara és l'assignació de la key pag.Nom i retorna true, altrament retorna false
+	 * Post: Si pag no existia a pagines ara és l'assignació de la key pag.Nom i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean addPagina(Pagina pag) {
 		if (pagines.containsKey(pag.getNom())) return false;
@@ -75,7 +75,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */	
 	public Boolean addCC(Categoria cat1, Categoria cat2) {
 		if (cat1 == cat2 || cat1.getNom() == cat2.getNom()) return false;
@@ -106,7 +106,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */	
 	public Boolean addCC(String categoria1, String categoria2) {
 		if (categoria1.equals(categoria2)) return false;
@@ -146,7 +146,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre pag i cat ara pag apunta a cat i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre pag i cat ara pag apunta a cat i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean addPC(Pagina pag, Categoria cat) {
 		boolean conte1, conte2;
@@ -176,7 +176,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre pag i cat ara pag apunta a cat i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre pag i cat ara pag apunta a cat i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean addPC(String pagina, String categoria) {
 		Categoria cat;
@@ -216,7 +216,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre cat i pag ara cat apunta a pag i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre cat i pag ara cat apunta a pag i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean addCP(Categoria cat, Pagina pag) {
 		boolean conte1, conte2;
@@ -246,7 +246,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre cat i pag ara cat apunta a pag i retorna true, altrament retorna false
+	 * Post: Si no existia ja la relació entre cat i pag ara cat apunta a pag i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean addCP(String categoria, String pagina) {
 		Pagina pag;
@@ -286,7 +286,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Retorna true si cat1 era super de cat2 i ja no, false altrament
+	 * Post: Retorna <code>true</code> si cat1 era super de cat2 i ja no, <code>false</code> altrament
 	 */
 	public Boolean removeCC(Categoria cat1, Categoria cat2) {
 		if (categories.containsKey(cat1.getNom()) && categories.containsKey(cat2.getNom())) {
@@ -301,7 +301,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Retorna true si pag apuntava a cat i ja no, false altrament
+	 * Post: Retorna <code>true</code> si pag apuntava a cat i ja no, <code>false</code> altrament
 	 */
 	public Boolean removePC(Pagina pag, Categoria cat) {
 		if (pagines.containsKey(pag.getNom()) && categories.containsKey(cat.getNom())) {
@@ -316,7 +316,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Retorna true si cat apuntava a pag i ja no, false altrament
+	 * Post: Retorna <code>true</code> si cat apuntava a pag i ja no, <code>false</code> altrament
 	 */
 	public Boolean removeCP(Categoria cat, Pagina pag) {
 		if (categories.containsKey(cat.getNom()) && pagines.containsKey(pag.getNom())) {
@@ -331,7 +331,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si nom era una key de categories amb una assignació nom ja no és key de categories ni existeix cap relació amb aquesta Categoria i retorna true, altrament retorna false
+	 * Post: Si nom era una key de categories amb una assignació nom ja no és key de categories ni existeix cap relació amb aquesta Categoria i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean removeCategoria(String nom) {
 		if (categories.containsKey(nom)) {
@@ -351,7 +351,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si nom era una key de pagines amb una assignació ja no és key de pagines ni existeix cap relació amb aquesta Pàgina i retorna true, altrament retorna false
+	 * Post: Si nom era una key de pagines amb una assignació ja no és key de pagines ni existeix cap relació amb aquesta Pàgina i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean removePagina(String nom) {
 		if (pagines.containsKey(nom)) {
@@ -383,7 +383,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si existia una Categoria amb nom == nomAntic i cap Categoria amb nom == nomNou ara nom = nomNou i retorna true, altrament retorna false
+	 * Post: Si existia una Categoria amb nom == nomAntic i cap Categoria amb nom == nomNou ara nom = nomNou i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean setNomCategoria(String nomAntic, String nomNou) {
 		if (nomAntic.equals(nomNou)) return false;
@@ -422,7 +422,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si existia una Pàgina amb nom == nomAntic i cap Pàgina amb nom == nomNou ara nom = nomNou i retorna true, altrament retorna false
+	 * Post: Si existia una Pàgina amb nom == nomAntic i cap Pàgina amb nom == nomNou ara nom = nomNou i retorna <code>true</code>, altrament retorna <code>false</code>
 	 */
 	public Boolean setNomPagina(String nomAntic, String nomNou) {
 		if (pagines.containsKey(nomAntic) && !pagines.containsKey(nomNou)) {
@@ -448,7 +448,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: TODO
+	 * Post: 
 	 *	
 	public Boolean setCatCP(String nomCat, ArrayList<String> cPs) {
 		Categoria aux;
@@ -473,7 +473,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: TODO
+	 * Post: 
 	 *	
 	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {
 		Categoria aux;
@@ -498,7 +498,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: TODO
+	 * Post: 
 	 *
 	public Boolean setCsupC(String nomCat, ArrayList<String> sup) {
 		Categoria aux;
@@ -523,7 +523,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: TODO
+	 * Post: 
 	 *
 	public Boolean setCsubC(String nomCat, ArrayList<String> sub) {
 		Categoria aux;
@@ -548,7 +548,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: TODO
+	 * Post: 
 	 *
 	public Boolean setPagCP(String nomPag, ArrayList<String> cPs) {
 		Pagina aux;
@@ -573,7 +573,7 @@ public class GrafDades {
 	
 	/**
 	 * Pre: Cert
-	 * Post: TODO
+	 * Post: 
 	 *
 	public Boolean setPagPC(String nomPag, ArrayList<String> pCs) {
 		Pagina aux;

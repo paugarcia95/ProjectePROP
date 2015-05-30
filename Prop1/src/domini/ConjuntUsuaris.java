@@ -53,7 +53,7 @@ public class ConjuntUsuaris {
 	
 	/**
 	 * Pre: Cert
-	 * Post: Si hi havia un Usuari amb key username ja no existeix a users i retorna true, retorna flase altrament
+	 * Post: Si hi havia un Usuari amb key username ja no existeix a users i retorna <code>true</code>, retorna flase altrament
 	 */
 	public Boolean removeUser(String username) {
 		if (users.remove(username) != null) return true;
