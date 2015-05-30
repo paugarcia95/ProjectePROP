@@ -41,9 +41,9 @@ public class MacroControlador {
 	public void setUserActual(String user) {
 		useractual = user;
 	}
-	public void carregaDades() {
-            aux.carregarGrafDades(gd);
-            aux.carregarUsuaris(conj.getMap());
+	public Boolean carregaDades() {
+            if(!aux.carregarGrafDades(gd))return false;
+            return aux.carregarUsuaris(conj.getMap());
             
 	}
         
@@ -56,9 +56,10 @@ public class MacroControlador {
 	}
         
         
-        public void guardaDades() {
-             aux.guardarGrafDades(gd);
-             aux.guardarUsuaris(conj.getMap());
+        public Boolean guardaDades() {
+             if(!aux.guardarGrafDades(gd)) return false;
+             return aux.guardarUsuaris(conj.getMap());
+             
         }
 	
 	public void eliminarDadesGraf(){
@@ -69,6 +70,10 @@ public class MacroControlador {
 
 // CONSULTORES///////////////////////////////////////////////////////////////////////////////
 
+        public String getMissatgeError() {
+            return aux.getError();
+        }
+        
 	public ControladorUsers getContUser(){
 		return cu;
 	}

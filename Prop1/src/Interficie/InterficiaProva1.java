@@ -277,7 +277,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         AP_Client.add(Panell, "Categories i pagines");
         Panell = new CreaComunitat(this,AP_Client);
         AP_Client.add(Panell, "Fer Cerca");
-        macro.carregaDades();
+        if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
         //macro.carregaUsers();
         provisional();
         
@@ -561,8 +561,8 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         login();
     }//GEN-LAST:event_LoginActionPerformed
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
-        macro.guardaDades();
-        System.exit(0);        // TODO add your handling code here:
+        if(!macro.guardaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
+        else System.exit(0);
     }//GEN-LAST:event_ExitActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
