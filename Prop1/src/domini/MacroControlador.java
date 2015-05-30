@@ -42,9 +42,9 @@ public class MacroControlador {
 		useractual = user;
 	}
 	public Boolean carregaDades() {
-            if(!aux.carregarGrafDades(gd))return false;
-            return aux.carregarUsuaris(conj.getMap());
-            
+            if(aux.carregarGrafDades(gd))return false;
+            if(aux.carregarUsuaris(conj.getMap()))return false;
+            return true;
 	}
         
 	public void carregaDadesFitxer(File fitxer) {
@@ -57,9 +57,9 @@ public class MacroControlador {
         
         
         public Boolean guardaDades() {
-             if(!aux.guardarGrafDades(gd)) return false;
-             return aux.guardarUsuaris(conj.getMap());
-             
+             if(aux.guardarGrafDades(gd)) return false;
+             if(aux.guardarUsuaris(conj.getMap()))return false;
+             return true;
         }
 	
 	public void eliminarDadesGraf(){
