@@ -17,12 +17,20 @@ public class ControladorRafa {
     public void ini(){
                 
                 A_Afegeix = new Afegeix();
-                AP_Afegeix.add(A_Afegeix,"Burro");
+                AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
+                A_Afegeix = new AfegirCat();
+                AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
+                A_Afegeix = new AfegirPag();
+                AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
+                A_Afegeix = new AfegirEnll();
+                AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
+                A_Afegeix = new EliminarDades();
+                AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
     }
     
-    public void canviaAASFADFG(){
+    /*public void canviaAASFADFG(){
         AP_Afegeix.setSelectedIndex(0);
-    }
+    }*/
     
     
     

@@ -9,7 +9,7 @@ import static Interficie.InterficiaProva1.capsalera;
 import static Interficie.InterficiaProva1.comp;
 import static Interficie.InterficiaProva1.cercaactual;
 import static Interficie.InterficiaProva1.auxguard;
-import static Interficie.InterficiaProva1.interrumput
+import static Interficie.InterficiaProva1.interrumput;
 import static Interficie.InterficiaProva1.macro;
 import static Interficie.InterficiaProva1.hilo;
 import java.awt.Toolkit;
