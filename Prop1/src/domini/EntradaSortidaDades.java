@@ -22,6 +22,8 @@ import java.util.StringTokenizer;
 public class EntradaSortidaDades {
 
 	private File rutaPerDefecte;
+	private String codiError = "Error?";
+	private Boolean errorEnExecucio = false;
 	
 	private final String DIRECTORI_USERS 		= "\\userData\\";
 	private final String DIRECTORI_GRAF 		= "\\graphData\\";
@@ -55,6 +57,10 @@ public class EntradaSortidaDades {
 		return rutaPerDefecte;
 	}
 
+	public String getError() {
+		return codiError;
+	}
+
 	/**
 	 * Carrega les dades d'un fitxer de text a un graf. El fitxer te el format
 	 * predeterminat d'una Wikipedia
@@ -70,7 +76,8 @@ public class EntradaSortidaDades {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public void llegirGrafDades(GrafDades G, File ruta) {
+	public Boolean llegirGrafDades(GrafDades G, File ruta) {
+		errorEnExecucio = false;
 		BufferedReader b = null;
 		String s;
 
@@ -96,16 +103,13 @@ public class EntradaSortidaDades {
 					else if (link.equals("PC"))
 						G.addPC(word1, word2);
 					else {
-						error(4);
-						return;
+						return error(4);
 					}
 				}
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println(e);
 			error(3);
 		} catch (IOException e) {
-			System.out.println(e);
 			error(1);
 		} finally {
 			try {
@@ -113,10 +117,10 @@ public class EntradaSortidaDades {
 					b.close();
 				}
 			} catch (IOException e) {
-				System.out.println(e);
 				error(7);
 			}
 		}
+		return errorEnExecucio;
 	}
 
 	/**
@@ -128,7 +132,8 @@ public class EntradaSortidaDades {
 	 *            Indica la ruta de directoris i el fitxer on es vol guardar el
 	 *            graf
 	 */
-	public void escriureGrafDadesEnFitxer(GrafDades G, String ruta) {
+	public Boolean escriureGrafDadesEnFitxer(GrafDades G, String ruta) {
+		errorEnExecucio = false;
 		FileWriter fichEscr = null;
 		PrintWriter docE = null;
 
@@ -167,7 +172,6 @@ public class EntradaSortidaDades {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e);
 			error(3);
 		} finally {
 			try {
@@ -175,10 +179,10 @@ public class EntradaSortidaDades {
 				if (null != docE)
 					docE.close();
 			} catch (Exception e2) {
-				System.out.println(e2);
 				error(7);
 			}
 		}
+		return errorEnExecucio;
 	}
 
 	/**
@@ -191,8 +195,10 @@ public class EntradaSortidaDades {
 	 *            dades del graf.
 	 * @param rutaImatgeTXT
 	 *            La ruta de l'arxiu de text de dest�.
+	 * @return
 	 */
-	public void traduirGrafDadesAImatge(String rutaGraf, String rutaImatgeTXT) {
+	public Boolean traduirGrafDadesAImatge(String rutaGraf, String rutaImatgeTXT) {
+		errorEnExecucio = false;
 		String s;
 
 		FileWriter fichEscr = null;
@@ -234,10 +240,7 @@ public class EntradaSortidaDades {
 					else if (link.equals("CsupC")) {
 						docE.println(word2 + " -> " + word1);
 					} else {
-						error(4);
-						docE.close();
-						docL.close();
-						return;
+						return error(4);
 					}
 
 					if (type1.equals("page"))
@@ -249,7 +252,6 @@ public class EntradaSortidaDades {
 			docE.println("}");
 
 		} catch (Exception e) {
-			System.out.println(e);
 			error(3);
 		} finally {
 			try {
@@ -257,17 +259,16 @@ public class EntradaSortidaDades {
 				if (null != docE)
 					docE.close();
 			} catch (Exception e2) {
-				System.out.println(e2);
 				error(7);
 			}
 			try {
 				if (null != docL)
 					docL.close();
 			} catch (Exception e2) {
-				System.out.println(e2);
 				error(7);
 			}
 		}
+		return errorEnExecucio;
 	}
 
 	/**
@@ -316,7 +317,8 @@ public class EntradaSortidaDades {
 		return true;
 	}
 
-	public void carregarGrafDades(GrafDades G) {
+	public Boolean carregarGrafDades(GrafDades G) {
+		errorEnExecucio = false;
 		BufferedReader b = null;
 		try {
 			b = new BufferedReader(new FileReader(rutaPerDefecte + ARXIU_DADES_GRAF));
@@ -328,32 +330,22 @@ public class EntradaSortidaDades {
 			if ((s = b.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(s);
 				if (!st.hasMoreTokens() || !st.nextToken().equals("|CATEGORIES|")) {
-					error(5);
-					return;
+					return error(5);
 				}
 				if (st.hasMoreTokens()) {
-					try {
-						nCats = Integer.valueOf(st.nextToken());
-					} catch (NumberFormatException e) {
-						error(4);
-						return;
-					}
+					nCats = Integer.valueOf(st.nextToken());
 				} else {
-					error(4);
-					return;
+					return error(4);
 				}
-				
 			} else {
-				error(5);
-				return;
+				return error(5);
 			}
 			
 			while (iter < nCats && (s = b.readLine()) != null) {
 				// linia a linia
 				String[] enllacos = s.split("\\|");
 				if (enllacos.length < 1) {
-					error(4);
-					return;
+					return error(4);
 				} else if (enllacos.length == 1) {
 					if (!G.existsCategoria(enllacos[0]))
 						G.addCategoria(new Categoria(enllacos[0]));
@@ -387,8 +379,7 @@ public class EntradaSortidaDades {
 							}
 						}
 					} else if (i != 0) {
-						error(4);
-						return;
+						return error(4);
 					}
 				}
 				++iter;
@@ -398,6 +389,7 @@ public class EntradaSortidaDades {
 				StringTokenizer st = new StringTokenizer(s);
 				if (!st.hasMoreTokens() || !st.nextToken().equals("|PAGINES|")) {
 					error(6);
+
 					// Intenta recuperar l'error
 					while (((s = b.readLine()) != null)) {
 						if ((st = new StringTokenizer(s)).hasMoreTokens() 
@@ -407,27 +399,20 @@ public class EntradaSortidaDades {
 					}
 				}
 				if (st.hasMoreTokens()) {
-					try {
-						nPags = Integer.valueOf(st.nextToken());
-					} catch (NumberFormatException e) {
-						error(4);
-						return;
-					}
+					nPags = Integer.valueOf(st.nextToken());
+
 				} else {
-					error(4);
-					return;
+					return error(4);
 				}
 
 			} else {
-				error(5);
-				return;
+				return error(5);
 			}
 
 			iter = 0;
 			while (iter < nPags && (s = b.readLine()) != null) {
 				if (s.contains(" ")) {
-					error(4);
-					return;
+					return error(4);
 				}
 				if (!G.existsPagina(s))
 					G.addPagina(new Pagina(s));
@@ -442,21 +427,23 @@ public class EntradaSortidaDades {
 			// No fa res perque no es un error no trobar l'arxiu, ja que pot ser
 			// que sigui la primera vegada que inici el programa
 		} catch (IOException e) {
-			System.out.println(e);
 			error(1);
+		} catch (NumberFormatException e) {
+			error(8);
 		} finally {
 			try {
 				if (b != null) {
 					b.close();
 				}
 			} catch (IOException e) {
-				System.out.println(e);
 				error(7);
 			}
 		}
+		return errorEnExecucio;
 	}
 
-	public void guardarGrafDades(GrafDades G) {
+	public Boolean guardarGrafDades(GrafDades G) {
+		errorEnExecucio = false;
 		FileWriter fichEscr = null;
 		PrintWriter docE = null;
 
@@ -528,7 +515,6 @@ public class EntradaSortidaDades {
 			docE.print("**END**");
 
 		} catch (Exception e) {
-			System.out.println(e);
 			error(2);
 		} finally {
 			try {
@@ -536,13 +522,14 @@ public class EntradaSortidaDades {
 				if (null != docE)
 					docE.close();
 			} catch (Exception e2) {
-				System.out.println(e2);
 				error(7);
 			}
 		}
+		return errorEnExecucio;
 	}
 
-	public void carregarUsuaris(Map<String, Usuari> MapUsuaris) {
+	public Boolean carregarUsuaris(Map<String, Usuari> MapUsuaris) {
+		errorEnExecucio = false;
 		BufferedReader b = null;
 
 		try {
@@ -551,68 +538,66 @@ public class EntradaSortidaDades {
 
 			int iter = 0;
 			final int nUsuaris;
-                        System.out.println("Estic aqui 1");
+
 			if ((s = b.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(s);
 				if (st.hasMoreTokens()) {
-					try {
-						nUsuaris = Integer.valueOf(st.nextToken());
-					} catch (NumberFormatException e) {
-						error(4);
-						return;
-					}
+					nUsuaris = Integer.valueOf(st.nextToken());
+
 				} else {
-					error(4);
-					return;
+					return error(8);
 				}
 			} else {
-				error(5);
-				return;
+				return error(5);
 			}
 
 			while (iter < nUsuaris && (s = b.readLine()) != null) {
 				Usuari user;
-                                
 				String[] userData = s.split(" ");
-                        System.out.println(userData[0]);
+
+				if (userData.length != 3) {
+					return error(8);
+				}
+
 				user = new Usuari(userData[0].replace('+', ' '), userData[1].replace('+', ' '),
 						userData[2].equals("true"));
-                                System.out.println(user.getUsername());
+
 				ArrayList<CercaComunitats> cerques = carregaDadesUsuari(user);
 				if (cerques != null) {
 					for (int i = 0; i < cerques.size(); ++i) {
 						if (cerques.get(i) != null)
 							user.addCerca(cerques.get(i));
 					}
-				} else
-					break;
-                                MapUsuaris.put(user.getUsername(), user);
+				} else {
+					error(8);
+				}
+				MapUsuaris.put(user.getUsername(), user);
 				++iter;
 			}
 
 			if (!b.readLine().equals("**END**") || iter < nUsuaris) {
 				error(6);
 			}
-                        
-                        
 
 		} catch (FileNotFoundException e) {
 			// No fa res perque no es un error no trobar l'arxiu, ja que pot ser
 			// que sigui la primera vegada que inici el programa
 		} catch (IOException e) {
-			System.out.println(e);
 			error(1);
+		} catch (NumberFormatException e) {
+			error(8);
 		} finally {
 			try {
 				if (b != null) {
 					b.close();
 				}
 			} catch (IOException e) {
-				System.out.println(e);
 				error(7);
 			}
 		}
+		return errorEnExecucio;
 	}
+
 
 	private ArrayList<CercaComunitats> carregaDadesUsuari(Usuari user) {
 		BufferedReader b = null;
@@ -632,37 +617,29 @@ public class EntradaSortidaDades {
 				StringTokenizer st = new StringTokenizer(s);
 				if (st.hasMoreTokens()) {
 					nCerques = Integer.valueOf(st.nextToken());
-				} else {
-					error(4);
-					System.out.println("1");
-					error = true;
-				}
-			} else {
-				error(5);
-				System.out.println("2");
-				error = true;
-			}
+				} else
+					return errorAuxiliar(8);
+
+			} else
+				return errorAuxiliar(5);
 
 			while (iter < nCerques && (s = b.readLine()) != null && !error) {
 
 				String[] info = ((String) s).split(" ");
-				if (info.length != 10) {
-					error(8);
-					error = true;
-					break;
-				}
+
+				if (info.length != 11)
+					return errorAuxiliar(8);
 
 				Date creacio = carregarData(info[2]);
 				Date modificacio = carregarData(info[3]);
 				String[] aux = info[4].split("\\+");
 				int[] criteris = new int[aux.length];
-				int valor, SIZEevitaCat, SIZEevitaPag, SIZEsubconj;
+				int SIZEevitaCat, SIZEevitaPag, SIZEsubconj;
 
 				for (int i = 0; i < aux.length; ++i) {
 					criteris[i] = Integer.valueOf(aux[i]);
 				}
 				
-				valor = Integer.valueOf(info[9]);
 				SIZEevitaCat = Integer.valueOf(info[5]);
 				SIZEevitaPag = Integer.valueOf(info[6]);
 				SIZEsubconj = Integer.valueOf(info[7]);
@@ -671,23 +648,22 @@ public class EntradaSortidaDades {
 				// alg, dada, rel, semb, tipus;
 				// 1 2 3 4 5
 
-				if (creacio != null && modificacio != null && !error && criteris.length == 5) {
+				if (creacio != null && modificacio != null && !error && criteris.length == 8) {
 					int iter2 = 0;
 					ArrayList<String> subconj, evitaCat, evitaPag;
 					subconj = new ArrayList<String>();
 					evitaCat = new ArrayList<String>();
 					evitaPag = new ArrayList<String>();
+					ArrayList<Comunitat> comunitats = new ArrayList<Comunitat>();
 
 					// Llegeixo el vector evitaCat
 					while (iter2 < SIZEevitaCat && (s = b.readLine()) != null && !error) {
 						evitaCat.add((String) s);
 						++iter2;
 					}
+
 					if (iter2 < SIZEevitaCat || !b.readLine().equals("*")) {
-						error(8);
-						System.out.println("4");
-						error = true;
-						break;
+						return errorAuxiliar(8);
 					}
 
 					// Llegeixo el vector evitaPag
@@ -697,10 +673,7 @@ public class EntradaSortidaDades {
 						++iter2;
 					}
 					if (iter2 < SIZEevitaPag || !b.readLine().equals("*")) {
-						error(8);
-						System.out.println("5");
-						error = true;
-						break;
+						return errorAuxiliar(8);
 					}
 
 					// Llegeixo el vector subconj
@@ -710,10 +683,7 @@ public class EntradaSortidaDades {
 						++iter2;
 					}
 					if (iter2 < SIZEsubconj || !b.readLine().equals("*")) {
-						error(8);
-						System.out.println("6");
-						error = true;
-						break;
+						return errorAuxiliar(8);
 					}
 					
 					//Llegeixo les comunitats
@@ -722,10 +692,7 @@ public class EntradaSortidaDades {
 					while (iter2 < numComunitats && (s = b.readLine()) != null && !error) {
 						String[] auxi = s.split(" ");
 						if (auxi.length != 2) {
-							error(8);
-							System.out.println("7");
-							error = true;
-							break;
+							return errorAuxiliar(8);
 						}
 						int id = Integer.parseInt(auxi[0]);
 						int nCats = Integer.parseInt(auxi[1]);
@@ -736,61 +703,53 @@ public class EntradaSortidaDades {
 							c.addCat(b.readLine());
 							++iter3;
 						}
+						comunitats.add(c);
 						++iter2;
 					}
 					if (iter2 < numComunitats || !b.readLine().equals("*")) {
-						error(8);
-						System.out.println("8");
-						error = true;
-						break;
+						return errorAuxiliar(8);
 					}
 
 					// Amb la informació de tot el fitxer munto la
 					// cercaDeComunitats
-					Criteris cri = new Criteris(new ParaulaValor(info[8], valor), criteris[2], criteris[3],
-							criteris[0], criteris[4], criteris[1], subconj, evitaCat, evitaPag, info[9]);
+					Criteris cri = new Criteris(new ParaulaValor(info[8], Integer.valueOf(info[9])), criteris[0],
+							criteris[1],
+							criteris[2], criteris[3], criteris[4], criteris[5], criteris[6], criteris[7], subconj,
+							evitaCat, evitaPag, info[10]);
 					CercaComunitats cerca = new CercaComunitats(info[0].replace('+', ' '), creacio, cri,
-							user.getUsername(), modificacio, info[1].replace('+', ' '), null);
+							user.getUsername(), modificacio, info[1].replace('+', ' '),
+							comunitats);
+					result.add(cerca);
 				}
 				else {
-					System.out.println("9");
-					error = true;
-					break;
+					return errorAuxiliar(8);
 				}
 				++iter;
 			}
 
 			if (!b.readLine().equals("**END**") || iter < nCerques) {
-				System.out.println("10");
 				error(6);
 			}
-
+		} catch (FileNotFoundException e) {
+			error(3);
+		} catch (IOException e) {
+			error(1);
+		} catch (NumberFormatException e) {
+			error(8);
+		} finally {
 			try {
 				if (b != null) {
 					b.close();
 				}
 			} catch (IOException e) {
-				System.out.println(e);
 				error(7);
 			}
-		} catch (FileNotFoundException e) {
-			System.out.println(e);
-			error(3);
-		} catch (IOException e) {
-			System.out.println(e);
-			error(1);
-		} catch (NumberFormatException e) {
-			error(8);
 		}
-		
-		if (error) {
-			return null;
-		} else
-			return result;
+		return result;
 	}
 
-	public void guardarUsuaris(Map<String, Usuari> MapUsuaris) {
-
+	public Boolean guardarUsuaris(Map<String, Usuari> MapUsuaris) {
+		errorEnExecucio = false;
 		PrintWriter docE = null;
 
 		try {
@@ -824,7 +783,6 @@ public class EntradaSortidaDades {
 			}
 			docE.println("**END**");
 		} catch (Exception e) {
-			System.out.println(e);
 			error(2);
 		} finally {
 			try {
@@ -832,14 +790,13 @@ public class EntradaSortidaDades {
 				if (null != docE)
 					docE.close();
 			} catch (Exception e2) {
-				System.out.println(e2);
 				error(7);
 			}
 		}
+		return errorEnExecucio;
 	}
 
 	private void guardaDadesUsuari(Usuari user) {
-
 		PrintWriter docE = null;
 
 		try {
@@ -855,12 +812,12 @@ public class EntradaSortidaDades {
 
 				// NomCerca
 				if (c.getNom().equals(""))
-					docE.print("|NULL| ");
+					docE.print("NULL ");
 				else
 					docE.print(c.getNom().replace(" ", "+") + " ");
 				// ComentariCerca
 				if (c.getComentari().equals(""))
-					docE.print("|NULL| ");
+					docE.print("NULL ");
 				else
 					docE.print(c.getComentari().replace(" ", "+") + " ");
 
@@ -874,16 +831,23 @@ public class EntradaSortidaDades {
 				// tipuCerca
 				Criteris criteris = c.getCriterisSeleccio();
 				docE.print(
-						criteris.getAlgorisme()		+ "+" + 
-						criteris.getDada()			+ "+" + 
 						criteris.getRelacionsCat() 	+ "+" +
+						criteris.getRelacionsPag()	+ "+" +
+						criteris.getRelacionsSubs() + "+" +
+						criteris.getRelacionsSuper()+ "+" +
 						criteris.getSemblaNom() 	+ "+" + 
-						criteris.getTipuCerca() 	+ " "
+						criteris.getAlgorisme()		+ "+" + 
+						criteris.getTipuCerca() 	+ "+" +
+						criteris.getDada() 			+ " "
 						);
 
 				ArrayList<String> evitaCat = criteris.getEvitaCat();
 				ArrayList<String> evitaPag = criteris.getEvitaPag();
 				ArrayList<String> subconj = criteris.getSubconjCat();
+
+				String pare = "NULL";
+				if (!criteris.getPare().equals(""))
+					pare = criteris.getPare();
 
 				// SIZEevitaCat SIZEevitaPag SIZEsubconj paraula clau
 				docE.println(
@@ -892,7 +856,7 @@ public class EntradaSortidaDades {
 						subconj.size() 							+ " " +
 						criteris.getParaulaClau().getParaula() 	+ " " + 
 						criteris.getParaulaClau().getNum() 		+ " " +
-						criteris.getPare() + " "
+						pare
 						);
 
 				// VECTORevitaCat
@@ -935,7 +899,6 @@ public class EntradaSortidaDades {
 			}
 			docE.println("**END**");
 		} catch (Exception e) {
-			System.out.println(e);
 			error(2);
 		} finally {
 			try {
@@ -943,7 +906,6 @@ public class EntradaSortidaDades {
 				if (null != docE)
 					docE.close();
 			} catch (Exception e2) {
-				System.out.println(e2);
 				error(7);
 			}
 		}
@@ -1000,52 +962,45 @@ public class EntradaSortidaDades {
 	 * @param e
 	 *            Codi de l'error
 	 */
-	private void error(int e) {
+	private Boolean error(int e) {
 		switch (e) {
 			case 1 :
-				System.out.println("Error de lectura");
-				return;
+				codiError = "Error amb el fitxer de lectura";
+				break;
 			case 2 :
-				System.out.println("Error d'escrpitura");
-				return;
+				codiError = "Error amb el fitxer d'escrpitura";
+				break;
 			case 3 :
-				System.out.println("No s'ha trobat el fitxer");
-				return;
+				codiError = "No s'ha trobat el fitxer";
+				break;
 			case 4 :
-				System.out.println("Error en la sintaxi del fitxer d'entrada");
-				return;
+				codiError = "Error en la sintaxi del fitxer d'entrada";
+				break;
 			case 5 :
-				System.out.println("Fitxer d'entrada sense dades");
-				return;
+				codiError = "Fitxer d'entrada sense dades";
+				break;
 			case 6 :
-				System.out.println("L'arxiu s'ha llegit correctament però pot contenir errors. Revisa la sintaxi per si de cas");
-				return;
+				codiError = "L'arxiu s'ha llegit correctament però pot contenir errors. Revisa la sintaxi per si de cas";
+				break;
 			case 7 :
-				System.out.println("Error al tancar l'arxiu");
-				return;
+				codiError = "Error al tancar l'arxiu";
+				break;
 			case 8:
-				System.out.println("Error al carregar les dades del programa: Fitxer corrupte");
-				return;
+				codiError = "Error al carregar les dades del programa: les dades han estat danyades";
+				break;
 			default :
-				System.out.println("Error indeterminat");
+				codiError = "Error indeterminat";
 		}
+		errorEnExecucio = true;
+		return true; // Sempre retorna true per marcar l'error
 	}
 
+	private ArrayList<CercaComunitats> errorAuxiliar(int i) {
+		error(i);
+		return null;
+	}
 }
 
-
-/*
- * Format:
- * 
- * usurname password esAdmin numCerques { (CERQUES) nomComunitat Comentari
- * DataCreacio DataModificacio nAlgorisme nDada nRelacioCat nSemblaNom
- * nTipuCerca nEvitaCat nEvitaPag nSubconjCat Paraula Valor { (EVITACAT) c1 c2
- * c3 ... cn } { (EVITAPAG) p1 p2 p3 ... pn } { (SUBCONJ_DE_CATEGORIES) c1 c2 c3
- * ... cn }
- * 
- * NumComunitats { (COMUNITATS) id numeroCategories { (CATEGORIES) c1 c2 c3 ...
- * cn } } }
- */
 
 /*
  * noms categories i pagines sense | ni * (NO pot tenir espais) nom usuari sense
@@ -1053,8 +1008,8 @@ public class EntradaSortidaDades {
  * nom, comentari de cercaComunitats sense | ni * ni + (pot tenir espais)
  * paraula clau igual, sense | ni * ni + (tmb pot tenir espais)
  * 
- * Osea com a resum: 1) MAI ni | ni * ni + (etcepte les pags i cats que el + si
- * que poden)
+ * O sigui com a resum: 1) MAI ni | ni * ni + (etcepte les pags i cats que el +
+ * si que poden)
  * 
  * 2) Espais es pot a tot arreu menys a cats i pags
  * 
