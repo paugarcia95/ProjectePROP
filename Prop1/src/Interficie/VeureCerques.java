@@ -46,6 +46,11 @@ public class VeureCerques extends javax.swing.JPanel {
                 formComponentShown(evt);
             }
         });
+        addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                formComponentAdded(evt);
+            }
+        });
 
         jScrollPane12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane12.setAutoscrolls(true);
@@ -111,6 +116,12 @@ public class VeureCerques extends javax.swing.JPanel {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         vista.carregaCerquesFetes(jTextField7, LlistaCerques);  
     }//GEN-LAST:event_formComponentShown
+    /*
+    * En iniciar-se el programa, es carreguen les cerques realitzades anteriorment per l'usuari actual
+    */
+    private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
+        vista.carregaCerquesFetes(jTextField7, LlistaCerques);  
+    }//GEN-LAST:event_formComponentAdded
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BVisCat2;
