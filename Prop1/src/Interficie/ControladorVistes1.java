@@ -16,6 +16,7 @@ import static Interficie.InterficiaProva1.userAdmin;
 import domini.Categoria;
 import domini.GrafDades;
 import domini.Pagina;
+import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -262,6 +263,7 @@ public class ControladorVistes1 {
        
        t2= System.currentTimeMillis();
        System.out.println("Temps total cerca: "+ (t2-t1));
+       macro.getContUser().ordenaCerca(macro.getUserActual(), cercaactual);
         return true;
     }
     public void netejaArbreCerca(Integer numcerca) {
@@ -403,7 +405,7 @@ public class ControladorVistes1 {
     } 
     public void treuCatComun(JTree Resultat, DefaultListModel modelos, Integer cercaaqui){
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) Resultat.getLastSelectedPathComponent();
-    if (node == null)JOptionPane.showMessageDialog(comp, "Has de seleccionar una categoria!", capsalera, WARNING_MESSAGE);
+    if (node == null|| node.isRoot())JOptionPane.showMessageDialog(comp, "Has de seleccionar una categoria!", capsalera, WARNING_MESSAGE);
     else {
     DefaultMutableTreeNode pare = (DefaultMutableTreeNode)node.getParent();
     if (!pare.equals(node.getRoot())) {
@@ -435,7 +437,19 @@ public class ControladorVistes1 {
             //macro.getContAdUs().guardaDades(aux);
         }
     }
-   
+    public void visualitzarCategoriaCerca(Frame pare, JTree Resultat1) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) Resultat1.getLastSelectedPathComponent();
+        if (node == null|| node.isRoot())JOptionPane.showMessageDialog(comp, "Has de seleccionar una categoria!", capsalera, WARNING_MESSAGE);
+        else {
+            DefaultMutableTreeNode pares = (DefaultMutableTreeNode)node.getParent();
+            if (!pares.equals(node.getRoot())) {
+                String quina = node.toString();
+                VCategoria1 nova = new VCategoria1(pare, true,macro.getContUser().isAdmin(macro.getUserActual()));
+                nova.NomCat(quina);
+            } 
+            else  JOptionPane.showMessageDialog(comp, "Has de seleccionar una categoria, no una comunitat!", capsalera, WARNING_MESSAGE);
+        }
+    }
     public void visualitzarCategoriaDe(JList quina){
         if(quina.getSelectedIndices().length>0) {
             String hy = quina.getSelectedValue().toString();

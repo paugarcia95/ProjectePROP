@@ -148,7 +148,7 @@ public class GrafNewman extends Graf {
 		 *            node pel qual es passa per arribar a fi
 		 */
 		public void pushCami(int inici, int meitat, int fi) {
-			System.out.println("ENTRO");
+			//System.out.println("ENTRO");
 			// El que fa aquest push es posar les arestes necessaries per
 			// arribar al node fi fent que el cami sigui de inici a meitat i de
 			// meitat a fi
@@ -263,30 +263,9 @@ public class GrafNewman extends Graf {
                 for(Integer j: i.keySet()){
                     i.put(j, 0);
                 }
-		// ////////////////// PART ANTIGA
-		// ///////////////////////////////////////////
-    
-		for (int i = 0; i < NCM.size(); ++i) {
-                ArrayList<Queue<Aresta> > camins = getCamiMinim(i);
-                for(int j=0; j < NCM.size();++j) {
-                    while(!camins.get(j).isEmpty()) {
-                        Aresta aux = camins.get(j).poll();
-                        Integer act = NCM.get(aux.node1).get(aux.node2);
-                        ++act;
-                        NCM.get(aux.node1).put(aux.node2,act);
-                        NCM.get(aux.node2).put(aux.node1,act);
-			// mantenir el vertex per on passen mes camins minims (variables maxi, maxj i maxNumCM)
-                        if (maxNumCM <= act) {
-                            maxi = aux.node1;
-                            maxj = aux.node2;
-                            maxNumCM = act;
-                        }
-                    }
-                }
-		} 
             
         // PART NOVA ///////////////////////////////////////////////////////////
-		/*
+		
 		QueueMatrix caminsMin = getCaminsMinims();
 		for (int i = 0; i < NCM.size(); ++i) {
 			for (int j = 0; j < NCM.size(); ++j) {
@@ -303,9 +282,40 @@ public class GrafNewman extends Graf {
 					}
 				}
 			} 
-		} */
+		} 
 		
 		
+
+		return true;
+	}
+        
+        public Boolean calcularEdgeBetweenv2() {
+		// Posem a 0 tots els camins minims per "comencar" la nova ronda
+            for(HashMap<Integer,Integer> i: NCM)
+                for(Integer j: i.keySet()){
+                    i.put(j, 0);
+                }
+		// ////////////////// PART ANTIGA
+		// ///////////////////////////////////////////
+    
+    	for (int i = 0; i < NCM.size(); ++i) {
+                ArrayList<Queue<Aresta> > camins = getCamiMinim(i);
+                for(int j=0; j < NCM.size();++j) {
+                    while(!camins.get(j).isEmpty()) {
+                        Aresta aux = camins.get(j).poll();
+                        Integer act = NCM.get(aux.node1).get(aux.node2);
+                        ++act;
+                        NCM.get(aux.node1).put(aux.node2,act);
+                        NCM.get(aux.node2).put(aux.node1,act);
+			// mantenir el vertex per on passen mes camins minims (variables maxi, maxj i maxNumCM)
+                        if (maxNumCM <= act) {
+                            maxi = aux.node1;
+                            maxj = aux.node2;
+                            maxNumCM = act;
+                        }
+                    }
+                }
+		}
 
 		return true;
 	}

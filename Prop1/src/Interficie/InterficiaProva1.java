@@ -70,6 +70,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     String algorisme;
     //static Integer guardada;
     static String capsalera = "Wiki";
+    static String noSelect="  No n'hi ha cap";
     static javax.swing.JTabbedPane AP_Afegeix = new javax.swing.JTabbedPane();
     static javax.swing.JPanel A_Afegeix = new javax.swing.JPanel();
     //guardada=0 -> nova cerca sense guardar, crearla
@@ -264,7 +265,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         AP_Client.add(Panell, "Categories i pagines");
         Panell = new CreaComunitat(this,AP_Client);
         AP_Client.add(Panell, "Fer Cerca");
-        if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
+       // if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
         
        
         provisional();

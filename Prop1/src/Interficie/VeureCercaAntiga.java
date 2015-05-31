@@ -6,6 +6,7 @@ package Interficie;
 import static Interficie.InterficiaProva1.auxguard;
 import static Interficie.InterficiaProva1.capsalera;
 import static Interficie.InterficiaProva1.cercaactual;
+import static Interficie.InterficiaProva1.comp;
 import static Interficie.InterficiaProva1.macro;
 import static Interficie.InterficiaProva1.vista;
 import static Interficie.InterficiaProva1.comunaEliminar;
@@ -14,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_CANCEL_OPTION;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -25,6 +27,7 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
 
     private InterficiaProva1 pare;
     private Integer numcerca;
+    private Boolean modificacio;
     
     /**
      * Creates new form VeureCercaAntiga
@@ -33,6 +36,7 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
         initComponents();
         pare = (InterficiaProva1)par;
         numcerca = num;
+        modificacio = false;
     }
 
     /**
@@ -55,6 +59,7 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
         jScrollPane14 = new javax.swing.JScrollPane();
         Resultat1 = new javax.swing.JTree();
         ButTanca = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -134,6 +139,13 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Visualitzar Categoria");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,7 +167,8 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton22)
                             .addComponent(jButton23)
-                            .addComponent(butAfegeixComuni))
+                            .addComponent(butAfegeixComuni)
+                            .addComponent(jButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Penjades1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -184,7 +197,9 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(jButton23)
                                         .addGap(18, 18, 18)
-                                        .addComponent(butAfegeixComuni))
+                                        .addComponent(butAfegeixComuni)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1))
                                     .addComponent(Penjades1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,6 +232,7 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
     */
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         vista.treuCatComun(Resultat1,modelos1, numcerca);
+        modificacio = true;
     }//GEN-LAST:event_jButton23ActionPerformed
     /*
     * Afegeix la categoria seleccionada de la llista a la comunitat de l'arbre seleccionada
@@ -258,8 +274,15 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
     */
     private void ButTancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButTancaActionPerformed
         vista.netejaArbreCerca(numcerca);
+        if(modificacio)macro.getContUser().ordenaCerca(macro.getUserActual(), numcerca);
         pare.eliminaTab(this);
     }//GEN-LAST:event_ButTancaActionPerformed
+    /*
+    * En clicar el boto de visualitzar una categoria, es mostres les caracteristiques d'aquesta
+    */
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        vista.visualitzarCategoriaCerca(pare,Resultat1);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -272,6 +295,7 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
     private javax.swing.JTree Resultat1;
     private javax.swing.JButton butAfegeixComuni;
     private javax.swing.JButton butModNom;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JScrollPane jScrollPane13;

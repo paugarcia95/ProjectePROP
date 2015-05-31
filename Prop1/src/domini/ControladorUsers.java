@@ -193,6 +193,10 @@ public class ControladorUsers {
             else System.out.println("S'ha eliminat correctament. num comunitats: "+conj.getUser(username).getCerca(Cerca).getNumComunitats());
         }
         
+        public void ordenaCerca(String username, Integer cerca) {
+            conj.getUser(username).getCerca(cerca).ordenaComunitats();
+        }
+        
         public Integer getNumCatComunitatCerca(String username, Integer Cerca, Integer Comunitat){
             return conj.getUser(username).getCerca(Cerca).getComunitat(Comunitat).getNumeroDeCategories();
         }

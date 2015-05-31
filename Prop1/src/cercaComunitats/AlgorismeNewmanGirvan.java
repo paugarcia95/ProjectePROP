@@ -53,14 +53,14 @@ public class AlgorismeNewmanGirvan {
 		GrafNewman util = new GrafNewman(G);
                 arestes = util.getNumArestes();
                 util.invertirPesos();
-		util.calcularEdgeBetween();
+		util.calcularEdgeBetweenv2();
 		int quitoca = calculadora(arestes, percentatge);
                 System.out.println("El graf te "+arestes+ " arestes, i he de fer "+quitoca+" iteracions");
 		while ( iterador< quitoca) {
                     System.out.println("Vaig x la iteracio "+iterador+", temps: "+ (System.currentTimeMillis()-t1));
                     t1 = System.currentTimeMillis();
 			util.esborrarMaxim();
-			util.calcularEdgeBetween();
+			util.calcularEdgeBetweenv2();
 			++iterador;
                         
 		}
