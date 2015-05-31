@@ -1,6 +1,3 @@
-/**
- * 
- */
 package domini;
 
 import static domini.MacroControlador.gd;
