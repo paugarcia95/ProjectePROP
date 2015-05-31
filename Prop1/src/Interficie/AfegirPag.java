@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 /**
  *
- * @author Alr
+ * @author Rafa
  */
 public class AfegirPag extends javax.swing.JPanel {
     String pag;
@@ -409,6 +409,7 @@ public class AfegirPag extends javax.swing.JPanel {
         mida = modelo1.getSize();
         for(int i = 0; i < mida; ++i) aux.add(modelo1.getElementAt(i).toString());
         macro.getContAdUs().setPagPC(pag, aux);
+        JOptionPane.showMessageDialog(comp, "Pàgina creada correctament");
         jDialog1.setVisible(true);
         jDialog1.setLocationRelativeTo(null);
 
