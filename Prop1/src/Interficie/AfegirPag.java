@@ -5,11 +5,15 @@
  */
 package Interficie;
 
+import static Interficie.InterficiaProva1.comp;
 import static Interficie.InterficiaProva1.vista;
+import static Interficie.InterficiaProva1.capsalera;
 import java.util.ArrayList;
 import static Interficie.InterficiaProva1.macro;
 import java.util.Collection;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 /**
  *
  * @author Alr
@@ -60,9 +64,9 @@ public class AfegirPag extends javax.swing.JPanel {
         EliminaC1 = new javax.swing.JButton();
         EliminaC2 = new javax.swing.JButton();
         Guardar = new javax.swing.JButton();
+        jOptionPane1 = new javax.swing.JOptionPane();
 
         jDialog1.setMinimumSize(new java.awt.Dimension(250, 250));
-        jDialog1.setPreferredSize(new java.awt.Dimension(250, 250));
         jDialog1.setResizable(false);
 
         jButton2.setText("Ok");
@@ -329,6 +333,11 @@ public class AfegirPag extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jOptionPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,15 +352,22 @@ public class AfegirPag extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jOptionPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void AfegeixCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixCActionPerformed
+        if(jList1.isSelectionEmpty())JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
         modelom.addElement(jList1.getSelectedValue());
         jList1.clearSelection();
     }//GEN-LAST:event_AfegeixCActionPerformed
 
     private void AfegeixC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixC1ActionPerformed
+        if(jList1.isSelectionEmpty())JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
         modelo1.addElement(jList1.getSelectedValue());
         jList1.clearSelection();
     }//GEN-LAST:event_AfegeixC1ActionPerformed
@@ -366,6 +382,7 @@ public class AfegirPag extends javax.swing.JPanel {
     }//GEN-LAST:event_CbuscaCatActionPerformed
 
     private void EliminaC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaC1ActionPerformed
+        if(CApunta1.isSelectionEmpty())JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
         if(modelom.getSize()>0){
             int n = CApunta1.getSelectedIndex();
             modelom.remove(n);
@@ -374,6 +391,7 @@ public class AfegirPag extends javax.swing.JPanel {
     }//GEN-LAST:event_EliminaC1ActionPerformed
 
     private void EliminaC2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaC2ActionPerformed
+        if(CApuntada1.isSelectionEmpty())JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna categoria de la llista!", capsalera, WARNING_MESSAGE);
         if(modelo1.getSize()>0){
             int n = CApuntada1.getSelectedIndex();
             modelo1.remove(n);
@@ -412,16 +430,20 @@ public class AfegirPag extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         pag = jTextField1.getText();
-        if(!pag.isEmpty()) {
+        if(!pag.isEmpty() && !pag.contains("|") && !pag.contains("*") && !pag.contains(" ")) {
             jLabel6.setText("Nom de la pàgina:" + pag);
             jPanel1.setVisible(false);
             A_ModificaPag.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(comp, "Si us plau, introdueix un nom vàlid", capsalera, WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
         // TODO add your handling code here:ç
         A_ModificaPag.setVisible(false);
+        jOptionPane1.setVisible(false);
     }//GEN-LAST:event_formComponentAdded
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -456,6 +478,7 @@ public class AfegirPag extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane7;
