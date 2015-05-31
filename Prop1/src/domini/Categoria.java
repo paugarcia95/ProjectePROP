@@ -18,7 +18,7 @@ public class Categoria {
 	/**
 	 * Crea una Categoria amb el nom especificat sense cap relació.
 	 * 
-	 * @param nom nom que posar a la categoria
+	 * @param nom nom de la categoria
 	 */
 	public Categoria(String nom) {
 		this.nom = nom;
@@ -48,7 +48,7 @@ public class Categoria {
 	
 	/**
 	 * 
-	 * @param nom nom que posar a la categoria
+	 * @param nom el nom de la categoria
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;

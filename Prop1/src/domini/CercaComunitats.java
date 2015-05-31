@@ -18,8 +18,15 @@ public class CercaComunitats {
 	private ArrayList<Comunitat> comunitats;
 	
 	/**
-	 * Pre: dataCreacio < dataModif, usuari existeix, no existeix cap CercaComunitats amb el mateix nom per a usuari
-	 * Post: Retorna una CercaComunitats
+	 * Crea una CercaComunitats amb el paràmetres especificats.
+	 * 
+	 * @param nom nom de la cerca
+	 * @param dataCreacio data de creació de la cerca
+	 * @param criteris criteris de busqueda de la cerca
+	 * @param usuari usuari que realitza la cerca
+	 * @param dataModif última data de modificació de la cerca
+	 * @param comentari comentari de la cerca
+	 * @param comunitats conjunt de comunitats resultants de la cerca
 	 */
 	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date dataModif, String comentari, ArrayList<Comunitat> comunitats) {
 		this.nom = nom;
@@ -31,61 +38,111 @@ public class CercaComunitats {
 		this.comunitats = comunitats;
 	}
 	
+	/**
+	 * Crea una CercaComunitats amb el nom especificat.
+	 * 
+	 * @param nom nom de la cerca
+	 */
 	public CercaComunitats(String nom) {
 		this.nom = nom;
 		dataCreacio = new Date();
 		comunitats = new ArrayList<Comunitat>();
 	}
 	
+	/**
+	 * Crea una CercaComunitats sense nom.
+	 */
 	public CercaComunitats() {
 		dataCreacio = new Date();
 		comunitats = new ArrayList<Comunitat>();
 	}
 	
+	/**
+	 * @return el <code>nom</code> de la cerca
+	 */
 	public String getNom() {
 		return nom;
 	}
 	
+	/**
+	 * 
+	 * @param s el nom de la cerca
+	 */
 	public void setNom(String s) {
 		nom = s;
 	}
 	
+	/**
+	 * @return la <code>dataCreacio</code> de la cerca
+	 */
 	public Date getDataCreacio() {
 		return dataCreacio;
 	}
 	
+	/**
+	 * 
+	 * @param d la dataCreacio de la cerca
+	 */
 	public void setDataCreacio(Date d) {
 		dataCreacio = d;
 	}
 	
+	/**
+	 * @return els <code>criterisSeleccio</code> de la cerca
+	 */
 	public Criteris getCriterisSeleccio() {
 		return criterisSeleccio;
 	}
 	
+	/**
+	 * 
+	 * @param c els criterisSeleccio de la cerca
+	 */
 	public void setCriterisSeleccio(Criteris c) {
 		criterisSeleccio = c;
 	}
 	
+	/**
+	 * @return el <code>comentari</code> de la cerca
+	 */
 	public String getComentari() {
 		return comentari;
 	}
 	
+	/**
+	 * 
+	 * @param s el comentari de la cerca
+	 */
 	public void setComentari(String s) {
 		comentari = s;
 	}
 	
+	/**
+	 * @return l'<code>usuari</code> de la cerca
+	 */
 	public String getUsuari() {
 		return usuari;
 	}	
 	
+	/**
+	 * 
+	 * @param s l'usuari de la cerca
+	 */
 	public void setUsuari(String s) {
 		usuari = s;
 	}
 	
+	/**
+	 * @return la <code>dataModificacio</code> de la cerca
+	 */	
 	public Date getDataModificacio() {
 		return dataModificacio;
 	}
 	
+	/**
+	 * 
+	 * @param d la dataModifiacio de la cerca
+	 */
 	public void setDataModificacio(Date d) {
 		dataModificacio = d;
 	}
@@ -93,7 +150,14 @@ public class CercaComunitats {
 	/**
 	 * Pre: Cert
 	 * Post: Retorna la Comunitat amb índex i
-	 */	 
+	 */
+	
+	/**
+	 * Elimina la relació "és supercategoria".
+	 * 
+	 * @param nomCategoria <code>key</code> que serà eliminada de <code>cSupC</code>
+	 * @return 
+	 */
 	public Comunitat getComunitat(Integer i) {
 		if (i >= 0 && i < comunitats.size()) return comunitats.get(i);
 		return null;

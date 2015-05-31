@@ -22,7 +22,7 @@ public class ControladorDadesGraf {
 	 * Pre: Cert
 	 * Post: Retorna el nom de totes les categories del graf
 	 */
-	public ArrayList<String>  getCategories() {
+	public ArrayList<String> getCategories() {
 		return gd.getNomCategories();
 	}
 	
