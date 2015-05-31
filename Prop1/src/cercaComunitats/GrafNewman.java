@@ -263,7 +263,8 @@ public class GrafNewman extends Graf {
                 for(Integer j: i.keySet()){
                     i.put(j, 0);
                 }
-   //////////////////// PART ANTIGA ///////////////////////////////////////////
+		// ////////////////// PART ANTIGA
+		// ///////////////////////////////////////////
     
 		for (int i = 0; i < NCM.size(); ++i) {
                 ArrayList<Queue<Aresta> > camins = getCamiMinim(i);
