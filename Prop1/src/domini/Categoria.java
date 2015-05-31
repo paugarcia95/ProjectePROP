@@ -79,6 +79,7 @@ public class Categoria {
 	}
 	
 	/**
+	 * Crea la relació "apunta a la pàgina".
 	 * 
 	 * @param pagina la pàgina que no pertany a <code>cP</code> i serà inserida
 	 */
@@ -87,6 +88,7 @@ public class Categoria {
 	}
 	
 	/**
+	 * Crea la relació "és apuntada per la pàgina".
 	 * 
 	 * @param pagina la pàgina que no pertany a <code>pC</code> i serà inserida
 	 */
@@ -95,6 +97,7 @@ public class Categoria {
 	}
 	
 	/**
+	 * Crea la relació "<code>categoria</code> és supercategoria".
 	 * 
 	 * @param categoria la categoria que no pertany a <code>cSupC</code> i serà inserida
 	 */
@@ -103,6 +106,7 @@ public class Categoria {
 	}
 	
 	/**
+	 * Crea la relació "<code>categoria</code> és subcategoria".
 	 * 
 	 * @param categoria la categoria que no pertany a <code>cSubC</code> i serà inserida
 	 */
@@ -111,65 +115,97 @@ public class Categoria {
 	}
 	
 	/** 
-	 * Pre: nomPagina es una key de cP amb un valor assignat
-	 * Post: nomPagina ja no es key de cP
+	 * Elimina la relació "apunta a la pàgina".
+	 * 
+	 * @param nomPagina <code>key</code> que serà eliminada de <code>cP</code>
 	 */
 	public void removeCP(String nomPagina) {
 		cP.remove(nomPagina);
 	}
 	
 	/**
-	 * Pre: nomPagina es una key de pC amb un valor assignat
-	 * Post: nomPagina ja no es key de pC
+	 * Elimina la relació "és apuntada per la pàgina".
+	 * 
+	 * @param nomPagina <code>key</code> que serà eliminada de <code>pC</code>
 	 */
 	public void removePC(String nomPagina) {
 		pC.remove(nomPagina);
 	}
 	
 	/**
-	 * Pre: nomCategoria es una key de cSubC amb un valor assignat
-	 * Post: nomCategoria ja no es key de cSubC
+	 * Elimina la relació "és subcategoria".
+	 * 
+	 * @param nomCategoria <code>key</code> que serà eliminada de <code>cSubC</code>
 	 */
 	public void removeCsubC(String nomCategoria) {
 		cSubC.remove(nomCategoria);
 	}
 	
 	/**
-	 * Pre: nomCategoria es una key de cSupC amb un valor assignat
-	 * Post: nomCategoria ja no es key de cSupC
+	 * Elimina la relació "és supercategoria".
+	 * 
+	 * @param nomCategoria <code>key</code> que serà eliminada de <code>cSupC</code>
 	 */
 	public void removeCsupC(String nomCategoria) {
 		cSupC.remove(nomCategoria);
 	}
 	
+	/**
+	 * @return el mapa de relacions "apunta a la pàgina"
+	 */
 	public Map<String, Pagina> getMapCP() {
 		return cP;
 	}
 
+	/**
+	 * @return el mapa de relacions "és apuntada per la pàgina"
+	 */
 	public Map<String, Pagina> getMapPC() {
 		return pC;
 	}
 	
+	/**
+	 * @return el mapa de relacions "és subcategoria"
+	 */
 	public Map<String, Categoria> getMapCSubC() {
 		return cSubC;
 	}
 	
+	/**
+	 * @return el mapa de relacions "és supercategoria"
+	 */
 	public Map<String, Categoria> getMapCSupC() {
 		return cSupC;
 	}
 
+	/**
+	 * 
+	 * @param mapa mapa que conté totes les relacions "apunta a la pàgina"
+	 */
 	public void setMapCP(Map<String, Pagina> mapa) {
 		cP = mapa;
 	}
 	
+	/**
+	 * 
+	 * @param mapa mapa que conté totes les relacions "és apuntada per la pàgina"
+	 */
 	public void setMapPC(Map<String, Pagina> mapa) {
 		pC = mapa;
 	}
 
+	/**
+	 * 
+	 * @param mapa mapa que conté totes les relacions "és subcategoria"
+	 */
 	public void setMapCSubC(Map<String, Categoria> mapa) {
 		cSubC = mapa;
 	}
 
+	/**
+	 * 
+	 * @param mapa mapa que conté totes les relacions "és supercategoria"
+	 */
 	public void setMapCSupC(Map<String, Categoria> mapa) {
 		cSupC = mapa;
 	}	
