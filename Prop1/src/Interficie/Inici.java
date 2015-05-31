@@ -34,7 +34,6 @@ public class Inici extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         jLabel1.setText("Benvingut");
 
@@ -42,13 +41,6 @@ public class Inici extends javax.swing.JPanel {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Afegeix Fitxer");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -63,19 +55,13 @@ public class Inici extends javax.swing.JPanel {
                 .addGap(129, 129, 129)
                 .addComponent(jButton1)
                 .addContainerGap(206, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(84, 84, 84))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(jLabel1)
-                .addGap(20, 20, 20)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(82, 82, 82))
         );
@@ -85,14 +71,9 @@ public class Inici extends javax.swing.JPanel {
         pare.logout();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        vista.afegirFitxer();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

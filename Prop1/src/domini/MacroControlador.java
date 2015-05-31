@@ -1,15 +1,12 @@
 /**
- * 
+ * Controlador principal del programa de la Wikipedia (PROP 2015)
  */
 package domini;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.TreeMap;
 
 /**
- * @author Cristina
+ * @author cristina.fontanet
  *
  */
 public class MacroControlador {
@@ -22,10 +19,8 @@ public class MacroControlador {
 	static String useractual;
 	static EntradaSortidaDades aux;
 
-// CREADORA///////////////////////////////////////////////////////////////////////////////
-
 	/**
-	 * 
+	 * Creadora per defecte del Macrocontrolador
 	 */
 	public MacroControlador() {
 		conj = new ConjuntUsuaris();
@@ -36,25 +31,32 @@ public class MacroControlador {
 		aux = new EntradaSortidaDades();
 	}
 	
-// MODIFICADORES///////////////////////////////////////////////////////////////////////////////
-	
+        /*
+        *   Assigna l'usuari actual del programa
+        */
 	public void setUserActual(String user) {
 		useractual = user;
 	}
+        
+        /*
+        * A traves de la persistencia, carrega les dades de l'ultim estat del programa
+        */
 	public Boolean carregaDades() {
             if(aux.carregarGrafDades(gd))return false;
             if(aux.carregarUsuaris(conj.getMap()))return false;
             return true;
 	}
         
+        /*
+        * Introdueix dades a la Wikipedia a partir d'un fitxer
+        */
 	public void carregaDadesFitxer(File fitxer) {
             aux.llegirGrafDades(gd,fitxer);
 	}
-	public Boolean carregaUsers() {
-		return cu.iniciCarregarUsers();
-	}
         
-        
+        /*
+        * A traves de la persistencia, guarda l'estat actual de les dades per a la proxima sessio
+        */
         public Boolean guardaDades() {
              if(aux.guardarGrafDades(gd)) return false;
              if(aux.guardarUsuaris(conj.getMap()))return false;

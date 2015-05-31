@@ -236,7 +236,7 @@ public class VCategoria1 extends javax.swing.JDialog {
         jLabel1.setText("Nom Categoria:");
 
         jLabel2.setBackground(new java.awt.Color(250, 250, 250));
-        jLabel2.setText("Comunitats a les que apunta:");
+        jLabel2.setText("Categories a les que apunta:");
 
         jLabel3.setText("Catgories que l'apunten:");
 
