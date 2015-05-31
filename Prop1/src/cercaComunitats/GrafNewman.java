@@ -263,8 +263,8 @@ public class GrafNewman extends Graf {
                 for(Integer j: i.keySet()){
                     i.put(j, 0);
                 }
-   /*//////////////////// PART ANTIGA ///////////////////////////////////////////
-    * 
+   //////////////////// PART ANTIGA ///////////////////////////////////////////
+    
 		for (int i = 0; i < NCM.size(); ++i) {
                 ArrayList<Queue<Aresta> > camins = getCamiMinim(i);
                 for(int j=0; j < NCM.size();++j) {
@@ -282,10 +282,10 @@ public class GrafNewman extends Graf {
                         }
                     }
                 }
-		} */
+		} 
             
         // PART NOVA ///////////////////////////////////////////////////////////
-		
+		/*
 		QueueMatrix caminsMin = getCaminsMinims();
 		for (int i = 0; i < NCM.size(); ++i) {
 			for (int j = 0; j < NCM.size(); ++j) {
@@ -302,7 +302,7 @@ public class GrafNewman extends Graf {
 					}
 				}
 			} 
-		}
+		} */
 		
 		
 
