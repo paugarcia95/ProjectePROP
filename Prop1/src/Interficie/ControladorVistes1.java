@@ -172,15 +172,14 @@ public class ControladorVistes1 {
         else JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari esta lliure, endavant", capsalera, PLAIN_MESSAGE);
     }
     public void creaUserNou(JTextField NouUsername, JTextField NovaPassword){
-        if(macro.getContUser().existsUser(NouUsername.getText())) {
-            JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre", capsalera, WARNING_MESSAGE);
-        }
-        else if(NovaPassword.getText().length()==0) {
-            JOptionPane.showMessageDialog(comp, "Escriu una contrassenya siusplau", capsalera, ERROR_MESSAGE);
-        }
+        if(NouUsername.getText().length()==0) JOptionPane.showMessageDialog(comp, "Escriu un nom d'usuari siusplau", capsalera, ERROR_MESSAGE);
+        else if (NouUsername.getText().contains("|")||NouUsername.getText().contains("/")||NouUsername.getText().contains("\\")||NouUsername.getText().contains(":")||NouUsername.getText().contains("*")||NouUsername.getText().contains("?")||NouUsername.getText().contains("<")||NouUsername.getText().contains(">")||NouUsername.getText().contains("+")||NouUsername.getText().contains("\"")) JOptionPane.showMessageDialog(comp, "El nom d'usuari conté algun caràcter prohibit", capsalera, ERROR_MESSAGE);
+        else if(macro.getContUser().existsUser(NouUsername.getText()))  JOptionPane.showMessageDialog(comp, "Aquest nom d'usuari ja existeix, si us plau, tria'n un altre", capsalera, WARNING_MESSAGE);
+        else if(NovaPassword.getText().length()==0) JOptionPane.showMessageDialog(comp, "Escriu una contrassenya siusplau", capsalera, ERROR_MESSAGE);
+        else if(NovaPassword.getText().contains("|")||NovaPassword.getText().contains("*")||NovaPassword.getText().contains("+")) JOptionPane.showMessageDialog(comp, "La contrassenya conté algun caràcter prohibit", capsalera, ERROR_MESSAGE);
         else {
             macro.getContUser().addUser(NouUsername.getText(), NovaPassword.getText());
-            if(userAdmin) System.out.println("Vinc des d'un admin");
+            //if(userAdmin) System.out.println("Vinc des d'un admin");
             if(userAdmin) macro.getContUser().addAdmin(NouUsername.getText());
             else if(!macro.getContUser().existsAdmin()) {
                 macro.getContUser().addAdmin(NouUsername.getText());
@@ -462,6 +461,7 @@ public class ControladorVistes1 {
     public void ompleCriteris(JTextArea on, Integer cercaaqui, Boolean guardada) {
         //Preparem els strings en cada cas
         String algorisme;
+        System.out.println("User: "+macro.getUserActual()+", cerca: "+cercaaqui );
         int algo = macro.getContUser().getAlgCerca(macro.getUserActual(), cercaaqui);
         if(algo==1) algorisme = "Louvain";
         else if(algo==2) algorisme = "Girvan-Newman";

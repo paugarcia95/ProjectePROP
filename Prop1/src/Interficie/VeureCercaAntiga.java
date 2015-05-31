@@ -101,6 +101,7 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
         CriterisNovaCerca1.setBackground(new java.awt.Color(240, 240, 240));
         CriterisNovaCerca1.setColumns(20);
         CriterisNovaCerca1.setRows(5);
+        CriterisNovaCerca1.setText("S'està carregant, \nel procés pot tardar una estoneta");
         jScrollPane13.setViewportView(CriterisNovaCerca1);
 
         butModNom.setText("Modificar Nom");
@@ -117,6 +118,10 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("carregant.....");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("tingues paciencia siusplau");
+        treeNode1.add(treeNode2);
+        Resultat1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         Resultat1.setAutoscrolls(true);
         Resultat1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Resultat1.setLargeModel(true);

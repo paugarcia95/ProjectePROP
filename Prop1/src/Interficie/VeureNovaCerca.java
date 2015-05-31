@@ -15,6 +15,7 @@ import java.util.PriorityQueue;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.OK_OPTION;
 import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
@@ -95,6 +96,10 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(105, 18, 0, 0);
         add(ButAfegirArbre, gridBagConstraints);
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("carregant.....");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("tingues paciencia siusplau");
+        treeNode1.add(treeNode2);
+        Resultat.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         Resultat.setAutoscrolls(true);
         Resultat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Resultat.setLargeModel(true);
@@ -173,6 +178,7 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         CriterisNovaCerca.setBackground(new java.awt.Color(240, 240, 240));
         CriterisNovaCerca.setColumns(20);
         CriterisNovaCerca.setRows(5);
+        CriterisNovaCerca.setText("S'està carregant, \nel procés pot tardar una estoneta");
         jScrollPane11.setViewportView(CriterisNovaCerca);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -227,13 +233,15 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         GuardaCerca auxi = new GuardaCerca(pare);
         int result = JOptionPane.showConfirmDialog(this, auxi,"Entra les dades requerides", PLAIN_MESSAGE);
         if(result == OK_OPTION) {
-            if(auxi.getName().length()>0) {
+            if(auxi.getName().length()<=0) JOptionPane.showMessageDialog(this, "Has d'introduir un nom.", capsalera, WARNING_MESSAGE);
+            else if(auxi.getName().contains("|")||auxi.getName().contains("*")||auxi.getName().contains("+")) JOptionPane.showMessageDialog(this, "El nom conte algun caràcter prohibit", capsalera, ERROR_MESSAGE);
+            else if (auxi.getComentari().length() >0 && (auxi.getComentari().contains("|")||auxi.getComentari().contains("*")||auxi.getComentari().contains("+"))) JOptionPane.showMessageDialog(this, "El comentari conté algun caracter prohibit", capsalera, ERROR_MESSAGE);
+            else {
                 macro.getContUser().addNomCerca(macro.getUserActual(),numcerca,auxi.getName());
                 macro.getContUser().addComentariCerca(macro.getUserActual(),numcerca,auxi.getComentari());
                 vista.netejaArbreCerca(numcerca);
                 pare.canviarACercaGuardada();
-            }
-            else JOptionPane.showMessageDialog(this, "Has d'introduir un nom.", capsalera, WARNING_MESSAGE);
+            } 
         }
     }//GEN-LAST:event_ButGuardarActionPerformed
     /*

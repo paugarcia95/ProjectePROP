@@ -298,6 +298,8 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         NovaPassword = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         AP_Client = new javax.swing.JTabbedPane();
         Panell = new javax.swing.JPanel();
         AP_Cerques = new javax.swing.JTabbedPane();
@@ -416,6 +418,10 @@ public class InterficiaProva1 extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("El nom d'usuari no pot contenir |, /, \\, :, *, ?, <, >, \" ni +");
+
+        jLabel6.setText("La contrassenya no pot contenir | ni * ni +");
+
         javax.swing.GroupLayout A_CreaUsuariLayout = new javax.swing.GroupLayout(A_CreaUsuari);
         A_CreaUsuari.setLayout(A_CreaUsuariLayout);
         A_CreaUsuariLayout.setHorizontalGroup(
@@ -423,22 +429,21 @@ public class InterficiaProva1 extends javax.swing.JFrame {
             .addGroup(A_CreaUsuariLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
                     .addComponent(jLabel7)
                     .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                        .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                                .addGap(116, 116, 116)
-                                .addComponent(jButton2))
-                            .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(38, 38, 38)
-                                .addComponent(NouUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel8)
+                        .addGap(38, 38, 38)
+                        .addComponent(NouUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(jButton1))
                     .addGroup(A_CreaUsuariLayout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(40, 40, 40)
-                        .addComponent(NovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(NovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton2)
+                        .addComponent(jLabel6)))
                 .addContainerGap(1078, Short.MAX_VALUE))
         );
         A_CreaUsuariLayout.setVerticalGroup(
@@ -452,16 +457,19 @@ public class InterficiaProva1 extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jButton1))
                 .addGroup(A_CreaUsuariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A_CreaUsuariLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(NovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
                     .addGroup(A_CreaUsuariLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel9)
-                        .addGap(35, 35, 35)))
+                        .addGap(46, 46, 46)
+                        .addComponent(NovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(A_CreaUsuariLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel9)))
+                .addGap(16, 16, 16)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
 
         AP_Principal.addTab("Crea nou usuari", A_CreaUsuari);
@@ -625,6 +633,8 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
