@@ -400,15 +400,15 @@ public class AfegirPag extends javax.swing.JPanel {
     }//GEN-LAST:event_EliminaC2ActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        macro.getContAdUs().addPagina(pag);
+        macro.getContDades().addPagina(pag);
         ArrayList<String> aux = new ArrayList<String>();
         int mida = modelom.getSize();
         for(int i = 0; i < mida; ++i)aux.add(modelom.getElementAt(i).toString());
-        macro.getContAdUs().setPagCP(pag, aux);
+        macro.getContDades().setPagCP(pag, aux);
         aux = new ArrayList<String>();
         mida = modelo1.getSize();
         for(int i = 0; i < mida; ++i) aux.add(modelo1.getElementAt(i).toString());
-        macro.getContAdUs().setPagPC(pag, aux);
+        macro.getContDades().setPagPC(pag, aux);
         JOptionPane.showMessageDialog(comp, "Pàgina creada correctament");
         jDialog1.setVisible(true);
         jDialog1.setLocationRelativeTo(null);

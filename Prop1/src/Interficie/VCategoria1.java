@@ -31,7 +31,7 @@ public class VCategoria1 extends javax.swing.JDialog {
     
     private void omplirDades(JList apuntaC, JList apuntadaC, JList aputaP, JList apuntadaP){
         //Categories a les que apunta
-        Collection<String> auxc = macro.getContAdUs().getCsubC(cat);
+        Collection<String> auxc = macro.getContDades().getCsubC(cat);
         Object[] aux2;
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
@@ -49,7 +49,7 @@ public class VCategoria1 extends javax.swing.JDialog {
         apuntaC.setListData(aux2);    
         
         //Categories que l'apunten
-        auxc = macro.getContAdUs().getCsupC(cat);
+        auxc = macro.getContDades().getCsupC(cat);
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
             int cont = 0;
@@ -66,7 +66,7 @@ public class VCategoria1 extends javax.swing.JDialog {
         apuntadaC.setListData(aux2);
         
         //Pagines a les que apunta
-        auxc = macro.getContAdUs().getCatCP(cat);
+        auxc = macro.getContDades().getCatCP(cat);
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
             int cont = 0;
@@ -83,7 +83,7 @@ public class VCategoria1 extends javax.swing.JDialog {
         aputaP.setListData(aux2);
         
         //Pagines que l'apunten
-        auxc = macro.getContAdUs().getCatPC(cat);
+        auxc = macro.getContDades().getCatPC(cat);
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
             int cont = 0;
@@ -100,13 +100,13 @@ public class VCategoria1 extends javax.swing.JDialog {
         apuntadaP.setListData(aux2);
     }
     private void omplirModificacions(){
-        Collection<String> auxc = macro.getContAdUs().getCsubC(cat);
+        Collection<String> auxc = macro.getContDades().getCsubC(cat);
         for(String cate: auxc)modelom.addElement(cate);
-        auxc = macro.getContAdUs().getCsupC(cat);
+        auxc = macro.getContDades().getCsupC(cat);
         for(String cate: auxc)modelo1.addElement(cate);
-        auxc = macro.getContAdUs().getCatCP(cat);
+        auxc = macro.getContDades().getCatCP(cat);
         for(String cate: auxc)modelo3.addElement(cate);
-        auxc = macro.getContAdUs().getCatPC(cat);
+        auxc = macro.getContDades().getCatPC(cat);
         for(String cate: auxc)modelo2.addElement(cate);
     }
     private void visualitzaPagBut(JList quina){
@@ -762,7 +762,7 @@ public class VCategoria1 extends javax.swing.JDialog {
     private void butElimCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butElimCatActionPerformed
         int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar aquesta categoria?", capsalera, YES_NO_OPTION);
         if(resposta==YES_OPTION) {
-            macro.getContAdUs().removeCateg(cat);
+            macro.getContDades().removeCateg(cat);
             vista.ompleCategoriesExistents(CategList);
             this.dispose();
         }
@@ -868,17 +868,17 @@ public class VCategoria1 extends javax.swing.JDialog {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         ArrayList<String> categs = new ArrayList<String>();
         for(int i = 0; i < modelom.size();++i) categs.add(modelom.getElementAt(i).toString());
-        macro.getContAdUs().setCsubC(cat, categs);
+        macro.getContDades().setCsubC(cat, categs);
         categs = new ArrayList<String>();
         for(int i = 0; i < modelo1.size();++i) categs.add(modelo1.getElementAt(i).toString());
-        macro.getContAdUs().setCsupC(cat, categs);
+        macro.getContDades().setCsupC(cat, categs);
         categs = new ArrayList<String>();
         for(int i = 0; i < modelo2.size();++i) categs.add(modelo2.getElementAt(i).toString());
-        macro.getContAdUs().setCatPC(cat, categs);
+        macro.getContDades().setCatPC(cat, categs);
         categs = new ArrayList<String>();
         for(int i = 0; i < modelo3.size();++i) categs.add(modelo3.getElementAt(i).toString());
-        macro.getContAdUs().setCatCP(cat, categs);
-        macro.getContAdUs().setNomCateg(cat, Nom.getText());
+        macro.getContDades().setCatCP(cat, categs);
+        macro.getContDades().setNomCateg(cat, Nom.getText());
         cat = Nom.getText();
         A_VisualitzaCateg.setVisible(true);
         A_ModificaCateg.setVisible(false);

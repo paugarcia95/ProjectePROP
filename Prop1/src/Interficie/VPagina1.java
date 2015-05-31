@@ -31,7 +31,7 @@ public class VPagina1 extends javax.swing.JDialog {
     
     private void omplirDades(JList CApunta, JList CApuntada){
         //Categories a les que apunta
-        Collection<String> auxc = macro.getContAdUs().getPagPC(pag);
+        Collection<String> auxc = macro.getContDades().getPagPC(pag);
         Object[] aux2;
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
@@ -49,7 +49,7 @@ public class VPagina1 extends javax.swing.JDialog {
         CApunta.setListData(aux2);    
         
         //Categories que l'apunten
-        auxc = macro.getContAdUs().getPagCP(pag);
+        auxc = macro.getContDades().getPagCP(pag);
         if(auxc.size()>0) {
             aux2 = new Object[auxc.size()];
             int cont = 0;
@@ -66,9 +66,9 @@ public class VPagina1 extends javax.swing.JDialog {
         CApuntada.setListData(aux2);
     } 
     private void omplirModificacions(){
-        Collection<String> aux = macro.getContAdUs().getPagPC(pag);
+        Collection<String> aux = macro.getContDades().getPagPC(pag);
         for(String pag: aux) modelom.addElement(pag);
-        Collection<String> auxi = macro.getContAdUs().getPagCP(pag);
+        Collection<String> auxi = macro.getContDades().getPagCP(pag);
         for(String pag: auxi) modelo1.addElement(pag);
     }
     public void NomPag(String nomPag) {
@@ -494,7 +494,7 @@ public class VPagina1 extends javax.swing.JDialog {
     private void butElimPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butElimPagActionPerformed
         int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar aquesta pàgina?", capsalera, YES_NO_OPTION);
         if(resposta==YES_OPTION) {
-            macro.getContAdUs().removePag(pag);
+            macro.getContDades().removePag(pag);
             vista.omplePaginesExistents(PagList);
             this.dispose();
         }
@@ -559,12 +559,12 @@ public class VPagina1 extends javax.swing.JDialog {
         ArrayList<String> aux = new ArrayList<String>();
         int mida = modelom.getSize();
         for(int i = 0; i < mida; ++i)aux.add(modelom.getElementAt(i).toString());
-        macro.getContAdUs().setPagCP(pag, aux);
+        macro.getContDades().setPagCP(pag, aux);
         aux = new ArrayList<String>();
         mida = modelo1.getSize();
         for(int i = 0; i < mida; ++i) aux.add(modelo1.getElementAt(i).toString());
-        macro.getContAdUs().setPagPC(pag, aux);
-        macro.getContAdUs().setNomPagina(pag, Nom.getText());
+        macro.getContDades().setPagPC(pag, aux);
+        macro.getContDades().setNomPagina(pag, Nom.getText());
         pag = Nom.getText();
         A_VeurePag.setVisible(true);
         A_ModificaPag.setVisible(false);

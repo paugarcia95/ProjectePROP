@@ -160,7 +160,7 @@ public class Afegeix extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar totes les dades?", capsalera, YES_NO_OPTION);
         if(resposta==YES_OPTION) {
-            macro.getContAdUs().eliminarDades();
+            macro.getContDades().eliminarDades();
             System.out.println("He eliminat les dades");
         }
         

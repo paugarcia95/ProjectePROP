@@ -486,19 +486,19 @@ public class AfegirCat extends javax.swing.JPanel {
     }//GEN-LAST:event_CbuscaCatActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        macro.getContAdUs().addCateg(pag);
+        macro.getContDades().addCateg(pag);
         ArrayList<String> categs = new ArrayList<String>();
         for(int i = 0; i < modelom.size();++i) categs.add(modelom.getElementAt(i).toString());
-        macro.getContAdUs().addCsubC(pag, categs);
+        macro.getContDades().addCsubC(pag, categs);
         categs = new ArrayList<String>();
         for(int i = 0; i < modelo1.size();++i) categs.add(modelo1.getElementAt(i).toString());
-        macro.getContAdUs().addCsupC(pag, categs);
+        macro.getContDades().addCsupC(pag, categs);
         categs = new ArrayList<String>();
         for(int i = 0; i < modelo2.size();++i) categs.add(modelo2.getElementAt(i).toString());
-        macro.getContAdUs().addCatPC(pag, categs);
+        macro.getContDades().addCatPC(pag, categs);
         categs = new ArrayList<String>();
         for(int i = 0; i < modelo3.size();++i) categs.add(modelo3.getElementAt(i).toString());
-        macro.getContAdUs().addCatCP(pag, categs);
+        macro.getContDades().addCatCP(pag, categs);
         JOptionPane.showMessageDialog(comp, "Categoria creada correctament");
         A_ModificaCateg.setVisible(false);
         Introduccio.setVisible(true);

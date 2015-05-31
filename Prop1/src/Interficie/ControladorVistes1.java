@@ -107,7 +107,7 @@ public class ControladorVistes1 {
                 if(aux != null) {
                     System.out.println(aux);
                     long abans =System.currentTimeMillis();
-                    macro.carregaDadesFitxer(aux);
+                    if(!macro.carregaDadesFitxer(aux));
                     long despres = System.currentTimeMillis();
                     System.out.println("Temps carregar fitxer: "+(despres-abans));
                 }
@@ -255,7 +255,7 @@ public class ControladorVistes1 {
        
         if(CpcImp==0) Cpc.setText(new String());
         ////////////////////////////////////////////////////////////////////////////////////////
-        System.out.println("Fem la cerca amb "+macro.getContAdUs().getNumCats()+" categories i "+macro.getContAdUs().getNumPags()+" p?gines.");
+        System.out.println("Fem la cerca amb "+macro.getContDades().getNumCats()+" categories i "+macro.getContDades().getNumPags()+" p?gines.");
         System.out.println("Alg: "+quin+", tipus: "+tipus+", user: "+macro.getUserActual()+ ", cerca num: "+cercaactual+", numDada: "+Cdada+", paraula clau: "+ Cpc.getText()+", importancia pc: "+ CpcImp+", imp relacio: "+ CrelacioCat+", imp sembla: "+  Csembla+", lsub: "+ auxx1+", lsub1: " +auxx2+", lsub2: "+auxx3+", cbusca1: "+ Cbusca1.getText()+ ", imp CSub: "+CrelacioPag+", imp Csup"+CrelacioSuper);
         macro.getContUser().addCriterisCerca(false, macro.getUserActual(), cercaactual, Cpc.getText(), CpcImp, CrelacioCat, Csembla, quin, tipus, Cdada, auxx1, auxx2, auxx3, Cbusca1.getText(), CrelacioPag, CrelacioSuper, CrelacioSub);
                                                 
@@ -268,11 +268,11 @@ public class ControladorVistes1 {
     }
     public void netejaArbreCerca(Integer numcerca) {
         while(!comunaEliminar.isEmpty()) {
-            macro.getContUser().removeComunitatCerca(macro.getUserActual(),numcerca,comunaEliminar.poll());
+            if(!macro.getContUser().removeComunitatCerca(macro.getUserActual(),numcerca,comunaEliminar.poll()))JOptionPane.showMessageDialog(comp, "Hi ha hagut un error en eliminar una comunitat!", capsalera, ERROR_MESSAGE);
         }
     }
     public void ompleCategoriesExistents(JList quina){         //es pot millorar efici?ncia (que vagi carregant a mida q es va fent scroll)
-        Collection<String> auxc = macro.getContAdUs().getCategories();
+        Collection<String> auxc = macro.getContDades().getCategories();
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
         Iterator<String> it = auxc.iterator();
@@ -284,7 +284,7 @@ public class ControladorVistes1 {
     }
     public void ompleCategoriesExistentsConcret(JList quina, JTextField don){
         String busca = don.getText();
-        Collection<String> aux = macro.getContAdUs().getCategories();
+        Collection<String> aux = macro.getContDades().getCategories();
         Iterator<String> it = aux.iterator();
         Object[] csub= new Object[aux.size()];
         int cont = 0;
@@ -298,7 +298,7 @@ public class ControladorVistes1 {
         quina.setListData(csub);
     }
     public void omplePaginesExistents(JList quina){
-        Collection<String> auxc = macro.getContAdUs().getPagines();
+        Collection<String> auxc = macro.getContDades().getPagines();
         Object[] aux2 = new Object[auxc.size()];
         int cont = 0;
         Iterator<String> it = auxc.iterator();
@@ -310,7 +310,7 @@ public class ControladorVistes1 {
     }
     public void omplePaginesExistentsConcret(JList quina, JTextField don){
         String busca = don.getText();
-        Collection<String> aux = macro.getContAdUs().getPagines();
+        Collection<String> aux = macro.getContDades().getPagines();
         Iterator<String> it = aux.iterator();
         Object[] csub= new Object[aux.size()];
         int cont = 0;
@@ -327,7 +327,7 @@ public class ControladorVistes1 {
         ompleCriteris(quin, cercaactual,false);
     }
     public void preaparaCreacioNovaCerca(Boolean modificacio,JList LCTotes, JList LPTotes, JTree Algorismes, JList Lsub, JList Lsub2, JList Lsub1, JTextField Cbusca1, JTextField Cpc, JSlider CpcImp, JSlider Csembla, JSlider Crelacio, JSpinner Cdada,JSlider Crelacio1,JSlider Crelacio2){
-        if(macro.getContAdUs().getNumCats()<= 0) {
+        if(macro.getContDades().getNumCats()<= 0) {
             JOptionPane.showMessageDialog(comp, "No es pot fer cap cerca ja que no hi ha Categories", capsalera, WARNING_MESSAGE);
         }
         else {
@@ -434,7 +434,7 @@ public class ControladorVistes1 {
         int result = input.showSaveDialog(comp);
         if (result == JFileChooser.APPROVE_OPTION) {
             File aux =input.getSelectedFile();
-            //macro.getContAdUs().guardaDades(aux);
+            //macro.getContDades().guardaDades(aux);
         }
     }
     public void visualitzarCategoriaCerca(Frame pare, JTree Resultat1) {
@@ -530,8 +530,8 @@ public class ControladorVistes1 {
                 "\nAmb la dada: "+macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaaqui)+
                 "\nImportancia de les realcions entre categories: "+macro.getContUser().getRelacioCerca(macro.getUserActual(), cercaaqui)+
                 "\nImportancia semblança de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaaqui)+
-                "\nImportancia de les subcategories: "+ macro.getContUser().getSubRelCerca(macro.getUserActual(), cercaaqui)+
-                "\nImportancia de les supercategories: "+macro.getContUser().getSupRelCerca(macro.getUserActual(), cercaaqui)+
+                "\nImportancia de les subcategories: "+ macro.getContUser().getRelacionsSubsCerca(macro.getUserActual(), cercaaqui)+
+                "\nImportancia de les supercategories: "+macro.getContUser().getRelacionsSuperCerca(macro.getUserActual(), cercaaqui)+
                 "\nImportancia de les pagines: "+macro.getContUser().getpagRelCerca(macro.getUserActual(), cercaaqui)+
                 "\nParaula clau: "+macro.getContUser().getParaulaClauCerca(macro.getUserActual(), cercaaqui)+
                 "\n     Amb importància: "+macro.getContUser().getParaulaImpCerca(macro.getUserActual(), cercaaqui)+
