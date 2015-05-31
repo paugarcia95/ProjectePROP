@@ -15,7 +15,6 @@ import static Interficie.InterficiaProva1.A_Afegeix;
 public class ControladorRafa {
     
     public void ini(){
-                
                 A_Afegeix = new Afegeix();
                 AP_Afegeix.add(A_Afegeix,"Afegir des de fitxer");
                 A_Afegeix = new AfegirCat();
