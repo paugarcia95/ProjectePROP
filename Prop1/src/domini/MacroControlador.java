@@ -1,6 +1,7 @@
 /**
  * Controlador principal del programa de la Wikipedia (PROP 2015)
  */
+
 package domini;
 
 import java.io.File;

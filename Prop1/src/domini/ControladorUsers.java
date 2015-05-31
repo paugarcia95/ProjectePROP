@@ -1,6 +1,7 @@
 /**
  * Controlador de les dades d'usuari del programa de la Wikipedia
  */
+
 package domini;
 
 import java.util.ArrayList;
