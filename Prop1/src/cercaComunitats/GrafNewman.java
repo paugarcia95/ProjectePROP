@@ -305,6 +305,7 @@ public class GrafNewman extends Graf {
 		}
 		
 		
+
 		return true;
 	}
         
