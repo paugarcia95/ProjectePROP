@@ -32,6 +32,9 @@ public class AfegirPag extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
@@ -57,6 +60,43 @@ public class AfegirPag extends javax.swing.JPanel {
         EliminaC1 = new javax.swing.JButton();
         EliminaC2 = new javax.swing.JButton();
         Guardar = new javax.swing.JButton();
+
+        jDialog1.setMinimumSize(new java.awt.Dimension(250, 250));
+        jDialog1.setPreferredSize(new java.awt.Dimension(250, 250));
+        jDialog1.setResizable(false);
+
+        jButton2.setText("Ok");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Pàgina creada correctament!");
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(jButton2))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel2)))
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addContainerGap(90, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(88, 88, 88))
+        );
 
         addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -234,7 +274,7 @@ public class AfegirPag extends javax.swing.JPanel {
                         .addGroup(A_ModificaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Enrere)
                             .addComponent(Guardar))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         A_ModificaPagLayout.setVerticalGroup(
             A_ModificaPagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,6 +382,7 @@ public class AfegirPag extends javax.swing.JPanel {
     }//GEN-LAST:event_EliminaC2ActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        macro.getContAdUs().addPagina(pag);
         ArrayList<String> aux = new ArrayList<String>();
         int mida = modelom.getSize();
         for(int i = 0; i < mida; ++i)aux.add(modelom.getElementAt(i).toString());
@@ -350,8 +391,9 @@ public class AfegirPag extends javax.swing.JPanel {
         mida = modelo1.getSize();
         for(int i = 0; i < mida; ++i) aux.add(modelo1.getElementAt(i).toString());
         macro.getContAdUs().setPagPC(pag, aux);
-        //macro.getContAdUs().setNomPagina(pag, Nom.getText());
-        A_ModificaPag.setVisible(false);
+        jDialog1.setVisible(true);
+        jDialog1.setLocationRelativeTo(null);
+
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void A_ModificaPagComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_A_ModificaPagComponentHidden
@@ -382,6 +424,13 @@ public class AfegirPag extends javax.swing.JPanel {
         A_ModificaPag.setVisible(false);
     }//GEN-LAST:event_formComponentAdded
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        A_ModificaPag.setVisible(false);
+        jDialog1.setVisible(false);
+        jPanel1.setVisible(true);
+           // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel A_ModificaPag;
@@ -398,8 +447,11 @@ public class AfegirPag extends javax.swing.JPanel {
     private javax.swing.JButton Enrere;
     private javax.swing.JButton Guardar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
