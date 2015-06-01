@@ -27,7 +27,7 @@ public class Criteris {
 	 * @param sembla pes establert per la relació de semblança del nom
 	 * @param alg algorisme amb el que es realitza la cerca. 1 Louvain, 2 GirvanNewman, 3 Clique
 	 * @param tipus el tipus d'execució, només és significatiu si <code>alg</code> és 2. 1 Dispersió, 2 Nombre de Categories, 3 MaxBetweenness
-	 * @param dada per defecte el % de dispersió, si <code>tipus</code> és 2 el nombre de categories máxim i si és 3 el mínim nombre de camins mínims que pot tenir l'aresta amb més camíns mínims
+	 * @param dada per defecte el % de dispersió, si <code>tipus</code> és 2 el nombre de categories máxim i si és 3 el màxim nombre de camins mínims que pot tenir l'aresta amb més camíns mínims
 	 * @param subconj el conjunt de categories sobre el qual s'executa la cerca
 	 * @param evitaCat el conjunt de categories sobre les que no es farà la cerca
 	 * @param evitaPag el conjunt de pàgines sobre les que no es farà la cerca
