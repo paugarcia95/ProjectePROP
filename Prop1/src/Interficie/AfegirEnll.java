@@ -373,9 +373,11 @@ public class AfegirEnll extends javax.swing.JPanel {
        if (aux1.isEmpty()) JOptionPane.showMessageDialog(comp, "No hi pot haver una categoria buida!", capsalera, WARNING_MESSAGE);
        String aux2 = jTextField1.getText();
        if (aux2.isEmpty()) JOptionPane.showMessageDialog(comp, "No hi pot haver una categoria buida!", capsalera, WARNING_MESSAGE);
-       ArrayList<String> temp = new ArrayList<String>();
-       temp.add(aux2);
-       macro.getContDades().addCsubC(aux1, temp);
+       if(!aux1.equals(aux2)){
+            ArrayList<String> temp = new ArrayList<String>();
+            temp.add(aux2);
+            macro.getContDades().addCsubC(aux1, temp);
+       }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -383,9 +385,11 @@ public class AfegirEnll extends javax.swing.JPanel {
         if (aux1.isEmpty()) JOptionPane.showMessageDialog(comp, "No hi pot haver una categoria buida!", capsalera, WARNING_MESSAGE);
         String aux2 = jTextField3.getText();
         if (aux2.isEmpty()) JOptionPane.showMessageDialog(comp, "No hi pot haver una categoria buida!", capsalera, WARNING_MESSAGE);
-        ArrayList<String> temp = new ArrayList<String>();
-        temp.add(aux2);
-        macro.getContDades().addCsubC(aux1, temp);
+        if(!aux1.equals(aux2)){
+            ArrayList<String> temp = new ArrayList<String>();
+            temp.add(aux2);
+            macro.getContDades().addCsubC(aux1, temp);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -393,9 +397,11 @@ public class AfegirEnll extends javax.swing.JPanel {
         if (aux1.isEmpty()) JOptionPane.showMessageDialog(comp, "La Pàgina no pot estar buida!", capsalera, WARNING_MESSAGE);
         String aux2 = jTextField2.getText();
         if (aux2.isEmpty()) JOptionPane.showMessageDialog(comp, "La Categoria no pot estar buida!", capsalera, WARNING_MESSAGE);
-        ArrayList<String> temp = new ArrayList<String>();
-        temp.add(aux2);
-        macro.getContDades().addPagPC(aux1, temp);
+        if(!aux1.equals(aux2)){
+            ArrayList<String> temp = new ArrayList<String>();
+            temp.add(aux2);
+            macro.getContDades().addPagPC(aux1, temp);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void AfegeixP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixP2ActionPerformed
@@ -415,10 +421,11 @@ public class AfegirEnll extends javax.swing.JPanel {
         if (aux1.isEmpty()) JOptionPane.showMessageDialog(comp, "La Categoria no pot estar buida!", capsalera, WARNING_MESSAGE);
         String aux2 = jTextField4.getText();
         if (aux2.isEmpty()) JOptionPane.showMessageDialog(comp, "La Pàgina no pot estar buida!", capsalera, WARNING_MESSAGE);
-        ArrayList<String> temp = new ArrayList<String>();
-        temp.add(aux2);
-        macro.getContDades().addCatCP(aux1, temp);
-        // TODO add your handling code here:
+        if(!aux1.equals(aux2)){
+            ArrayList<String> temp = new ArrayList<String>();
+            temp.add(aux2);
+            macro.getContDades().addCatCP(aux1, temp);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CbuscaCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaCatActionPerformed
