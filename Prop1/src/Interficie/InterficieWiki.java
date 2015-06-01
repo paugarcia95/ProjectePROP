@@ -172,15 +172,14 @@ public class InterficieWiki extends javax.swing.JFrame {
         if(!macro.getContUser().existsUser(user)) JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, WARNING_MESSAGE);
         else if(macro.getContUser().login(user, pass)){
             macro.setUserActual(user);
-            System.out.println("User actual: "+macro.getUserActual());
             auxguard = 0;
-                A_CerquesGuardades = new VeureCerques(this);
-                AP_Cerques.add(A_CerquesGuardades, "Totes");
-                AP_Cerques.setSelectedIndex(0);
-                AP_Client.add(AP_Cerques, "Cerques guardades");
-                Panell = new CanviaDadesUser();
-                AP_Client.add(Panell, "Dades d'usuari"); 
-                primera = false;
+            A_CerquesGuardades = new VeureCerques(this);
+            AP_Cerques.add(A_CerquesGuardades, "Totes");
+            AP_Cerques.setSelectedIndex(0);
+            AP_Client.add(AP_Cerques, "Cerques guardades");
+            Panell = new CanviaDadesUser();
+            AP_Client.add(Panell, "Dades d'usuari"); 
+            primera = false;
             AP_Inici.setuser(user);
             if(macro.getContUser().isAdmin(user)) {
                 userAdmin = true;

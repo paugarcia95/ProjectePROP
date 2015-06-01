@@ -351,28 +351,14 @@ public class TraduccioiAlgorisme {
                 System.out.println("En el graf de l'algorisme hi ha "+utilitzable.getNodes().size()+" nodes");
                 t3= System.currentTimeMillis();
 		if(cri.getAlgorisme() == 1) {
-                    System.out.println("Executo Louvain amb dispersio "+cri.getDada());
 			solucio = Louvain.executa(utilitzable, cri.getDada());
 		}
 		else if (cri.getAlgorisme() == 2) {
-                    System.out.print("Executo Newman amb ");
-			if(cri.getTipuCerca() == 1){
-                            System.out.println("dispersio: "+cri.getDada());
-                            solucio = AlgorismeNewmanGirvan.executa(utilitzable,cri.getDada());
-                        }
-			else if(cri.getTipuCerca() == 2){
-                            System.out.println("Num comunitats: "+cri.getDada());
-                            solucio = AlgorismeNewmanGirvan.executaNum(utilitzable,cri.getDada());
-                        }
-                        else{
-                            System.out.println("Max num de camins minims: "+cri.getDada());
-                            solucio = AlgorismeNewmanGirvan.executabet(utilitzable,cri.getDada());
-                        }
+			if(cri.getTipuCerca() == 1) solucio = AlgorismeNewmanGirvan.executa(utilitzable,cri.getDada());
+			else if(cri.getTipuCerca() == 2) solucio = AlgorismeNewmanGirvan.executaNum(utilitzable,cri.getDada());
+                        else solucio = AlgorismeNewmanGirvan.executabet(utilitzable,cri.getDada());
 		}
-		else {
-                     System.out.println("Executo Clique amb dispersio "+cri.getDada());
-                    solucio = Clique.executa(utilitzable, cri.getDada());
-                } 
+		else solucio = Clique.executa(utilitzable, cri.getDada()); 
                 t4= System.currentTimeMillis();
                 System.out.println("Temps algorisme: "+(t4-t3));
 		ArrayList<Comunitat> retorna = new ArrayList<Comunitat>();

@@ -273,7 +273,6 @@ public class GrafNewman extends Graf {
                 for(Integer j: llista.adjacents(nodes).keySet()) {
                     double act = llista.get(nodes, j);
                     if(act != 0.0 ) llista.setDirected(nodes,j,(1/act));
-                    //else System.out.println("EEEEPS, hi ha una aresta amb pes 0.0 entre els nodes "+nodes+" i "+j);
                 }
              }
            return true;
@@ -440,7 +439,6 @@ public class GrafNewman extends Graf {
 		 *            node pel qual es passa per arribar a fi
 		 */
 		public void pushCami(int inici, int meitat, int fi) {
-			// System.out.println("ENTRO");
 			// El que fa aquest push es posar les arestes necessaries per
 			// arribar al node fi fent que el cami sigui de inici a meitat i de
 			// meitat a fi

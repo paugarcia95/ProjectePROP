@@ -117,14 +117,12 @@ public class VeureCerques extends javax.swing.JPanel {
     * En mostrar-se el panell, es carreguen les cerques realitzades per l'usuari actual
     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        System.out.println("COMPONENT SHOWN user: "+macro.getUserActual());
         vista.carregaCerquesFetes(jTextField7, LlistaCerques);  
     }//GEN-LAST:event_formComponentShown
     /*
     * En iniciar-se el programa, es carreguen les cerques realitzades anteriorment per l'usuari actual
     */
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
-        System.out.println("COMPONENT ADDED user: "+macro.getUserActual());
         vista.carregaCerquesFetes(jTextField7, LlistaCerques);  
     }//GEN-LAST:event_formComponentAdded
 

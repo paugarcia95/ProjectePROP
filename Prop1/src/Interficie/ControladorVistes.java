@@ -62,7 +62,7 @@ public class ControladorVistes {
                 nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)node, node.getChildCount());
                 num = Integer.parseInt(node.toString().substring(10))-1;
            }
-            if(!macro.getContUser().addCatComunitatCerca(macro.getUserActual(), cercaaqui, num,Penjades.getSelectedValue().toString())) System.out.println("ERROR en afegir");
+            if(!macro.getContUser().addCatComunitatCerca(macro.getUserActual(), cercaaqui, num,Penjades.getSelectedValue().toString())) JOptionPane.showMessageDialog(comp, "Error en afegir!", capsalera, ERROR_MESSAGE);
             if(comunaEliminar.contains(num))comunaEliminar.remove(num); 
             modelos.remove(Penjades.getSelectedIndex());
             Penjades.setSelectedIndex(0);
@@ -82,10 +82,7 @@ public class ControladorVistes {
                         return false;
                     }
                 }
-                else {
-                    System.out.println("Error, el fitxer es buit");
-                    return false;
-                }
+                else return false; 
         }
         return true;
     }
@@ -107,7 +104,6 @@ public class ControladorVistes {
     protected void carregaCerquesFetes(JTextField jTextField7,JList LlistaCerques){
         DefaultListModel llista = (DefaultListModel)LlistaCerques.getModel();
         boolean noguardat = false;
-        System.out.println("Mostro les cerques de l'usuari: "+macro.getUserActual()+", i te "+macro.getContUser().getNumCerquesUser(macro.getUserActual()));
         ArrayList<String> aux = macro.getContUser().getCerquesComunitats(macro.getUserActual());
         llista.removeAllElements();
         for(String cerca: aux) {
@@ -383,7 +379,7 @@ public class ControladorVistes {
         DefaultMutableTreeNode pare = (DefaultMutableTreeNode)node.getParent();
         if (!pare.equals(node.getRoot())) {
             Integer num = Integer.parseInt(pare.toString().substring(10))-1;
-            if(!macro.getContUser().removeCatComunitatCerca(macro.getUserActual(), cercaaqui, num,node.toString() )) System.out.println("ERROR en eliminar");
+            if(!macro.getContUser().removeCatComunitatCerca(macro.getUserActual(), cercaaqui, num,node.toString() )) JOptionPane.showMessageDialog(comp, "Error en eliminar!", capsalera, ERROR_MESSAGE);
         
             DefaultTreeModel aux = (DefaultTreeModel)Resultat.getModel();
             modelos.addElement(node.toString());
