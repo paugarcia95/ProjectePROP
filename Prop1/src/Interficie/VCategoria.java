@@ -3,7 +3,6 @@
  */
 package Interficie;
 
-
 import static Interficie.InterficieWiki.capsalera;
 import static Interficie.InterficieWiki.macro;
 import static Interficie.InterficieWiki.vista;

@@ -6,7 +6,6 @@ package Interficie;
 import static Interficie.InterficieWiki.auxguard;
 import static Interficie.InterficieWiki.capsalera;
 import static Interficie.InterficieWiki.cercaactual;
-import static Interficie.InterficieWiki.comp;
 import static Interficie.InterficieWiki.macro;
 import static Interficie.InterficieWiki.vista;
 import static Interficie.InterficieWiki.comunaEliminar;
@@ -15,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
-import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_CANCEL_OPTION;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -25,12 +23,15 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class VeureCercaAntiga extends javax.swing.JPanel {
 
-    private InterficieWiki pare;
-    private Integer numcerca;
+    private final InterficieWiki pare;
+    private final Integer numcerca;
     private Boolean modificacio;
     
     /**
      * Creates new form VeureCercaAntiga
+     * 
+     * @param par Frame principal de la interficie a la qual es coloca el panell
+     * @param num Identificador de la cerca que es vol visualitzar dins de les Cerques de l'usuari
      */
     public VeureCercaAntiga(JFrame par, Integer num) {
         initComponents();
@@ -219,9 +220,7 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
     */
     private void butAfegeixComuniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAfegeixComuniActionPerformed
         Integer quina = macro.getContUser().addComunitatCerca(macro.getUserActual(), numcerca)+1;
-        System.out.println("Afegeico la comunitat: "+quina);
         DefaultTreeModel arb = (DefaultTreeModel)Resultat1.getModel();
-
         DefaultMutableTreeNode act = (DefaultMutableTreeNode)arb.getRoot();
 
         arb.insertNodeInto(new DefaultMutableTreeNode("Comunitat "+quina), act, act.getChildCount());

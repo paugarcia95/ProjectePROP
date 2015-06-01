@@ -68,9 +68,9 @@ public class VPagina extends javax.swing.JDialog {
     } 
     private void omplirModificacions(){
         Collection<String> aux = macro.getContDades().getPagPC(pag);
-        for(String pag: aux) modelom.addElement(pag);
+        for(String pagi: aux) modelom.addElement(pagi);
         Collection<String> auxi = macro.getContDades().getPagCP(pag);
-        for(String pag: auxi) modelo1.addElement(pag);
+        for(String pagi: auxi) modelo1.addElement(pagi);
     }
     public void NomPag(String nomPag) {
         pag = nomPag;
@@ -81,10 +81,15 @@ public class VPagina extends javax.swing.JDialog {
         A_VeurePag.setVisible(true);
         this.setVisible(true);
     }
+
     /**
-     * Creates new form VPagina1
+     * Creates new form VPagina
+     * 
+     * @param parent Frame principal de la interficie a la qual es coloca el panell
+     * @param modalitat 
+     * @param adm 
      */
-    public VPagina(java.awt.Frame parent, boolean modalitat, Boolean adm) {
+    public VPagina(java.awt.Frame parent, Boolean modalitat, Boolean adm) {
         super(parent, modalitat);
         pare=parent;
         admin = adm;
@@ -608,7 +613,7 @@ public class VPagina extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Nimbus look and feel ·*/
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 

@@ -13,16 +13,19 @@ import static javax.swing.JOptionPane.YES_NO_OPTION;
 import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+
 /**
  *
  * @author cristina.fontanet
  */
 public class VeureUsers extends javax.swing.JPanel {
 
-    private InterficieWiki pare;
+    private final InterficieWiki pare;
     
     /**
      * Creates new form VeureUsers
+     * 
+     * @param par 
      */
     public VeureUsers(JFrame par) {
         initComponents();

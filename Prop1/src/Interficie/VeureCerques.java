@@ -19,9 +19,12 @@ import javax.swing.JFrame;
 public class VeureCerques extends javax.swing.JPanel {
 	
 
-    private InterficieWiki pare;
+    private final InterficieWiki pare;
+
     /**
      * Creates new form VeureCerques
+     * 
+     * @param par 
      */
     public VeureCerques(JFrame par) {
         initComponents();

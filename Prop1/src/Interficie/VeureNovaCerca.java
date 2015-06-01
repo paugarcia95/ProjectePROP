@@ -27,12 +27,15 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class VeureNovaCerca extends javax.swing.JPanel {
 	
-    private Integer numcerca;
-    private InterficieWiki pare;
+    private final Integer numcerca;
+    private final InterficieWiki pare;
     private Boolean modificacio;
     
     /**
      * Creates new form VisualitzaNovaCerca
+     * 
+     * @param par Frame principal de la interficie a la qual es coloca el panell
+     * @param cerca Identificador de la cerca que es vol visualitzar dins de les Cerques de l'usuari
      */
     public VeureNovaCerca(JFrame par, Integer cerca) {
         initComponents();
