@@ -1,6 +1,5 @@
 package drivers;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import persistencia.EntradaSortidaDades;
@@ -8,7 +7,7 @@ import domini.GrafDades;
 
 /**
  * @author Pau
- *
+ * 
  */
 
 public class DriverEntradaSortidaDadesGraf {
@@ -37,7 +36,7 @@ public class DriverEntradaSortidaDadesGraf {
 
 		GrafDades G = new GrafDades();
 
-		System.out.println("Escriu la ruta on vols llegir el graf");
+		System.out.println("Escriu la ruta on vols llegir el graf: ");
 		String ruta = in.next();
 
 	/*	try {

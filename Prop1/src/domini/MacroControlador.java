@@ -35,7 +35,7 @@ public class MacroControlador {
 	}
 	
         /**
-         *  Assigna l'usuari actual del programa
+         * Assigna l'usuari actual del programa
          * 
          * @param user usuari que fa el login
          */

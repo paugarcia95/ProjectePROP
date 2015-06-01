@@ -1139,7 +1139,7 @@ public class EntradaSortidaDades {
 
 
 /*
- * NORMES DE CARACTERS AL GUARDAR UN ARXIU:
+ *                NORMES DE CARACTERS AL GUARDAR UN ARXIU:
  * 
  * 
  * noms categories i pagines sense | ni * (NO pot tenir espais) nom usuari sense
