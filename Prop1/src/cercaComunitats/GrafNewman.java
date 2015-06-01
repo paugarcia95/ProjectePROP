@@ -28,7 +28,7 @@ public class GrafNewman extends Graf {
 	private Integer maxNumCM;       //Maxim nombre de camins minims que passen per qualsevol aresta
 	private Integer numCom;     //Numero de comunitats actuals
         
-	public static final class Aresta {
+	private static final class Aresta {
 		public Integer node1;
 		public Integer node2;
 		/**
@@ -36,9 +36,8 @@ public class GrafNewman extends Graf {
 		 * 
 		 * @param node1
 		 *            El node d'un dels extrems de l'aresta.
-		 * @param nodeB
+		 * @param node2
 		 *            El node de l'altre extrem.
-		 * @return Una Aresta formada per node1 i node2
 		 */
 		public Aresta(int node1, int node2) {
 			this.node1 = node1;
