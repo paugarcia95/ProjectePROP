@@ -81,9 +81,8 @@ public class AlgorismeNewmanGirvan {
 	 *         numcomunidades comunitats)
 	 */
 	public static HashSet<HashSet<String>> executaNum(Graf G, Integer numComunidades) {
-            System.out.println("executo num comunitats");
 		GrafNewman util = new GrafNewman(G);
-                util.invertirPesos();
+        util.invertirPesos();
 		util.calcularEdgeBetween();
 		Integer tamany = new Integer(G.getNodes().size());
 		if(numComunidades > tamany) numComunidades = tamany;
