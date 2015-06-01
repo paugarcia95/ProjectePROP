@@ -22,14 +22,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.QUESTION_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_CANCEL_OPTION;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
-import static javax.swing.JOptionPane.YES_OPTION;
-import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
-import static javax.swing.JOptionPane.OK_OPTION;
 import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.JSlider;
@@ -87,7 +80,7 @@ public class ControladorVistes {
                     if(!macro.carregaDadesFitxer(aux)) {
                         JOptionPane.showMessageDialog(comp, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
                         return false;
-                    };
+                    }
                 }
                 else {
                     System.out.println("Error, el fitxer es buit");

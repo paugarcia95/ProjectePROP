@@ -99,12 +99,6 @@ public class InterficieWiki extends javax.swing.JFrame {
        AP_Client.setComponentAt(4, Panell);
    }
    
-   protected void cancelaCerca(){
-       hilo.stop();
-       interrumput = true;
-       desactivaEspera();
-   }
-   
    protected void canviarACercaGuardada(){
       AP_Cerques.remove(AP_Cerques.getSelectedIndex());
       auxguard = 0;
