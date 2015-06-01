@@ -150,7 +150,7 @@ public class GrafNewman extends Graf {
 		super();
                 //MatriuNova
 		maxNumCM = maxi = maxj = numCom = 0;
-                NCM = new ArrayList<HashMap<Integer,Integer> >();
+        NCM = new ArrayList<HashMap<Integer,Integer> >();
 	}	
 	
 	public GrafNewman(Graf G) {
@@ -367,8 +367,7 @@ public class GrafNewman extends Graf {
 		return comunitats;
 	}
 
-	// ///////////// CODI PER ENTREGAR PERO QUE NO ES FUNCIONAL (Versions
-	// desfasades) ////////////////////////////////
+	// ///////////// CODI PER ENTREGAR PERO QUE NO ES FUNCIONAL (Versions desfasades) ////////////////////////////////
 
 	// ALGORISME DE FLOYD WARSHALL //
 
