@@ -6,6 +6,8 @@ package domini;
 
 import java.io.File;
 
+import persistencia.EntradaSortidaDades;
+
 /**
  * @author cristina.fontanet
  *

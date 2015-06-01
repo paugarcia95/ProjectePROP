@@ -3,7 +3,7 @@ package drivers;
 import java.io.IOException;
 import java.util.Scanner;
 
-import domini.EntradaSortidaDades;
+import persistencia.EntradaSortidaDades;
 import domini.GrafDades;
 
 /**
@@ -23,7 +23,7 @@ public class DriverEntradaSortidaDadesGraf {
 		System.out.println("");
 
 		System.out.println("Introdueix les Arestes (Per indicar que has acabat escriu el caracter \"#\"");
-		System.out.println("Format d'entrada: node1 tipusEnllaç node2");
+		System.out.println("Format d'entrada: node1 tipusEnllaï¿½ node2");
 
 		while (io.entrarUnaDada(G, true));
 		return G;
@@ -67,11 +67,11 @@ public class DriverEntradaSortidaDadesGraf {
 
 		while (true) {
 			System.out.println("");
-			System.out.println("Quina funció vol provar?");
+			System.out.println("Quina funciï¿½ vol provar?");
 			System.out.println("1. Llegir des d'un fitxer i escriure graf a un fitxer de text");
 			System.out.println("2. Llegir les entrades del graf una a una i escriure'l a un fitxer");
-			System.out.println("3. Llegir des d'un fitxer i escriure la representació en imatge del graf (cal haver especificat una ruta per defecte per guardar el graf auxiliar)");
-			System.out.println("4. Llegir les entrades del graf una a una i escriure'n la seva representació gràfica (cal haver especificat una ruta per defecte per guardar el graf auxiliar)");
+			System.out.println("3. Llegir des d'un fitxer i escriure la representaciï¿½ en imatge del graf (cal haver especificat una ruta per defecte per guardar el graf auxiliar)");
+			System.out.println("4. Llegir les entrades del graf una a una i escriure'n la seva representaciï¿½ grï¿½fica (cal haver especificat una ruta per defecte per guardar el graf auxiliar)");
 			System.out.println("5. Sortir");
 
 			EntradaSortidaDades io = new EntradaSortidaDades();
@@ -89,7 +89,7 @@ public class DriverEntradaSortidaDadesGraf {
 					System.out.println("Escriu la ruta on vols llegir el graf");
 					String ruta = in.next();
 
-					System.out.println("Escriu la ruta de destí");
+					System.out.println("Escriu la ruta de destï¿½");
 					io.traduirGrafDadesAImatge(ruta, in.next());
 					break;
 				case 4 :
@@ -99,7 +99,7 @@ public class DriverEntradaSortidaDadesGraf {
 					String aux = in.next();
 					io.escriureGrafDadesEnFitxer(G, aux);
 
-					System.out.println("Escriu la ruta de destí");
+					System.out.println("Escriu la ruta de destï¿½");
 					io.traduirGrafDadesAImatge(aux, in.next());
 					break;
 

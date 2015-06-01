@@ -1,4 +1,4 @@
-package domini;
+package persistencia;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,6 +13,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+
+import domini.Categoria;
+import domini.CercaComunitats;
+import domini.Comunitat;
+import domini.Criteris;
+import domini.GrafDades;
+import domini.Pagina;
+import domini.ParaulaValor;
+import domini.Usuari;
 
 /**
  * @author Pau
