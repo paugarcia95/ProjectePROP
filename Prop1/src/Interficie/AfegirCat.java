@@ -532,6 +532,7 @@ public class AfegirCat extends javax.swing.JPanel {
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
         Introduccio.setVisible(true);
         A_ModificaCateg.setVisible(false);
+        jOptionPane1.setVisible(false);
     }//GEN-LAST:event_formComponentAdded
 
 
