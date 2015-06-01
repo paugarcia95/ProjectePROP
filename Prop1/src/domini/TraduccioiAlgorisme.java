@@ -18,7 +18,7 @@ import cercaComunitats.Louvain;
 
 
 /**
- * @author Rafa
+ * @author Rafa Lucena
  *
  */
 
@@ -58,24 +58,17 @@ public class TraduccioiAlgorisme {
 	 */
 	private Double calcularpesentrecategories(Categoria c1, Categoria c2, Criteris cri, Integer potenciador){
 		Double solucio = new Double(0);	
-		
-		////////////**************Criteri de cat-cat, cat-sub o cat-sup********/////////////
-		Integer temp = potenciador; //Potenciador és la variable q toac(, é s a dir, la variable Cat-Cat, cat-sub o cat-supr)
+		Integer temp = potenciador;
 		if(temp == 5) solucio += 5;
 		else if(temp > 5) solucio += (5+(temp-5));
 		else solucio += 5-(5-temp);
-		/////////////*********************************************///////////
-		
-		/////////// Criteri Semblança //////////////////
-		if(cri.getSemblaNom() != 0) { // Si  està actiu
+		if(cri.getSemblaNom() != 0) {
 			Double aux = similarity(c1.getNom(),c2.getNom());
 			if(aux > 5) aux = 0.0;
 			else aux = 6 - aux;
 			solucio += cri.getSemblaNom()+aux;
 		}
-		/////////////////////////////////////////////////
-		
-		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
+		if(solucio < 0) solucio = 0.0;
 		return solucio;
 	}
 	
@@ -87,15 +80,10 @@ public class TraduccioiAlgorisme {
 	 */
 	private Double calcularpesentrecatpag(Criteris cri) {
 		Double solucio = new Double(0);	
-		
-		////////////**************Criteri de cat-cat i cat-pg********/////////////
 		Integer temp = cri.getRelacionsPag(); // Criteri de cat-cat i cat-pg
 		if(temp == 5) solucio += 5;
 		else if(temp > 5) solucio += 5-(temp-5);
 		else solucio += (5+(5-temp));
-		/////////////*********************************************///////////
-		
-		
 		if(solucio < 0) solucio = 0.0; // Evitem que suigi negatiu
 		return solucio;
 		
@@ -127,98 +115,87 @@ public class TraduccioiAlgorisme {
 	private Graf grafdadestograf (GrafDades graf, Criteris cri) {
 		Graf solucio = new Graf();
 		Collection<Categoria> llistat = graf.getCategories();
-		
-		///////////////////////ANEM A AFEGIR ELS NODES AL GRAF //////////////////////////
-		
-		if(cri.getSubconjCat().size() != 0) {// Si aquest criteri està actiu...(subconjunt)
+		if(cri.getSubconjCat().size() != 0) {
 			for(Categoria cataux : llistat) {
-				if(cri.getSubconjCat().contains(cataux.getNom())) {// I està a la llista d'acceptats
-					solucio.addNode(cataux.getNom()); // L'afegim
+				if(cri.getSubconjCat().contains(cataux.getNom())) {
+					solucio.addNode(cataux.getNom());
 				}
 			}
 		}
-		else { // Si no està actiu el criteri de subconjunt, fem servir la resta
-			if(cri.getParaulaClau().getNum() != 0) { // Si està activat el criteri de paraula clau
+		else { 
+			if(cri.getParaulaClau().getNum() != 0) { 
 				if(cri.getParaulaClau().getNum() == 5) {
 					String ayuda = cri.getParaulaClau().getParaula().substring(0, (cri.getParaulaClau().getParaula().length())/2); // Partim la paraula /2
-					for(Categoria cataux : llistat) { // Recorrem els nodes
-						if(cataux.getNom().indexOf(ayuda) != -1) { // Si la paraula/2 està inclosa al nom de la categoria
-							solucio.addNode(cataux.getNom()); //L'afegim al graf
+					for(Categoria cataux : llistat) {
+						if(cataux.getNom().indexOf(ayuda) != -1) {
+							solucio.addNode(cataux.getNom());
 						}
 					}
 				}
-				else { // Si el criteri val 10 és molt estricte
+				else {
 					String ayuda = cri.getParaulaClau().getParaula();
 					for(Categoria cataux : llistat) {
-						if(cataux.getNom().indexOf(ayuda) != -1) { // mirem q continguin exactament aquella paraula
+						if(cataux.getNom().indexOf(ayuda) != -1) {
 							solucio.addNode(cataux.getNom());
 						}
 					}
 				}
 			}
 			else {
-				if(cri.getPare().length() != 0) { // Criteri Pare actiu
-					Map<String, Categoria> mapcatsubcat = graf.getCategoria(cri.getPare()).getMapCSubC(); //Adquireixo totes les seves subcategories de pare
-					Stack<String> pila = new Stack<String>(); // Monto una pila
-					Stack<String> visitats = new Stack<String>(); // Monto una pila
-					visitats.push(cri.getPare()); // Fico al pare com a visitat
-					for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves subcategories
-						pila.push(e.getNom()); // Les guardo a la pila;
-						visitats.push(e.getNom());//Guardo també els seus fills com a visitats
+				if(cri.getPare().length() != 0) {
+					Map<String, Categoria> mapcatsubcat = graf.getCategoria(cri.getPare()).getMapCSubC(); 
+					Stack<String> pila = new Stack<String>();
+					Stack<String> visitats = new Stack<String>();
+					visitats.push(cri.getPare());
+					for(Categoria e : mapcatsubcat.values()) {
+						pila.push(e.getNom());
+						visitats.push(e.getNom());
 					}
-					solucio.addNode(cri.getPare()); /// Afageixo al pare al node solució
+					solucio.addNode(cri.getPare());
 					while(!pila.isEmpty()){
 						String aux = new String(pila.peek());
 						pila.pop();
 						solucio.addNode(aux);
 						Map<String, Categoria> mapcatsubcat2 = graf.getCategoria(aux).getMapCSubC();
-						for(Categoria e2 : mapcatsubcat2.values()) { // Per a cadascuna de les seves subcategories
-							if(!visitats.contains(e2.getNom()))  pila.push(e2.getNom()); // Les guardo a la pila;
+						for(Categoria e2 : mapcatsubcat2.values()) {
+							if(!visitats.contains(e2.getNom()))  pila.push(e2.getNom());
 						}
 					}
 				}
-				else { // Si no hi ha cap criteri, ho afegim tot
+				else {
 					for(Categoria cataux : llistat) {
 						solucio.addNode(cataux.getNom());
 					}
 				}
 			}
 			
-			if(cri.getEvitaCat().size() != 0) { // Si el criteri d'ignorar està actiu
-				HashSet<String> llistatactual = solucio.getNodes(); // Agafo tots els nodes afegits fins llavors
+			if(cri.getEvitaCat().size() != 0) {
+				HashSet<String> llistatactual = solucio.getNodes();
 				for(String it : llistatactual) {
-					if(cri.getEvitaCat().contains(it)) { // Miro si estan a la llista d'ignorats
-						solucio.removeNode(it); // I l'elimino si escau
+					if(cri.getEvitaCat().contains(it)) {
+						solucio.removeNode(it);
 					}
 				}
 			}
 		}
-		////////////////////////FI AFEGIR NODES////////////////////////////
 		
-		
-		///////////////ANEM A CREAR LES ARESTES AMB PESOS////////////////////////
-		
-		//////////////////ENTRE SUBCATEGORIES////////////////////////
-		HashSet<String> llistatactual = solucio.getNodes(); // Llista dels nodes a Solució (Graf)
-		for(String it : llistatactual) { // Per a cada node del graf( a seques)
-			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); //Adquireixo totes les seves subcategories
-			for(Categoria e : mapcatsubcat.values()) { // Per a cadascuna de les seves categories
-				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) { // Miro si està al graf Solució
-					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri,cri.getRelacionsCat())); // I si hi està, afageixo el pes
-				} // ESTO ES CREAR UNICAMENTE LAS RELACIONES ENTRE SUBCATS
+		HashSet<String> llistatactual = solucio.getNodes(); 
+		for(String it : llistatactual) {
+			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC();
+			for(Categoria e : mapcatsubcat.values()) { 
+				if(solucio.existeixNode(e.getNom()) && !solucio.existeixAresta(it, e.getNom()) && !solucio.existeixAresta(e.getNom(), it)) {
+					solucio.addAresta(it, e.getNom(), calcularpesentrecategories(graf.getCategoria(it),e,cri,cri.getRelacionsCat()));
+				}
 			}
 		}
-		
-		/////////////// CREAR RELACIONS ENTRE LES SUBCATS DE UNA CAT ////////////
-		
-		for(String it : llistatactual) { // Per a cada node del graf( a seques)
+		for(String it : llistatactual) {
 			Map<String,ArrayList<String>> jacreat = new HashMap<String,ArrayList<String>>();
 			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSubC(); 
-			for (Categoria s : mapcatsubcat.values()) { // RELACIONES ENTRE SI LES SUBCATS DE IT
+			for (Categoria s : mapcatsubcat.values()) {
 				for (Categoria q : mapcatsubcat.values()) {
 					if(!s.getNom().equals(q.getNom())) {
-						if(solucio.addAresta(s.getNom(), q.getNom(), calcularpesentrecategories(s,q,cri, cri.getRelacionsSubs()))){ // Si no existeix l'aresta la creem
-							ArrayList<String> aux = jacreat.get(s.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+						if(solucio.addAresta(s.getNom(), q.getNom(), calcularpesentrecategories(s,q,cri, cri.getRelacionsSubs()))){
+							ArrayList<String> aux = jacreat.get(s.getNom());
 							if(aux == null) {
 								ArrayList<String> aux3 = new ArrayList<String>();
 								aux3.add(q.getNom());
@@ -229,7 +206,7 @@ public class TraduccioiAlgorisme {
 								jacreat.put(s.getNom(), aux);
 							}
 							
-							ArrayList<String> aux2 = jacreat.get(q.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+							ArrayList<String> aux2 = jacreat.get(q.getNom());
 							if(aux2 == null) {
 								ArrayList<String> aux3 = new ArrayList<String>();
 								aux3.add(s.getNom());
@@ -240,8 +217,8 @@ public class TraduccioiAlgorisme {
 								jacreat.put(q.getNom(), aux2);
 							}
 						}
-						else if(!mirarartificial(s,q,jacreat)) { // En el cas de q no hagi pogut crear l'aresta perq aquesta ja existia, mirem si No era artificial
-							ArrayList<String> aux = jacreat.get(s.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL" ( tot i q no ho sigui, ho maquem)
+						else if(!mirarartificial(s,q,jacreat)) {
+							ArrayList<String> aux = jacreat.get(s.getNom());
 							if(aux == null) {
 								ArrayList<String> aux3 = new ArrayList<String>();
 								aux3.add(q.getNom());
@@ -252,7 +229,7 @@ public class TraduccioiAlgorisme {
 								jacreat.put(s.getNom(), aux);
 							}
 							
-							ArrayList<String> aux2 = jacreat.get(q.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+							ArrayList<String> aux2 = jacreat.get(q.getNom());
 							if(aux2 == null) {
 								ArrayList<String> aux3 = new ArrayList<String>();
 								aux3.add(s.getNom());
@@ -270,21 +247,15 @@ public class TraduccioiAlgorisme {
 					}
 				}
 			}
-		}
-		
-
-		//////////////////////////////////////////////////////////////
-		
-		/////////////// CREAR RELACIONS ENTRE LES SUPERCATS DE UNA CAT ////////////
-			
-		for(String it : llistatactual) { // Per a cada node del graf( a seques)
+		}	
+		for(String it : llistatactual) {
 			Map<String,ArrayList<String>> jacreat = new HashMap<String,ArrayList<String>>();
 			Map<String, Categoria> mapcatsubcat = graf.getCategoria(it).getMapCSupC(); 
-			for (Categoria s : mapcatsubcat.values()) { // RELACIONES ENTRE SI LES SUBCATS DE IT
+			for (Categoria s : mapcatsubcat.values()) {
 				for (Categoria q : mapcatsubcat.values()) {
 					if(!s.getNom().equals(q.getNom())) {
-						if(solucio.addAresta(s.getNom(), q.getNom(), calcularpesentrecategories(s,q,cri,cri.getRelacionsSuper()))){ // Si no existeix l'aresta la creem
-							ArrayList<String> aux = jacreat.get(s.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+						if(solucio.addAresta(s.getNom(), q.getNom(), calcularpesentrecategories(s,q,cri,cri.getRelacionsSuper()))){
+							ArrayList<String> aux = jacreat.get(s.getNom());
 							if(aux == null) {
 								ArrayList<String> aux3 = new ArrayList<String>();
 								aux3.add(q.getNom());
@@ -294,8 +265,7 @@ public class TraduccioiAlgorisme {
 								aux.add(q.getNom());
 								jacreat.put(s.getNom(), aux);
 							}
-							
-							ArrayList<String> aux2 = jacreat.get(q.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+							ArrayList<String> aux2 = jacreat.get(q.getNom());
 							if(aux2 == null) {
 								ArrayList<String> aux3 = new ArrayList<String>();
 								aux3.add(s.getNom());
@@ -306,8 +276,8 @@ public class TraduccioiAlgorisme {
 								jacreat.put(q.getNom(), aux2);
 							}
 						}
-						else if(!mirarartificial(s,q,jacreat)) { // En el cas de q no hagi pogut crear l'aresta perq aquesta ja existia, mirem si No era artificial
-							ArrayList<String> aux = jacreat.get(s.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL" ( tot i q no ho sigui, ho maquem)
+						else if(!mirarartificial(s,q,jacreat)) {
+							ArrayList<String> aux = jacreat.get(s.getNom());
 							if(aux == null) {
 								ArrayList<String> aux3 = new ArrayList<String>();
 								aux3.add(q.getNom());
@@ -318,7 +288,7 @@ public class TraduccioiAlgorisme {
 								jacreat.put(s.getNom(), aux);
 							}
 							
-							ArrayList<String> aux2 = jacreat.get(q.getNom()); // LA GUARDEM COM A ARESTA "ARTIFICIAL"
+							ArrayList<String> aux2 = jacreat.get(q.getNom());
 							if(aux2 == null) {
 								ArrayList<String> aux3 = new ArrayList<String>();
 								aux3.add(s.getNom());
@@ -337,23 +307,17 @@ public class TraduccioiAlgorisme {
 				}
 			}
 		}
-		
-	
-		/////////////////////////////////////////////////////////////
-		
-		/////////////ENTRE PAGINES//////////////////
 		Collection<Pagina> paginat = graf.getPagines();
-		
 		for(Pagina p : paginat) {
-			Map<String, Categoria> pagacat = p.getCP(); // Cosneguim les categories a les q apunta la pag
-			Collection<Categoria> cates = pagacat.values(); // Agafo les categories i les paso a una Collection
-			ArrayList<Categoria> seguiment = new ArrayList<Categoria>(); // Creo una arraylist
+			Map<String, Categoria> pagacat = p.getCP();
+			Collection<Categoria> cates = pagacat.values();
+			ArrayList<Categoria> seguiment = new ArrayList<Categoria>();
 			for(Categoria ka : cates){
 				seguiment.add(ka);
 			}
 			for(int q = 0; q < seguiment.size(); ++q){
 				for(int u = q+1; u < seguiment.size(); ++u) {
-					if(solucio.existeixNode(seguiment.get(q).getNom()) && solucio.existeixNode(seguiment.get(u).getNom())) { // Si les categories existeixen al graf Solució
+					if(solucio.existeixNode(seguiment.get(q).getNom()) && solucio.existeixNode(seguiment.get(u).getNom())) {
 						if(solucio.existeixAresta(seguiment.get(q).getNom(), seguiment.get(u).getNom())) {
 							Double pesactual = solucio.getPes(seguiment.get(q).getNom(), seguiment.get(u).getNom());
 							pesactual += calcularpesentrecatpag(cri);
@@ -412,15 +376,12 @@ public class TraduccioiAlgorisme {
                 t4= System.currentTimeMillis();
                 System.out.println("Temps algorisme: "+(t4-t3));
 		ArrayList<Comunitat> retorna = new ArrayList<Comunitat>();
-		//it es un iterador que va recorrent el primer HashSet de HashSet<HashSet<String>> (el conjunt de comunitats
 		Iterator<HashSet<String>> it = solucio.iterator();
 		int idaux = 0;
 		while(it.hasNext()) {
-			//it2 es un iterador que va recorrent el segon HashSet de HashSet<HashSet<String>> (les comunitats)
 			Iterator<String> it2 = it.next().iterator();
 			Comunitat aux = new Comunitat();
                         System.out.println("Comunitat "+idaux+":");
-			//afegim a la comunitat aux totes les categories del HashSet<String>
 			while(it2.hasNext()){
                             String impr= it2.next();
                             System.out.println("    "+impr);
@@ -428,7 +389,6 @@ public class TraduccioiAlgorisme {
 			}
 			aux.setId(idaux);
 			++idaux;
-			//la comunitat aux ja conte totes les categories i l'afegim al retorna
 			retorna.add(aux);
 		}
 		return retorna;
