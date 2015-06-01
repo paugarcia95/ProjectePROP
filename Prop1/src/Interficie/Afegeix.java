@@ -5,10 +5,10 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.capsalera;
-import static Interficie.InterficiaProva1.comp;
-import static Interficie.InterficiaProva1.macro;
-import static Interficie.InterficiaProva1.vista;
+import static Interficie.InterficieWiki.capsalera;
+import static Interficie.InterficieWiki.comp;
+import static Interficie.InterficieWiki.macro;
+import static Interficie.InterficieWiki.vista;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_OPTION;
 

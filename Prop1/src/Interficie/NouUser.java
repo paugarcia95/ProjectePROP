@@ -3,20 +3,20 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.vista;
+import static Interficie.InterficieWiki.vista;
 import javax.swing.JFrame;
 /**
  *
  * @author cristina.fontanet
  */
 public class NouUser extends javax.swing.JPanel {
-    private InterficiaProva1 pare;
+    private InterficieWiki pare;
     /**
      * Creates new form NouUser
      */
     public NouUser(JFrame par) {
         initComponents();
-        pare = (InterficiaProva1)par;
+        pare = (InterficieWiki)par;
     }
 
     /**

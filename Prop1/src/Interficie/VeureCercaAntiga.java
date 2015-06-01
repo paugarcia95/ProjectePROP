@@ -3,13 +3,13 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.auxguard;
-import static Interficie.InterficiaProva1.capsalera;
-import static Interficie.InterficiaProva1.cercaactual;
-import static Interficie.InterficiaProva1.comp;
-import static Interficie.InterficiaProva1.macro;
-import static Interficie.InterficiaProva1.vista;
-import static Interficie.InterficiaProva1.comunaEliminar;
+import static Interficie.InterficieWiki.auxguard;
+import static Interficie.InterficieWiki.capsalera;
+import static Interficie.InterficieWiki.cercaactual;
+import static Interficie.InterficieWiki.comp;
+import static Interficie.InterficieWiki.macro;
+import static Interficie.InterficieWiki.vista;
+import static Interficie.InterficieWiki.comunaEliminar;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -25,7 +25,7 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class VeureCercaAntiga extends javax.swing.JPanel {
 
-    private InterficiaProva1 pare;
+    private InterficieWiki pare;
     private Integer numcerca;
     private Boolean modificacio;
     
@@ -34,7 +34,7 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
      */
     public VeureCercaAntiga(JFrame par, Integer num) {
         initComponents();
-        pare = (InterficiaProva1)par;
+        pare = (InterficieWiki)par;
         numcerca = num;
         modificacio = false;
     }

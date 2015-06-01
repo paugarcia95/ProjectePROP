@@ -3,45 +3,46 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.vista;
-import static Interficie.InterficiaProva1.capsalera;
-import static Interficie.InterficiaProva1.comp;
-import static Interficie.InterficiaProva1.cercaactual;
-import static Interficie.InterficiaProva1.auxguard;
-import static Interficie.InterficiaProva1.interrumput;
-import static Interficie.InterficiaProva1.macro;
-import static Interficie.InterficiaProva1.hilo;
+import static Interficie.InterficieWiki.vista;
+import static Interficie.InterficieWiki.capsalera;
+import static Interficie.InterficieWiki.comp;
+import static Interficie.InterficieWiki.cercaactual;
+import static Interficie.InterficieWiki.auxguard;
+import static Interficie.InterficieWiki.interrumput;
+import static Interficie.InterficieWiki.macro;
+import static Interficie.InterficieWiki.hilo;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_CANCEL_OPTION;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 import static javax.swing.JOptionPane.YES_OPTION;
-import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
-import static javax.swing.JOptionPane.OK_OPTION;
-import static javax.swing.JOptionPane.PLAIN_MESSAGE;
-import javax.swing.JTabbedPane;
 /**
  *
  * @author cristina.fontanet
  */
 public class CreaComunitat extends javax.swing.JPanel {
-
-    private InterficiaProva1 pare;
-     //Per a saber quin tab hi ha seleccionat en el moment d'acabar la cerca
-    private JTabbedPane taula; 
-    //private Thread hilo;    //Thread per a fer la cerca
+    /**
+     * Interficie a la qual es coloca el panell, per poder interectuar amb ella
+     */
+    private final InterficieWiki pare;
+    /**
+     * Per a saber quin tab hi ha seleccionat en el moment d'acabar la cerca
+     */
+    private final JTabbedPane taula; 
 
     /**
      * Creates new form CreaComunitat
+     * 
+     * @param par Frame principal de la interficie a la qual es coloca el panell
+     * @param dequi TabbedPane a on es coloca el panell
      */
     public CreaComunitat(JFrame par, JTabbedPane dequi) {
         initComponents();
-        pare = (InterficiaProva1)par;
+        pare = (InterficieWiki)par;
         taula = dequi;
     }
 
@@ -99,12 +100,12 @@ public class CreaComunitat extends javax.swing.JPanel {
         jScrollPane8 = new javax.swing.JScrollPane();
         Algorismes = new javax.swing.JTree();
         Cdada = new javax.swing.JSpinner();
-        Crelacio2 = new javax.swing.JSlider();
+        CrelacioSup = new javax.swing.JSlider();
         CrelacioPag = new javax.swing.JSlider();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        Crelacio3 = new javax.swing.JSlider();
+        CrelacioSub = new javax.swing.JSlider();
         jLabel2 = new javax.swing.JLabel();
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Algorismes");
@@ -328,18 +329,18 @@ public class CreaComunitat extends javax.swing.JPanel {
 
         Cdada.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
-        Crelacio2.setForeground(new java.awt.Color(0, 0, 153));
-        Crelacio2.setMajorTickSpacing(1);
-        Crelacio2.setMaximum(10);
-        Crelacio2.setMinorTickSpacing(1);
-        Crelacio2.setPaintLabels(true);
-        Crelacio2.setPaintTicks(true);
-        Crelacio2.setSnapToTicks(true);
-        Crelacio2.setValue(5);
-        Crelacio2.setAutoscrolls(true);
-        Crelacio2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Crelacio2.setInheritsPopupMenu(true);
-        Crelacio2.setValueIsAdjusting(true);
+        CrelacioSup.setForeground(new java.awt.Color(0, 0, 153));
+        CrelacioSup.setMajorTickSpacing(1);
+        CrelacioSup.setMaximum(10);
+        CrelacioSup.setMinorTickSpacing(1);
+        CrelacioSup.setPaintLabels(true);
+        CrelacioSup.setPaintTicks(true);
+        CrelacioSup.setSnapToTicks(true);
+        CrelacioSup.setValue(5);
+        CrelacioSup.setAutoscrolls(true);
+        CrelacioSup.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CrelacioSup.setInheritsPopupMenu(true);
+        CrelacioSup.setValueIsAdjusting(true);
 
         CrelacioPag.setForeground(new java.awt.Color(0, 0, 153));
         CrelacioPag.setMajorTickSpacing(1);
@@ -360,18 +361,18 @@ public class CreaComunitat extends javax.swing.JPanel {
 
         jLabel1.setText("Importancia de la relació entre pàgines i categories");
 
-        Crelacio3.setForeground(new java.awt.Color(0, 0, 153));
-        Crelacio3.setMajorTickSpacing(1);
-        Crelacio3.setMaximum(10);
-        Crelacio3.setMinorTickSpacing(1);
-        Crelacio3.setPaintLabels(true);
-        Crelacio3.setPaintTicks(true);
-        Crelacio3.setSnapToTicks(true);
-        Crelacio3.setValue(5);
-        Crelacio3.setAutoscrolls(true);
-        Crelacio3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Crelacio3.setInheritsPopupMenu(true);
-        Crelacio3.setValueIsAdjusting(true);
+        CrelacioSub.setForeground(new java.awt.Color(0, 0, 153));
+        CrelacioSub.setMajorTickSpacing(1);
+        CrelacioSub.setMaximum(10);
+        CrelacioSub.setMinorTickSpacing(1);
+        CrelacioSub.setPaintLabels(true);
+        CrelacioSub.setPaintTicks(true);
+        CrelacioSub.setSnapToTicks(true);
+        CrelacioSub.setValue(5);
+        CrelacioSub.setAutoscrolls(true);
+        CrelacioSub.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CrelacioSub.setInheritsPopupMenu(true);
+        CrelacioSub.setValueIsAdjusting(true);
 
         jLabel2.setText("La paraula clau no pot contenir |, * ni +");
 
@@ -466,7 +467,7 @@ public class CreaComunitat extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel31)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Crelacio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(CrelacioSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
@@ -480,7 +481,7 @@ public class CreaComunitat extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel30)
                                 .addGap(18, 18, 18)
-                                .addComponent(Crelacio3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(CrelacioSub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -516,11 +517,11 @@ public class CreaComunitat extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel30)
                                         .addGap(23, 23, 23))
-                                    .addComponent(Crelacio3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CrelacioSub, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(13, 13, 13)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel31)
-                                    .addComponent(Crelacio2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CrelacioSup, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(CrelacioPag, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -635,8 +636,7 @@ public class CreaComunitat extends javax.swing.JPanel {
     */
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         if(modelo1.getSize()>0){
-            int n = Lsub1.getSelectedIndex();
-            modelo1.removeElementAt(n);
+            modelo1.removeElementAt(Lsub1.getSelectedIndex());
         }
         else JOptionPane.showMessageDialog(this, "Has de seleccionar algun element de la llista de categories a ignorar!", capsalera, WARNING_MESSAGE);
         Lsub1.clearSelection();
@@ -654,8 +654,7 @@ public class CreaComunitat extends javax.swing.JPanel {
     */
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         if(modelo2.getSize()>0){
-            int n = Lsub2.getSelectedIndex();
-            modelo2.removeElementAt(n);
+            modelo2.removeElementAt(Lsub2.getSelectedIndex());
         }
         else JOptionPane.showMessageDialog(this, "Has de seleccionar algun element de la llista de pàgines a ignorar!", capsalera, WARNING_MESSAGE);
         Lsub2.clearSelection();
@@ -668,10 +667,11 @@ public class CreaComunitat extends javax.swing.JPanel {
     else if(Cpc.getText().length()>0 && (Cpc.getText().contains("|")||Cpc.getText().contains("+")||Cpc.getText().contains("*"))) JOptionPane.showMessageDialog(this, "La paraula clau conté algun caràcter prohibit", capsalera, ERROR_MESSAGE);
     else {
         Runnable cerca = new Runnable() {
+            @Override 
             public void run() {
                 try {
                         interrumput = false;
-                       if(vista.ferCerca(Algorismes,(Integer)Cdada.getValue(), Lsub, Lsub2, Lsub1, CpcImp.getValue(), Cpc, Csembla.getValue(), CrelacioCat.getValue(), Cbusca1, CrelacioPag.getValue(), Crelacio2.getValue(), Crelacio3.getValue())){
+                       if(vista.ferCerca(Algorismes,(Integer)Cdada.getValue(), Lsub, Lsub2, Lsub1, CpcImp.getValue(), Cpc, Csembla.getValue(), CrelacioCat.getValue(), Cbusca1, CrelacioPag.getValue(), CrelacioSup.getValue(), CrelacioSub.getValue())){
                         pare.desactivaEspera();
                         pare.revalidaCerques();
                             if(taula.getSelectedIndex()==4) {
@@ -689,8 +689,7 @@ public class CreaComunitat extends javax.swing.JPanel {
                             }
                     }
                 }
-                catch (Exception e)
-                {
+                catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -705,10 +704,8 @@ public class CreaComunitat extends javax.swing.JPanel {
     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         Boolean nova;
-        System.out.println("Mostra Fer cerca, amb auxguard: "+auxguard);
-        if(auxguard==0) nova = false;
-        else nova = true;
-        vista.preaparaCreacioNovaCerca(nova, LCTotes, LPTotes, Algorismes, Lsub, Lsub2, Lsub1, Cbusca1, Cpc, CpcImp, Csembla, CrelacioCat, Cdada,CrelacioPag,Crelacio2);
+        nova = auxguard != 0;
+        vista.preaparaCreacioNovaCerca(nova, LCTotes, LPTotes, Algorismes, Lsub, Lsub2, Lsub1, Cbusca1, Cpc, CpcImp, Csembla, CrelacioCat, Cdada,CrelacioPag,CrelacioSup, CrelacioSub);
     }//GEN-LAST:event_formComponentShown
 
 
@@ -728,10 +725,10 @@ public class CreaComunitat extends javax.swing.JPanel {
     private javax.swing.JButton CercaB;
     private javax.swing.JTextField Cpc;
     private javax.swing.JSlider CpcImp;
-    private javax.swing.JSlider Crelacio2;
-    private javax.swing.JSlider Crelacio3;
     private javax.swing.JSlider CrelacioCat;
     private javax.swing.JSlider CrelacioPag;
+    private javax.swing.JSlider CrelacioSub;
+    private javax.swing.JSlider CrelacioSup;
     private javax.swing.JSlider Csembla;
     private javax.swing.JButton EliminaCsub;
     private javax.swing.JList LCTotes;

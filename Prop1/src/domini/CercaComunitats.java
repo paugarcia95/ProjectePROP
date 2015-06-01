@@ -148,15 +148,9 @@ public class CercaComunitats {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna la Comunitat amb índex i
-	 */
-	
-	/**
-	 * Elimina la relació "és supercategoria".
 	 * 
-	 * @param nomCategoria <code>key</code> que serà eliminada de <code>cSupC</code>
-	 * @return 
+	 * @param i l'índex de la comunitat que retorna
+	 * @return la comunitat amb índex especificat. <code>null</code> si l'índex no és positiu i inferior al nombre de comunitats
 	 */
 	public Comunitat getComunitat(Integer i) {
 		if (i >= 0 && i < comunitats.size()) return comunitats.get(i);
@@ -164,25 +158,27 @@ public class CercaComunitats {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna el nombre de comunitats que componen la cerca
-	 */
+	 * @return el nombre de comunitats que té la cerca com a resultat
+	 */	
 	public Integer getNumComunitats() {
 		return comunitats.size();
 	}	
 	
 	/**
-	 * Pre: comunitat no pertany a comunitats
-	 * Post: comunitat pertanty a comunitats amb índex retornat
+	 * Afegeix una nova comunitat al resultat de la cerca.
+	 * 
+	 * @param comunitat la comunitat que serà afegida
 	 */
 	public Integer addComunitat(Comunitat comunitat) {
 		comunitats.add(comunitat);
 		return comunitats.size() - 1;
 	}
 	
-	/** 
-	 * Pre: i es l'índex d'una Comunitat existent a comunitats && i < comunitas.size()
-	 * Post: La Comunitat amb índex i ja no pertany a comunitats
+	/**
+	 * Elimina la comunitat amb índex especificat.
+	 * 
+	 * @param i l'índex de la comunitat que elimina
+	 * @return <code>true</code> si s'ha eliminat la comunitat amb índex especificat. <code>false</code> si l'índex no és positiu i inferior al nombre de comunitats
 	 */
 	public Boolean removeComunitat(Integer i) {
 		if (i >= 0 && i < comunitats.size()) {
@@ -193,8 +189,11 @@ public class CercaComunitats {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: categoria pertanty a la Comunitat amb índex comunitat i retorna <code>true</code>, retorna <code>false</code> altrament
+	 * Afegeix una nova categoria a una comunitat del resultat de la cerca.
+	 * 
+	 * @param comunitat l'índex de la comunitat a la que se li afegeix la categoria
+	 * @param categoria la categoria que serà afegida a la comunitat
+	 * @return <code>true</code> si s'ha afegit la categoria. <code>false</code> si l'índex no és positiu i inferior al nombre de comunitats o si la categoria ja pertanyia a la comunitat especificada
 	 */
 	public Boolean addCategoriaComunitat(Integer comunitat, String categoria) {
 		if (comunitat >= 0 && comunitat < comunitats.size()) {
@@ -202,10 +201,13 @@ public class CercaComunitats {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Pre: Cert
-	 * Post: categoria no pertany a la Comunitat amb índex comunitat i retorna <code>true</code>, retorna <code>false</code> altrament
+	 * Elimina una categoria d'una comunitat del resultat de la cerca.
+	 * 
+	 * @param comunitat l'índex de la comunitat a la que se li elimina la categoria
+	 * @param categoria la categoria que serà eliminada de la comunitat
+	 * @return <code>true</code> si s'ha eliminat la categoria. <code>false</code> si l'índex no és positiu i inferior al nombre de comunitats o si la categoria no pertanyia a la comunitat especificada
 	 */
 	public Boolean removeCategoriaComunitat(Integer comunitat, String categoria) {
 		if (comunitat >= 0 && comunitat < comunitats.size()) {
@@ -213,10 +215,11 @@ public class CercaComunitats {
 		}
 		return false;
 	}
-		
+	
 	/**
-	 * Pre: Cert
-	 * Post: comunitats = array i nComunitats = array.size()
+	 * Assigna a la cerca un nou conjunt de comunitats.
+	 * 
+	 * @param array el resultat de la cerca
 	 */
 	public void setComunitats(ArrayList<Comunitat> array) {
 		if (array == null) comunitats = new ArrayList<Comunitat>();
@@ -224,8 +227,7 @@ public class CercaComunitats {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Les comunitats estan ordenades de més a menys categories
+	 * Ordena el resultat de la cerca per ordre decreixent en funció del nombre de categories. 
 	 */
 	public void ordenaComunitats() {
 		Collections.sort(comunitats, new CustomComparator());

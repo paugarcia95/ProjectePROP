@@ -1,24 +1,22 @@
 /**
  * Panell dels noms de totes les categories existents al sistema 
  */
+
 package Interficie;
 
-import static Interficie.InterficiaProva1.vista;
-import javax.swing.JFrame;
+
+import static Interficie.InterficieWiki.vista;
 
 /**
  *
  * @author cristina.fontanet
  */
 public class BuscaCat extends javax.swing.JPanel {
-    private InterficiaProva1 pare;
-
     /**
      * Creates new form BuscaCat
      */
-    public BuscaCat(JFrame par) {
+    public BuscaCat() {
         initComponents();
-        pare = (InterficiaProva1)par;
     }
 
     /**
