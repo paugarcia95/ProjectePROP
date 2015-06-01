@@ -70,6 +70,14 @@ public class AfegirEnll extends javax.swing.JPanel {
         jTextField4 = new javax.swing.JTextField();
         jOptionPane1 = new javax.swing.JOptionPane();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 formComponentAdded(evt);
@@ -458,6 +466,16 @@ public class AfegirEnll extends javax.swing.JPanel {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        vista.omplePaginesExistentsConcret(jList2,Cbusca2);
+        vista.ompleCategoriesExistentsConcret(jList1,Cbusca);
+    }//GEN-LAST:event_formComponentHidden
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        vista.omplePaginesExistentsConcret(jList2,Cbusca2);
+        vista.ompleCategoriesExistentsConcret(jList1,Cbusca);
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
