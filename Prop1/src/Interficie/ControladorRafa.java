@@ -27,8 +27,4 @@ public class ControladorRafa {
                 AP_Afegeix.add(A_Afegeix,"Eliminació de dades");
     }
     
-    
-    
-    
-    
 }

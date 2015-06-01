@@ -184,7 +184,6 @@ public class InterficieWiki extends javax.swing.JFrame {
             AP_Inici.setuser(user);
             if(macro.getContUser().isAdmin(user)) {
                 userAdmin = true;
-                rafa.ini();
                 AP_Client.add(AP_Afegeix, "Afegeix");
                 A_VeureUsers = new VeureUsers(this);
                 AP_Client.add(A_VeureUsers, "Usuaris existents");
@@ -192,7 +191,9 @@ public class InterficieWiki extends javax.swing.JFrame {
             else userAdmin = false;
             AP_Client.setVisible(true);
             AP_Principal.setVisible(false);
-            AP_Client.setSelectedIndex(0); 
+            AP_Client.setSelectedIndex(0);
+            Username.setText("");
+            Password.setText("");
         }
         else JOptionPane.showMessageDialog(this, "La contrassenya es incorrecta.", capsalera, ERROR_MESSAGE);
     }
@@ -231,6 +232,7 @@ public class InterficieWiki extends javax.swing.JFrame {
         AP_Client.add(Panell, "Categories i pagines");
         Panell = new CreaComunitat(this,AP_Client);
         AP_Client.add(Panell, "Fer Cerca");
+        rafa.ini();
         if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
         
     }

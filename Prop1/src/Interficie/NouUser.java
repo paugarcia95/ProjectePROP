@@ -55,7 +55,7 @@ public class NouUser extends javax.swing.JPanel {
 
         jLabel8.setText("Username");
 
-        jButton1.setText("Comproba Disponibilitat");
+        jButton1.setText("Comprova Disponibilitat");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
