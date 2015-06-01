@@ -270,6 +270,7 @@ public class VeureNovaCerca extends javax.swing.JPanel {
       if(modificacio)macro.getContUser().ordenaCerca(macro.getUserActual(), numcerca);
     }//GEN-LAST:event_formComponentHidden
     
+    
     /*
     * Descarta la cerca de comunitats actual
     */
