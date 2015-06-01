@@ -23,57 +23,14 @@ import cercaComunitats.Louvain;
  */
 
 
-public class TraduccioiAlgorisme {
-
-	/**
-	 * Calcula la similaritat
-	 * @param s1 String s2 String
-	 * @return Retorna la similaritat que tenen les cats
-	 */
-	  /*private static double similarity(String s1, String s2) {
-	        Double solu = new Double (0);
-	        
-
-	        if(s2.indexOf(s1) != -1) { //Si l'inclou sencer
-	        	solu += s1.length();
-	        	return solu;
-	        }
-	        if(s1.indexOf(s2) != -1) {//Si l'inclou sencer
-	        	solu += s2.length();
-	        	return solu;
-	        }
-	        
-	        String ayuda = s1.substring(0,s1.length()/2);
-	        if(s2.indexOf(ayuda) != -1) {//Si l'inclou partit
-	        	solu += ayuda.length();
-	        	return solu;
-	        }
-	        ayuda = s2.substring(0,s2.length()/2);
-	        if(s1.indexOf(ayuda) != -1){//Si l'inclou partit
-	        	solu += ayuda.length();
-	        	return solu;
-	        }
-	        ayuda = s1.substring(s1.length()/2,s1.length());
-	        if(s2.indexOf(ayuda) != -1){//Si l'inclou partit ( altre meitat)
-		        solu += ayuda.length();
-		        return solu;
-		    }
-	        ayuda = s2.substring(s2.length()/2,s2.length());
-		    if(s1.indexOf(ayuda) != -1) {//Si l'inclou partit ( altre meitat)
-		    	solu += ayuda.length();
-		    	return solu;
-	        }
-	        
-	        return solu;
-	    }*/
-	
+public class TraduccioiAlgorisme {	
 	/**
 	 * Calcula la similaritat entre dues paraules
 	 * @param a String a comparar
 	 * @param b String a comparar
-	 * @return Retorna el numero de canvis q fan falta per a que aquelles paraules siguin iguals
+	 * @return Retorna el numero de canvis que fan falta per a que aquelles paraules siguin iguals
 	 */
-	  public static double similarity(String a, String b) {
+	  private static double similarity(String a, String b) {
 	        a = a.toLowerCase();
 	        b = b.toLowerCase();
 	        int [] costs = new int [b.length() + 1];
@@ -145,7 +102,7 @@ public class TraduccioiAlgorisme {
 	}
 	
 	/**
-	 * Diu si una relacio és "artificial",e sa  dir, creades per sub/sup categories comuns
+	 * Diu si una relacio és "artificial",es a dir, creades per sub/sup categories comuns
 	 * @param c1 Categoria c2 Categoria
 	 * @return True si es artificial, false si no ho és
 	 */
@@ -165,7 +122,7 @@ public class TraduccioiAlgorisme {
 	 * @param cri Criteris passats
 	 * @return Retorna un graf transformat a partir de l'original
 	 */
-	public Graf grafdadestograf (GrafDades graf, Criteris cri) {
+	private Graf grafdadestograf (GrafDades graf, Criteris cri) {
 		Graf solucio = new Graf();
 		Collection<Categoria> llistat = graf.getCategories();
 		
@@ -380,7 +337,7 @@ public class TraduccioiAlgorisme {
 		}
 		
 	
-		//////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////
 		
 		/////////////ENTRE PAGINES//////////////////
 		Collection<Pagina> paginat = graf.getPagines();
@@ -417,7 +374,7 @@ public class TraduccioiAlgorisme {
 	 * @param cri Criteris passats
 	 * @return Retorna un conjunt de comunitats resultant d'aplicar els algorismes al graf transformat
 	 */
-	public ArrayList<Comunitat> traduiricercar (GrafDades graf, Criteris cri) { // ÉS PRIVADA, ESTÀ EN PUBLICA PEL DRIVER
+	public ArrayList<Comunitat> traduiricercar (GrafDades graf, Criteris cri) {
 		Graf utilitzable = new Graf();
                 long t1,t2,t3,t4;
                 t1= System.currentTimeMillis();
