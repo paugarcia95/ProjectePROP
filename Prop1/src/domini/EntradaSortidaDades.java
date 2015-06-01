@@ -43,6 +43,8 @@ public class EntradaSortidaDades {
 	/**
 	 * Creadora amb ruta per defecte.
 	 * 
+	 * @param rutaPerDefecte
+	 *            Directori on es guardaran les dades del programa
 	 */
 	public EntradaSortidaDades(File rutaPerDefecte) {
 		super();
@@ -201,93 +203,6 @@ public class EntradaSortidaDades {
 				// Nos aseguramos que se cierra el fichero.
 				if (null != docE)
 					docE.close();
-			} catch (Exception e2) {
-				error(7);
-			}
-		}
-		return errorEnExecucio;
-	}
-
-	/**
-	 * Tradueix un fitxer de dades d'un graf a un fitxer que permet al programa
-	 * DOT representar graficament un graf. El programa DOT nomes funciona
-	 * correctament si el graf te menys de 100 nodes aproximadament.
-	 * 
-	 * @param rutaGraf
-	 *            Ruta de directoris que indica on es troba el fitxer amb les
-	 *            dades del graf.
-	 * @param rutaImatgeTXT
-	 *            La ruta de l'arxiu de text de dest�.
-	 * @return Un boolea que indica si hi ha hagut un error en la
-	 *         lectura/escriptura.
-	 */
-	public Boolean traduirGrafDadesAImatge(String rutaGraf, String rutaImatgeTXT) {
-		errorEnExecucio = false;
-		String s;
-
-		FileWriter fichEscr = null;
-		PrintWriter docE = null;
-
-		FileReader fichLect = null;
-		BufferedReader docL = null;
-
-		try {
-			// Arxiu de lectura
-			fichLect = new FileReader(rutaGraf);
-			docL = new BufferedReader(fichLect);
-
-			// Arxiu d'escriptura
-			fichEscr = new FileWriter(rutaImatgeTXT);
-			docE = new PrintWriter(fichEscr);
-
-			docE.println("digraph Graf {");
-
-			while ((s = docL.readLine()) != null) {
-
-				StringTokenizer st = new StringTokenizer(s);
-
-				while (st.hasMoreTokens() && st.countTokens() >= 4) {
-					String word1 = st.nextToken();
-					String type1 = st.nextToken();
-					String link = st.nextToken();
-					String word2 = st.nextToken();
-					String type2 = st.nextToken();
-
-					word1 = word1.replaceAll("[^a-zA-Z]", "_");
-					// Aixo fa que elimini tots els caracters que no siguin
-					// lletres o barra_baixes
-					word2 = word2.replaceAll("[^a-zA-Z]", "_");
-					// Perque sino el programa de dibuixar grafs no funciona
-
-					if (link.equals("CsubC") || link.equals("CP") || link.equals("PC"))
-						docE.println(word1 + " -> " + word2);
-					else if (link.equals("CsupC")) {
-						docE.println(word2 + " -> " + word1);
-					} else {
-						return error(4);
-					}
-
-					if (type1.equals("page"))
-						docE.println(word1 + " [shape=box]");
-					if (type2.equals("page"))
-						docE.println(word2 + " [shape=box]");
-				}
-			}
-			docE.println("}");
-
-		} catch (Exception e) {
-			error(3);
-		} finally {
-			try {
-				// Nos aseguramos que se cierra el fichero.
-				if (null != docE)
-					docE.close();
-			} catch (Exception e2) {
-				error(7);
-			}
-			try {
-				if (null != docL)
-					docL.close();
 			} catch (Exception e2) {
 				error(7);
 			}
@@ -1120,10 +1035,104 @@ public class EntradaSortidaDades {
 		error(i);
 		return null;
 	}
+	
+	
+	///////////////////// FUNCIO QUE AL FINAL NO HEM UTILITZAT AL PROGRAMA PRINCIPAL ///////////
+	
+	/**
+	 * Tradueix un fitxer de dades d'un graf a un fitxer que permet al programa
+	 * DOT representar graficament un graf. El programa DOT nomes funciona
+	 * correctament si el graf te menys de 100 nodes aproximadament.
+	 * 
+	 * @param rutaGraf
+	 *            Ruta de directoris que indica on es troba el fitxer amb les
+	 *            dades del graf.
+	 * @param rutaImatgeTXT
+	 *            La ruta de l'arxiu de text de dest�.
+	 * @return Un boolea que indica si hi ha hagut un error en la
+	 *         lectura/escriptura.
+	 */
+	public Boolean traduirGrafDadesAImatge(String rutaGraf, String rutaImatgeTXT) {
+		errorEnExecucio = false;
+		String s;
+
+		FileWriter fichEscr = null;
+		PrintWriter docE = null;
+
+		FileReader fichLect = null;
+		BufferedReader docL = null;
+
+		try {
+			// Arxiu de lectura
+			fichLect = new FileReader(rutaGraf);
+			docL = new BufferedReader(fichLect);
+
+			// Arxiu d'escriptura
+			fichEscr = new FileWriter(rutaImatgeTXT);
+			docE = new PrintWriter(fichEscr);
+
+			docE.println("digraph Graf {");
+
+			while ((s = docL.readLine()) != null) {
+
+				StringTokenizer st = new StringTokenizer(s);
+
+				while (st.hasMoreTokens() && st.countTokens() >= 4) {
+					String word1 = st.nextToken();
+					String type1 = st.nextToken();
+					String link = st.nextToken();
+					String word2 = st.nextToken();
+					String type2 = st.nextToken();
+
+					word1 = word1.replaceAll("[^a-zA-Z]", "_");
+					// Aixo fa que elimini tots els caracters que no siguin
+					// lletres o barra_baixes
+					word2 = word2.replaceAll("[^a-zA-Z]", "_");
+					// Perque sino el programa de dibuixar grafs no funciona
+
+					if (link.equals("CsubC") || link.equals("CP") || link.equals("PC"))
+						docE.println(word1 + " -> " + word2);
+					else if (link.equals("CsupC")) {
+						docE.println(word2 + " -> " + word1);
+					} else {
+						return error(4);
+					}
+
+					if (type1.equals("page"))
+						docE.println(word1 + " [shape=box]");
+					if (type2.equals("page"))
+						docE.println(word2 + " [shape=box]");
+				}
+			}
+			docE.println("}");
+
+		} catch (Exception e) {
+			error(3);
+		} finally {
+			try {
+				// Nos aseguramos que se cierra el fichero.
+				if (null != docE)
+					docE.close();
+			} catch (Exception e2) {
+				error(7);
+			}
+			try {
+				if (null != docL)
+					docL.close();
+			} catch (Exception e2) {
+				error(7);
+			}
+		}
+		return errorEnExecucio;
+	}
+
 }
 
 
 /*
+ * NORMES DE CARACTERS AL GUARDAR UN ARXIU:
+ * 
+ * 
  * noms categories i pagines sense | ni * (NO pot tenir espais) nom usuari sense
  * |/\:*?<>"+ (pot tenir espais) password sense | i * ni + (pot tenir espais)
  * nom, comentari de cercaComunitats sense | ni * ni + (pot tenir espais)
