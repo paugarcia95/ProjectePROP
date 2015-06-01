@@ -6,9 +6,11 @@ package cercaComunitats;
 import java.util.HashSet;
 
 /**
- * @author Rafa
- *
- */
+*
+* La classe Algorisme Newman Girvan per a generar comunitats
+* @author Rafa Lucena
+*
+*/
 public class AlgorismeNewmanGirvan {
         public static int arestes;
         public static Integer iterador;
@@ -53,14 +55,14 @@ public class AlgorismeNewmanGirvan {
 		GrafNewman util = new GrafNewman(G);
                 arestes = util.getNumArestes();
                 util.invertirPesos();
-		util.calcularEdgeBetweenv2();
+		util.calcularEdgeBetween();
 		int quitoca = calculadora(arestes, percentatge);
                 System.out.println("El graf te "+arestes+ " arestes, i he de fer "+quitoca+" iteracions");
 		while ( iterador< quitoca) {
                     System.out.println("Vaig x la iteracio "+iterador+", temps: "+ (System.currentTimeMillis()-t1));
                     t1 = System.currentTimeMillis();
 			util.esborrarMaxim();
-			util.calcularEdgeBetweenv2();
+			util.calcularEdgeBetween();
 			++iterador;
                         
 		}
