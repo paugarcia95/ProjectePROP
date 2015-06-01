@@ -10,9 +10,11 @@ import javax.swing.JFrame;
  * @author cristina.fontanet
  */
 public class NouUser extends javax.swing.JPanel {
-    private InterficieWiki pare;
+    private final InterficieWiki pare;
+
     /**
      * Creates new form NouUser
+     * @param par Frame principal de la interficie a la qual es coloca el panell
      */
     public NouUser(JFrame par) {
         initComponents();

@@ -1,10 +1,11 @@
 package cercaComunitats;
+
 import java.util.*;
 
 /**
  *
  * La clase Clique Percolation para la detection de comunidades
- * @author Alejandro Quibus
+ * @author Alejandro Q
  * @author Natali Balón
  *
  */
@@ -62,6 +63,7 @@ public class Clique {
                 candidates.remove(candidate);
 
                 //crear new_candidates eliminando nodos de "candidates" conectado al nodo candidate
+
                 for(int j=0; j<candidates.size(); j++){
                     String new_candidate = candidates.get(j);
                     if (graph.existeixAresta(candidate, new_candidate))
@@ -118,10 +120,12 @@ public class Clique {
                 } // of if
             } // of for
             if (edgecounter == candidates.size()) {
-                end = true;
+                //end = true;
+                return true;
             }
         } // of for
-        return end;
+        return false;
+        //return end;
     }
 
     /**
@@ -131,7 +135,6 @@ public class Clique {
     private static ArrayList<HashSet<String>> getCliquesOrder()
     {
         //tenemos en cliques todos los cliques
-        //TODO OBTENER LAS MEDIAS DE LAS K PARA CALCULAR
         int maximum = 0;
         mediaK = 0.0;
         int n = 0;
@@ -162,10 +165,9 @@ public class Clique {
     private static void     determinarGrafoNuevo(Graf f, Integer percentatge){
         //Primero determinamos pMax y pMin
         //obtengo todos los nodos
-        //pMax = Double.MAX_VALUE;
-        pMax = -1111111111111111111.0;
-        pMin = 1111111111111111111.0;
-        double mediaPesos = 0;
+        pMax = Double.MIN_VALUE;
+        pMin = Double.MAX_VALUE;
+        double mediaPesos = 0.0;
         HashSet<String> nodes = f.getNodes();
 
         //para cada nodo miro sus adjacentes y determino pMax, pMin.
@@ -181,22 +183,15 @@ public class Clique {
             }
         }
 
-//        double aux = (mediaPesos*(1-(double)percentatge/100)) / c;
-//        double aux2 = ((mediaPesos/c)*(1-(double)percentatge/100));
         mediaPesos = mediaPesos/c;
 
         /**
          * Cambios hechos, ahora como partimos de la media (estamos ya aprox sobre el 50% de estricto aumententamos o decrecemos ese 50% según el parámetro de estricto que nos piden
          */
+        //Determino la W segun el peso Maximo, el peso Minimo, la media y el porcentaje de estricto.
         double w = calcularMediaEstricta(mediaPesos,pMax,pMin,percentatge);
-
-        //Aqui ya tengo el pMax y pMin de el grafo f
-        //genero mi grafo nuevo
-
         //Hago una copia.
         graph = new Graf(f);
-        //Determino la W segun el peso Maximo, el peso Minimo y El porcentaje de estricto.
-        //double w = pMax-((pMax-pMin)*(1-((double)percentatge/100)));
         //elimino las aristas que no cumple la W:
         for (String n : nodes){
             HashSet<String> adj = f.getAdjacents(n);
@@ -217,19 +212,20 @@ public class Clique {
 
         //GEnero el grafo con la cual va a trabajar para detectar los cliques
         determinarGrafoNuevo(G, percentatge);
-
+        //G = null;
         //ME encuentra todos los cliques que existen en el grafo "GRAPH"
         getAllMaximalCliques();
-
         //Me ordena los cliques de mayor a menor(K mas alta)
         cliques = getCliquesOrder();
-
+        //Vamos a vaciar memoria
+        //Llamamos al garbage collector
+        System.gc();
         //PARA OBTENER LAS COMUNIDADES
         HashSet<HashSet<String>> res = obtenerComunidades(cliques,percentatge);
         return res;
     }
 
-    ///FUNCIONES OBTENER COMUNIDAD DESARROLLADAS POR ALEJANDRO QUIBUS:
+    ///FUNCIONES OBTENER COMUNIDAD DESARROLLADAS POR ALEJANDRO:
 
     /**
      * Obtenemos el número de nodos comunes entre dos cliques
@@ -256,28 +252,25 @@ public class Clique {
      */
     private static HashSet<HashSet<String>> obtenerComunidades(ArrayList<HashSet<String>> cliques,Integer percentatge){
         int n = cliques.size();
-//        int k = kComunidad(cliques.get(0).size(),cliques.get(n-1).size(),percentatge);
+        //Obtenemos nuestra K para las comunidades
         int k = (int) Math.round(calcularMediaEstricta(mediaK,cliques.get(0).size(),cliques.get(n-1).size(),percentatge));
         int overMat[][] = new int[n][n]; //La matriz de NxN cliques inicializada
-        //Rellenamos la tabla de overlaping (tenemos el número de nodos en común
+        //Rellenamos la tabla de overlaping (tenemos el número de nodos en común) y generamos a la vez la binaria (1=forman comunidad los cliques, 0=no)
         for(int i=0;i<n;i++){
             for (int j = i; j < n; j++) { //Miramos solo diagonal superior solo
-                if(i==j) {
+                if(i==j) { //Obtenemos el número de nodos que tiene el clique, por la matriz M[i][i]=clique[i](intersección)clique[i]=clique[i].size
                     overMat[i][j] = cliques.get(i).size();
                     if(overMat[i][j]>=k) overMat[i][j] = 1;
                     else overMat[i][j] = 0;
                 }
-                else { //SI es diferente ya tiene un valor
+                else { //SI es diferente vomparamos los nodos comunues entre esos dos cliques
                     overMat[i][j] = numNodosComunes(cliques.get(i),cliques.get(j));
                     if(overMat[i][j] >= (k-1)) overMat[i][j] = 1;
                     else overMat[i][j] = 0;
                 }
             }
         }
-        //AHORA OBTENGAMOS DE LA MATRIZ BINARIA DE SI SON COMUNIDAD O NO
-        //Voy a acumular todas las filas hasta que solo queden las N comunidades
-        //int checked[] = new int[n]; //0 si no han sido revisados
-        //List<HashSet<String>> comunidades= new ArrayList<HashSet<String>>();
+        //int checked[] = new int[n]; //0 si no han sido revisada la fila
         List<Set<Integer>> comProv = new ArrayList<Set<Integer>>();
         int checked[] = new int[n]; //0 si no han sido revisados
         Set<Integer> com;
@@ -285,16 +278,15 @@ public class Clique {
         for(int i =0;i<n;i++){
             //Una fila 1 comunidad provisional si no ha sido ya chekeada/procesada, una fila es chekeada si sus cliques adyacentes han sido procesados
             if(checked[i]==0) {
-                checked[i] = 1; //La marcamos como revisada
                 com = new HashSet<Integer>(); //La comunidad provisional
                 //Ahora para i hemos de obtener todas sus cliques adjacentes, por tanto exploramos
                 com.addAll(obtenerComunidades(overMat, i,checked)); //Añadimos todas las comunidades de i ya hemos explorado también todas de las que son adyacente, así tenemos los nº de cliques adyacentes entre ellos
-                checked[i] = 1; //Acabamos de procesar j
+                checked[i] = 1; //Acabamos de procesar i, entonces ya la marcamos
                 comProv.add(com);//La añadimos
             }
-            //Si ya ha sido procesada no nos interesa
+            //Si ya ha sido procesada no nos interesa examinarla porque ya ha sido añadida junto a otra comunidad bien por la función recursiva o en este mismo bucle
         }
-        //en comProv tenemos todas l
+        //en comProv tenemos todas las comunidades, pero solo su número de clique no los nodos
         //Voy a fusionar todos los nodos de las comunidades que tengo en comPro
         HashSet<HashSet<String>> comunidades = new HashSet<>();
         for(int i = 0; i<comProv.size();i++) {
@@ -306,13 +298,13 @@ public class Clique {
                 comunidades.add(aux);
             }
         }
+        //Para el caso de todos los cliques que no cumplan la condución de K-Comunidad para el proposito de este ejercicio los transformo en comunidades asiladas
         for(int i=0;i<n;i++){
             if(overMat[i][i]==0){
                 //Son los cliques que no cumplen el requisito de K-comunidad por tanto "fuerzo" a que sean comunidades aisladas
                 comunidades.add(cliques.get(i)); //Creamos una nueva comunidad para todos los nodos del clique for ever alone
             }
         }
-
         return comunidades;
     }
 
@@ -324,44 +316,24 @@ public class Clique {
      */
     private static HashSet<Integer> obtenerComunidades(int m[][], int i,int c[]){
         HashSet<Integer> cs = new HashSet<>();
-        if(m[i][i]==1) {
-            cs.add(i);
-            c[i] = 1;
-        }
+        cs.add(i); //Si hemos llegado aquí m[i][i]=1, ya que existe m[x][i]=1 por tanto [i][i] valdrá 1
+        if(c[i]==1) return cs;; //Condición de romper la recursividad si ya ha sido examinada esta fila salimos
         for(int j=i+1; j<m.length;j++){
             if(m[i][j]==1) {
                 if(c[j]==1){
+                    //Ya han evaluado la fila j pero como tiene 1 en overmat están relacionados
                     cs.add(j);
                 }
-                else {
-                    cs.addAll(obtenerComunidades(m, j, c)); //Obtenemos todos las comunidades que comparte j {su fila}, la procesamos integra y acumulamos
-                    c[j] = 1;
+                if(c[j]==0) {
+                    //Como la fila no ha sido evaluada vamso a evaluarla
+                    HashSet<Integer> res = obtenerComunidades(m, j, c);
+                    cs.addAll(res); //Obtenemos todos las comunidades que comparte j {su fila}, la procesamos integra y acumulamos
+                    c[j] = 1; //Hemos obtenido todas las comunidades de j por tanto la marcamos como evaluada la fila
                 }
             }
         }
-
         return cs;
     }
-
-    /**
-     * Calculamos la K de la comunidad.
-     * @param max num de nodos del k-clique máximo.
-     * @param min num de nodos del k-clique mínimo.
-     * @param porcentaje lo estricto que será la Kcomunidad
-     * @return La k de forma heurística, en función del lo estricto que se pida y el k max,min.
-     * @deprecated ANTIGUA AHORA SE USA CALCULARMEDIAESTRICTA
-     */
-
-    private static int kComunidad(int max,int min, Integer porcentaje){
-        /**
-         * Cambios hechos, ahora como partimos de la media (estamos ya aprox sobre el 50% de estricto aumententamos o decrecemos ese 50% según el parámetro de estricto que nos piden
-         */
-        //ORIGINAL
-//        double por = (double) 1-(porcentaje)/100.0; //Así conseguimos que aumente o decrezca el promedio de K's
-//        int k = (int) Math.round(max-((max-min)*por));
-        return 0;
-    }
-
 
     /**
      * Te permite calcular el valor de la media en función de como de estricto se pida que sea
@@ -372,16 +344,20 @@ public class Clique {
      * @return La media en función de lo estricto que se pida que se sea. Consideramos que estrico = 50% es la propia media
      */
     private static double calcularMediaEstricta(double media, double max, double min, int estricto){
+        //Partimos de la base de que la media ya es el 50% de estricto y queremos obtener una nueva media en función de lo estricto que pidan
         if(estricto == 50){
+            //Si nos piden el 50% de estricto ya es la media
             return media;
         }
         if(estricto > 50){
+            //Si >50, implica que ahora media será el valor más bajo y el máximo max, por tanto aproximammos una nueva media para el estricto
             double porcentaje = (double) 1-((estricto-50)*2/100.00);
             double i = max-((max-media)*porcentaje);
             return i;
         }
         if (estricto < 50){
-            double porcentaje = (double) 1 - ((estricto/100.00)*2);
+            //Si <50, implica que ahora media será el valor maximo y el min el mínimo, por tanto aproximammos una nueva media para el estricto
+            double porcentaje = (double) 1-((estricto/100.00)*2);
             return media-((media-min)*(porcentaje));
         }
         return 0;

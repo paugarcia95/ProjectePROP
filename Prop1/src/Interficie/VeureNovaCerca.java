@@ -26,6 +26,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author cristina.fontanet
  */
 public class VeureNovaCerca extends javax.swing.JPanel {
+	
     private Integer numcerca;
     private InterficieWiki pare;
     private Boolean modificacio;
@@ -196,6 +197,7 @@ public class VeureNovaCerca extends javax.swing.JPanel {
                 .addComponent(Penjades, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+    
     /*
     * Afegeix una nova comunitat sense categories 
     */
@@ -208,24 +210,26 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         arb.insertNodeInto(new DefaultMutableTreeNode("Comunitat "+quina), act, act.getChildCount());
         comunaEliminar.add(quina-1);
     }//GEN-LAST:event_ButAfegirComunitatActionPerformed
+    
     /*
     * Afegeix la categoria seleccionada de la llista a la comunitat de l'arbre seleccionada
     */
     private void ButAfegirArbreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAfegirArbreActionPerformed
         vista.afegeixCatComun(Resultat,modelos, Penjades, numcerca);
     }//GEN-LAST:event_ButAfegirArbreActionPerformed
+   
     /*
     * En clicar al boto de Guardar, demana les dades necessaries per a poder guardar la cerca de comunitats i la guarda, permetent que se'n pugui realitzar una altra
     */
     private void ButGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButGuardarActionPerformed
-        GuardaCerca auxi = new GuardaCerca(pare);
+        GuardaCerca auxi = new GuardaCerca();
         int result = JOptionPane.showConfirmDialog(this, auxi,"Entra les dades requerides", PLAIN_MESSAGE);
         if(result == OK_OPTION) {
-            if(auxi.getName().length()<=0) JOptionPane.showMessageDialog(this, "Has d'introduir un nom.", capsalera, WARNING_MESSAGE);
-            else if(auxi.getName().contains("|")||auxi.getName().contains("*")||auxi.getName().contains("+")) JOptionPane.showMessageDialog(this, "El nom conte algun caràcter prohibit", capsalera, ERROR_MESSAGE);
+            if(auxi.getNameCerca().length()<=0) JOptionPane.showMessageDialog(this, "Has d'introduir un nom.", capsalera, WARNING_MESSAGE);
+            else if(auxi.getNameCerca().contains("|")||auxi.getNameCerca().contains("*")||auxi.getNameCerca().contains("+")) JOptionPane.showMessageDialog(this, "El nom conte algun caràcter prohibit", capsalera, ERROR_MESSAGE);
             else if (auxi.getComentari().length() >0 && (auxi.getComentari().contains("|")||auxi.getComentari().contains("*")||auxi.getComentari().contains("+"))) JOptionPane.showMessageDialog(this, "El comentari conté algun caracter prohibit", capsalera, ERROR_MESSAGE);
             else {
-                macro.getContUser().addNomCerca(macro.getUserActual(),numcerca,auxi.getName());
+                macro.getContUser().addNomCerca(macro.getUserActual(),numcerca,auxi.getNameCerca());
                 macro.getContUser().addComentariCerca(macro.getUserActual(),numcerca,auxi.getComentari());
                 vista.netejaArbreCerca(numcerca);
                 if(modificacio)macro.getContUser().ordenaCerca(macro.getUserActual(), numcerca);
@@ -233,6 +237,7 @@ public class VeureNovaCerca extends javax.swing.JPanel {
             } 
         }
     }//GEN-LAST:event_ButGuardarActionPerformed
+    
     /*
     * Treu la categoria seleccionada de l'arbre de resultats i l'afegeix a la llista
     */
@@ -240,6 +245,7 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         vista.treuCatComun(Resultat,modelos, numcerca);
         modificacio = true;
     }//GEN-LAST:event_ButTreureArbreActionPerformed
+    
     /*
     * En clicar el boto de modificar criteris, es mostra la pantalla de creació de cerques
     */
@@ -247,6 +253,7 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         cercaactual=numcerca;
         pare.modificaCercaGuardada();
     }//GEN-LAST:event_ButModificarCriterisActionPerformed
+    
     /*
     * En mostrar-se el panell, s'omplen les dades de la cerca
     */
@@ -255,12 +262,15 @@ public class VeureNovaCerca extends javax.swing.JPanel {
         vista.visualitzaCerca(false, Resultat, CriterisNovaCerca, numcerca);
         comunaEliminar = new PriorityQueue<>(1, Collections.reverseOrder());
     }//GEN-LAST:event_formComponentShown
+    
     /*
     * En desapareixer el panell, s'actualitzen els canvis de l'arbre
     */
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
       if(modificacio)macro.getContUser().ordenaCerca(macro.getUserActual(), numcerca);
     }//GEN-LAST:event_formComponentHidden
+    
+    
     /*
     * Descarta la cerca de comunitats actual
     */
@@ -270,6 +280,7 @@ public class VeureNovaCerca extends javax.swing.JPanel {
       pare.activaCerca();
       pare.eliminaTab(this);
     }//GEN-LAST:event_ButTancarActionPerformed
+    
     /*
     * En clicar el boto de visualitzar una categoria, es mostres les caracteristiques d'aquesta
     */
