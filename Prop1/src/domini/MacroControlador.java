@@ -121,9 +121,4 @@ public class MacroControlador {
 	public String getUserActual() {
 		return useractual;
 	}
-        
-        //PROVISIONAL
-	public GrafDades getGraf(){ 
-		return gd;
-	}
 }

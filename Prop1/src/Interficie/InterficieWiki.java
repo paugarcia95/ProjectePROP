@@ -83,11 +83,6 @@ public class InterficieWiki extends javax.swing.JFrame {
    private void provisional(){
         Username.setText("admin");
         Password.setText("admin");
-       
-        macro.getContUser().addUser("admin", "admin");
-	macro.getContUser().addUser("client", "client");
-	macro.getContUser().addAdmin("admin");
-        vista.jocProves1();
    }
     
    protected void activaCerca(){
