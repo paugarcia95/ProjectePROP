@@ -86,9 +86,9 @@ public class AlgorismeNewmanGirvan {
                 util.invertirPesos();
 		util.calcularEdgeBetween();
 		Integer tamany = new Integer(G.getNodes().size());
-		if(numComunidades > tamany) numComunidades = tamany; // En cas de q se'ns demani mes comunitats q nodes, canviem el valor
+		if(numComunidades > tamany) numComunidades = tamany;
 		while (util.numComunitats() < numComunidades) {
-			if (!util.esborrarMaxim()) return null; //control d'errors
+			if (!util.esborrarMaxim()) return null;
 			util.calcularEdgeBetween();
 		}
 		return util.comunitats();
@@ -110,9 +110,9 @@ public class AlgorismeNewmanGirvan {
 		GrafNewman util = new GrafNewman(G);
                 util.invertirPesos();
 		util.calcularEdgeBetween();
-		int maxactual = util.getMaxBetween(); // Variable amb el valor de maxbtw
+		int maxactual = util.getMaxBetween();
 		while (maxactual > maxbetweness) {
-			if (!util.esborrarMaxim()) return null;// control d'errors
+			if (!util.esborrarMaxim()) return null;
 			util.calcularEdgeBetween();
 			maxactual = util.getMaxBetween();
 		}
