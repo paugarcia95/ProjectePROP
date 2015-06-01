@@ -424,8 +424,8 @@ public class ControladorVistes {
     protected void visualitzarPaginaDe(JList quina){
         if(quina.getSelectedIndices().length>0) {
             String hy = quina.getSelectedValue().toString();
-            VPagina aux = new VPagina(comp,true, macro.getContUser().isAdmin(macro.getUserActual()));
-            aux.NomPag(hy);
+           VPagina nova = new VPagina(comp, true, macro.getContUser().isAdmin(macro.getUserActual()));
+            nova.NomPag(hy);
         }
         else JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna p?gina de la llista!", capsalera, WARNING_MESSAGE);
     }

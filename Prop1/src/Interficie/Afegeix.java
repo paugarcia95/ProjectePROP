@@ -14,7 +14,7 @@ import static javax.swing.JOptionPane.OK_OPTION;
 
 /**
  *
- * @author Cristina
+ * @author rafael.lucena
  */
 public class Afegeix extends javax.swing.JPanel {
     /**

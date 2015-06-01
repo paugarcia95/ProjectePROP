@@ -84,9 +84,6 @@ public class PantallaEspera extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-   /*
-    * Es cancela la cerca de comunitats que s'estava realitzant
-    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         pare.cancelaCerca();
     }//GEN-LAST:event_jButton1ActionPerformed
