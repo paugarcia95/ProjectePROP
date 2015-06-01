@@ -18,7 +18,7 @@ public class CercaComunitats {
 	private ArrayList<Comunitat> comunitats;
 	
 	/**
-	 * Crea una CercaComunitats amb el paràmetres especificats.
+	 * Crea una CercaComunitats amb els paràmetres especificats.
 	 * 
 	 * @param nom nom de la cerca
 	 * @param dataCreacio data de creació de la cerca
