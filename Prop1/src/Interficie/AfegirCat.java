@@ -9,7 +9,6 @@ import static Interficie.InterficieWiki.vista;
 import static Interficie.InterficieWiki.capsalera;
 import java.util.ArrayList;
 import static Interficie.InterficieWiki.macro;
-import java.util.Collection;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;

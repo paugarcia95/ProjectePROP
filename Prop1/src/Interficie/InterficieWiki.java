@@ -187,6 +187,7 @@ public class InterficieWiki extends javax.swing.JFrame {
                 AP_Client.add(Panell, "Dades d'usuari"); 
                 primera = false;
             }
+            AP_Inici.setuser(user);
             if(macro.getContUser().isAdmin(user)) {
                 userAdmin = true;
                 rafa.ini();
@@ -226,8 +227,8 @@ public class InterficieWiki extends javax.swing.JFrame {
         userAdmin = false;
         initComponents();
         this.setVisible(false);
-        Panell = new Inici(this);
-        AP_Client.add(Panell, "Inici");
+        AP_Inici = new Inici(this);
+        AP_Client.add(AP_Inici, "Inici");
         Panell = new BuscaCat();
         AP_Client.add(Panell, "Categories");
         Panell = new BuscaPag();
@@ -241,7 +242,7 @@ public class InterficieWiki extends javax.swing.JFrame {
         provisional();
         
     }
-            
+    Inici AP_Inici;        
     /**
      * By Netbeans
      */
@@ -276,6 +277,7 @@ public class InterficieWiki extends javax.swing.JFrame {
         A_CerquesGuardades = new javax.swing.JPanel();
         A_VeureUsers = new javax.swing.JPanel();
         A_NouAdmin = new javax.swing.JPanel();
+        A_Inici = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WIKIPEDIA");
@@ -337,7 +339,7 @@ public class InterficieWiki extends javax.swing.JFrame {
                                 .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Login)
                                     .addComponent(Exit))))))
-                .addContainerGap(1010, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         A_PantallaPrincipalLayout.setVerticalGroup(
             A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,7 +361,7 @@ public class InterficieWiki extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(70, 70, 70)
                         .addComponent(jLabel1)))
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Username.getAccessibleContext().setAccessibleName("Username");
@@ -522,6 +524,19 @@ public class InterficieWiki extends javax.swing.JFrame {
 
         getContentPane().add(A_NouAdmin, "card18");
 
+        javax.swing.GroupLayout A_IniciLayout = new javax.swing.GroupLayout(A_Inici);
+        A_Inici.setLayout(A_IniciLayout);
+        A_IniciLayout.setHorizontalGroup(
+            A_IniciLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        A_IniciLayout.setVerticalGroup(
+            A_IniciLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(A_Inici, "card10");
+
         getAccessibleContext().setAccessibleDescription("");
 
         pack();
@@ -562,6 +577,7 @@ public class InterficieWiki extends javax.swing.JFrame {
     private javax.swing.JPanel A_CerquesGuardades;
     private javax.swing.JPanel A_CreaUsuari;
     private javax.swing.JPanel A_FerCerca;
+    private javax.swing.JPanel A_Inici;
     private javax.swing.JPanel A_NouAdmin;
     private javax.swing.JPanel A_PantallaPrincipal;
     private javax.swing.JPanel A_VeureUsers;
