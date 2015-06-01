@@ -519,7 +519,7 @@ public class AfegirCat extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         pag = jTextField1.getText();
-        if(!pag.isEmpty() && !pag.contains("|") && !pag.contains("*") && !pag.contains(" ")) {
+        if(!pag.isEmpty() && !pag.contains("|") && !pag.contains("*") && !pag.contains(" ") && !macro.getContDades().getCategories().contains(pag)) {
             jLabel6.setText("Nom de la pàgina:" + pag);
             Introduccio.setVisible(false);
             A_ModificaCateg.setVisible(true);
