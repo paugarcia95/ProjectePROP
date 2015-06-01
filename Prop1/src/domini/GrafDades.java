@@ -15,47 +15,51 @@ public class GrafDades {
 	private Map<String, Categoria> categories;
 	private Map<String, Pagina> pagines;
 	
-	
+	/**
+	 * Crea un GrafDades buit.
+	 */
 	public GrafDades() {
 		categories = new TreeMap<String, Categoria>();
 		pagines = new TreeMap<String, Pagina>();
 	}
 	
 	/**
-	 * Pre: nom és una key de categories amb una assignació
-	 * Post: Retorna la assignació de nom a categories
+	 * 
+	 * @param nom el nom de la categoria que retorna
+	 * @return la categoria amb nom especificat. <code>null</code> si la categoria no pertany al graf
 	 */
 	public Categoria getCategoria(String nom) {
 		return categories.get(nom);
 	}
 	
 	/**
-	 * Pre: nom és una key de pagines amb una assignació
-	 * Post: Retorna la assignació de nom a pagines
+	 * 
+	 * @param nom el nom de la pàgina que retorna
+	 * @return la pàgina amb nom especificat. <code>null</code> si la pàgina no pertany al graf
 	 */
 	public Pagina getPagina(String nom) {
 		return pagines.get(nom);
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna el nombre de categories que hi ha al graf
-	 */
+	 * @return el nombre de categories que hi ha al graf
+	 */	
 	public Integer getNombreCategories() {
 		return categories.size();
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna el nombre de pàgines que hi ha al graf
-	 */
+	 * @return el nombre de pàgines que hi ha al graf
+	 */	
 	public Integer getNombrePagines() {
 		return pagines.size();
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Si cat no existia a categories ara és l'assignació de la key cat.Nom i retorna <code>true</code>, altrament retorna <code>false</code>
+	 * Afegeix una nova categoria al graf.
+	 * 
+	 * @param cat la categoria que serà afegida al graf
+	 * @return <code>true</code> si s'ha afegit la categoria. <code>false</code> si la categoria ja existia al graf
 	 */
 	public Boolean addCategoria(Categoria cat) {
 		if (categories.containsKey(cat.getNom())) return false;
@@ -64,50 +68,24 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Si pag no existia a pagines ara és l'assignació de la key pag.Nom i retorna <code>true</code>, altrament retorna <code>false</code>
+	 * Afegeix una nova pàgina al graf.
+	 * 
+	 * @param pag la pàgina que serà afegida al graf
+	 * @return <code>true</code> si s'ha afegit la pàgina. <code>false</code> si la pàgina ja existia al graf
 	 */
 	public Boolean addPagina(Pagina pag) {
 		if (pagines.containsKey(pag.getNom())) return false;
 		pagines.put(pag.getNom(), pag);
 		return true;
-	}
+	}	
 	
 	/**
-	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna <code>true</code>, altrament retorna <code>false</code>
-	 */	
-	public Boolean addCC(Categoria cat1, Categoria cat2) {
-		if (cat1 == cat2 || cat1.getNom() == cat2.getNom()) return false;
-		boolean conte1, conte2;
-		conte1 = categories.containsKey(cat1.getNom());
-		conte2 = categories.containsKey(cat2.getNom());
-		if (conte1 && conte2) {
-			if (cat1.existsCC(cat2.getNom()) == 2 /*&& cat2.existsCC(cat1.getNom()) == 1*/) { //ja existeix
-				return false;
-			}
-			//com que el graf es consistent no existeixen els casos  {(0,1),(0,2),(1,0),(1,1),(2,0),(2,2)}
-			//els casos (0,0) i (1,2) es tracten al final del metode
-		}
-		else if (!conte1 && conte2) {
-			categories.put(cat1.getNom(), cat1);
-		}
-		else if (conte1 && !conte2) {
-			categories.put(cat2.getNom(), cat2);
-		}
-		else {
-			categories.put(cat1.getNom(), cat1);
-			categories.put(cat2.getNom(), cat2);
-		}
-		cat1.addCsubC(cat2);
-		cat2.addCsupC(cat1);
-		return true;
-	}
-	
-	/**
-	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre cat1 i cat2 ara cat1 es super de cat2 i retorna <code>true</code>, altrament retorna <code>false</code>
-	 */	
+	 * Crea la relació "és subcategoria" a la categoria amb nom <code>cat1</code> i l'inversa a la categoria amb nom <code>cat2</code>.
+	 * 
+	 * @param categoria1 nom de la categoria a la que es crea la relació "és subcategoria"
+	 * @param categoria2 nom de la categoria a la que es crea la relació "és supercategoria"
+	 * @return <code>true</code> si s'ha creat la relació. <code>false</code> si ja existia
+	 */
 	public Boolean addCC(String categoria1, String categoria2) {
 		if (categoria1.equals(categoria2)) return false;
 		boolean conte1, conte2;
@@ -143,40 +121,13 @@ public class GrafDades {
 		cat2.addCsupC(cat1);
 		return true;
 	}
-	
+
 	/**
-	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre pag i cat ara pag apunta a cat i retorna <code>true</code>, altrament retorna <code>false</code>
-	 */
-	public Boolean addPC(Pagina pag, Categoria cat) {
-		boolean conte1, conte2;
-		conte1 = pagines.containsKey(pag.getNom());
-		conte2 = categories.containsKey(cat.getNom());
-		if (conte1 && conte2) {
-			if (pag.existsPC(cat.getNom()) == 1 /*&& cat.existsCP(pag.getNom()) == 1*/) { //ja existeix
-				return false;
-			}
-			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
-			//els casos (0,0) i (2,2) es tracten al final del metode
-		}
-		else if (!conte1 && conte2) {
-			pagines.put(pag.getNom(), pag);
-		}
-		else if (conte1 && !conte2) {
-			categories.put(cat.getNom(), cat);
-		}
-		else {
-			pagines.put(pag.getNom(), pag);
-			categories.put(cat.getNom(), cat);
-		}
-		pag.addPC(cat);
-		cat.addPC(pag);
-		return true;
-	}
-	
-	/**
-	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre pag i cat ara pag apunta a cat i retorna <code>true</code>, altrament retorna <code>false</code>
+	 * Crea la relació "és apuntada per la pàgina" a la categoria amb nom especificat i l'inversa a la pàgina amb nom especificat.
+	 * 
+	 * @param pagina nom de la pàgina a la que es crea la relació "apunta a"
+	 * @param categoria nom de la categoria a la que es crea la relació "és apuntada per"
+	 * @return <code>true</code> si s'ha creat la relació. <code>false</code> si ja existia
 	 */
 	public Boolean addPC(String pagina, String categoria) {
 		Categoria cat;
@@ -215,38 +166,11 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre cat i pag ara cat apunta a pag i retorna <code>true</code>, altrament retorna <code>false</code>
-	 */
-	public Boolean addCP(Categoria cat, Pagina pag) {
-		boolean conte1, conte2;
-		conte1 = categories.containsKey(cat.getNom());
-		conte2 = pagines.containsKey(pag.getNom());
-		if (conte1 && conte2) {
-			if (cat.existsCP(pag.getNom()) == 2 /*&& pag.existsPC(cat.getNom()) == 2*/) { //ja existeix
-				return false;
-			}
-			//com que el graf es consistent no existeixen els casos {(0,1),(0,2),(1,0),(1,2),(2,0),(2,1)}
-			//el casos (0,0) i (1,1) es tracten al final del metode
-		}
-		else if (!conte1 && conte2) {
-			categories.put(cat.getNom(), cat);
-		}
-		else if (conte1 && !conte2) {
-			pagines.put(pag.getNom(), pag);
-		}
-		else {
-			categories.put(cat.getNom(), cat);
-			pagines.put(pag.getNom(), pag);
-		}
-		cat.addCP(pag);
-		pag.addCP(cat);
-		return true;
-	}
-	
-	/**
-	 * Pre: Cert
-	 * Post: Si no existia ja la relació entre cat i pag ara cat apunta a pag i retorna <code>true</code>, altrament retorna <code>false</code>
+	 * Crea la relació "apunta a la pàgina" a la categoria amb nom especificat i l'inversa a la pàgina amb nom especificat.
+	 * 
+	 * @param categoria nom de la categoria a la que es crea la relació "apunta a"
+	 * @param pagina nom de la pàgina a la que es crea la relació "és apuntada per"
+	 * @return <code>true</code> si s'ha creat la relació. <code>false</code> si ja existia
 	 */
 	public Boolean addCP(String categoria, String pagina) {
 		Pagina pag;
@@ -285,8 +209,11 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna <code>true</code> si cat1 era super de cat2 i ja no, <code>false</code> altrament
+	 * Elimina la relació "és subcategoria" de la categoria <code>cat1</code> i l'inversa de la categoria <code>cat2</code>.
+	 * 
+	 * @param cat1 categoria de la qual s'elimina la relació "és subcategoria"
+	 * @param cat2 categoria de la qual s'elimina la relació "és supercategoria"
+	 * @return <code>true</code> si s'ha eliminat la relació. <code>false</code> si no existeix al graf alguna categoria o si no estan relacionades
 	 */
 	public Boolean removeCC(Categoria cat1, Categoria cat2) {
 		if (categories.containsKey(cat1.getNom()) && categories.containsKey(cat2.getNom())) {
@@ -300,8 +227,11 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna <code>true</code> si pag apuntava a cat i ja no, <code>false</code> altrament
+	 * Elimina la relació "és apuntada per la pàgina" a la categoria <code>cat</code> i l'inversa a la pàgina <code>pag</code>.
+	 * 
+	 * @param pagina pàgina a la qual s'elimina la relació "apunta a"
+	 * @param categoria categoria a la qual s'elimina la relació "és apuntada per"
+	 * @return <code>true</code> si s'ha eliminat la relació. <code>false</code> si no existeix al graf la categoria o la pàgina; o si no estan relacionades
 	 */
 	public Boolean removePC(Pagina pag, Categoria cat) {
 		if (pagines.containsKey(pag.getNom()) && categories.containsKey(cat.getNom())) {
@@ -315,8 +245,11 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna <code>true</code> si cat apuntava a pag i ja no, <code>false</code> altrament
+	 * Elimina la relació "apunta a la pàgina" a la categoria <code>cat</code> i l'inversa a la pàgina <code>pag</code>.
+	 * 
+	 * @param categoria categoria a la qual s'elimina la relació "apunta a"
+	 * @param pagina pàgina a la qual s'elimina la relació "és apuntada per"
+	 * @return <code>true</code> si s'ha eliminat la relació. <code>false</code> si no existeix al graf la categoria o la pàgina; o si no estan relacionades
 	 */
 	public Boolean removeCP(Categoria cat, Pagina pag) {
 		if (categories.containsKey(cat.getNom()) && pagines.containsKey(pag.getNom())) {
@@ -330,8 +263,10 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Si nom era una key de categories amb una assignació nom ja no és key de categories ni existeix cap relació amb aquesta Categoria i retorna <code>true</code>, altrament retorna <code>false</code>
+	 * Elimina una categoria del graf i totes les seves relacions.
+	 * 
+	 * @param nom la categoria que serà eliminada del graf
+	 * @return <code>true</code> si s'ha eliminat la categoria. <code>false</code> si la categoria no pertanyia al graf
 	 */
 	public Boolean removeCategoria(String nom) {
 		if (categories.containsKey(nom)) {
@@ -350,8 +285,10 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Si nom era una key de pagines amb una assignació ja no és key de pagines ni existeix cap relació amb aquesta Pàgina i retorna <code>true</code>, altrament retorna <code>false</code>
+	 * Elimina una pàgina del graf i totes les seves relacions.
+	 * 
+	 * @param nom la pàgina que serà eliminada del graf
+	 * @return <code>true</code> si s'ha eliminat la pàgina. <code>false</code> si la pàgina no pertanyia al graf
 	 */
 	public Boolean removePagina(String nom) {
 		if (pagines.containsKey(nom)) {
@@ -366,24 +303,31 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna si existeix una Categoria assignada a nom
+	 * Retorna si la categoria amb nom especificat existeix al graf. 
+	 * 
+	 * @param nom nom de la categoria buscada
+	 * @return <code>true</code> si la categoria amb nom especificat pertany a <code>categories</code>
 	 */
 	public Boolean existsCategoria(String nom) {
 		return categories.containsKey(nom);
 	}
 
 	/**
-	 * Pre: Cert
-	 * Post: Retorna si existeix una Pagina assignada a nom
+	 * Retorna si la pàgina amb nom especificat existeix al graf. 
+	 * 
+	 * @param nom nom de la pàgina buscada
+	 * @return <code>true</code> si la pàgina amb nom especificat pertany a <code>pagines</code>
 	 */
 	public Boolean existsPagina(String nom) {
 		return pagines.containsKey(nom);
 	}
-	
+
 	/**
-	 * Pre: Cert
-	 * Post: Si existia una Categoria amb nom == nomAntic i cap Categoria amb nom == nomNou ara nom = nomNou i retorna <code>true</code>, altrament retorna <code>false</code>
+	 * Canvia el nom de la categoria especificada pel nou nom especificat.
+	 * 
+	 * @param nomAntic nom de la categoria a la que se li modificarà el <code>nom</code>
+	 * @param nomNou el nou <code>nom</code> de la categoria especificada
+	 * @return <code>true</code> si s'ha canviat el <code>nom</code>. <code>false</code> si la categoria no pertanyia al graf o si existeix una categoria amb nom = nomNou
 	 */
 	public Boolean setNomCategoria(String nomAntic, String nomNou) {
 		if (nomAntic.equals(nomNou)) return false;
@@ -421,8 +365,11 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Si existia una Pàgina amb nom == nomAntic i cap Pàgina amb nom == nomNou ara nom = nomNou i retorna <code>true</code>, altrament retorna <code>false</code>
+	 * Canvia el nom de la pàgina especificada pel nou nom especificat.
+	 * 
+	 * @param nomAntic nom de la pàgina a la que se li modificarà el <code>nom</code>
+	 * @param nomNou el nou <code>nom</code> de la pàgina especificada
+	 * @return <code>true</code> si s'ha canviat el <code>nom</code>. <code>false</code> si la pàgina no pertanyia al graf o si existeix una pàgina amb nom = nomNou
 	 */
 	public Boolean setNomPagina(String nomAntic, String nomNou) {
 		if (pagines.containsKey(nomAntic) && !pagines.containsKey(nomNou)) {
@@ -447,175 +394,24 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: 
-	 *	
-	public Boolean setCatCP(String nomCat, ArrayList<String> cPs) {
-		Categoria aux;
-		if (categories.containsKey(nomCat)) {
-			aux = categories.get(nomCat);
-			Map<String, Pagina> CP = aux.getMapCP();
-			for (Pagina pag : CP.values())
-			{
-				pag.removeCP(nomCat);
-			}
-		}
-		else {
-			aux = new Categoria(nomCat);
-			categories.put(nomCat, aux);
-		}
-		boolean retorn = true;
-		for (String nomPag: cPs) {
-			if (!this.addCP(nomCat, nomPag)) retorn = false;
-		}
-		return retorn;
-	}
-	
-	/**
-	 * Pre: Cert
-	 * Post: 
-	 *	
-	public Boolean setCatPC(String nomCat, ArrayList<String> pCs) {
-		Categoria aux;
-		if (categories.containsKey(nomCat)) {
-			aux = categories.get(nomCat);
-			Map<String, Pagina> PC = aux.getMapPC();
-			for (Pagina pag : PC.values())
-			{
-				pag.removePC(nomCat);
-			}
-		}
-		else {
-			aux = new Categoria(nomCat);
-			categories.put(nomCat, aux);
-		}
-		boolean retorn = true;
-		for (String nomPag: pCs) {
-			if (!this.addPC(nomCat, nomPag)) retorn = false;
-		}
-		return retorn;
-	}
-	
-	/**
-	 * Pre: Cert
-	 * Post: 
-	 *
-	public Boolean setCsupC(String nomCat, ArrayList<String> sup) {
-		Categoria aux;
-		if (categories.containsKey(nomCat)) {
-			aux = categories.get(nomCat);
-			Map<String, Categoria> CsupC = aux.getMapCSupC();
-			for (Categoria cat : CsupC.values())
-			{
-				cat.removeCsubC(nomCat);
-			}
-		}
-		else {
-			aux = new Categoria(nomCat);
-			categories.put(nomCat, aux);
-		}
-		boolean retorn = true;
-		for (String nomAux: sup) {
-			if (!this.addCC(nomAux, nomCat)) retorn = false;
-		}
-		return retorn;
-	}
-	
-	/**
-	 * Pre: Cert
-	 * Post: 
-	 *
-	public Boolean setCsubC(String nomCat, ArrayList<String> sub) {
-		Categoria aux;
-		if (categories.containsKey(nomCat)) {
-			aux = categories.get(nomCat);
-			Map<String, Categoria> CsubC = aux.getMapCSubC();
-			for (Categoria cat : CsubC.values())
-			{
-				cat.removeCsupC(nomCat);
-			}
-		}
-		else {
-			aux = new Categoria(nomCat);
-			categories.put(nomCat, aux);
-		}
-		boolean retorn = true;
-		for (String nomAux: sub) {
-			if (!this.addCC(nomCat, nomAux)) retorn = false;
-		}
-		return retorn;
-	}
-	
-	/**
-	 * Pre: Cert
-	 * Post: 
-	 *
-	public Boolean setPagCP(String nomPag, ArrayList<String> cPs) {
-		Pagina aux;
-		if (pagines.containsKey(nomPag)) {
-			aux = pagines.get(nomPag);
-			Map<String, Categoria> CP = aux.getCP();
-			for (Categoria cat : CP.values())
-			{
-				cat.removeCP(nomPag);
-			}
-		}
-		else {
-			aux = new Pagina(nomPag);
-			pagines.put(nomPag, aux);
-		}
-		boolean retorn = true;
-		for (String nomCat: cPs) {
-			if (!this.addCP(nomCat, nomPag)) retorn = false;
-		}
-		return retorn;
-	}
-	
-	/**
-	 * Pre: Cert
-	 * Post: 
-	 *
-	public Boolean setPagPC(String nomPag, ArrayList<String> pCs) {
-		Pagina aux;
-		if (pagines.containsKey(nomPag)) {
-			aux = pagines.get(nomPag);
-			Map<String, Categoria> PC = aux.getPC();
-			for (Categoria cat : PC.values())
-			{
-				cat.removePC(nomPag);
-			}
-		}
-		else {
-			aux = new Pagina(nomPag);
-			pagines.put(nomPag, aux);
-		}
-		boolean retorn = true;
-		for (String nomCat: pCs) {
-			if (!this.addPC(nomCat, nomPag)) retorn = false;
-		}
-		return retorn;
-	}
-	
-	/**
-	 * Pre: Cert
-	 * Post: Retorna el conjunt de categories
+	 * Obté les categories que pertanyen al graf.
+	 * @return les categories del graf
 	 */
 	public Collection<Categoria> getCategories() {
 		return categories.values();
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna el conjunt de pàgines
+	 * Obté les pàgines que pertanyen al graf.
+	 * @return les pàgines del graf
 	 */
 	public Collection<Pagina> getPagines() {
 		return pagines.values();
 	}
 	
-	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna el nom de totes les categories del graf
+	 * Obté el nom de les categories que pertanyen al graf.
+	 * @return el nom de les categories del graf
 	 */
 	public ArrayList<String> getNomCategories() {
 		ArrayList<String> result = new ArrayList<String>();
@@ -626,8 +422,8 @@ public class GrafDades {
 	}
 	
 	/**
-	 * Pre: Cert
-	 * Post: Retorna el nom de totes les pagines del graf
+	 * Obté el nom de les pàgines que pertanyen al graf.
+	 * @return el nom de les pàgines del graf
 	 */
 	public ArrayList<String> getNomPagines() {
 		ArrayList<String> result = new ArrayList<String>();
