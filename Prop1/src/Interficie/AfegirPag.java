@@ -431,7 +431,7 @@ public class AfegirPag extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         pag = jTextField1.getText();
-        if(!pag.isEmpty() && !pag.contains("|") && !pag.contains("*") && !pag.contains(" ")) {
+        if(!pag.isEmpty() && !pag.contains("|") && !pag.contains("*") && !pag.contains(" ") && !macro.getContDades().getPagines().contains(pag)) {
             jLabel6.setText("Nom de la pàgina:" + pag);
             jPanel1.setVisible(false);
             A_ModificaPag.setVisible(true);
