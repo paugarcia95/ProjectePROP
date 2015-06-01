@@ -104,158 +104,6 @@ public class GrafNewman extends Graf {
             }
             return result;
         }
-        
-	public static final class QueueMatrix {
-		private static Queue<Aresta>[][] Q;
-
-		/**
-		 * Constructora per defecte. (Pau)
-		 * 
-		 * @param size
-		 *            Representa el tamany de la matriu
-		 */
-		public QueueMatrix(int size) {
-			Q = new LinkedList[size][size];
-			for (int i = 0; i < size; ++i) {
-				for (int j = 0; j < size; ++j) {
-					Q[i][j] = new LinkedList<Aresta>();
-				}
-			}
-		}
-
-		/**
-		 * Afegeix una aresta de i a j al cami de i a j. (Pau)
-		 * 
-		 * @param i
-		 *            primer node
-		 * @param j
-		 *            segon node
-		 */
-		public void pushAresta(int i, int j) {
-			Q[i][j].add(new Aresta(i, j));
-		}
-
-		/**
-		 * Crea el cami minim d'inici a fi passant pel node meitat El que fa
-		 * aquest push es posar les arestes necessaries per arribar al node fi
-		 * fent que el cami sigui de inici a meitat i de meitat a fi. (Pau)
-		 * 
-		 * @param inici
-		 *            node origen
-		 * @param fi
-		 *            node desti
-		 * @param meitat
-		 *            node pel qual es passa per arribar a fi
-		 */
-		public void pushCami(int inici, int meitat, int fi) {
-			//System.out.println("ENTRO");
-			// El que fa aquest push es posar les arestes necessaries per
-			// arribar al node fi fent que el cami sigui de inici a meitat i de
-			// meitat a fi
-			Q[inici][fi].clear();; // Netejo el cami minim de inici a fi
-			Q[inici][fi].addAll(new LinkedList<Aresta>(Q[inici][meitat]));
-			Q[inici][fi].addAll(new LinkedList<Aresta>(Q[meitat][fi]));
-		}
-
-		/**
-		 * Retorna i elimina, el primer element del cami minim de i a j. (Pau)
-		 * 
-		 * @param i
-		 *            primer node
-		 * @param j
-		 *            segon node
-		 * @return El primer node pel que passa el cami minim de i a j (i
-		 *         l'esborra)
-		 */
-		public Aresta popCami(int i, int j) {
-			return Q[i][j].poll();
-		}
-
-		/**
-		 * Retorna, pero NO elimina, el primer element del cami minim de i a j.
-		 * (Pau)
-		 * 
-		 * @param i
-		 *            primer node
-		 * @param j
-		 *            segon node
-		 * @return El primer node pel que passa el cami minim de i a j
-		 */
-		public Aresta topCami(int i, int j) {
-			return Q[i][j].peek();
-		}
-
-		/**
-		 * Retorna el cami minim del node i al j. (Pau)
-		 * 
-		 * @param i
-		 *            primer node
-		 * @param j
-		 *            segon node
-		 * @return Una cua pels nodes que passa el cami minim de i a j
-		 */
-		public Queue<Aresta> getCamiMinim(int i, int j) {
-			return Q[i][j];
-		}
-
-		/**
-		 * Indica si hi ha mes nodes al cami minim de i a j (Pau)
-		 * 
-		 * @param i
-		 *            primer node
-		 * @param j
-		 *            segon node
-		 * @return un boolea que indica si no queden mes nodes
-		 */
-		public Boolean isEmpty(int i, int j) {
-			return Q[i][j].isEmpty();
-		}
-	};
-
-	public QueueMatrix getCaminsMinims() {
-		QueueMatrix caminsMinims = new QueueMatrix(size());
-		double[][] pes = new double[size()][size()];
-
-		inicialitzaPesos(pes, caminsMinims);
-
-		for (int k = 0; k < pes.length; k++) {
-			for (int i = 0; i < pes.length; i++) {
-				for (int j = 0; j < pes.length; j++) {
-					if (pes[i][j] > pes[i][k] + pes[k][j]) {
-						caminsMinims.pushCami(i, k, j);
-					}
-					pes[i][j] = Math.min(pes[i][j], pes[i][k] + pes[k][j]);
-				}
-			}
-		}
-		return caminsMinims;
-	}
-
-	public void inicialitzaPesos(double[][] pes, QueueMatrix caminsMinims) {
-		for (int i = 0; i < pes.length; ++i) {
-			for (int j = 0; j < pes[0].length; ++j) {
-				if (i == j) {
-					pes[i][j] = 0;
-				} else if (llista.exists(i, j)) {
-					pes[i][j] = llista.get(i, j);
-					caminsMinims.pushAresta(i, j);;
-				} else
-					pes[i][j] = Integer.MAX_VALUE;
-			}
-		}
-	}
-
-	private void printPesos(double[][] pes) {
-		for (int i = 0; i < pes.length; ++i) {
-			for (int j = 0; j < pes[0].length; ++j) {
-				if (pes[i][j] == Integer.MAX_VALUE)
-					System.out.print("inf ");
-				else
-					System.out.print(pes[i][j] + " ");
-			}
-			System.out.println();
-		}
-	}
 
 	public Boolean calcularEdgeBetween() {
 		// Posem a 0 tots els camins minims per "comencar" la nova ronda
@@ -263,41 +111,7 @@ public class GrafNewman extends Graf {
                 for(Integer j: i.keySet()){
                     i.put(j, 0);
                 }
-            
-        // PART NOVA ///////////////////////////////////////////////////////////
-		
-		QueueMatrix caminsMin = getCaminsMinims();
-		for (int i = 0; i < NCM.size(); ++i) {
-			for (int j = 0; j < NCM.size(); ++j) {
-				while (!caminsMin.isEmpty(i, j)) {
-					Aresta a = caminsMin.popCami(i, j);
-					int act = NCM.get(a.node1).get(a.node2);
-					++act;
-					NCM.get(a.node1).put(a.node2, act);
-					NCM.get(a.node2).put(a.node1, act);
-					if (maxNumCM <= act) {
-						maxi = a.node1;
-						maxj = a.node2;
-						maxNumCM = act;
-					}
-				}
-			} 
-		} 
-		
-		
 
-		return true;
-	}
-        
-        public Boolean calcularEdgeBetweenv2() {
-		// Posem a 0 tots els camins minims per "comencar" la nova ronda
-            for(HashMap<Integer,Integer> i: NCM)
-                for(Integer j: i.keySet()){
-                    i.put(j, 0);
-                }
-		// ////////////////// PART ANTIGA
-		// ///////////////////////////////////////////
-    
     	for (int i = 0; i < NCM.size(); ++i) {
                 ArrayList<Queue<Aresta> > camins = getCamiMinim(i);
                 for(int j=0; j < NCM.size();++j) {
@@ -322,12 +136,8 @@ public class GrafNewman extends Graf {
         
 	public Integer getNumArestes() {
             Integer num = 0;
-            int aux = 0;
             for(HashMap<Integer,Integer> aresta: NCM) {
-               // System.out.println("El node "+DiccionariInvers.get(aux)+" te "+aresta.size()+" arestes");
                 num+=aresta.size();
-                ++aux;
-                //System.out.println("En portem acumulades: "+num);
             }
             return num/2;
         }
@@ -555,5 +365,345 @@ public class GrafNewman extends Graf {
 		}
 		numCom = comunitats.size();
 		return comunitats;
+	}
+
+	// ///////////// CODI PER ENTREGAR PERO QUE NO ES FUNCIONAL (Versions
+	// desfasades) ////////////////////////////////
+
+	// ALGORISME DE FLOYD WARSHALL //
+
+	public Boolean calcularEdgeBetweenv2() {
+		// Posem a 0 tots els camins minims per "comencar" la nova ronda
+		for (HashMap<Integer, Integer> i : NCM)
+			for (Integer j : i.keySet()) {
+				i.put(j, 0);
+			}
+
+		QueueMatrix caminsMin = getCaminsMinims();
+		for (int i = 0; i < NCM.size(); ++i) {
+			for (int j = 0; j < NCM.size(); ++j) {
+				while (!caminsMin.isEmpty(i, j)) {
+					Aresta a = caminsMin.popCami(i, j);
+					int act = NCM.get(a.node1).get(a.node2);
+					++act;
+					NCM.get(a.node1).put(a.node2, act);
+					NCM.get(a.node2).put(a.node1, act);
+					if (maxNumCM <= act) {
+						maxi = a.node1;
+						maxj = a.node2;
+						maxNumCM = act;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	private static final class QueueMatrix {
+		private static Queue<Aresta>[][] Q;
+
+		/**
+		 * Constructora per defecte. (Pau)
+		 * 
+		 * @param size
+		 *            Representa el tamany de la matriu
+		 */
+		public QueueMatrix(int size) {
+			Q = new LinkedList[size][size];
+			for (int i = 0; i < size; ++i) {
+				for (int j = 0; j < size; ++j) {
+					Q[i][j] = new LinkedList<Aresta>();
+				}
+			}
+		}
+
+		/**
+		 * Afegeix una aresta de i a j al cami de i a j. (Pau)
+		 * 
+		 * @param i
+		 *            primer node
+		 * @param j
+		 *            segon node
+		 */
+		public void pushAresta(int i, int j) {
+			Q[i][j].add(new Aresta(i, j));
+		}
+
+		/**
+		 * Crea el cami minim d'inici a fi passant pel node meitat El que fa
+		 * aquest push es posar les arestes necessaries per arribar al node fi
+		 * fent que el cami sigui de inici a meitat i de meitat a fi. (Pau)
+		 * 
+		 * @param inici
+		 *            node origen
+		 * @param fi
+		 *            node desti
+		 * @param meitat
+		 *            node pel qual es passa per arribar a fi
+		 */
+		public void pushCami(int inici, int meitat, int fi) {
+			// System.out.println("ENTRO");
+			// El que fa aquest push es posar les arestes necessaries per
+			// arribar al node fi fent que el cami sigui de inici a meitat i de
+			// meitat a fi
+			Q[inici][fi].clear();; // Netejo el cami minim de inici a fi
+			Q[inici][fi].addAll(new LinkedList<Aresta>(Q[inici][meitat]));
+			Q[inici][fi].addAll(new LinkedList<Aresta>(Q[meitat][fi]));
+		}
+
+		/**
+		 * Retorna i elimina, el primer element del cami minim de i a j. (Pau)
+		 * 
+		 * @param i
+		 *            primer node
+		 * @param j
+		 *            segon node
+		 * @return El primer node pel que passa el cami minim de i a j (i
+		 *         l'esborra)
+		 */
+		public Aresta popCami(int i, int j) {
+			return Q[i][j].poll();
+		}
+
+		/**
+		 * Retorna, pero NO elimina, el primer element del cami minim de i a j.
+		 * (Pau)
+		 * 
+		 * @param i
+		 *            primer node
+		 * @param j
+		 *            segon node
+		 * @return El primer node pel que passa el cami minim de i a j
+		 */
+		public Aresta topCami(int i, int j) {
+			return Q[i][j].peek();
+		}
+
+		/**
+		 * Retorna el cami minim del node i al j. (Pau)
+		 * 
+		 * @param i
+		 *            primer node
+		 * @param j
+		 *            segon node
+		 * @return Una cua pels nodes que passa el cami minim de i a j
+		 */
+		public Queue<Aresta> getCamiMinim(int i, int j) {
+			return Q[i][j];
+		}
+
+		/**
+		 * Indica si hi ha mes nodes al cami minim de i a j (Pau)
+		 * 
+		 * @param i
+		 *            primer node
+		 * @param j
+		 *            segon node
+		 * @return un boolea que indica si no queden mes nodes
+		 */
+		public Boolean isEmpty(int i, int j) {
+			return Q[i][j].isEmpty();
+		}
+	};
+
+	private QueueMatrix getCaminsMinims() {
+		QueueMatrix caminsMinims = new QueueMatrix(size());
+		double[][] pes = new double[size()][size()];
+
+		inicialitzaPesos(pes, caminsMinims);
+
+		for (int k = 0; k < pes.length; k++) {
+			for (int i = 0; i < pes.length; i++) {
+				for (int j = 0; j < pes.length; j++) {
+					if (pes[i][j] > pes[i][k] + pes[k][j]) {
+						caminsMinims.pushCami(i, k, j);
+					}
+					pes[i][j] = Math.min(pes[i][j], pes[i][k] + pes[k][j]);
+				}
+			}
+		}
+		return caminsMinims;
+	}
+
+	public void inicialitzaPesos(double[][] pes, QueueMatrix caminsMinims) {
+		for (int i = 0; i < pes.length; ++i) {
+			for (int j = 0; j < pes[0].length; ++j) {
+				if (i == j) {
+					pes[i][j] = 0;
+				} else if (llista.exists(i, j)) {
+					pes[i][j] = llista.get(i, j);
+					caminsMinims.pushAresta(i, j);;
+				} else
+					pes[i][j] = Integer.MAX_VALUE;
+			}
+		}
+	}
+
+	// ALGORISME DIJKSTRA VERSIÓ NO TANT EFICIENT //
+
+	private static final class ArestaPes {
+		public Integer aresta;
+		public Double pes;
+
+		/**
+		 * Constructora per defecte. (Pau)
+		 * 
+		 * @param aresta
+		 *            Es el node d'un dels extrems de l'aresta (A la funcio on
+		 *            s'utilitza representa el node a on es vol anar).
+		 * @param pes
+		 *            Representa el pes de l'aresta formada per el node d'origen
+		 *            i "aresta".
+		 * @return Una ArestaPes amb aresta i pes.
+		 */
+		public ArestaPes(int aresta, double pes) {
+			this.aresta = aresta;
+			this.pes = pes;
+		}
+	}
+
+	private static final class ComparaValors implements Comparator<ArestaPes> {
+		/**
+		 * Compara l'aresta les arestes mitjancant el seu pes. (Pau)
+		 * 
+		 * @param o1
+		 *            Una Aresta.
+		 * @param o2
+		 *            L'altra Aresta.
+		 * @return Un enter positiu si o1 te un pes mes gran que o2, 0 si tenen
+		 *         el mateix pes i un enter negatiu si o2 te un pes major a o1.
+		 */
+		@Override
+		public int compare(ArestaPes o1, ArestaPes o2) {
+			// Es multiplica el valor per 100 per no perdre precisio a la
+			// comparacio de doubles (ja que despres es fa un cast a integer i
+			// es perden els decimals)
+			return (int) (o1.pes * 100 - o2.pes * 100);
+		}
+	}
+
+	private static final class QueueVector {
+		private static ArrayList<Queue<Aresta>> Q;
+
+		/**
+		 * Constructora per defecte. (Pau)
+		 * 
+		 * @param size
+		 *            Representa el tamany del vector
+		 * @return Un vector que conte tantes Queue (buides) com size indica
+		 */
+		public QueueVector(int size) {
+			Q = new ArrayList<Queue<Aresta>>(size);
+			for (int i = 0; i < size; i++) {
+				Q.add(new LinkedList<Aresta>());
+			}
+		}
+
+		/**
+		 * Insereix l'element "a" a la cua de la posicio "i" (Pau)
+		 * 
+		 * @param i
+		 *            Posicio on es vol inserir
+		 * @param a
+		 *            Aresta que es vol inserir
+		 */
+		public void push(int i, Aresta a) {
+			// El que fa aquest push es posar les arestes necessaries per
+			// arribar al primer node de l'aresta mes la nova aresta per
+			// arribar al seguent node
+			Q.get(i).clear();
+
+			Queue<Aresta> aux = new LinkedList<>(Q.get(a.node1));
+			while (!aux.isEmpty()) {
+				Q.get(i).add(aux.poll());
+			}
+
+			Q.get(i).add(a);
+		}
+
+		/**
+		 * Retorna i elimina el primer element de la cua de la posició i. (Pau)
+		 * 
+		 * @param i
+		 *            Posicio on es troba la cua desitjada
+		 * @return El primer element de la cua de la posició i
+		 */
+		public Aresta pop(int i) {
+			return Q.get(i).poll();
+		}
+
+		/**
+		 * Retorna, pero NO elimina, el primer element de la cua de la posició
+		 * i. (Pau)
+		 * 
+		 * @param i
+		 *            Posicio on es troba la cua desitjada
+		 * @return El primer element de la cua de la posició i
+		 */
+		public Aresta top(int i) {
+			return Q.get(i).peek();
+		}
+
+		/**
+		 * Retorna la cua de la posicio i. (Pau)
+		 * 
+		 * @param i
+		 *            Posicio on es troba la cua desitjada
+		 * @return La cua de la posicio i
+		 */
+		public Queue<Aresta> getQueue(int i) {
+			return Q.get(i);
+		}
+	}
+
+	/**
+	 * Calcula el cami minim des del nodeA a la resta de nodes. (Pau)
+	 * 
+	 * @param nodeA
+	 *            El node d'un dels extrems del cami.
+	 * @return Un vector de cues de les arestes per on passen els camins minims.
+	 */
+	private QueueVector getCamiMinimv2(int nodeA) {
+		// Implementat amb Dijkstra
+		QueueVector camiMinim = new QueueVector(this.size());
+		// Vector que marca la distancia del nodeA a la resta de nodes
+		ArrayList<Double> distancia = new ArrayList<Double>(this.size());
+
+		// Es com una cua de prioritat que ordena els nodes en una posicio mes
+		// curta al principi
+		PriorityQueue<ArestaPes> cola = new PriorityQueue<ArestaPes>(100, new ComparaValors());
+
+		// En un principi no se sap, i es marquen les distancies com a
+		// infinites
+		for (int i = 0; i < this.size(); ++i) {
+			distancia.add(Double.POSITIVE_INFINITY);
+		}
+
+		// La distancia del nodeA a ell mateix es 0
+		distancia.set(nodeA, 0.0);
+		cola.add(new ArestaPes(nodeA, 0.0));
+
+		while (!cola.isEmpty()) {
+			ArestaPes a = cola.poll();
+			Integer u = a.aresta;
+
+			// Conte un iterador dels nodes adjacents a "u"
+			Iterator<Integer> it2 = this.getAdjacents(u).iterator();
+
+			while (it2.hasNext()) {
+				Integer v = it2.next();
+				Double pesUV = llista.get(u, v);
+
+				if (distancia.get(v) > distancia.get(u) + pesUV) {
+					distancia.set(v, distancia.get(u) + pesUV);
+					cola.add(new ArestaPes(v, distancia.get(v)));
+					// Aquest push que es fa aqu� �s especial: insereix el cam�
+					// per arribar fins
+					// a "u" i despres l'aresta de u a v.
+					camiMinim.push(v, new Aresta(u, v));
+				}
+			}
+		}
+		return camiMinim;
 	}
 }
