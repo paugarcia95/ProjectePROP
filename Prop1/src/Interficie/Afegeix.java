@@ -79,6 +79,7 @@ public class Afegeix extends javax.swing.JPanel {
         // TODO add your handling code here:
         vista.afegirFitxer();
         JOptionPane.showMessageDialog(comp, "Tot carregat correctament");
+        // CACA
     }//GEN-LAST:event_jButton17ActionPerformed
 
 
