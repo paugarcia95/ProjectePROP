@@ -103,6 +103,7 @@ public class BuscaPag extends javax.swing.JPanel {
     private void BVisPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVisPagActionPerformed
         vista.visualitzarPaginaDe(LlistaPag);
         LlistaPag.clearSelection();
+        vista.omplePaginesExistents(LlistaPag);
     }//GEN-LAST:event_BVisPagActionPerformed
     /*
     * Quan es clica al boto busca, es mostren nomes les pagines que contenen el conjunt de lletres

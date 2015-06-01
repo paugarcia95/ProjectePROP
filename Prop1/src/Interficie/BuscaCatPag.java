@@ -51,12 +51,6 @@ public class BuscaCatPag extends javax.swing.JPanel {
             }
         });
 
-        Cbusca3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Cbusca3ActionPerformed(evt);
-            }
-        });
-
         CbuscaPag1.setText("Busca");
         CbuscaPag1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,18 +172,16 @@ public class BuscaCatPag extends javax.swing.JPanel {
     private void ButVisualitzaCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButVisualitzaCatActionPerformed
         vista.visualitzarCategoriaDe(LlistaCateg1);
         LlistaCateg1.clearSelection();
+        vista.ompleCategoriesExistents(LlistaCateg1);
     }//GEN-LAST:event_ButVisualitzaCatActionPerformed
     /*
     * Quan es clica el boto de visualitzacio d'una pagina, s'obre la informacio de la pagina seleccionada
     */
     private void ButVisualitzaPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButVisualitzaPagActionPerformed
         vista.visualitzarPaginaDe(LlistaPag1);
-       LlistaPag1.clearSelection();
+        LlistaPag1.clearSelection();
+        vista.omplePaginesExistents(LlistaPag1);
     }//GEN-LAST:event_ButVisualitzaPagActionPerformed
-
-    private void Cbusca3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbusca3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Cbusca3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

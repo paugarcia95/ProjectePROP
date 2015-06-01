@@ -110,6 +110,7 @@ public class BuscaCat extends javax.swing.JPanel {
     */
     private void BVisCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVisCatActionPerformed
         vista.visualitzarCategoriaDe(LlistaCateg);
+        vista.ompleCategoriesExistents(LlistaCateg);
         LlistaCateg.clearSelection();
     }//GEN-LAST:event_BVisCatActionPerformed
     

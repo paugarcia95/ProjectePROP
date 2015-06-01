@@ -11,9 +11,6 @@ import static Interficie.InterficieWiki.auxguard;
 import static Interficie.InterficieWiki.userAdmin;
 import static Interficie.InterficieWiki.comunaEliminar;
 
-import domini.Categoria;
-import domini.GrafDades;
-import domini.Pagina;
 import java.awt.Frame;
 import java.io.File;
 import java.util.ArrayList;
@@ -246,7 +243,7 @@ public class ControladorVistes {
             if(!macro.getContUser().removeComunitatCerca(macro.getUserActual(),numcerca,comunaEliminar.poll()))JOptionPane.showMessageDialog(comp, "Hi ha hagut un error en eliminar una comunitat!", capsalera, ERROR_MESSAGE);
         }
     }
-//es pot millorar eficiencia (que vagi carregant a mida q es va fent scroll)   
+  
     protected void ompleCategoriesExistents(JList quina){         
         Collection<String> auxc = macro.getContDades().getCategories();
         Object[] aux2 = new Object[auxc.size()];

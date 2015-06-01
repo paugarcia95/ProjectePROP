@@ -501,7 +501,7 @@ public class VPagina extends javax.swing.JDialog {
         int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar aquesta pàgina?", capsalera, YES_NO_OPTION);
         if(resposta==YES_OPTION) {
             macro.getContDades().removePag(pag);
-            vista.omplePaginesExistents(PagList);
+            //vista.omplePaginesExistents(PagList);
             this.dispose();
         }
     }//GEN-LAST:event_butElimPagActionPerformed

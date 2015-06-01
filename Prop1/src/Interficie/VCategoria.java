@@ -764,7 +764,6 @@ public class VCategoria extends javax.swing.JDialog {
         int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar aquesta categoria?", capsalera, YES_NO_OPTION);
         if(resposta==YES_OPTION) {
             macro.getContDades().removeCateg(cat);
-            vista.ompleCategoriesExistents(CategList);
             this.dispose();
         }
     }//GEN-LAST:event_butElimCatActionPerformed
