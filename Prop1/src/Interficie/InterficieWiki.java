@@ -232,8 +232,6 @@ public class InterficieWiki extends javax.swing.JFrame {
         Panell = new CreaComunitat(this,AP_Client);
         AP_Client.add(Panell, "Fer Cerca");
         if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
-///////////////////ELIMINAAAAAAAAR////////////////////////////////////////////////////////////
-        provisional();
         
     }
     Inici AP_Inici;        
@@ -374,7 +372,7 @@ public class InterficieWiki extends javax.swing.JFrame {
 
         jLabel8.setText("Username");
 
-        jButton1.setText("Comproba Disponibilitat");
+        jButton1.setText("Comprova Disponibilitat");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
