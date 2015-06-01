@@ -1,6 +1,7 @@
 /**
  * Panell dels noms de totes les categories existents al sistema 
  */
+
 package Interficie;
 
 

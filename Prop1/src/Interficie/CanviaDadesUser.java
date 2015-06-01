@@ -1,6 +1,7 @@
 /*
  * Panell de modidicacio de les dades de l'usuari actual
  */
+
 package Interficie;
 
 import static Interficie.InterficieWiki.macro;

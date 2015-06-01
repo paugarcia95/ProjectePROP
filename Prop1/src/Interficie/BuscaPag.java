@@ -1,6 +1,7 @@
 /*
  * Panell dels noms de totes les pagines existents al sistema 
  */
+
 package Interficie;
 
 import static Interficie.InterficieWiki.vista;

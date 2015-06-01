@@ -3,24 +3,17 @@
  */
 package Interficie;
 
-import static Interficie.InterficieWiki.macro;
-import static Interficie.InterficieWiki.cercaactual;
-import javax.swing.JFrame;
 /**
  *
  * @author cristina.fontanet
  */
 public class GuardaCerca extends javax.swing.JPanel {
-
-    private InterficieWiki pare;
     
     /**
      * Creates new form GuardaCerca
      */
-    public GuardaCerca(JFrame par) {
+    public GuardaCerca() {
         initComponents();
-        pare = (InterficieWiki)par;
-
     }
     
     /*
@@ -32,7 +25,7 @@ public class GuardaCerca extends javax.swing.JPanel {
     /*
     * Funcio que ens permet obtenir el nom de la cerca desitjat per l'usuari
     */
-    public String getName(){
+    public String getNameCerca(){
         return jTextField5.getText();
     }
 
