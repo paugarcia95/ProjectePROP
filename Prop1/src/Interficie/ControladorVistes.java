@@ -107,6 +107,7 @@ public class ControladorVistes {
     protected void carregaCerquesFetes(JTextField jTextField7,JList LlistaCerques){
         DefaultListModel llista = (DefaultListModel)LlistaCerques.getModel();
         boolean noguardat = false;
+        System.out.println("Mostro les cerques de l'usuari: "+macro.getUserActual()+", i te "+macro.getContUser().getNumCerquesUser(macro.getUserActual()));
         ArrayList<String> aux = macro.getContUser().getCerquesComunitats(macro.getUserActual());
         llista.removeAllElements();
         for(String cerca: aux) {

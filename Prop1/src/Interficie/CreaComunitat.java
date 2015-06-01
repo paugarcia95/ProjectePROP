@@ -793,7 +793,6 @@ public class CreaComunitat extends javax.swing.JPanel {
         jPanel2.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree Algorismes;
     private javax.swing.JTree Algorismes1;
