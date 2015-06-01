@@ -367,10 +367,8 @@ public class TraduccioiAlgorisme {
 		while(it.hasNext()) {
 			Iterator<String> it2 = it.next().iterator();
 			Comunitat aux = new Comunitat();
-                        System.out.println("Comunitat "+idaux+":");
 			while(it2.hasNext()){
-                            String impr= it2.next();
-                            System.out.println("    "+impr);
+                String impr= it2.next();
 				aux.addCat(impr);
 			}
 			aux.setId(idaux);
