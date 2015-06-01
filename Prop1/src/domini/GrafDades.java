@@ -229,8 +229,8 @@ public class GrafDades {
 	/**
 	 * Elimina la relació "és apuntada per la pàgina" a la categoria <code>cat</code> i l'inversa a la pàgina <code>pag</code>.
 	 * 
-	 * @param pagina pàgina a la qual s'elimina la relació "apunta a"
-	 * @param categoria categoria a la qual s'elimina la relació "és apuntada per"
+	 * @param pag pàgina a la qual s'elimina la relació "apunta a"
+	 * @param cat categoria a la qual s'elimina la relació "és apuntada per"
 	 * @return <code>true</code> si s'ha eliminat la relació. <code>false</code> si no existeix al graf la categoria o la pàgina; o si no estan relacionades
 	 */
 	public Boolean removePC(Pagina pag, Categoria cat) {
@@ -247,8 +247,8 @@ public class GrafDades {
 	/**
 	 * Elimina la relació "apunta a la pàgina" a la categoria <code>cat</code> i l'inversa a la pàgina <code>pag</code>.
 	 * 
-	 * @param categoria categoria a la qual s'elimina la relació "apunta a"
-	 * @param pagina pàgina a la qual s'elimina la relació "és apuntada per"
+	 * @param cat categoria a la qual s'elimina la relació "apunta a"
+	 * @param pag pàgina a la qual s'elimina la relació "és apuntada per"
 	 * @return <code>true</code> si s'ha eliminat la relació. <code>false</code> si no existeix al graf la categoria o la pàgina; o si no estan relacionades
 	 */
 	public Boolean removeCP(Categoria cat, Pagina pag) {
