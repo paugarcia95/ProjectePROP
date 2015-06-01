@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 /**
  *
- * @author Rafa
+ * @author Rafa Lucena
  */
 public class AfegirCat extends javax.swing.JPanel {
     String pag;

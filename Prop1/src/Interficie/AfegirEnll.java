@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 /**
  *
- * @author Alr
+ * @author Rafa Lucena
  */
 public class AfegirEnll extends javax.swing.JPanel {
     String cat;
@@ -439,11 +439,11 @@ public class AfegirEnll extends javax.swing.JPanel {
     }//GEN-LAST:event_AfegeixP1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField4ActionPerformed
 
 

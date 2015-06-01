@@ -10,7 +10,7 @@ import static Interficie.InterficieWiki.AP_Afegeix;
 import static Interficie.InterficieWiki.A_Afegeix;
 /**
  *
- * @author Cristina
+ * @author Rafa Lucena
  */
 public class ControladorRafa {
     
@@ -26,10 +26,6 @@ public class ControladorRafa {
                 A_Afegeix = new EliminarDades();
                 AP_Afegeix.add(A_Afegeix,"Eliminació de dades");
     }
-    
-    /*public void canviaAASFADFG(){
-        AP_Afegeix.setSelectedIndex(0);
-    }*/
     
     
     

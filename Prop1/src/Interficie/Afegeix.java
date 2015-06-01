@@ -14,7 +14,7 @@ import static javax.swing.JOptionPane.OK_OPTION;
 
 /**
  *
- * @author rafael.lucena
+ * @author Rafa Lucena
  */
 public class Afegeix extends javax.swing.JPanel {
     /**
@@ -23,7 +23,6 @@ public class Afegeix extends javax.swing.JPanel {
     public Afegeix() {
         initComponents();
         this.setVisible(true);
-        //caca
     }
 
     /**
@@ -76,10 +75,8 @@ public class Afegeix extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
         vista.afegirFitxer();
         JOptionPane.showMessageDialog(comp, "Tot carregat correctament");
-        // CACA
     }//GEN-LAST:event_jButton17ActionPerformed
 
 

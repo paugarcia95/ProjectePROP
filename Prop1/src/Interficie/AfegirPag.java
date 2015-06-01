@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 /**
  *
- * @author Rafa
+ * @author Rafa Lucena
  */
 public class AfegirPag extends javax.swing.JPanel {
     String pag;
@@ -442,7 +442,6 @@ public class AfegirPag extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
-        // TODO add your handling code here:ç
         A_ModificaPag.setVisible(false);
         jOptionPane1.setVisible(false);
     }//GEN-LAST:event_formComponentAdded
@@ -451,7 +450,6 @@ public class AfegirPag extends javax.swing.JPanel {
         A_ModificaPag.setVisible(false);
         jDialog1.setVisible(false);
         jPanel1.setVisible(true);
-           // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
