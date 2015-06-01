@@ -776,10 +776,10 @@ public class CreaComunitat extends javax.swing.JPanel {
     * En mostrar-se el panell, es carreguen els valors per defecte en cas de que sigui una cerca nova o els valors originals de cerca a modificar en cas contrari
     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        jPanel2.setVisible(false);
         Boolean nova;
         nova = auxguard != 0;
         jPanel1.setVisible(true);
-        jPanel2.setVisible(false);
         vista.preaparaCreacioNovaCerca(nova, LCTotes, LPTotes, Algorismes, Lsub, Lsub2, Lsub1, Cbusca1, Cpc, CpcImp, Csembla, CrelacioCat, Cdada,CrelacioPag,CrelacioSup, CrelacioSub);
     }//GEN-LAST:event_formComponentShown
 
