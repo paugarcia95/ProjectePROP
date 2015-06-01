@@ -103,7 +103,9 @@ public class TraduccioiAlgorisme {
 	
 	/**
 	 * Diu si una relacio és "artificial",es a dir, creades per sub/sup categories comuns
-	 * @param c1 Categoria c2 Categoria
+	 * @param c1 Categoria 
+	 * @param c2 Categoria
+	 * @param jacreat Contenidor controlador de relacions creades
 	 * @return True si es artificial, false si no ho és
 	 */
 	private Boolean mirarartificial(Categoria c1, Categoria c2, Map<String,ArrayList<String>> jacreat) {
