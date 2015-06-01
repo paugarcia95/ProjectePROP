@@ -175,7 +175,7 @@ public class ControladorVistes {
         switch(arbre.getPathComponent(1).toString()) {
             case "Louvain": 
                 quin=1;
-                tipus=0;
+                tipus=1;
                 break;
             case "Newman-Girvan":
                 quin=2;
@@ -193,7 +193,7 @@ public class ControladorVistes {
                 break;
             default:
                 quin=3;
-                tipus=0;
+                tipus=1;
                 break;
         }
         ListModel m = Lsub.getModel();

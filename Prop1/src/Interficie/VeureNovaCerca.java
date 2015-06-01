@@ -26,6 +26,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author cristina.fontanet
  */
 public class VeureNovaCerca extends javax.swing.JPanel {
+	
     private Integer numcerca;
     private InterficieWiki pare;
     private Boolean modificacio;
