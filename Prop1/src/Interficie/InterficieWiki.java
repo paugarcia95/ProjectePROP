@@ -282,13 +282,18 @@ public class InterficieWiki extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WIKIPEDIA");
         setLocationByPlatform(true);
+        setMaximumSize(new java.awt.Dimension(3500, 3500));
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
+        setPreferredSize(new java.awt.Dimension(1200, 900));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
         getContentPane().setLayout(new java.awt.CardLayout());
+
+        A_PantallaPrincipal.setMaximumSize(new java.awt.Dimension(32000, 32000));
+        A_PantallaPrincipal.setPreferredSize(new java.awt.Dimension(250, 250));
 
         jLabel3.setText("Benvingut al programa de la wikipedia");
 
@@ -319,49 +324,46 @@ public class InterficieWiki extends javax.swing.JFrame {
             .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
                 .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
-                        .addGap(255, 255, 255)
-                        .addComponent(jLabel3))
-                    .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
-                                .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(35, 35, 35)
-                                .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Login)
-                                    .addComponent(Exit))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(35, 35, 35)
+                        .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Login)
+                            .addComponent(Exit)))
+                    .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel3))
+                    .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addContainerGap(1040, Short.MAX_VALUE))
         );
         A_PantallaPrincipalLayout.setVerticalGroup(
             A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
-                .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(Login))
-                        .addGap(20, 20, 20)
-                        .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Exit)))
-                    .addGroup(A_PantallaPrincipalLayout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jLabel3)
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(jLabel3)
+                .addGap(97, 97, 97)
+                .addComponent(jLabel1)
+                .addGap(53, 53, 53)
+                .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(Login))
+                .addGap(20, 20, 20)
+                .addGroup(A_PantallaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Exit))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         Username.getAccessibleContext().setAccessibleName("Username");
@@ -528,11 +530,11 @@ public class InterficieWiki extends javax.swing.JFrame {
         A_Inici.setLayout(A_IniciLayout);
         A_IniciLayout.setHorizontalGroup(
             A_IniciLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 1532, Short.MAX_VALUE)
         );
         A_IniciLayout.setVerticalGroup(
             A_IniciLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 562, Short.MAX_VALUE)
         );
 
         getContentPane().add(A_Inici, "card10");
