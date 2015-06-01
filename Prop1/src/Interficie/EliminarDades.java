@@ -5,7 +5,7 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.macro;
+import static Interficie.InterficieWiki.macro;
 
 /**
  *

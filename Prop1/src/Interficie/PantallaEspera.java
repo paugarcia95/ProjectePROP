@@ -3,7 +3,7 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.vista;
+import static Interficie.InterficieWiki.vista;
 import javax.swing.JFrame;
 /**
  *
@@ -11,13 +11,13 @@ import javax.swing.JFrame;
  */
 public class PantallaEspera extends javax.swing.JPanel {
 
-    private InterficiaProva1 pare;
+    private InterficieWiki pare;
     /**
      * Creates new form PantallaEspera
      */
     public PantallaEspera(JFrame par) {
         initComponents();
-        pare = (InterficiaProva1)par;
+        pare = (InterficieWiki)par;
     }
 
     /**

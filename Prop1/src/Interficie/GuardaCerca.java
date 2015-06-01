@@ -3,8 +3,8 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.macro;
-import static Interficie.InterficiaProva1.cercaactual;
+import static Interficie.InterficieWiki.macro;
+import static Interficie.InterficieWiki.cercaactual;
 import javax.swing.JFrame;
 /**
  *
@@ -12,14 +12,14 @@ import javax.swing.JFrame;
  */
 public class GuardaCerca extends javax.swing.JPanel {
 
-    private InterficiaProva1 pare;
+    private InterficieWiki pare;
     
     /**
      * Creates new form GuardaCerca
      */
     public GuardaCerca(JFrame par) {
         initComponents();
-        pare = (InterficiaProva1)par;
+        pare = (InterficieWiki)par;
 
     }
     

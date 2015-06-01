@@ -5,11 +5,11 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.comp;
-import static Interficie.InterficiaProva1.vista;
-import static Interficie.InterficiaProva1.capsalera;
+import static Interficie.InterficieWiki.comp;
+import static Interficie.InterficieWiki.vista;
+import static Interficie.InterficieWiki.capsalera;
 import java.util.ArrayList;
-import static Interficie.InterficiaProva1.macro;
+import static Interficie.InterficieWiki.macro;
 import java.util.Collection;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;

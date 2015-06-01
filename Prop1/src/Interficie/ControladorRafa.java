@@ -6,8 +6,8 @@
 package Interficie;
 
 import javax.swing.JTabbedPane;
-import static Interficie.InterficiaProva1.AP_Afegeix;
-import static Interficie.InterficiaProva1.A_Afegeix;
+import static Interficie.InterficieWiki.AP_Afegeix;
+import static Interficie.InterficieWiki.A_Afegeix;
 /**
  *
  * @author Cristina

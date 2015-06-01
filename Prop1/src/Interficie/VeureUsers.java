@@ -3,9 +3,9 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.vista;
-import static Interficie.InterficiaProva1.macro;
-import static Interficie.InterficiaProva1.capsalera;
+import static Interficie.InterficieWiki.vista;
+import static Interficie.InterficieWiki.macro;
+import static Interficie.InterficieWiki.capsalera;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
@@ -19,14 +19,14 @@ import javax.swing.JFrame;
  */
 public class VeureUsers extends javax.swing.JPanel {
 
-    private InterficiaProva1 pare;
+    private InterficieWiki pare;
     
     /**
      * Creates new form VeureUsers
      */
     public VeureUsers(JFrame par) {
         initComponents();
-        pare = (InterficiaProva1)par;
+        pare = (InterficieWiki)par;
     }
 
     /**

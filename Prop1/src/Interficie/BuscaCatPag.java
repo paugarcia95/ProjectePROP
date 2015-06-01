@@ -3,22 +3,18 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.vista;
-import javax.swing.JFrame;
+import static Interficie.InterficieWiki.vista;
 
 /**
  *
  * @author cristina.fontanet
  */
 public class BuscaCatPag extends javax.swing.JPanel {
-    private InterficiaProva1 aux;
-    
     /**
      * Creates new form BuscaCatPag
      */
-    public BuscaCatPag(JFrame auxi) {
+    public BuscaCatPag() {
         initComponents();
-        aux = (InterficiaProva1)auxi;
     }
 
     /**

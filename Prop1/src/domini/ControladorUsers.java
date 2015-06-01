@@ -463,7 +463,7 @@ public class ControladorUsers {
 	 * 
 	 * @return valor de la importancia entre les relacions entre categories de la CercaComunitats a resoldre.
 	 */
-	public Integer getRelacioCerca(String username, Integer quina) {
+	public Integer getRelacioCatCerca(String username, Integer quina) {
 		return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getRelacionsCat();
 	}
         
@@ -475,7 +475,7 @@ public class ControladorUsers {
 	 * 
 	 * @return valor de la importancia de compartir pagines en la CercaComunitats a resoldre.
          */
-        public Integer getpagRelCerca(String username, Integer quina) {
+        public Integer getRelacioPagCerca(String username, Integer quina) {
             return conj.getUser(username).getCerca(quina).getCriterisSeleccio().getRelacionsPag();
         }
         

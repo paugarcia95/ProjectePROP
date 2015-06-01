@@ -15,7 +15,7 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
  *
  * @author cristina.fontanet
  */
-public class InterficiaProva1 extends javax.swing.JFrame {
+public class InterficieWiki extends javax.swing.JFrame {
     /**
      * Macrocontrolador del domini
      */
@@ -23,7 +23,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     /**
      * Controlador de vistes
      */
-    protected static ControladorVistes1 vista;
+    protected static ControladorVistes vista;
     /**
      * Part d'interficie
      */
@@ -62,6 +62,9 @@ public class InterficiaProva1 extends javax.swing.JFrame {
      * auxguard= 2 -> no es pot crear cap nova cerca, ja n'hi ha una sense guardar
      */
     protected static Integer auxguard;
+    /**
+     * Component des del qual es crida a la funcio
+     */
     protected static Frame comp;
     /**
      * Thread on s'executa la cerca de comunitats
@@ -76,126 +79,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
      */
     protected static Boolean userAdmin;
    
-    /**
-     * Mostra la pantalla de Fer Cerca
-     */
-   public void activaCerca(){
-       AP_Client.setEnabledAt(4, true);
-   }
-   
-   /**
-    * 
-    */
-   public void activaEspera() {
-       Panell = new PantallaEspera(this);
-       AP_Client.setComponentAt(4, Panell);
-   }
-   
-   /**
-    * 
-    */
-   public void desactivaEspera() {
-       Panell = new CreaComunitat(this,AP_Client);
-       AP_Client.setComponentAt(4, Panell);
-   }
-   
-   /**
-    * 
-    */
-   public void cancelaCerca(){
-       hilo.stop();
-       interrumput = true;
-       desactivaEspera();
-       //hilo.st
-   }
-   
-   /**
-    * 
-    */
-   public void canviarACercaGuardada(){
-      AP_Cerques.remove(AP_Cerques.getSelectedIndex());
-      System.out.println("Guardem la cerca i auxguard= 0");
-      auxguard = 0;
-      AP_Client.setEnabledAt(4, true);
-      AP_Cerques.setEnabledAt(0, true);
-      /* for(int i = 0; i < AP_Cerques.getComponentCount(); ++i) {
-         AP_Cerques.setEnabledAt(i, true);
-       }*/
-      visualitzaCercaAntiga();
-   } 
-   
-   /**
-    * 
-    * @param nouNom 
-    */
-   public void canviaNomTaula(String nouNom){
-        AP_Cerques.setTitleAt(AP_Cerques.getSelectedIndex(), nouNom);
-    }
-   
-   /**
-    * 
-    */
-   public void creaAdminNou(){
-       Panell = new NouUser(this);
-       AP_Client.setComponentAt(8, Panell);
-   }
-   
-   /**
-    * 
-    * @param quin 
-    */
-   public void eliminaTab(Component quin){
-       AP_Cerques.remove(quin);
-   }
-   
-   /**
-    * 
-    * @param nom
-    * @return 
-    */
-   public Boolean espotvisualitzar(String nom) {
-       for(int i = 1; i < AP_Cerques.getComponentCount(); ++i) {
-            if(AP_Cerques.getTitleAt(i).equals(nom)) return false;
-       }
-       return true;
-   }
-   
-   /**
-    * 
-    */
-   public void modificaCercaGuardada(){
-       AP_Client.setEnabledAt(4, true);
-       System.out.println("Vull modificar una cerca ja existent, auxguard = 1");
-       auxguard = 1;
-       AP_Client.setSelectedIndex(4);
-   }
-   
-   /**
-    * 
-    */
-   public void novaCerca(){
-       AP_Client.setEnabledAt(4, true);
-       auxguard = 0;
-       AP_Client.setSelectedIndex(4);
-   }
-   
-   /**
-    * 
-    */
-   public void obreOpcions(){
-     //  if(macro.getContUser().isAdmin(macro.getUserActual())) A_OpcionsAdmin.setVisible(true);
-     //  else A_OpcionsClient.setVisible(true);
-    System.out.println("Aqui crido a la funcio obreOpcions de InterficiaProva1, s'ha d'implementar");  
-    /* guardada = 2;
-       Panell = new GuardaCerca(this);
-       AP_Cerques.setComponentAt(AP_Cerques.getSelectedIndex(), Panell);
-       */
-       //AP_Cerques.remove(quin);
-   } 
-   
-   /**
-    * 
-    */
+///////////////////ELIMINAAAAAAAAR////////////////////////////////////////////////////////////
    private void provisional(){
         Username.setText("admin");
         Password.setText("admin");
@@ -205,52 +89,94 @@ public class InterficiaProva1 extends javax.swing.JFrame {
 	macro.getContUser().addAdmin("admin");
         vista.jocProves1();
    }
+    
+   protected void activaCerca(){
+       AP_Client.setEnabledAt(4, true);
+   }
    
-   /**
-    * 
-    */
-   public void revalidaCerques(){
+   protected void activaEspera() {
+       Panell = new PantallaEspera(this);
+       AP_Client.setComponentAt(4, Panell);
+   }
+   
+   protected void desactivaEspera() {
+       Panell = new CreaComunitat(this,AP_Client);
+       AP_Client.setComponentAt(4, Panell);
+   }
+   
+   protected void cancelaCerca(){
+       hilo.stop();
+       interrumput = true;
+       desactivaEspera();
+   }
+   
+   protected void canviarACercaGuardada(){
+      AP_Cerques.remove(AP_Cerques.getSelectedIndex());
+      auxguard = 0;
+      AP_Client.setEnabledAt(4, true);
+      AP_Cerques.setEnabledAt(0, true);
+      visualitzaCercaAntiga();
+   } 
+   
+   protected void canviaNomTaula(String nouNom){
+        AP_Cerques.setTitleAt(AP_Cerques.getSelectedIndex(), nouNom);
+    }
+   
+   protected void creaAdminNou(){
+       Panell = new NouUser(this);
+       AP_Client.setComponentAt(8, Panell);
+   }
+   
+   protected void eliminaTab(Component quin){
+       AP_Cerques.remove(quin);
+   }
+   
+   protected Boolean espotvisualitzar(String nom) {
+       for(int i = 1; i < AP_Cerques.getComponentCount(); ++i) {
+            if(AP_Cerques.getTitleAt(i).equals(nom)) return false;
+       }
+       return true;
+   }
+   
+   protected void modificaCercaGuardada(){
+       AP_Client.setEnabledAt(4, true);
+       auxguard = 1;
+       AP_Client.setSelectedIndex(4);
+   }
+   
+   protected void novaCerca(){
+       AP_Client.setEnabledAt(4, true);
+       auxguard = 0;
+       AP_Client.setSelectedIndex(4);
+   }
+   
+   protected void revalidaCerques(){
        AP_Cerques.setSelectedIndex(0);
    }
    
-   /**
-    * 
-    */
-   public void tornaVeureUsers(){
+   protected void tornaVeureUsers(){
       Panell = new VeureUsers(this);
       AP_Client.setComponentAt(8, Panell);
     }
    
-   /**
-    * 
-    */
-   public void visualitzaCercaAntiga() {
+   protected void visualitzaCercaAntiga() {
        javax.swing.JPanel Panells = new VeureCercaAntiga(this, cercaactual);
        AP_Cerques.add(Panells, macro.getContUser().getNomCerca(macro.getUserActual(), cercaactual));
        AP_Cerques.setSelectedComponent(Panells);
    }  
    
-   /**
-    * 
-    */
-   public void visualitzaCercaNova() {
-       System.out.println("Visualitzacio cerac nova, auxguard: "+auxguard);
+   protected void visualitzaCercaNova() {
        if(auxguard!=1) {
            Panell = new VeureNovaCerca(this, cercaactual);
            AP_Cerques.add(Panell, "Sense guardar");
        }
-       System.out.println("Visualitzacio cerac nova, posem auxguard a 2 ");
        auxguard = 2;
        AP_Client.setSelectedIndex(5);
        AP_Cerques.setSelectedIndex(AP_Cerques.getComponentCount()-1);
        AP_Client.setEnabledAt(4, false);
    }
-   
-   /**
-    * 
-    */
-   public void login(){
-       
+  
+   protected void login(){
         String user, pass;
         user= Username.getText();
         pass= Password.getText();
@@ -276,18 +202,12 @@ public class InterficiaProva1 extends javax.swing.JFrame {
             else userAdmin = false;
             AP_Client.setVisible(true);
             AP_Principal.setVisible(false);
-            AP_Client.setSelectedIndex(0);
-            
+            AP_Client.setSelectedIndex(0); 
         }
-        else {
-            JOptionPane.showMessageDialog(this, "La contrassenya es incorrecta.", capsalera, ERROR_MESSAGE);
-        }
+        else JOptionPane.showMessageDialog(this, "La contrassenya es incorrecta.", capsalera, ERROR_MESSAGE);
     }
    
-   /**
-    * 
-    */
-   public void logout(){
+   protected void logout(){
        AP_Client.setVisible(false);
        userAdmin = false;
        AP_Principal.add(A_CreaUsuari, "Crea nou usuari");
@@ -297,15 +217,15 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         AP_Client.remove(7);
        }
    }
+   
    /**
-     * Creates new form InterficiaProva
+     * Creates new form InterficieWiki
      */
-
-    public InterficiaProva1() {
+    public InterficieWiki() {
         primera=true;
         comunaEliminar = new PriorityQueue<>();
         macro = new MacroControlador();
-        vista = new ControladorVistes1();
+        vista = new ControladorVistes();
         rafa = new ControladorRafa();
         comp = this;
         userAdmin = false;
@@ -313,17 +233,16 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         this.setVisible(false);
         Panell = new Inici(this);
         AP_Client.add(Panell, "Inici");
-        Panell = new BuscaCat(this);
+        Panell = new BuscaCat();
         AP_Client.add(Panell, "Categories");
-        Panell = new BuscaPag(this);
+        Panell = new BuscaPag();
         AP_Client.add(Panell, "Pàgines");
-        Panell = new BuscaCatPag(this);
+        Panell = new BuscaCatPag();
         AP_Client.add(Panell, "Categories i pagines");
         Panell = new CreaComunitat(this,AP_Client);
         AP_Client.add(Panell, "Fer Cerca");
         if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
-        
-       
+///////////////////ELIMINAAAAAAAAR////////////////////////////////////////////////////////////
         provisional();
         
     }
@@ -640,42 +559,6 @@ public class InterficiaProva1 extends javax.swing.JFrame {
        if(!macro.guardaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
        System.exit(0);
     }//GEN-LAST:event_formWindowClosing
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterficiaProva1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterficiaProva1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterficiaProva1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterficiaProva1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterficiaProva1()/*.setVisible(true)*/;
-            }
-        });
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane AP_Cerques;

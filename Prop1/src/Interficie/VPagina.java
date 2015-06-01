@@ -3,11 +3,12 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.macro;
-import static Interficie.InterficiaProva1.vista;
-import static Interficie.ControladorVistes1.PagList;
-import static Interficie.InterficiaProva1.capsalera;
-import static Interficie.InterficiaProva1.comp;
+
+import static Interficie.InterficieWiki.macro;
+import static Interficie.InterficieWiki.vista;
+import static Interficie.ControladorVistes.PagList;
+import static Interficie.InterficieWiki.capsalera;
+import static Interficie.InterficieWiki.comp;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +24,7 @@ import static javax.swing.JOptionPane.YES_OPTION;
  *
  * @author cristina.fontanet
  */
-public class VPagina1 extends javax.swing.JDialog {
+public class VPagina extends javax.swing.JDialog {
     String pag;
     Frame pare;
     String noSelect="  No n'hi ha cap";
@@ -83,7 +84,7 @@ public class VPagina1 extends javax.swing.JDialog {
     /**
      * Creates new form VPagina1
      */
-    public VPagina1(java.awt.Frame parent, boolean modalitat, Boolean adm) {
+    public VPagina(java.awt.Frame parent, boolean modalitat, Boolean adm) {
         super(parent, modalitat);
         pare=parent;
         admin = adm;
@@ -469,10 +470,10 @@ public class VPagina1 extends javax.swing.JDialog {
     * Es visualitza la categoria seleccionada de les categories a les que apunta
     */
     private void butVisualCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVisualCatActionPerformed
-        VCategoria1 nova;
+        VCategoria nova;
         if(CApunta.getSelectedIndices().length>0 && !CApunta.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApunta.getSelectedValue().toString();
-            nova = new VCategoria1(pare, true,admin);
+            nova = new VCategoria(pare, true,admin);
             nova.NomCat(hy);
             nova.setAlwaysOnTop(true);
             nova.setFocusable(true);
@@ -590,10 +591,10 @@ public class VPagina1 extends javax.swing.JDialog {
     * Es visualitza la categoria seleccionada de les categories que l'apunten
     */
     private void butVisualCat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVisualCat1ActionPerformed
-        VCategoria1 nova; 
+        VCategoria nova; 
         if(CApuntada.getSelectedIndices().length>0 && !CApuntada.getSelectedValue().toString().equals(noSelect)) {
             String hy = CApuntada.getSelectedValue().toString();
-            nova = new VCategoria1(pare, true,admin);
+            nova = new VCategoria(pare, true,admin);
             nova.NomCat(hy);
             nova.setAlwaysOnTop(true);
             nova.setFocusable(true);
@@ -620,20 +621,21 @@ public class VPagina1 extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VPagina1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPagina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VPagina1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPagina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VPagina1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPagina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VPagina1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VPagina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VPagina1 dialog = new VPagina1(new javax.swing.JFrame(), true, admin);
+                VPagina dialog = new VPagina(new javax.swing.JFrame(), true, admin);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

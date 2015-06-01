@@ -3,8 +3,8 @@
  */
 package Interficie;
 
-import static Interficie.InterficiaProva1.macro;
-import static Interficie.InterficiaProva1.vista;
+import static Interficie.InterficieWiki.macro;
+import static Interficie.InterficieWiki.vista;
 /**
  *
  * @author cristina.fontanet
