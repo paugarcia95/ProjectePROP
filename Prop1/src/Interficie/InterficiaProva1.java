@@ -1,116 +1,117 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Interficie principal del programa de la Wikipedia
  */
 package Interficie;
 
-import java.util.Collection;
-import java.util.Iterator;
-
-import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
-import static cercaComunitats.AlgorismeNewmanGirvan.arestes;
-import static cercaComunitats.AlgorismeNewmanGirvan.iterador;
-import domini.Categoria;
-import domini.EntradaSortidaDades;
-import domini.GrafDades;
 import domini.MacroControlador;
-import domini.Pagina;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Enumeration;
 import java.util.PriorityQueue;
-import java.util.Set;
-import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.QUESTION_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_CANCEL_OPTION;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
-import static javax.swing.JOptionPane.YES_OPTION;
-import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
-import static javax.swing.JOptionPane.OK_OPTION;
-import static javax.swing.JOptionPane.PLAIN_MESSAGE;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTree;
-import javax.swing.ProgressMonitor;
-import javax.swing.Timer;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
 
 /**
  *
- * @author Cristina
+ * @author cristina.fontanet
  */
 public class InterficiaProva1 extends javax.swing.JFrame {
-    static domini.MacroControlador macro;
-    static Interficie.ControladorRafa rafa;
-    static Integer cercaactual;
-    String algorisme;
-    //static Integer guardada;
-    static String capsalera = "Wiki";
-    static String noSelect="  No n'hi ha cap";
-    static javax.swing.JTabbedPane AP_Afegeix = new javax.swing.JTabbedPane();
-    static javax.swing.JPanel A_Afegeix = new javax.swing.JPanel();
-    //guardada=0 -> nova cerca sense guardar, crearla
-    //guardada=1  -> cerca no guardada, preguntar si la volen guardar
-    //guardada=2 -> cerca guardada
-    //guardada=3 -> volem sobreescriue una cerca ja guardada
-    //guardada=4 -> volem modificar una cerca sense guardar, no se'n poden fer de noves!
-    Boolean primera; //variable per evitar excepcions en els pannels que tenen accions en amagar
-    static Integer auxguard;
-    //auxguard= 0 -> es pot crear una nova cerca sense problemes
-    //auxguard= 1 -> s'ha de sobrescriure la cerca cercaactual
-    //auxguard= 2 -> no es pot crear cap nova cerca, ja n'hi ha una sense guardar
-    static ControladorVistes1 vista;
-    static Frame comp;
-    //int pos;
-    //private ProgressMonitor progressMonitor;
-   public static Boolean userAdmin;
-   public static PriorityQueue<Integer> comunaEliminar;
-   public static Thread hilo;
-   public static Boolean interrumput;
+    /**
+     * Macrocontrolador del domini
+     */
+    protected static domini.MacroControlador macro;
+    /**
+     * Controlador de vistes
+     */
+    protected static ControladorVistes1 vista;
+    /**
+     * Part d'interficie
+     */
+    protected static Interficie.ControladorRafa rafa;
+    /**
+     * Per poder compartir interficie
+     */
+    protected static javax.swing.JTabbedPane AP_Afegeix = new javax.swing.JTabbedPane();
+    /**
+     * Per poder compartir interficie
+     */
+    protected static javax.swing.JPanel A_Afegeix = new javax.swing.JPanel(); 
+    /**
+     * Conjunt de comunitats a eliminar (dels arbres de Visualitzacio de les cerques)
+     */
+    protected static PriorityQueue<Integer> comunaEliminar;
+    /**
+     * Identifiador de la cerca actual
+     */
+    protected static Integer cercaactual;
+    /**
+     * Variable a mostrar en els JOptionPane
+     */
+    protected static String capsalera = "Wiki";
+    /**
+     * Variable en cas de que no hi hagi cap pagina/categoria a l'hora de mostrar
+     */
+    protected static String noSelect="  No n'hi ha cap"; 
+    /**
+     * indica si es el primer login del programa
+     */
+    protected Boolean primera; 
+    /**
+     * auxguard= 0 -> es pot crear una nova cerca sense problemes
+     * auxguard= 1 -> s'ha de sobrescriure la cerca cercaactual
+     * auxguard= 2 -> no es pot crear cap nova cerca, ja n'hi ha una sense guardar
+     */
+    protected static Integer auxguard;
+    protected static Frame comp;
+    /**
+     * Thread on s'executa la cerca de comunitats
+     */
+    protected static Thread hilo;
+    /**
+     * indica si s'ha interrumput la cerca de comunitats o no
+     */
+    protected static Boolean interrumput; 
+    /**
+     * Indica si qui fa la creacio d'un nou usuari es l'administrador o no
+     */
+    protected static Boolean userAdmin;
    
-   
-  //public void guardaCerca(Component quin) {}
+    /**
+     * Mostra la pantalla de Fer Cerca
+     */
    public void activaCerca(){
        AP_Client.setEnabledAt(4, true);
    }
+   
+   /**
+    * 
+    */
    public void activaEspera() {
        Panell = new PantallaEspera(this);
        AP_Client.setComponentAt(4, Panell);
    }
+   
+   /**
+    * 
+    */
    public void desactivaEspera() {
        Panell = new CreaComunitat(this,AP_Client);
        AP_Client.setComponentAt(4, Panell);
    }
+   
+   /**
+    * 
+    */
    public void cancelaCerca(){
        hilo.stop();
        interrumput = true;
        desactivaEspera();
        //hilo.st
    }
+   
+   /**
+    * 
+    */
    public void canviarACercaGuardada(){
       AP_Cerques.remove(AP_Cerques.getSelectedIndex());
       System.out.println("Guardem la cerca i auxguard= 0");
@@ -122,33 +123,65 @@ public class InterficiaProva1 extends javax.swing.JFrame {
        }*/
       visualitzaCercaAntiga();
    } 
+   
+   /**
+    * 
+    * @param nouNom 
+    */
    public void canviaNomTaula(String nouNom){
         AP_Cerques.setTitleAt(AP_Cerques.getSelectedIndex(), nouNom);
     }
+   
+   /**
+    * 
+    */
    public void creaAdminNou(){
        Panell = new NouUser(this);
        AP_Client.setComponentAt(8, Panell);
    }
+   
+   /**
+    * 
+    * @param quin 
+    */
    public void eliminaTab(Component quin){
        AP_Cerques.remove(quin);
    }
+   
+   /**
+    * 
+    * @param nom
+    * @return 
+    */
    public Boolean espotvisualitzar(String nom) {
        for(int i = 1; i < AP_Cerques.getComponentCount(); ++i) {
             if(AP_Cerques.getTitleAt(i).equals(nom)) return false;
        }
        return true;
    }
+   
+   /**
+    * 
+    */
    public void modificaCercaGuardada(){
        AP_Client.setEnabledAt(4, true);
        System.out.println("Vull modificar una cerca ja existent, auxguard = 1");
        auxguard = 1;
        AP_Client.setSelectedIndex(4);
    }
+   
+   /**
+    * 
+    */
    public void novaCerca(){
        AP_Client.setEnabledAt(4, true);
        auxguard = 0;
        AP_Client.setSelectedIndex(4);
    }
+   
+   /**
+    * 
+    */
    public void obreOpcions(){
      //  if(macro.getContUser().isAdmin(macro.getUserActual())) A_OpcionsAdmin.setVisible(true);
      //  else A_OpcionsClient.setVisible(true);
@@ -159,6 +192,10 @@ public class InterficiaProva1 extends javax.swing.JFrame {
        */
        //AP_Cerques.remove(quin);
    } 
+   
+   /**
+    * 
+    */
    private void provisional(){
         Username.setText("admin");
         Password.setText("admin");
@@ -168,18 +205,34 @@ public class InterficiaProva1 extends javax.swing.JFrame {
 	macro.getContUser().addAdmin("admin");
         vista.jocProves1();
    }
+   
+   /**
+    * 
+    */
    public void revalidaCerques(){
        AP_Cerques.setSelectedIndex(0);
    }
+   
+   /**
+    * 
+    */
    public void tornaVeureUsers(){
       Panell = new VeureUsers(this);
       AP_Client.setComponentAt(8, Panell);
     }
+   
+   /**
+    * 
+    */
    public void visualitzaCercaAntiga() {
        javax.swing.JPanel Panells = new VeureCercaAntiga(this, cercaactual);
        AP_Cerques.add(Panells, macro.getContUser().getNomCerca(macro.getUserActual(), cercaactual));
        AP_Cerques.setSelectedComponent(Panells);
    }  
+   
+   /**
+    * 
+    */
    public void visualitzaCercaNova() {
        System.out.println("Visualitzacio cerac nova, auxguard: "+auxguard);
        if(auxguard!=1) {
@@ -192,12 +245,15 @@ public class InterficiaProva1 extends javax.swing.JFrame {
        AP_Cerques.setSelectedIndex(AP_Cerques.getComponentCount()-1);
        AP_Client.setEnabledAt(4, false);
    }
+   
+   /**
+    * 
+    */
    public void login(){
        
         String user, pass;
         user= Username.getText();
         pass= Password.getText();
-        userAdmin=true;
         if(!macro.getContUser().existsUser(user)) JOptionPane.showMessageDialog(this, "L'username no existeix, torna'l a introduir o crea una nova conta.", capsalera, WARNING_MESSAGE);
         else if(macro.getContUser().login(user, pass)){
             macro.setUserActual(user);
@@ -210,16 +266,14 @@ public class InterficiaProva1 extends javax.swing.JFrame {
                 AP_Client.add(Panell, "Dades d'usuari"); 
                 primera = false;
             }
-            else {
-                // AP_Client.setComponentAt(6, A_CanviaDadesUser);
-            }
             if(macro.getContUser().isAdmin(user)) {
+                userAdmin = true;
                 rafa.ini();
                 AP_Client.add(AP_Afegeix, "Afegeix");
                 A_VeureUsers = new VeureUsers(this);
                 AP_Client.add(A_VeureUsers, "Usuaris existents");
-              //  AP_Client.add(A_CreaUsuari, "Nou admin");
             }
+            else userAdmin = false;
             AP_Client.setVisible(true);
             AP_Principal.setVisible(false);
             AP_Client.setSelectedIndex(0);
@@ -229,17 +283,19 @@ public class InterficiaProva1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La contrassenya es incorrecta.", capsalera, ERROR_MESSAGE);
         }
     }
+   
+   /**
+    * 
+    */
    public void logout(){
        AP_Client.setVisible(false);
-       //Panell = new NouUser(this);
+       userAdmin = false;
        AP_Principal.add(A_CreaUsuari, "Crea nou usuari");
        AP_Principal.setVisible(true);
        if(AP_Client.getComponentCount()>7) {
         AP_Client.remove(8);
         AP_Client.remove(7);
        }
-        userAdmin=false;
-      // AP_Client.remove(A_CreaUsuari);
    }
    /**
      * Creates new form InterficiaProva
@@ -252,7 +308,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         vista = new ControladorVistes1();
         rafa = new ControladorRafa();
         comp = this;
-        userAdmin= false;
+        userAdmin = false;
         initComponents();
         this.setVisible(false);
         Panell = new Inici(this);
@@ -265,7 +321,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         AP_Client.add(Panell, "Categories i pagines");
         Panell = new CreaComunitat(this,AP_Client);
         AP_Client.add(Panell, "Fer Cerca");
-       // if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
+        if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
         
        
         provisional();
@@ -273,9 +329,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
     }
             
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * By Netbeans
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -313,6 +367,11 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         setTitle("WIKIPEDIA");
         setLocationByPlatform(true);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jLabel3.setText("Benvingut al programa de la wikipedia");
@@ -554,9 +613,11 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         login();
     }//GEN-LAST:event_LoginActionPerformed
+
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         if(!macro.guardaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
         else System.exit(0);
@@ -574,6 +635,11 @@ public class InterficiaProva1 extends javax.swing.JFrame {
         NouUsername.setText("");
         NovaPassword.setText("");
     }//GEN-LAST:event_A_CreaUsuariComponentShown
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       if(!macro.guardaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
+       System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -610,7 +676,7 @@ public class InterficiaProva1 extends javax.swing.JFrame {
             }
         });
     }
-//public javax.swing.JTabbedPane AP_Afegeix;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane AP_Cerques;
     private javax.swing.JTabbedPane AP_Client;

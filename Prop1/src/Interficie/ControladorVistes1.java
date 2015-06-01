@@ -8,31 +8,20 @@ import static Interficie.InterficiaProva1.comp;
 import static Interficie.InterficiaProva1.capsalera;
 import static Interficie.InterficiaProva1.cercaactual;
 import static Interficie.InterficiaProva1.auxguard;
-//import static Interficie.InterficiaProva1.guardada;
-import static Interficie.InterficiaProva1.comunaEliminar;
 import static Interficie.InterficiaProva1.userAdmin;
+import static Interficie.InterficiaProva1.comunaEliminar;
 
 
 import domini.Categoria;
 import domini.GrafDades;
 import domini.Pagina;
 import java.awt.Frame;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -61,7 +50,7 @@ import javax.swing.tree.TreePath;
 
 /**
  *
- * @author Cristina
+ * @author cristina.fontanet
  */
 public class ControladorVistes1 {
     static JList<String> CategList;  
@@ -180,8 +169,10 @@ public class ControladorVistes1 {
         else if(NovaPassword.getText().contains("|")||NovaPassword.getText().contains("*")||NovaPassword.getText().contains("+")) JOptionPane.showMessageDialog(comp, "La contrassenya conté algun caràcter prohibit", capsalera, ERROR_MESSAGE);
         else {
             macro.getContUser().addUser(NouUsername.getText(), NovaPassword.getText());
-            //if(userAdmin) System.out.println("Vinc des d'un admin");
-            if(userAdmin) macro.getContUser().addAdmin(NouUsername.getText());
+            if(userAdmin) {
+                System.out.println("El faig admin xq si");
+                macro.getContUser().addAdmin(NouUsername.getText());
+            }
             else if(!macro.getContUser().existsAdmin()) {
                 macro.getContUser().addAdmin(NouUsername.getText());
                 JOptionPane.showMessageDialog(comp, "Felicitats, conta creada, ets administrador!", capsalera,INFORMATION_MESSAGE);
