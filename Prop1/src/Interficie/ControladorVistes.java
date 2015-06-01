@@ -81,16 +81,23 @@ public class ControladorVistes {
     else JOptionPane.showMessageDialog(comp, "Has de seleccionar quina categoria vols afegir!", capsalera, WARNING_MESSAGE);
     }
     
-    protected void afegirFitxer(){
+    protected Boolean afegirFitxer(){
         JFileChooser input = new JFileChooser();
         int result = input.showOpenDialog(comp);
         if (result == JFileChooser.APPROVE_OPTION) {
             File aux =input.getSelectedFile();
                 if(aux != null) { 
-                    if(!macro.carregaDadesFitxer(aux)) JOptionPane.showMessageDialog(comp, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);;
+                    if(!macro.carregaDadesFitxer(aux)) {
+                        JOptionPane.showMessageDialog(comp, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
+                        return false;
+                    };
                 }
-                else System.out.println("Error, el fitxer es buit");
+                else {
+                    System.out.println("Error, el fitxer es buit");
+                    return false;
+                }
         }
+        return true;
     }
     
     protected void canviaDadesUser(JTextField NouUsername1, JTextField NovaPassword1){
