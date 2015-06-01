@@ -21,7 +21,7 @@ public class Afegeix extends javax.swing.JPanel {
      */
     public Afegeix() {
         initComponents();
-        this.setVisible(true);
+        //this.setVisible(true);
         
     }
 
