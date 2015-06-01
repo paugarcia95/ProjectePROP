@@ -107,6 +107,8 @@ public class AfegirEnll extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jList2.setFixedCellHeight(15);
+        jList2.setFixedCellWidth(15);
         jScrollPane11.setViewportView(jList2);
 
         AfegeixP1.setText("Afegeix");
@@ -206,13 +208,13 @@ public class AfegirEnll extends javax.swing.JPanel {
                         .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(A_ModificaCategLayout.createSequentialGroup()
                                 .addGap(24, 24, 24)
-                                .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel11)
-                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(A_ModificaCategLayout.createSequentialGroup()
                                         .addComponent(Cbusca, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(CbuscaCat))))
+                                        .addComponent(CbuscaCat))
+                                    .addComponent(jScrollPane10)))
                             .addGroup(A_ModificaCategLayout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -222,18 +224,19 @@ public class AfegirEnll extends javax.swing.JPanel {
                                     .addComponent(AfegeixC1)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                                     .addComponent(jTextField1))))
+                        .addGap(14, 14, 14)
                         .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(A_ModificaCategLayout.createSequentialGroup()
-                                .addGap(80, 80, 80)
-                                .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(140, 140, 140)
+                                .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(A_ModificaCategLayout.createSequentialGroup()
                                         .addComponent(Cbusca2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(CbuscaPag))
-                                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12)))
+                                    .addComponent(jLabel12)
+                                    .addComponent(jScrollPane11)))
                             .addGroup(A_ModificaCategLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
+                                .addGap(80, 80, 80)
                                 .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(A_ModificaCategLayout.createSequentialGroup()
                                         .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,7 +276,7 @@ public class AfegirEnll extends javax.swing.JPanel {
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(AfegeixC2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel8))
@@ -298,10 +301,10 @@ public class AfegirEnll extends javax.swing.JPanel {
                     .addComponent(jLabel12)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62))
+                .addGroup(A_ModificaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane11)
+                    .addComponent(jScrollPane10))
+                .addGap(67, 67, 67))
         );
 
         jOptionPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -328,12 +331,12 @@ public class AfegirEnll extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
+            .addGap(0, 581, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(A_ModificaCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(A_ModificaCateg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -434,7 +437,7 @@ public class AfegirEnll extends javax.swing.JPanel {
 
     private void AfegeixP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixP1ActionPerformed
         if(jList2.isSelectionEmpty())JOptionPane.showMessageDialog(comp, "Has de seleccionar alguna pàgina de la llista!", capsalera, WARNING_MESSAGE);
-        else if(!jTextField4.equals(jList1.getSelectedValue().toString()))jTextField4.setText(jList2.getSelectedValue().toString());
+        else if(!jTextField4.equals(jList2.getSelectedValue().toString()))jTextField4.setText(jList2.getSelectedValue().toString());
         jList2.clearSelection();
     }//GEN-LAST:event_AfegeixP1ActionPerformed
 

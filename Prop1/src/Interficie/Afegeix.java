@@ -10,6 +10,7 @@ import static Interficie.InterficieWiki.comp;
 import static Interficie.InterficieWiki.macro;
 import static Interficie.InterficieWiki.vista;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.OK_OPTION;
 
 /**
@@ -75,8 +76,8 @@ public class Afegeix extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        vista.afegirFitxer();
-        JOptionPane.showMessageDialog(comp, "Tot carregat correctament");
+        if(vista.afegirFitxer()) JOptionPane.showMessageDialog(comp, "Tot carregat correctament");
+        else JOptionPane.showMessageDialog(comp, "Error al carregar dades!",capsalera, ERROR_MESSAGE);
     }//GEN-LAST:event_jButton17ActionPerformed
 
 
