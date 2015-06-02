@@ -205,7 +205,12 @@ public class InterficieWiki extends javax.swing.JFrame {
         else JOptionPane.showMessageDialog(this, "La contrassenya es incorrecta.", capsalera, ERROR_MESSAGE);
     }
    
-   protected void logout(){
+   protected Boolean logout(){
+       if(auxguard==2) {
+           JOptionPane.showMessageDialog(comp, "Tens una cerca sense guardar, descarta-la o guarda-la abans de sortir!", capsalera, WARNING_MESSAGE);
+           return false;
+       }
+       else {
        AP_Client.setVisible(false);
        userAdmin = false;
        AP_Principal.add(A_CreaUsuari, "Crea nou usuari");
@@ -218,6 +223,8 @@ public class InterficieWiki extends javax.swing.JFrame {
        AP_Cerques.removeAll();
        AP_Client.remove(6);
        AP_Client.remove(5); 
+       return true;
+       }
    }
    
    /**
@@ -283,7 +290,7 @@ public class InterficieWiki extends javax.swing.JFrame {
         A_NouAdmin = new javax.swing.JPanel();
         A_Inici = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("WIKIPEDIA");
         setLocationByPlatform(true);
         setMaximumSize(new java.awt.Dimension(3500, 3500));
@@ -572,8 +579,11 @@ public class InterficieWiki extends javax.swing.JFrame {
     }//GEN-LAST:event_A_CreaUsuariComponentShown
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       if(!macro.guardaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
-       System.exit(0);
+       if (AP_Principal.isVisible()) System.exit(0);
+       else if (logout()) {
+        if(!macro.guardaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
+        System.exit(0);
+       }
     }//GEN-LAST:event_formWindowClosing
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
