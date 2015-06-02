@@ -5,12 +5,16 @@
 package Interficie;
 
 import static Interficie.InterficieWiki.vista;
+import static Interficie.InterficieWiki.macro;
+import javax.swing.DefaultListModel;
 
 /**
  *
  * @author cristina.fontanet
  */
 public class BuscaCatPag extends javax.swing.JPanel {
+    static Integer numPagsConc;
+     static Integer numCategsConc;
     /**
      * Creates new form BuscaCatPag
      */
@@ -18,7 +22,15 @@ public class BuscaCatPag extends javax.swing.JPanel {
         initComponents();
     }
 
+    private void numsTotals() {
+            jLabel1.setText("Hi ha "+macro.getContDades().getNumCats()+" categories");    
+            jLabel2.setText("Hi ha "+macro.getContDades().getNumPags()+" pagines");
+    }
     
+    private void numCatParcials() {
+        //DefaultListModel mod = new (DefaultListModel)LlistaCateg1.getModel();
+        jLabel1.setText("Hi ha "+numCategsConc+" categories que continguin "+Cbusca3.getText());
+    }
     /**
      * By Netbeans
      */
@@ -38,6 +50,8 @@ public class BuscaCatPag extends javax.swing.JPanel {
         LlistaCateg1 = new javax.swing.JList();
         ButVisualitzaCat = new javax.swing.JButton();
         ButVisualitzaPag = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -104,25 +118,35 @@ public class BuscaCatPag extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Cbusca3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CbuscaCat1)
-                        .addGap(18, 18, 18)
-                        .addComponent(ButVisualitzaCat)))
-                .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Cbusca3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CbuscaCat1)
+                                .addGap(18, 18, 18)
+                                .addComponent(ButVisualitzaCat)))
+                        .addGap(49, 49, 49))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Cbusca4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CbuscaPag1)
-                        .addGap(18, 18, 18)
-                        .addComponent(ButVisualitzaPag))
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4))
-                .addGap(18, 18, 18))
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Cbusca4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CbuscaPag1)
+                                .addGap(18, 18, 18)
+                                .addComponent(ButVisualitzaPag))
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,11 +163,18 @@ public class BuscaCatPag extends javax.swing.JPanel {
                     .addComponent(Cbusca4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CbuscaPag1)
                     .addComponent(ButVisualitzaPag))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE))
-                .addGap(3, 3, 3))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
 
         getAccessibleContext().setAccessibleName("Panel");
@@ -152,7 +183,9 @@ public class BuscaCatPag extends javax.swing.JPanel {
     * Quan es clica al boto busca de les categories, es mostren nomes les categories que contenen el conjunt de lletres
     */
     private void CbuscaCat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaCat1ActionPerformed
-        vista.ompleCategoriesExistentsConcret(LlistaCateg1, Cbusca3);
+        numCategsConc =vista.ompleCategoriesExistentsConcret(LlistaCateg1, Cbusca3);
+        if(Cbusca3.getText().length()>0) numCatParcials();
+        else numsTotals();
     }//GEN-LAST:event_CbuscaCat1ActionPerformed
     /*
     * Quan es clica al boto busca de les pagines, es mostren nomes les pagines que contenen el conjunt de lletres
@@ -164,6 +197,7 @@ public class BuscaCatPag extends javax.swing.JPanel {
     * Quan es mostra el panell, es veuen els noms de totes les categories i pagines existents
     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        numsTotals();
         vista.omplePaginesExistents(LlistaPag1);
         vista.ompleCategoriesExistents(LlistaCateg1);
     }//GEN-LAST:event_formComponentShown
@@ -194,6 +228,8 @@ public class BuscaCatPag extends javax.swing.JPanel {
     private javax.swing.JButton CbuscaPag1;
     private javax.swing.JList LlistaCateg1;
     private javax.swing.JList LlistaPag1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField3;

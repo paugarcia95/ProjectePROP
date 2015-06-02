@@ -248,12 +248,12 @@ public class ControladorVistes {
         quina.setListData(aux2);
     }
     
-    protected void ompleCategoriesExistentsConcret(JList quina, JTextField don){
+    protected Integer ompleCategoriesExistentsConcret(JList quina, JTextField don){
         String busca = don.getText();
         Collection<String> aux = macro.getContDades().getCategories();
         Iterator<String> it = aux.iterator();
         Object[] csub= new Object[aux.size()];
-        int cont = 0;
+        Integer cont = 0;
         while(it.hasNext()){
             String nom =it.next();
             if(nom.contains(busca)) {
@@ -262,6 +262,7 @@ public class ControladorVistes {
             }
         }
         quina.setListData(csub);
+        return cont;
     }
     
     protected void omplePaginesExistents(JList quina){
@@ -383,9 +384,10 @@ public class ControladorVistes {
         else {
         DefaultMutableTreeNode pare = (DefaultMutableTreeNode)node.getParent();
         if (!pare.equals(node.getRoot())) {
-            Integer num = Integer.parseInt(pare.toString().substring(10))-1;
+            String [] auxiliar = pare.toString().split(" ");
+            System.out.println(auxiliar[0]+ " "+ auxiliar[1]);
+            Integer num = Integer.parseInt(auxiliar[1])-1;
             if(!macro.getContUser().removeCatComunitatCerca(macro.getUserActual(), cercaaqui, num,node.toString() )) JOptionPane.showMessageDialog(comp, "Error en eliminar!", capsalera, ERROR_MESSAGE);
-        
             DefaultTreeModel aux = (DefaultTreeModel)Resultat.getModel();
             modelos.addElement(node.toString());
             aux.removeNodeFromParent(node);
