@@ -102,6 +102,9 @@ public class InterficieWiki extends javax.swing.JFrame {
        Panell = new CreaComunitat(this,AP_Client);
        AP_Client.setComponentAt(4, Panell);
    }
+   protected Boolean dinsprog() {
+      return !AP_Principal.isVisible();
+   }
    
    protected void canviarACercaGuardada(){
       AP_Cerques.remove(AP_Cerques.getSelectedIndex());
@@ -149,7 +152,7 @@ public class InterficieWiki extends javax.swing.JFrame {
    
    protected void surtDeCerca(){
        if(macro.getContUser().isAdmin(macro.getUserActual())) AP_Client.setSelectedIndex(7);
-       else AP_Client.setSelectedIndex(5);
+       else if(AP_Client.getComponentCount()>5) AP_Client.setSelectedIndex(5);
    }
    
    protected void tornaVeureUsers(){
@@ -219,6 +222,7 @@ public class InterficieWiki extends javax.swing.JFrame {
        AP_Cerques.removeAll();
        AP_Client.remove(6);
        AP_Client.remove(5); 
+       //AP_Client.remove(4); 
    }
    
    /**

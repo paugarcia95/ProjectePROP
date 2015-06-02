@@ -300,10 +300,11 @@ public class ControladorUsers {
 	 * 
 	 * @param username Nom de l'usuari que es vol consultar.
 	 * 
-	 * @return true si l'usuari es admin, false en cas contrari.
+	 * @return true si l'usuari es admin, false en cas contrari o si no existeix l'usuari.
 	 */
 	public Boolean isAdmin(String username) {
-		return conj.getUser(username).esAdmin();
+		if(conj.exists(username))return conj.getUser(username).esAdmin();
+                else return false;
 	}
 
 	/**

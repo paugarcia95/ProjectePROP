@@ -301,7 +301,7 @@ public class ControladorVistes {
     }
     
     protected void preaparaCreacioNovaCerca(Boolean modificacio,JList LCTotes, JList LPTotes, JTree Algorismes, JList Lsub, JList Lsub2, JList Lsub1, JTextField Cbusca1, JTextField Cpc, JSlider CpcImp, JSlider Csembla, JSlider CrelacioCat, JSpinner Cdada,JSlider CrelacioPag,JSlider CrelacioSuper, JSlider CrelacioSub){
-        if(macro.getContDades().getNumCats()<= 0) {
+        if(macro.getContDades().getNumCats()<= 0 && pare.dinsprog()) {
             JOptionPane.showMessageDialog(comp, "No es pot fer cap cerca ja que no hi ha Categories", capsalera, WARNING_MESSAGE);
             pare.surtDeCerca();
         }
