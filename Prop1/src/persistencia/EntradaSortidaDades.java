@@ -114,7 +114,6 @@ public class EntradaSortidaDades {
 
 		try {
 			b = new BufferedReader(new FileReader(ruta));
-
 			s = b.readLine();
 
 			if (s == null)
