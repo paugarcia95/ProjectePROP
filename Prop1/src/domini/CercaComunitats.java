@@ -16,6 +16,7 @@ public class CercaComunitats {
 	private Date dataCreacio, dataModificacio;
 	private Criteris criterisSeleccio;
 	private ArrayList<Comunitat> comunitats;
+	private Long temps;
 	
 	/**
 	 * Crea una CercaComunitats amb els paràmetres especificats.
@@ -27,8 +28,9 @@ public class CercaComunitats {
 	 * @param dataModif última data de modificació de la cerca
 	 * @param comentari comentari de la cerca
 	 * @param comunitats conjunt de comunitats resultants de la cerca
+	 * @param temps el temps emprat per fer la cerca
 	 */
-	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date dataModif, String comentari, ArrayList<Comunitat> comunitats) {
+	public CercaComunitats(String nom, Date dataCreacio, Criteris criteris, String usuari, Date dataModif, String comentari, ArrayList<Comunitat> comunitats, Long temps) {
 		this.nom = nom;
 		this.dataCreacio = dataCreacio;
 		this.criterisSeleccio = criteris;
@@ -36,6 +38,7 @@ public class CercaComunitats {
 		dataModificacio = dataModif;
 		this.comentari = comentari;
 		this.comunitats = comunitats;
+		this.temps = temps;
 	}
 	
 	/**
@@ -47,6 +50,7 @@ public class CercaComunitats {
 		this.nom = nom;
 		dataCreacio = new Date();
 		comunitats = new ArrayList<Comunitat>();
+		temps = 0l;
 	}
 	
 	/**
@@ -55,6 +59,7 @@ public class CercaComunitats {
 	public CercaComunitats() {
 		dataCreacio = new Date();
 		comunitats = new ArrayList<Comunitat>();
+		temps = 0l;
 	}
 	
 	/**
@@ -214,6 +219,21 @@ public class CercaComunitats {
 			return comunitats.get(comunitat).removeCat(categoria);
 		}
 		return false;
+	}
+	
+	/**
+	 * @return el <code>temps</code> dels criteris
+	 */
+	public Long getTemps() {
+		return temps;
+	}
+
+	/**
+	 * 
+	 * @param temps <code>temps</code> dels criteris
+	 */
+	public void setTemps(Long temps) {
+		this.temps = temps;
 	}
 	
 	/**
