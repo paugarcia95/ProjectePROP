@@ -723,7 +723,7 @@ public class EntradaSortidaDades {
 							criteris[1], criteris[2], criteris[3], criteris[4], criteris[5], criteris[6], criteris[7],
 							subconj, evitaCat, evitaPag, info[10].replace("NULL", ""));
 					CercaComunitats cerca = new CercaComunitats(info[0].replace('+', ' '), creacio, cri,
-							user.getUsername(), modificacio, info[1].replace('+', ' '),
+							user.getUsername(), modificacio, info[1].replace('+', ' ').replace("NULL", ""),
 							comunitats);
 					result.add(cerca);
 				}
