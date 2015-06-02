@@ -11,10 +11,6 @@ import java.util.Collection;
  */
 public class ControladorDadesGraf {
 
-        public Boolean existsCategoria(String nom) {
-            return gd.existsCategoria(nom);
-        }
-
 	/**
 	 * Crea un ControladorDadesGraf.
 	 */
@@ -401,6 +397,26 @@ public class ControladorDadesGraf {
 		
 		return retorn;
 	}
+	
+	/**
+	 * Retorna si la pàgina amb nom especificat existeix al graf. 
+	 * 
+	 * @param nom nom de la pàgina buscada
+	 * @return <code>true</code> si la pàgina amb nom especificat existeix al conjunt de pàgines del graf
+	 */
+	public Boolean existsPagina(String nom) {
+        return gd.existsPagina(nom);
+    }
+	
+	/**
+	 * Retorna si la categoria amb nom especificat existeix al graf. 
+	 * 
+	 * @param nom nom de la categoria buscada
+	 * @return <code>true</code> si la categoria amb nom especificat existeix al conjunt de categories del graf
+	 */
+	public Boolean existsCategoria(String nom) {
+        return gd.existsCategoria(nom);
+    }
 		
 	/**
 	 * Elimina una pàgina del graf i totes les seves relacions.
