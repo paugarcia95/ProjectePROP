@@ -6,7 +6,6 @@ package Interficie;
 import domini.MacroControlador;
 import java.awt.Component;
 import java.awt.Frame;
-import java.awt.event.KeyEvent;
 import java.util.PriorityQueue;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -52,7 +51,7 @@ public class InterficieWiki extends javax.swing.JFrame {
     /**
      * path d'on es troba el manual d'usuari
      */
-    protected static String pathpdf = "./data/Practica3.pdf";
+    protected static String pathpdf = "./data/Manualdusuari.pdf";
     /**
      * Variable en cas de que no hi hagi cap pagina/categoria a l'hora de mostrar
      */
@@ -584,7 +583,10 @@ public class InterficieWiki extends javax.swing.JFrame {
     }//GEN-LAST:event_A_CreaUsuariComponentShown
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       if (AP_Principal.isVisible()) System.exit(0);
+       if (AP_Principal.isVisible()) {
+           if(!macro.guardaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
+           System.exit(0);
+       }
        else if (logout()) {
         if(!macro.guardaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
         System.exit(0);

@@ -43,6 +43,7 @@ public class VeureCerques extends javax.swing.JPanel {
         LlistaCerques = new javax.swing.JList();
         BVisCat2 = new javax.swing.JButton();
         jTextField7 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -73,6 +74,13 @@ public class VeureCerques extends javax.swing.JPanel {
         jTextField7.setBackground(new java.awt.Color(240, 240, 240));
         jTextField7.setText("Cerques realitzades:");
 
+        jButton1.setText("Elimina");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,7 +91,9 @@ public class VeureCerques extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BVisCat2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BVisCat2)
+                            .addComponent(jButton1)))
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -96,6 +106,8 @@ public class VeureCerques extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BVisCat2)
+                        .addGap(85, 85, 85)
+                        .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
                 .addContainerGap())
@@ -126,10 +138,16 @@ public class VeureCerques extends javax.swing.JPanel {
         vista.carregaCerquesFetes(jTextField7, LlistaCerques);  
     }//GEN-LAST:event_formComponentAdded
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     macro.getContUser().removeCerca(macro.getUserActual(),LlistaCerques.getSelectedIndex());
+     vista.carregaCerquesFetes(jTextField7, LlistaCerques); 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BVisCat2;
     private javax.swing.JList LlistaCerques;
     private DefaultListModel modcerques;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables

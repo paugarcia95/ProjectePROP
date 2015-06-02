@@ -207,9 +207,8 @@ public class VeureNovaCerca extends javax.swing.JPanel {
     private void ButAfegirComunitatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAfegirComunitatActionPerformed
         Integer quina = macro.getContUser().addComunitatCerca(macro.getUserActual(), numcerca)+1;
         DefaultTreeModel arb = (DefaultTreeModel)Resultat.getModel();
-
+        
         DefaultMutableTreeNode act = (DefaultMutableTreeNode)arb.getRoot();
-
         arb.insertNodeInto(new DefaultMutableTreeNode("Comunitat "+quina), act, act.getChildCount());
         comunaEliminar.add(quina-1);
     }//GEN-LAST:event_ButAfegirComunitatActionPerformed

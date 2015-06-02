@@ -51,6 +51,8 @@ public class ControladorVistes {
     if(Penjades.getSelectedIndex()>=0) {
         DefaultTreeModel nou = (DefaultTreeModel)Resultat.getModel();
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) Resultat.getLastSelectedPathComponent();
+        if(nou.getRoot().equals(node)) JOptionPane.showMessageDialog(comp, "Has de seleccionar una comunitat!", capsalera, WARNING_MESSAGE);
+        else {
         if (node == null)JOptionPane.showMessageDialog(comp, "Has de seleccionar a quina comunitat vols afegir la comunitat seleccionada!", capsalera, WARNING_MESSAGE);
         else {
             Integer num;
@@ -62,12 +64,13 @@ public class ControladorVistes {
             else {
                 nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)node, node.getChildCount());
                 String[] arbre = node.toString().split(" ");
-                num = Integer.parseInt(arbre[1]);
-           }
+                num = Integer.parseInt(arbre[1])-1;
+           }System.out.println("Intento afegir una com a la comunitat "+num+ " de la cerca: "+cercaaqui);
             if(!macro.getContUser().addCatComunitatCerca(macro.getUserActual(), cercaaqui, num,Penjades.getSelectedValue().toString())) JOptionPane.showMessageDialog(comp, "Error en afegir!", capsalera, ERROR_MESSAGE);
             if(comunaEliminar.contains(num))comunaEliminar.remove(num); 
             modelos.remove(Penjades.getSelectedIndex());
             Penjades.setSelectedIndex(0);
+        }
         }
     }
     else JOptionPane.showMessageDialog(comp, "Has de seleccionar quina categoria vols afegir!", capsalera, WARNING_MESSAGE);
@@ -347,35 +350,30 @@ public class ControladorVistes {
         int cont;
         if(modificacio||modificaCerca) {
             modificaCerca = false;
+            
             Collection<String> auxs = macro.getContUser().getSubCerca(macro.getUserActual(),cercaactual);
-            Object[] aux3 = new Object[auxs.size()];
-            cont = 0;
-            Iterator<String> it3 = auxs.iterator();
-            while(it3.hasNext()) {
-                aux3[cont] = it3.next();
-                ++cont;
+            
+            DefaultListModel modelo = (DefaultListModel)Lsub.getModel();
+            modelo.removeAllElements();
+            for(String quin: auxs) {
+                modelo.addElement(quin);
             }
-            Lsub.setListData(aux3);
             
             Collection<String> auxs2 = macro.getContUser().getEvitaPagCerca(macro.getUserActual(),cercaactual);
-            Object[] aux5 = new Object[auxs2.size()];
-            cont = 0;
-            Iterator<String> it5 = auxs2.iterator();
-            while(it5.hasNext()) {
-                aux5[cont] = it5.next();
-                ++cont;
+            
+            modelo = (DefaultListModel)Lsub2.getModel();
+            modelo.removeAllElements();
+            for(String quin: auxs2) {
+                modelo.addElement(quin);
             }
-            Lsub2.setListData(aux5);
             
             Collection<String> auxs1 = macro.getContUser().getEvitaCatCerca(macro.getUserActual(),cercaactual);
-            Object[] aux4 = new Object[auxs1.size()];
-            cont = 0;
-            Iterator<String> it4 = auxs1.iterator();
-            while(it4.hasNext()) {
-                aux4[cont] = it4.next();
-                ++cont;
+            modelo = (DefaultListModel)Lsub1.getModel();
+            modelo.removeAllElements();
+            for(String quin: auxs1) {
+                modelo.addElement(quin);
             }
-            Lsub1.setListData(aux4);
+            
             String auxP = macro.getContUser().getPareCerca(macro.getUserActual(),cercaactual);
             if(macro.getContDades().existsCategoria(auxP)) Cbusca1.setText(auxP);
             
@@ -416,7 +414,7 @@ public class ControladorVistes {
             DefaultTreeModel aux = (DefaultTreeModel)Resultat.getModel();
             modelos.addElement(node.toString());
             aux.removeNodeFromParent(node);
-            if(macro.getContUser().getNumCatComunitatCerca(macro.getUserActual(),cercaaqui,num)==0) {
+            if(macro.getContUser().getNumCatComunitatCerca(macro.getUserActual(),cercaaqui,num)==0 && pare.getChildCount()>1) {
                 comunaEliminar.add(num);
                 aux.removeNodeFromParent(pare);
             }
