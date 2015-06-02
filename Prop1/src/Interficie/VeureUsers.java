@@ -122,7 +122,8 @@ public class VeureUsers extends javax.swing.JPanel {
     */
     private void ferAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ferAdminActionPerformed
         if(UsersAct.getSelectedIndices().length>0) {
-            macro.getContUser().addAdmin(UsersAct.getSelectedValue().toString());
+            if(!UsersAct.getSelectedValue().toString().contains(" <ad>"))  macro.getContUser().addAdmin(UsersAct.getSelectedValue().toString());
+            else JOptionPane.showMessageDialog(this, "Aquest usuari ja es admninistrador!", capsalera, WARNING_MESSAGE);
             vista.carregaUsers(modusers);
         }
         else JOptionPane.showMessageDialog(this, "Has de seleccionar quin usuari vols fer admninistrador!", capsalera, WARNING_MESSAGE);
@@ -132,7 +133,7 @@ public class VeureUsers extends javax.swing.JPanel {
     */
     private void EliminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaActionPerformed
         if(UsersAct.getSelectedIndices().length>0) {
-            if(UsersAct.getSelectedValue().toString().equals(macro.getUserActual())||(UsersAct.getSelectedValue().toString().contains("[ad]")&&(UsersAct.getSelectedValue().toString().substring(0, UsersAct.getSelectedValue().toString().length()-5)).equals(macro.getUserActual()))) {
+            if(UsersAct.getSelectedValue().toString().equals(macro.getUserActual())||(UsersAct.getSelectedValue().toString().contains("<ad>")&&(UsersAct.getSelectedValue().toString().substring(0, UsersAct.getSelectedValue().toString().length()-5)).equals(macro.getUserActual()))) {
                     int resposta = JOptionPane.showConfirmDialog(this, "Segur que vols eliminar-te a tu mateix?", capsalera, YES_NO_OPTION);
                     if(resposta==YES_OPTION) {
                         macro.getContUser().removeUser(macro.getUserActual());

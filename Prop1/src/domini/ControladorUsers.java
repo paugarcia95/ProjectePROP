@@ -30,7 +30,7 @@ public class ControladorUsers {
 	 * @param username Username de l'usuari que es vol fer administrador.
 	 */
 	public void addAdmin(String username) {
-		conj.getUser(username).ferAdmin();
+		/*if(!conj.getUser(username).esAdmin())*/conj.getUser(username).ferAdmin();
 	}
 
 	/**
