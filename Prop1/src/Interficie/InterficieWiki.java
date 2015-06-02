@@ -51,7 +51,7 @@ public class InterficieWiki extends javax.swing.JFrame {
     /**
      * path d'on es troba el manual d'usuari
      */
-    protected static String pathpdf = "./data/Manualdusuari.pdf";
+    protected static String pathpdf = "./Manualdusuari.pdf";
     /**
      * Variable en cas de que no hi hagi cap pagina/categoria a l'hora de mostrar
      */
