@@ -32,6 +32,7 @@ public class Criteris {
 	 * @param evitaCat el conjunt de categories sobre les que no es farà la cerca
 	 * @param evitaPag el conjunt de pàgines sobre les que no es farà la cerca
 	 * @param pare la categoria de la qual només és farà la cerca sobre les seves subcategories
+	 * @param temps el temps emprat en fer la cerca
 	 */
 	public Criteris(ParaulaValor paraula, Integer relacionsCat, Integer relacionsPag, Integer relacionsSubs, Integer relacionsSuper, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare, Long temps) {
 		paraulaClau = paraula;
@@ -265,10 +266,17 @@ public class Criteris {
 		this.pare = pare;
 	}
 	
+	/**
+	 * @return el <code>temps</code> dels criteris
+	 */
 	public Long getTemps() {
 		return temps;
 	}
 
+	/**
+	 * 
+	 * @param temps <code>temps</code> dels criteris
+	 */
 	public void setTemps(Long temps) {
 		this.temps = temps;
 	}
