@@ -342,14 +342,8 @@ public class TraduccioiAlgorisme {
 	 */
 	public ArrayList<Comunitat> traduiricercar (GrafDades graf, Criteris cri) {
 		Graf utilitzable = new Graf();
-                long t1,t2,t3,t4;
-                t1= System.currentTimeMillis();
 		utilitzable = grafdadestograf(graf,cri);
-                t2= System.currentTimeMillis();
 		HashSet<HashSet<String>> solucio = new HashSet<HashSet<String>>();
-                System.out.println("Temps traducció: "+(t2-t1));
-                System.out.println("En el graf de l'algorisme hi ha "+utilitzable.getNodes().size()+" nodes");
-                t3= System.currentTimeMillis();
 		if(cri.getAlgorisme() == 1) {
 			solucio = Louvain.executa(utilitzable, cri.getDada());
 		}
@@ -358,9 +352,7 @@ public class TraduccioiAlgorisme {
 			else if(cri.getTipuCerca() == 2) solucio = AlgorismeNewmanGirvan.executaNum(utilitzable,cri.getDada());
                         else solucio = AlgorismeNewmanGirvan.executabet(utilitzable,cri.getDada());
 		}
-		else solucio = Clique.executa(utilitzable, cri.getDada()); 
-                t4= System.currentTimeMillis();
-                System.out.println("Temps algorisme: "+(t4-t3));
+		else solucio = Clique.executa(utilitzable, cri.getDada());
 		ArrayList<Comunitat> retorna = new ArrayList<Comunitat>();
 		Iterator<HashSet<String>> it = solucio.iterator();
 		int idaux = 0;

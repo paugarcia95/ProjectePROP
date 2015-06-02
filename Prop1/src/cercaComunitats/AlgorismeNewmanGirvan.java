@@ -51,16 +51,12 @@ public class AlgorismeNewmanGirvan {
 	 */
 	public static HashSet<HashSet<String>> executa(Graf G, Integer percentatge) {
                 iterador = 0;
-                long t1= System.currentTimeMillis();
 		GrafNewman util = new GrafNewman(G);
                 arestes = util.getNumArestes();
                 util.invertirPesos();
 		util.calcularEdgeBetween();
 		int quitoca = calculadora(arestes, percentatge);
-                System.out.println("El graf te "+arestes+ " arestes, i he de fer "+quitoca+" iteracions");
 		while ( iterador< quitoca) {
-                    System.out.println("Vaig x la iteracio "+iterador+", temps: "+ (System.currentTimeMillis()-t1));
-                    t1 = System.currentTimeMillis();
 			util.esborrarMaxim();
 			util.calcularEdgeBetween();
 			++iterador;

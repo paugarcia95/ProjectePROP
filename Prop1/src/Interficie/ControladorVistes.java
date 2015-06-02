@@ -153,12 +153,27 @@ public class ControladorVistes {
         return !nom.contains("<ad>");
     }
     
+    protected Boolean exportarFitxer() {
+        JFileChooser input = new JFileChooser();
+        int result = input.showSaveDialog(comp);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File aux =input.getSelectedFile();
+                if(aux != null) { 
+                    if(!macro.exportaDadesFitxer(aux)) {
+                        JOptionPane.showMessageDialog(comp, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
+                        return false;
+                    }
+                }
+                else return false; 
+         return true;
+        }
+        return false;
+    }
+        
     protected Boolean ferCerca(JTree Algorismes, Integer Cdada, JList Lsub, JList Lsub2, JList Lsub1, Integer CpcImp, JTextField Cpc, Integer Csembla, Integer CrelacioCat, JTextField Cbusca1,Integer CrelacioPag,Integer CrelacioSuper, Integer CrelacioSub){
- long t1,t2;
  //RECOLLIM LES DADES PER A FER LA CERCA       
         if(auxguard==0)cercaactual = macro.getContUser().addNovaCerca(macro.getUserActual());
         Integer quin, tipus;
- t1= System.currentTimeMillis(); ////////////////////////////////////////////
         TreePath arbre =Algorismes.getSelectionModel().getSelectionPath();
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) Algorismes.getLastSelectedPathComponent();
 
@@ -223,11 +238,11 @@ public class ControladorVistes {
         if(CpcImp==0) Cpc.setText(new String());
         ///////////////////////////////////////////////////////////////////////////////////////
         macro.getContUser().addCriterisCerca(false, macro.getUserActual(), cercaactual, Cpc.getText(), CpcImp, CrelacioCat, Csembla, quin, tipus, Cdada, auxx1, auxx2, auxx3, Cbusca1.getText(), CrelacioPag, CrelacioSuper, CrelacioSub);
-                                                
+        long t1,t2;
+        t1= System.currentTimeMillis(); ////////////////////////////////////////////                                        
         macro.getContUser().ferCerca(macro.getUserActual(), cercaactual);
-       
- t2= System.currentTimeMillis();
- System.out.println("Temps total cerca: "+ (t2-t1));
+        t2= System.currentTimeMillis();
+        System.out.println("Temps total cerca: "+ (t2-t1));
        macro.getContUser().ordenaCerca(macro.getUserActual(), cercaactual);
         return true;
     }
@@ -388,7 +403,6 @@ public class ControladorVistes {
         DefaultMutableTreeNode pare = (DefaultMutableTreeNode)node.getParent();
         if (!pare.equals(node.getRoot())) {
             String [] auxiliar = pare.toString().split(" ");
-            System.out.println(auxiliar[0]+ " "+ auxiliar[1]);
             Integer num = Integer.parseInt(auxiliar[1])-1;
             if(!macro.getContUser().removeCatComunitatCerca(macro.getUserActual(), cercaaqui, num,node.toString() )) JOptionPane.showMessageDialog(comp, "Error en eliminar!", capsalera, ERROR_MESSAGE);
             DefaultTreeModel aux = (DefaultTreeModel)Resultat.getModel();
@@ -537,23 +551,6 @@ public class ControladorVistes {
         pare.setVisible(true);
          
    }
-
-    boolean exportarFitxer() {
-        JFileChooser input = new JFileChooser();
-        int result = input.showOpenDialog(comp);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File aux =input.getSelectedFile();
-                if(aux != null) { 
-                    if(!macro.exportaDadesFitxer(aux)) {
-                        JOptionPane.showMessageDialog(comp, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
-                        return false;
-                    }
-                }
-                else return false; 
-         return true;
-        }
-        return false;
-    }
     
     
 }

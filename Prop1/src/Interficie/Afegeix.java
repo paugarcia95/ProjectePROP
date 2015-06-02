@@ -88,12 +88,10 @@ public class Afegeix extends javax.swing.JPanel {
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         if(vista.afegirFitxer()) JOptionPane.showMessageDialog(comp, "Tot carregat correctament");
-        //else JOptionPane.showMessageDialog(comp, "Error al carregar dades!",capsalera, ERROR_MESSAGE);
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(vista.exportarFitxer()) JOptionPane.showMessageDialog(comp, "Dades exportades correctament");
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

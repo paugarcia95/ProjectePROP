@@ -49,7 +49,7 @@ public class InterficieWiki extends javax.swing.JFrame {
      */
     protected static final String capsalera = "Wiki";
     /**
-     * 
+     * path d'on es troba el manual d'usuari
      */
     protected static String pathpdf = "./data/Practica3.pdf";
     /**
@@ -82,12 +82,7 @@ public class InterficieWiki extends javax.swing.JFrame {
      * Indica si qui fa la creacio d'un nou usuari es l'administrador o no
      */
     protected static Boolean userAdmin;
-   
-///////////////////ELIMINAAAAAAAAR////////////////////////////////////////////////////////////
-   private void provisional(){
-        Username.setText("admin");
-        Password.setText("admin");
-   }
+    
     
    protected void activaCerca(){
        AP_Client.setEnabledAt(4, true);
@@ -102,6 +97,7 @@ public class InterficieWiki extends javax.swing.JFrame {
        Panell = new CreaComunitat(this,AP_Client);
        AP_Client.setComponentAt(4, Panell);
    }
+   
    protected Boolean dinsprog() {
       return !AP_Principal.isVisible();
    }
@@ -222,7 +218,6 @@ public class InterficieWiki extends javax.swing.JFrame {
        AP_Cerques.removeAll();
        AP_Client.remove(6);
        AP_Client.remove(5); 
-       //AP_Client.remove(4); 
    }
    
    /**
@@ -250,7 +245,6 @@ public class InterficieWiki extends javax.swing.JFrame {
         AP_Client.add(Panell, "Fer Cerca");
         rafa.ini();
         if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
-        provisional();
     }
     Inici AP_Inici;        
     /**
