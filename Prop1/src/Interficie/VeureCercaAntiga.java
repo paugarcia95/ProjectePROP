@@ -9,6 +9,7 @@ import static Interficie.InterficieWiki.cercaactual;
 import static Interficie.InterficieWiki.macro;
 import static Interficie.InterficieWiki.vista;
 import static Interficie.InterficieWiki.comunaEliminar;
+import static Interficie.InterficieWiki.modificaCerca;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -255,7 +256,9 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
         if(auxguard ==2) JOptionPane.showMessageDialog(this, "No es pot fer una nova cerca mentres n'hi hagi una sense guardar, si us plau, guarda-la o descarta-la", capsalera, ERROR_MESSAGE);
         else {
         int resposta = JOptionPane.showOptionDialog(this,"Vols crear una nova cerca o sobreescriure aquesta?", capsalera,YES_NO_CANCEL_OPTION,QUESTION_MESSAGE,null,new Object[]{"Conserva aquesta","Modifica aquesta","Cancelar"},"i tu?");
-        if(resposta==0)pare.novaCerca();
+        if(resposta==0) {
+            pare.novaCerca();
+        }
         else if (resposta==1){
             cercaactual = numcerca;
             pare.modificaCercaGuardada();

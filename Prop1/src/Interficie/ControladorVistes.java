@@ -10,6 +10,7 @@ import static Interficie.InterficieWiki.cercaactual;
 import static Interficie.InterficieWiki.auxguard;
 import static Interficie.InterficieWiki.userAdmin;
 import static Interficie.InterficieWiki.comunaEliminar;
+import static Interficie.InterficieWiki.modificaCerca;
 
 import java.awt.Frame;
 import java.io.File;
@@ -315,6 +316,22 @@ public class ControladorVistes {
         ompleCriteris(quin, cercaactual,false);
     }
     
+    protected void criterisPerDefecte(JList LCTotes, JList LPTotes, JTree Algorismes, JList Lsub, JList Lsub2, JList Lsub1, JTextField Cbusca1, JTextField Cpc, JSlider CpcImp, JSlider Csembla, JSlider CrelacioCat, JSpinner Cdada,JSlider CrelacioPag,JSlider CrelacioSuper, JSlider CrelacioSub) {
+            Lsub.removeAll();
+            Lsub1.removeAll();
+            Lsub2.removeAll();
+            Cbusca1.setText("");
+            Cpc.removeAll();
+            CpcImp.setValue(0);
+            Cpc.setText("");
+            Csembla.setValue(5);
+            CrelacioCat.setValue(5);
+            CrelacioPag.setValue(5);
+            CrelacioSub.setValue(5);
+            CrelacioSuper.setValue(5);
+            Cdada.setValue(0);
+    }
+    
     protected void preaparaCreacioNovaCerca(Boolean modificacio,JList LCTotes, JList LPTotes, JTree Algorismes, JList Lsub, JList Lsub2, JList Lsub1, JTextField Cbusca1, JTextField Cpc, JSlider CpcImp, JSlider Csembla, JSlider CrelacioCat, JSpinner Cdada,JSlider CrelacioPag,JSlider CrelacioSuper, JSlider CrelacioSub){
         if(macro.getContDades().getNumCats()<= 0 && pare.dinsprog()) {
             JOptionPane.showMessageDialog(comp, "No es pot fer cap cerca ja que no hi ha Categories", capsalera, WARNING_MESSAGE);
@@ -328,7 +345,8 @@ public class ControladorVistes {
         Algorismes.expandRow(7);
         Algorismes.setSelectionRow(5);
         int cont;
-        if(modificacio) {
+        if(modificacio||modificaCerca) {
+            modificaCerca = false;
             Collection<String> auxs = macro.getContUser().getSubCerca(macro.getUserActual(),cercaactual);
             Object[] aux3 = new Object[auxs.size()];
             cont = 0;
@@ -358,6 +376,8 @@ public class ControladorVistes {
                 ++cont;
             }
             Lsub1.setListData(aux4);
+            String auxP = macro.getContUser().getPareCerca(macro.getUserActual(),cercaactual);
+            if(macro.getContDades().existsCategoria(auxP)) Cbusca1.setText(auxP);
             
             Cbusca1.setText(macro.getContUser().getPareCerca(macro.getUserActual(),cercaactual));
             Cpc.setText(macro.getContUser().getParaulaClauCerca(macro.getUserActual(),cercaactual));
@@ -379,19 +399,7 @@ public class ControladorVistes {
             else Algorismes.setSelectionRow(8);
         }
         else {
-            Lsub.removeAll();
-            Lsub1.removeAll();
-            Lsub2.removeAll();
-            Cbusca1.removeAll();
-            Cpc.removeAll();
-            CpcImp.setValue(0);
-            Cpc.setText("");
-            Csembla.setValue(5);
-            CrelacioCat.setValue(5);
-            CrelacioPag.setValue(5);
-            CrelacioSub.setValue(5);
-            CrelacioSuper.setValue(5);
-            Cdada.setValue(0);
+            criterisPerDefecte(LCTotes, LPTotes, Algorismes, Lsub,Lsub2, Lsub1, Cbusca1, Cpc, CpcImp, Csembla,CrelacioCat, Cdada,CrelacioPag, CrelacioSuper,CrelacioSub);
         }
         }
     } 
@@ -509,7 +517,6 @@ public class ControladorVistes {
          Long second = (temps / 1000) % 60;
          Long minute = (temps / (1000 * 60)) % 60;
          Long hour = (temps / (1000*60*60)) % 24;
-         System.out.println("t: "+temps+" seg: "+second+" minute:"+minute);
          String time = String.format("%02d:%02d:%02d:%d", hour, minute, second,milis);
          on.setText(guard+"Algorisme: "+algorisme+
                  "\nTipus de valor: "+tipu+

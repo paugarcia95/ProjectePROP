@@ -84,6 +84,8 @@ public class InterficieWiki extends javax.swing.JFrame {
      */
     protected static Boolean userAdmin;
     
+    protected static Boolean  modificaCerca;
+    
     
    protected void activaCerca(){
        AP_Client.setEnabledAt(4, true);
@@ -140,6 +142,7 @@ public class InterficieWiki extends javax.swing.JFrame {
    protected void novaCerca(){
        AP_Client.setEnabledAt(4, true);
        auxguard = 0;
+       modificaCerca = true;
        AP_Client.setSelectedIndex(4);
    }
    
@@ -238,6 +241,7 @@ public class InterficieWiki extends javax.swing.JFrame {
         vista = new ControladorVistes();
         rafa = new ControladorRafa();
         comp = this;
+        modificaCerca = false;
         userAdmin = false;
         initComponents();
         this.setVisible(false);
