@@ -115,10 +115,16 @@ public class EntradaSortidaDades {
 		try {
 			b = new BufferedReader(new FileReader(ruta));
 
-			while ((s = b.readLine()) != null) {
-				StringTokenizer st = new StringTokenizer(s);
+			s = b.readLine();
 
-				while (st.hasMoreTokens() && st.countTokens() >= 4) {
+			if (s == null)
+				return error(10);
+
+			while (s != null) {
+				StringTokenizer st = new StringTokenizer(s);
+				System.out.println(s);
+
+				while (st.hasMoreTokens() && st.countTokens() >= 5) {
 					String word1 = st.nextToken();
 					st.nextToken();
 					String link = st.nextToken();
@@ -137,11 +143,14 @@ public class EntradaSortidaDades {
 						return error(4);
 					}
 				}
+				s = b.readLine();
 			}
 		} catch (FileNotFoundException e) {
 			error(9);
 		} catch (IOException e) {
 			error(1);
+		} catch (Exception e) {
+			error(2);
 		} finally {
 			try {
 				if (b != null) {
@@ -1005,12 +1014,13 @@ public class EntradaSortidaDades {
 	 * @exception 2: Error d'escrpitura
 	 * @exception 3: No s'ha trobat el fitxer
 	 * @exception 4: Error en la sintaxi del fitxer d'entrada
-	 * @exception 5: Fitxer d'entrada sense dades
+	 * @exception 5: El fitxer d'on s'havien de carregar les dades està buit
 	 * @exception 6: L'arxiu s'ha llegit correctament però pot contenir errors.
 	 *            Revisa la sintaxi per si de cas
 	 * @exception 7: Error al tancar l'arxiu
 	 * @exception 8: Error al carregar les dades del programa
 	 * @exception 9: L'arxiu no existeix, tria'n un altre
+	 * @exception 10: Fitxer d'entrada sense dades
 	 * @exception default
 	 *                : Error indeterminat
 	 * 
@@ -1020,37 +1030,40 @@ public class EntradaSortidaDades {
 	private Boolean error(int e) {
 		switch (e) {
 			case 1 :
-				codiError = "Error amb el fitxer de lectura (Algun error amb el sistema de fitxers del sistema operatiu)";
+				codiError = "Error amb el fitxer de lectura (Algun error amb el sistema de fitxers del sistema operatiu).";
 				break;
 			case 2 :
-				codiError = "Error amb el fitxer d'escrpitura (Algun error amb el sistema de fitxers del sistema operatiu)";
+				codiError = "Error amb el fitxer d'escrpitura (Algun error amb el sistema de fitxers del sistema operatiu).";
 				break;
 			case 3 :
-				codiError = "No s'ha trobat el fitxer";
+				codiError = "No s'ha trobat el fitxer.";
 				break;
 			case 4 :
-				codiError = "Error en la sintaxi del fitxer d'entrada";
+				codiError = "Error en la sintaxi del fitxer d'entrada.";
 				break;
 			case 5 :
-				codiError = "El fitxer d'on s'havien de carregar les dades està buit, es crearà un nou fitxer quan es tanqui el programa";
+				codiError = "El fitxer d'on s'havien de carregar les dades està buit, es crearà un nou fitxer quan es tanqui el programa.";
 				break;
 			case 6 :
-				codiError = "L'arxiu s'ha llegit correctament però pot contenir errors. Revisa la sintaxi per si de cas";
+				codiError = "L'arxiu s'ha llegit correctament però pot contenir errors. Revisa la sintaxi per si de cas.";
 				break;
 			case 7 :
-				codiError = "Error al tancar l'arxiu (Algun error amb el sistema de fitxers del sistema operatiu)";
+				codiError = "Error al tancar l'arxiu (Algun error amb el sistema de fitxers del sistema operatiu).";
 				break;
 			case 8:
-				codiError = "Error al carregar les dades del programa: les dades han estat danyades. S'esta intentant recuperar les dades i corregir els arxius";
+				codiError = "Error al carregar les dades del programa: les dades han estat danyades. S'esta intentant recuperar les dades i corregir els arxius.";
 				break;
 			case 9 :
-				codiError = "L'arxiu no existeix, tria'n un altre";
+				codiError = "L'arxiu no existeix, tria'n un altre.";
+				break;
+			case 10 :
+				codiError = "Fitxer d'entrada sense dades o de format incorrecte.";
 				break;
 			case -1 :
 				codiError = "La variable que m'has passat per guardar les dades es nul·la!";
 				break;
 			default :
-				codiError = "Error indeterminat";
+				codiError = "Error indeterminat.";
 		}
 		errorEnExecucio = true;
 		return true; // Sempre retorna true per marcar l'error
