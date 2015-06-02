@@ -92,9 +92,10 @@ public class EntradaSortidaDades {
 	/**
 	 * Carrega les dades d'un fitxer de text (escrit en format usuari) a un
 	 * graf. El fitxer te el format predeterminat d'una Wikipedia.
-	 * 
+	 * <p>
 	 * S'afegeixen a G els nodes i/o arestes indicats pel fitxer de text a
 	 * "ruta"
+	 * </p>
 	 * 
 	 * @param G
 	 *            S'afegeixen a aquest graf els nous nodes i arestes
@@ -282,9 +283,10 @@ public class EntradaSortidaDades {
 	/**
 	 * Carrega les dades d'un fitxer de text a un graf. El fitxer te el format
 	 * intern del programa.
-	 * 
+	 * <p>
 	 * S'afegeixen a G els nodes i/o arestes indicats pel fitxer de text a la
 	 * rutaPerDefecte
+	 * </p>
 	 * 
 	 * @param G
 	 *            S'afegeixen a aquest graf els nous nodes i arestes
