@@ -121,7 +121,6 @@ public class EntradaSortidaDades {
 
 			while (s != null) {
 				StringTokenizer st = new StringTokenizer(s);
-				System.out.println(s);
 
 				while (st.hasMoreTokens() && st.countTokens() >= 5) {
 					String word1 = st.nextToken();
