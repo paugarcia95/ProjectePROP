@@ -507,8 +507,12 @@ public class EntradaSortidaDades {
 			}
 			docE.print("**END**");
 
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
+			// No es un error, el crea
+		} catch (IOException e2) {
 			error(2);
+		} catch (Exception e) {
+			error(0);
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
@@ -639,7 +643,7 @@ public class EntradaSortidaDades {
 
 				String[] info = ((String) s).split(" ");
 
-				if (info.length != 11)
+				if (info.length != 12)
 					return errorAuxiliar(8);
 
 
@@ -722,7 +726,7 @@ public class EntradaSortidaDades {
 					if (iter2 < numComunitats || !b.readLine().equals("*")) {
 							return errorAuxiliar(8);
 					}
-
+					
 					// Amb la informació de tot el fitxer munto la
 					// cercaDeComunitats
 					Criteris cri = new Criteris(
@@ -731,7 +735,7 @@ public class EntradaSortidaDades {
 							subconj, evitaCat, evitaPag, info[10].replace("NULL", ""));
 					CercaComunitats cerca = new CercaComunitats(info[0].replace('+', ' '), creacio, cri,
 							user.getUsername(), modificacio, info[1].replace('+', ' ').replace("NULL", ""),
-							comunitats);
+							comunitats,  new Long(info[11]));
 					result.add(cerca);
 				}
 				else {
@@ -898,7 +902,8 @@ public class EntradaSortidaDades {
 						subconj.size() 							+ " " +
 						paraula								 	+ " " + 
 						criteris.getParaulaClau().getNum() 		+ " " +
-						pare
+						pare									+ " " +
+						c.getTemps()
 						);
 
 				// VECTORevitaCat
