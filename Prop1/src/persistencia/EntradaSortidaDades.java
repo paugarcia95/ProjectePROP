@@ -139,7 +139,7 @@ public class EntradaSortidaDades {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			error(3);
+			error(9);
 		} catch (IOException e) {
 			error(1);
 		} finally {
@@ -208,10 +208,12 @@ public class EntradaSortidaDades {
 				}
 			}
 
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
 			error(9);
-		} catch (Exception e2) {
+		} catch (IOException e2) {
 			error(2);
+		} catch (Exception e3) {
+			error(0);
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
@@ -801,8 +803,12 @@ public class EntradaSortidaDades {
 				guardaDadesUsuari(user);
 			}
 			docE.println("**END**");
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
+			// No es error
+		} catch (IOException e2) {
 			error(2);
+		} catch (Exception e3) {
+			error(0);
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
@@ -928,6 +934,8 @@ public class EntradaSortidaDades {
 			docE.println("**END**");
 		} catch (IOException e) {
 			error(2);
+		} catch (Exception e1) {
+			error(0);
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
@@ -1003,6 +1011,7 @@ public class EntradaSortidaDades {
 	 *            Revisa la sintaxi per si de cas
 	 * @exception 7: Error al tancar l'arxiu
 	 * @exception 8: Error al carregar les dades del programa
+	 * @exception 9: L'arxiu no existeix, tria'n un altre
 	 * @exception default
 	 *                : Error indeterminat
 	 * 
@@ -1012,10 +1021,10 @@ public class EntradaSortidaDades {
 	private Boolean error(int e) {
 		switch (e) {
 			case 1 :
-				codiError = "Error amb el fitxer de lectura";
+				codiError = "Error amb el fitxer de lectura (Algun error amb el sistema de fitxers del sistema operatiu)";
 				break;
 			case 2 :
-				codiError = "Error amb el fitxer d'escrpitura";
+				codiError = "Error amb el fitxer d'escrpitura (Algun error amb el sistema de fitxers del sistema operatiu)";
 				break;
 			case 3 :
 				codiError = "No s'ha trobat el fitxer";
@@ -1024,13 +1033,13 @@ public class EntradaSortidaDades {
 				codiError = "Error en la sintaxi del fitxer d'entrada";
 				break;
 			case 5 :
-				codiError = "Fitxer d'entrada sense dades";
+				codiError = "El fitxer d'on s'havien de carregar les dades està buit, es crearà un nou fitxer quan es tanqui el programa";
 				break;
 			case 6 :
 				codiError = "L'arxiu s'ha llegit correctament però pot contenir errors. Revisa la sintaxi per si de cas";
 				break;
 			case 7 :
-				codiError = "Error al tancar l'arxiu";
+				codiError = "Error al tancar l'arxiu (Algun error amb el sistema de fitxers del sistema operatiu)";
 				break;
 			case 8:
 				codiError = "Error al carregar les dades del programa: les dades han estat danyades";
