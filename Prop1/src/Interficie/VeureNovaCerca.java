@@ -160,7 +160,7 @@ public class VeureNovaCerca extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(ButGuardar)
                         .addGap(18, 18, 18)
-                        .addComponent(ButTancar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ButTancar, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)

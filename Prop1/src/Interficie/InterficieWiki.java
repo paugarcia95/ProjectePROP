@@ -6,6 +6,7 @@ package Interficie;
 import domini.MacroControlador;
 import java.awt.Component;
 import java.awt.Frame;
+import java.awt.event.KeyEvent;
 import java.util.PriorityQueue;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -585,6 +586,7 @@ public class InterficieWiki extends javax.swing.JFrame {
         System.exit(0);
        }
     }//GEN-LAST:event_formWindowClosing
+   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane AP_Cerques;

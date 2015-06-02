@@ -85,10 +85,10 @@ public class ControladorUsers {
          * @param relacioPag Importancia que se li vol donar a les relacions amb les pagines
          * @param relacioSuper Importancia que se li vol donar a compartir Supercategoria
          * @param relacioSub Importancia que se li vol donar a compartir Supercategoria
-         * 
+         * @param temps
          * @return false si hi ha hagut algun error, true altrament.
          */
-	public Boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacionsCat, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare, Integer relacioPag, Integer  relacioSuper, Integer relacioSub ) {
+	public Boolean addCriterisCerca(Boolean modifica, String username, Integer i, String paraulast, Integer paraulain, Integer relacionsCat, Integer sembla, Integer alg, Integer tipus, Integer dada, ArrayList<String> subconj, ArrayList<String> evitaCat, ArrayList<String> evitaPag, String pare, Integer relacioPag, Integer  relacioSuper, Integer relacioSub) {
 		ParaulaValor par = new ParaulaValor(paraulast, paraulain);
 		Criteris aux = new Criteris(par, relacionsCat,relacioPag,relacioSub,relacioSuper, sembla, alg, tipus, dada, subconj, evitaCat, evitaPag, pare);
 		conj.getUser(username).getCerca(i).setCriterisSeleccio(aux);
@@ -177,6 +177,10 @@ public class ControladorUsers {
 	public Boolean setUsername(String antic, String nou) {
 		return conj.setUsername(antic, nou);
 	}
+        
+        public void setTempsCerca(String username, Integer quina, Long temps ) {
+            conj.getUser(username).getCerca(quina).setTemps(temps);
+        }
 
         /**
          *  Elimina una categoria determinada d'una comunitat determinada d'una cercaComunitats d'un usuari existent
@@ -360,6 +364,16 @@ public class ControladorUsers {
            return conj.getUser(username).getNumCerques();
         }
 	
+        /**
+         * 
+         * @param username Nom de l'usuari del qual es vol consultar el temps de la Cerca.
+         * @param quina Nom de la Cerca de Comunitats de la qual es vol resoldre el temps.
+         * @return  temps emprat per a realitzar la cerca 
+         */
+        public Long getTempsCerca(String username, Integer quina) {
+            return conj.getUser(username).getCerca(quina).getTemps();
+        }
+        
 	/**
 	 * Consulta la posicio d'una CercaComunitats dins de les fetes per un usuari a partir del seu nom.
 	 * 

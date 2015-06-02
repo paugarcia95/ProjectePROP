@@ -172,7 +172,7 @@ public class ControladorVistes {
         
     protected Boolean ferCerca(JTree Algorismes, Integer Cdada, JList Lsub, JList Lsub2, JList Lsub1, Integer CpcImp, JTextField Cpc, Integer Csembla, Integer CrelacioCat, JTextField Cbusca1,Integer CrelacioPag,Integer CrelacioSuper, Integer CrelacioSub){
  //RECOLLIM LES DADES PER A FER LA CERCA       
-        if(auxguard==0)cercaactual = macro.getContUser().addNovaCerca(macro.getUserActual());
+        if(auxguard==0) cercaactual = macro.getContUser().addNovaCerca(macro.getUserActual());
         Integer quin, tipus;
         TreePath arbre =Algorismes.getSelectionModel().getSelectionPath();
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) Algorismes.getLastSelectedPathComponent();
@@ -242,7 +242,7 @@ public class ControladorVistes {
         t1= System.currentTimeMillis(); ////////////////////////////////////////////                                        
         macro.getContUser().ferCerca(macro.getUserActual(), cercaactual);
         t2= System.currentTimeMillis();
-        System.out.println("Temps total cerca: "+ (t2-t1));
+        macro.getContUser().setTempsCerca(macro.getUserActual(), cercaactual, t2-t1);
        macro.getContUser().ordenaCerca(macro.getUserActual(), cercaactual);
         return true;
     }
@@ -503,9 +503,18 @@ public class ControladorVistes {
             else sb4.append("\nData ultima modificació: "+data +"\n");
             guard=sb4.toString();
         }
-        on.setText(guard+"Algorisme: "+algorisme+
-                "\nTipus de valor: "+tipu+
-                "\nAmb la dada: "+macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaaqui)+
+        Long temps = macro.getContUser().getTempsCerca(macro.getUserActual(), cercaaqui);
+        // temps.
+         Long milis = temps%1000;
+         Long second = (temps / 1000) % 60;
+         Long minute = (temps / (1000 * 60)) % 60;
+         Long hour = (temps / (1000*60*60)) % 24;
+         System.out.println("t: "+temps+" seg: "+second+" minute:"+minute);
+         String time = String.format("%02d:%02d:%02d:%d", hour, minute, second,milis);
+         on.setText(guard+"Algorisme: "+algorisme+
+                 "\nTipus de valor: "+tipu+
+                 "\nAmb la dada: "+ macro.getContUser().getAlgDadaCerca(macro.getUserActual(), cercaaqui)+
+                 "\nTemps emprat: " +  hour.toString() +"h "+ minute.toString() + "m "+ second.toString() + "s " + milis.toString()+ "ms "+
                 "\nImportancia de les realcions entre categories: "+macro.getContUser().getRelacioCatCerca(macro.getUserActual(), cercaaqui)+
                 "\nImportancia semblança de noms: "+macro.getContUser().getSembCerca(macro.getUserActual(), cercaaqui)+
                 "\nImportancia de les subcategories: "+ macro.getContUser().getRelacionsSubsCerca(macro.getUserActual(), cercaaqui)+
