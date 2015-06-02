@@ -537,6 +537,23 @@ public class ControladorVistes {
         pare.setVisible(true);
          
    }
+
+    boolean exportarFitxer() {
+        JFileChooser input = new JFileChooser();
+        int result = input.showOpenDialog(comp);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File aux =input.getSelectedFile();
+                if(aux != null) { 
+                    if(!macro.exportaDadesFitxer(aux)) {
+                        JOptionPane.showMessageDialog(comp, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
+                        return false;
+                    }
+                }
+                else return false; 
+         return true;
+        }
+        return false;
+    }
     
     
 }

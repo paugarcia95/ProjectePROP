@@ -38,10 +38,11 @@ public class Afegeix extends javax.swing.JPanel {
         jOptionPane1 = new javax.swing.JOptionPane();
         jButton17 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setAutoscrolls(true);
 
-        jButton17.setText("Afegeix des de fitxer");
+        jButton17.setText("Importa les dades des d'un fitxer");
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton17ActionPerformed(evt);
@@ -50,28 +51,38 @@ public class Afegeix extends javax.swing.JPanel {
 
         jLabel1.setText("Selecciona un fitxer per afegir dades");
 
+        jButton1.setText("Exporta les dades a un fitxer");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(175, 175, 175)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(jButton17))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jLabel1)))
-                .addContainerGap(182, Short.MAX_VALUE))
+                    .addComponent(jButton17)
+                    .addComponent(jLabel1))
+                .addContainerGap(167, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(175, 175, 175))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addComponent(jButton17)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(148, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -80,8 +91,14 @@ public class Afegeix extends javax.swing.JPanel {
         //else JOptionPane.showMessageDialog(comp, "Error al carregar dades!",capsalera, ERROR_MESSAGE);
     }//GEN-LAST:event_jButton17ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(vista.exportarFitxer()) JOptionPane.showMessageDialog(comp, "Dades exportades correctament");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton17;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JOptionPane jOptionPane1;

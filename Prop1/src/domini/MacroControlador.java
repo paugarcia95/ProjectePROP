@@ -121,4 +121,9 @@ public class MacroControlador {
 	public String getUserActual() {
 		return useractual;
 	}
+
+    public boolean exportaDadesFitxer(File fitxer) {
+       if(aux.escriureGrafDades(gd,fitxer))return false;
+        else return true;
+    }
 }
