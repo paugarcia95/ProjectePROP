@@ -565,8 +565,6 @@ public class EntradaSortidaDades {
 						if (cerques.get(i) != null)
 							user.addCerca(cerques.get(i));
 					}
-				} else {
-					error(8);
 				}
 				MapUsuaris.put(user.getUsername(), user);
 				++iter;
@@ -648,7 +646,7 @@ public class EntradaSortidaDades {
 				
 				SIZEevitaCat = Integer.valueOf(info[5]);
 				SIZEevitaPag = Integer.valueOf(info[6]);
-				SIZEsubconj = Integer.valueOf(info[7]);
+				SIZEsubconj  = Integer.valueOf(info[7]);
 
 
 				// alg, dada, rel, semb, tipus;
@@ -738,6 +736,7 @@ public class EntradaSortidaDades {
 			}
 		} catch (FileNotFoundException e) {
 			error(3);
+			codiError += " de dades de l'usuari " + user.getUsername();
 		} catch (IOException e) {
 			error(1);
 		} catch (NumberFormatException e) {
@@ -1042,7 +1041,7 @@ public class EntradaSortidaDades {
 				codiError = "Error al tancar l'arxiu (Algun error amb el sistema de fitxers del sistema operatiu)";
 				break;
 			case 8:
-				codiError = "Error al carregar les dades del programa: les dades han estat danyades";
+				codiError = "Error al carregar les dades del programa: les dades han estat danyades. S'esta intentant recuperar les dades i corregir els arxius";
 				break;
 			case 9 :
 				codiError = "L'arxiu no existeix, tria'n un altre";
@@ -1133,7 +1132,7 @@ public class EntradaSortidaDades {
 			docE.println("}");
 
 		} catch (Exception e) {
-			error(3);
+			error(2);
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
