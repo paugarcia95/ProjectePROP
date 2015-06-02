@@ -166,10 +166,13 @@ public class EntradaSortidaDades {
 	 * @return Un boolea que indica si hi ha hagut un error en la
 	 *         lectura/escriptura.
 	 */
-	public Boolean escriureGrafDadesEnFitxer(GrafDades G, String ruta) {
+	public Boolean escriureGrafDades(GrafDades G, File ruta) {
 		errorEnExecucio = false;
 		FileWriter fichEscr = null;
 		PrintWriter docE = null;
+
+		if (G == null)
+			return error(-1);
 
 		try {
 			// Arxiu d'escriptura
@@ -205,8 +208,10 @@ public class EntradaSortidaDades {
 				}
 			}
 
-		} catch (Exception e) {
-			error(3);
+		} catch (IOException e) {
+			error(9);
+		} catch (Exception e2) {
+			error(2);
 		} finally {
 			try {
 				// Nos aseguramos que se cierra el fichero.
@@ -1029,6 +1034,9 @@ public class EntradaSortidaDades {
 				break;
 			case 8:
 				codiError = "Error al carregar les dades del programa: les dades han estat danyades";
+				break;
+			case 9 :
+				codiError = "L'arxiu no existeix, tria'n un altre";
 				break;
 			case -1 :
 				codiError = "La variable que m'has passat per guardar les dades es nul·la!";
