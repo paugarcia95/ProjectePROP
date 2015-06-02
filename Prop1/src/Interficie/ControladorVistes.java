@@ -60,7 +60,8 @@ public class ControladorVistes {
             }
             else {
                 nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)node, node.getChildCount());
-                num = Integer.parseInt(node.toString().substring(10))-1;
+                String[] arbre = node.toString().split(" ");
+                num = Integer.parseInt(arbre[1]);
            }
             if(!macro.getContUser().addCatComunitatCerca(macro.getUserActual(), cercaaqui, num,Penjades.getSelectedValue().toString())) JOptionPane.showMessageDialog(comp, "Error en afegir!", capsalera, ERROR_MESSAGE);
             if(comunaEliminar.contains(num))comunaEliminar.remove(num); 
@@ -511,7 +512,7 @@ public class ControladorVistes {
         Integer numcom =  macro.getContUser().getNumComunitatsCerca(macro.getUserActual(), cercaaqui);
 	
 	for(Integer i = 1; i <= numcom; ++i) {
-            DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i+ "["+macro.getContUser().getNumCatCerca(macro.getUserActual(),cercaaqui, i-1)+"]");
+            DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i+ " ["+macro.getContUser().getNumCatCerca(macro.getUserActual(),cercaaqui, i-1)+"]");
             arrel.add(prim);
             ArrayList<String> auxm = macro.getContUser().getCatCerca(macro.getUserActual(), cercaaqui, i-1);
             Iterator<String> it4 = auxm.iterator();

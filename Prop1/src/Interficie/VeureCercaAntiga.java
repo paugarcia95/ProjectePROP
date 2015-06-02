@@ -266,7 +266,11 @@ public class VeureCercaAntiga extends javax.swing.JPanel {
     * En visualitzar-se el panell, es preparen els detalls de la cerca
     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-       vista.visualitzaCerca(true, Resultat1, CriterisNovaCerca1, numcerca);
+        if(auxguard==1) {
+            pare.activaCerca();
+            auxguard=0;
+        }
+        vista.visualitzaCerca(true, Resultat1, CriterisNovaCerca1, numcerca);
     }//GEN-LAST:event_formComponentShown
     /*
     * Es tanca la visualitzacio actual de la cerca

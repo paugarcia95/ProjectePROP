@@ -105,7 +105,7 @@ public class InterficieWiki extends javax.swing.JFrame {
    
    protected void canviarACercaGuardada(){
       AP_Cerques.remove(AP_Cerques.getSelectedIndex());
-      auxguard = 0;
+      auxguard = 0;     //quan guardem la cerca, passem a poder-ne fer una altra
       AP_Client.setEnabledAt(4, true);
       AP_Cerques.setEnabledAt(0, true);
       visualitzaCercaAntiga();
@@ -167,8 +167,8 @@ public class InterficieWiki extends javax.swing.JFrame {
        if(auxguard!=1) {
            Panell = new VeureNovaCerca(this, cercaactual);
            AP_Cerques.add(Panell, "Sense guardar");
+           auxguard = 2;
        }
-       auxguard = 2;
        AP_Client.setSelectedIndex(5);
        AP_Cerques.setSelectedIndex(AP_Cerques.getComponentCount()-1);
        AP_Client.setEnabledAt(4, false);
@@ -245,7 +245,7 @@ public class InterficieWiki extends javax.swing.JFrame {
         AP_Client.add(Panell, "Fer Cerca");
         rafa.ini();
         if(!macro.carregaDades()) JOptionPane.showMessageDialog(this, macro.getMissatgeError(), capsalera, ERROR_MESSAGE);
-        
+        provisional();
     }
     Inici AP_Inici;        
     /**
