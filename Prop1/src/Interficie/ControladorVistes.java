@@ -65,7 +65,7 @@ public class ControladorVistes {
                 nou.insertNodeInto(new DefaultMutableTreeNode(Penjades.getSelectedValue().toString()), (MutableTreeNode)node, node.getChildCount());
                 String[] arbre = node.toString().split(" ");
                 num = Integer.parseInt(arbre[1])-1;
-           }System.out.println("Intento afegir una com a la comunitat "+num+ " de la cerca: "+cercaaqui);
+           }
             if(!macro.getContUser().addCatComunitatCerca(macro.getUserActual(), cercaaqui, num,Penjades.getSelectedValue().toString())) JOptionPane.showMessageDialog(comp, "Error en afegir!", capsalera, ERROR_MESSAGE);
             if(comunaEliminar.contains(num))comunaEliminar.remove(num); 
             modelos.remove(Penjades.getSelectedIndex());

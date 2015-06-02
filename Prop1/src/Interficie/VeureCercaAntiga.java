@@ -9,7 +9,6 @@ import static Interficie.InterficieWiki.cercaactual;
 import static Interficie.InterficieWiki.macro;
 import static Interficie.InterficieWiki.vista;
 import static Interficie.InterficieWiki.comunaEliminar;
-import static Interficie.InterficieWiki.modificaCerca;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
