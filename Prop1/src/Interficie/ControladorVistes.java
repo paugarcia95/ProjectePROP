@@ -84,8 +84,9 @@ public class ControladorVistes {
                     }
                 }
                 else return false; 
+         return true;
         }
-        return true;
+        return false;
     }
     
     protected void canviaDadesUser(JTextField NouUsername1, JTextField NovaPassword1){
@@ -119,7 +120,7 @@ public class ControladorVistes {
         ArrayList<String> auxc = macro.getContUser().getUsers();
         UsersAct.removeAllElements();
         for(String us: auxc) {
-            if(macro.getContUser().isAdmin(us))UsersAct.addElement(us.concat(" [ad]"));
+            if(macro.getContUser().isAdmin(us))UsersAct.addElement(us.concat(" <ad>"));
             else UsersAct.addElement(us);
         }
     }
@@ -149,7 +150,7 @@ public class ControladorVistes {
     } 
     
     protected Boolean espoteliminar(String nom){
-        return !nom.contains("[ad]");
+        return !nom.contains("<ad>");
     }
     
     protected Boolean ferCerca(JTree Algorismes, Integer Cdada, JList Lsub, JList Lsub2, JList Lsub1, Integer CpcImp, JTextField Cpc, Integer Csembla, Integer CrelacioCat, JTextField Cbusca1,Integer CrelacioPag,Integer CrelacioSuper, Integer CrelacioSub){
