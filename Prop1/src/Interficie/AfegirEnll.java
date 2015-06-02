@@ -460,9 +460,8 @@ public class AfegirEnll extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        vista.omplePaginesExistentsConcret(jList2,Cbusca2);
-       Integer aux = vista.ompleCategoriesExistentsConcret(jList1,Cbusca);
-       System.out.println(aux);
+       Integer aux = vista.omplePaginesExistentsConcret(jList2,Cbusca2);
+        aux= vista.ompleCategoriesExistentsConcret(jList1,Cbusca);
     }//GEN-LAST:event_formComponentHidden
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown

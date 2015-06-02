@@ -6,12 +6,25 @@ package Interficie;
 
 
 import static Interficie.InterficieWiki.vista;
+import static Interficie.InterficieWiki.macro;
 
 /**
  *
  * @author cristina.fontanet
  */
 public class BuscaCat extends javax.swing.JPanel {
+    
+     static Integer numCategsConc;
+      private void numCatTotals() {
+            jLabel1.setText("Hi ha "+macro.getContDades().getNumCats()+" categories");
+    }
+      
+    
+    private void numCatParcials() {
+        jLabel1.setText("Hi ha "+numCategsConc+" categories que continguin "+Cbusca6.getText());
+    }
+    
+    
     /**
      * Creates new form BuscaCat
      */
@@ -32,6 +45,7 @@ public class BuscaCat extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         CbuscaPag3 = new javax.swing.JButton();
         Cbusca6 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -79,13 +93,17 @@ public class BuscaCat extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                         .addGap(1, 1, 1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Cbusca6)
-                            .addComponent(jTextField1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CbuscaPag3)
-                        .addGap(18, 18, 18)
-                        .addComponent(BVisCat)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(Cbusca6)
+                                    .addComponent(jTextField1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CbuscaPag3)
+                                .addGap(18, 18, 18)
+                                .addComponent(BVisCat))
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -100,7 +118,9 @@ public class BuscaCat extends javax.swing.JPanel {
                         .addComponent(CbuscaPag3)
                         .addComponent(BVisCat)))
                 .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -118,14 +138,17 @@ public class BuscaCat extends javax.swing.JPanel {
     * Quan es clica al boto busca, es mostren nomes les categories que contenen el conjunt de lletres
     */
     private void CbuscaPag3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaPag3ActionPerformed
-        vista.ompleCategoriesExistentsConcret(LlistaCateg, Cbusca6);
+        numCategsConc = vista.ompleCategoriesExistentsConcret(LlistaCateg, Cbusca6);
+        if(Cbusca6.getText().length()>0) numCatParcials();
+        else numCatTotals();
     }//GEN-LAST:event_CbuscaPag3ActionPerformed
 
     /*
     * Quan es mostra el panell, es veuen els noms de totes les categories existents
     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-       vista.ompleCategoriesExistents(LlistaCateg);
+       numCatTotals();
+        vista.ompleCategoriesExistents(LlistaCateg);
     }//GEN-LAST:event_formComponentShown
 
 
@@ -134,6 +157,7 @@ public class BuscaCat extends javax.swing.JPanel {
     private javax.swing.JTextField Cbusca6;
     private javax.swing.JButton CbuscaPag3;
     private javax.swing.JList LlistaCateg;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

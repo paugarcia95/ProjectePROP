@@ -6,7 +6,6 @@ package Interficie;
 
 import static Interficie.InterficieWiki.vista;
 import static Interficie.InterficieWiki.macro;
-import javax.swing.DefaultListModel;
 
 /**
  *
@@ -22,15 +21,24 @@ public class BuscaCatPag extends javax.swing.JPanel {
         initComponents();
     }
 
-    private void numsTotals() {
-            jLabel1.setText("Hi ha "+macro.getContDades().getNumCats()+" categories");    
+    private void numCatTotals() {
+            jLabel1.setText("Hi ha "+macro.getContDades().getNumCats()+" categories");
+    }
+    private void numPagTotals() {
             jLabel2.setText("Hi ha "+macro.getContDades().getNumPags()+" pagines");
+    }
+    private void numsTotals() {  
+        numCatTotals();
+        numPagTotals();
     }
     
     private void numCatParcials() {
-        //DefaultListModel mod = new (DefaultListModel)LlistaCateg1.getModel();
         jLabel1.setText("Hi ha "+numCategsConc+" categories que continguin "+Cbusca3.getText());
     }
+    private void numPagParcials(){
+         jLabel2.setText("Hi ha "+numPagsConc+" pagines que continguin "+Cbusca4.getText());
+    }
+    
     /**
      * By Netbeans
      */
@@ -185,13 +193,15 @@ public class BuscaCatPag extends javax.swing.JPanel {
     private void CbuscaCat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaCat1ActionPerformed
         numCategsConc =vista.ompleCategoriesExistentsConcret(LlistaCateg1, Cbusca3);
         if(Cbusca3.getText().length()>0) numCatParcials();
-        else numsTotals();
+        else numCatTotals();
     }//GEN-LAST:event_CbuscaCat1ActionPerformed
     /*
     * Quan es clica al boto busca de les pagines, es mostren nomes les pagines que contenen el conjunt de lletres
     */
     private void CbuscaPag1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaPag1ActionPerformed
-        vista.omplePaginesExistentsConcret(LlistaPag1, Cbusca4);
+        numPagsConc = vista.omplePaginesExistentsConcret(LlistaPag1, Cbusca4);
+        if(Cbusca4.getText().length()>0) numPagParcials();
+        else numPagTotals();
     }//GEN-LAST:event_CbuscaPag1ActionPerformed
     /*
     * Quan es mostra el panell, es veuen els noms de totes les categories i pagines existents

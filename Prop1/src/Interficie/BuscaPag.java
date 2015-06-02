@@ -5,11 +5,22 @@
 package Interficie;
 
 import static Interficie.InterficieWiki.vista;
+import static Interficie.InterficieWiki.macro;
 /**
  *
  * @author cristina.fontanet
  */
 public class BuscaPag extends javax.swing.JPanel {
+    
+    static Integer numPagsConc;
+    
+        private void numPagTotals() {
+            jLabel1.setText("Hi ha "+macro.getContDades().getNumPags()+" pagines");
+    }
+   
+    private void numPagParcials(){
+         jLabel1.setText("Hi ha "+numPagsConc+" pagines que continguin "+Cbusca5.getText());
+    }
     
     /**
      * Creates new form BuscaPag
@@ -32,6 +43,7 @@ public class BuscaPag extends javax.swing.JPanel {
         LlistaPag = new javax.swing.JList();
         Cbusca5 = new javax.swing.JTextField();
         CbuscaPag2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -71,7 +83,8 @@ public class BuscaPag extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Cbusca5, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -79,8 +92,8 @@ public class BuscaPag extends javax.swing.JPanel {
                         .addComponent(CbuscaPag2)
                         .addGap(18, 18, 18)
                         .addComponent(BVisPag))
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +106,9 @@ public class BuscaPag extends javax.swing.JPanel {
                     .addComponent(CbuscaPag2)
                     .addComponent(BVisPag))
                 .addGap(12, 12, 12)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addGap(7, 7, 7)
+                .addComponent(jLabel1)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -109,12 +124,15 @@ public class BuscaPag extends javax.swing.JPanel {
     * Quan es clica al boto busca, es mostren nomes les pagines que contenen el conjunt de lletres
     */
     private void CbuscaPag2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuscaPag2ActionPerformed
-        vista.omplePaginesExistentsConcret(LlistaPag, Cbusca5);
+        numPagsConc =vista.omplePaginesExistentsConcret(LlistaPag, Cbusca5);
+        if(Cbusca5.getText().length()>0) numPagParcials();
+        else numPagTotals();
     }//GEN-LAST:event_CbuscaPag2ActionPerformed
     /*
     * Quan es mostra el panell, es veuen els noms de totes les pagines existents
     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        numPagTotals();
         vista.omplePaginesExistents(LlistaPag);
     }//GEN-LAST:event_formComponentShown
         
@@ -124,6 +142,7 @@ public class BuscaPag extends javax.swing.JPanel {
     private javax.swing.JTextField Cbusca5;
     private javax.swing.JButton CbuscaPag2;
     private javax.swing.JList LlistaPag;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

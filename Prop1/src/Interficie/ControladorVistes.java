@@ -277,7 +277,7 @@ public class ControladorVistes {
         quina.setListData(aux2);
     }
     
-    protected void omplePaginesExistentsConcret(JList quina, JTextField don){
+    protected Integer omplePaginesExistentsConcret(JList quina, JTextField don){
         String busca = don.getText();
         Collection<String> aux = macro.getContDades().getPagines();
         Iterator<String> it = aux.iterator();
@@ -291,6 +291,7 @@ public class ControladorVistes {
             }
         }
         quina.setListData(csub);
+        return cont;
     }
     
     protected void omplePantallaEspera(JTextArea quin){
@@ -510,7 +511,7 @@ public class ControladorVistes {
         Integer numcom =  macro.getContUser().getNumComunitatsCerca(macro.getUserActual(), cercaaqui);
 	
 	for(Integer i = 1; i <= numcom; ++i) {
-            DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i);
+            DefaultMutableTreeNode prim = new DefaultMutableTreeNode("Comunitat "+i+ "["+macro.getContUser().getNumCatCerca(macro.getUserActual(),cercaaqui, i-1)+"]");
             arrel.add(prim);
             ArrayList<String> auxm = macro.getContUser().getCatCerca(macro.getUserActual(), cercaaqui, i-1);
             Iterator<String> it4 = auxm.iterator();
