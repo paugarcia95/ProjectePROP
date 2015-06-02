@@ -44,7 +44,7 @@ import javax.swing.tree.TreePath;
 public class ControladorVistes {
     static JList<String> CategList;  
     static JList<String> PagList; 
-    
+    private static Interficie.InterficieWiki pare;
     
     protected void afegeixCatComun(JTree Resultat,DefaultListModel modelos, JList Penjades, Integer cercaaqui) {
     if(Penjades.getSelectedIndex()>=0) {
@@ -142,6 +142,8 @@ public class ControladorVistes {
                 JOptionPane.showMessageDialog(comp, "Felicitats, conta creada, ets administrador!", capsalera,INFORMATION_MESSAGE);
             }
             else JOptionPane.showMessageDialog(comp, "Felicitats, conta creada.", capsalera,INFORMATION_MESSAGE);
+            NouUsername.setText("");
+            NovaPassword.setText("");
         }
     } 
     
@@ -295,7 +297,10 @@ public class ControladorVistes {
     }
     
     protected void preaparaCreacioNovaCerca(Boolean modificacio,JList LCTotes, JList LPTotes, JTree Algorismes, JList Lsub, JList Lsub2, JList Lsub1, JTextField Cbusca1, JTextField Cpc, JSlider CpcImp, JSlider Csembla, JSlider CrelacioCat, JSpinner Cdada,JSlider CrelacioPag,JSlider CrelacioSuper, JSlider CrelacioSub){
-        if(macro.getContDades().getNumCats()<= 0)  JOptionPane.showMessageDialog(comp, "No es pot fer cap cerca ja que no hi ha Categories", capsalera, WARNING_MESSAGE);
+        if(macro.getContDades().getNumCats()<= 0) {
+            JOptionPane.showMessageDialog(comp, "No es pot fer cap cerca ja que no hi ha Categories", capsalera, WARNING_MESSAGE);
+            pare.surtDeCerca();
+        }
         else {
         ompleCategoriesExistents(LCTotes);
         omplePaginesExistents(LPTotes);
@@ -399,8 +404,11 @@ public class ControladorVistes {
             DefaultMutableTreeNode pares = (DefaultMutableTreeNode)node.getParent();
             if (!pares.equals(node.getRoot())) {
                 String quina = node.toString();
-                VCategoria nova = new VCategoria(pare, true,macro.getContUser().isAdmin(macro.getUserActual()));
-                nova.NomCat(quina);
+                if(macro.getContDades().existsCategoria(quina)) {
+                    VCategoria nova = new VCategoria(pare, true,macro.getContUser().isAdmin(macro.getUserActual()));
+                    nova.NomCat(quina);
+                }
+                else JOptionPane.showMessageDialog(comp, "S'han modificat les dades del graf i aquesta categoria ja no existeix o be s'ha canviat el nom", capsalera, WARNING_MESSAGE);
             } 
             else  JOptionPane.showMessageDialog(comp, "Has de seleccionar una categoria, no una comunitat!", capsalera, WARNING_MESSAGE);
         }
@@ -520,8 +528,8 @@ public class ControladorVistes {
     }
 
     public static void main(String[] args) {
-         Interficie.InterficieWiki aux = new Interficie.InterficieWiki();
-        aux.setVisible(true);
+         pare = new Interficie.InterficieWiki();
+        pare.setVisible(true);
          
    }
     

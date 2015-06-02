@@ -47,7 +47,11 @@ public class InterficieWiki extends javax.swing.JFrame {
     /**
      * Variable a mostrar en els JOptionPane
      */
-    protected static String capsalera = "Wiki";
+    protected static final String capsalera = "Wiki";
+    /**
+     * 
+     */
+    protected static String pathpdf = "./data/Practica3.pdf";
     /**
      * Variable en cas de que no hi hagi cap pagina/categoria a l'hora de mostrar
      */
@@ -141,6 +145,11 @@ public class InterficieWiki extends javax.swing.JFrame {
    
    protected void revalidaCerques(){
        AP_Cerques.setSelectedIndex(0);
+   }
+   
+   protected void surtDeCerca(){
+       if(macro.getContUser().isAdmin(macro.getUserActual())) AP_Client.setSelectedIndex(7);
+       else AP_Client.setSelectedIndex(5);
    }
    
    protected void tornaVeureUsers(){

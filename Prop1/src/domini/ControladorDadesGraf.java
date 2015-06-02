@@ -11,6 +11,9 @@ import java.util.Collection;
  */
 public class ControladorDadesGraf {
 
+        public Boolean existsCategoria(String nom) {
+            return gd.existsCategoria(nom);
+        }
 
 	/**
 	 * Crea un ControladorDadesGraf.

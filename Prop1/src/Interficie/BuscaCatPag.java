@@ -18,6 +18,7 @@ public class BuscaCatPag extends javax.swing.JPanel {
         initComponents();
     }
 
+    
     /**
      * By Netbeans
      */
