@@ -215,6 +215,7 @@ public class InterficieWiki extends javax.swing.JFrame {
         AP_Client.remove(8);
         AP_Client.remove(7);
        }
+       AP_Cerques.remove(0);
        AP_Cerques.removeAll();
        AP_Client.remove(6);
        AP_Client.remove(5); 
