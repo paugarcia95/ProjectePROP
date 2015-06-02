@@ -50,7 +50,7 @@ public class CercaComunitats {
 		this.nom = nom;
 		dataCreacio = new Date();
 		comunitats = new ArrayList<Comunitat>();
-		temps = 0l;
+		temps = 1l;
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public class CercaComunitats {
 	public CercaComunitats() {
 		dataCreacio = new Date();
 		comunitats = new ArrayList<Comunitat>();
-		temps = 0l;
+		temps = 1l;
 	}
 	
 	/**
